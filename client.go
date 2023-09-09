@@ -16,7 +16,7 @@ import (
 //go:generate -command swagger go run github.com/go-swagger/go-swagger/cmd/swagger
 //go:generate swagger generate client --skip-tag-packages -f ./swagger.json
 //go:generate -command mockgen go run github.com/golang/mock/mockgen
-//go:generate mockgen -destination=mock.go -source=client.go -package=client
+//go:generate mockgen -destination=mock.go -source=client.go -package=nuon
 type Client interface {
 	SetOrgID(orgID string)
 

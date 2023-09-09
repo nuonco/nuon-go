@@ -1,10 +1,10 @@
-package client
+package nuon
 
 import (
 	"context"
 	"fmt"
 
-	"github.com/nuonco/nuon-go/client"
+	"github.com/nuonco/nuon-go/client/operations"
 	"github.com/nuonco/nuon-go/models"
 )
 
