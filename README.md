@@ -15,13 +15,13 @@ All endpoints in the API follow REST conventions and standard HTTP methods. You 
 In your project, you can install the package directly using `go get`:
 
 ```bash
-go get github.com/nuonco/go-sdk
+go get github.com/nuonco/nuon-go
 ```
 
 In your code, add the following import:
 
 ```
-import nuon "github.com/nuonco/go-sdk"
+import nuon "github.com/nuonco/nuon-go"
 ```
 
 ## Create a client
@@ -60,4 +60,3 @@ app, err := apiClient.GetApp(ctx, appID)
 ## Contributing
 
 This repo is currently not setup for local contributions. However, if you would like to contribute you can open an issue or contact us on our [shared slack](https://join.slack.com/t/nuoncommunity/shared_invite/zt-1q323vw9z-C8ztRP~HfWjZx6AXi50VRA).
->>>>>>> bf9e9da (chore: initial import (#1))
