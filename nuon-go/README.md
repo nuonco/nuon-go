@@ -8,7 +8,7 @@ The Nuon API allows you to configure your Nuon apps, release to them and create 
 
 Full documentation is available at https://docs.nuon.co.
 
-All endpoints in the API follow REST conventions and standard HTTP methods. You can find the OpenAPI Spec [here](https://ctl.prod.nuon.co/docs/swagger.yaml)
+All endpoints in the API follow REST conventions and standard HTTP methods. You can find the OpenAPI Spec [here](https://ctl.prod.nuon.co/docs/doc.json)
 
 ## Installation
 
