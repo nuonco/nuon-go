@@ -23,6 +23,9 @@ type AppUserToken struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
+	// email
+	Email string `json:"email,omitempty"`
+
 	// expires at
 	ExpiresAt string `json:"expires_at,omitempty"`
 
