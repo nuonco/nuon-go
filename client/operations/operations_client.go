@@ -140,9 +140,13 @@ type ClientService interface {
 
 	PostV1InstallsInstallIDDeploys(params *PostV1InstallsInstallIDDeploysParams, opts ...ClientOption) (*PostV1InstallsInstallIDDeploysCreated, error)
 
+	PostV1InstallsInstallIDRestart(params *PostV1InstallsInstallIDRestartParams, opts ...ClientOption) (*PostV1InstallsInstallIDRestartOK, error)
+
 	PostV1Orgs(params *PostV1OrgsParams, opts ...ClientOption) (*PostV1OrgsCreated, error)
 
 	PostV1OrgsCurrentUser(params *PostV1OrgsCurrentUserParams, opts ...ClientOption) (*PostV1OrgsCurrentUserCreated, error)
+
+	PostV1OrgsOrgIDAddUser(params *PostV1OrgsOrgIDAddUserParams, opts ...ClientOption) (*PostV1OrgsOrgIDAddUserCreated, error)
 
 	PostV1OrgsOrgIDSupportUsers(params *PostV1OrgsOrgIDSupportUsersParams, opts ...ClientOption) (*PostV1OrgsOrgIDSupportUsersCreated, error)
 
@@ -2358,6 +2362,46 @@ func (a *Client) PostV1InstallsInstallIDDeploys(params *PostV1InstallsInstallIDD
 }
 
 /*
+PostV1InstallsInstallIDRestart restarts an installs event loop
+
+restart install event loop
+*/
+func (a *Client) PostV1InstallsInstallIDRestart(params *PostV1InstallsInstallIDRestartParams, opts ...ClientOption) (*PostV1InstallsInstallIDRestartOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPostV1InstallsInstallIDRestartParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PostV1InstallsInstallIDRestart",
+		Method:             "POST",
+		PathPattern:        "/v1/installs/{install_id}/restart",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PostV1InstallsInstallIDRestartReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PostV1InstallsInstallIDRestartOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for PostV1InstallsInstallIDRestart: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 PostV1Orgs creates a new org
 
 create a new org
@@ -2434,6 +2478,46 @@ func (a *Client) PostV1OrgsCurrentUser(params *PostV1OrgsCurrentUserParams, opts
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for PostV1OrgsCurrentUser: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+PostV1OrgsOrgIDAddUser adds a user to an org
+
+create a new org
+*/
+func (a *Client) PostV1OrgsOrgIDAddUser(params *PostV1OrgsOrgIDAddUserParams, opts ...ClientOption) (*PostV1OrgsOrgIDAddUserCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPostV1OrgsOrgIDAddUserParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PostV1OrgsOrgIDAddUser",
+		Method:             "POST",
+		PathPattern:        "/v1/orgs/{org_id}/add-user",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PostV1OrgsOrgIDAddUserReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PostV1OrgsOrgIDAddUserCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for PostV1OrgsOrgIDAddUser: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
