@@ -150,6 +150,8 @@ type ClientService interface {
 
 	PostV1OrgsOrgIDSupportUsers(params *PostV1OrgsOrgIDSupportUsersParams, opts ...ClientOption) (*PostV1OrgsOrgIDSupportUsersCreated, error)
 
+	PostV1Releases(params *PostV1ReleasesParams, opts ...ClientOption) (*PostV1ReleasesCreated, error)
+
 	PostV1Sandboxes(params *PostV1SandboxesParams, opts ...ClientOption) (*PostV1SandboxesCreated, error)
 
 	PostV1SandboxesSandboxIDRelease(params *PostV1SandboxesSandboxIDReleaseParams, opts ...ClientOption) (*PostV1SandboxesSandboxIDReleaseCreated, error)
@@ -2558,6 +2560,46 @@ func (a *Client) PostV1OrgsOrgIDSupportUsers(params *PostV1OrgsOrgIDSupportUsers
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for PostV1OrgsOrgIDSupportUsers: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+PostV1Releases creates a release
+
+create a release for a component
+*/
+func (a *Client) PostV1Releases(params *PostV1ReleasesParams, opts ...ClientOption) (*PostV1ReleasesCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPostV1ReleasesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PostV1Releases",
+		Method:             "POST",
+		PathPattern:        "/v1/releases",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PostV1ReleasesReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PostV1ReleasesCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for PostV1Releases: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

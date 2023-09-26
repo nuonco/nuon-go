@@ -7,7 +7,9 @@ package models
 
 import (
 	"context"
+	"strconv"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -32,6 +34,9 @@ type AppComponent struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// install components
+	InstallComponents []*AppInstallComponent `json:"installComponents"`
+
 	// name
 	Name string `json:"name,omitempty"`
 
@@ -41,11 +46,80 @@ type AppComponent struct {
 
 // Validate validates this app component
 func (m *AppComponent) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateInstallComponents(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this app component based on context it is used
+func (m *AppComponent) validateInstallComponents(formats strfmt.Registry) error {
+	if swag.IsZero(m.InstallComponents) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.InstallComponents); i++ {
+		if swag.IsZero(m.InstallComponents[i]) { // not required
+			continue
+		}
+
+		if m.InstallComponents[i] != nil {
+			if err := m.InstallComponents[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("installComponents" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("installComponents" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this app component based on the context it is used
 func (m *AppComponent) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateInstallComponents(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *AppComponent) contextValidateInstallComponents(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.InstallComponents); i++ {
+
+		if m.InstallComponents[i] != nil {
+
+			if swag.IsZero(m.InstallComponents[i]) { // not required
+				return nil
+			}
+
+			if err := m.InstallComponents[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("installComponents" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("installComponents" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
