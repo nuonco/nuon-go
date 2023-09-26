@@ -69,3 +69,15 @@ func (c *client) CreateComponentRelease(ctx context.Context, componentID string,
 
 	return resp.Payload, nil
 }
+
+func (c *client) CreateRelease(ctx context.Context, req *models.ServiceCreateComponentReleaseRequest) (*models.AppComponentRelease, error) {
+	resp, err := c.genClient.Operations.PostV1Releases(&operations.PostV1ReleasesParams{
+		Req:     req,
+		Context: ctx,
+	})
+	if err != nil {
+		return nil, fmt.Errorf("unable to create release: %w", err)
+	}
+
+	return resp.Payload, nil
+}
