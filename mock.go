@@ -899,3 +899,18 @@ func (mr *MockClientMockRecorder) GetReleaseSteps(ctx, releaseID interface{}) *g
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetReleaseSteps", reflect.TypeOf((*MockClient)(nil).GetReleaseSteps), ctx, releaseID)
 }
+
+// CreateRelease mocks base method
+func (m *MockClient) CreateRelease(ctx context.Context, req *models.ServiceCreateComponentReleaseRequest) (*models.AppComponentRelease, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateRelease", ctx, req)
+	ret0, _ := ret[0].(*models.AppComponentRelease)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateRelease indicates an expected call of CreateRelease
+func (mr *MockClientMockRecorder) CreateRelease(ctx, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateRelease", reflect.TypeOf((*MockClient)(nil).CreateRelease), ctx, req)
+}
