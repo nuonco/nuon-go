@@ -14,7 +14,7 @@ import (
 
 //
 //go:generate -command swagger go run github.com/go-swagger/go-swagger/cmd/swagger
-//go:generate swagger generate client --skip-tag-packages -f $NUON_API_URL/docs/doc.json
+//go:generate swagger generate client --spec=$NUON_API_URL/docs/doc.json --skip-tag-packages --tags=releases,sandboxes,installs,general,orgs,components,vcs,apps
 //go:generate -command mockgen go run github.com/golang/mock/mockgen
 //go:generate mockgen -destination=mock.go -source=client.go -package=nuon
 type Client interface {
