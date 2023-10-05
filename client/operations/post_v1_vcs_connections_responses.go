@@ -29,6 +29,36 @@ func (o *PostV1VcsConnectionsReader) ReadResponse(response runtime.ClientRespons
 			return nil, err
 		}
 		return result, nil
+	case 400:
+		result := NewPostV1VcsConnectionsBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 401:
+		result := NewPostV1VcsConnectionsUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewPostV1VcsConnectionsForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewPostV1VcsConnectionsNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 500:
+		result := NewPostV1VcsConnectionsInternalServerError()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("[POST /v1/vcs/connections] PostV1VcsConnections", response, response.Code())
 	}
@@ -93,6 +123,346 @@ func (o *PostV1VcsConnectionsCreated) GetPayload() *models.AppVCSConnection {
 func (o *PostV1VcsConnectionsCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.AppVCSConnection)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1VcsConnectionsBadRequest creates a PostV1VcsConnectionsBadRequest with default headers values
+func NewPostV1VcsConnectionsBadRequest() *PostV1VcsConnectionsBadRequest {
+	return &PostV1VcsConnectionsBadRequest{}
+}
+
+/*
+PostV1VcsConnectionsBadRequest describes a response with status code 400, with default header values.
+
+Bad Request
+*/
+type PostV1VcsConnectionsBadRequest struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 vcs connections bad request response has a 2xx status code
+func (o *PostV1VcsConnectionsBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 vcs connections bad request response has a 3xx status code
+func (o *PostV1VcsConnectionsBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 vcs connections bad request response has a 4xx status code
+func (o *PostV1VcsConnectionsBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 vcs connections bad request response has a 5xx status code
+func (o *PostV1VcsConnectionsBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 vcs connections bad request response a status code equal to that given
+func (o *PostV1VcsConnectionsBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the post v1 vcs connections bad request response
+func (o *PostV1VcsConnectionsBadRequest) Code() int {
+	return 400
+}
+
+func (o *PostV1VcsConnectionsBadRequest) Error() string {
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] postV1VcsConnectionsBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PostV1VcsConnectionsBadRequest) String() string {
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] postV1VcsConnectionsBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PostV1VcsConnectionsBadRequest) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1VcsConnectionsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1VcsConnectionsUnauthorized creates a PostV1VcsConnectionsUnauthorized with default headers values
+func NewPostV1VcsConnectionsUnauthorized() *PostV1VcsConnectionsUnauthorized {
+	return &PostV1VcsConnectionsUnauthorized{}
+}
+
+/*
+PostV1VcsConnectionsUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized
+*/
+type PostV1VcsConnectionsUnauthorized struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 vcs connections unauthorized response has a 2xx status code
+func (o *PostV1VcsConnectionsUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 vcs connections unauthorized response has a 3xx status code
+func (o *PostV1VcsConnectionsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 vcs connections unauthorized response has a 4xx status code
+func (o *PostV1VcsConnectionsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 vcs connections unauthorized response has a 5xx status code
+func (o *PostV1VcsConnectionsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 vcs connections unauthorized response a status code equal to that given
+func (o *PostV1VcsConnectionsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the post v1 vcs connections unauthorized response
+func (o *PostV1VcsConnectionsUnauthorized) Code() int {
+	return 401
+}
+
+func (o *PostV1VcsConnectionsUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] postV1VcsConnectionsUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *PostV1VcsConnectionsUnauthorized) String() string {
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] postV1VcsConnectionsUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *PostV1VcsConnectionsUnauthorized) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1VcsConnectionsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1VcsConnectionsForbidden creates a PostV1VcsConnectionsForbidden with default headers values
+func NewPostV1VcsConnectionsForbidden() *PostV1VcsConnectionsForbidden {
+	return &PostV1VcsConnectionsForbidden{}
+}
+
+/*
+PostV1VcsConnectionsForbidden describes a response with status code 403, with default header values.
+
+Forbidden
+*/
+type PostV1VcsConnectionsForbidden struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 vcs connections forbidden response has a 2xx status code
+func (o *PostV1VcsConnectionsForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 vcs connections forbidden response has a 3xx status code
+func (o *PostV1VcsConnectionsForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 vcs connections forbidden response has a 4xx status code
+func (o *PostV1VcsConnectionsForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 vcs connections forbidden response has a 5xx status code
+func (o *PostV1VcsConnectionsForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 vcs connections forbidden response a status code equal to that given
+func (o *PostV1VcsConnectionsForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the post v1 vcs connections forbidden response
+func (o *PostV1VcsConnectionsForbidden) Code() int {
+	return 403
+}
+
+func (o *PostV1VcsConnectionsForbidden) Error() string {
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] postV1VcsConnectionsForbidden  %+v", 403, o.Payload)
+}
+
+func (o *PostV1VcsConnectionsForbidden) String() string {
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] postV1VcsConnectionsForbidden  %+v", 403, o.Payload)
+}
+
+func (o *PostV1VcsConnectionsForbidden) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1VcsConnectionsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1VcsConnectionsNotFound creates a PostV1VcsConnectionsNotFound with default headers values
+func NewPostV1VcsConnectionsNotFound() *PostV1VcsConnectionsNotFound {
+	return &PostV1VcsConnectionsNotFound{}
+}
+
+/*
+PostV1VcsConnectionsNotFound describes a response with status code 404, with default header values.
+
+Not Found
+*/
+type PostV1VcsConnectionsNotFound struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 vcs connections not found response has a 2xx status code
+func (o *PostV1VcsConnectionsNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 vcs connections not found response has a 3xx status code
+func (o *PostV1VcsConnectionsNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 vcs connections not found response has a 4xx status code
+func (o *PostV1VcsConnectionsNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 vcs connections not found response has a 5xx status code
+func (o *PostV1VcsConnectionsNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 vcs connections not found response a status code equal to that given
+func (o *PostV1VcsConnectionsNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the post v1 vcs connections not found response
+func (o *PostV1VcsConnectionsNotFound) Code() int {
+	return 404
+}
+
+func (o *PostV1VcsConnectionsNotFound) Error() string {
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] postV1VcsConnectionsNotFound  %+v", 404, o.Payload)
+}
+
+func (o *PostV1VcsConnectionsNotFound) String() string {
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] postV1VcsConnectionsNotFound  %+v", 404, o.Payload)
+}
+
+func (o *PostV1VcsConnectionsNotFound) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1VcsConnectionsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1VcsConnectionsInternalServerError creates a PostV1VcsConnectionsInternalServerError with default headers values
+func NewPostV1VcsConnectionsInternalServerError() *PostV1VcsConnectionsInternalServerError {
+	return &PostV1VcsConnectionsInternalServerError{}
+}
+
+/*
+PostV1VcsConnectionsInternalServerError describes a response with status code 500, with default header values.
+
+Internal Server Error
+*/
+type PostV1VcsConnectionsInternalServerError struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 vcs connections internal server error response has a 2xx status code
+func (o *PostV1VcsConnectionsInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 vcs connections internal server error response has a 3xx status code
+func (o *PostV1VcsConnectionsInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 vcs connections internal server error response has a 4xx status code
+func (o *PostV1VcsConnectionsInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post v1 vcs connections internal server error response has a 5xx status code
+func (o *PostV1VcsConnectionsInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this post v1 vcs connections internal server error response a status code equal to that given
+func (o *PostV1VcsConnectionsInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the post v1 vcs connections internal server error response
+func (o *PostV1VcsConnectionsInternalServerError) Code() int {
+	return 500
+}
+
+func (o *PostV1VcsConnectionsInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] postV1VcsConnectionsInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *PostV1VcsConnectionsInternalServerError) String() string {
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] postV1VcsConnectionsInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *PostV1VcsConnectionsInternalServerError) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1VcsConnectionsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

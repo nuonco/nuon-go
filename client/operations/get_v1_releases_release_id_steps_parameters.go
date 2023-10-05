@@ -61,6 +61,18 @@ GetV1ReleasesReleaseIDStepsParams contains all the parameters to send to the API
 */
 type GetV1ReleasesReleaseIDStepsParams struct {
 
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
+	/* XNuonOrgID.
+
+	   org ID
+	*/
+	XNuonOrgID string
+
 	/* ReleaseID.
 
 	   release ID
@@ -120,6 +132,28 @@ func (o *GetV1ReleasesReleaseIDStepsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the get v1 releases release ID steps params
+func (o *GetV1ReleasesReleaseIDStepsParams) WithAuthorization(authorization string) *GetV1ReleasesReleaseIDStepsParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the get v1 releases release ID steps params
+func (o *GetV1ReleasesReleaseIDStepsParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
+// WithXNuonOrgID adds the xNuonOrgID to the get v1 releases release ID steps params
+func (o *GetV1ReleasesReleaseIDStepsParams) WithXNuonOrgID(xNuonOrgID string) *GetV1ReleasesReleaseIDStepsParams {
+	o.SetXNuonOrgID(xNuonOrgID)
+	return o
+}
+
+// SetXNuonOrgID adds the xNuonOrgId to the get v1 releases release ID steps params
+func (o *GetV1ReleasesReleaseIDStepsParams) SetXNuonOrgID(xNuonOrgID string) {
+	o.XNuonOrgID = xNuonOrgID
+}
+
 // WithReleaseID adds the releaseID to the get v1 releases release ID steps params
 func (o *GetV1ReleasesReleaseIDStepsParams) WithReleaseID(releaseID string) *GetV1ReleasesReleaseIDStepsParams {
 	o.SetReleaseID(releaseID)
@@ -138,6 +172,16 @@ func (o *GetV1ReleasesReleaseIDStepsParams) WriteToRequest(r runtime.ClientReque
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
+
+	// header param X-Nuon-Org-ID
+	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
+		return err
+	}
 
 	// path param release_id
 	if err := r.SetPathParam("release_id", o.ReleaseID); err != nil {

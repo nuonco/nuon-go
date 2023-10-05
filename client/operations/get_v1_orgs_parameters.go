@@ -60,6 +60,13 @@ GetV1OrgsParams contains all the parameters to send to the API endpoint
 	Typically these are written to a http.Request.
 */
 type GetV1OrgsParams struct {
+
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -113,6 +120,17 @@ func (o *GetV1OrgsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the get v1 orgs params
+func (o *GetV1OrgsParams) WithAuthorization(authorization string) *GetV1OrgsParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the get v1 orgs params
+func (o *GetV1OrgsParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *GetV1OrgsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -120,6 +138,11 @@ func (o *GetV1OrgsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Reg
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

@@ -61,6 +61,18 @@ GetV1VcsConnectionsConnectionIDParams contains all the parameters to send to the
 */
 type GetV1VcsConnectionsConnectionIDParams struct {
 
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
+	/* XNuonOrgID.
+
+	   org ID
+	*/
+	XNuonOrgID string
+
 	/* ConnectionID.
 
 	   connection ID
@@ -120,6 +132,28 @@ func (o *GetV1VcsConnectionsConnectionIDParams) SetHTTPClient(client *http.Clien
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the get v1 vcs connections connection ID params
+func (o *GetV1VcsConnectionsConnectionIDParams) WithAuthorization(authorization string) *GetV1VcsConnectionsConnectionIDParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the get v1 vcs connections connection ID params
+func (o *GetV1VcsConnectionsConnectionIDParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
+// WithXNuonOrgID adds the xNuonOrgID to the get v1 vcs connections connection ID params
+func (o *GetV1VcsConnectionsConnectionIDParams) WithXNuonOrgID(xNuonOrgID string) *GetV1VcsConnectionsConnectionIDParams {
+	o.SetXNuonOrgID(xNuonOrgID)
+	return o
+}
+
+// SetXNuonOrgID adds the xNuonOrgId to the get v1 vcs connections connection ID params
+func (o *GetV1VcsConnectionsConnectionIDParams) SetXNuonOrgID(xNuonOrgID string) {
+	o.XNuonOrgID = xNuonOrgID
+}
+
 // WithConnectionID adds the connectionID to the get v1 vcs connections connection ID params
 func (o *GetV1VcsConnectionsConnectionIDParams) WithConnectionID(connectionID string) *GetV1VcsConnectionsConnectionIDParams {
 	o.SetConnectionID(connectionID)
@@ -138,6 +172,16 @@ func (o *GetV1VcsConnectionsConnectionIDParams) WriteToRequest(r runtime.ClientR
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
+
+	// header param X-Nuon-Org-ID
+	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
+		return err
+	}
 
 	// path param connection_id
 	if err := r.SetPathParam("connection_id", o.ConnectionID); err != nil {

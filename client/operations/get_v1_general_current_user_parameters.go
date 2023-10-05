@@ -60,6 +60,13 @@ GetV1GeneralCurrentUserParams contains all the parameters to send to the API end
 	Typically these are written to a http.Request.
 */
 type GetV1GeneralCurrentUserParams struct {
+
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -113,6 +120,17 @@ func (o *GetV1GeneralCurrentUserParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the get v1 general current user params
+func (o *GetV1GeneralCurrentUserParams) WithAuthorization(authorization string) *GetV1GeneralCurrentUserParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the get v1 general current user params
+func (o *GetV1GeneralCurrentUserParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *GetV1GeneralCurrentUserParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -120,6 +138,11 @@ func (o *GetV1GeneralCurrentUserParams) WriteToRequest(r runtime.ClientRequest, 
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

@@ -63,6 +63,18 @@ PostV1ReleasesParams contains all the parameters to send to the API endpoint
 */
 type PostV1ReleasesParams struct {
 
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
+	/* XNuonOrgID.
+
+	   org ID
+	*/
+	XNuonOrgID string
+
 	/* Req.
 
 	   Input
@@ -122,6 +134,28 @@ func (o *PostV1ReleasesParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the post v1 releases params
+func (o *PostV1ReleasesParams) WithAuthorization(authorization string) *PostV1ReleasesParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the post v1 releases params
+func (o *PostV1ReleasesParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
+// WithXNuonOrgID adds the xNuonOrgID to the post v1 releases params
+func (o *PostV1ReleasesParams) WithXNuonOrgID(xNuonOrgID string) *PostV1ReleasesParams {
+	o.SetXNuonOrgID(xNuonOrgID)
+	return o
+}
+
+// SetXNuonOrgID adds the xNuonOrgId to the post v1 releases params
+func (o *PostV1ReleasesParams) SetXNuonOrgID(xNuonOrgID string) {
+	o.XNuonOrgID = xNuonOrgID
+}
+
 // WithReq adds the req to the post v1 releases params
 func (o *PostV1ReleasesParams) WithReq(req *models.ServiceCreateComponentReleaseRequest) *PostV1ReleasesParams {
 	o.SetReq(req)
@@ -140,6 +174,16 @@ func (o *PostV1ReleasesParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
+
+	// header param X-Nuon-Org-ID
+	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
+		return err
+	}
 	if o.Req != nil {
 		if err := r.SetBodyParam(o.Req); err != nil {
 			return err

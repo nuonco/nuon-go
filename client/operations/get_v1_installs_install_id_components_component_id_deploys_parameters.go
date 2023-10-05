@@ -61,6 +61,18 @@ GetV1InstallsInstallIDComponentsComponentIDDeploysParams contains all the parame
 */
 type GetV1InstallsInstallIDComponentsComponentIDDeploysParams struct {
 
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
+	/* XNuonOrgID.
+
+	   org ID
+	*/
+	XNuonOrgID string
+
 	/* ComponentID.
 
 	   component ID
@@ -126,6 +138,28 @@ func (o *GetV1InstallsInstallIDComponentsComponentIDDeploysParams) SetHTTPClient
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the get v1 installs install ID components component ID deploys params
+func (o *GetV1InstallsInstallIDComponentsComponentIDDeploysParams) WithAuthorization(authorization string) *GetV1InstallsInstallIDComponentsComponentIDDeploysParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the get v1 installs install ID components component ID deploys params
+func (o *GetV1InstallsInstallIDComponentsComponentIDDeploysParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
+// WithXNuonOrgID adds the xNuonOrgID to the get v1 installs install ID components component ID deploys params
+func (o *GetV1InstallsInstallIDComponentsComponentIDDeploysParams) WithXNuonOrgID(xNuonOrgID string) *GetV1InstallsInstallIDComponentsComponentIDDeploysParams {
+	o.SetXNuonOrgID(xNuonOrgID)
+	return o
+}
+
+// SetXNuonOrgID adds the xNuonOrgId to the get v1 installs install ID components component ID deploys params
+func (o *GetV1InstallsInstallIDComponentsComponentIDDeploysParams) SetXNuonOrgID(xNuonOrgID string) {
+	o.XNuonOrgID = xNuonOrgID
+}
+
 // WithComponentID adds the componentID to the get v1 installs install ID components component ID deploys params
 func (o *GetV1InstallsInstallIDComponentsComponentIDDeploysParams) WithComponentID(componentID string) *GetV1InstallsInstallIDComponentsComponentIDDeploysParams {
 	o.SetComponentID(componentID)
@@ -155,6 +189,16 @@ func (o *GetV1InstallsInstallIDComponentsComponentIDDeploysParams) WriteToReques
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
+
+	// header param X-Nuon-Org-ID
+	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
+		return err
+	}
 
 	// path param component_id
 	if err := r.SetPathParam("component_id", o.ComponentID); err != nil {

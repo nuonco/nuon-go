@@ -29,6 +29,36 @@ func (o *GetV1OrgsCurrentReader) ReadResponse(response runtime.ClientResponse, c
 			return nil, err
 		}
 		return result, nil
+	case 400:
+		result := NewGetV1OrgsCurrentBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 401:
+		result := NewGetV1OrgsCurrentUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewGetV1OrgsCurrentForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewGetV1OrgsCurrentNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 500:
+		result := NewGetV1OrgsCurrentInternalServerError()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("[GET /v1/orgs/current] GetV1OrgsCurrent", response, response.Code())
 	}
@@ -93,6 +123,346 @@ func (o *GetV1OrgsCurrentOK) GetPayload() *models.AppOrg {
 func (o *GetV1OrgsCurrentOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.AppOrg)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1OrgsCurrentBadRequest creates a GetV1OrgsCurrentBadRequest with default headers values
+func NewGetV1OrgsCurrentBadRequest() *GetV1OrgsCurrentBadRequest {
+	return &GetV1OrgsCurrentBadRequest{}
+}
+
+/*
+GetV1OrgsCurrentBadRequest describes a response with status code 400, with default header values.
+
+Bad Request
+*/
+type GetV1OrgsCurrentBadRequest struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 orgs current bad request response has a 2xx status code
+func (o *GetV1OrgsCurrentBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 orgs current bad request response has a 3xx status code
+func (o *GetV1OrgsCurrentBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 orgs current bad request response has a 4xx status code
+func (o *GetV1OrgsCurrentBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 orgs current bad request response has a 5xx status code
+func (o *GetV1OrgsCurrentBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 orgs current bad request response a status code equal to that given
+func (o *GetV1OrgsCurrentBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get v1 orgs current bad request response
+func (o *GetV1OrgsCurrentBadRequest) Code() int {
+	return 400
+}
+
+func (o *GetV1OrgsCurrentBadRequest) Error() string {
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getV1OrgsCurrentBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetV1OrgsCurrentBadRequest) String() string {
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getV1OrgsCurrentBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetV1OrgsCurrentBadRequest) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1OrgsCurrentBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1OrgsCurrentUnauthorized creates a GetV1OrgsCurrentUnauthorized with default headers values
+func NewGetV1OrgsCurrentUnauthorized() *GetV1OrgsCurrentUnauthorized {
+	return &GetV1OrgsCurrentUnauthorized{}
+}
+
+/*
+GetV1OrgsCurrentUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized
+*/
+type GetV1OrgsCurrentUnauthorized struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 orgs current unauthorized response has a 2xx status code
+func (o *GetV1OrgsCurrentUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 orgs current unauthorized response has a 3xx status code
+func (o *GetV1OrgsCurrentUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 orgs current unauthorized response has a 4xx status code
+func (o *GetV1OrgsCurrentUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 orgs current unauthorized response has a 5xx status code
+func (o *GetV1OrgsCurrentUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 orgs current unauthorized response a status code equal to that given
+func (o *GetV1OrgsCurrentUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get v1 orgs current unauthorized response
+func (o *GetV1OrgsCurrentUnauthorized) Code() int {
+	return 401
+}
+
+func (o *GetV1OrgsCurrentUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getV1OrgsCurrentUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetV1OrgsCurrentUnauthorized) String() string {
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getV1OrgsCurrentUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetV1OrgsCurrentUnauthorized) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1OrgsCurrentUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1OrgsCurrentForbidden creates a GetV1OrgsCurrentForbidden with default headers values
+func NewGetV1OrgsCurrentForbidden() *GetV1OrgsCurrentForbidden {
+	return &GetV1OrgsCurrentForbidden{}
+}
+
+/*
+GetV1OrgsCurrentForbidden describes a response with status code 403, with default header values.
+
+Forbidden
+*/
+type GetV1OrgsCurrentForbidden struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 orgs current forbidden response has a 2xx status code
+func (o *GetV1OrgsCurrentForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 orgs current forbidden response has a 3xx status code
+func (o *GetV1OrgsCurrentForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 orgs current forbidden response has a 4xx status code
+func (o *GetV1OrgsCurrentForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 orgs current forbidden response has a 5xx status code
+func (o *GetV1OrgsCurrentForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 orgs current forbidden response a status code equal to that given
+func (o *GetV1OrgsCurrentForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get v1 orgs current forbidden response
+func (o *GetV1OrgsCurrentForbidden) Code() int {
+	return 403
+}
+
+func (o *GetV1OrgsCurrentForbidden) Error() string {
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getV1OrgsCurrentForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetV1OrgsCurrentForbidden) String() string {
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getV1OrgsCurrentForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetV1OrgsCurrentForbidden) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1OrgsCurrentForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1OrgsCurrentNotFound creates a GetV1OrgsCurrentNotFound with default headers values
+func NewGetV1OrgsCurrentNotFound() *GetV1OrgsCurrentNotFound {
+	return &GetV1OrgsCurrentNotFound{}
+}
+
+/*
+GetV1OrgsCurrentNotFound describes a response with status code 404, with default header values.
+
+Not Found
+*/
+type GetV1OrgsCurrentNotFound struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 orgs current not found response has a 2xx status code
+func (o *GetV1OrgsCurrentNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 orgs current not found response has a 3xx status code
+func (o *GetV1OrgsCurrentNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 orgs current not found response has a 4xx status code
+func (o *GetV1OrgsCurrentNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 orgs current not found response has a 5xx status code
+func (o *GetV1OrgsCurrentNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 orgs current not found response a status code equal to that given
+func (o *GetV1OrgsCurrentNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get v1 orgs current not found response
+func (o *GetV1OrgsCurrentNotFound) Code() int {
+	return 404
+}
+
+func (o *GetV1OrgsCurrentNotFound) Error() string {
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getV1OrgsCurrentNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetV1OrgsCurrentNotFound) String() string {
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getV1OrgsCurrentNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetV1OrgsCurrentNotFound) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1OrgsCurrentNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1OrgsCurrentInternalServerError creates a GetV1OrgsCurrentInternalServerError with default headers values
+func NewGetV1OrgsCurrentInternalServerError() *GetV1OrgsCurrentInternalServerError {
+	return &GetV1OrgsCurrentInternalServerError{}
+}
+
+/*
+GetV1OrgsCurrentInternalServerError describes a response with status code 500, with default header values.
+
+Internal Server Error
+*/
+type GetV1OrgsCurrentInternalServerError struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 orgs current internal server error response has a 2xx status code
+func (o *GetV1OrgsCurrentInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 orgs current internal server error response has a 3xx status code
+func (o *GetV1OrgsCurrentInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 orgs current internal server error response has a 4xx status code
+func (o *GetV1OrgsCurrentInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get v1 orgs current internal server error response has a 5xx status code
+func (o *GetV1OrgsCurrentInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get v1 orgs current internal server error response a status code equal to that given
+func (o *GetV1OrgsCurrentInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get v1 orgs current internal server error response
+func (o *GetV1OrgsCurrentInternalServerError) Code() int {
+	return 500
+}
+
+func (o *GetV1OrgsCurrentInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getV1OrgsCurrentInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetV1OrgsCurrentInternalServerError) String() string {
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getV1OrgsCurrentInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetV1OrgsCurrentInternalServerError) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1OrgsCurrentInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

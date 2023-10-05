@@ -61,6 +61,18 @@ GetV1InstallsInstallIDComponentsParams contains all the parameters to send to th
 */
 type GetV1InstallsInstallIDComponentsParams struct {
 
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
+	/* XNuonOrgID.
+
+	   org ID
+	*/
+	XNuonOrgID string
+
 	/* InstallID.
 
 	   install ID
@@ -120,6 +132,28 @@ func (o *GetV1InstallsInstallIDComponentsParams) SetHTTPClient(client *http.Clie
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the get v1 installs install ID components params
+func (o *GetV1InstallsInstallIDComponentsParams) WithAuthorization(authorization string) *GetV1InstallsInstallIDComponentsParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the get v1 installs install ID components params
+func (o *GetV1InstallsInstallIDComponentsParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
+// WithXNuonOrgID adds the xNuonOrgID to the get v1 installs install ID components params
+func (o *GetV1InstallsInstallIDComponentsParams) WithXNuonOrgID(xNuonOrgID string) *GetV1InstallsInstallIDComponentsParams {
+	o.SetXNuonOrgID(xNuonOrgID)
+	return o
+}
+
+// SetXNuonOrgID adds the xNuonOrgId to the get v1 installs install ID components params
+func (o *GetV1InstallsInstallIDComponentsParams) SetXNuonOrgID(xNuonOrgID string) {
+	o.XNuonOrgID = xNuonOrgID
+}
+
 // WithInstallID adds the installID to the get v1 installs install ID components params
 func (o *GetV1InstallsInstallIDComponentsParams) WithInstallID(installID string) *GetV1InstallsInstallIDComponentsParams {
 	o.SetInstallID(installID)
@@ -138,6 +172,16 @@ func (o *GetV1InstallsInstallIDComponentsParams) WriteToRequest(r runtime.Client
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
+
+	// header param X-Nuon-Org-ID
+	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
+		return err
+	}
 
 	// path param install_id
 	if err := r.SetPathParam("install_id", o.InstallID); err != nil {

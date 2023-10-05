@@ -30,9 +30,6 @@ type AppApp struct {
 	// name
 	Name string `json:"name,omitempty"`
 
-	// org
-	Org *AppOrg `json:"org,omitempty"`
-
 	// org id
 	OrgID string `json:"org_id,omitempty"`
 
@@ -53,10 +50,6 @@ type AppApp struct {
 func (m *AppApp) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateOrg(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateSandboxRelease(formats); err != nil {
 		res = append(res, err)
 	}
@@ -64,25 +57,6 @@ func (m *AppApp) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *AppApp) validateOrg(formats strfmt.Registry) error {
-	if swag.IsZero(m.Org) { // not required
-		return nil
-	}
-
-	if m.Org != nil {
-		if err := m.Org.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("org")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("org")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -109,10 +83,6 @@ func (m *AppApp) validateSandboxRelease(formats strfmt.Registry) error {
 func (m *AppApp) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateOrg(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateSandboxRelease(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -120,27 +90,6 @@ func (m *AppApp) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *AppApp) contextValidateOrg(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Org != nil {
-
-		if swag.IsZero(m.Org) { // not required
-			return nil
-		}
-
-		if err := m.Org.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("org")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("org")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 

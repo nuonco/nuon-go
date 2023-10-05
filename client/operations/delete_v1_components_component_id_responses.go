@@ -11,6 +11,8 @@ import (
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/nuonco/nuon-go/models"
 )
 
 // DeleteV1ComponentsComponentIDReader is a Reader for the DeleteV1ComponentsComponentID structure.
@@ -27,6 +29,36 @@ func (o *DeleteV1ComponentsComponentIDReader) ReadResponse(response runtime.Clie
 			return nil, err
 		}
 		return result, nil
+	case 400:
+		result := NewDeleteV1ComponentsComponentIDBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 401:
+		result := NewDeleteV1ComponentsComponentIDUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewDeleteV1ComponentsComponentIDForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewDeleteV1ComponentsComponentIDNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 500:
+		result := NewDeleteV1ComponentsComponentIDInternalServerError()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("[DELETE /v1/components/{component_id}] DeleteV1ComponentsComponentID", response, response.Code())
 	}
@@ -92,6 +124,346 @@ func (o *DeleteV1ComponentsComponentIDOK) readResponse(response runtime.ClientRe
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteV1ComponentsComponentIDBadRequest creates a DeleteV1ComponentsComponentIDBadRequest with default headers values
+func NewDeleteV1ComponentsComponentIDBadRequest() *DeleteV1ComponentsComponentIDBadRequest {
+	return &DeleteV1ComponentsComponentIDBadRequest{}
+}
+
+/*
+DeleteV1ComponentsComponentIDBadRequest describes a response with status code 400, with default header values.
+
+Bad Request
+*/
+type DeleteV1ComponentsComponentIDBadRequest struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this delete v1 components component Id bad request response has a 2xx status code
+func (o *DeleteV1ComponentsComponentIDBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete v1 components component Id bad request response has a 3xx status code
+func (o *DeleteV1ComponentsComponentIDBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete v1 components component Id bad request response has a 4xx status code
+func (o *DeleteV1ComponentsComponentIDBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete v1 components component Id bad request response has a 5xx status code
+func (o *DeleteV1ComponentsComponentIDBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete v1 components component Id bad request response a status code equal to that given
+func (o *DeleteV1ComponentsComponentIDBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the delete v1 components component Id bad request response
+func (o *DeleteV1ComponentsComponentIDBadRequest) Code() int {
+	return 400
+}
+
+func (o *DeleteV1ComponentsComponentIDBadRequest) Error() string {
+	return fmt.Sprintf("[DELETE /v1/components/{component_id}][%d] deleteV1ComponentsComponentIdBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *DeleteV1ComponentsComponentIDBadRequest) String() string {
+	return fmt.Sprintf("[DELETE /v1/components/{component_id}][%d] deleteV1ComponentsComponentIdBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *DeleteV1ComponentsComponentIDBadRequest) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *DeleteV1ComponentsComponentIDBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteV1ComponentsComponentIDUnauthorized creates a DeleteV1ComponentsComponentIDUnauthorized with default headers values
+func NewDeleteV1ComponentsComponentIDUnauthorized() *DeleteV1ComponentsComponentIDUnauthorized {
+	return &DeleteV1ComponentsComponentIDUnauthorized{}
+}
+
+/*
+DeleteV1ComponentsComponentIDUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized
+*/
+type DeleteV1ComponentsComponentIDUnauthorized struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this delete v1 components component Id unauthorized response has a 2xx status code
+func (o *DeleteV1ComponentsComponentIDUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete v1 components component Id unauthorized response has a 3xx status code
+func (o *DeleteV1ComponentsComponentIDUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete v1 components component Id unauthorized response has a 4xx status code
+func (o *DeleteV1ComponentsComponentIDUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete v1 components component Id unauthorized response has a 5xx status code
+func (o *DeleteV1ComponentsComponentIDUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete v1 components component Id unauthorized response a status code equal to that given
+func (o *DeleteV1ComponentsComponentIDUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the delete v1 components component Id unauthorized response
+func (o *DeleteV1ComponentsComponentIDUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DeleteV1ComponentsComponentIDUnauthorized) Error() string {
+	return fmt.Sprintf("[DELETE /v1/components/{component_id}][%d] deleteV1ComponentsComponentIdUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *DeleteV1ComponentsComponentIDUnauthorized) String() string {
+	return fmt.Sprintf("[DELETE /v1/components/{component_id}][%d] deleteV1ComponentsComponentIdUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *DeleteV1ComponentsComponentIDUnauthorized) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *DeleteV1ComponentsComponentIDUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteV1ComponentsComponentIDForbidden creates a DeleteV1ComponentsComponentIDForbidden with default headers values
+func NewDeleteV1ComponentsComponentIDForbidden() *DeleteV1ComponentsComponentIDForbidden {
+	return &DeleteV1ComponentsComponentIDForbidden{}
+}
+
+/*
+DeleteV1ComponentsComponentIDForbidden describes a response with status code 403, with default header values.
+
+Forbidden
+*/
+type DeleteV1ComponentsComponentIDForbidden struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this delete v1 components component Id forbidden response has a 2xx status code
+func (o *DeleteV1ComponentsComponentIDForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete v1 components component Id forbidden response has a 3xx status code
+func (o *DeleteV1ComponentsComponentIDForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete v1 components component Id forbidden response has a 4xx status code
+func (o *DeleteV1ComponentsComponentIDForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete v1 components component Id forbidden response has a 5xx status code
+func (o *DeleteV1ComponentsComponentIDForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete v1 components component Id forbidden response a status code equal to that given
+func (o *DeleteV1ComponentsComponentIDForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the delete v1 components component Id forbidden response
+func (o *DeleteV1ComponentsComponentIDForbidden) Code() int {
+	return 403
+}
+
+func (o *DeleteV1ComponentsComponentIDForbidden) Error() string {
+	return fmt.Sprintf("[DELETE /v1/components/{component_id}][%d] deleteV1ComponentsComponentIdForbidden  %+v", 403, o.Payload)
+}
+
+func (o *DeleteV1ComponentsComponentIDForbidden) String() string {
+	return fmt.Sprintf("[DELETE /v1/components/{component_id}][%d] deleteV1ComponentsComponentIdForbidden  %+v", 403, o.Payload)
+}
+
+func (o *DeleteV1ComponentsComponentIDForbidden) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *DeleteV1ComponentsComponentIDForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteV1ComponentsComponentIDNotFound creates a DeleteV1ComponentsComponentIDNotFound with default headers values
+func NewDeleteV1ComponentsComponentIDNotFound() *DeleteV1ComponentsComponentIDNotFound {
+	return &DeleteV1ComponentsComponentIDNotFound{}
+}
+
+/*
+DeleteV1ComponentsComponentIDNotFound describes a response with status code 404, with default header values.
+
+Not Found
+*/
+type DeleteV1ComponentsComponentIDNotFound struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this delete v1 components component Id not found response has a 2xx status code
+func (o *DeleteV1ComponentsComponentIDNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete v1 components component Id not found response has a 3xx status code
+func (o *DeleteV1ComponentsComponentIDNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete v1 components component Id not found response has a 4xx status code
+func (o *DeleteV1ComponentsComponentIDNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete v1 components component Id not found response has a 5xx status code
+func (o *DeleteV1ComponentsComponentIDNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete v1 components component Id not found response a status code equal to that given
+func (o *DeleteV1ComponentsComponentIDNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete v1 components component Id not found response
+func (o *DeleteV1ComponentsComponentIDNotFound) Code() int {
+	return 404
+}
+
+func (o *DeleteV1ComponentsComponentIDNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /v1/components/{component_id}][%d] deleteV1ComponentsComponentIdNotFound  %+v", 404, o.Payload)
+}
+
+func (o *DeleteV1ComponentsComponentIDNotFound) String() string {
+	return fmt.Sprintf("[DELETE /v1/components/{component_id}][%d] deleteV1ComponentsComponentIdNotFound  %+v", 404, o.Payload)
+}
+
+func (o *DeleteV1ComponentsComponentIDNotFound) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *DeleteV1ComponentsComponentIDNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteV1ComponentsComponentIDInternalServerError creates a DeleteV1ComponentsComponentIDInternalServerError with default headers values
+func NewDeleteV1ComponentsComponentIDInternalServerError() *DeleteV1ComponentsComponentIDInternalServerError {
+	return &DeleteV1ComponentsComponentIDInternalServerError{}
+}
+
+/*
+DeleteV1ComponentsComponentIDInternalServerError describes a response with status code 500, with default header values.
+
+Internal Server Error
+*/
+type DeleteV1ComponentsComponentIDInternalServerError struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this delete v1 components component Id internal server error response has a 2xx status code
+func (o *DeleteV1ComponentsComponentIDInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete v1 components component Id internal server error response has a 3xx status code
+func (o *DeleteV1ComponentsComponentIDInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete v1 components component Id internal server error response has a 4xx status code
+func (o *DeleteV1ComponentsComponentIDInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete v1 components component Id internal server error response has a 5xx status code
+func (o *DeleteV1ComponentsComponentIDInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this delete v1 components component Id internal server error response a status code equal to that given
+func (o *DeleteV1ComponentsComponentIDInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the delete v1 components component Id internal server error response
+func (o *DeleteV1ComponentsComponentIDInternalServerError) Code() int {
+	return 500
+}
+
+func (o *DeleteV1ComponentsComponentIDInternalServerError) Error() string {
+	return fmt.Sprintf("[DELETE /v1/components/{component_id}][%d] deleteV1ComponentsComponentIdInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *DeleteV1ComponentsComponentIDInternalServerError) String() string {
+	return fmt.Sprintf("[DELETE /v1/components/{component_id}][%d] deleteV1ComponentsComponentIdInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *DeleteV1ComponentsComponentIDInternalServerError) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *DeleteV1ComponentsComponentIDInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

@@ -29,6 +29,36 @@ func (o *PatchV1AppsAppIDReader) ReadResponse(response runtime.ClientResponse, c
 			return nil, err
 		}
 		return result, nil
+	case 400:
+		result := NewPatchV1AppsAppIDBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 401:
+		result := NewPatchV1AppsAppIDUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewPatchV1AppsAppIDForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewPatchV1AppsAppIDNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 500:
+		result := NewPatchV1AppsAppIDInternalServerError()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("[PATCH /v1/apps/{app_id}] PatchV1AppsAppID", response, response.Code())
 	}
@@ -93,6 +123,346 @@ func (o *PatchV1AppsAppIDOK) GetPayload() *models.AppApp {
 func (o *PatchV1AppsAppIDOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.AppApp)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPatchV1AppsAppIDBadRequest creates a PatchV1AppsAppIDBadRequest with default headers values
+func NewPatchV1AppsAppIDBadRequest() *PatchV1AppsAppIDBadRequest {
+	return &PatchV1AppsAppIDBadRequest{}
+}
+
+/*
+PatchV1AppsAppIDBadRequest describes a response with status code 400, with default header values.
+
+Bad Request
+*/
+type PatchV1AppsAppIDBadRequest struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this patch v1 apps app Id bad request response has a 2xx status code
+func (o *PatchV1AppsAppIDBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this patch v1 apps app Id bad request response has a 3xx status code
+func (o *PatchV1AppsAppIDBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch v1 apps app Id bad request response has a 4xx status code
+func (o *PatchV1AppsAppIDBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch v1 apps app Id bad request response has a 5xx status code
+func (o *PatchV1AppsAppIDBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch v1 apps app Id bad request response a status code equal to that given
+func (o *PatchV1AppsAppIDBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the patch v1 apps app Id bad request response
+func (o *PatchV1AppsAppIDBadRequest) Code() int {
+	return 400
+}
+
+func (o *PatchV1AppsAppIDBadRequest) Error() string {
+	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] patchV1AppsAppIdBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PatchV1AppsAppIDBadRequest) String() string {
+	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] patchV1AppsAppIdBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PatchV1AppsAppIDBadRequest) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PatchV1AppsAppIDBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPatchV1AppsAppIDUnauthorized creates a PatchV1AppsAppIDUnauthorized with default headers values
+func NewPatchV1AppsAppIDUnauthorized() *PatchV1AppsAppIDUnauthorized {
+	return &PatchV1AppsAppIDUnauthorized{}
+}
+
+/*
+PatchV1AppsAppIDUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized
+*/
+type PatchV1AppsAppIDUnauthorized struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this patch v1 apps app Id unauthorized response has a 2xx status code
+func (o *PatchV1AppsAppIDUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this patch v1 apps app Id unauthorized response has a 3xx status code
+func (o *PatchV1AppsAppIDUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch v1 apps app Id unauthorized response has a 4xx status code
+func (o *PatchV1AppsAppIDUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch v1 apps app Id unauthorized response has a 5xx status code
+func (o *PatchV1AppsAppIDUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch v1 apps app Id unauthorized response a status code equal to that given
+func (o *PatchV1AppsAppIDUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the patch v1 apps app Id unauthorized response
+func (o *PatchV1AppsAppIDUnauthorized) Code() int {
+	return 401
+}
+
+func (o *PatchV1AppsAppIDUnauthorized) Error() string {
+	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] patchV1AppsAppIdUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *PatchV1AppsAppIDUnauthorized) String() string {
+	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] patchV1AppsAppIdUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *PatchV1AppsAppIDUnauthorized) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PatchV1AppsAppIDUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPatchV1AppsAppIDForbidden creates a PatchV1AppsAppIDForbidden with default headers values
+func NewPatchV1AppsAppIDForbidden() *PatchV1AppsAppIDForbidden {
+	return &PatchV1AppsAppIDForbidden{}
+}
+
+/*
+PatchV1AppsAppIDForbidden describes a response with status code 403, with default header values.
+
+Forbidden
+*/
+type PatchV1AppsAppIDForbidden struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this patch v1 apps app Id forbidden response has a 2xx status code
+func (o *PatchV1AppsAppIDForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this patch v1 apps app Id forbidden response has a 3xx status code
+func (o *PatchV1AppsAppIDForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch v1 apps app Id forbidden response has a 4xx status code
+func (o *PatchV1AppsAppIDForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch v1 apps app Id forbidden response has a 5xx status code
+func (o *PatchV1AppsAppIDForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch v1 apps app Id forbidden response a status code equal to that given
+func (o *PatchV1AppsAppIDForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the patch v1 apps app Id forbidden response
+func (o *PatchV1AppsAppIDForbidden) Code() int {
+	return 403
+}
+
+func (o *PatchV1AppsAppIDForbidden) Error() string {
+	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] patchV1AppsAppIdForbidden  %+v", 403, o.Payload)
+}
+
+func (o *PatchV1AppsAppIDForbidden) String() string {
+	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] patchV1AppsAppIdForbidden  %+v", 403, o.Payload)
+}
+
+func (o *PatchV1AppsAppIDForbidden) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PatchV1AppsAppIDForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPatchV1AppsAppIDNotFound creates a PatchV1AppsAppIDNotFound with default headers values
+func NewPatchV1AppsAppIDNotFound() *PatchV1AppsAppIDNotFound {
+	return &PatchV1AppsAppIDNotFound{}
+}
+
+/*
+PatchV1AppsAppIDNotFound describes a response with status code 404, with default header values.
+
+Not Found
+*/
+type PatchV1AppsAppIDNotFound struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this patch v1 apps app Id not found response has a 2xx status code
+func (o *PatchV1AppsAppIDNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this patch v1 apps app Id not found response has a 3xx status code
+func (o *PatchV1AppsAppIDNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch v1 apps app Id not found response has a 4xx status code
+func (o *PatchV1AppsAppIDNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch v1 apps app Id not found response has a 5xx status code
+func (o *PatchV1AppsAppIDNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch v1 apps app Id not found response a status code equal to that given
+func (o *PatchV1AppsAppIDNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the patch v1 apps app Id not found response
+func (o *PatchV1AppsAppIDNotFound) Code() int {
+	return 404
+}
+
+func (o *PatchV1AppsAppIDNotFound) Error() string {
+	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] patchV1AppsAppIdNotFound  %+v", 404, o.Payload)
+}
+
+func (o *PatchV1AppsAppIDNotFound) String() string {
+	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] patchV1AppsAppIdNotFound  %+v", 404, o.Payload)
+}
+
+func (o *PatchV1AppsAppIDNotFound) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PatchV1AppsAppIDNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPatchV1AppsAppIDInternalServerError creates a PatchV1AppsAppIDInternalServerError with default headers values
+func NewPatchV1AppsAppIDInternalServerError() *PatchV1AppsAppIDInternalServerError {
+	return &PatchV1AppsAppIDInternalServerError{}
+}
+
+/*
+PatchV1AppsAppIDInternalServerError describes a response with status code 500, with default header values.
+
+Internal Server Error
+*/
+type PatchV1AppsAppIDInternalServerError struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this patch v1 apps app Id internal server error response has a 2xx status code
+func (o *PatchV1AppsAppIDInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this patch v1 apps app Id internal server error response has a 3xx status code
+func (o *PatchV1AppsAppIDInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch v1 apps app Id internal server error response has a 4xx status code
+func (o *PatchV1AppsAppIDInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this patch v1 apps app Id internal server error response has a 5xx status code
+func (o *PatchV1AppsAppIDInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this patch v1 apps app Id internal server error response a status code equal to that given
+func (o *PatchV1AppsAppIDInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the patch v1 apps app Id internal server error response
+func (o *PatchV1AppsAppIDInternalServerError) Code() int {
+	return 500
+}
+
+func (o *PatchV1AppsAppIDInternalServerError) Error() string {
+	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] patchV1AppsAppIdInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *PatchV1AppsAppIDInternalServerError) String() string {
+	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] patchV1AppsAppIdInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *PatchV1AppsAppIDInternalServerError) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PatchV1AppsAppIDInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -29,6 +29,36 @@ func (o *GetV1VcsConnectedReposReader) ReadResponse(response runtime.ClientRespo
 			return nil, err
 		}
 		return result, nil
+	case 400:
+		result := NewGetV1VcsConnectedReposBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 401:
+		result := NewGetV1VcsConnectedReposUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewGetV1VcsConnectedReposForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewGetV1VcsConnectedReposNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 500:
+		result := NewGetV1VcsConnectedReposInternalServerError()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("[GET /v1/vcs/connected-repos] GetV1VcsConnectedRepos", response, response.Code())
 	}
@@ -94,6 +124,346 @@ func (o *GetV1VcsConnectedReposOK) readResponse(response runtime.ClientResponse,
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1VcsConnectedReposBadRequest creates a GetV1VcsConnectedReposBadRequest with default headers values
+func NewGetV1VcsConnectedReposBadRequest() *GetV1VcsConnectedReposBadRequest {
+	return &GetV1VcsConnectedReposBadRequest{}
+}
+
+/*
+GetV1VcsConnectedReposBadRequest describes a response with status code 400, with default header values.
+
+Bad Request
+*/
+type GetV1VcsConnectedReposBadRequest struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 vcs connected repos bad request response has a 2xx status code
+func (o *GetV1VcsConnectedReposBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 vcs connected repos bad request response has a 3xx status code
+func (o *GetV1VcsConnectedReposBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 vcs connected repos bad request response has a 4xx status code
+func (o *GetV1VcsConnectedReposBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 vcs connected repos bad request response has a 5xx status code
+func (o *GetV1VcsConnectedReposBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 vcs connected repos bad request response a status code equal to that given
+func (o *GetV1VcsConnectedReposBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get v1 vcs connected repos bad request response
+func (o *GetV1VcsConnectedReposBadRequest) Code() int {
+	return 400
+}
+
+func (o *GetV1VcsConnectedReposBadRequest) Error() string {
+	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getV1VcsConnectedReposBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetV1VcsConnectedReposBadRequest) String() string {
+	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getV1VcsConnectedReposBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetV1VcsConnectedReposBadRequest) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1VcsConnectedReposBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1VcsConnectedReposUnauthorized creates a GetV1VcsConnectedReposUnauthorized with default headers values
+func NewGetV1VcsConnectedReposUnauthorized() *GetV1VcsConnectedReposUnauthorized {
+	return &GetV1VcsConnectedReposUnauthorized{}
+}
+
+/*
+GetV1VcsConnectedReposUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized
+*/
+type GetV1VcsConnectedReposUnauthorized struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 vcs connected repos unauthorized response has a 2xx status code
+func (o *GetV1VcsConnectedReposUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 vcs connected repos unauthorized response has a 3xx status code
+func (o *GetV1VcsConnectedReposUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 vcs connected repos unauthorized response has a 4xx status code
+func (o *GetV1VcsConnectedReposUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 vcs connected repos unauthorized response has a 5xx status code
+func (o *GetV1VcsConnectedReposUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 vcs connected repos unauthorized response a status code equal to that given
+func (o *GetV1VcsConnectedReposUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get v1 vcs connected repos unauthorized response
+func (o *GetV1VcsConnectedReposUnauthorized) Code() int {
+	return 401
+}
+
+func (o *GetV1VcsConnectedReposUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getV1VcsConnectedReposUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetV1VcsConnectedReposUnauthorized) String() string {
+	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getV1VcsConnectedReposUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetV1VcsConnectedReposUnauthorized) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1VcsConnectedReposUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1VcsConnectedReposForbidden creates a GetV1VcsConnectedReposForbidden with default headers values
+func NewGetV1VcsConnectedReposForbidden() *GetV1VcsConnectedReposForbidden {
+	return &GetV1VcsConnectedReposForbidden{}
+}
+
+/*
+GetV1VcsConnectedReposForbidden describes a response with status code 403, with default header values.
+
+Forbidden
+*/
+type GetV1VcsConnectedReposForbidden struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 vcs connected repos forbidden response has a 2xx status code
+func (o *GetV1VcsConnectedReposForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 vcs connected repos forbidden response has a 3xx status code
+func (o *GetV1VcsConnectedReposForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 vcs connected repos forbidden response has a 4xx status code
+func (o *GetV1VcsConnectedReposForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 vcs connected repos forbidden response has a 5xx status code
+func (o *GetV1VcsConnectedReposForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 vcs connected repos forbidden response a status code equal to that given
+func (o *GetV1VcsConnectedReposForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get v1 vcs connected repos forbidden response
+func (o *GetV1VcsConnectedReposForbidden) Code() int {
+	return 403
+}
+
+func (o *GetV1VcsConnectedReposForbidden) Error() string {
+	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getV1VcsConnectedReposForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetV1VcsConnectedReposForbidden) String() string {
+	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getV1VcsConnectedReposForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetV1VcsConnectedReposForbidden) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1VcsConnectedReposForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1VcsConnectedReposNotFound creates a GetV1VcsConnectedReposNotFound with default headers values
+func NewGetV1VcsConnectedReposNotFound() *GetV1VcsConnectedReposNotFound {
+	return &GetV1VcsConnectedReposNotFound{}
+}
+
+/*
+GetV1VcsConnectedReposNotFound describes a response with status code 404, with default header values.
+
+Not Found
+*/
+type GetV1VcsConnectedReposNotFound struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 vcs connected repos not found response has a 2xx status code
+func (o *GetV1VcsConnectedReposNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 vcs connected repos not found response has a 3xx status code
+func (o *GetV1VcsConnectedReposNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 vcs connected repos not found response has a 4xx status code
+func (o *GetV1VcsConnectedReposNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 vcs connected repos not found response has a 5xx status code
+func (o *GetV1VcsConnectedReposNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 vcs connected repos not found response a status code equal to that given
+func (o *GetV1VcsConnectedReposNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get v1 vcs connected repos not found response
+func (o *GetV1VcsConnectedReposNotFound) Code() int {
+	return 404
+}
+
+func (o *GetV1VcsConnectedReposNotFound) Error() string {
+	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getV1VcsConnectedReposNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetV1VcsConnectedReposNotFound) String() string {
+	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getV1VcsConnectedReposNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetV1VcsConnectedReposNotFound) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1VcsConnectedReposNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1VcsConnectedReposInternalServerError creates a GetV1VcsConnectedReposInternalServerError with default headers values
+func NewGetV1VcsConnectedReposInternalServerError() *GetV1VcsConnectedReposInternalServerError {
+	return &GetV1VcsConnectedReposInternalServerError{}
+}
+
+/*
+GetV1VcsConnectedReposInternalServerError describes a response with status code 500, with default header values.
+
+Internal Server Error
+*/
+type GetV1VcsConnectedReposInternalServerError struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 vcs connected repos internal server error response has a 2xx status code
+func (o *GetV1VcsConnectedReposInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 vcs connected repos internal server error response has a 3xx status code
+func (o *GetV1VcsConnectedReposInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 vcs connected repos internal server error response has a 4xx status code
+func (o *GetV1VcsConnectedReposInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get v1 vcs connected repos internal server error response has a 5xx status code
+func (o *GetV1VcsConnectedReposInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get v1 vcs connected repos internal server error response a status code equal to that given
+func (o *GetV1VcsConnectedReposInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get v1 vcs connected repos internal server error response
+func (o *GetV1VcsConnectedReposInternalServerError) Code() int {
+	return 500
+}
+
+func (o *GetV1VcsConnectedReposInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getV1VcsConnectedReposInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetV1VcsConnectedReposInternalServerError) String() string {
+	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getV1VcsConnectedReposInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetV1VcsConnectedReposInternalServerError) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1VcsConnectedReposInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

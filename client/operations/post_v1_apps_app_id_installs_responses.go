@@ -29,6 +29,36 @@ func (o *PostV1AppsAppIDInstallsReader) ReadResponse(response runtime.ClientResp
 			return nil, err
 		}
 		return result, nil
+	case 400:
+		result := NewPostV1AppsAppIDInstallsBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 401:
+		result := NewPostV1AppsAppIDInstallsUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewPostV1AppsAppIDInstallsForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewPostV1AppsAppIDInstallsNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 500:
+		result := NewPostV1AppsAppIDInstallsInternalServerError()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("[POST /v1/apps/{app_id}/installs/] PostV1AppsAppIDInstalls", response, response.Code())
 	}
@@ -93,6 +123,346 @@ func (o *PostV1AppsAppIDInstallsCreated) GetPayload() *models.AppInstall {
 func (o *PostV1AppsAppIDInstallsCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.AppInstall)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1AppsAppIDInstallsBadRequest creates a PostV1AppsAppIDInstallsBadRequest with default headers values
+func NewPostV1AppsAppIDInstallsBadRequest() *PostV1AppsAppIDInstallsBadRequest {
+	return &PostV1AppsAppIDInstallsBadRequest{}
+}
+
+/*
+PostV1AppsAppIDInstallsBadRequest describes a response with status code 400, with default header values.
+
+Bad Request
+*/
+type PostV1AppsAppIDInstallsBadRequest struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 apps app Id installs bad request response has a 2xx status code
+func (o *PostV1AppsAppIDInstallsBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 apps app Id installs bad request response has a 3xx status code
+func (o *PostV1AppsAppIDInstallsBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 apps app Id installs bad request response has a 4xx status code
+func (o *PostV1AppsAppIDInstallsBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 apps app Id installs bad request response has a 5xx status code
+func (o *PostV1AppsAppIDInstallsBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 apps app Id installs bad request response a status code equal to that given
+func (o *PostV1AppsAppIDInstallsBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the post v1 apps app Id installs bad request response
+func (o *PostV1AppsAppIDInstallsBadRequest) Code() int {
+	return 400
+}
+
+func (o *PostV1AppsAppIDInstallsBadRequest) Error() string {
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs/][%d] postV1AppsAppIdInstallsBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PostV1AppsAppIDInstallsBadRequest) String() string {
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs/][%d] postV1AppsAppIdInstallsBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PostV1AppsAppIDInstallsBadRequest) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1AppsAppIDInstallsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1AppsAppIDInstallsUnauthorized creates a PostV1AppsAppIDInstallsUnauthorized with default headers values
+func NewPostV1AppsAppIDInstallsUnauthorized() *PostV1AppsAppIDInstallsUnauthorized {
+	return &PostV1AppsAppIDInstallsUnauthorized{}
+}
+
+/*
+PostV1AppsAppIDInstallsUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized
+*/
+type PostV1AppsAppIDInstallsUnauthorized struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 apps app Id installs unauthorized response has a 2xx status code
+func (o *PostV1AppsAppIDInstallsUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 apps app Id installs unauthorized response has a 3xx status code
+func (o *PostV1AppsAppIDInstallsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 apps app Id installs unauthorized response has a 4xx status code
+func (o *PostV1AppsAppIDInstallsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 apps app Id installs unauthorized response has a 5xx status code
+func (o *PostV1AppsAppIDInstallsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 apps app Id installs unauthorized response a status code equal to that given
+func (o *PostV1AppsAppIDInstallsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the post v1 apps app Id installs unauthorized response
+func (o *PostV1AppsAppIDInstallsUnauthorized) Code() int {
+	return 401
+}
+
+func (o *PostV1AppsAppIDInstallsUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs/][%d] postV1AppsAppIdInstallsUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *PostV1AppsAppIDInstallsUnauthorized) String() string {
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs/][%d] postV1AppsAppIdInstallsUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *PostV1AppsAppIDInstallsUnauthorized) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1AppsAppIDInstallsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1AppsAppIDInstallsForbidden creates a PostV1AppsAppIDInstallsForbidden with default headers values
+func NewPostV1AppsAppIDInstallsForbidden() *PostV1AppsAppIDInstallsForbidden {
+	return &PostV1AppsAppIDInstallsForbidden{}
+}
+
+/*
+PostV1AppsAppIDInstallsForbidden describes a response with status code 403, with default header values.
+
+Forbidden
+*/
+type PostV1AppsAppIDInstallsForbidden struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 apps app Id installs forbidden response has a 2xx status code
+func (o *PostV1AppsAppIDInstallsForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 apps app Id installs forbidden response has a 3xx status code
+func (o *PostV1AppsAppIDInstallsForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 apps app Id installs forbidden response has a 4xx status code
+func (o *PostV1AppsAppIDInstallsForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 apps app Id installs forbidden response has a 5xx status code
+func (o *PostV1AppsAppIDInstallsForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 apps app Id installs forbidden response a status code equal to that given
+func (o *PostV1AppsAppIDInstallsForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the post v1 apps app Id installs forbidden response
+func (o *PostV1AppsAppIDInstallsForbidden) Code() int {
+	return 403
+}
+
+func (o *PostV1AppsAppIDInstallsForbidden) Error() string {
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs/][%d] postV1AppsAppIdInstallsForbidden  %+v", 403, o.Payload)
+}
+
+func (o *PostV1AppsAppIDInstallsForbidden) String() string {
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs/][%d] postV1AppsAppIdInstallsForbidden  %+v", 403, o.Payload)
+}
+
+func (o *PostV1AppsAppIDInstallsForbidden) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1AppsAppIDInstallsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1AppsAppIDInstallsNotFound creates a PostV1AppsAppIDInstallsNotFound with default headers values
+func NewPostV1AppsAppIDInstallsNotFound() *PostV1AppsAppIDInstallsNotFound {
+	return &PostV1AppsAppIDInstallsNotFound{}
+}
+
+/*
+PostV1AppsAppIDInstallsNotFound describes a response with status code 404, with default header values.
+
+Not Found
+*/
+type PostV1AppsAppIDInstallsNotFound struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 apps app Id installs not found response has a 2xx status code
+func (o *PostV1AppsAppIDInstallsNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 apps app Id installs not found response has a 3xx status code
+func (o *PostV1AppsAppIDInstallsNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 apps app Id installs not found response has a 4xx status code
+func (o *PostV1AppsAppIDInstallsNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 apps app Id installs not found response has a 5xx status code
+func (o *PostV1AppsAppIDInstallsNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 apps app Id installs not found response a status code equal to that given
+func (o *PostV1AppsAppIDInstallsNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the post v1 apps app Id installs not found response
+func (o *PostV1AppsAppIDInstallsNotFound) Code() int {
+	return 404
+}
+
+func (o *PostV1AppsAppIDInstallsNotFound) Error() string {
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs/][%d] postV1AppsAppIdInstallsNotFound  %+v", 404, o.Payload)
+}
+
+func (o *PostV1AppsAppIDInstallsNotFound) String() string {
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs/][%d] postV1AppsAppIdInstallsNotFound  %+v", 404, o.Payload)
+}
+
+func (o *PostV1AppsAppIDInstallsNotFound) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1AppsAppIDInstallsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1AppsAppIDInstallsInternalServerError creates a PostV1AppsAppIDInstallsInternalServerError with default headers values
+func NewPostV1AppsAppIDInstallsInternalServerError() *PostV1AppsAppIDInstallsInternalServerError {
+	return &PostV1AppsAppIDInstallsInternalServerError{}
+}
+
+/*
+PostV1AppsAppIDInstallsInternalServerError describes a response with status code 500, with default header values.
+
+Internal Server Error
+*/
+type PostV1AppsAppIDInstallsInternalServerError struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 apps app Id installs internal server error response has a 2xx status code
+func (o *PostV1AppsAppIDInstallsInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 apps app Id installs internal server error response has a 3xx status code
+func (o *PostV1AppsAppIDInstallsInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 apps app Id installs internal server error response has a 4xx status code
+func (o *PostV1AppsAppIDInstallsInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post v1 apps app Id installs internal server error response has a 5xx status code
+func (o *PostV1AppsAppIDInstallsInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this post v1 apps app Id installs internal server error response a status code equal to that given
+func (o *PostV1AppsAppIDInstallsInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the post v1 apps app Id installs internal server error response
+func (o *PostV1AppsAppIDInstallsInternalServerError) Code() int {
+	return 500
+}
+
+func (o *PostV1AppsAppIDInstallsInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs/][%d] postV1AppsAppIdInstallsInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *PostV1AppsAppIDInstallsInternalServerError) String() string {
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs/][%d] postV1AppsAppIdInstallsInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *PostV1AppsAppIDInstallsInternalServerError) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1AppsAppIDInstallsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

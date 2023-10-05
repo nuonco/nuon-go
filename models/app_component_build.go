@@ -34,6 +34,9 @@ type AppComponentBuild struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// install deploys
+	InstallDeploys []*AppInstallDeploy `json:"install_deploys"`
+
 	// releases
 	Releases []*AppComponentRelease `json:"releases"`
 
@@ -54,6 +57,10 @@ type AppComponentBuild struct {
 func (m *AppComponentBuild) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateInstallDeploys(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateReleases(formats); err != nil {
 		res = append(res, err)
 	}
@@ -65,6 +72,32 @@ func (m *AppComponentBuild) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppComponentBuild) validateInstallDeploys(formats strfmt.Registry) error {
+	if swag.IsZero(m.InstallDeploys) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.InstallDeploys); i++ {
+		if swag.IsZero(m.InstallDeploys[i]) { // not required
+			continue
+		}
+
+		if m.InstallDeploys[i] != nil {
+			if err := m.InstallDeploys[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("install_deploys" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("install_deploys" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -117,6 +150,10 @@ func (m *AppComponentBuild) validateVcsConnectionCommit(formats strfmt.Registry)
 func (m *AppComponentBuild) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateInstallDeploys(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateReleases(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -128,6 +165,31 @@ func (m *AppComponentBuild) ContextValidate(ctx context.Context, formats strfmt.
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppComponentBuild) contextValidateInstallDeploys(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.InstallDeploys); i++ {
+
+		if m.InstallDeploys[i] != nil {
+
+			if swag.IsZero(m.InstallDeploys[i]) { // not required
+				return nil
+			}
+
+			if err := m.InstallDeploys[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("install_deploys" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("install_deploys" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

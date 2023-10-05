@@ -29,6 +29,36 @@ func (o *PatchV1InstallsInstallIDReader) ReadResponse(response runtime.ClientRes
 			return nil, err
 		}
 		return result, nil
+	case 400:
+		result := NewPatchV1InstallsInstallIDBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 401:
+		result := NewPatchV1InstallsInstallIDUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewPatchV1InstallsInstallIDForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewPatchV1InstallsInstallIDNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 500:
+		result := NewPatchV1InstallsInstallIDInternalServerError()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("[PATCH /v1/installs/{install_id}] PatchV1InstallsInstallID", response, response.Code())
 	}
@@ -93,6 +123,346 @@ func (o *PatchV1InstallsInstallIDOK) GetPayload() *models.AppInstall {
 func (o *PatchV1InstallsInstallIDOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.AppInstall)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPatchV1InstallsInstallIDBadRequest creates a PatchV1InstallsInstallIDBadRequest with default headers values
+func NewPatchV1InstallsInstallIDBadRequest() *PatchV1InstallsInstallIDBadRequest {
+	return &PatchV1InstallsInstallIDBadRequest{}
+}
+
+/*
+PatchV1InstallsInstallIDBadRequest describes a response with status code 400, with default header values.
+
+Bad Request
+*/
+type PatchV1InstallsInstallIDBadRequest struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this patch v1 installs install Id bad request response has a 2xx status code
+func (o *PatchV1InstallsInstallIDBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this patch v1 installs install Id bad request response has a 3xx status code
+func (o *PatchV1InstallsInstallIDBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch v1 installs install Id bad request response has a 4xx status code
+func (o *PatchV1InstallsInstallIDBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch v1 installs install Id bad request response has a 5xx status code
+func (o *PatchV1InstallsInstallIDBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch v1 installs install Id bad request response a status code equal to that given
+func (o *PatchV1InstallsInstallIDBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the patch v1 installs install Id bad request response
+func (o *PatchV1InstallsInstallIDBadRequest) Code() int {
+	return 400
+}
+
+func (o *PatchV1InstallsInstallIDBadRequest) Error() string {
+	return fmt.Sprintf("[PATCH /v1/installs/{install_id}][%d] patchV1InstallsInstallIdBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PatchV1InstallsInstallIDBadRequest) String() string {
+	return fmt.Sprintf("[PATCH /v1/installs/{install_id}][%d] patchV1InstallsInstallIdBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PatchV1InstallsInstallIDBadRequest) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PatchV1InstallsInstallIDBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPatchV1InstallsInstallIDUnauthorized creates a PatchV1InstallsInstallIDUnauthorized with default headers values
+func NewPatchV1InstallsInstallIDUnauthorized() *PatchV1InstallsInstallIDUnauthorized {
+	return &PatchV1InstallsInstallIDUnauthorized{}
+}
+
+/*
+PatchV1InstallsInstallIDUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized
+*/
+type PatchV1InstallsInstallIDUnauthorized struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this patch v1 installs install Id unauthorized response has a 2xx status code
+func (o *PatchV1InstallsInstallIDUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this patch v1 installs install Id unauthorized response has a 3xx status code
+func (o *PatchV1InstallsInstallIDUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch v1 installs install Id unauthorized response has a 4xx status code
+func (o *PatchV1InstallsInstallIDUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch v1 installs install Id unauthorized response has a 5xx status code
+func (o *PatchV1InstallsInstallIDUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch v1 installs install Id unauthorized response a status code equal to that given
+func (o *PatchV1InstallsInstallIDUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the patch v1 installs install Id unauthorized response
+func (o *PatchV1InstallsInstallIDUnauthorized) Code() int {
+	return 401
+}
+
+func (o *PatchV1InstallsInstallIDUnauthorized) Error() string {
+	return fmt.Sprintf("[PATCH /v1/installs/{install_id}][%d] patchV1InstallsInstallIdUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *PatchV1InstallsInstallIDUnauthorized) String() string {
+	return fmt.Sprintf("[PATCH /v1/installs/{install_id}][%d] patchV1InstallsInstallIdUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *PatchV1InstallsInstallIDUnauthorized) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PatchV1InstallsInstallIDUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPatchV1InstallsInstallIDForbidden creates a PatchV1InstallsInstallIDForbidden with default headers values
+func NewPatchV1InstallsInstallIDForbidden() *PatchV1InstallsInstallIDForbidden {
+	return &PatchV1InstallsInstallIDForbidden{}
+}
+
+/*
+PatchV1InstallsInstallIDForbidden describes a response with status code 403, with default header values.
+
+Forbidden
+*/
+type PatchV1InstallsInstallIDForbidden struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this patch v1 installs install Id forbidden response has a 2xx status code
+func (o *PatchV1InstallsInstallIDForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this patch v1 installs install Id forbidden response has a 3xx status code
+func (o *PatchV1InstallsInstallIDForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch v1 installs install Id forbidden response has a 4xx status code
+func (o *PatchV1InstallsInstallIDForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch v1 installs install Id forbidden response has a 5xx status code
+func (o *PatchV1InstallsInstallIDForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch v1 installs install Id forbidden response a status code equal to that given
+func (o *PatchV1InstallsInstallIDForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the patch v1 installs install Id forbidden response
+func (o *PatchV1InstallsInstallIDForbidden) Code() int {
+	return 403
+}
+
+func (o *PatchV1InstallsInstallIDForbidden) Error() string {
+	return fmt.Sprintf("[PATCH /v1/installs/{install_id}][%d] patchV1InstallsInstallIdForbidden  %+v", 403, o.Payload)
+}
+
+func (o *PatchV1InstallsInstallIDForbidden) String() string {
+	return fmt.Sprintf("[PATCH /v1/installs/{install_id}][%d] patchV1InstallsInstallIdForbidden  %+v", 403, o.Payload)
+}
+
+func (o *PatchV1InstallsInstallIDForbidden) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PatchV1InstallsInstallIDForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPatchV1InstallsInstallIDNotFound creates a PatchV1InstallsInstallIDNotFound with default headers values
+func NewPatchV1InstallsInstallIDNotFound() *PatchV1InstallsInstallIDNotFound {
+	return &PatchV1InstallsInstallIDNotFound{}
+}
+
+/*
+PatchV1InstallsInstallIDNotFound describes a response with status code 404, with default header values.
+
+Not Found
+*/
+type PatchV1InstallsInstallIDNotFound struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this patch v1 installs install Id not found response has a 2xx status code
+func (o *PatchV1InstallsInstallIDNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this patch v1 installs install Id not found response has a 3xx status code
+func (o *PatchV1InstallsInstallIDNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch v1 installs install Id not found response has a 4xx status code
+func (o *PatchV1InstallsInstallIDNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch v1 installs install Id not found response has a 5xx status code
+func (o *PatchV1InstallsInstallIDNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch v1 installs install Id not found response a status code equal to that given
+func (o *PatchV1InstallsInstallIDNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the patch v1 installs install Id not found response
+func (o *PatchV1InstallsInstallIDNotFound) Code() int {
+	return 404
+}
+
+func (o *PatchV1InstallsInstallIDNotFound) Error() string {
+	return fmt.Sprintf("[PATCH /v1/installs/{install_id}][%d] patchV1InstallsInstallIdNotFound  %+v", 404, o.Payload)
+}
+
+func (o *PatchV1InstallsInstallIDNotFound) String() string {
+	return fmt.Sprintf("[PATCH /v1/installs/{install_id}][%d] patchV1InstallsInstallIdNotFound  %+v", 404, o.Payload)
+}
+
+func (o *PatchV1InstallsInstallIDNotFound) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PatchV1InstallsInstallIDNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPatchV1InstallsInstallIDInternalServerError creates a PatchV1InstallsInstallIDInternalServerError with default headers values
+func NewPatchV1InstallsInstallIDInternalServerError() *PatchV1InstallsInstallIDInternalServerError {
+	return &PatchV1InstallsInstallIDInternalServerError{}
+}
+
+/*
+PatchV1InstallsInstallIDInternalServerError describes a response with status code 500, with default header values.
+
+Internal Server Error
+*/
+type PatchV1InstallsInstallIDInternalServerError struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this patch v1 installs install Id internal server error response has a 2xx status code
+func (o *PatchV1InstallsInstallIDInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this patch v1 installs install Id internal server error response has a 3xx status code
+func (o *PatchV1InstallsInstallIDInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch v1 installs install Id internal server error response has a 4xx status code
+func (o *PatchV1InstallsInstallIDInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this patch v1 installs install Id internal server error response has a 5xx status code
+func (o *PatchV1InstallsInstallIDInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this patch v1 installs install Id internal server error response a status code equal to that given
+func (o *PatchV1InstallsInstallIDInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the patch v1 installs install Id internal server error response
+func (o *PatchV1InstallsInstallIDInternalServerError) Code() int {
+	return 500
+}
+
+func (o *PatchV1InstallsInstallIDInternalServerError) Error() string {
+	return fmt.Sprintf("[PATCH /v1/installs/{install_id}][%d] patchV1InstallsInstallIdInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *PatchV1InstallsInstallIDInternalServerError) String() string {
+	return fmt.Sprintf("[PATCH /v1/installs/{install_id}][%d] patchV1InstallsInstallIdInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *PatchV1InstallsInstallIDInternalServerError) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PatchV1InstallsInstallIDInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
