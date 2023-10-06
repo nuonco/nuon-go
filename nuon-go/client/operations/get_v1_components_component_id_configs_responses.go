@@ -29,6 +29,36 @@ func (o *GetV1ComponentsComponentIDConfigsReader) ReadResponse(response runtime.
 			return nil, err
 		}
 		return result, nil
+	case 400:
+		result := NewGetV1ComponentsComponentIDConfigsBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 401:
+		result := NewGetV1ComponentsComponentIDConfigsUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewGetV1ComponentsComponentIDConfigsForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewGetV1ComponentsComponentIDConfigsNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 500:
+		result := NewGetV1ComponentsComponentIDConfigsInternalServerError()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("[GET /v1/components/{component_id}/configs] GetV1ComponentsComponentIDConfigs", response, response.Code())
 	}
@@ -94,6 +124,346 @@ func (o *GetV1ComponentsComponentIDConfigsOK) readResponse(response runtime.Clie
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1ComponentsComponentIDConfigsBadRequest creates a GetV1ComponentsComponentIDConfigsBadRequest with default headers values
+func NewGetV1ComponentsComponentIDConfigsBadRequest() *GetV1ComponentsComponentIDConfigsBadRequest {
+	return &GetV1ComponentsComponentIDConfigsBadRequest{}
+}
+
+/*
+GetV1ComponentsComponentIDConfigsBadRequest describes a response with status code 400, with default header values.
+
+Bad Request
+*/
+type GetV1ComponentsComponentIDConfigsBadRequest struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 components component Id configs bad request response has a 2xx status code
+func (o *GetV1ComponentsComponentIDConfigsBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 components component Id configs bad request response has a 3xx status code
+func (o *GetV1ComponentsComponentIDConfigsBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 components component Id configs bad request response has a 4xx status code
+func (o *GetV1ComponentsComponentIDConfigsBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 components component Id configs bad request response has a 5xx status code
+func (o *GetV1ComponentsComponentIDConfigsBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 components component Id configs bad request response a status code equal to that given
+func (o *GetV1ComponentsComponentIDConfigsBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get v1 components component Id configs bad request response
+func (o *GetV1ComponentsComponentIDConfigsBadRequest) Code() int {
+	return 400
+}
+
+func (o *GetV1ComponentsComponentIDConfigsBadRequest) Error() string {
+	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getV1ComponentsComponentIdConfigsBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetV1ComponentsComponentIDConfigsBadRequest) String() string {
+	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getV1ComponentsComponentIdConfigsBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetV1ComponentsComponentIDConfigsBadRequest) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1ComponentsComponentIDConfigsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1ComponentsComponentIDConfigsUnauthorized creates a GetV1ComponentsComponentIDConfigsUnauthorized with default headers values
+func NewGetV1ComponentsComponentIDConfigsUnauthorized() *GetV1ComponentsComponentIDConfigsUnauthorized {
+	return &GetV1ComponentsComponentIDConfigsUnauthorized{}
+}
+
+/*
+GetV1ComponentsComponentIDConfigsUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized
+*/
+type GetV1ComponentsComponentIDConfigsUnauthorized struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 components component Id configs unauthorized response has a 2xx status code
+func (o *GetV1ComponentsComponentIDConfigsUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 components component Id configs unauthorized response has a 3xx status code
+func (o *GetV1ComponentsComponentIDConfigsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 components component Id configs unauthorized response has a 4xx status code
+func (o *GetV1ComponentsComponentIDConfigsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 components component Id configs unauthorized response has a 5xx status code
+func (o *GetV1ComponentsComponentIDConfigsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 components component Id configs unauthorized response a status code equal to that given
+func (o *GetV1ComponentsComponentIDConfigsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get v1 components component Id configs unauthorized response
+func (o *GetV1ComponentsComponentIDConfigsUnauthorized) Code() int {
+	return 401
+}
+
+func (o *GetV1ComponentsComponentIDConfigsUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getV1ComponentsComponentIdConfigsUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetV1ComponentsComponentIDConfigsUnauthorized) String() string {
+	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getV1ComponentsComponentIdConfigsUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetV1ComponentsComponentIDConfigsUnauthorized) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1ComponentsComponentIDConfigsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1ComponentsComponentIDConfigsForbidden creates a GetV1ComponentsComponentIDConfigsForbidden with default headers values
+func NewGetV1ComponentsComponentIDConfigsForbidden() *GetV1ComponentsComponentIDConfigsForbidden {
+	return &GetV1ComponentsComponentIDConfigsForbidden{}
+}
+
+/*
+GetV1ComponentsComponentIDConfigsForbidden describes a response with status code 403, with default header values.
+
+Forbidden
+*/
+type GetV1ComponentsComponentIDConfigsForbidden struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 components component Id configs forbidden response has a 2xx status code
+func (o *GetV1ComponentsComponentIDConfigsForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 components component Id configs forbidden response has a 3xx status code
+func (o *GetV1ComponentsComponentIDConfigsForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 components component Id configs forbidden response has a 4xx status code
+func (o *GetV1ComponentsComponentIDConfigsForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 components component Id configs forbidden response has a 5xx status code
+func (o *GetV1ComponentsComponentIDConfigsForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 components component Id configs forbidden response a status code equal to that given
+func (o *GetV1ComponentsComponentIDConfigsForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get v1 components component Id configs forbidden response
+func (o *GetV1ComponentsComponentIDConfigsForbidden) Code() int {
+	return 403
+}
+
+func (o *GetV1ComponentsComponentIDConfigsForbidden) Error() string {
+	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getV1ComponentsComponentIdConfigsForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetV1ComponentsComponentIDConfigsForbidden) String() string {
+	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getV1ComponentsComponentIdConfigsForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetV1ComponentsComponentIDConfigsForbidden) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1ComponentsComponentIDConfigsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1ComponentsComponentIDConfigsNotFound creates a GetV1ComponentsComponentIDConfigsNotFound with default headers values
+func NewGetV1ComponentsComponentIDConfigsNotFound() *GetV1ComponentsComponentIDConfigsNotFound {
+	return &GetV1ComponentsComponentIDConfigsNotFound{}
+}
+
+/*
+GetV1ComponentsComponentIDConfigsNotFound describes a response with status code 404, with default header values.
+
+Not Found
+*/
+type GetV1ComponentsComponentIDConfigsNotFound struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 components component Id configs not found response has a 2xx status code
+func (o *GetV1ComponentsComponentIDConfigsNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 components component Id configs not found response has a 3xx status code
+func (o *GetV1ComponentsComponentIDConfigsNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 components component Id configs not found response has a 4xx status code
+func (o *GetV1ComponentsComponentIDConfigsNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 components component Id configs not found response has a 5xx status code
+func (o *GetV1ComponentsComponentIDConfigsNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 components component Id configs not found response a status code equal to that given
+func (o *GetV1ComponentsComponentIDConfigsNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get v1 components component Id configs not found response
+func (o *GetV1ComponentsComponentIDConfigsNotFound) Code() int {
+	return 404
+}
+
+func (o *GetV1ComponentsComponentIDConfigsNotFound) Error() string {
+	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getV1ComponentsComponentIdConfigsNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetV1ComponentsComponentIDConfigsNotFound) String() string {
+	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getV1ComponentsComponentIdConfigsNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetV1ComponentsComponentIDConfigsNotFound) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1ComponentsComponentIDConfigsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1ComponentsComponentIDConfigsInternalServerError creates a GetV1ComponentsComponentIDConfigsInternalServerError with default headers values
+func NewGetV1ComponentsComponentIDConfigsInternalServerError() *GetV1ComponentsComponentIDConfigsInternalServerError {
+	return &GetV1ComponentsComponentIDConfigsInternalServerError{}
+}
+
+/*
+GetV1ComponentsComponentIDConfigsInternalServerError describes a response with status code 500, with default header values.
+
+Internal Server Error
+*/
+type GetV1ComponentsComponentIDConfigsInternalServerError struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 components component Id configs internal server error response has a 2xx status code
+func (o *GetV1ComponentsComponentIDConfigsInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 components component Id configs internal server error response has a 3xx status code
+func (o *GetV1ComponentsComponentIDConfigsInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 components component Id configs internal server error response has a 4xx status code
+func (o *GetV1ComponentsComponentIDConfigsInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get v1 components component Id configs internal server error response has a 5xx status code
+func (o *GetV1ComponentsComponentIDConfigsInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get v1 components component Id configs internal server error response a status code equal to that given
+func (o *GetV1ComponentsComponentIDConfigsInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get v1 components component Id configs internal server error response
+func (o *GetV1ComponentsComponentIDConfigsInternalServerError) Code() int {
+	return 500
+}
+
+func (o *GetV1ComponentsComponentIDConfigsInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getV1ComponentsComponentIdConfigsInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetV1ComponentsComponentIDConfigsInternalServerError) String() string {
+	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getV1ComponentsComponentIdConfigsInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetV1ComponentsComponentIDConfigsInternalServerError) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1ComponentsComponentIDConfigsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

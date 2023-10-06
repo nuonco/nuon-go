@@ -40,6 +40,12 @@ type AppComponent struct {
 	// name
 	Name string `json:"name,omitempty"`
 
+	// status
+	Status string `json:"status,omitempty"`
+
+	// status description
+	StatusDescription string `json:"status_description,omitempty"`
+
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
 }

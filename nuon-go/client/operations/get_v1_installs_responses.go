@@ -29,6 +29,36 @@ func (o *GetV1InstallsReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return result, nil
+	case 400:
+		result := NewGetV1InstallsBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 401:
+		result := NewGetV1InstallsUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewGetV1InstallsForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewGetV1InstallsNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 500:
+		result := NewGetV1InstallsInternalServerError()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("[GET /v1/installs] GetV1Installs", response, response.Code())
 	}
@@ -94,6 +124,346 @@ func (o *GetV1InstallsOK) readResponse(response runtime.ClientResponse, consumer
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1InstallsBadRequest creates a GetV1InstallsBadRequest with default headers values
+func NewGetV1InstallsBadRequest() *GetV1InstallsBadRequest {
+	return &GetV1InstallsBadRequest{}
+}
+
+/*
+GetV1InstallsBadRequest describes a response with status code 400, with default header values.
+
+Bad Request
+*/
+type GetV1InstallsBadRequest struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 installs bad request response has a 2xx status code
+func (o *GetV1InstallsBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 installs bad request response has a 3xx status code
+func (o *GetV1InstallsBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 installs bad request response has a 4xx status code
+func (o *GetV1InstallsBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 installs bad request response has a 5xx status code
+func (o *GetV1InstallsBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 installs bad request response a status code equal to that given
+func (o *GetV1InstallsBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get v1 installs bad request response
+func (o *GetV1InstallsBadRequest) Code() int {
+	return 400
+}
+
+func (o *GetV1InstallsBadRequest) Error() string {
+	return fmt.Sprintf("[GET /v1/installs][%d] getV1InstallsBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetV1InstallsBadRequest) String() string {
+	return fmt.Sprintf("[GET /v1/installs][%d] getV1InstallsBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetV1InstallsBadRequest) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1InstallsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1InstallsUnauthorized creates a GetV1InstallsUnauthorized with default headers values
+func NewGetV1InstallsUnauthorized() *GetV1InstallsUnauthorized {
+	return &GetV1InstallsUnauthorized{}
+}
+
+/*
+GetV1InstallsUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized
+*/
+type GetV1InstallsUnauthorized struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 installs unauthorized response has a 2xx status code
+func (o *GetV1InstallsUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 installs unauthorized response has a 3xx status code
+func (o *GetV1InstallsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 installs unauthorized response has a 4xx status code
+func (o *GetV1InstallsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 installs unauthorized response has a 5xx status code
+func (o *GetV1InstallsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 installs unauthorized response a status code equal to that given
+func (o *GetV1InstallsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get v1 installs unauthorized response
+func (o *GetV1InstallsUnauthorized) Code() int {
+	return 401
+}
+
+func (o *GetV1InstallsUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /v1/installs][%d] getV1InstallsUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetV1InstallsUnauthorized) String() string {
+	return fmt.Sprintf("[GET /v1/installs][%d] getV1InstallsUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetV1InstallsUnauthorized) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1InstallsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1InstallsForbidden creates a GetV1InstallsForbidden with default headers values
+func NewGetV1InstallsForbidden() *GetV1InstallsForbidden {
+	return &GetV1InstallsForbidden{}
+}
+
+/*
+GetV1InstallsForbidden describes a response with status code 403, with default header values.
+
+Forbidden
+*/
+type GetV1InstallsForbidden struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 installs forbidden response has a 2xx status code
+func (o *GetV1InstallsForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 installs forbidden response has a 3xx status code
+func (o *GetV1InstallsForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 installs forbidden response has a 4xx status code
+func (o *GetV1InstallsForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 installs forbidden response has a 5xx status code
+func (o *GetV1InstallsForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 installs forbidden response a status code equal to that given
+func (o *GetV1InstallsForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get v1 installs forbidden response
+func (o *GetV1InstallsForbidden) Code() int {
+	return 403
+}
+
+func (o *GetV1InstallsForbidden) Error() string {
+	return fmt.Sprintf("[GET /v1/installs][%d] getV1InstallsForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetV1InstallsForbidden) String() string {
+	return fmt.Sprintf("[GET /v1/installs][%d] getV1InstallsForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetV1InstallsForbidden) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1InstallsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1InstallsNotFound creates a GetV1InstallsNotFound with default headers values
+func NewGetV1InstallsNotFound() *GetV1InstallsNotFound {
+	return &GetV1InstallsNotFound{}
+}
+
+/*
+GetV1InstallsNotFound describes a response with status code 404, with default header values.
+
+Not Found
+*/
+type GetV1InstallsNotFound struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 installs not found response has a 2xx status code
+func (o *GetV1InstallsNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 installs not found response has a 3xx status code
+func (o *GetV1InstallsNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 installs not found response has a 4xx status code
+func (o *GetV1InstallsNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 installs not found response has a 5xx status code
+func (o *GetV1InstallsNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 installs not found response a status code equal to that given
+func (o *GetV1InstallsNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get v1 installs not found response
+func (o *GetV1InstallsNotFound) Code() int {
+	return 404
+}
+
+func (o *GetV1InstallsNotFound) Error() string {
+	return fmt.Sprintf("[GET /v1/installs][%d] getV1InstallsNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetV1InstallsNotFound) String() string {
+	return fmt.Sprintf("[GET /v1/installs][%d] getV1InstallsNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetV1InstallsNotFound) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1InstallsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1InstallsInternalServerError creates a GetV1InstallsInternalServerError with default headers values
+func NewGetV1InstallsInternalServerError() *GetV1InstallsInternalServerError {
+	return &GetV1InstallsInternalServerError{}
+}
+
+/*
+GetV1InstallsInternalServerError describes a response with status code 500, with default header values.
+
+Internal Server Error
+*/
+type GetV1InstallsInternalServerError struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 installs internal server error response has a 2xx status code
+func (o *GetV1InstallsInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 installs internal server error response has a 3xx status code
+func (o *GetV1InstallsInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 installs internal server error response has a 4xx status code
+func (o *GetV1InstallsInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get v1 installs internal server error response has a 5xx status code
+func (o *GetV1InstallsInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get v1 installs internal server error response a status code equal to that given
+func (o *GetV1InstallsInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get v1 installs internal server error response
+func (o *GetV1InstallsInternalServerError) Code() int {
+	return 500
+}
+
+func (o *GetV1InstallsInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /v1/installs][%d] getV1InstallsInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetV1InstallsInternalServerError) String() string {
+	return fmt.Sprintf("[GET /v1/installs][%d] getV1InstallsInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetV1InstallsInternalServerError) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1InstallsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

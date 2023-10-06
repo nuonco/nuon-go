@@ -60,6 +60,19 @@ GetV1VcsConnectedReposParams contains all the parameters to send to the API endp
 	Typically these are written to a http.Request.
 */
 type GetV1VcsConnectedReposParams struct {
+
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
+	/* XNuonOrgID.
+
+	   org ID
+	*/
+	XNuonOrgID string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -113,6 +126,28 @@ func (o *GetV1VcsConnectedReposParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the get v1 vcs connected repos params
+func (o *GetV1VcsConnectedReposParams) WithAuthorization(authorization string) *GetV1VcsConnectedReposParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the get v1 vcs connected repos params
+func (o *GetV1VcsConnectedReposParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
+// WithXNuonOrgID adds the xNuonOrgID to the get v1 vcs connected repos params
+func (o *GetV1VcsConnectedReposParams) WithXNuonOrgID(xNuonOrgID string) *GetV1VcsConnectedReposParams {
+	o.SetXNuonOrgID(xNuonOrgID)
+	return o
+}
+
+// SetXNuonOrgID adds the xNuonOrgId to the get v1 vcs connected repos params
+func (o *GetV1VcsConnectedReposParams) SetXNuonOrgID(xNuonOrgID string) {
+	o.XNuonOrgID = xNuonOrgID
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *GetV1VcsConnectedReposParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -120,6 +155,16 @@ func (o *GetV1VcsConnectedReposParams) WriteToRequest(r runtime.ClientRequest, r
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
+
+	// header param X-Nuon-Org-ID
+	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
+		return err
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

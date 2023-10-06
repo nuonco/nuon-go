@@ -29,6 +29,36 @@ func (o *PostV1InstallsInstallIDDeploysReader) ReadResponse(response runtime.Cli
 			return nil, err
 		}
 		return result, nil
+	case 400:
+		result := NewPostV1InstallsInstallIDDeploysBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 401:
+		result := NewPostV1InstallsInstallIDDeploysUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewPostV1InstallsInstallIDDeploysForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewPostV1InstallsInstallIDDeploysNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 500:
+		result := NewPostV1InstallsInstallIDDeploysInternalServerError()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("[POST /v1/installs/{install_id}/deploys/] PostV1InstallsInstallIDDeploys", response, response.Code())
 	}
@@ -93,6 +123,346 @@ func (o *PostV1InstallsInstallIDDeploysCreated) GetPayload() *models.AppInstallD
 func (o *PostV1InstallsInstallIDDeploysCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.AppInstallDeploy)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1InstallsInstallIDDeploysBadRequest creates a PostV1InstallsInstallIDDeploysBadRequest with default headers values
+func NewPostV1InstallsInstallIDDeploysBadRequest() *PostV1InstallsInstallIDDeploysBadRequest {
+	return &PostV1InstallsInstallIDDeploysBadRequest{}
+}
+
+/*
+PostV1InstallsInstallIDDeploysBadRequest describes a response with status code 400, with default header values.
+
+Bad Request
+*/
+type PostV1InstallsInstallIDDeploysBadRequest struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 installs install Id deploys bad request response has a 2xx status code
+func (o *PostV1InstallsInstallIDDeploysBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 installs install Id deploys bad request response has a 3xx status code
+func (o *PostV1InstallsInstallIDDeploysBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 installs install Id deploys bad request response has a 4xx status code
+func (o *PostV1InstallsInstallIDDeploysBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 installs install Id deploys bad request response has a 5xx status code
+func (o *PostV1InstallsInstallIDDeploysBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 installs install Id deploys bad request response a status code equal to that given
+func (o *PostV1InstallsInstallIDDeploysBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the post v1 installs install Id deploys bad request response
+func (o *PostV1InstallsInstallIDDeploysBadRequest) Code() int {
+	return 400
+}
+
+func (o *PostV1InstallsInstallIDDeploysBadRequest) Error() string {
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys/][%d] postV1InstallsInstallIdDeploysBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PostV1InstallsInstallIDDeploysBadRequest) String() string {
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys/][%d] postV1InstallsInstallIdDeploysBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PostV1InstallsInstallIDDeploysBadRequest) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1InstallsInstallIDDeploysBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1InstallsInstallIDDeploysUnauthorized creates a PostV1InstallsInstallIDDeploysUnauthorized with default headers values
+func NewPostV1InstallsInstallIDDeploysUnauthorized() *PostV1InstallsInstallIDDeploysUnauthorized {
+	return &PostV1InstallsInstallIDDeploysUnauthorized{}
+}
+
+/*
+PostV1InstallsInstallIDDeploysUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized
+*/
+type PostV1InstallsInstallIDDeploysUnauthorized struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 installs install Id deploys unauthorized response has a 2xx status code
+func (o *PostV1InstallsInstallIDDeploysUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 installs install Id deploys unauthorized response has a 3xx status code
+func (o *PostV1InstallsInstallIDDeploysUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 installs install Id deploys unauthorized response has a 4xx status code
+func (o *PostV1InstallsInstallIDDeploysUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 installs install Id deploys unauthorized response has a 5xx status code
+func (o *PostV1InstallsInstallIDDeploysUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 installs install Id deploys unauthorized response a status code equal to that given
+func (o *PostV1InstallsInstallIDDeploysUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the post v1 installs install Id deploys unauthorized response
+func (o *PostV1InstallsInstallIDDeploysUnauthorized) Code() int {
+	return 401
+}
+
+func (o *PostV1InstallsInstallIDDeploysUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys/][%d] postV1InstallsInstallIdDeploysUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *PostV1InstallsInstallIDDeploysUnauthorized) String() string {
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys/][%d] postV1InstallsInstallIdDeploysUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *PostV1InstallsInstallIDDeploysUnauthorized) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1InstallsInstallIDDeploysUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1InstallsInstallIDDeploysForbidden creates a PostV1InstallsInstallIDDeploysForbidden with default headers values
+func NewPostV1InstallsInstallIDDeploysForbidden() *PostV1InstallsInstallIDDeploysForbidden {
+	return &PostV1InstallsInstallIDDeploysForbidden{}
+}
+
+/*
+PostV1InstallsInstallIDDeploysForbidden describes a response with status code 403, with default header values.
+
+Forbidden
+*/
+type PostV1InstallsInstallIDDeploysForbidden struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 installs install Id deploys forbidden response has a 2xx status code
+func (o *PostV1InstallsInstallIDDeploysForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 installs install Id deploys forbidden response has a 3xx status code
+func (o *PostV1InstallsInstallIDDeploysForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 installs install Id deploys forbidden response has a 4xx status code
+func (o *PostV1InstallsInstallIDDeploysForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 installs install Id deploys forbidden response has a 5xx status code
+func (o *PostV1InstallsInstallIDDeploysForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 installs install Id deploys forbidden response a status code equal to that given
+func (o *PostV1InstallsInstallIDDeploysForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the post v1 installs install Id deploys forbidden response
+func (o *PostV1InstallsInstallIDDeploysForbidden) Code() int {
+	return 403
+}
+
+func (o *PostV1InstallsInstallIDDeploysForbidden) Error() string {
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys/][%d] postV1InstallsInstallIdDeploysForbidden  %+v", 403, o.Payload)
+}
+
+func (o *PostV1InstallsInstallIDDeploysForbidden) String() string {
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys/][%d] postV1InstallsInstallIdDeploysForbidden  %+v", 403, o.Payload)
+}
+
+func (o *PostV1InstallsInstallIDDeploysForbidden) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1InstallsInstallIDDeploysForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1InstallsInstallIDDeploysNotFound creates a PostV1InstallsInstallIDDeploysNotFound with default headers values
+func NewPostV1InstallsInstallIDDeploysNotFound() *PostV1InstallsInstallIDDeploysNotFound {
+	return &PostV1InstallsInstallIDDeploysNotFound{}
+}
+
+/*
+PostV1InstallsInstallIDDeploysNotFound describes a response with status code 404, with default header values.
+
+Not Found
+*/
+type PostV1InstallsInstallIDDeploysNotFound struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 installs install Id deploys not found response has a 2xx status code
+func (o *PostV1InstallsInstallIDDeploysNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 installs install Id deploys not found response has a 3xx status code
+func (o *PostV1InstallsInstallIDDeploysNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 installs install Id deploys not found response has a 4xx status code
+func (o *PostV1InstallsInstallIDDeploysNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 installs install Id deploys not found response has a 5xx status code
+func (o *PostV1InstallsInstallIDDeploysNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 installs install Id deploys not found response a status code equal to that given
+func (o *PostV1InstallsInstallIDDeploysNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the post v1 installs install Id deploys not found response
+func (o *PostV1InstallsInstallIDDeploysNotFound) Code() int {
+	return 404
+}
+
+func (o *PostV1InstallsInstallIDDeploysNotFound) Error() string {
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys/][%d] postV1InstallsInstallIdDeploysNotFound  %+v", 404, o.Payload)
+}
+
+func (o *PostV1InstallsInstallIDDeploysNotFound) String() string {
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys/][%d] postV1InstallsInstallIdDeploysNotFound  %+v", 404, o.Payload)
+}
+
+func (o *PostV1InstallsInstallIDDeploysNotFound) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1InstallsInstallIDDeploysNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1InstallsInstallIDDeploysInternalServerError creates a PostV1InstallsInstallIDDeploysInternalServerError with default headers values
+func NewPostV1InstallsInstallIDDeploysInternalServerError() *PostV1InstallsInstallIDDeploysInternalServerError {
+	return &PostV1InstallsInstallIDDeploysInternalServerError{}
+}
+
+/*
+PostV1InstallsInstallIDDeploysInternalServerError describes a response with status code 500, with default header values.
+
+Internal Server Error
+*/
+type PostV1InstallsInstallIDDeploysInternalServerError struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 installs install Id deploys internal server error response has a 2xx status code
+func (o *PostV1InstallsInstallIDDeploysInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 installs install Id deploys internal server error response has a 3xx status code
+func (o *PostV1InstallsInstallIDDeploysInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 installs install Id deploys internal server error response has a 4xx status code
+func (o *PostV1InstallsInstallIDDeploysInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post v1 installs install Id deploys internal server error response has a 5xx status code
+func (o *PostV1InstallsInstallIDDeploysInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this post v1 installs install Id deploys internal server error response a status code equal to that given
+func (o *PostV1InstallsInstallIDDeploysInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the post v1 installs install Id deploys internal server error response
+func (o *PostV1InstallsInstallIDDeploysInternalServerError) Code() int {
+	return 500
+}
+
+func (o *PostV1InstallsInstallIDDeploysInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys/][%d] postV1InstallsInstallIdDeploysInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *PostV1InstallsInstallIDDeploysInternalServerError) String() string {
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys/][%d] postV1InstallsInstallIdDeploysInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *PostV1InstallsInstallIDDeploysInternalServerError) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1InstallsInstallIDDeploysInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -61,6 +61,12 @@ GetV1SandboxesSandboxIDParams contains all the parameters to send to the API end
 */
 type GetV1SandboxesSandboxIDParams struct {
 
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
 	/* SandboxID.
 
 	   sandbox ID
@@ -120,6 +126,17 @@ func (o *GetV1SandboxesSandboxIDParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the get v1 sandboxes sandbox ID params
+func (o *GetV1SandboxesSandboxIDParams) WithAuthorization(authorization string) *GetV1SandboxesSandboxIDParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the get v1 sandboxes sandbox ID params
+func (o *GetV1SandboxesSandboxIDParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
 // WithSandboxID adds the sandboxID to the get v1 sandboxes sandbox ID params
 func (o *GetV1SandboxesSandboxIDParams) WithSandboxID(sandboxID string) *GetV1SandboxesSandboxIDParams {
 	o.SetSandboxID(sandboxID)
@@ -138,6 +155,11 @@ func (o *GetV1SandboxesSandboxIDParams) WriteToRequest(r runtime.ClientRequest, 
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
 
 	// path param sandbox_id
 	if err := r.SetPathParam("sandbox_id", o.SandboxID); err != nil {

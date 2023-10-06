@@ -29,6 +29,36 @@ func (o *PostV1OrgsCurrentUserReader) ReadResponse(response runtime.ClientRespon
 			return nil, err
 		}
 		return result, nil
+	case 400:
+		result := NewPostV1OrgsCurrentUserBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 401:
+		result := NewPostV1OrgsCurrentUserUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewPostV1OrgsCurrentUserForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewPostV1OrgsCurrentUserNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 500:
+		result := NewPostV1OrgsCurrentUserInternalServerError()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("[POST /v1/orgs/current/user] PostV1OrgsCurrentUser", response, response.Code())
 	}
@@ -93,6 +123,346 @@ func (o *PostV1OrgsCurrentUserCreated) GetPayload() *models.AppUserOrg {
 func (o *PostV1OrgsCurrentUserCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.AppUserOrg)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1OrgsCurrentUserBadRequest creates a PostV1OrgsCurrentUserBadRequest with default headers values
+func NewPostV1OrgsCurrentUserBadRequest() *PostV1OrgsCurrentUserBadRequest {
+	return &PostV1OrgsCurrentUserBadRequest{}
+}
+
+/*
+PostV1OrgsCurrentUserBadRequest describes a response with status code 400, with default header values.
+
+Bad Request
+*/
+type PostV1OrgsCurrentUserBadRequest struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 orgs current user bad request response has a 2xx status code
+func (o *PostV1OrgsCurrentUserBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 orgs current user bad request response has a 3xx status code
+func (o *PostV1OrgsCurrentUserBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 orgs current user bad request response has a 4xx status code
+func (o *PostV1OrgsCurrentUserBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 orgs current user bad request response has a 5xx status code
+func (o *PostV1OrgsCurrentUserBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 orgs current user bad request response a status code equal to that given
+func (o *PostV1OrgsCurrentUserBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the post v1 orgs current user bad request response
+func (o *PostV1OrgsCurrentUserBadRequest) Code() int {
+	return 400
+}
+
+func (o *PostV1OrgsCurrentUserBadRequest) Error() string {
+	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] postV1OrgsCurrentUserBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PostV1OrgsCurrentUserBadRequest) String() string {
+	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] postV1OrgsCurrentUserBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PostV1OrgsCurrentUserBadRequest) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1OrgsCurrentUserBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1OrgsCurrentUserUnauthorized creates a PostV1OrgsCurrentUserUnauthorized with default headers values
+func NewPostV1OrgsCurrentUserUnauthorized() *PostV1OrgsCurrentUserUnauthorized {
+	return &PostV1OrgsCurrentUserUnauthorized{}
+}
+
+/*
+PostV1OrgsCurrentUserUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized
+*/
+type PostV1OrgsCurrentUserUnauthorized struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 orgs current user unauthorized response has a 2xx status code
+func (o *PostV1OrgsCurrentUserUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 orgs current user unauthorized response has a 3xx status code
+func (o *PostV1OrgsCurrentUserUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 orgs current user unauthorized response has a 4xx status code
+func (o *PostV1OrgsCurrentUserUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 orgs current user unauthorized response has a 5xx status code
+func (o *PostV1OrgsCurrentUserUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 orgs current user unauthorized response a status code equal to that given
+func (o *PostV1OrgsCurrentUserUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the post v1 orgs current user unauthorized response
+func (o *PostV1OrgsCurrentUserUnauthorized) Code() int {
+	return 401
+}
+
+func (o *PostV1OrgsCurrentUserUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] postV1OrgsCurrentUserUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *PostV1OrgsCurrentUserUnauthorized) String() string {
+	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] postV1OrgsCurrentUserUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *PostV1OrgsCurrentUserUnauthorized) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1OrgsCurrentUserUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1OrgsCurrentUserForbidden creates a PostV1OrgsCurrentUserForbidden with default headers values
+func NewPostV1OrgsCurrentUserForbidden() *PostV1OrgsCurrentUserForbidden {
+	return &PostV1OrgsCurrentUserForbidden{}
+}
+
+/*
+PostV1OrgsCurrentUserForbidden describes a response with status code 403, with default header values.
+
+Forbidden
+*/
+type PostV1OrgsCurrentUserForbidden struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 orgs current user forbidden response has a 2xx status code
+func (o *PostV1OrgsCurrentUserForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 orgs current user forbidden response has a 3xx status code
+func (o *PostV1OrgsCurrentUserForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 orgs current user forbidden response has a 4xx status code
+func (o *PostV1OrgsCurrentUserForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 orgs current user forbidden response has a 5xx status code
+func (o *PostV1OrgsCurrentUserForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 orgs current user forbidden response a status code equal to that given
+func (o *PostV1OrgsCurrentUserForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the post v1 orgs current user forbidden response
+func (o *PostV1OrgsCurrentUserForbidden) Code() int {
+	return 403
+}
+
+func (o *PostV1OrgsCurrentUserForbidden) Error() string {
+	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] postV1OrgsCurrentUserForbidden  %+v", 403, o.Payload)
+}
+
+func (o *PostV1OrgsCurrentUserForbidden) String() string {
+	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] postV1OrgsCurrentUserForbidden  %+v", 403, o.Payload)
+}
+
+func (o *PostV1OrgsCurrentUserForbidden) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1OrgsCurrentUserForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1OrgsCurrentUserNotFound creates a PostV1OrgsCurrentUserNotFound with default headers values
+func NewPostV1OrgsCurrentUserNotFound() *PostV1OrgsCurrentUserNotFound {
+	return &PostV1OrgsCurrentUserNotFound{}
+}
+
+/*
+PostV1OrgsCurrentUserNotFound describes a response with status code 404, with default header values.
+
+Not Found
+*/
+type PostV1OrgsCurrentUserNotFound struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 orgs current user not found response has a 2xx status code
+func (o *PostV1OrgsCurrentUserNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 orgs current user not found response has a 3xx status code
+func (o *PostV1OrgsCurrentUserNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 orgs current user not found response has a 4xx status code
+func (o *PostV1OrgsCurrentUserNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 orgs current user not found response has a 5xx status code
+func (o *PostV1OrgsCurrentUserNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 orgs current user not found response a status code equal to that given
+func (o *PostV1OrgsCurrentUserNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the post v1 orgs current user not found response
+func (o *PostV1OrgsCurrentUserNotFound) Code() int {
+	return 404
+}
+
+func (o *PostV1OrgsCurrentUserNotFound) Error() string {
+	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] postV1OrgsCurrentUserNotFound  %+v", 404, o.Payload)
+}
+
+func (o *PostV1OrgsCurrentUserNotFound) String() string {
+	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] postV1OrgsCurrentUserNotFound  %+v", 404, o.Payload)
+}
+
+func (o *PostV1OrgsCurrentUserNotFound) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1OrgsCurrentUserNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1OrgsCurrentUserInternalServerError creates a PostV1OrgsCurrentUserInternalServerError with default headers values
+func NewPostV1OrgsCurrentUserInternalServerError() *PostV1OrgsCurrentUserInternalServerError {
+	return &PostV1OrgsCurrentUserInternalServerError{}
+}
+
+/*
+PostV1OrgsCurrentUserInternalServerError describes a response with status code 500, with default header values.
+
+Internal Server Error
+*/
+type PostV1OrgsCurrentUserInternalServerError struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 orgs current user internal server error response has a 2xx status code
+func (o *PostV1OrgsCurrentUserInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 orgs current user internal server error response has a 3xx status code
+func (o *PostV1OrgsCurrentUserInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 orgs current user internal server error response has a 4xx status code
+func (o *PostV1OrgsCurrentUserInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post v1 orgs current user internal server error response has a 5xx status code
+func (o *PostV1OrgsCurrentUserInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this post v1 orgs current user internal server error response a status code equal to that given
+func (o *PostV1OrgsCurrentUserInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the post v1 orgs current user internal server error response
+func (o *PostV1OrgsCurrentUserInternalServerError) Code() int {
+	return 500
+}
+
+func (o *PostV1OrgsCurrentUserInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] postV1OrgsCurrentUserInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *PostV1OrgsCurrentUserInternalServerError) String() string {
+	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] postV1OrgsCurrentUserInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *PostV1OrgsCurrentUserInternalServerError) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1OrgsCurrentUserInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

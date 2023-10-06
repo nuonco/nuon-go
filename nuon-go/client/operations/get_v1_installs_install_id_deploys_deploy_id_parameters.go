@@ -61,6 +61,18 @@ GetV1InstallsInstallIDDeploysDeployIDParams contains all the parameters to send 
 */
 type GetV1InstallsInstallIDDeploysDeployIDParams struct {
 
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
+	/* XNuonOrgID.
+
+	   org ID
+	*/
+	XNuonOrgID string
+
 	/* DeployID.
 
 	   deploy ID
@@ -126,6 +138,28 @@ func (o *GetV1InstallsInstallIDDeploysDeployIDParams) SetHTTPClient(client *http
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the get v1 installs install ID deploys deploy ID params
+func (o *GetV1InstallsInstallIDDeploysDeployIDParams) WithAuthorization(authorization string) *GetV1InstallsInstallIDDeploysDeployIDParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the get v1 installs install ID deploys deploy ID params
+func (o *GetV1InstallsInstallIDDeploysDeployIDParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
+// WithXNuonOrgID adds the xNuonOrgID to the get v1 installs install ID deploys deploy ID params
+func (o *GetV1InstallsInstallIDDeploysDeployIDParams) WithXNuonOrgID(xNuonOrgID string) *GetV1InstallsInstallIDDeploysDeployIDParams {
+	o.SetXNuonOrgID(xNuonOrgID)
+	return o
+}
+
+// SetXNuonOrgID adds the xNuonOrgId to the get v1 installs install ID deploys deploy ID params
+func (o *GetV1InstallsInstallIDDeploysDeployIDParams) SetXNuonOrgID(xNuonOrgID string) {
+	o.XNuonOrgID = xNuonOrgID
+}
+
 // WithDeployID adds the deployID to the get v1 installs install ID deploys deploy ID params
 func (o *GetV1InstallsInstallIDDeploysDeployIDParams) WithDeployID(deployID string) *GetV1InstallsInstallIDDeploysDeployIDParams {
 	o.SetDeployID(deployID)
@@ -155,6 +189,16 @@ func (o *GetV1InstallsInstallIDDeploysDeployIDParams) WriteToRequest(r runtime.C
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
+
+	// header param X-Nuon-Org-ID
+	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
+		return err
+	}
 
 	// path param deploy_id
 	if err := r.SetPathParam("deploy_id", o.DeployID); err != nil {

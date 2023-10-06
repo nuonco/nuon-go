@@ -16,7 +16,7 @@ func (c *client) CreateInstall(ctx context.Context, appID string, req *models.Se
 		Context: ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to create app install: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -28,7 +28,7 @@ func (c *client) GetAppInstalls(ctx context.Context, appID string) ([]*models.Ap
 		Context: ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get app installs: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -39,7 +39,7 @@ func (c *client) GetAllInstalls(ctx context.Context) ([]*models.AppInstall, erro
 		Context: ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get installs: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -51,7 +51,7 @@ func (c *client) GetInstall(ctx context.Context, installID string) (*models.AppI
 		Context:   ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get install: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -76,7 +76,7 @@ func (c *client) DeleteInstall(ctx context.Context, installID string) (bool, err
 		Context:   ctx,
 	})
 	if err != nil {
-		return false, fmt.Errorf("unable to delete install: %w", err)
+		return false, err
 	}
 
 	return resp.IsSuccess(), nil
@@ -89,7 +89,7 @@ func (c *client) GetInstallDeploys(ctx context.Context, installID string) ([]*mo
 		Context:   ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get install deploys: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -102,7 +102,7 @@ func (c *client) CreateInstallDeploy(ctx context.Context, installID string, req 
 		Context:   ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to create install deploy: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -114,7 +114,7 @@ func (c *client) GetInstallLatestDeploy(ctx context.Context, installID string) (
 		Context:   ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to create install deploy: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -127,7 +127,7 @@ func (c *client) GetInstallDeploy(ctx context.Context, installID string, deployI
 		Context:   ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to create install deploy: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -153,7 +153,7 @@ func (c *client) GetInstallComponents(ctx context.Context, installID string) ([]
 		Context:   ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get install components: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -166,7 +166,7 @@ func (c *client) GetInstallComponentDeploys(ctx context.Context, installID strin
 		Context:     ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get install components: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -179,7 +179,7 @@ func (c *client) GetInstallComponentLatestDeploy(ctx context.Context, installID 
 		Context:     ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get install component latest deploy: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil

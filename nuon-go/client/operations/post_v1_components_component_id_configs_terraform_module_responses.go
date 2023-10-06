@@ -29,6 +29,36 @@ func (o *PostV1ComponentsComponentIDConfigsTerraformModuleReader) ReadResponse(r
 			return nil, err
 		}
 		return result, nil
+	case 400:
+		result := NewPostV1ComponentsComponentIDConfigsTerraformModuleBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 401:
+		result := NewPostV1ComponentsComponentIDConfigsTerraformModuleUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewPostV1ComponentsComponentIDConfigsTerraformModuleForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewPostV1ComponentsComponentIDConfigsTerraformModuleNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 500:
+		result := NewPostV1ComponentsComponentIDConfigsTerraformModuleInternalServerError()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("[POST /v1/components/{component_id}/configs/terraform-module] PostV1ComponentsComponentIDConfigsTerraformModule", response, response.Code())
 	}
@@ -93,6 +123,346 @@ func (o *PostV1ComponentsComponentIDConfigsTerraformModuleCreated) GetPayload() 
 func (o *PostV1ComponentsComponentIDConfigsTerraformModuleCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.AppTerraformModuleComponentConfig)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1ComponentsComponentIDConfigsTerraformModuleBadRequest creates a PostV1ComponentsComponentIDConfigsTerraformModuleBadRequest with default headers values
+func NewPostV1ComponentsComponentIDConfigsTerraformModuleBadRequest() *PostV1ComponentsComponentIDConfigsTerraformModuleBadRequest {
+	return &PostV1ComponentsComponentIDConfigsTerraformModuleBadRequest{}
+}
+
+/*
+PostV1ComponentsComponentIDConfigsTerraformModuleBadRequest describes a response with status code 400, with default header values.
+
+Bad Request
+*/
+type PostV1ComponentsComponentIDConfigsTerraformModuleBadRequest struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 components component Id configs terraform module bad request response has a 2xx status code
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 components component Id configs terraform module bad request response has a 3xx status code
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 components component Id configs terraform module bad request response has a 4xx status code
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 components component Id configs terraform module bad request response has a 5xx status code
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 components component Id configs terraform module bad request response a status code equal to that given
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the post v1 components component Id configs terraform module bad request response
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleBadRequest) Code() int {
+	return 400
+}
+
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleBadRequest) Error() string {
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] postV1ComponentsComponentIdConfigsTerraformModuleBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleBadRequest) String() string {
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] postV1ComponentsComponentIdConfigsTerraformModuleBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleBadRequest) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1ComponentsComponentIDConfigsTerraformModuleUnauthorized creates a PostV1ComponentsComponentIDConfigsTerraformModuleUnauthorized with default headers values
+func NewPostV1ComponentsComponentIDConfigsTerraformModuleUnauthorized() *PostV1ComponentsComponentIDConfigsTerraformModuleUnauthorized {
+	return &PostV1ComponentsComponentIDConfigsTerraformModuleUnauthorized{}
+}
+
+/*
+PostV1ComponentsComponentIDConfigsTerraformModuleUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized
+*/
+type PostV1ComponentsComponentIDConfigsTerraformModuleUnauthorized struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 components component Id configs terraform module unauthorized response has a 2xx status code
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 components component Id configs terraform module unauthorized response has a 3xx status code
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 components component Id configs terraform module unauthorized response has a 4xx status code
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 components component Id configs terraform module unauthorized response has a 5xx status code
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 components component Id configs terraform module unauthorized response a status code equal to that given
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the post v1 components component Id configs terraform module unauthorized response
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleUnauthorized) Code() int {
+	return 401
+}
+
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] postV1ComponentsComponentIdConfigsTerraformModuleUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleUnauthorized) String() string {
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] postV1ComponentsComponentIdConfigsTerraformModuleUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleUnauthorized) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1ComponentsComponentIDConfigsTerraformModuleForbidden creates a PostV1ComponentsComponentIDConfigsTerraformModuleForbidden with default headers values
+func NewPostV1ComponentsComponentIDConfigsTerraformModuleForbidden() *PostV1ComponentsComponentIDConfigsTerraformModuleForbidden {
+	return &PostV1ComponentsComponentIDConfigsTerraformModuleForbidden{}
+}
+
+/*
+PostV1ComponentsComponentIDConfigsTerraformModuleForbidden describes a response with status code 403, with default header values.
+
+Forbidden
+*/
+type PostV1ComponentsComponentIDConfigsTerraformModuleForbidden struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 components component Id configs terraform module forbidden response has a 2xx status code
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 components component Id configs terraform module forbidden response has a 3xx status code
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 components component Id configs terraform module forbidden response has a 4xx status code
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 components component Id configs terraform module forbidden response has a 5xx status code
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 components component Id configs terraform module forbidden response a status code equal to that given
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the post v1 components component Id configs terraform module forbidden response
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleForbidden) Code() int {
+	return 403
+}
+
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleForbidden) Error() string {
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] postV1ComponentsComponentIdConfigsTerraformModuleForbidden  %+v", 403, o.Payload)
+}
+
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleForbidden) String() string {
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] postV1ComponentsComponentIdConfigsTerraformModuleForbidden  %+v", 403, o.Payload)
+}
+
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleForbidden) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1ComponentsComponentIDConfigsTerraformModuleNotFound creates a PostV1ComponentsComponentIDConfigsTerraformModuleNotFound with default headers values
+func NewPostV1ComponentsComponentIDConfigsTerraformModuleNotFound() *PostV1ComponentsComponentIDConfigsTerraformModuleNotFound {
+	return &PostV1ComponentsComponentIDConfigsTerraformModuleNotFound{}
+}
+
+/*
+PostV1ComponentsComponentIDConfigsTerraformModuleNotFound describes a response with status code 404, with default header values.
+
+Not Found
+*/
+type PostV1ComponentsComponentIDConfigsTerraformModuleNotFound struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 components component Id configs terraform module not found response has a 2xx status code
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 components component Id configs terraform module not found response has a 3xx status code
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 components component Id configs terraform module not found response has a 4xx status code
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 components component Id configs terraform module not found response has a 5xx status code
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 components component Id configs terraform module not found response a status code equal to that given
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the post v1 components component Id configs terraform module not found response
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleNotFound) Code() int {
+	return 404
+}
+
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleNotFound) Error() string {
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] postV1ComponentsComponentIdConfigsTerraformModuleNotFound  %+v", 404, o.Payload)
+}
+
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleNotFound) String() string {
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] postV1ComponentsComponentIdConfigsTerraformModuleNotFound  %+v", 404, o.Payload)
+}
+
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleNotFound) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1ComponentsComponentIDConfigsTerraformModuleInternalServerError creates a PostV1ComponentsComponentIDConfigsTerraformModuleInternalServerError with default headers values
+func NewPostV1ComponentsComponentIDConfigsTerraformModuleInternalServerError() *PostV1ComponentsComponentIDConfigsTerraformModuleInternalServerError {
+	return &PostV1ComponentsComponentIDConfigsTerraformModuleInternalServerError{}
+}
+
+/*
+PostV1ComponentsComponentIDConfigsTerraformModuleInternalServerError describes a response with status code 500, with default header values.
+
+Internal Server Error
+*/
+type PostV1ComponentsComponentIDConfigsTerraformModuleInternalServerError struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 components component Id configs terraform module internal server error response has a 2xx status code
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 components component Id configs terraform module internal server error response has a 3xx status code
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 components component Id configs terraform module internal server error response has a 4xx status code
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post v1 components component Id configs terraform module internal server error response has a 5xx status code
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this post v1 components component Id configs terraform module internal server error response a status code equal to that given
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the post v1 components component Id configs terraform module internal server error response
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleInternalServerError) Code() int {
+	return 500
+}
+
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] postV1ComponentsComponentIdConfigsTerraformModuleInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleInternalServerError) String() string {
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] postV1ComponentsComponentIdConfigsTerraformModuleInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleInternalServerError) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1ComponentsComponentIDConfigsTerraformModuleInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

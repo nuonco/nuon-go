@@ -29,6 +29,36 @@ func (o *GetV1GeneralCurrentUserReader) ReadResponse(response runtime.ClientResp
 			return nil, err
 		}
 		return result, nil
+	case 400:
+		result := NewGetV1GeneralCurrentUserBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 401:
+		result := NewGetV1GeneralCurrentUserUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewGetV1GeneralCurrentUserForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewGetV1GeneralCurrentUserNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 500:
+		result := NewGetV1GeneralCurrentUserInternalServerError()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("[GET /v1/general/current-user] GetV1GeneralCurrentUser", response, response.Code())
 	}
@@ -93,6 +123,346 @@ func (o *GetV1GeneralCurrentUserOK) GetPayload() *models.AppUserToken {
 func (o *GetV1GeneralCurrentUserOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.AppUserToken)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1GeneralCurrentUserBadRequest creates a GetV1GeneralCurrentUserBadRequest with default headers values
+func NewGetV1GeneralCurrentUserBadRequest() *GetV1GeneralCurrentUserBadRequest {
+	return &GetV1GeneralCurrentUserBadRequest{}
+}
+
+/*
+GetV1GeneralCurrentUserBadRequest describes a response with status code 400, with default header values.
+
+Bad Request
+*/
+type GetV1GeneralCurrentUserBadRequest struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 general current user bad request response has a 2xx status code
+func (o *GetV1GeneralCurrentUserBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 general current user bad request response has a 3xx status code
+func (o *GetV1GeneralCurrentUserBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 general current user bad request response has a 4xx status code
+func (o *GetV1GeneralCurrentUserBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 general current user bad request response has a 5xx status code
+func (o *GetV1GeneralCurrentUserBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 general current user bad request response a status code equal to that given
+func (o *GetV1GeneralCurrentUserBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get v1 general current user bad request response
+func (o *GetV1GeneralCurrentUserBadRequest) Code() int {
+	return 400
+}
+
+func (o *GetV1GeneralCurrentUserBadRequest) Error() string {
+	return fmt.Sprintf("[GET /v1/general/current-user][%d] getV1GeneralCurrentUserBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetV1GeneralCurrentUserBadRequest) String() string {
+	return fmt.Sprintf("[GET /v1/general/current-user][%d] getV1GeneralCurrentUserBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetV1GeneralCurrentUserBadRequest) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1GeneralCurrentUserBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1GeneralCurrentUserUnauthorized creates a GetV1GeneralCurrentUserUnauthorized with default headers values
+func NewGetV1GeneralCurrentUserUnauthorized() *GetV1GeneralCurrentUserUnauthorized {
+	return &GetV1GeneralCurrentUserUnauthorized{}
+}
+
+/*
+GetV1GeneralCurrentUserUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized
+*/
+type GetV1GeneralCurrentUserUnauthorized struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 general current user unauthorized response has a 2xx status code
+func (o *GetV1GeneralCurrentUserUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 general current user unauthorized response has a 3xx status code
+func (o *GetV1GeneralCurrentUserUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 general current user unauthorized response has a 4xx status code
+func (o *GetV1GeneralCurrentUserUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 general current user unauthorized response has a 5xx status code
+func (o *GetV1GeneralCurrentUserUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 general current user unauthorized response a status code equal to that given
+func (o *GetV1GeneralCurrentUserUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get v1 general current user unauthorized response
+func (o *GetV1GeneralCurrentUserUnauthorized) Code() int {
+	return 401
+}
+
+func (o *GetV1GeneralCurrentUserUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /v1/general/current-user][%d] getV1GeneralCurrentUserUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetV1GeneralCurrentUserUnauthorized) String() string {
+	return fmt.Sprintf("[GET /v1/general/current-user][%d] getV1GeneralCurrentUserUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetV1GeneralCurrentUserUnauthorized) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1GeneralCurrentUserUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1GeneralCurrentUserForbidden creates a GetV1GeneralCurrentUserForbidden with default headers values
+func NewGetV1GeneralCurrentUserForbidden() *GetV1GeneralCurrentUserForbidden {
+	return &GetV1GeneralCurrentUserForbidden{}
+}
+
+/*
+GetV1GeneralCurrentUserForbidden describes a response with status code 403, with default header values.
+
+Forbidden
+*/
+type GetV1GeneralCurrentUserForbidden struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 general current user forbidden response has a 2xx status code
+func (o *GetV1GeneralCurrentUserForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 general current user forbidden response has a 3xx status code
+func (o *GetV1GeneralCurrentUserForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 general current user forbidden response has a 4xx status code
+func (o *GetV1GeneralCurrentUserForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 general current user forbidden response has a 5xx status code
+func (o *GetV1GeneralCurrentUserForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 general current user forbidden response a status code equal to that given
+func (o *GetV1GeneralCurrentUserForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get v1 general current user forbidden response
+func (o *GetV1GeneralCurrentUserForbidden) Code() int {
+	return 403
+}
+
+func (o *GetV1GeneralCurrentUserForbidden) Error() string {
+	return fmt.Sprintf("[GET /v1/general/current-user][%d] getV1GeneralCurrentUserForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetV1GeneralCurrentUserForbidden) String() string {
+	return fmt.Sprintf("[GET /v1/general/current-user][%d] getV1GeneralCurrentUserForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetV1GeneralCurrentUserForbidden) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1GeneralCurrentUserForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1GeneralCurrentUserNotFound creates a GetV1GeneralCurrentUserNotFound with default headers values
+func NewGetV1GeneralCurrentUserNotFound() *GetV1GeneralCurrentUserNotFound {
+	return &GetV1GeneralCurrentUserNotFound{}
+}
+
+/*
+GetV1GeneralCurrentUserNotFound describes a response with status code 404, with default header values.
+
+Not Found
+*/
+type GetV1GeneralCurrentUserNotFound struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 general current user not found response has a 2xx status code
+func (o *GetV1GeneralCurrentUserNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 general current user not found response has a 3xx status code
+func (o *GetV1GeneralCurrentUserNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 general current user not found response has a 4xx status code
+func (o *GetV1GeneralCurrentUserNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 general current user not found response has a 5xx status code
+func (o *GetV1GeneralCurrentUserNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 general current user not found response a status code equal to that given
+func (o *GetV1GeneralCurrentUserNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get v1 general current user not found response
+func (o *GetV1GeneralCurrentUserNotFound) Code() int {
+	return 404
+}
+
+func (o *GetV1GeneralCurrentUserNotFound) Error() string {
+	return fmt.Sprintf("[GET /v1/general/current-user][%d] getV1GeneralCurrentUserNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetV1GeneralCurrentUserNotFound) String() string {
+	return fmt.Sprintf("[GET /v1/general/current-user][%d] getV1GeneralCurrentUserNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetV1GeneralCurrentUserNotFound) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1GeneralCurrentUserNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1GeneralCurrentUserInternalServerError creates a GetV1GeneralCurrentUserInternalServerError with default headers values
+func NewGetV1GeneralCurrentUserInternalServerError() *GetV1GeneralCurrentUserInternalServerError {
+	return &GetV1GeneralCurrentUserInternalServerError{}
+}
+
+/*
+GetV1GeneralCurrentUserInternalServerError describes a response with status code 500, with default header values.
+
+Internal Server Error
+*/
+type GetV1GeneralCurrentUserInternalServerError struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 general current user internal server error response has a 2xx status code
+func (o *GetV1GeneralCurrentUserInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 general current user internal server error response has a 3xx status code
+func (o *GetV1GeneralCurrentUserInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 general current user internal server error response has a 4xx status code
+func (o *GetV1GeneralCurrentUserInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get v1 general current user internal server error response has a 5xx status code
+func (o *GetV1GeneralCurrentUserInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get v1 general current user internal server error response a status code equal to that given
+func (o *GetV1GeneralCurrentUserInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get v1 general current user internal server error response
+func (o *GetV1GeneralCurrentUserInternalServerError) Code() int {
+	return 500
+}
+
+func (o *GetV1GeneralCurrentUserInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /v1/general/current-user][%d] getV1GeneralCurrentUserInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetV1GeneralCurrentUserInternalServerError) String() string {
+	return fmt.Sprintf("[GET /v1/general/current-user][%d] getV1GeneralCurrentUserInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetV1GeneralCurrentUserInternalServerError) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1GeneralCurrentUserInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

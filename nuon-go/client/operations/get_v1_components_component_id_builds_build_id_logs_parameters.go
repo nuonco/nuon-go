@@ -61,6 +61,18 @@ GetV1ComponentsComponentIDBuildsBuildIDLogsParams contains all the parameters to
 */
 type GetV1ComponentsComponentIDBuildsBuildIDLogsParams struct {
 
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
+	/* XNuonOrgID.
+
+	   org ID
+	*/
+	XNuonOrgID string
+
 	/* BuildID.
 
 	   build ID
@@ -126,6 +138,28 @@ func (o *GetV1ComponentsComponentIDBuildsBuildIDLogsParams) SetHTTPClient(client
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the get v1 components component ID builds build ID logs params
+func (o *GetV1ComponentsComponentIDBuildsBuildIDLogsParams) WithAuthorization(authorization string) *GetV1ComponentsComponentIDBuildsBuildIDLogsParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the get v1 components component ID builds build ID logs params
+func (o *GetV1ComponentsComponentIDBuildsBuildIDLogsParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
+// WithXNuonOrgID adds the xNuonOrgID to the get v1 components component ID builds build ID logs params
+func (o *GetV1ComponentsComponentIDBuildsBuildIDLogsParams) WithXNuonOrgID(xNuonOrgID string) *GetV1ComponentsComponentIDBuildsBuildIDLogsParams {
+	o.SetXNuonOrgID(xNuonOrgID)
+	return o
+}
+
+// SetXNuonOrgID adds the xNuonOrgId to the get v1 components component ID builds build ID logs params
+func (o *GetV1ComponentsComponentIDBuildsBuildIDLogsParams) SetXNuonOrgID(xNuonOrgID string) {
+	o.XNuonOrgID = xNuonOrgID
+}
+
 // WithBuildID adds the buildID to the get v1 components component ID builds build ID logs params
 func (o *GetV1ComponentsComponentIDBuildsBuildIDLogsParams) WithBuildID(buildID string) *GetV1ComponentsComponentIDBuildsBuildIDLogsParams {
 	o.SetBuildID(buildID)
@@ -155,6 +189,16 @@ func (o *GetV1ComponentsComponentIDBuildsBuildIDLogsParams) WriteToRequest(r run
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
+
+	// header param X-Nuon-Org-ID
+	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
+		return err
+	}
 
 	// path param build_id
 	if err := r.SetPathParam("build_id", o.BuildID); err != nil {

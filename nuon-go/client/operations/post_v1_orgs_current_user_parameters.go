@@ -63,6 +63,18 @@ PostV1OrgsCurrentUserParams contains all the parameters to send to the API endpo
 */
 type PostV1OrgsCurrentUserParams struct {
 
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
+	/* XNuonOrgID.
+
+	   org ID
+	*/
+	XNuonOrgID string
+
 	/* Req.
 
 	   Input
@@ -122,6 +134,28 @@ func (o *PostV1OrgsCurrentUserParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the post v1 orgs current user params
+func (o *PostV1OrgsCurrentUserParams) WithAuthorization(authorization string) *PostV1OrgsCurrentUserParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the post v1 orgs current user params
+func (o *PostV1OrgsCurrentUserParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
+// WithXNuonOrgID adds the xNuonOrgID to the post v1 orgs current user params
+func (o *PostV1OrgsCurrentUserParams) WithXNuonOrgID(xNuonOrgID string) *PostV1OrgsCurrentUserParams {
+	o.SetXNuonOrgID(xNuonOrgID)
+	return o
+}
+
+// SetXNuonOrgID adds the xNuonOrgId to the post v1 orgs current user params
+func (o *PostV1OrgsCurrentUserParams) SetXNuonOrgID(xNuonOrgID string) {
+	o.XNuonOrgID = xNuonOrgID
+}
+
 // WithReq adds the req to the post v1 orgs current user params
 func (o *PostV1OrgsCurrentUserParams) WithReq(req *models.ServiceCreateOrgUserRequest) *PostV1OrgsCurrentUserParams {
 	o.SetReq(req)
@@ -140,6 +174,16 @@ func (o *PostV1OrgsCurrentUserParams) WriteToRequest(r runtime.ClientRequest, re
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
+
+	// header param X-Nuon-Org-ID
+	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
+		return err
+	}
 	if o.Req != nil {
 		if err := r.SetBodyParam(o.Req); err != nil {
 			return err

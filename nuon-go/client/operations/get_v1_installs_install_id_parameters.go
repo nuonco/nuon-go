@@ -61,6 +61,18 @@ GetV1InstallsInstallIDParams contains all the parameters to send to the API endp
 */
 type GetV1InstallsInstallIDParams struct {
 
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
+	/* XNuonOrgID.
+
+	   org ID
+	*/
+	XNuonOrgID string
+
 	/* InstallID.
 
 	   install ID
@@ -120,6 +132,28 @@ func (o *GetV1InstallsInstallIDParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the get v1 installs install ID params
+func (o *GetV1InstallsInstallIDParams) WithAuthorization(authorization string) *GetV1InstallsInstallIDParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the get v1 installs install ID params
+func (o *GetV1InstallsInstallIDParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
+// WithXNuonOrgID adds the xNuonOrgID to the get v1 installs install ID params
+func (o *GetV1InstallsInstallIDParams) WithXNuonOrgID(xNuonOrgID string) *GetV1InstallsInstallIDParams {
+	o.SetXNuonOrgID(xNuonOrgID)
+	return o
+}
+
+// SetXNuonOrgID adds the xNuonOrgId to the get v1 installs install ID params
+func (o *GetV1InstallsInstallIDParams) SetXNuonOrgID(xNuonOrgID string) {
+	o.XNuonOrgID = xNuonOrgID
+}
+
 // WithInstallID adds the installID to the get v1 installs install ID params
 func (o *GetV1InstallsInstallIDParams) WithInstallID(installID string) *GetV1InstallsInstallIDParams {
 	o.SetInstallID(installID)
@@ -138,6 +172,16 @@ func (o *GetV1InstallsInstallIDParams) WriteToRequest(r runtime.ClientRequest, r
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
+
+	// header param X-Nuon-Org-ID
+	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
+		return err
+	}
 
 	// path param install_id
 	if err := r.SetPathParam("install_id", o.InstallID); err != nil {

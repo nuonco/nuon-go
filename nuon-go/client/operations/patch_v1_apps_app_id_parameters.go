@@ -63,6 +63,18 @@ PatchV1AppsAppIDParams contains all the parameters to send to the API endpoint
 */
 type PatchV1AppsAppIDParams struct {
 
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
+	/* XNuonOrgID.
+
+	   org ID
+	*/
+	XNuonOrgID string
+
 	/* AppID.
 
 	   app ID
@@ -128,6 +140,28 @@ func (o *PatchV1AppsAppIDParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the patch v1 apps app ID params
+func (o *PatchV1AppsAppIDParams) WithAuthorization(authorization string) *PatchV1AppsAppIDParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the patch v1 apps app ID params
+func (o *PatchV1AppsAppIDParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
+// WithXNuonOrgID adds the xNuonOrgID to the patch v1 apps app ID params
+func (o *PatchV1AppsAppIDParams) WithXNuonOrgID(xNuonOrgID string) *PatchV1AppsAppIDParams {
+	o.SetXNuonOrgID(xNuonOrgID)
+	return o
+}
+
+// SetXNuonOrgID adds the xNuonOrgId to the patch v1 apps app ID params
+func (o *PatchV1AppsAppIDParams) SetXNuonOrgID(xNuonOrgID string) {
+	o.XNuonOrgID = xNuonOrgID
+}
+
 // WithAppID adds the appID to the patch v1 apps app ID params
 func (o *PatchV1AppsAppIDParams) WithAppID(appID string) *PatchV1AppsAppIDParams {
 	o.SetAppID(appID)
@@ -157,6 +191,16 @@ func (o *PatchV1AppsAppIDParams) WriteToRequest(r runtime.ClientRequest, reg str
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
+
+	// header param X-Nuon-Org-ID
+	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
+		return err
+	}
 
 	// path param app_id
 	if err := r.SetPathParam("app_id", o.AppID); err != nil {

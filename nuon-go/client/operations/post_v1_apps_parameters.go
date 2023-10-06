@@ -63,6 +63,18 @@ PostV1AppsParams contains all the parameters to send to the API endpoint
 */
 type PostV1AppsParams struct {
 
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
+	/* XNuonOrgID.
+
+	   org ID
+	*/
+	XNuonOrgID string
+
 	/* Req.
 
 	   Input
@@ -122,6 +134,28 @@ func (o *PostV1AppsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the post v1 apps params
+func (o *PostV1AppsParams) WithAuthorization(authorization string) *PostV1AppsParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the post v1 apps params
+func (o *PostV1AppsParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
+// WithXNuonOrgID adds the xNuonOrgID to the post v1 apps params
+func (o *PostV1AppsParams) WithXNuonOrgID(xNuonOrgID string) *PostV1AppsParams {
+	o.SetXNuonOrgID(xNuonOrgID)
+	return o
+}
+
+// SetXNuonOrgID adds the xNuonOrgId to the post v1 apps params
+func (o *PostV1AppsParams) SetXNuonOrgID(xNuonOrgID string) {
+	o.XNuonOrgID = xNuonOrgID
+}
+
 // WithReq adds the req to the post v1 apps params
 func (o *PostV1AppsParams) WithReq(req *models.ServiceCreateAppRequest) *PostV1AppsParams {
 	o.SetReq(req)
@@ -140,6 +174,16 @@ func (o *PostV1AppsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Re
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
+
+	// header param X-Nuon-Org-ID
+	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
+		return err
+	}
 	if o.Req != nil {
 		if err := r.SetBodyParam(o.Req); err != nil {
 			return err

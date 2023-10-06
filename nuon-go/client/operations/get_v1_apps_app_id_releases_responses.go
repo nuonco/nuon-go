@@ -29,6 +29,36 @@ func (o *GetV1AppsAppIDReleasesReader) ReadResponse(response runtime.ClientRespo
 			return nil, err
 		}
 		return result, nil
+	case 400:
+		result := NewGetV1AppsAppIDReleasesBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 401:
+		result := NewGetV1AppsAppIDReleasesUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewGetV1AppsAppIDReleasesForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewGetV1AppsAppIDReleasesNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 500:
+		result := NewGetV1AppsAppIDReleasesInternalServerError()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("[GET /v1/apps/{app_id}/releases] GetV1AppsAppIDReleases", response, response.Code())
 	}
@@ -94,6 +124,346 @@ func (o *GetV1AppsAppIDReleasesOK) readResponse(response runtime.ClientResponse,
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1AppsAppIDReleasesBadRequest creates a GetV1AppsAppIDReleasesBadRequest with default headers values
+func NewGetV1AppsAppIDReleasesBadRequest() *GetV1AppsAppIDReleasesBadRequest {
+	return &GetV1AppsAppIDReleasesBadRequest{}
+}
+
+/*
+GetV1AppsAppIDReleasesBadRequest describes a response with status code 400, with default header values.
+
+Bad Request
+*/
+type GetV1AppsAppIDReleasesBadRequest struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 apps app Id releases bad request response has a 2xx status code
+func (o *GetV1AppsAppIDReleasesBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 apps app Id releases bad request response has a 3xx status code
+func (o *GetV1AppsAppIDReleasesBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 apps app Id releases bad request response has a 4xx status code
+func (o *GetV1AppsAppIDReleasesBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 apps app Id releases bad request response has a 5xx status code
+func (o *GetV1AppsAppIDReleasesBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 apps app Id releases bad request response a status code equal to that given
+func (o *GetV1AppsAppIDReleasesBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get v1 apps app Id releases bad request response
+func (o *GetV1AppsAppIDReleasesBadRequest) Code() int {
+	return 400
+}
+
+func (o *GetV1AppsAppIDReleasesBadRequest) Error() string {
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/releases][%d] getV1AppsAppIdReleasesBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetV1AppsAppIDReleasesBadRequest) String() string {
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/releases][%d] getV1AppsAppIdReleasesBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetV1AppsAppIDReleasesBadRequest) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1AppsAppIDReleasesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1AppsAppIDReleasesUnauthorized creates a GetV1AppsAppIDReleasesUnauthorized with default headers values
+func NewGetV1AppsAppIDReleasesUnauthorized() *GetV1AppsAppIDReleasesUnauthorized {
+	return &GetV1AppsAppIDReleasesUnauthorized{}
+}
+
+/*
+GetV1AppsAppIDReleasesUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized
+*/
+type GetV1AppsAppIDReleasesUnauthorized struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 apps app Id releases unauthorized response has a 2xx status code
+func (o *GetV1AppsAppIDReleasesUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 apps app Id releases unauthorized response has a 3xx status code
+func (o *GetV1AppsAppIDReleasesUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 apps app Id releases unauthorized response has a 4xx status code
+func (o *GetV1AppsAppIDReleasesUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 apps app Id releases unauthorized response has a 5xx status code
+func (o *GetV1AppsAppIDReleasesUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 apps app Id releases unauthorized response a status code equal to that given
+func (o *GetV1AppsAppIDReleasesUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get v1 apps app Id releases unauthorized response
+func (o *GetV1AppsAppIDReleasesUnauthorized) Code() int {
+	return 401
+}
+
+func (o *GetV1AppsAppIDReleasesUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/releases][%d] getV1AppsAppIdReleasesUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetV1AppsAppIDReleasesUnauthorized) String() string {
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/releases][%d] getV1AppsAppIdReleasesUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetV1AppsAppIDReleasesUnauthorized) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1AppsAppIDReleasesUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1AppsAppIDReleasesForbidden creates a GetV1AppsAppIDReleasesForbidden with default headers values
+func NewGetV1AppsAppIDReleasesForbidden() *GetV1AppsAppIDReleasesForbidden {
+	return &GetV1AppsAppIDReleasesForbidden{}
+}
+
+/*
+GetV1AppsAppIDReleasesForbidden describes a response with status code 403, with default header values.
+
+Forbidden
+*/
+type GetV1AppsAppIDReleasesForbidden struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 apps app Id releases forbidden response has a 2xx status code
+func (o *GetV1AppsAppIDReleasesForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 apps app Id releases forbidden response has a 3xx status code
+func (o *GetV1AppsAppIDReleasesForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 apps app Id releases forbidden response has a 4xx status code
+func (o *GetV1AppsAppIDReleasesForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 apps app Id releases forbidden response has a 5xx status code
+func (o *GetV1AppsAppIDReleasesForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 apps app Id releases forbidden response a status code equal to that given
+func (o *GetV1AppsAppIDReleasesForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get v1 apps app Id releases forbidden response
+func (o *GetV1AppsAppIDReleasesForbidden) Code() int {
+	return 403
+}
+
+func (o *GetV1AppsAppIDReleasesForbidden) Error() string {
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/releases][%d] getV1AppsAppIdReleasesForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetV1AppsAppIDReleasesForbidden) String() string {
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/releases][%d] getV1AppsAppIdReleasesForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetV1AppsAppIDReleasesForbidden) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1AppsAppIDReleasesForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1AppsAppIDReleasesNotFound creates a GetV1AppsAppIDReleasesNotFound with default headers values
+func NewGetV1AppsAppIDReleasesNotFound() *GetV1AppsAppIDReleasesNotFound {
+	return &GetV1AppsAppIDReleasesNotFound{}
+}
+
+/*
+GetV1AppsAppIDReleasesNotFound describes a response with status code 404, with default header values.
+
+Not Found
+*/
+type GetV1AppsAppIDReleasesNotFound struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 apps app Id releases not found response has a 2xx status code
+func (o *GetV1AppsAppIDReleasesNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 apps app Id releases not found response has a 3xx status code
+func (o *GetV1AppsAppIDReleasesNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 apps app Id releases not found response has a 4xx status code
+func (o *GetV1AppsAppIDReleasesNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 apps app Id releases not found response has a 5xx status code
+func (o *GetV1AppsAppIDReleasesNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 apps app Id releases not found response a status code equal to that given
+func (o *GetV1AppsAppIDReleasesNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get v1 apps app Id releases not found response
+func (o *GetV1AppsAppIDReleasesNotFound) Code() int {
+	return 404
+}
+
+func (o *GetV1AppsAppIDReleasesNotFound) Error() string {
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/releases][%d] getV1AppsAppIdReleasesNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetV1AppsAppIDReleasesNotFound) String() string {
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/releases][%d] getV1AppsAppIdReleasesNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetV1AppsAppIDReleasesNotFound) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1AppsAppIDReleasesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1AppsAppIDReleasesInternalServerError creates a GetV1AppsAppIDReleasesInternalServerError with default headers values
+func NewGetV1AppsAppIDReleasesInternalServerError() *GetV1AppsAppIDReleasesInternalServerError {
+	return &GetV1AppsAppIDReleasesInternalServerError{}
+}
+
+/*
+GetV1AppsAppIDReleasesInternalServerError describes a response with status code 500, with default header values.
+
+Internal Server Error
+*/
+type GetV1AppsAppIDReleasesInternalServerError struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 apps app Id releases internal server error response has a 2xx status code
+func (o *GetV1AppsAppIDReleasesInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 apps app Id releases internal server error response has a 3xx status code
+func (o *GetV1AppsAppIDReleasesInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 apps app Id releases internal server error response has a 4xx status code
+func (o *GetV1AppsAppIDReleasesInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get v1 apps app Id releases internal server error response has a 5xx status code
+func (o *GetV1AppsAppIDReleasesInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get v1 apps app Id releases internal server error response a status code equal to that given
+func (o *GetV1AppsAppIDReleasesInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get v1 apps app Id releases internal server error response
+func (o *GetV1AppsAppIDReleasesInternalServerError) Code() int {
+	return 500
+}
+
+func (o *GetV1AppsAppIDReleasesInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/releases][%d] getV1AppsAppIdReleasesInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetV1AppsAppIDReleasesInternalServerError) String() string {
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/releases][%d] getV1AppsAppIdReleasesInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetV1AppsAppIDReleasesInternalServerError) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1AppsAppIDReleasesInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

@@ -61,6 +61,18 @@ DeleteV1ComponentsComponentIDParams contains all the parameters to send to the A
 */
 type DeleteV1ComponentsComponentIDParams struct {
 
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
+	/* XNuonOrgID.
+
+	   org ID
+	*/
+	XNuonOrgID string
+
 	/* ComponentID.
 
 	   component ID
@@ -120,6 +132,28 @@ func (o *DeleteV1ComponentsComponentIDParams) SetHTTPClient(client *http.Client)
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the delete v1 components component ID params
+func (o *DeleteV1ComponentsComponentIDParams) WithAuthorization(authorization string) *DeleteV1ComponentsComponentIDParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the delete v1 components component ID params
+func (o *DeleteV1ComponentsComponentIDParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
+// WithXNuonOrgID adds the xNuonOrgID to the delete v1 components component ID params
+func (o *DeleteV1ComponentsComponentIDParams) WithXNuonOrgID(xNuonOrgID string) *DeleteV1ComponentsComponentIDParams {
+	o.SetXNuonOrgID(xNuonOrgID)
+	return o
+}
+
+// SetXNuonOrgID adds the xNuonOrgId to the delete v1 components component ID params
+func (o *DeleteV1ComponentsComponentIDParams) SetXNuonOrgID(xNuonOrgID string) {
+	o.XNuonOrgID = xNuonOrgID
+}
+
 // WithComponentID adds the componentID to the delete v1 components component ID params
 func (o *DeleteV1ComponentsComponentIDParams) WithComponentID(componentID string) *DeleteV1ComponentsComponentIDParams {
 	o.SetComponentID(componentID)
@@ -138,6 +172,16 @@ func (o *DeleteV1ComponentsComponentIDParams) WriteToRequest(r runtime.ClientReq
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
+
+	// header param X-Nuon-Org-ID
+	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
+		return err
+	}
 
 	// path param component_id
 	if err := r.SetPathParam("component_id", o.ComponentID); err != nil {

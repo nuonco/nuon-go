@@ -29,6 +29,36 @@ func (o *PostV1ComponentsComponentIDConfigsDockerBuildReader) ReadResponse(respo
 			return nil, err
 		}
 		return result, nil
+	case 400:
+		result := NewPostV1ComponentsComponentIDConfigsDockerBuildBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 401:
+		result := NewPostV1ComponentsComponentIDConfigsDockerBuildUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewPostV1ComponentsComponentIDConfigsDockerBuildForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewPostV1ComponentsComponentIDConfigsDockerBuildNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 500:
+		result := NewPostV1ComponentsComponentIDConfigsDockerBuildInternalServerError()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("[POST /v1/components/{component_id}/configs/docker-build] PostV1ComponentsComponentIDConfigsDockerBuild", response, response.Code())
 	}
@@ -93,6 +123,346 @@ func (o *PostV1ComponentsComponentIDConfigsDockerBuildCreated) GetPayload() *mod
 func (o *PostV1ComponentsComponentIDConfigsDockerBuildCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.AppDockerBuildComponentConfig)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1ComponentsComponentIDConfigsDockerBuildBadRequest creates a PostV1ComponentsComponentIDConfigsDockerBuildBadRequest with default headers values
+func NewPostV1ComponentsComponentIDConfigsDockerBuildBadRequest() *PostV1ComponentsComponentIDConfigsDockerBuildBadRequest {
+	return &PostV1ComponentsComponentIDConfigsDockerBuildBadRequest{}
+}
+
+/*
+PostV1ComponentsComponentIDConfigsDockerBuildBadRequest describes a response with status code 400, with default header values.
+
+Bad Request
+*/
+type PostV1ComponentsComponentIDConfigsDockerBuildBadRequest struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 components component Id configs docker build bad request response has a 2xx status code
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 components component Id configs docker build bad request response has a 3xx status code
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 components component Id configs docker build bad request response has a 4xx status code
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 components component Id configs docker build bad request response has a 5xx status code
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 components component Id configs docker build bad request response a status code equal to that given
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the post v1 components component Id configs docker build bad request response
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildBadRequest) Code() int {
+	return 400
+}
+
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildBadRequest) Error() string {
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] postV1ComponentsComponentIdConfigsDockerBuildBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildBadRequest) String() string {
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] postV1ComponentsComponentIdConfigsDockerBuildBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildBadRequest) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1ComponentsComponentIDConfigsDockerBuildUnauthorized creates a PostV1ComponentsComponentIDConfigsDockerBuildUnauthorized with default headers values
+func NewPostV1ComponentsComponentIDConfigsDockerBuildUnauthorized() *PostV1ComponentsComponentIDConfigsDockerBuildUnauthorized {
+	return &PostV1ComponentsComponentIDConfigsDockerBuildUnauthorized{}
+}
+
+/*
+PostV1ComponentsComponentIDConfigsDockerBuildUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized
+*/
+type PostV1ComponentsComponentIDConfigsDockerBuildUnauthorized struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 components component Id configs docker build unauthorized response has a 2xx status code
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 components component Id configs docker build unauthorized response has a 3xx status code
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 components component Id configs docker build unauthorized response has a 4xx status code
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 components component Id configs docker build unauthorized response has a 5xx status code
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 components component Id configs docker build unauthorized response a status code equal to that given
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the post v1 components component Id configs docker build unauthorized response
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildUnauthorized) Code() int {
+	return 401
+}
+
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] postV1ComponentsComponentIdConfigsDockerBuildUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildUnauthorized) String() string {
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] postV1ComponentsComponentIdConfigsDockerBuildUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildUnauthorized) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1ComponentsComponentIDConfigsDockerBuildForbidden creates a PostV1ComponentsComponentIDConfigsDockerBuildForbidden with default headers values
+func NewPostV1ComponentsComponentIDConfigsDockerBuildForbidden() *PostV1ComponentsComponentIDConfigsDockerBuildForbidden {
+	return &PostV1ComponentsComponentIDConfigsDockerBuildForbidden{}
+}
+
+/*
+PostV1ComponentsComponentIDConfigsDockerBuildForbidden describes a response with status code 403, with default header values.
+
+Forbidden
+*/
+type PostV1ComponentsComponentIDConfigsDockerBuildForbidden struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 components component Id configs docker build forbidden response has a 2xx status code
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 components component Id configs docker build forbidden response has a 3xx status code
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 components component Id configs docker build forbidden response has a 4xx status code
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 components component Id configs docker build forbidden response has a 5xx status code
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 components component Id configs docker build forbidden response a status code equal to that given
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the post v1 components component Id configs docker build forbidden response
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildForbidden) Code() int {
+	return 403
+}
+
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildForbidden) Error() string {
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] postV1ComponentsComponentIdConfigsDockerBuildForbidden  %+v", 403, o.Payload)
+}
+
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildForbidden) String() string {
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] postV1ComponentsComponentIdConfigsDockerBuildForbidden  %+v", 403, o.Payload)
+}
+
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildForbidden) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1ComponentsComponentIDConfigsDockerBuildNotFound creates a PostV1ComponentsComponentIDConfigsDockerBuildNotFound with default headers values
+func NewPostV1ComponentsComponentIDConfigsDockerBuildNotFound() *PostV1ComponentsComponentIDConfigsDockerBuildNotFound {
+	return &PostV1ComponentsComponentIDConfigsDockerBuildNotFound{}
+}
+
+/*
+PostV1ComponentsComponentIDConfigsDockerBuildNotFound describes a response with status code 404, with default header values.
+
+Not Found
+*/
+type PostV1ComponentsComponentIDConfigsDockerBuildNotFound struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 components component Id configs docker build not found response has a 2xx status code
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 components component Id configs docker build not found response has a 3xx status code
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 components component Id configs docker build not found response has a 4xx status code
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 components component Id configs docker build not found response has a 5xx status code
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 components component Id configs docker build not found response a status code equal to that given
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the post v1 components component Id configs docker build not found response
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildNotFound) Code() int {
+	return 404
+}
+
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildNotFound) Error() string {
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] postV1ComponentsComponentIdConfigsDockerBuildNotFound  %+v", 404, o.Payload)
+}
+
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildNotFound) String() string {
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] postV1ComponentsComponentIdConfigsDockerBuildNotFound  %+v", 404, o.Payload)
+}
+
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildNotFound) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1ComponentsComponentIDConfigsDockerBuildInternalServerError creates a PostV1ComponentsComponentIDConfigsDockerBuildInternalServerError with default headers values
+func NewPostV1ComponentsComponentIDConfigsDockerBuildInternalServerError() *PostV1ComponentsComponentIDConfigsDockerBuildInternalServerError {
+	return &PostV1ComponentsComponentIDConfigsDockerBuildInternalServerError{}
+}
+
+/*
+PostV1ComponentsComponentIDConfigsDockerBuildInternalServerError describes a response with status code 500, with default header values.
+
+Internal Server Error
+*/
+type PostV1ComponentsComponentIDConfigsDockerBuildInternalServerError struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 components component Id configs docker build internal server error response has a 2xx status code
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 components component Id configs docker build internal server error response has a 3xx status code
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 components component Id configs docker build internal server error response has a 4xx status code
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post v1 components component Id configs docker build internal server error response has a 5xx status code
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this post v1 components component Id configs docker build internal server error response a status code equal to that given
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the post v1 components component Id configs docker build internal server error response
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildInternalServerError) Code() int {
+	return 500
+}
+
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] postV1ComponentsComponentIdConfigsDockerBuildInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildInternalServerError) String() string {
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] postV1ComponentsComponentIdConfigsDockerBuildInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildInternalServerError) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1ComponentsComponentIDConfigsDockerBuildInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

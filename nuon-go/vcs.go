@@ -2,7 +2,6 @@ package nuon
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/nuonco/nuon-go/client/operations"
 	"github.com/nuonco/nuon-go/models"
@@ -15,7 +14,7 @@ func (c *client) CreateVCSConnection(ctx context.Context, req *models.ServiceCre
 		Context: ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to create org vcs connection: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -26,7 +25,7 @@ func (c *client) GetVCSConnections(ctx context.Context) ([]*models.AppVCSConnect
 		Context: ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get vcs connections: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -38,7 +37,7 @@ func (c *client) GetVCSConnection(ctx context.Context, connID string) (*models.A
 		Context:      ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to create get vcs connection: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -49,7 +48,7 @@ func (c *client) GetAllVCSConnectedRepos(ctx context.Context) ([]*models.Service
 		Context: ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get org connected repos: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil

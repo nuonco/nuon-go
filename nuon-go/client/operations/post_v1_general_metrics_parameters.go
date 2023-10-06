@@ -63,6 +63,12 @@ PostV1GeneralMetricsParams contains all the parameters to send to the API endpoi
 */
 type PostV1GeneralMetricsParams struct {
 
+	/* XNuonOrgID.
+
+	   org ID
+	*/
+	XNuonOrgID string
+
 	/* Req.
 
 	   Input
@@ -122,6 +128,17 @@ func (o *PostV1GeneralMetricsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXNuonOrgID adds the xNuonOrgID to the post v1 general metrics params
+func (o *PostV1GeneralMetricsParams) WithXNuonOrgID(xNuonOrgID string) *PostV1GeneralMetricsParams {
+	o.SetXNuonOrgID(xNuonOrgID)
+	return o
+}
+
+// SetXNuonOrgID adds the xNuonOrgId to the post v1 general metrics params
+func (o *PostV1GeneralMetricsParams) SetXNuonOrgID(xNuonOrgID string) {
+	o.XNuonOrgID = xNuonOrgID
+}
+
 // WithReq adds the req to the post v1 general metrics params
 func (o *PostV1GeneralMetricsParams) WithReq(req models.ServicePublishMetricInput) *PostV1GeneralMetricsParams {
 	o.SetReq(req)
@@ -140,6 +157,11 @@ func (o *PostV1GeneralMetricsParams) WriteToRequest(r runtime.ClientRequest, reg
 		return err
 	}
 	var res []error
+
+	// header param X-Nuon-Org-ID
+	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
+		return err
+	}
 	if o.Req != nil {
 		if err := r.SetBodyParam(o.Req); err != nil {
 			return err
