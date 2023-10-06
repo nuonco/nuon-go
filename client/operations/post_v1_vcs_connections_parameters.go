@@ -63,6 +63,18 @@ PostV1VcsConnectionsParams contains all the parameters to send to the API endpoi
 */
 type PostV1VcsConnectionsParams struct {
 
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
+	/* XNuonOrgID.
+
+	   org ID
+	*/
+	XNuonOrgID string
+
 	/* Req.
 
 	   Input
@@ -122,6 +134,28 @@ func (o *PostV1VcsConnectionsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the post v1 vcs connections params
+func (o *PostV1VcsConnectionsParams) WithAuthorization(authorization string) *PostV1VcsConnectionsParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the post v1 vcs connections params
+func (o *PostV1VcsConnectionsParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
+// WithXNuonOrgID adds the xNuonOrgID to the post v1 vcs connections params
+func (o *PostV1VcsConnectionsParams) WithXNuonOrgID(xNuonOrgID string) *PostV1VcsConnectionsParams {
+	o.SetXNuonOrgID(xNuonOrgID)
+	return o
+}
+
+// SetXNuonOrgID adds the xNuonOrgId to the post v1 vcs connections params
+func (o *PostV1VcsConnectionsParams) SetXNuonOrgID(xNuonOrgID string) {
+	o.XNuonOrgID = xNuonOrgID
+}
+
 // WithReq adds the req to the post v1 vcs connections params
 func (o *PostV1VcsConnectionsParams) WithReq(req *models.ServiceCreateConnectionRequest) *PostV1VcsConnectionsParams {
 	o.SetReq(req)
@@ -140,6 +174,16 @@ func (o *PostV1VcsConnectionsParams) WriteToRequest(r runtime.ClientRequest, reg
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
+
+	// header param X-Nuon-Org-ID
+	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
+		return err
+	}
 	if o.Req != nil {
 		if err := r.SetBodyParam(o.Req); err != nil {
 			return err

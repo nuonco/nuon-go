@@ -61,6 +61,18 @@ GetV1ReleasesReleaseIDParams contains all the parameters to send to the API endp
 */
 type GetV1ReleasesReleaseIDParams struct {
 
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
+	/* XNuonOrgID.
+
+	   org ID
+	*/
+	XNuonOrgID string
+
 	/* ReleaseID.
 
 	   release ID
@@ -120,6 +132,28 @@ func (o *GetV1ReleasesReleaseIDParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the get v1 releases release ID params
+func (o *GetV1ReleasesReleaseIDParams) WithAuthorization(authorization string) *GetV1ReleasesReleaseIDParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the get v1 releases release ID params
+func (o *GetV1ReleasesReleaseIDParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
+// WithXNuonOrgID adds the xNuonOrgID to the get v1 releases release ID params
+func (o *GetV1ReleasesReleaseIDParams) WithXNuonOrgID(xNuonOrgID string) *GetV1ReleasesReleaseIDParams {
+	o.SetXNuonOrgID(xNuonOrgID)
+	return o
+}
+
+// SetXNuonOrgID adds the xNuonOrgId to the get v1 releases release ID params
+func (o *GetV1ReleasesReleaseIDParams) SetXNuonOrgID(xNuonOrgID string) {
+	o.XNuonOrgID = xNuonOrgID
+}
+
 // WithReleaseID adds the releaseID to the get v1 releases release ID params
 func (o *GetV1ReleasesReleaseIDParams) WithReleaseID(releaseID string) *GetV1ReleasesReleaseIDParams {
 	o.SetReleaseID(releaseID)
@@ -138,6 +172,16 @@ func (o *GetV1ReleasesReleaseIDParams) WriteToRequest(r runtime.ClientRequest, r
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
+
+	// header param X-Nuon-Org-ID
+	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
+		return err
+	}
 
 	// path param release_id
 	if err := r.SetPathParam("release_id", o.ReleaseID); err != nil {

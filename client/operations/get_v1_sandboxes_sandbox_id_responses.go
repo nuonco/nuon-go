@@ -29,6 +29,36 @@ func (o *GetV1SandboxesSandboxIDReader) ReadResponse(response runtime.ClientResp
 			return nil, err
 		}
 		return result, nil
+	case 400:
+		result := NewGetV1SandboxesSandboxIDBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 401:
+		result := NewGetV1SandboxesSandboxIDUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewGetV1SandboxesSandboxIDForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewGetV1SandboxesSandboxIDNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 500:
+		result := NewGetV1SandboxesSandboxIDInternalServerError()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("[GET /v1/sandboxes/{sandbox_id}] GetV1SandboxesSandboxID", response, response.Code())
 	}
@@ -93,6 +123,346 @@ func (o *GetV1SandboxesSandboxIDOK) GetPayload() *models.AppSandbox {
 func (o *GetV1SandboxesSandboxIDOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.AppSandbox)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1SandboxesSandboxIDBadRequest creates a GetV1SandboxesSandboxIDBadRequest with default headers values
+func NewGetV1SandboxesSandboxIDBadRequest() *GetV1SandboxesSandboxIDBadRequest {
+	return &GetV1SandboxesSandboxIDBadRequest{}
+}
+
+/*
+GetV1SandboxesSandboxIDBadRequest describes a response with status code 400, with default header values.
+
+Bad Request
+*/
+type GetV1SandboxesSandboxIDBadRequest struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 sandboxes sandbox Id bad request response has a 2xx status code
+func (o *GetV1SandboxesSandboxIDBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 sandboxes sandbox Id bad request response has a 3xx status code
+func (o *GetV1SandboxesSandboxIDBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 sandboxes sandbox Id bad request response has a 4xx status code
+func (o *GetV1SandboxesSandboxIDBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 sandboxes sandbox Id bad request response has a 5xx status code
+func (o *GetV1SandboxesSandboxIDBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 sandboxes sandbox Id bad request response a status code equal to that given
+func (o *GetV1SandboxesSandboxIDBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get v1 sandboxes sandbox Id bad request response
+func (o *GetV1SandboxesSandboxIDBadRequest) Code() int {
+	return 400
+}
+
+func (o *GetV1SandboxesSandboxIDBadRequest) Error() string {
+	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getV1SandboxesSandboxIdBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetV1SandboxesSandboxIDBadRequest) String() string {
+	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getV1SandboxesSandboxIdBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetV1SandboxesSandboxIDBadRequest) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1SandboxesSandboxIDBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1SandboxesSandboxIDUnauthorized creates a GetV1SandboxesSandboxIDUnauthorized with default headers values
+func NewGetV1SandboxesSandboxIDUnauthorized() *GetV1SandboxesSandboxIDUnauthorized {
+	return &GetV1SandboxesSandboxIDUnauthorized{}
+}
+
+/*
+GetV1SandboxesSandboxIDUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized
+*/
+type GetV1SandboxesSandboxIDUnauthorized struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 sandboxes sandbox Id unauthorized response has a 2xx status code
+func (o *GetV1SandboxesSandboxIDUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 sandboxes sandbox Id unauthorized response has a 3xx status code
+func (o *GetV1SandboxesSandboxIDUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 sandboxes sandbox Id unauthorized response has a 4xx status code
+func (o *GetV1SandboxesSandboxIDUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 sandboxes sandbox Id unauthorized response has a 5xx status code
+func (o *GetV1SandboxesSandboxIDUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 sandboxes sandbox Id unauthorized response a status code equal to that given
+func (o *GetV1SandboxesSandboxIDUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get v1 sandboxes sandbox Id unauthorized response
+func (o *GetV1SandboxesSandboxIDUnauthorized) Code() int {
+	return 401
+}
+
+func (o *GetV1SandboxesSandboxIDUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getV1SandboxesSandboxIdUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetV1SandboxesSandboxIDUnauthorized) String() string {
+	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getV1SandboxesSandboxIdUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetV1SandboxesSandboxIDUnauthorized) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1SandboxesSandboxIDUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1SandboxesSandboxIDForbidden creates a GetV1SandboxesSandboxIDForbidden with default headers values
+func NewGetV1SandboxesSandboxIDForbidden() *GetV1SandboxesSandboxIDForbidden {
+	return &GetV1SandboxesSandboxIDForbidden{}
+}
+
+/*
+GetV1SandboxesSandboxIDForbidden describes a response with status code 403, with default header values.
+
+Forbidden
+*/
+type GetV1SandboxesSandboxIDForbidden struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 sandboxes sandbox Id forbidden response has a 2xx status code
+func (o *GetV1SandboxesSandboxIDForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 sandboxes sandbox Id forbidden response has a 3xx status code
+func (o *GetV1SandboxesSandboxIDForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 sandboxes sandbox Id forbidden response has a 4xx status code
+func (o *GetV1SandboxesSandboxIDForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 sandboxes sandbox Id forbidden response has a 5xx status code
+func (o *GetV1SandboxesSandboxIDForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 sandboxes sandbox Id forbidden response a status code equal to that given
+func (o *GetV1SandboxesSandboxIDForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get v1 sandboxes sandbox Id forbidden response
+func (o *GetV1SandboxesSandboxIDForbidden) Code() int {
+	return 403
+}
+
+func (o *GetV1SandboxesSandboxIDForbidden) Error() string {
+	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getV1SandboxesSandboxIdForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetV1SandboxesSandboxIDForbidden) String() string {
+	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getV1SandboxesSandboxIdForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetV1SandboxesSandboxIDForbidden) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1SandboxesSandboxIDForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1SandboxesSandboxIDNotFound creates a GetV1SandboxesSandboxIDNotFound with default headers values
+func NewGetV1SandboxesSandboxIDNotFound() *GetV1SandboxesSandboxIDNotFound {
+	return &GetV1SandboxesSandboxIDNotFound{}
+}
+
+/*
+GetV1SandboxesSandboxIDNotFound describes a response with status code 404, with default header values.
+
+Not Found
+*/
+type GetV1SandboxesSandboxIDNotFound struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 sandboxes sandbox Id not found response has a 2xx status code
+func (o *GetV1SandboxesSandboxIDNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 sandboxes sandbox Id not found response has a 3xx status code
+func (o *GetV1SandboxesSandboxIDNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 sandboxes sandbox Id not found response has a 4xx status code
+func (o *GetV1SandboxesSandboxIDNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get v1 sandboxes sandbox Id not found response has a 5xx status code
+func (o *GetV1SandboxesSandboxIDNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get v1 sandboxes sandbox Id not found response a status code equal to that given
+func (o *GetV1SandboxesSandboxIDNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get v1 sandboxes sandbox Id not found response
+func (o *GetV1SandboxesSandboxIDNotFound) Code() int {
+	return 404
+}
+
+func (o *GetV1SandboxesSandboxIDNotFound) Error() string {
+	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getV1SandboxesSandboxIdNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetV1SandboxesSandboxIDNotFound) String() string {
+	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getV1SandboxesSandboxIdNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetV1SandboxesSandboxIDNotFound) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1SandboxesSandboxIDNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetV1SandboxesSandboxIDInternalServerError creates a GetV1SandboxesSandboxIDInternalServerError with default headers values
+func NewGetV1SandboxesSandboxIDInternalServerError() *GetV1SandboxesSandboxIDInternalServerError {
+	return &GetV1SandboxesSandboxIDInternalServerError{}
+}
+
+/*
+GetV1SandboxesSandboxIDInternalServerError describes a response with status code 500, with default header values.
+
+Internal Server Error
+*/
+type GetV1SandboxesSandboxIDInternalServerError struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this get v1 sandboxes sandbox Id internal server error response has a 2xx status code
+func (o *GetV1SandboxesSandboxIDInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get v1 sandboxes sandbox Id internal server error response has a 3xx status code
+func (o *GetV1SandboxesSandboxIDInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get v1 sandboxes sandbox Id internal server error response has a 4xx status code
+func (o *GetV1SandboxesSandboxIDInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get v1 sandboxes sandbox Id internal server error response has a 5xx status code
+func (o *GetV1SandboxesSandboxIDInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get v1 sandboxes sandbox Id internal server error response a status code equal to that given
+func (o *GetV1SandboxesSandboxIDInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get v1 sandboxes sandbox Id internal server error response
+func (o *GetV1SandboxesSandboxIDInternalServerError) Code() int {
+	return 500
+}
+
+func (o *GetV1SandboxesSandboxIDInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getV1SandboxesSandboxIdInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetV1SandboxesSandboxIDInternalServerError) String() string {
+	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getV1SandboxesSandboxIdInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetV1SandboxesSandboxIDInternalServerError) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *GetV1SandboxesSandboxIDInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

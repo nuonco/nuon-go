@@ -63,6 +63,12 @@ PostV1OrgsParams contains all the parameters to send to the API endpoint
 */
 type PostV1OrgsParams struct {
 
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
 	/* Req.
 
 	   Input
@@ -122,6 +128,17 @@ func (o *PostV1OrgsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the post v1 orgs params
+func (o *PostV1OrgsParams) WithAuthorization(authorization string) *PostV1OrgsParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the post v1 orgs params
+func (o *PostV1OrgsParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
 // WithReq adds the req to the post v1 orgs params
 func (o *PostV1OrgsParams) WithReq(req *models.ServiceCreateOrgRequest) *PostV1OrgsParams {
 	o.SetReq(req)
@@ -140,6 +157,11 @@ func (o *PostV1OrgsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Re
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
 	if o.Req != nil {
 		if err := r.SetBodyParam(o.Req); err != nil {
 			return err

@@ -2,7 +2,6 @@ package nuon
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/nuonco/nuon-go/client/operations"
 	"github.com/nuonco/nuon-go/models"
@@ -13,7 +12,7 @@ func (c *client) GetOrg(ctx context.Context) (*models.AppOrg, error) {
 		Context: ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get org: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -24,7 +23,7 @@ func (c *client) GetOrgs(ctx context.Context) ([]*models.AppOrg, error) {
 		Context: ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get orgs: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -35,7 +34,7 @@ func (c *client) DeleteOrg(ctx context.Context) (bool, error) {
 		Context: ctx,
 	})
 	if err != nil {
-		return false, fmt.Errorf("unable to create org: %w", err)
+		return false, err
 	}
 
 	return resp.Payload, nil
@@ -47,7 +46,7 @@ func (c *client) CreateOrg(ctx context.Context, req *models.ServiceCreateOrgRequ
 		Context: ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to create org: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -59,7 +58,7 @@ func (c *client) UpdateOrg(ctx context.Context, req *models.ServiceUpdateOrgRequ
 		Context: ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to update org: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -71,7 +70,7 @@ func (c *client) CreateOrgUser(ctx context.Context, req *models.ServiceCreateOrg
 		Context: ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to create org user: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil

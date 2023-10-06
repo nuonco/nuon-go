@@ -63,6 +63,18 @@ PutV1AppsAppIDSandboxParams contains all the parameters to send to the API endpo
 */
 type PutV1AppsAppIDSandboxParams struct {
 
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
+	/* XNuonOrgID.
+
+	   org ID
+	*/
+	XNuonOrgID string
+
 	/* AppID.
 
 	   app ID
@@ -128,6 +140,28 @@ func (o *PutV1AppsAppIDSandboxParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the put v1 apps app ID sandbox params
+func (o *PutV1AppsAppIDSandboxParams) WithAuthorization(authorization string) *PutV1AppsAppIDSandboxParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the put v1 apps app ID sandbox params
+func (o *PutV1AppsAppIDSandboxParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
+// WithXNuonOrgID adds the xNuonOrgID to the put v1 apps app ID sandbox params
+func (o *PutV1AppsAppIDSandboxParams) WithXNuonOrgID(xNuonOrgID string) *PutV1AppsAppIDSandboxParams {
+	o.SetXNuonOrgID(xNuonOrgID)
+	return o
+}
+
+// SetXNuonOrgID adds the xNuonOrgId to the put v1 apps app ID sandbox params
+func (o *PutV1AppsAppIDSandboxParams) SetXNuonOrgID(xNuonOrgID string) {
+	o.XNuonOrgID = xNuonOrgID
+}
+
 // WithAppID adds the appID to the put v1 apps app ID sandbox params
 func (o *PutV1AppsAppIDSandboxParams) WithAppID(appID string) *PutV1AppsAppIDSandboxParams {
 	o.SetAppID(appID)
@@ -157,6 +191,16 @@ func (o *PutV1AppsAppIDSandboxParams) WriteToRequest(r runtime.ClientRequest, re
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
+
+	// header param X-Nuon-Org-ID
+	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
+		return err
+	}
 
 	// path param app_id
 	if err := r.SetPathParam("app_id", o.AppID); err != nil {

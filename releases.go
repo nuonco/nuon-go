@@ -2,7 +2,6 @@ package nuon
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/nuonco/nuon-go/client/operations"
 	"github.com/nuonco/nuon-go/models"
@@ -15,7 +14,7 @@ func (c *client) GetRelease(ctx context.Context, releaseID string) (*models.AppC
 		Context:   ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get release: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -27,7 +26,7 @@ func (c *client) GetReleaseSteps(ctx context.Context, releaseID string) ([]*mode
 		Context:   ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get release steps: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -39,7 +38,7 @@ func (c *client) GetAppReleases(ctx context.Context, appID string) ([]*models.Ap
 		Context: ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get app releases: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -51,7 +50,7 @@ func (c *client) GetComponentReleases(ctx context.Context, componentID string) (
 		Context:     ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get component releases: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -64,7 +63,7 @@ func (c *client) CreateComponentRelease(ctx context.Context, componentID string,
 		Context:     ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to create component release: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -76,7 +75,7 @@ func (c *client) CreateRelease(ctx context.Context, req *models.ServiceCreateCom
 		Context: ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to create release: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil

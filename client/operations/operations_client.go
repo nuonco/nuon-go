@@ -92,8 +92,6 @@ type ClientService interface {
 
 	GetV1OrgsCurrent(params *GetV1OrgsCurrentParams, opts ...ClientOption) (*GetV1OrgsCurrentOK, error)
 
-	GetV1Releases(params *GetV1ReleasesParams, opts ...ClientOption) (*GetV1ReleasesOK, error)
-
 	GetV1ReleasesReleaseID(params *GetV1ReleasesReleaseIDParams, opts ...ClientOption) (*GetV1ReleasesReleaseIDOK, error)
 
 	GetV1ReleasesReleaseIDSteps(params *GetV1ReleasesReleaseIDStepsParams, opts ...ClientOption) (*GetV1ReleasesReleaseIDStepsOK, error)
@@ -140,21 +138,11 @@ type ClientService interface {
 
 	PostV1InstallsInstallIDDeploys(params *PostV1InstallsInstallIDDeploysParams, opts ...ClientOption) (*PostV1InstallsInstallIDDeploysCreated, error)
 
-	PostV1InstallsInstallIDRestart(params *PostV1InstallsInstallIDRestartParams, opts ...ClientOption) (*PostV1InstallsInstallIDRestartOK, error)
-
 	PostV1Orgs(params *PostV1OrgsParams, opts ...ClientOption) (*PostV1OrgsCreated, error)
 
 	PostV1OrgsCurrentUser(params *PostV1OrgsCurrentUserParams, opts ...ClientOption) (*PostV1OrgsCurrentUserCreated, error)
 
-	PostV1OrgsOrgIDAddUser(params *PostV1OrgsOrgIDAddUserParams, opts ...ClientOption) (*PostV1OrgsOrgIDAddUserCreated, error)
-
-	PostV1OrgsOrgIDSupportUsers(params *PostV1OrgsOrgIDSupportUsersParams, opts ...ClientOption) (*PostV1OrgsOrgIDSupportUsersCreated, error)
-
 	PostV1Releases(params *PostV1ReleasesParams, opts ...ClientOption) (*PostV1ReleasesCreated, error)
-
-	PostV1Sandboxes(params *PostV1SandboxesParams, opts ...ClientOption) (*PostV1SandboxesCreated, error)
-
-	PostV1SandboxesSandboxIDRelease(params *PostV1SandboxesSandboxIDReleaseParams, opts ...ClientOption) (*PostV1SandboxesSandboxIDReleaseCreated, error)
 
 	PostV1VcsConnections(params *PostV1VcsConnectionsParams, opts ...ClientOption) (*PostV1VcsConnectionsCreated, error)
 
@@ -1404,46 +1392,6 @@ func (a *Client) GetV1OrgsCurrent(params *GetV1OrgsCurrentParams, opts ...Client
 }
 
 /*
-GetV1Releases gets all releases for all orgs
-
-get all installs
-*/
-func (a *Client) GetV1Releases(params *GetV1ReleasesParams, opts ...ClientOption) (*GetV1ReleasesOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetV1ReleasesParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetV1Releases",
-		Method:             "GET",
-		PathPattern:        "/v1/releases",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetV1ReleasesReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetV1ReleasesOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetV1Releases: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 GetV1ReleasesReleaseID gets a release
 
 get a release
@@ -2364,46 +2312,6 @@ func (a *Client) PostV1InstallsInstallIDDeploys(params *PostV1InstallsInstallIDD
 }
 
 /*
-PostV1InstallsInstallIDRestart restarts an installs event loop
-
-restart install event loop
-*/
-func (a *Client) PostV1InstallsInstallIDRestart(params *PostV1InstallsInstallIDRestartParams, opts ...ClientOption) (*PostV1InstallsInstallIDRestartOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPostV1InstallsInstallIDRestartParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "PostV1InstallsInstallIDRestart",
-		Method:             "POST",
-		PathPattern:        "/v1/installs/{install_id}/restart",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &PostV1InstallsInstallIDRestartReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*PostV1InstallsInstallIDRestartOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostV1InstallsInstallIDRestart: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 PostV1Orgs creates a new org
 
 create a new org
@@ -2484,89 +2392,9 @@ func (a *Client) PostV1OrgsCurrentUser(params *PostV1OrgsCurrentUserParams, opts
 }
 
 /*
-PostV1OrgsOrgIDAddUser adds a user to an org
-
-create a new org
-*/
-func (a *Client) PostV1OrgsOrgIDAddUser(params *PostV1OrgsOrgIDAddUserParams, opts ...ClientOption) (*PostV1OrgsOrgIDAddUserCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPostV1OrgsOrgIDAddUserParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "PostV1OrgsOrgIDAddUser",
-		Method:             "POST",
-		PathPattern:        "/v1/orgs/{org_id}/add-user",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &PostV1OrgsOrgIDAddUserReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*PostV1OrgsOrgIDAddUserCreated)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostV1OrgsOrgIDAddUser: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-PostV1OrgsOrgIDSupportUsers adds nuon users as support members
-
-create a new org
-*/
-func (a *Client) PostV1OrgsOrgIDSupportUsers(params *PostV1OrgsOrgIDSupportUsersParams, opts ...ClientOption) (*PostV1OrgsOrgIDSupportUsersCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPostV1OrgsOrgIDSupportUsersParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "PostV1OrgsOrgIDSupportUsers",
-		Method:             "POST",
-		PathPattern:        "/v1/orgs/{org_id}/support-users",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &PostV1OrgsOrgIDSupportUsersReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*PostV1OrgsOrgIDSupportUsersCreated)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostV1OrgsOrgIDSupportUsers: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 PostV1Releases creates a release
 
-create a release for a component
+create a release for a build
 */
 func (a *Client) PostV1Releases(params *PostV1ReleasesParams, opts ...ClientOption) (*PostV1ReleasesCreated, error) {
 	// TODO: Validate the params before sending
@@ -2600,86 +2428,6 @@ func (a *Client) PostV1Releases(params *PostV1ReleasesParams, opts ...ClientOpti
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for PostV1Releases: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-PostV1Sandboxes creates a new sandbox
-
-create a new sandbox
-*/
-func (a *Client) PostV1Sandboxes(params *PostV1SandboxesParams, opts ...ClientOption) (*PostV1SandboxesCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPostV1SandboxesParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "PostV1Sandboxes",
-		Method:             "POST",
-		PathPattern:        "/v1/sandboxes",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &PostV1SandboxesReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*PostV1SandboxesCreated)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostV1Sandboxes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-PostV1SandboxesSandboxIDRelease creates a new sandbox
-
-create a new sandbox
-*/
-func (a *Client) PostV1SandboxesSandboxIDRelease(params *PostV1SandboxesSandboxIDReleaseParams, opts ...ClientOption) (*PostV1SandboxesSandboxIDReleaseCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPostV1SandboxesSandboxIDReleaseParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "PostV1SandboxesSandboxIDRelease",
-		Method:             "POST",
-		PathPattern:        "/v1/sandboxes/{sandbox_id}/release",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &PostV1SandboxesSandboxIDReleaseReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*PostV1SandboxesSandboxIDReleaseCreated)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostV1SandboxesSandboxIDRelease: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

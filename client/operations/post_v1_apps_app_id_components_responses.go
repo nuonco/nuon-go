@@ -29,6 +29,36 @@ func (o *PostV1AppsAppIDComponentsReader) ReadResponse(response runtime.ClientRe
 			return nil, err
 		}
 		return result, nil
+	case 400:
+		result := NewPostV1AppsAppIDComponentsBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 401:
+		result := NewPostV1AppsAppIDComponentsUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewPostV1AppsAppIDComponentsForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewPostV1AppsAppIDComponentsNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 500:
+		result := NewPostV1AppsAppIDComponentsInternalServerError()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("[POST /v1/apps/{app_id}/components/] PostV1AppsAppIDComponents", response, response.Code())
 	}
@@ -93,6 +123,346 @@ func (o *PostV1AppsAppIDComponentsCreated) GetPayload() *models.AppComponent {
 func (o *PostV1AppsAppIDComponentsCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.AppComponent)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1AppsAppIDComponentsBadRequest creates a PostV1AppsAppIDComponentsBadRequest with default headers values
+func NewPostV1AppsAppIDComponentsBadRequest() *PostV1AppsAppIDComponentsBadRequest {
+	return &PostV1AppsAppIDComponentsBadRequest{}
+}
+
+/*
+PostV1AppsAppIDComponentsBadRequest describes a response with status code 400, with default header values.
+
+Bad Request
+*/
+type PostV1AppsAppIDComponentsBadRequest struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 apps app Id components bad request response has a 2xx status code
+func (o *PostV1AppsAppIDComponentsBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 apps app Id components bad request response has a 3xx status code
+func (o *PostV1AppsAppIDComponentsBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 apps app Id components bad request response has a 4xx status code
+func (o *PostV1AppsAppIDComponentsBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 apps app Id components bad request response has a 5xx status code
+func (o *PostV1AppsAppIDComponentsBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 apps app Id components bad request response a status code equal to that given
+func (o *PostV1AppsAppIDComponentsBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the post v1 apps app Id components bad request response
+func (o *PostV1AppsAppIDComponentsBadRequest) Code() int {
+	return 400
+}
+
+func (o *PostV1AppsAppIDComponentsBadRequest) Error() string {
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/][%d] postV1AppsAppIdComponentsBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PostV1AppsAppIDComponentsBadRequest) String() string {
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/][%d] postV1AppsAppIdComponentsBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PostV1AppsAppIDComponentsBadRequest) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1AppsAppIDComponentsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1AppsAppIDComponentsUnauthorized creates a PostV1AppsAppIDComponentsUnauthorized with default headers values
+func NewPostV1AppsAppIDComponentsUnauthorized() *PostV1AppsAppIDComponentsUnauthorized {
+	return &PostV1AppsAppIDComponentsUnauthorized{}
+}
+
+/*
+PostV1AppsAppIDComponentsUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized
+*/
+type PostV1AppsAppIDComponentsUnauthorized struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 apps app Id components unauthorized response has a 2xx status code
+func (o *PostV1AppsAppIDComponentsUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 apps app Id components unauthorized response has a 3xx status code
+func (o *PostV1AppsAppIDComponentsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 apps app Id components unauthorized response has a 4xx status code
+func (o *PostV1AppsAppIDComponentsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 apps app Id components unauthorized response has a 5xx status code
+func (o *PostV1AppsAppIDComponentsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 apps app Id components unauthorized response a status code equal to that given
+func (o *PostV1AppsAppIDComponentsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the post v1 apps app Id components unauthorized response
+func (o *PostV1AppsAppIDComponentsUnauthorized) Code() int {
+	return 401
+}
+
+func (o *PostV1AppsAppIDComponentsUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/][%d] postV1AppsAppIdComponentsUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *PostV1AppsAppIDComponentsUnauthorized) String() string {
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/][%d] postV1AppsAppIdComponentsUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *PostV1AppsAppIDComponentsUnauthorized) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1AppsAppIDComponentsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1AppsAppIDComponentsForbidden creates a PostV1AppsAppIDComponentsForbidden with default headers values
+func NewPostV1AppsAppIDComponentsForbidden() *PostV1AppsAppIDComponentsForbidden {
+	return &PostV1AppsAppIDComponentsForbidden{}
+}
+
+/*
+PostV1AppsAppIDComponentsForbidden describes a response with status code 403, with default header values.
+
+Forbidden
+*/
+type PostV1AppsAppIDComponentsForbidden struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 apps app Id components forbidden response has a 2xx status code
+func (o *PostV1AppsAppIDComponentsForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 apps app Id components forbidden response has a 3xx status code
+func (o *PostV1AppsAppIDComponentsForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 apps app Id components forbidden response has a 4xx status code
+func (o *PostV1AppsAppIDComponentsForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 apps app Id components forbidden response has a 5xx status code
+func (o *PostV1AppsAppIDComponentsForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 apps app Id components forbidden response a status code equal to that given
+func (o *PostV1AppsAppIDComponentsForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the post v1 apps app Id components forbidden response
+func (o *PostV1AppsAppIDComponentsForbidden) Code() int {
+	return 403
+}
+
+func (o *PostV1AppsAppIDComponentsForbidden) Error() string {
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/][%d] postV1AppsAppIdComponentsForbidden  %+v", 403, o.Payload)
+}
+
+func (o *PostV1AppsAppIDComponentsForbidden) String() string {
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/][%d] postV1AppsAppIdComponentsForbidden  %+v", 403, o.Payload)
+}
+
+func (o *PostV1AppsAppIDComponentsForbidden) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1AppsAppIDComponentsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1AppsAppIDComponentsNotFound creates a PostV1AppsAppIDComponentsNotFound with default headers values
+func NewPostV1AppsAppIDComponentsNotFound() *PostV1AppsAppIDComponentsNotFound {
+	return &PostV1AppsAppIDComponentsNotFound{}
+}
+
+/*
+PostV1AppsAppIDComponentsNotFound describes a response with status code 404, with default header values.
+
+Not Found
+*/
+type PostV1AppsAppIDComponentsNotFound struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 apps app Id components not found response has a 2xx status code
+func (o *PostV1AppsAppIDComponentsNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 apps app Id components not found response has a 3xx status code
+func (o *PostV1AppsAppIDComponentsNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 apps app Id components not found response has a 4xx status code
+func (o *PostV1AppsAppIDComponentsNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post v1 apps app Id components not found response has a 5xx status code
+func (o *PostV1AppsAppIDComponentsNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post v1 apps app Id components not found response a status code equal to that given
+func (o *PostV1AppsAppIDComponentsNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the post v1 apps app Id components not found response
+func (o *PostV1AppsAppIDComponentsNotFound) Code() int {
+	return 404
+}
+
+func (o *PostV1AppsAppIDComponentsNotFound) Error() string {
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/][%d] postV1AppsAppIdComponentsNotFound  %+v", 404, o.Payload)
+}
+
+func (o *PostV1AppsAppIDComponentsNotFound) String() string {
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/][%d] postV1AppsAppIdComponentsNotFound  %+v", 404, o.Payload)
+}
+
+func (o *PostV1AppsAppIDComponentsNotFound) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1AppsAppIDComponentsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostV1AppsAppIDComponentsInternalServerError creates a PostV1AppsAppIDComponentsInternalServerError with default headers values
+func NewPostV1AppsAppIDComponentsInternalServerError() *PostV1AppsAppIDComponentsInternalServerError {
+	return &PostV1AppsAppIDComponentsInternalServerError{}
+}
+
+/*
+PostV1AppsAppIDComponentsInternalServerError describes a response with status code 500, with default header values.
+
+Internal Server Error
+*/
+type PostV1AppsAppIDComponentsInternalServerError struct {
+	Payload *models.StderrErrResponse
+}
+
+// IsSuccess returns true when this post v1 apps app Id components internal server error response has a 2xx status code
+func (o *PostV1AppsAppIDComponentsInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post v1 apps app Id components internal server error response has a 3xx status code
+func (o *PostV1AppsAppIDComponentsInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post v1 apps app Id components internal server error response has a 4xx status code
+func (o *PostV1AppsAppIDComponentsInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post v1 apps app Id components internal server error response has a 5xx status code
+func (o *PostV1AppsAppIDComponentsInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this post v1 apps app Id components internal server error response a status code equal to that given
+func (o *PostV1AppsAppIDComponentsInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the post v1 apps app Id components internal server error response
+func (o *PostV1AppsAppIDComponentsInternalServerError) Code() int {
+	return 500
+}
+
+func (o *PostV1AppsAppIDComponentsInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/][%d] postV1AppsAppIdComponentsInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *PostV1AppsAppIDComponentsInternalServerError) String() string {
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/][%d] postV1AppsAppIdComponentsInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *PostV1AppsAppIDComponentsInternalServerError) GetPayload() *models.StderrErrResponse {
+	return o.Payload
+}
+
+func (o *PostV1AppsAppIDComponentsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

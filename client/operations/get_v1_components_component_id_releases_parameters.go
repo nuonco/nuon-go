@@ -61,6 +61,18 @@ GetV1ComponentsComponentIDReleasesParams contains all the parameters to send to 
 */
 type GetV1ComponentsComponentIDReleasesParams struct {
 
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
+	/* XNuonOrgID.
+
+	   org ID
+	*/
+	XNuonOrgID string
+
 	/* ComponentID.
 
 	   component ID
@@ -120,6 +132,28 @@ func (o *GetV1ComponentsComponentIDReleasesParams) SetHTTPClient(client *http.Cl
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the get v1 components component ID releases params
+func (o *GetV1ComponentsComponentIDReleasesParams) WithAuthorization(authorization string) *GetV1ComponentsComponentIDReleasesParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the get v1 components component ID releases params
+func (o *GetV1ComponentsComponentIDReleasesParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
+// WithXNuonOrgID adds the xNuonOrgID to the get v1 components component ID releases params
+func (o *GetV1ComponentsComponentIDReleasesParams) WithXNuonOrgID(xNuonOrgID string) *GetV1ComponentsComponentIDReleasesParams {
+	o.SetXNuonOrgID(xNuonOrgID)
+	return o
+}
+
+// SetXNuonOrgID adds the xNuonOrgId to the get v1 components component ID releases params
+func (o *GetV1ComponentsComponentIDReleasesParams) SetXNuonOrgID(xNuonOrgID string) {
+	o.XNuonOrgID = xNuonOrgID
+}
+
 // WithComponentID adds the componentID to the get v1 components component ID releases params
 func (o *GetV1ComponentsComponentIDReleasesParams) WithComponentID(componentID string) *GetV1ComponentsComponentIDReleasesParams {
 	o.SetComponentID(componentID)
@@ -138,6 +172,16 @@ func (o *GetV1ComponentsComponentIDReleasesParams) WriteToRequest(r runtime.Clie
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
+
+	// header param X-Nuon-Org-ID
+	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
+		return err
+	}
 
 	// path param component_id
 	if err := r.SetPathParam("component_id", o.ComponentID); err != nil {

@@ -63,6 +63,18 @@ PatchV1InstallsInstallIDParams contains all the parameters to send to the API en
 */
 type PatchV1InstallsInstallIDParams struct {
 
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
+	/* XNuonOrgID.
+
+	   org ID
+	*/
+	XNuonOrgID string
+
 	/* InstallID.
 
 	   app ID
@@ -128,6 +140,28 @@ func (o *PatchV1InstallsInstallIDParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the patch v1 installs install ID params
+func (o *PatchV1InstallsInstallIDParams) WithAuthorization(authorization string) *PatchV1InstallsInstallIDParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the patch v1 installs install ID params
+func (o *PatchV1InstallsInstallIDParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
+// WithXNuonOrgID adds the xNuonOrgID to the patch v1 installs install ID params
+func (o *PatchV1InstallsInstallIDParams) WithXNuonOrgID(xNuonOrgID string) *PatchV1InstallsInstallIDParams {
+	o.SetXNuonOrgID(xNuonOrgID)
+	return o
+}
+
+// SetXNuonOrgID adds the xNuonOrgId to the patch v1 installs install ID params
+func (o *PatchV1InstallsInstallIDParams) SetXNuonOrgID(xNuonOrgID string) {
+	o.XNuonOrgID = xNuonOrgID
+}
+
 // WithInstallID adds the installID to the patch v1 installs install ID params
 func (o *PatchV1InstallsInstallIDParams) WithInstallID(installID string) *PatchV1InstallsInstallIDParams {
 	o.SetInstallID(installID)
@@ -157,6 +191,16 @@ func (o *PatchV1InstallsInstallIDParams) WriteToRequest(r runtime.ClientRequest,
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
+
+	// header param X-Nuon-Org-ID
+	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
+		return err
+	}
 
 	// path param install_id
 	if err := r.SetPathParam("install_id", o.InstallID); err != nil {

@@ -61,6 +61,18 @@ DeleteV1InstallsInstallIDParams contains all the parameters to send to the API e
 */
 type DeleteV1InstallsInstallIDParams struct {
 
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
+	/* XNuonOrgID.
+
+	   org ID
+	*/
+	XNuonOrgID string
+
 	/* InstallID.
 
 	   install ID
@@ -120,6 +132,28 @@ func (o *DeleteV1InstallsInstallIDParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the delete v1 installs install ID params
+func (o *DeleteV1InstallsInstallIDParams) WithAuthorization(authorization string) *DeleteV1InstallsInstallIDParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the delete v1 installs install ID params
+func (o *DeleteV1InstallsInstallIDParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
+// WithXNuonOrgID adds the xNuonOrgID to the delete v1 installs install ID params
+func (o *DeleteV1InstallsInstallIDParams) WithXNuonOrgID(xNuonOrgID string) *DeleteV1InstallsInstallIDParams {
+	o.SetXNuonOrgID(xNuonOrgID)
+	return o
+}
+
+// SetXNuonOrgID adds the xNuonOrgId to the delete v1 installs install ID params
+func (o *DeleteV1InstallsInstallIDParams) SetXNuonOrgID(xNuonOrgID string) {
+	o.XNuonOrgID = xNuonOrgID
+}
+
 // WithInstallID adds the installID to the delete v1 installs install ID params
 func (o *DeleteV1InstallsInstallIDParams) WithInstallID(installID string) *DeleteV1InstallsInstallIDParams {
 	o.SetInstallID(installID)
@@ -138,6 +172,16 @@ func (o *DeleteV1InstallsInstallIDParams) WriteToRequest(r runtime.ClientRequest
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
+
+	// header param X-Nuon-Org-ID
+	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
+		return err
+	}
 
 	// path param install_id
 	if err := r.SetPathParam("install_id", o.InstallID); err != nil {

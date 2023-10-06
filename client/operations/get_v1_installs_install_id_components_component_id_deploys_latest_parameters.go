@@ -61,6 +61,18 @@ GetV1InstallsInstallIDComponentsComponentIDDeploysLatestParams contains all the 
 */
 type GetV1InstallsInstallIDComponentsComponentIDDeploysLatestParams struct {
 
+	/* Authorization.
+
+	   bearer auth token
+	*/
+	Authorization string
+
+	/* XNuonOrgID.
+
+	   org ID
+	*/
+	XNuonOrgID string
+
 	/* ComponentID.
 
 	   component ID
@@ -126,6 +138,28 @@ func (o *GetV1InstallsInstallIDComponentsComponentIDDeploysLatestParams) SetHTTP
 	o.HTTPClient = client
 }
 
+// WithAuthorization adds the authorization to the get v1 installs install ID components component ID deploys latest params
+func (o *GetV1InstallsInstallIDComponentsComponentIDDeploysLatestParams) WithAuthorization(authorization string) *GetV1InstallsInstallIDComponentsComponentIDDeploysLatestParams {
+	o.SetAuthorization(authorization)
+	return o
+}
+
+// SetAuthorization adds the authorization to the get v1 installs install ID components component ID deploys latest params
+func (o *GetV1InstallsInstallIDComponentsComponentIDDeploysLatestParams) SetAuthorization(authorization string) {
+	o.Authorization = authorization
+}
+
+// WithXNuonOrgID adds the xNuonOrgID to the get v1 installs install ID components component ID deploys latest params
+func (o *GetV1InstallsInstallIDComponentsComponentIDDeploysLatestParams) WithXNuonOrgID(xNuonOrgID string) *GetV1InstallsInstallIDComponentsComponentIDDeploysLatestParams {
+	o.SetXNuonOrgID(xNuonOrgID)
+	return o
+}
+
+// SetXNuonOrgID adds the xNuonOrgId to the get v1 installs install ID components component ID deploys latest params
+func (o *GetV1InstallsInstallIDComponentsComponentIDDeploysLatestParams) SetXNuonOrgID(xNuonOrgID string) {
+	o.XNuonOrgID = xNuonOrgID
+}
+
 // WithComponentID adds the componentID to the get v1 installs install ID components component ID deploys latest params
 func (o *GetV1InstallsInstallIDComponentsComponentIDDeploysLatestParams) WithComponentID(componentID string) *GetV1InstallsInstallIDComponentsComponentIDDeploysLatestParams {
 	o.SetComponentID(componentID)
@@ -155,6 +189,16 @@ func (o *GetV1InstallsInstallIDComponentsComponentIDDeploysLatestParams) WriteTo
 		return err
 	}
 	var res []error
+
+	// header param Authorization
+	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+		return err
+	}
+
+	// header param X-Nuon-Org-ID
+	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
+		return err
+	}
 
 	// path param component_id
 	if err := r.SetPathParam("component_id", o.ComponentID); err != nil {

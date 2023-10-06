@@ -2,7 +2,6 @@ package nuon
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/nuonco/nuon-go/client/operations"
 	"github.com/nuonco/nuon-go/models"
@@ -14,7 +13,7 @@ func (c *client) GetCurrentUser(ctx context.Context) (*models.AppUserToken, erro
 		Context: ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get current user: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -26,7 +25,7 @@ func (c *client) PublishMetrics(ctx context.Context, req []*models.ServicePublis
 		Context: ctx,
 	})
 	if err != nil {
-		return fmt.Errorf("unable to publish metrics: %w", err)
+		return err
 	}
 
 	return nil
