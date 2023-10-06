@@ -132,6 +132,8 @@ type ClientService interface {
 
 	PostV1ComponentsComponentIDConfigsHelm(params *PostV1ComponentsComponentIDConfigsHelmParams, opts ...ClientOption) (*PostV1ComponentsComponentIDConfigsHelmCreated, error)
 
+	PostV1ComponentsComponentIDConfigsJob(params *PostV1ComponentsComponentIDConfigsJobParams, opts ...ClientOption) (*PostV1ComponentsComponentIDConfigsJobCreated, error)
+
 	PostV1ComponentsComponentIDConfigsTerraformModule(params *PostV1ComponentsComponentIDConfigsTerraformModuleParams, opts ...ClientOption) (*PostV1ComponentsComponentIDConfigsTerraformModuleCreated, error)
 
 	PostV1ComponentsComponentIDReleases(params *PostV1ComponentsComponentIDReleasesParams, opts ...ClientOption) (*PostV1ComponentsComponentIDReleasesCreated, error)
@@ -2190,6 +2192,46 @@ func (a *Client) PostV1ComponentsComponentIDConfigsHelm(params *PostV1Components
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for PostV1ComponentsComponentIDConfigsHelm: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+PostV1ComponentsComponentIDConfigsJob creates a job component config
+
+create a job component config.
+*/
+func (a *Client) PostV1ComponentsComponentIDConfigsJob(params *PostV1ComponentsComponentIDConfigsJobParams, opts ...ClientOption) (*PostV1ComponentsComponentIDConfigsJobCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPostV1ComponentsComponentIDConfigsJobParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PostV1ComponentsComponentIDConfigsJob",
+		Method:             "POST",
+		PathPattern:        "/v1/components/{component_id}/configs/job",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PostV1ComponentsComponentIDConfigsJobReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PostV1ComponentsComponentIDConfigsJobCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for PostV1ComponentsComponentIDConfigsJob: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
