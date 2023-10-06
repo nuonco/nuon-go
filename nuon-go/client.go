@@ -115,8 +115,8 @@ var _ Client = (*client)(nil)
 type client struct {
 	v *validator.Validate
 
-	APIToken string `validate:"required"`
 	APIURL   string `validate:"required"`
+	APIToken string
 	OrgID    string
 
 	genClient    *genclient.NuonAPI

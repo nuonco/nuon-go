@@ -66,6 +66,8 @@ type ClientService interface {
 
 	GetV1ComponentsComponentIDReleases(params *GetV1ComponentsComponentIDReleasesParams, opts ...ClientOption) (*GetV1ComponentsComponentIDReleasesOK, error)
 
+	GetV1GeneralCliConfig(params *GetV1GeneralCliConfigParams, opts ...ClientOption) (*GetV1GeneralCliConfigOK, error)
+
 	GetV1GeneralCurrentUser(params *GetV1GeneralCurrentUserParams, opts ...ClientOption) (*GetV1GeneralCurrentUserOK, error)
 
 	GetV1Installs(params *GetV1InstallsParams, opts ...ClientOption) (*GetV1InstallsOK, error)
@@ -868,6 +870,46 @@ func (a *Client) GetV1ComponentsComponentIDReleases(params *GetV1ComponentsCompo
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetV1ComponentsComponentIDReleases: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetV1GeneralCliConfig gets config for cli
+
+get config for cli
+*/
+func (a *Client) GetV1GeneralCliConfig(params *GetV1GeneralCliConfigParams, opts ...ClientOption) (*GetV1GeneralCliConfigOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetV1GeneralCliConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetV1GeneralCliConfig",
+		Method:             "GET",
+		PathPattern:        "/v1/general/cli-config",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetV1GeneralCliConfigReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetV1GeneralCliConfigOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetV1GeneralCliConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

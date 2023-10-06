@@ -30,3 +30,14 @@ func (c *client) PublishMetrics(ctx context.Context, req []*models.ServicePublis
 
 	return nil
 }
+
+func (c *client) GetCLIConfig(ctx context.Context) (*models.ServiceCLIConfig, error) {
+	resp, err := c.genClient.Operations.GetV1GeneralCliConfig(&operations.GetV1GeneralCliConfigParams{
+		Context: ctx,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}
