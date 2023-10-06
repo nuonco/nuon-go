@@ -2,7 +2,6 @@ package nuon
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/nuonco/nuon-go/client/operations"
 	"github.com/nuonco/nuon-go/models"
@@ -15,7 +14,7 @@ func (c *client) GetApp(ctx context.Context, appID string) (*models.AppApp, erro
 		AppID:   appID,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get app: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -26,7 +25,7 @@ func (c *client) GetApps(ctx context.Context) ([]*models.AppApp, error) {
 		Context: ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get apps: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -38,7 +37,7 @@ func (c *client) CreateApp(ctx context.Context, req *models.ServiceCreateAppRequ
 		Context: ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to create app: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -51,7 +50,7 @@ func (c *client) UpdateApp(ctx context.Context, appID string, req *models.Servic
 		Context: ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to update app: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -63,7 +62,7 @@ func (c *client) DeleteApp(ctx context.Context, appID string) (bool, error) {
 		Context: ctx,
 	})
 	if err != nil {
-		return false, fmt.Errorf("unable to delete app: %w", err)
+		return false, err
 	}
 
 	return resp.IsSuccess(), nil
@@ -76,7 +75,7 @@ func (c *client) UpdateAppSandbox(ctx context.Context, appID string, req *models
 		Context: ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to update app sandbox: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil

@@ -14,7 +14,7 @@ func (c *client) GetAllComponents(ctx context.Context) ([]*models.AppComponent, 
 		Context: ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get components: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -26,7 +26,7 @@ func (c *client) GetAppComponents(ctx context.Context, appID string) ([]*models.
 		Context: ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get app components: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -39,7 +39,7 @@ func (c *client) CreateComponent(ctx context.Context, appID string, req *models.
 		Context: ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to create app component: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -51,7 +51,7 @@ func (c *client) GetComponent(ctx context.Context, componentID string) (*models.
 		Context:     ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get component: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -64,7 +64,7 @@ func (c *client) UpdateComponent(ctx context.Context, componentID string, req *m
 		Context:     ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to update component: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -76,7 +76,7 @@ func (c *client) DeleteComponent(ctx context.Context, componentID string) (bool,
 		Context:     ctx,
 	})
 	if err != nil {
-		return false, fmt.Errorf("unable to delete component: %w", err)
+		return false, err
 	}
 
 	return resp.Payload, nil
@@ -90,7 +90,7 @@ func (c *client) CreateTerraformModuleComponentConfig(ctx context.Context, compo
 		Context:     ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to create terraform component config: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -103,7 +103,7 @@ func (c *client) CreateHelmComponentConfig(ctx context.Context, componentID stri
 		Context:     ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to create helm component config: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -116,7 +116,7 @@ func (c *client) CreateDockerBuildComponentConfig(ctx context.Context, component
 		Context:     ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to create docker build component config: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -153,7 +153,7 @@ func (c *client) GetComponentLatestConfig(ctx context.Context, componentID strin
 		Context:     ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get latest component config: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -167,7 +167,7 @@ func (c *client) CreateComponentBuild(ctx context.Context, componentID string, r
 		Context:     ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to create component build: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -179,7 +179,7 @@ func (c *client) GetComponentBuilds(ctx context.Context, componentID string) ([]
 		Context:     ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get component builds: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -191,7 +191,7 @@ func (c *client) GetComponentLatestBuild(ctx context.Context, componentID string
 		Context:     ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get latest build for component: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil

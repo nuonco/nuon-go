@@ -2,7 +2,6 @@ package nuon
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/nuonco/nuon-go/client/operations"
 	"github.com/nuonco/nuon-go/models"
@@ -14,7 +13,7 @@ func (c *client) GetSandboxes(ctx context.Context) ([]*models.AppSandbox, error)
 		Context: ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get sandboxes: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -26,7 +25,7 @@ func (c *client) GetSandbox(ctx context.Context, sandboxID string) (*models.AppS
 		Context:   ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get sandbox: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
@@ -38,7 +37,7 @@ func (c *client) GetSandboxReleases(ctx context.Context, sandboxID string) ([]*m
 		Context:   ctx,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to get sandbox releases: %w", err)
+		return nil, err
 	}
 
 	return resp.Payload, nil
