@@ -39,6 +39,9 @@ type AppComponentConfigConnection struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// job
+	Job *AppJobComponentConfig `json:"job,omitempty"`
+
 	// terraform module
 	TerraformModule *AppTerraformModuleComponentConfig `json:"terraform_module,omitempty"`
 
@@ -59,6 +62,10 @@ func (m *AppComponentConfigConnection) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateHelm(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateJob(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -129,6 +136,25 @@ func (m *AppComponentConfigConnection) validateHelm(formats strfmt.Registry) err
 	return nil
 }
 
+func (m *AppComponentConfigConnection) validateJob(formats strfmt.Registry) error {
+	if swag.IsZero(m.Job) { // not required
+		return nil
+	}
+
+	if m.Job != nil {
+		if err := m.Job.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("job")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("job")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *AppComponentConfigConnection) validateTerraformModule(formats strfmt.Registry) error {
 	if swag.IsZero(m.TerraformModule) { // not required
 		return nil
@@ -161,6 +187,10 @@ func (m *AppComponentConfigConnection) ContextValidate(ctx context.Context, form
 	}
 
 	if err := m.contextValidateHelm(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateJob(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -229,6 +259,27 @@ func (m *AppComponentConfigConnection) contextValidateHelm(ctx context.Context, 
 				return ve.ValidateName("helm")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("helm")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppComponentConfigConnection) contextValidateJob(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Job != nil {
+
+		if swag.IsZero(m.Job) { // not required
+			return nil
+		}
+
+		if err := m.Job.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("job")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("job")
 			}
 			return err
 		}

@@ -135,6 +135,19 @@ func (c *client) CreateExternalImageComponentConfig(ctx context.Context, compone
 	return resp.Payload, nil
 }
 
+func (c *client) CreateJobComponentConfig(ctx context.Context, componentID string, req *models.ServiceCreateJobComponentConfigRequest) (*models.AppJobComponentConfig, error) {
+	resp, err := c.genClient.Operations.PostV1ComponentsComponentIDConfigsJob(&operations.PostV1ComponentsComponentIDConfigsJobParams{
+		ComponentID: componentID,
+		Req:         req,
+		Context:     ctx,
+	})
+	if err != nil {
+		return nil, fmt.Errorf("unable to create job component config: %w", err)
+	}
+
+	return resp.Payload, nil
+}
+
 func (c *client) GetComponentConfigs(ctx context.Context, componentID string) ([]*models.AppComponentConfigConnection, error) {
 	resp, err := c.genClient.Operations.GetV1ComponentsComponentIDConfigs(&operations.GetV1ComponentsComponentIDConfigsParams{
 		ComponentID: componentID,
