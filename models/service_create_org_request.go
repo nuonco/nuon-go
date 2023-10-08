@@ -22,6 +22,15 @@ type ServiceCreateOrgRequest struct {
 	// name
 	// Required: true
 	Name *string `json:"name"`
+
+	// These fields are used to control the behaviour of the org.
+	UseCustomCert bool `json:"use_custom_cert,omitempty"`
+
+	// use data plane id
+	UseDataPlaneID string `json:"use_data_plane_id,omitempty"`
+
+	// use sandbox mode
+	UseSandboxMode bool `json:"use_sandbox_mode,omitempty"`
 }
 
 // Validate validates this service create org request
