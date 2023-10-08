@@ -25,11 +25,21 @@ type AppOrg struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
+	// custom cert
+	CustomCert bool `json:"customCert,omitempty"`
+
+	// data plane ID
+	DataPlaneID string `json:"dataPlaneID,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
+
+	// These fields are used to control the behaviour of the org
+	// NOTE: these are starting as nullable, so we can update stage/prod before resetting locally.
+	SandboxMode bool `json:"sandboxMode,omitempty"`
 
 	// status
 	Status string `json:"status,omitempty"`
