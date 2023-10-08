@@ -31,6 +31,9 @@ type AppInstall struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
+	// data plane ID
+	DataPlaneID string `json:"dataPlaneID,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
