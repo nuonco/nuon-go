@@ -20,6 +20,9 @@ type AppAppInstallerMetadata struct {
 	// app installer id
 	AppInstallerID string `json:"app_installer_id,omitempty"`
 
+	// community url
+	CommunityURL string `json:"community_url,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
@@ -34,6 +37,9 @@ type AppAppInstallerMetadata struct {
 
 	// github url
 	GithubURL string `json:"github_url,omitempty"`
+
+	// homepage url
+	HomepageURL string `json:"homepage_url,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`

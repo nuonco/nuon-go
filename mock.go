@@ -426,10 +426,10 @@ func (mr *MockClientMockRecorder) GetAppComponents(ctx, appID interface{}) *gomo
 }
 
 // GetAppInstaller mocks base method.
-func (m *MockClient) GetAppInstaller(ctx context.Context, appInstallerID string) (*models.AppAppInstaller, error) {
+func (m *MockClient) GetAppInstaller(ctx context.Context, appInstallerID string) (*models.ServiceAppInstaller, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAppInstaller", ctx, appInstallerID)
-	ret0, _ := ret[0].(*models.AppAppInstaller)
+	ret0, _ := ret[0].(*models.ServiceAppInstaller)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
