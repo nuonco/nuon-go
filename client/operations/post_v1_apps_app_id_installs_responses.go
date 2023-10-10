@@ -60,7 +60,7 @@ func (o *PostV1AppsAppIDInstallsReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /v1/apps/{app_id}/installs/] PostV1AppsAppIDInstalls", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /v1/apps/{app_id}/installs] PostV1AppsAppIDInstalls", response, response.Code())
 	}
 }
 
@@ -109,11 +109,11 @@ func (o *PostV1AppsAppIDInstallsCreated) Code() int {
 }
 
 func (o *PostV1AppsAppIDInstallsCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs/][%d] postV1AppsAppIdInstallsCreated  %+v", 201, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs][%d] postV1AppsAppIdInstallsCreated  %+v", 201, o.Payload)
 }
 
 func (o *PostV1AppsAppIDInstallsCreated) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs/][%d] postV1AppsAppIdInstallsCreated  %+v", 201, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs][%d] postV1AppsAppIdInstallsCreated  %+v", 201, o.Payload)
 }
 
 func (o *PostV1AppsAppIDInstallsCreated) GetPayload() *models.AppInstall {
@@ -177,11 +177,11 @@ func (o *PostV1AppsAppIDInstallsBadRequest) Code() int {
 }
 
 func (o *PostV1AppsAppIDInstallsBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs/][%d] postV1AppsAppIdInstallsBadRequest  %+v", 400, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs][%d] postV1AppsAppIdInstallsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *PostV1AppsAppIDInstallsBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs/][%d] postV1AppsAppIdInstallsBadRequest  %+v", 400, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs][%d] postV1AppsAppIdInstallsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *PostV1AppsAppIDInstallsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +245,11 @@ func (o *PostV1AppsAppIDInstallsUnauthorized) Code() int {
 }
 
 func (o *PostV1AppsAppIDInstallsUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs/][%d] postV1AppsAppIdInstallsUnauthorized  %+v", 401, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs][%d] postV1AppsAppIdInstallsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *PostV1AppsAppIDInstallsUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs/][%d] postV1AppsAppIdInstallsUnauthorized  %+v", 401, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs][%d] postV1AppsAppIdInstallsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *PostV1AppsAppIDInstallsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +313,11 @@ func (o *PostV1AppsAppIDInstallsForbidden) Code() int {
 }
 
 func (o *PostV1AppsAppIDInstallsForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs/][%d] postV1AppsAppIdInstallsForbidden  %+v", 403, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs][%d] postV1AppsAppIdInstallsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *PostV1AppsAppIDInstallsForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs/][%d] postV1AppsAppIdInstallsForbidden  %+v", 403, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs][%d] postV1AppsAppIdInstallsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *PostV1AppsAppIDInstallsForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +381,11 @@ func (o *PostV1AppsAppIDInstallsNotFound) Code() int {
 }
 
 func (o *PostV1AppsAppIDInstallsNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs/][%d] postV1AppsAppIdInstallsNotFound  %+v", 404, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs][%d] postV1AppsAppIdInstallsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *PostV1AppsAppIDInstallsNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs/][%d] postV1AppsAppIdInstallsNotFound  %+v", 404, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs][%d] postV1AppsAppIdInstallsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *PostV1AppsAppIDInstallsNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +449,11 @@ func (o *PostV1AppsAppIDInstallsInternalServerError) Code() int {
 }
 
 func (o *PostV1AppsAppIDInstallsInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs/][%d] postV1AppsAppIdInstallsInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs][%d] postV1AppsAppIdInstallsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *PostV1AppsAppIDInstallsInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs/][%d] postV1AppsAppIdInstallsInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/installs][%d] postV1AppsAppIdInstallsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *PostV1AppsAppIDInstallsInternalServerError) GetPayload() *models.StderrErrResponse {

@@ -30,13 +30,19 @@ type Client interface {
 	DeleteOrg(ctx context.Context) (bool, error)
 	CreateOrgUser(ctx context.Context, req *models.ServiceCreateOrgUserRequest) (*models.AppUserOrg, error)
 
-	// internal methods
+	// app methods
 	GetApp(ctx context.Context, appID string) (*models.AppApp, error)
 	GetApps(ctx context.Context) ([]*models.AppApp, error)
 	CreateApp(ctx context.Context, req *models.ServiceCreateAppRequest) (*models.AppApp, error)
 	UpdateApp(ctx context.Context, appID string, req *models.ServiceUpdateAppRequest) (*models.AppApp, error)
 	DeleteApp(ctx context.Context, appID string) (bool, error)
 	UpdateAppSandbox(ctx context.Context, appID string, req *models.ServiceUpdateAppSandboxRequest) (*models.AppApp, error)
+
+	// app installer methods
+	CreateAppInstaller(ctx context.Context, appID string, req *models.ServiceCreateAppInstallerRequest) (*models.AppAppInstaller, error)
+	UpdateAppInstaller(ctx context.Context, appInstallerID string, req *models.ServiceUpdateAppInstallerRequest) (*models.AppAppInstaller, error)
+	DeleteAppInstaller(ctx context.Context, appInstallerID string) (bool, error)
+	GetAppInstaller(ctx context.Context, appInstallerID string) (*models.ServiceAppInstaller, error)
 
 	// general methods
 	GetCurrentUser(ctx context.Context) (*models.AppUserToken, error)

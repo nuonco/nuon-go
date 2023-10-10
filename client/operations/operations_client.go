@@ -34,6 +34,8 @@ type ClientService interface {
 
 	DeleteV1ComponentsComponentID(params *DeleteV1ComponentsComponentIDParams, opts ...ClientOption) (*DeleteV1ComponentsComponentIDOK, error)
 
+	DeleteV1InstallersInstallerID(params *DeleteV1InstallersInstallerIDParams, opts ...ClientOption) (*DeleteV1InstallersInstallerIDOK, error)
+
 	DeleteV1InstallsInstallID(params *DeleteV1InstallsInstallIDParams, opts ...ClientOption) (*DeleteV1InstallsInstallIDOK, error)
 
 	DeleteV1OrgsCurrent(params *DeleteV1OrgsCurrentParams, opts ...ClientOption) (*DeleteV1OrgsCurrentOK, error)
@@ -69,6 +71,8 @@ type ClientService interface {
 	GetV1GeneralCliConfig(params *GetV1GeneralCliConfigParams, opts ...ClientOption) (*GetV1GeneralCliConfigOK, error)
 
 	GetV1GeneralCurrentUser(params *GetV1GeneralCurrentUserParams, opts ...ClientOption) (*GetV1GeneralCurrentUserOK, error)
+
+	GetV1InstallersInstallerSlug(params *GetV1InstallersInstallerSlugParams, opts ...ClientOption) (*GetV1InstallersInstallerSlugOK, error)
 
 	GetV1Installs(params *GetV1InstallsParams, opts ...ClientOption) (*GetV1InstallsOK, error)
 
@@ -114,6 +118,8 @@ type ClientService interface {
 
 	PatchV1ComponentsComponentID(params *PatchV1ComponentsComponentIDParams, opts ...ClientOption) (*PatchV1ComponentsComponentIDOK, error)
 
+	PatchV1InstallersInstallerID(params *PatchV1InstallersInstallerIDParams, opts ...ClientOption) (*PatchV1InstallersInstallerIDCreated, error)
+
 	PatchV1InstallsInstallID(params *PatchV1InstallsInstallIDParams, opts ...ClientOption) (*PatchV1InstallsInstallIDOK, error)
 
 	PatchV1OrgsCurrent(params *PatchV1OrgsCurrentParams, opts ...ClientOption) (*PatchV1OrgsCurrentOK, error)
@@ -121,6 +127,8 @@ type ClientService interface {
 	PostV1Apps(params *PostV1AppsParams, opts ...ClientOption) (*PostV1AppsCreated, error)
 
 	PostV1AppsAppIDComponents(params *PostV1AppsAppIDComponentsParams, opts ...ClientOption) (*PostV1AppsAppIDComponentsCreated, error)
+
+	PostV1AppsAppIDInstaller(params *PostV1AppsAppIDInstallerParams, opts ...ClientOption) (*PostV1AppsAppIDInstallerCreated, error)
 
 	PostV1AppsAppIDInstalls(params *PostV1AppsAppIDInstallsParams, opts ...ClientOption) (*PostV1AppsAppIDInstallsCreated, error)
 
@@ -232,6 +240,46 @@ func (a *Client) DeleteV1ComponentsComponentID(params *DeleteV1ComponentsCompone
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeleteV1ComponentsComponentID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+DeleteV1InstallersInstallerID deletes an app installer
+
+delete an app installer
+*/
+func (a *Client) DeleteV1InstallersInstallerID(params *DeleteV1InstallersInstallerIDParams, opts ...ClientOption) (*DeleteV1InstallersInstallerIDOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteV1InstallersInstallerIDParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteV1InstallersInstallerID",
+		Method:             "DELETE",
+		PathPattern:        "/v1/installers/{installer_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteV1InstallersInstallerIDReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteV1InstallersInstallerIDOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeleteV1InstallersInstallerID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -952,6 +1000,46 @@ func (a *Client) GetV1GeneralCurrentUser(params *GetV1GeneralCurrentUserParams, 
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetV1GeneralCurrentUser: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetV1InstallersInstallerSlug gets an app installer
+
+get an app installer
+*/
+func (a *Client) GetV1InstallersInstallerSlug(params *GetV1InstallersInstallerSlugParams, opts ...ClientOption) (*GetV1InstallersInstallerSlugOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetV1InstallersInstallerSlugParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetV1InstallersInstallerSlug",
+		Method:             "GET",
+		PathPattern:        "/v1/installers/{installer_slug}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetV1InstallersInstallerSlugReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetV1InstallersInstallerSlugOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetV1InstallersInstallerSlug: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -1836,6 +1924,46 @@ func (a *Client) PatchV1ComponentsComponentID(params *PatchV1ComponentsComponent
 }
 
 /*
+PatchV1InstallersInstallerID updates an app
+
+get an app
+*/
+func (a *Client) PatchV1InstallersInstallerID(params *PatchV1InstallersInstallerIDParams, opts ...ClientOption) (*PatchV1InstallersInstallerIDCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPatchV1InstallersInstallerIDParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PatchV1InstallersInstallerID",
+		Method:             "PATCH",
+		PathPattern:        "/v1/installers/{installer_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PatchV1InstallersInstallerIDReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PatchV1InstallersInstallerIDCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for PatchV1InstallersInstallerID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 PatchV1InstallsInstallID updates an install
 
 update an install
@@ -1928,7 +2056,7 @@ func (a *Client) PostV1Apps(params *PostV1AppsParams, opts ...ClientOption) (*Po
 	op := &runtime.ClientOperation{
 		ID:                 "PostV1Apps",
 		Method:             "POST",
-		PathPattern:        "/v1/apps/",
+		PathPattern:        "/v1/apps",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -1968,7 +2096,7 @@ func (a *Client) PostV1AppsAppIDComponents(params *PostV1AppsAppIDComponentsPara
 	op := &runtime.ClientOperation{
 		ID:                 "PostV1AppsAppIDComponents",
 		Method:             "POST",
-		PathPattern:        "/v1/apps/{app_id}/components/",
+		PathPattern:        "/v1/apps/{app_id}/components",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -1996,6 +2124,46 @@ func (a *Client) PostV1AppsAppIDComponents(params *PostV1AppsAppIDComponentsPara
 }
 
 /*
+PostV1AppsAppIDInstaller creates an app installer
+
+create an app installer
+*/
+func (a *Client) PostV1AppsAppIDInstaller(params *PostV1AppsAppIDInstallerParams, opts ...ClientOption) (*PostV1AppsAppIDInstallerCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPostV1AppsAppIDInstallerParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PostV1AppsAppIDInstaller",
+		Method:             "POST",
+		PathPattern:        "/v1/apps/{app_id}/installer",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PostV1AppsAppIDInstallerReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PostV1AppsAppIDInstallerCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for PostV1AppsAppIDInstaller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 PostV1AppsAppIDInstalls creates an app install
 
 create an app install
@@ -2008,7 +2176,7 @@ func (a *Client) PostV1AppsAppIDInstalls(params *PostV1AppsAppIDInstallsParams, 
 	op := &runtime.ClientOperation{
 		ID:                 "PostV1AppsAppIDInstalls",
 		Method:             "POST",
-		PathPattern:        "/v1/apps/{app_id}/installs/",
+		PathPattern:        "/v1/apps/{app_id}/installs",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -2368,7 +2536,7 @@ func (a *Client) PostV1InstallsInstallIDDeploys(params *PostV1InstallsInstallIDD
 	op := &runtime.ClientOperation{
 		ID:                 "PostV1InstallsInstallIDDeploys",
 		Method:             "POST",
-		PathPattern:        "/v1/installs/{install_id}/deploys/",
+		PathPattern:        "/v1/installs/{install_id}/deploys",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},

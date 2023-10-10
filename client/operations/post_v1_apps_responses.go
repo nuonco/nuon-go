@@ -60,7 +60,7 @@ func (o *PostV1AppsReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /v1/apps/] PostV1Apps", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /v1/apps] PostV1Apps", response, response.Code())
 	}
 }
 
@@ -109,11 +109,11 @@ func (o *PostV1AppsCreated) Code() int {
 }
 
 func (o *PostV1AppsCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/][%d] postV1AppsCreated  %+v", 201, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] postV1AppsCreated  %+v", 201, o.Payload)
 }
 
 func (o *PostV1AppsCreated) String() string {
-	return fmt.Sprintf("[POST /v1/apps/][%d] postV1AppsCreated  %+v", 201, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] postV1AppsCreated  %+v", 201, o.Payload)
 }
 
 func (o *PostV1AppsCreated) GetPayload() *models.AppApp {
@@ -177,11 +177,11 @@ func (o *PostV1AppsBadRequest) Code() int {
 }
 
 func (o *PostV1AppsBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/][%d] postV1AppsBadRequest  %+v", 400, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] postV1AppsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *PostV1AppsBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/apps/][%d] postV1AppsBadRequest  %+v", 400, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] postV1AppsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *PostV1AppsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +245,11 @@ func (o *PostV1AppsUnauthorized) Code() int {
 }
 
 func (o *PostV1AppsUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/][%d] postV1AppsUnauthorized  %+v", 401, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] postV1AppsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *PostV1AppsUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/apps/][%d] postV1AppsUnauthorized  %+v", 401, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] postV1AppsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *PostV1AppsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +313,11 @@ func (o *PostV1AppsForbidden) Code() int {
 }
 
 func (o *PostV1AppsForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/][%d] postV1AppsForbidden  %+v", 403, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] postV1AppsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *PostV1AppsForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/apps/][%d] postV1AppsForbidden  %+v", 403, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] postV1AppsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *PostV1AppsForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +381,11 @@ func (o *PostV1AppsNotFound) Code() int {
 }
 
 func (o *PostV1AppsNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/][%d] postV1AppsNotFound  %+v", 404, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] postV1AppsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *PostV1AppsNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/apps/][%d] postV1AppsNotFound  %+v", 404, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] postV1AppsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *PostV1AppsNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +449,11 @@ func (o *PostV1AppsInternalServerError) Code() int {
 }
 
 func (o *PostV1AppsInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/][%d] postV1AppsInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] postV1AppsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *PostV1AppsInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/apps/][%d] postV1AppsInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] postV1AppsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *PostV1AppsInternalServerError) GetPayload() *models.StderrErrResponse {
