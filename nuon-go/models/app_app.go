@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -24,11 +25,11 @@ type AppApp struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
-	// data plane ID
-	DataPlaneID string `json:"dataPlaneID,omitempty"`
-
 	// id
 	ID string `json:"id,omitempty"`
+
+	// installers
+	Installers []*AppAppInstaller `json:"installers"`
 
 	// name
 	Name string `json:"name,omitempty"`
@@ -53,6 +54,10 @@ type AppApp struct {
 func (m *AppApp) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateInstallers(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSandboxRelease(formats); err != nil {
 		res = append(res, err)
 	}
@@ -60,6 +65,32 @@ func (m *AppApp) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppApp) validateInstallers(formats strfmt.Registry) error {
+	if swag.IsZero(m.Installers) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Installers); i++ {
+		if swag.IsZero(m.Installers[i]) { // not required
+			continue
+		}
+
+		if m.Installers[i] != nil {
+			if err := m.Installers[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("installers" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("installers" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -86,6 +117,10 @@ func (m *AppApp) validateSandboxRelease(formats strfmt.Registry) error {
 func (m *AppApp) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateInstallers(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateSandboxRelease(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -93,6 +128,31 @@ func (m *AppApp) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppApp) contextValidateInstallers(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Installers); i++ {
+
+		if m.Installers[i] != nil {
+
+			if swag.IsZero(m.Installers[i]) { // not required
+				return nil
+			}
+
+			if err := m.Installers[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("installers" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("installers" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

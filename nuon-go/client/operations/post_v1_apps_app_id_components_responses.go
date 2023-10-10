@@ -60,7 +60,7 @@ func (o *PostV1AppsAppIDComponentsReader) ReadResponse(response runtime.ClientRe
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /v1/apps/{app_id}/components/] PostV1AppsAppIDComponents", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /v1/apps/{app_id}/components] PostV1AppsAppIDComponents", response, response.Code())
 	}
 }
 
@@ -109,11 +109,11 @@ func (o *PostV1AppsAppIDComponentsCreated) Code() int {
 }
 
 func (o *PostV1AppsAppIDComponentsCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/][%d] postV1AppsAppIdComponentsCreated  %+v", 201, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components][%d] postV1AppsAppIdComponentsCreated  %+v", 201, o.Payload)
 }
 
 func (o *PostV1AppsAppIDComponentsCreated) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/][%d] postV1AppsAppIdComponentsCreated  %+v", 201, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components][%d] postV1AppsAppIdComponentsCreated  %+v", 201, o.Payload)
 }
 
 func (o *PostV1AppsAppIDComponentsCreated) GetPayload() *models.AppComponent {
@@ -177,11 +177,11 @@ func (o *PostV1AppsAppIDComponentsBadRequest) Code() int {
 }
 
 func (o *PostV1AppsAppIDComponentsBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/][%d] postV1AppsAppIdComponentsBadRequest  %+v", 400, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components][%d] postV1AppsAppIdComponentsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *PostV1AppsAppIDComponentsBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/][%d] postV1AppsAppIdComponentsBadRequest  %+v", 400, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components][%d] postV1AppsAppIdComponentsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *PostV1AppsAppIDComponentsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +245,11 @@ func (o *PostV1AppsAppIDComponentsUnauthorized) Code() int {
 }
 
 func (o *PostV1AppsAppIDComponentsUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/][%d] postV1AppsAppIdComponentsUnauthorized  %+v", 401, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components][%d] postV1AppsAppIdComponentsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *PostV1AppsAppIDComponentsUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/][%d] postV1AppsAppIdComponentsUnauthorized  %+v", 401, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components][%d] postV1AppsAppIdComponentsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *PostV1AppsAppIDComponentsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +313,11 @@ func (o *PostV1AppsAppIDComponentsForbidden) Code() int {
 }
 
 func (o *PostV1AppsAppIDComponentsForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/][%d] postV1AppsAppIdComponentsForbidden  %+v", 403, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components][%d] postV1AppsAppIdComponentsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *PostV1AppsAppIDComponentsForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/][%d] postV1AppsAppIdComponentsForbidden  %+v", 403, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components][%d] postV1AppsAppIdComponentsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *PostV1AppsAppIDComponentsForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +381,11 @@ func (o *PostV1AppsAppIDComponentsNotFound) Code() int {
 }
 
 func (o *PostV1AppsAppIDComponentsNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/][%d] postV1AppsAppIdComponentsNotFound  %+v", 404, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components][%d] postV1AppsAppIdComponentsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *PostV1AppsAppIDComponentsNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/][%d] postV1AppsAppIdComponentsNotFound  %+v", 404, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components][%d] postV1AppsAppIdComponentsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *PostV1AppsAppIDComponentsNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +449,11 @@ func (o *PostV1AppsAppIDComponentsInternalServerError) Code() int {
 }
 
 func (o *PostV1AppsAppIDComponentsInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/][%d] postV1AppsAppIdComponentsInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components][%d] postV1AppsAppIdComponentsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *PostV1AppsAppIDComponentsInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/][%d] postV1AppsAppIdComponentsInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components][%d] postV1AppsAppIdComponentsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *PostV1AppsAppIDComponentsInternalServerError) GetPayload() *models.StderrErrResponse {

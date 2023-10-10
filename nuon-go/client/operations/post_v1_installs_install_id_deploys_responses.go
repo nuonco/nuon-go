@@ -60,7 +60,7 @@ func (o *PostV1InstallsInstallIDDeploysReader) ReadResponse(response runtime.Cli
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /v1/installs/{install_id}/deploys/] PostV1InstallsInstallIDDeploys", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /v1/installs/{install_id}/deploys] PostV1InstallsInstallIDDeploys", response, response.Code())
 	}
 }
 
@@ -109,11 +109,11 @@ func (o *PostV1InstallsInstallIDDeploysCreated) Code() int {
 }
 
 func (o *PostV1InstallsInstallIDDeploysCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys/][%d] postV1InstallsInstallIdDeploysCreated  %+v", 201, o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys][%d] postV1InstallsInstallIdDeploysCreated  %+v", 201, o.Payload)
 }
 
 func (o *PostV1InstallsInstallIDDeploysCreated) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys/][%d] postV1InstallsInstallIdDeploysCreated  %+v", 201, o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys][%d] postV1InstallsInstallIdDeploysCreated  %+v", 201, o.Payload)
 }
 
 func (o *PostV1InstallsInstallIDDeploysCreated) GetPayload() *models.AppInstallDeploy {
@@ -177,11 +177,11 @@ func (o *PostV1InstallsInstallIDDeploysBadRequest) Code() int {
 }
 
 func (o *PostV1InstallsInstallIDDeploysBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys/][%d] postV1InstallsInstallIdDeploysBadRequest  %+v", 400, o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys][%d] postV1InstallsInstallIdDeploysBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *PostV1InstallsInstallIDDeploysBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys/][%d] postV1InstallsInstallIdDeploysBadRequest  %+v", 400, o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys][%d] postV1InstallsInstallIdDeploysBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *PostV1InstallsInstallIDDeploysBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +245,11 @@ func (o *PostV1InstallsInstallIDDeploysUnauthorized) Code() int {
 }
 
 func (o *PostV1InstallsInstallIDDeploysUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys/][%d] postV1InstallsInstallIdDeploysUnauthorized  %+v", 401, o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys][%d] postV1InstallsInstallIdDeploysUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *PostV1InstallsInstallIDDeploysUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys/][%d] postV1InstallsInstallIdDeploysUnauthorized  %+v", 401, o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys][%d] postV1InstallsInstallIdDeploysUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *PostV1InstallsInstallIDDeploysUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +313,11 @@ func (o *PostV1InstallsInstallIDDeploysForbidden) Code() int {
 }
 
 func (o *PostV1InstallsInstallIDDeploysForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys/][%d] postV1InstallsInstallIdDeploysForbidden  %+v", 403, o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys][%d] postV1InstallsInstallIdDeploysForbidden  %+v", 403, o.Payload)
 }
 
 func (o *PostV1InstallsInstallIDDeploysForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys/][%d] postV1InstallsInstallIdDeploysForbidden  %+v", 403, o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys][%d] postV1InstallsInstallIdDeploysForbidden  %+v", 403, o.Payload)
 }
 
 func (o *PostV1InstallsInstallIDDeploysForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +381,11 @@ func (o *PostV1InstallsInstallIDDeploysNotFound) Code() int {
 }
 
 func (o *PostV1InstallsInstallIDDeploysNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys/][%d] postV1InstallsInstallIdDeploysNotFound  %+v", 404, o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys][%d] postV1InstallsInstallIdDeploysNotFound  %+v", 404, o.Payload)
 }
 
 func (o *PostV1InstallsInstallIDDeploysNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys/][%d] postV1InstallsInstallIdDeploysNotFound  %+v", 404, o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys][%d] postV1InstallsInstallIdDeploysNotFound  %+v", 404, o.Payload)
 }
 
 func (o *PostV1InstallsInstallIDDeploysNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +449,11 @@ func (o *PostV1InstallsInstallIDDeploysInternalServerError) Code() int {
 }
 
 func (o *PostV1InstallsInstallIDDeploysInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys/][%d] postV1InstallsInstallIdDeploysInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys][%d] postV1InstallsInstallIdDeploysInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *PostV1InstallsInstallIDDeploysInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys/][%d] postV1InstallsInstallIdDeploysInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deploys][%d] postV1InstallsInstallIdDeploysInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *PostV1InstallsInstallIDDeploysInternalServerError) GetPayload() *models.StderrErrResponse {
