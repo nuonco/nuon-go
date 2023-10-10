@@ -81,10 +81,22 @@ func (c *client) UpdateAppSandbox(ctx context.Context, appID string, req *models
 	return resp.Payload, nil
 }
 
-func (c *client) GetAppInstaller(ctx context.Context, appInstallerID string) (*models.ServiceAppInstaller, error) {
-	resp, err := c.genClient.Operations.GetV1InstallersInstallerSlug(&operations.GetV1InstallersInstallerSlugParams{
+func (c *client) RenderAppInstaller(ctx context.Context, slug string) (*models.ServiceAppInstaller, error) {
+	resp, err := c.genClient.Operations.GetV1InstallersInstallerSlugRender(&operations.GetV1InstallersInstallerSlugRenderParams{
 		Context:       ctx,
-		InstallerSlug: appInstallerID,
+		InstallerSlug: slug,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}
+
+func (c *client) GetAppInstaller(ctx context.Context, appInstallerID string) (*models.AppAppInstaller, error) {
+	resp, err := c.genClient.Operations.GetV1InstallersInstallerID(&operations.GetV1InstallersInstallerIDParams{
+		Context:     ctx,
+		InstallerID: appInstallerID,
 	})
 	if err != nil {
 		return nil, err

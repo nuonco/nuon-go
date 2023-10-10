@@ -42,7 +42,8 @@ type Client interface {
 	CreateAppInstaller(ctx context.Context, appID string, req *models.ServiceCreateAppInstallerRequest) (*models.AppAppInstaller, error)
 	UpdateAppInstaller(ctx context.Context, appInstallerID string, req *models.ServiceUpdateAppInstallerRequest) (*models.AppAppInstaller, error)
 	DeleteAppInstaller(ctx context.Context, appInstallerID string) (bool, error)
-	GetAppInstaller(ctx context.Context, appInstallerID string) (*models.ServiceAppInstaller, error)
+	GetAppInstaller(ctx context.Context, appInstallerID string) (*models.AppAppInstaller, error)
+	RenderAppInstaller(ctx context.Context, slug string) (*models.ServiceAppInstaller, error)
 
 	// general methods
 	GetCurrentUser(ctx context.Context) (*models.AppUserToken, error)

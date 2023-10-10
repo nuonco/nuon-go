@@ -72,7 +72,9 @@ type ClientService interface {
 
 	GetV1GeneralCurrentUser(params *GetV1GeneralCurrentUserParams, opts ...ClientOption) (*GetV1GeneralCurrentUserOK, error)
 
-	GetV1InstallersInstallerSlug(params *GetV1InstallersInstallerSlugParams, opts ...ClientOption) (*GetV1InstallersInstallerSlugOK, error)
+	GetV1InstallersInstallerID(params *GetV1InstallersInstallerIDParams, opts ...ClientOption) (*GetV1InstallersInstallerIDOK, error)
+
+	GetV1InstallersInstallerSlugRender(params *GetV1InstallersInstallerSlugRenderParams, opts ...ClientOption) (*GetV1InstallersInstallerSlugRenderOK, error)
 
 	GetV1Installs(params *GetV1InstallsParams, opts ...ClientOption) (*GetV1InstallsOK, error)
 
@@ -1004,24 +1006,24 @@ func (a *Client) GetV1GeneralCurrentUser(params *GetV1GeneralCurrentUserParams, 
 }
 
 /*
-GetV1InstallersInstallerSlug gets an app installer
+GetV1InstallersInstallerID gets an app installer
 
 get an app installer
 */
-func (a *Client) GetV1InstallersInstallerSlug(params *GetV1InstallersInstallerSlugParams, opts ...ClientOption) (*GetV1InstallersInstallerSlugOK, error) {
+func (a *Client) GetV1InstallersInstallerID(params *GetV1InstallersInstallerIDParams, opts ...ClientOption) (*GetV1InstallersInstallerIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetV1InstallersInstallerSlugParams()
+		params = NewGetV1InstallersInstallerIDParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetV1InstallersInstallerSlug",
+		ID:                 "GetV1InstallersInstallerID",
 		Method:             "GET",
-		PathPattern:        "/v1/installers/{installer_slug}",
+		PathPattern:        "/v1/installers/{installer_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetV1InstallersInstallerSlugReader{formats: a.formats},
+		Reader:             &GetV1InstallersInstallerIDReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -1033,13 +1035,53 @@ func (a *Client) GetV1InstallersInstallerSlug(params *GetV1InstallersInstallerSl
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetV1InstallersInstallerSlugOK)
+	success, ok := result.(*GetV1InstallersInstallerIDOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetV1InstallersInstallerSlug: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for GetV1InstallersInstallerID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetV1InstallersInstallerSlugRender renders an app installer
+
+render an app installer
+*/
+func (a *Client) GetV1InstallersInstallerSlugRender(params *GetV1InstallersInstallerSlugRenderParams, opts ...ClientOption) (*GetV1InstallersInstallerSlugRenderOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetV1InstallersInstallerSlugRenderParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetV1InstallersInstallerSlugRender",
+		Method:             "GET",
+		PathPattern:        "/v1/installers/{installer_slug}/render",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetV1InstallersInstallerSlugRenderReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetV1InstallersInstallerSlugRenderOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetV1InstallersInstallerSlugRender: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
