@@ -152,6 +152,10 @@ type ServiceUpdateAppInstallerRequestLinks struct {
 	// Required: true
 	Community *string `json:"community"`
 
+	// demo
+	// Required: true
+	Demo *string `json:"demo"`
+
 	// documentation
 	// Required: true
 	Documentation *string `json:"documentation"`
@@ -174,6 +178,10 @@ func (m *ServiceUpdateAppInstallerRequestLinks) Validate(formats strfmt.Registry
 	var res []error
 
 	if err := m.validateCommunity(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDemo(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -202,6 +210,15 @@ func (m *ServiceUpdateAppInstallerRequestLinks) Validate(formats strfmt.Registry
 func (m *ServiceUpdateAppInstallerRequestLinks) validateCommunity(formats strfmt.Registry) error {
 
 	if err := validate.Required("links"+"."+"community", "body", m.Community); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ServiceUpdateAppInstallerRequestLinks) validateDemo(formats strfmt.Registry) error {
+
+	if err := validate.Required("links"+"."+"demo", "body", m.Demo); err != nil {
 		return err
 	}
 
