@@ -29,6 +29,9 @@ type AppAppInstallerMetadata struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
+	// demo url
+	DemoURL string `json:"demo_url,omitempty"`
+
 	// description
 	Description string `json:"description,omitempty"`
 
