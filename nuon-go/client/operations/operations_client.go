@@ -72,9 +72,11 @@ type ClientService interface {
 
 	GetV1GeneralCurrentUser(params *GetV1GeneralCurrentUserParams, opts ...ClientOption) (*GetV1GeneralCurrentUserOK, error)
 
-	GetV1InstallersInstallerID(params *GetV1InstallersInstallerIDParams, opts ...ClientOption) (*GetV1InstallersInstallerIDOK, error)
+	GetV1InstallerInstallerSlugInstallInstallID(params *GetV1InstallerInstallerSlugInstallInstallIDParams, opts ...ClientOption) (*GetV1InstallerInstallerSlugInstallInstallIDOK, error)
 
-	GetV1InstallersInstallerSlugRender(params *GetV1InstallersInstallerSlugRenderParams, opts ...ClientOption) (*GetV1InstallersInstallerSlugRenderOK, error)
+	GetV1InstallerInstallerSlugRender(params *GetV1InstallerInstallerSlugRenderParams, opts ...ClientOption) (*GetV1InstallerInstallerSlugRenderOK, error)
+
+	GetV1InstallersInstallerID(params *GetV1InstallersInstallerIDParams, opts ...ClientOption) (*GetV1InstallersInstallerIDOK, error)
 
 	GetV1Installs(params *GetV1InstallsParams, opts ...ClientOption) (*GetV1InstallsOK, error)
 
@@ -149,6 +151,8 @@ type ClientService interface {
 	PostV1ComponentsComponentIDReleases(params *PostV1ComponentsComponentIDReleasesParams, opts ...ClientOption) (*PostV1ComponentsComponentIDReleasesCreated, error)
 
 	PostV1GeneralMetrics(params *PostV1GeneralMetricsParams, opts ...ClientOption) (*PostV1GeneralMetricsOK, error)
+
+	PostV1InstallerInstallerSlugInstalls(params *PostV1InstallerInstallerSlugInstallsParams, opts ...ClientOption) (*PostV1InstallerInstallerSlugInstallsCreated, error)
 
 	PostV1InstallsInstallIDDeploys(params *PostV1InstallsInstallIDDeploysParams, opts ...ClientOption) (*PostV1InstallsInstallIDDeploysCreated, error)
 
@@ -1006,6 +1010,86 @@ func (a *Client) GetV1GeneralCurrentUser(params *GetV1GeneralCurrentUserParams, 
 }
 
 /*
+GetV1InstallerInstallerSlugInstallInstallID gets an install
+
+get an install
+*/
+func (a *Client) GetV1InstallerInstallerSlugInstallInstallID(params *GetV1InstallerInstallerSlugInstallInstallIDParams, opts ...ClientOption) (*GetV1InstallerInstallerSlugInstallInstallIDOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetV1InstallerInstallerSlugInstallInstallIDParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetV1InstallerInstallerSlugInstallInstallID",
+		Method:             "GET",
+		PathPattern:        "/v1/installer/{installer_slug}/install/{install_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetV1InstallerInstallerSlugInstallInstallIDReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetV1InstallerInstallerSlugInstallInstallIDOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetV1InstallerInstallerSlugInstallInstallID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetV1InstallerInstallerSlugRender renders an app installer
+
+render an app installer
+*/
+func (a *Client) GetV1InstallerInstallerSlugRender(params *GetV1InstallerInstallerSlugRenderParams, opts ...ClientOption) (*GetV1InstallerInstallerSlugRenderOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetV1InstallerInstallerSlugRenderParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetV1InstallerInstallerSlugRender",
+		Method:             "GET",
+		PathPattern:        "/v1/installer/{installer_slug}/render",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetV1InstallerInstallerSlugRenderReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetV1InstallerInstallerSlugRenderOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetV1InstallerInstallerSlugRender: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetV1InstallersInstallerID gets an app installer
 
 get an app installer
@@ -1042,46 +1126,6 @@ func (a *Client) GetV1InstallersInstallerID(params *GetV1InstallersInstallerIDPa
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetV1InstallersInstallerID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetV1InstallersInstallerSlugRender renders an app installer
-
-render an app installer
-*/
-func (a *Client) GetV1InstallersInstallerSlugRender(params *GetV1InstallersInstallerSlugRenderParams, opts ...ClientOption) (*GetV1InstallersInstallerSlugRenderOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetV1InstallersInstallerSlugRenderParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetV1InstallersInstallerSlugRender",
-		Method:             "GET",
-		PathPattern:        "/v1/installers/{installer_slug}/render",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetV1InstallersInstallerSlugRenderReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetV1InstallersInstallerSlugRenderOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetV1InstallersInstallerSlugRender: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -2562,6 +2606,46 @@ func (a *Client) PostV1GeneralMetrics(params *PostV1GeneralMetricsParams, opts .
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for PostV1GeneralMetrics: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+PostV1InstallerInstallerSlugInstalls creates an app install
+
+create an app install
+*/
+func (a *Client) PostV1InstallerInstallerSlugInstalls(params *PostV1InstallerInstallerSlugInstallsParams, opts ...ClientOption) (*PostV1InstallerInstallerSlugInstallsCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPostV1InstallerInstallerSlugInstallsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PostV1InstallerInstallerSlugInstalls",
+		Method:             "POST",
+		PathPattern:        "/v1/installer/{installer_slug}/installs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PostV1InstallerInstallerSlugInstallsReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PostV1InstallerInstallerSlugInstallsCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for PostV1InstallerInstallerSlugInstalls: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

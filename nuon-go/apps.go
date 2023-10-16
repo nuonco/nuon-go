@@ -82,7 +82,7 @@ func (c *client) UpdateAppSandbox(ctx context.Context, appID string, req *models
 }
 
 func (c *client) RenderAppInstaller(ctx context.Context, slug string) (*models.ServiceAppInstaller, error) {
-	resp, err := c.genClient.Operations.GetV1InstallersInstallerSlugRender(&operations.GetV1InstallersInstallerSlugRenderParams{
+	resp, err := c.genClient.Operations.GetV1InstallerInstallerSlugRender(&operations.GetV1InstallerInstallerSlugRenderParams{
 		Context:       ctx,
 		InstallerSlug: slug,
 	})
