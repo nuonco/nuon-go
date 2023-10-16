@@ -73,7 +73,7 @@ type PostV1InstallerInstallerSlugInstallsParams struct {
 
 	   Input
 	*/
-	Req *models.GithubComPowertoolsdevMonoServicesCtlAPIInternalAppAppsServiceCreateInstallRequest
+	Req *models.ServiceInstallerCreateInstallRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -140,13 +140,13 @@ func (o *PostV1InstallerInstallerSlugInstallsParams) SetInstallerSlug(installerS
 }
 
 // WithReq adds the req to the post v1 installer installer slug installs params
-func (o *PostV1InstallerInstallerSlugInstallsParams) WithReq(req *models.GithubComPowertoolsdevMonoServicesCtlAPIInternalAppAppsServiceCreateInstallRequest) *PostV1InstallerInstallerSlugInstallsParams {
+func (o *PostV1InstallerInstallerSlugInstallsParams) WithReq(req *models.ServiceInstallerCreateInstallRequest) *PostV1InstallerInstallerSlugInstallsParams {
 	o.SetReq(req)
 	return o
 }
 
 // SetReq adds the req to the post v1 installer installer slug installs params
-func (o *PostV1InstallerInstallerSlugInstallsParams) SetReq(req *models.GithubComPowertoolsdevMonoServicesCtlAPIInternalAppAppsServiceCreateInstallRequest) {
+func (o *PostV1InstallerInstallerSlugInstallsParams) SetReq(req *models.ServiceInstallerCreateInstallRequest) {
 	o.Req = req
 }
 

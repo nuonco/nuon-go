@@ -85,7 +85,7 @@ type PostV1AppsAppIDInstallsParams struct {
 
 	   Input
 	*/
-	Req *models.GithubComPowertoolsdevMonoServicesCtlAPIInternalAppInstallsServiceCreateInstallRequest
+	Req *models.ServiceCreateInstallRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -174,13 +174,13 @@ func (o *PostV1AppsAppIDInstallsParams) SetAppID(appID string) {
 }
 
 // WithReq adds the req to the post v1 apps app ID installs params
-func (o *PostV1AppsAppIDInstallsParams) WithReq(req *models.GithubComPowertoolsdevMonoServicesCtlAPIInternalAppInstallsServiceCreateInstallRequest) *PostV1AppsAppIDInstallsParams {
+func (o *PostV1AppsAppIDInstallsParams) WithReq(req *models.ServiceCreateInstallRequest) *PostV1AppsAppIDInstallsParams {
 	o.SetReq(req)
 	return o
 }
 
 // SetReq adds the req to the post v1 apps app ID installs params
-func (o *PostV1AppsAppIDInstallsParams) SetReq(req *models.GithubComPowertoolsdevMonoServicesCtlAPIInternalAppInstallsServiceCreateInstallRequest) {
+func (o *PostV1AppsAppIDInstallsParams) SetReq(req *models.ServiceCreateInstallRequest) {
 	o.Req = req
 }
 
