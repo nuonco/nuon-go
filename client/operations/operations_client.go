@@ -60,6 +60,8 @@ type ClientService interface {
 
 	GetV1ComponentsComponentIDBuildsBuildIDLogs(params *GetV1ComponentsComponentIDBuildsBuildIDLogsParams, opts ...ClientOption) (*GetV1ComponentsComponentIDBuildsBuildIDLogsOK, error)
 
+	GetV1ComponentsComponentIDBuildsBuildIDPlan(params *GetV1ComponentsComponentIDBuildsBuildIDPlanParams, opts ...ClientOption) (*GetV1ComponentsComponentIDBuildsBuildIDPlanOK, error)
+
 	GetV1ComponentsComponentIDBuildsLatest(params *GetV1ComponentsComponentIDBuildsLatestParams, opts ...ClientOption) (*GetV1ComponentsComponentIDBuildsLatestOK, error)
 
 	GetV1ComponentsComponentIDConfigs(params *GetV1ComponentsComponentIDConfigsParams, opts ...ClientOption) (*GetV1ComponentsComponentIDConfigsOK, error)
@@ -95,6 +97,8 @@ type ClientService interface {
 	GetV1InstallsInstallIDDeploysDeployID(params *GetV1InstallsInstallIDDeploysDeployIDParams, opts ...ClientOption) (*GetV1InstallsInstallIDDeploysDeployIDOK, error)
 
 	GetV1InstallsInstallIDDeploysDeployIDLogs(params *GetV1InstallsInstallIDDeploysDeployIDLogsParams, opts ...ClientOption) (*GetV1InstallsInstallIDDeploysDeployIDLogsOK, error)
+
+	GetV1InstallsInstallIDDeploysDeployIDPlan(params *GetV1InstallsInstallIDDeploysDeployIDPlanParams, opts ...ClientOption) (*GetV1InstallsInstallIDDeploysDeployIDPlanOK, error)
 
 	GetV1InstallsInstallIDDeploysLatest(params *GetV1InstallsInstallIDDeploysLatestParams, opts ...ClientOption) (*GetV1InstallsInstallIDDeploysLatestOK, error)
 
@@ -766,6 +770,46 @@ func (a *Client) GetV1ComponentsComponentIDBuildsBuildIDLogs(params *GetV1Compon
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetV1ComponentsComponentIDBuildsBuildIDLogs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetV1ComponentsComponentIDBuildsBuildIDPlan gets component build plan
+
+get component build plan
+*/
+func (a *Client) GetV1ComponentsComponentIDBuildsBuildIDPlan(params *GetV1ComponentsComponentIDBuildsBuildIDPlanParams, opts ...ClientOption) (*GetV1ComponentsComponentIDBuildsBuildIDPlanOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetV1ComponentsComponentIDBuildsBuildIDPlanParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetV1ComponentsComponentIDBuildsBuildIDPlan",
+		Method:             "GET",
+		PathPattern:        "/v1/components/{component_id}/builds/{build_id}/plan",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetV1ComponentsComponentIDBuildsBuildIDPlanReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetV1ComponentsComponentIDBuildsBuildIDPlanOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetV1ComponentsComponentIDBuildsBuildIDPlan: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -1486,6 +1530,46 @@ func (a *Client) GetV1InstallsInstallIDDeploysDeployIDLogs(params *GetV1Installs
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetV1InstallsInstallIDDeploysDeployIDLogs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetV1InstallsInstallIDDeploysDeployIDPlan gets install deploy plan
+
+get install deploy plan
+*/
+func (a *Client) GetV1InstallsInstallIDDeploysDeployIDPlan(params *GetV1InstallsInstallIDDeploysDeployIDPlanParams, opts ...ClientOption) (*GetV1InstallsInstallIDDeploysDeployIDPlanOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetV1InstallsInstallIDDeploysDeployIDPlanParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetV1InstallsInstallIDDeploysDeployIDPlan",
+		Method:             "GET",
+		PathPattern:        "/v1/installs/{install_id}/deploys/{deploy_id}/plan",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetV1InstallsInstallIDDeploysDeployIDPlanReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetV1InstallsInstallIDDeploysDeployIDPlanOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetV1InstallsInstallIDDeploysDeployIDPlan: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -2610,9 +2694,9 @@ func (a *Client) PostV1GeneralMetrics(params *PostV1GeneralMetricsParams, opts .
 }
 
 /*
-PostV1InstallerInstallerSlugInstalls creates an app install
+PostV1InstallerInstallerSlugInstalls creates an app install from an installer
 
-create an app install
+create an app install from an installer
 */
 func (a *Client) PostV1InstallerInstallerSlugInstalls(params *PostV1InstallerInstallerSlugInstallsParams, opts ...ClientOption) (*PostV1InstallerInstallerSlugInstallsCreated, error) {
 	// TODO: Validate the params before sending

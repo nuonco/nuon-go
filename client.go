@@ -105,6 +105,7 @@ type Client interface {
 	GetComponentLatestBuild(ctx context.Context, componentID string) (*models.AppComponentBuild, error)
 	GetComponentBuild(ctx context.Context, componentID, buildID string) (*models.AppComponentBuild, error)
 	GetComponentBuildLogs(ctx context.Context, componentID, buildID string) ([]models.ServiceBuildLog, error)
+	GetComponentBuildPlan(ctx context.Context, componentsID, buildID string) (*models.Planv1Plan, error)
 
 	// component releases
 	GetAppReleases(ctx context.Context, appID string) ([]*models.AppComponentRelease, error)
