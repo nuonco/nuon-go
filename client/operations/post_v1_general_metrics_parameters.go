@@ -73,7 +73,7 @@ type PostV1GeneralMetricsParams struct {
 
 	   Input
 	*/
-	Req *models.ServicePublishMetricInput
+	Req []*models.ServicePublishMetricInput
 
 	timeout    time.Duration
 	Context    context.Context
@@ -140,13 +140,13 @@ func (o *PostV1GeneralMetricsParams) SetXNuonOrgID(xNuonOrgID string) {
 }
 
 // WithReq adds the req to the post v1 general metrics params
-func (o *PostV1GeneralMetricsParams) WithReq(req *models.ServicePublishMetricInput) *PostV1GeneralMetricsParams {
+func (o *PostV1GeneralMetricsParams) WithReq(req []*models.ServicePublishMetricInput) *PostV1GeneralMetricsParams {
 	o.SetReq(req)
 	return o
 }
 
 // SetReq adds the req to the post v1 general metrics params
-func (o *PostV1GeneralMetricsParams) SetReq(req *models.ServicePublishMetricInput) {
+func (o *PostV1GeneralMetricsParams) SetReq(req []*models.ServicePublishMetricInput) {
 	o.Req = req
 }
 

@@ -21,7 +21,7 @@ func (c *client) GetCurrentUser(ctx context.Context) (*models.AppUserToken, erro
 
 func (c *client) PublishMetrics(ctx context.Context, req []*models.ServicePublishMetricInput) error {
 	_, err := c.genClient.Operations.PostV1GeneralMetrics(&operations.PostV1GeneralMetricsParams{
-		Req:     req[len(req)-1],
+		Req:     req,
 		Context: ctx,
 	})
 	if err != nil {
