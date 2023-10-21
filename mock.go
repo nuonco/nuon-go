@@ -530,6 +530,21 @@ func (mr *MockClientMockRecorder) GetComponentBuildLogs(ctx, componentID, buildI
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetComponentBuildLogs", reflect.TypeOf((*MockClient)(nil).GetComponentBuildLogs), ctx, componentID, buildID)
 }
 
+// GetComponentBuildPlan mocks base method.
+func (m *MockClient) GetComponentBuildPlan(ctx context.Context, componentsID, buildID string) (*models.Planv1Plan, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetComponentBuildPlan", ctx, componentsID, buildID)
+	ret0, _ := ret[0].(*models.Planv1Plan)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetComponentBuildPlan indicates an expected call of GetComponentBuildPlan.
+func (mr *MockClientMockRecorder) GetComponentBuildPlan(ctx, componentsID, buildID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetComponentBuildPlan", reflect.TypeOf((*MockClient)(nil).GetComponentBuildPlan), ctx, componentsID, buildID)
+}
+
 // GetComponentBuilds mocks base method.
 func (m *MockClient) GetComponentBuilds(ctx context.Context, componentID string) ([]*models.AppComponentBuild, error) {
 	m.ctrl.T.Helper()
