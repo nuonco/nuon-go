@@ -235,3 +235,16 @@ func (c *client) GetComponentBuildLogs(ctx context.Context, componentID string, 
 
 	return resp.Payload, nil
 }
+
+func (c *client) GetComponentBuildPlan(ctx context.Context, componentID, buildID string) (*models.Planv1Plan, error) {
+	resp, err := c.genClient.Operations.GetV1ComponentsComponentIDBuildsBuildIDPlan(&operations.GetV1ComponentsComponentIDBuildsBuildIDPlanParams{
+		ComponentID: componentID,
+		BuildID:     buildID,
+		Context:     ctx,
+	})
+	if err != nil {
+		return nil, fmt.Errorf("unable to get build plan: %w", err)
+	}
+
+	return resp.Payload, nil
+}
