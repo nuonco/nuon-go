@@ -20,7 +20,8 @@ import (
 type ServiceCreateJobComponentConfigRequest struct {
 
 	// cmd
-	Cmd string `json:"cmd,omitempty"`
+	// Required: true
+	Cmd *string `json:"cmd"`
 
 	// image url
 	// Required: true
@@ -35,6 +36,10 @@ type ServiceCreateJobComponentConfigRequest struct {
 func (m *ServiceCreateJobComponentConfigRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateCmd(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateImageURL(formats); err != nil {
 		res = append(res, err)
 	}
@@ -46,6 +51,15 @@ func (m *ServiceCreateJobComponentConfigRequest) Validate(formats strfmt.Registr
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ServiceCreateJobComponentConfigRequest) validateCmd(formats strfmt.Registry) error {
+
+	if err := validate.Required("cmd", "body", m.Cmd); err != nil {
+		return err
+	}
+
 	return nil
 }
 
