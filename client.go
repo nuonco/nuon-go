@@ -73,6 +73,7 @@ type Client interface {
 	GetInstallDeploys(ctx context.Context, installID string) ([]*models.AppInstallDeploy, error)
 	CreateInstallDeploy(ctx context.Context, installID string, req *models.ServiceCreateInstallDeployRequest) (*models.AppInstallDeploy, error)
 	GetInstallDeploy(ctx context.Context, installID, deployID string) (*models.AppInstallDeploy, error)
+	GetInstallDeployPlan(ctx context.Context, installID, deployID string) (*models.Planv1Plan, error)
 	GetInstallLatestDeploy(ctx context.Context, installID string) (*models.AppInstallDeploy, error)
 	GetInstallDeployLogs(ctx context.Context, installID, deployID string) ([]models.ServiceDeployLog, error)
 

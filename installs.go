@@ -184,3 +184,16 @@ func (c *client) GetInstallComponentLatestDeploy(ctx context.Context, installID 
 
 	return resp.Payload, nil
 }
+
+func (c *client) GetInstallDeployPlan(ctx context.Context, installID string, deployID string) (*models.Planv1Plan, error) {
+	resp, err := c.genClient.Operations.GetV1InstallsInstallIDDeploysDeployIDPlan(&operations.GetV1InstallsInstallIDDeploysDeployIDPlanParams{
+		Context:   ctx,
+		InstallID: installID,
+		DeployID:  deployID,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}
