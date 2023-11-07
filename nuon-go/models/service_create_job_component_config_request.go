@@ -19,8 +19,11 @@ import (
 // swagger:model service.CreateJobComponentConfigRequest
 type ServiceCreateJobComponentConfigRequest struct {
 
+	// args
+	Args []string `json:"args"`
+
 	// cmd
-	Cmd string `json:"cmd,omitempty"`
+	Cmd []string `json:"cmd"`
 
 	// env vars
 	EnvVars map[string]string `json:"env_vars,omitempty"`

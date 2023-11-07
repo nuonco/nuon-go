@@ -17,8 +17,11 @@ import (
 // swagger:model app.JobComponentConfig
 type AppJobComponentConfig struct {
 
+	// args
+	Args []string `json:"args"`
+
 	// cmd
-	Cmd string `json:"cmd,omitempty"`
+	Cmd []string `json:"cmd"`
 
 	// value
 	ComponentConfigConnectionID string `json:"component_config_connection_id,omitempty"`
