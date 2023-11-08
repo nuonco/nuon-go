@@ -143,7 +143,7 @@ func (c *client) GetInstallDeployLogs(ctx context.Context, installID string, dep
 		return nil, fmt.Errorf("unable to get install deploy logs: %w", err)
 	}
 
-	// need to asser the type of each slice item individually
+	// need to assert the type of each slice item individually
 	response := make([]models.ServiceDeployLog, len(resp.Payload))
 	for idx, item := range resp.Payload {
 		response[idx] = item.(models.ServiceDeployLog)

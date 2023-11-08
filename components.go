@@ -233,7 +233,7 @@ func (c *client) GetComponentBuildLogs(ctx context.Context, componentID string, 
 		return nil, fmt.Errorf("unable to get build logs: %w", err)
 	}
 
-	// need to asser the type of each slice item individually
+	// need to assert the type of each slice item individually
 	response := make([]models.ServiceBuildLog, len(resp.Payload))
 	for idx, item := range resp.Payload {
 		response[idx] = item.(models.ServiceBuildLog)
