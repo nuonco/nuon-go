@@ -725,6 +725,21 @@ func (mr *MockClientMockRecorder) GetInstallDeployLogs(ctx, installID, deployID 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallDeployLogs", reflect.TypeOf((*MockClient)(nil).GetInstallDeployLogs), ctx, installID, deployID)
 }
 
+// GetInstallDeployPlan mocks base method.
+func (m *MockClient) GetInstallDeployPlan(ctx context.Context, installID, deployID string) (*models.Planv1Plan, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetInstallDeployPlan", ctx, installID, deployID)
+	ret0, _ := ret[0].(*models.Planv1Plan)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetInstallDeployPlan indicates an expected call of GetInstallDeployPlan.
+func (mr *MockClientMockRecorder) GetInstallDeployPlan(ctx, installID, deployID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallDeployPlan", reflect.TypeOf((*MockClient)(nil).GetInstallDeployPlan), ctx, installID, deployID)
+}
+
 // GetInstallDeploys mocks base method.
 func (m *MockClient) GetInstallDeploys(ctx context.Context, installID string) ([]*models.AppInstallDeploy, error) {
 	m.ctrl.T.Helper()

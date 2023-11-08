@@ -233,7 +233,13 @@ func (c *client) GetComponentBuildLogs(ctx context.Context, componentID string, 
 		return nil, fmt.Errorf("unable to get build logs: %w", err)
 	}
 
-	return resp.Payload, nil
+	// need to asser the type of each slice item individually
+	response := make([]models.ServiceBuildLog, len(resp.Payload))
+	for idx, item := range resp.Payload {
+		response[idx] = item.(models.ServiceBuildLog)
+	}
+
+	return response, nil
 }
 
 func (c *client) GetComponentBuildPlan(ctx context.Context, componentID, buildID string) (*models.Planv1Plan, error) {
