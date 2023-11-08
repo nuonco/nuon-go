@@ -27,9 +27,6 @@ type AppExternalImageComponentConfig struct {
 	// value
 	ComponentConfigConnectionID string `json:"component_config_connection_id,omitempty"`
 
-	// connected github vcs config
-	ConnectedGithubVcsConfig *AppConnectedGithubVCSConfig `json:"connected_github_vcs_config,omitempty"`
-
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
@@ -41,11 +38,6 @@ type AppExternalImageComponentConfig struct {
 
 	// image url
 	ImageURL string `json:"image_url,omitempty"`
-
-	// VCS Config
-	PublicGitVcsConfig struct {
-		AppPublicGitVCSConfig
-	} `json:"public_git_vcs_config,omitempty"`
 
 	// sync only
 	SyncOnly bool `json:"sync_only,omitempty"`
@@ -66,14 +58,6 @@ func (m *AppExternalImageComponentConfig) Validate(formats strfmt.Registry) erro
 	}
 
 	if err := m.validateBasicDeployConfig(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateConnectedGithubVcsConfig(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validatePublicGitVcsConfig(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -121,33 +105,6 @@ func (m *AppExternalImageComponentConfig) validateBasicDeployConfig(formats strf
 	return nil
 }
 
-func (m *AppExternalImageComponentConfig) validateConnectedGithubVcsConfig(formats strfmt.Registry) error {
-	if swag.IsZero(m.ConnectedGithubVcsConfig) { // not required
-		return nil
-	}
-
-	if m.ConnectedGithubVcsConfig != nil {
-		if err := m.ConnectedGithubVcsConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("connected_github_vcs_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("connected_github_vcs_config")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *AppExternalImageComponentConfig) validatePublicGitVcsConfig(formats strfmt.Registry) error {
-	if swag.IsZero(m.PublicGitVcsConfig) { // not required
-		return nil
-	}
-
-	return nil
-}
-
 // ContextValidate validate this app external image component config based on the context it is used
 func (m *AppExternalImageComponentConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -157,14 +114,6 @@ func (m *AppExternalImageComponentConfig) ContextValidate(ctx context.Context, f
 	}
 
 	if err := m.contextValidateBasicDeployConfig(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateConnectedGithubVcsConfig(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidatePublicGitVcsConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -212,32 +161,6 @@ func (m *AppExternalImageComponentConfig) contextValidateBasicDeployConfig(ctx c
 			return err
 		}
 	}
-
-	return nil
-}
-
-func (m *AppExternalImageComponentConfig) contextValidateConnectedGithubVcsConfig(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.ConnectedGithubVcsConfig != nil {
-
-		if swag.IsZero(m.ConnectedGithubVcsConfig) { // not required
-			return nil
-		}
-
-		if err := m.ConnectedGithubVcsConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("connected_github_vcs_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("connected_github_vcs_config")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *AppExternalImageComponentConfig) contextValidatePublicGitVcsConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	return nil
 }
