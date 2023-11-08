@@ -75,7 +75,7 @@ GetV1InstallsInstallIDDeploysDeployIDLogsOK describes a response with status cod
 OK
 */
 type GetV1InstallsInstallIDDeploysDeployIDLogsOK struct {
-	Payload []models.ServiceDeployLog
+	Payload []interface{}
 }
 
 // IsSuccess returns true when this get v1 installs install Id deploys deploy Id logs o k response has a 2xx status code
@@ -116,7 +116,7 @@ func (o *GetV1InstallsInstallIDDeploysDeployIDLogsOK) String() string {
 	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getV1InstallsInstallIdDeploysDeployIdLogsOK  %+v", 200, o.Payload)
 }
 
-func (o *GetV1InstallsInstallIDDeploysDeployIDLogsOK) GetPayload() []models.ServiceDeployLog {
+func (o *GetV1InstallsInstallIDDeploysDeployIDLogsOK) GetPayload() []interface{} {
 	return o.Payload
 }
 

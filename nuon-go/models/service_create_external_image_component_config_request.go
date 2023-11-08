@@ -25,15 +25,9 @@ type ServiceCreateExternalImageComponentConfigRequest struct {
 	// basic deploy config
 	BasicDeployConfig *ServiceBasicDeployConfigRequest `json:"basic_deploy_config,omitempty"`
 
-	// connected github vcs config
-	ConnectedGithubVcsConfig *ServiceConnectedGithubVCSConfigRequest `json:"connected_github_vcs_config,omitempty"`
-
 	// image url
 	// Required: true
 	ImageURL *string `json:"image_url"`
-
-	// public git vcs config
-	PublicGitVcsConfig *ServicePublicGitVCSConfigRequest `json:"public_git_vcs_config,omitempty"`
 
 	// sync only
 	SyncOnly bool `json:"sync_only,omitempty"`
@@ -55,15 +49,7 @@ func (m *ServiceCreateExternalImageComponentConfigRequest) Validate(formats strf
 		res = append(res, err)
 	}
 
-	if err := m.validateConnectedGithubVcsConfig(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateImageURL(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validatePublicGitVcsConfig(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -115,48 +101,10 @@ func (m *ServiceCreateExternalImageComponentConfigRequest) validateBasicDeployCo
 	return nil
 }
 
-func (m *ServiceCreateExternalImageComponentConfigRequest) validateConnectedGithubVcsConfig(formats strfmt.Registry) error {
-	if swag.IsZero(m.ConnectedGithubVcsConfig) { // not required
-		return nil
-	}
-
-	if m.ConnectedGithubVcsConfig != nil {
-		if err := m.ConnectedGithubVcsConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("connected_github_vcs_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("connected_github_vcs_config")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *ServiceCreateExternalImageComponentConfigRequest) validateImageURL(formats strfmt.Registry) error {
 
 	if err := validate.Required("image_url", "body", m.ImageURL); err != nil {
 		return err
-	}
-
-	return nil
-}
-
-func (m *ServiceCreateExternalImageComponentConfigRequest) validatePublicGitVcsConfig(formats strfmt.Registry) error {
-	if swag.IsZero(m.PublicGitVcsConfig) { // not required
-		return nil
-	}
-
-	if m.PublicGitVcsConfig != nil {
-		if err := m.PublicGitVcsConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("public_git_vcs_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("public_git_vcs_config")
-			}
-			return err
-		}
 	}
 
 	return nil
@@ -180,14 +128,6 @@ func (m *ServiceCreateExternalImageComponentConfigRequest) ContextValidate(ctx c
 	}
 
 	if err := m.contextValidateBasicDeployConfig(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateConnectedGithubVcsConfig(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidatePublicGitVcsConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -231,48 +171,6 @@ func (m *ServiceCreateExternalImageComponentConfigRequest) contextValidateBasicD
 				return ve.ValidateName("basic_deploy_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("basic_deploy_config")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *ServiceCreateExternalImageComponentConfigRequest) contextValidateConnectedGithubVcsConfig(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.ConnectedGithubVcsConfig != nil {
-
-		if swag.IsZero(m.ConnectedGithubVcsConfig) { // not required
-			return nil
-		}
-
-		if err := m.ConnectedGithubVcsConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("connected_github_vcs_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("connected_github_vcs_config")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *ServiceCreateExternalImageComponentConfigRequest) contextValidatePublicGitVcsConfig(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.PublicGitVcsConfig != nil {
-
-		if swag.IsZero(m.PublicGitVcsConfig) { // not required
-			return nil
-		}
-
-		if err := m.PublicGitVcsConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("public_git_vcs_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("public_git_vcs_config")
 			}
 			return err
 		}

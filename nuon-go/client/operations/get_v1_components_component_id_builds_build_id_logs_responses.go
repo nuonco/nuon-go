@@ -75,7 +75,7 @@ GetV1ComponentsComponentIDBuildsBuildIDLogsOK describes a response with status c
 OK
 */
 type GetV1ComponentsComponentIDBuildsBuildIDLogsOK struct {
-	Payload []models.ServiceBuildLog
+	Payload []interface{}
 }
 
 // IsSuccess returns true when this get v1 components component Id builds build Id logs o k response has a 2xx status code
@@ -116,7 +116,7 @@ func (o *GetV1ComponentsComponentIDBuildsBuildIDLogsOK) String() string {
 	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/logs][%d] getV1ComponentsComponentIdBuildsBuildIdLogsOK  %+v", 200, o.Payload)
 }
 
-func (o *GetV1ComponentsComponentIDBuildsBuildIDLogsOK) GetPayload() []models.ServiceBuildLog {
+func (o *GetV1ComponentsComponentIDBuildsBuildIDLogsOK) GetPayload() []interface{} {
 	return o.Payload
 }
 
