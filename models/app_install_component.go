@@ -34,11 +34,8 @@ type AppInstallComponent struct {
 	// id
 	ID string `json:"id,omitempty"`
 
-	// install
-	Install *AppInstall `json:"install,omitempty"`
-
 	// install deploys
-	InstallDeploys []*AppInstallDeploy `json:"installDeploys"`
+	InstallDeploys []*AppInstallDeploy `json:"install_deploys"`
 
 	// install id
 	InstallID string `json:"install_id,omitempty"`
@@ -52,10 +49,6 @@ func (m *AppInstallComponent) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateComponent(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateInstall(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -88,25 +81,6 @@ func (m *AppInstallComponent) validateComponent(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *AppInstallComponent) validateInstall(formats strfmt.Registry) error {
-	if swag.IsZero(m.Install) { // not required
-		return nil
-	}
-
-	if m.Install != nil {
-		if err := m.Install.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("install")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("install")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *AppInstallComponent) validateInstallDeploys(formats strfmt.Registry) error {
 	if swag.IsZero(m.InstallDeploys) { // not required
 		return nil
@@ -120,9 +94,9 @@ func (m *AppInstallComponent) validateInstallDeploys(formats strfmt.Registry) er
 		if m.InstallDeploys[i] != nil {
 			if err := m.InstallDeploys[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("installDeploys" + "." + strconv.Itoa(i))
+					return ve.ValidateName("install_deploys" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("installDeploys" + "." + strconv.Itoa(i))
+					return ce.ValidateName("install_deploys" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -138,10 +112,6 @@ func (m *AppInstallComponent) ContextValidate(ctx context.Context, formats strfm
 	var res []error
 
 	if err := m.contextValidateComponent(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateInstall(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -176,27 +146,6 @@ func (m *AppInstallComponent) contextValidateComponent(ctx context.Context, form
 	return nil
 }
 
-func (m *AppInstallComponent) contextValidateInstall(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Install != nil {
-
-		if swag.IsZero(m.Install) { // not required
-			return nil
-		}
-
-		if err := m.Install.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("install")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("install")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *AppInstallComponent) contextValidateInstallDeploys(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.InstallDeploys); i++ {
@@ -209,9 +158,9 @@ func (m *AppInstallComponent) contextValidateInstallDeploys(ctx context.Context,
 
 			if err := m.InstallDeploys[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("installDeploys" + "." + strconv.Itoa(i))
+					return ve.ValidateName("install_deploys" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("installDeploys" + "." + strconv.Itoa(i))
+					return ce.ValidateName("install_deploys" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

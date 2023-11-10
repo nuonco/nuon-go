@@ -33,6 +33,9 @@ type AppInstallDeploy struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// install component
+	InstallComponent *AppInstallComponent `json:"install_component,omitempty"`
+
 	// install component id
 	InstallComponentID string `json:"install_component_id,omitempty"`
 
@@ -54,6 +57,10 @@ func (m *AppInstallDeploy) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateBuild(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInstallComponent(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -82,11 +89,34 @@ func (m *AppInstallDeploy) validateBuild(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppInstallDeploy) validateInstallComponent(formats strfmt.Registry) error {
+	if swag.IsZero(m.InstallComponent) { // not required
+		return nil
+	}
+
+	if m.InstallComponent != nil {
+		if err := m.InstallComponent.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("install_component")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("install_component")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app install deploy based on the context it is used
 func (m *AppInstallDeploy) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateBuild(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateInstallComponent(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -109,6 +139,27 @@ func (m *AppInstallDeploy) contextValidateBuild(ctx context.Context, formats str
 				return ve.ValidateName("build")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("build")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppInstallDeploy) contextValidateInstallComponent(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.InstallComponent != nil {
+
+		if swag.IsZero(m.InstallComponent) { // not required
+			return nil
+		}
+
+		if err := m.InstallComponent.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("install_component")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("install_component")
 			}
 			return err
 		}
