@@ -22,6 +22,10 @@ type ServiceCreateTerraformModuleComponentConfigRequest struct {
 	// connected github vcs config
 	ConnectedGithubVcsConfig *ServiceConnectedGithubVCSConfigRequest `json:"connected_github_vcs_config,omitempty"`
 
+	// env vars
+	// Required: true
+	EnvVars map[string]string `json:"env_vars"`
+
 	// public git vcs config
 	PublicGitVcsConfig *ServicePublicGitVCSConfigRequest `json:"public_git_vcs_config,omitempty"`
 
@@ -38,6 +42,10 @@ func (m *ServiceCreateTerraformModuleComponentConfigRequest) Validate(formats st
 	var res []error
 
 	if err := m.validateConnectedGithubVcsConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateEnvVars(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -69,6 +77,15 @@ func (m *ServiceCreateTerraformModuleComponentConfigRequest) validateConnectedGi
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *ServiceCreateTerraformModuleComponentConfigRequest) validateEnvVars(formats strfmt.Registry) error {
+
+	if err := validate.Required("env_vars", "body", m.EnvVars); err != nil {
+		return err
 	}
 
 	return nil
