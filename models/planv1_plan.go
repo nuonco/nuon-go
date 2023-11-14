@@ -20,7 +20,6 @@ type Planv1Plan struct {
 	// Types that are assignable to Actual:
 	//
 	// 	*Plan_WaypointPlan
-	// 	*Plan_TerraformPlan
 	// 	*Plan_NoopPlan
 	Actual interface{} `json:"actual,omitempty"`
 }
