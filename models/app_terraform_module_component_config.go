@@ -36,10 +36,8 @@ type AppTerraformModuleComponentConfig struct {
 	// id
 	ID string `json:"id,omitempty"`
 
-	// VCSConfig
-	PublicGitVcsConfig struct {
-		AppPublicGitVCSConfig
-	} `json:"public_git_vcs_config,omitempty"`
+	// public git vcs config
+	PublicGitVcsConfig *AppPublicGitVCSConfig `json:"public_git_vcs_config,omitempty"`
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
@@ -93,6 +91,17 @@ func (m *AppTerraformModuleComponentConfig) validatePublicGitVcsConfig(formats s
 		return nil
 	}
 
+	if m.PublicGitVcsConfig != nil {
+		if err := m.PublicGitVcsConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("public_git_vcs_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("public_git_vcs_config")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -136,6 +145,22 @@ func (m *AppTerraformModuleComponentConfig) contextValidateConnectedGithubVcsCon
 }
 
 func (m *AppTerraformModuleComponentConfig) contextValidatePublicGitVcsConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.PublicGitVcsConfig != nil {
+
+		if swag.IsZero(m.PublicGitVcsConfig) { // not required
+			return nil
+		}
+
+		if err := m.PublicGitVcsConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("public_git_vcs_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("public_git_vcs_config")
+			}
+			return err
+		}
+	}
 
 	return nil
 }

@@ -45,10 +45,8 @@ type AppDockerBuildComponentConfig struct {
 	// id
 	ID string `json:"id,omitempty"`
 
-	// VCS Config
-	PublicGitVcsConfig struct {
-		AppPublicGitVCSConfig
-	} `json:"public_git_vcs_config,omitempty"`
+	// public git vcs config
+	PublicGitVcsConfig *AppPublicGitVCSConfig `json:"public_git_vcs_config,omitempty"`
 
 	// sync only
 	SyncOnly bool `json:"sync_only,omitempty"`
@@ -125,6 +123,17 @@ func (m *AppDockerBuildComponentConfig) validatePublicGitVcsConfig(formats strfm
 		return nil
 	}
 
+	if m.PublicGitVcsConfig != nil {
+		if err := m.PublicGitVcsConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("public_git_vcs_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("public_git_vcs_config")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -193,6 +202,22 @@ func (m *AppDockerBuildComponentConfig) contextValidateConnectedGithubVcsConfig(
 }
 
 func (m *AppDockerBuildComponentConfig) contextValidatePublicGitVcsConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.PublicGitVcsConfig != nil {
+
+		if swag.IsZero(m.PublicGitVcsConfig) { // not required
+			return nil
+		}
+
+		if err := m.PublicGitVcsConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("public_git_vcs_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("public_git_vcs_config")
+			}
+			return err
+		}
+	}
 
 	return nil
 }
