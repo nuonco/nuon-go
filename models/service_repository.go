@@ -35,6 +35,10 @@ type ServiceRepository struct {
 	// Required: true
 	GitURL *string `json:"git_url"`
 
+	// github install id
+	// Required: true
+	GithubInstallID *string `json:"github_install_id"`
+
 	// name
 	// Required: true
 	Name *string `json:"name"`
@@ -61,6 +65,10 @@ func (m *ServiceRepository) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateGitURL(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGithubInstallID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -108,6 +116,15 @@ func (m *ServiceRepository) validateFullName(formats strfmt.Registry) error {
 func (m *ServiceRepository) validateGitURL(formats strfmt.Registry) error {
 
 	if err := validate.Required("git_url", "body", m.GitURL); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ServiceRepository) validateGithubInstallID(formats strfmt.Registry) error {
+
+	if err := validate.Required("github_install_id", "body", m.GithubInstallID); err != nil {
 		return err
 	}
 
