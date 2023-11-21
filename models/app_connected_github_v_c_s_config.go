@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -50,17 +51,78 @@ type AppConnectedGithubVCSConfig struct {
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
 
+	// vcs connection
+	VcsConnection *AppVCSConnection `json:"vcs_connection,omitempty"`
+
 	// vcs connection id
 	VcsConnectionID string `json:"vcs_connection_id,omitempty"`
 }
 
 // Validate validates this app connected github v c s config
 func (m *AppConnectedGithubVCSConfig) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateVcsConnection(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this app connected github v c s config based on context it is used
+func (m *AppConnectedGithubVCSConfig) validateVcsConnection(formats strfmt.Registry) error {
+	if swag.IsZero(m.VcsConnection) { // not required
+		return nil
+	}
+
+	if m.VcsConnection != nil {
+		if err := m.VcsConnection.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("vcs_connection")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("vcs_connection")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this app connected github v c s config based on the context it is used
 func (m *AppConnectedGithubVCSConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateVcsConnection(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *AppConnectedGithubVCSConfig) contextValidateVcsConnection(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.VcsConnection != nil {
+
+		if swag.IsZero(m.VcsConnection) { // not required
+			return nil
+		}
+
+		if err := m.VcsConnection.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("vcs_connection")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("vcs_connection")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
