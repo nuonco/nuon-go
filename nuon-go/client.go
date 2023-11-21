@@ -46,6 +46,7 @@ type Client interface {
 	RenderAppInstaller(ctx context.Context, slug string) (*models.ServiceAppInstaller, error)
 
 	// general methods
+	GetCLIConfig(ctx context.Context) (*models.ServiceCLIConfig, error)
 	GetCurrentUser(ctx context.Context) (*models.AppUserToken, error)
 	PublishMetrics(ctx context.Context, req []*models.ServicePublishMetricInput) error
 
