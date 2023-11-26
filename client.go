@@ -36,7 +36,11 @@ type Client interface {
 	CreateApp(ctx context.Context, req *models.ServiceCreateAppRequest) (*models.AppApp, error)
 	UpdateApp(ctx context.Context, appID string, req *models.ServiceUpdateAppRequest) (*models.AppApp, error)
 	DeleteApp(ctx context.Context, appID string) (bool, error)
-	UpdateAppSandbox(ctx context.Context, appID string, req *models.ServiceUpdateAppSandboxRequest) (*models.AppApp, error)
+
+	// app sandbox methods
+	CreateAppSandboxConfig(ctx context.Context, appID string, req *models.ServiceCreateAppSandboxConfigRequest) (*models.AppAppSandboxConfig, error)
+	GetAppSandboxLatestConfig(ctx context.Context, appID string) (*models.AppAppSandboxConfig, error)
+	GetAppSandboxConfigs(ctx context.Context, appID string) ([]*models.AppAppSandboxConfig, error)
 
 	// app installer methods
 	CreateAppInstaller(ctx context.Context, appID string, req *models.ServiceCreateAppInstallerRequest) (*models.AppAppInstaller, error)

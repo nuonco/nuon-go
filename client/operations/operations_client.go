@@ -50,6 +50,10 @@ type ClientService interface {
 
 	GetV1AppsAppIDReleases(params *GetV1AppsAppIDReleasesParams, opts ...ClientOption) (*GetV1AppsAppIDReleasesOK, error)
 
+	GetV1AppsAppIDSandboxConfigs(params *GetV1AppsAppIDSandboxConfigsParams, opts ...ClientOption) (*GetV1AppsAppIDSandboxConfigsOK, error)
+
+	GetV1AppsAppIDSandboxLatestConfig(params *GetV1AppsAppIDSandboxLatestConfigParams, opts ...ClientOption) (*GetV1AppsAppIDSandboxLatestConfigOK, error)
+
 	GetV1Components(params *GetV1ComponentsParams, opts ...ClientOption) (*GetV1ComponentsOK, error)
 
 	GetV1ComponentsComponentID(params *GetV1ComponentsComponentIDParams, opts ...ClientOption) (*GetV1ComponentsComponentIDOK, error)
@@ -140,6 +144,8 @@ type ClientService interface {
 
 	PostV1AppsAppIDInstalls(params *PostV1AppsAppIDInstallsParams, opts ...ClientOption) (*PostV1AppsAppIDInstallsCreated, error)
 
+	PostV1AppsAppIDSandboxConfig(params *PostV1AppsAppIDSandboxConfigParams, opts ...ClientOption) (*PostV1AppsAppIDSandboxConfigCreated, error)
+
 	PostV1ComponentsComponentIDBuilds(params *PostV1ComponentsComponentIDBuildsParams, opts ...ClientOption) (*PostV1ComponentsComponentIDBuildsCreated, error)
 
 	PostV1ComponentsComponentIDConfigsDockerBuild(params *PostV1ComponentsComponentIDConfigsDockerBuildParams, opts ...ClientOption) (*PostV1ComponentsComponentIDConfigsDockerBuildCreated, error)
@@ -167,8 +173,6 @@ type ClientService interface {
 	PostV1Releases(params *PostV1ReleasesParams, opts ...ClientOption) (*PostV1ReleasesCreated, error)
 
 	PostV1VcsConnections(params *PostV1VcsConnectionsParams, opts ...ClientOption) (*PostV1VcsConnectionsCreated, error)
-
-	PutV1AppsAppIDSandbox(params *PutV1AppsAppIDSandboxParams, opts ...ClientOption) (*PutV1AppsAppIDSandboxOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -570,6 +574,86 @@ func (a *Client) GetV1AppsAppIDReleases(params *GetV1AppsAppIDReleasesParams, op
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetV1AppsAppIDReleases: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetV1AppsAppIDSandboxConfigs gets app sandbox configs
+
+get app sandbox configs
+*/
+func (a *Client) GetV1AppsAppIDSandboxConfigs(params *GetV1AppsAppIDSandboxConfigsParams, opts ...ClientOption) (*GetV1AppsAppIDSandboxConfigsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetV1AppsAppIDSandboxConfigsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetV1AppsAppIDSandboxConfigs",
+		Method:             "GET",
+		PathPattern:        "/v1/apps/{app_id}/sandbox-configs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetV1AppsAppIDSandboxConfigsReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetV1AppsAppIDSandboxConfigsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetV1AppsAppIDSandboxConfigs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetV1AppsAppIDSandboxLatestConfig gets latest app sandbox config
+
+get latest app sandbox config
+*/
+func (a *Client) GetV1AppsAppIDSandboxLatestConfig(params *GetV1AppsAppIDSandboxLatestConfigParams, opts ...ClientOption) (*GetV1AppsAppIDSandboxLatestConfigOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetV1AppsAppIDSandboxLatestConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetV1AppsAppIDSandboxLatestConfig",
+		Method:             "GET",
+		PathPattern:        "/v1/apps/{app_id}/sandbox-latest-config",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetV1AppsAppIDSandboxLatestConfigReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetV1AppsAppIDSandboxLatestConfigOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetV1AppsAppIDSandboxLatestConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -2374,6 +2458,46 @@ func (a *Client) PostV1AppsAppIDInstalls(params *PostV1AppsAppIDInstallsParams, 
 }
 
 /*
+PostV1AppsAppIDSandboxConfig creates an app sandbox config
+
+create an app sandbox config
+*/
+func (a *Client) PostV1AppsAppIDSandboxConfig(params *PostV1AppsAppIDSandboxConfigParams, opts ...ClientOption) (*PostV1AppsAppIDSandboxConfigCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPostV1AppsAppIDSandboxConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PostV1AppsAppIDSandboxConfig",
+		Method:             "POST",
+		PathPattern:        "/v1/apps/{app_id}/sandbox-config",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PostV1AppsAppIDSandboxConfigReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PostV1AppsAppIDSandboxConfigCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for PostV1AppsAppIDSandboxConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 PostV1ComponentsComponentIDBuilds creates component build
 
 create component build
@@ -2930,46 +3054,6 @@ func (a *Client) PostV1VcsConnections(params *PostV1VcsConnectionsParams, opts .
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for PostV1VcsConnections: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-PutV1AppsAppIDSandbox updates an app sandbox release
-
-update an app sandbox release
-*/
-func (a *Client) PutV1AppsAppIDSandbox(params *PutV1AppsAppIDSandboxParams, opts ...ClientOption) (*PutV1AppsAppIDSandboxOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPutV1AppsAppIDSandboxParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "PutV1AppsAppIDSandbox",
-		Method:             "PUT",
-		PathPattern:        "/v1/apps/{app_id}/sandbox",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &PutV1AppsAppIDSandboxReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*PutV1AppsAppIDSandboxOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PutV1AppsAppIDSandbox: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
