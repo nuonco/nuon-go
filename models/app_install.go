@@ -22,6 +22,9 @@ type AppInstall struct {
 	// app id
 	AppID string `json:"app_id,omitempty"`
 
+	// app sandbox config
+	AppSandboxConfig *AppAppSandboxConfig `json:"app_sandbox_config,omitempty"`
+
 	// aws account
 	AwsAccount *AppAWSAccount `json:"aws_account,omitempty"`
 
@@ -40,9 +43,6 @@ type AppInstall struct {
 	// name
 	Name string `json:"name,omitempty"`
 
-	// sandbox release
-	SandboxRelease *AppSandboxRelease `json:"sandbox_release,omitempty"`
-
 	// status
 	Status string `json:"status,omitempty"`
 
@@ -57,6 +57,10 @@ type AppInstall struct {
 func (m *AppInstall) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAppSandboxConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateAwsAccount(formats); err != nil {
 		res = append(res, err)
 	}
@@ -65,13 +69,28 @@ func (m *AppInstall) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateSandboxRelease(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppInstall) validateAppSandboxConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.AppSandboxConfig) { // not required
+		return nil
+	}
+
+	if m.AppSandboxConfig != nil {
+		if err := m.AppSandboxConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("app_sandbox_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("app_sandbox_config")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -120,28 +139,13 @@ func (m *AppInstall) validateInstallComponents(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *AppInstall) validateSandboxRelease(formats strfmt.Registry) error {
-	if swag.IsZero(m.SandboxRelease) { // not required
-		return nil
-	}
-
-	if m.SandboxRelease != nil {
-		if err := m.SandboxRelease.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("sandbox_release")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("sandbox_release")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 // ContextValidate validate this app install based on the context it is used
 func (m *AppInstall) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.contextValidateAppSandboxConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.contextValidateAwsAccount(ctx, formats); err != nil {
 		res = append(res, err)
@@ -151,13 +155,30 @@ func (m *AppInstall) ContextValidate(ctx context.Context, formats strfmt.Registr
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateSandboxRelease(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppInstall) contextValidateAppSandboxConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AppSandboxConfig != nil {
+
+		if swag.IsZero(m.AppSandboxConfig) { // not required
+			return nil
+		}
+
+		if err := m.AppSandboxConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("app_sandbox_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("app_sandbox_config")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -202,27 +223,6 @@ func (m *AppInstall) contextValidateInstallComponents(ctx context.Context, forma
 			}
 		}
 
-	}
-
-	return nil
-}
-
-func (m *AppInstall) contextValidateSandboxRelease(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.SandboxRelease != nil {
-
-		if swag.IsZero(m.SandboxRelease) { // not required
-			return nil
-		}
-
-		if err := m.SandboxRelease.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("sandbox_release")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("sandbox_release")
-			}
-			return err
-		}
 	}
 
 	return nil

@@ -530,6 +530,21 @@ func (mr *MockClientMockRecorder) GetApps(ctx interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetApps", reflect.TypeOf((*MockClient)(nil).GetApps), ctx)
 }
 
+// GetCLIConfig mocks base method.
+func (m *MockClient) GetCLIConfig(ctx context.Context) (*models.ServiceCLIConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetCLIConfig", ctx)
+	ret0, _ := ret[0].(*models.ServiceCLIConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetCLIConfig indicates an expected call of GetCLIConfig.
+func (mr *MockClientMockRecorder) GetCLIConfig(ctx interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCLIConfig", reflect.TypeOf((*MockClient)(nil).GetCLIConfig), ctx)
+}
+
 // GetComponent mocks base method.
 func (m *MockClient) GetComponent(ctx context.Context, componentID string) (*models.AppComponent, error) {
 	m.ctrl.T.Helper()

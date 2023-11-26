@@ -31,6 +31,10 @@ type ServiceCreateAppSandboxConfigRequest struct {
 
 	// sandbox release id
 	SandboxReleaseID string `json:"sandbox_release_id,omitempty"`
+
+	// terraform version
+	// Required: true
+	TerraformVersion *string `json:"terraform_version"`
 }
 
 // Validate validates this service create app sandbox config request
@@ -46,6 +50,10 @@ func (m *ServiceCreateAppSandboxConfigRequest) Validate(formats strfmt.Registry)
 	}
 
 	if err := m.validateSandboxInputs(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTerraformVersion(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -96,6 +104,15 @@ func (m *ServiceCreateAppSandboxConfigRequest) validatePublicGitVcsConfig(format
 func (m *ServiceCreateAppSandboxConfigRequest) validateSandboxInputs(formats strfmt.Registry) error {
 
 	if err := validate.Required("sandbox_inputs", "body", m.SandboxInputs); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ServiceCreateAppSandboxConfigRequest) validateTerraformVersion(formats strfmt.Registry) error {
+
+	if err := validate.Required("terraform_version", "body", m.TerraformVersion); err != nil {
 		return err
 	}
 

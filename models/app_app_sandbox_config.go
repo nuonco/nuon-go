@@ -48,6 +48,9 @@ type AppAppSandboxConfig struct {
 	// sandbox release id
 	SandboxReleaseID string `json:"sandbox_release_id,omitempty"`
 
+	// terraform version
+	TerraformVersion string `json:"terraform_version,omitempty"`
+
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
 }

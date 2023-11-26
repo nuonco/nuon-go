@@ -39,9 +39,6 @@ type AppSandboxRelease struct {
 	// sandbox
 	Sandbox *AppSandbox `json:"sandbox,omitempty"`
 
-	// terraform version
-	TerraformVersion string `json:"terraform_version,omitempty"`
-
 	// trust policy url
 	TrustPolicyURL string `json:"trust_policy_url,omitempty"`
 
