@@ -19,6 +19,9 @@ import (
 // swagger:model app.App
 type AppApp struct {
 
+	// app sandbox
+	AppSandbox *AppAppSandbox `json:"app_sandbox,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
@@ -37,9 +40,6 @@ type AppApp struct {
 	// org id
 	OrgID string `json:"org_id,omitempty"`
 
-	// sandbox release
-	SandboxRelease *AppSandboxRelease `json:"sandbox_release,omitempty"`
-
 	// status
 	Status string `json:"status,omitempty"`
 
@@ -54,17 +54,36 @@ type AppApp struct {
 func (m *AppApp) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateInstallers(formats); err != nil {
+	if err := m.validateAppSandbox(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateSandboxRelease(formats); err != nil {
+	if err := m.validateInstallers(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppApp) validateAppSandbox(formats strfmt.Registry) error {
+	if swag.IsZero(m.AppSandbox) { // not required
+		return nil
+	}
+
+	if m.AppSandbox != nil {
+		if err := m.AppSandbox.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("app_sandbox")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("app_sandbox")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -94,40 +113,42 @@ func (m *AppApp) validateInstallers(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *AppApp) validateSandboxRelease(formats strfmt.Registry) error {
-	if swag.IsZero(m.SandboxRelease) { // not required
-		return nil
-	}
-
-	if m.SandboxRelease != nil {
-		if err := m.SandboxRelease.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("sandbox_release")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("sandbox_release")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 // ContextValidate validate this app app based on the context it is used
 func (m *AppApp) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateInstallers(ctx, formats); err != nil {
+	if err := m.contextValidateAppSandbox(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateSandboxRelease(ctx, formats); err != nil {
+	if err := m.contextValidateInstallers(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppApp) contextValidateAppSandbox(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AppSandbox != nil {
+
+		if swag.IsZero(m.AppSandbox) { // not required
+			return nil
+		}
+
+		if err := m.AppSandbox.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("app_sandbox")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("app_sandbox")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -151,27 +172,6 @@ func (m *AppApp) contextValidateInstallers(ctx context.Context, formats strfmt.R
 			}
 		}
 
-	}
-
-	return nil
-}
-
-func (m *AppApp) contextValidateSandboxRelease(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.SandboxRelease != nil {
-
-		if swag.IsZero(m.SandboxRelease) { // not required
-			return nil
-		}
-
-		if err := m.SandboxRelease.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("sandbox_release")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("sandbox_release")
-			}
-			return err
-		}
 	}
 
 	return nil
