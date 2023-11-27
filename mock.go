@@ -50,6 +50,21 @@ func (mr *MockClientMockRecorder) CreateApp(ctx, req interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateApp", reflect.TypeOf((*MockClient)(nil).CreateApp), ctx, req)
 }
 
+// CreateAppInputConfig mocks base method.
+func (m *MockClient) CreateAppInputConfig(ctx context.Context, appID string, req *models.ServiceCreateAppInputConfigRequest) (*models.AppAppInputConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateAppInputConfig", ctx, appID, req)
+	ret0, _ := ret[0].(*models.AppAppInputConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateAppInputConfig indicates an expected call of CreateAppInputConfig.
+func (mr *MockClientMockRecorder) CreateAppInputConfig(ctx, appID, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAppInputConfig", reflect.TypeOf((*MockClient)(nil).CreateAppInputConfig), ctx, appID, req)
+}
+
 // CreateAppInstaller mocks base method.
 func (m *MockClient) CreateAppInstaller(ctx context.Context, appID string, req *models.ServiceCreateAppInstallerRequest) (*models.AppAppInstaller, error) {
 	m.ctrl.T.Helper()
@@ -440,6 +455,36 @@ func (mr *MockClientMockRecorder) GetAppComponents(ctx, appID interface{}) *gomo
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppComponents", reflect.TypeOf((*MockClient)(nil).GetAppComponents), ctx, appID)
 }
 
+// GetAppInputConfigs mocks base method.
+func (m *MockClient) GetAppInputConfigs(ctx context.Context, appID string) ([]*models.AppAppInputConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAppInputConfigs", ctx, appID)
+	ret0, _ := ret[0].([]*models.AppAppInputConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAppInputConfigs indicates an expected call of GetAppInputConfigs.
+func (mr *MockClientMockRecorder) GetAppInputConfigs(ctx, appID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppInputConfigs", reflect.TypeOf((*MockClient)(nil).GetAppInputConfigs), ctx, appID)
+}
+
+// GetAppInputLatestConfig mocks base method.
+func (m *MockClient) GetAppInputLatestConfig(ctx context.Context, appID string) (*models.AppAppInputConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAppInputLatestConfig", ctx, appID)
+	ret0, _ := ret[0].(*models.AppAppInputConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAppInputLatestConfig indicates an expected call of GetAppInputLatestConfig.
+func (mr *MockClientMockRecorder) GetAppInputLatestConfig(ctx, appID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppInputLatestConfig", reflect.TypeOf((*MockClient)(nil).GetAppInputLatestConfig), ctx, appID)
+}
+
 // GetAppInstaller mocks base method.
 func (m *MockClient) GetAppInstaller(ctx context.Context, appInstallerID string) (*models.AppAppInstaller, error) {
 	m.ctrl.T.Helper()
@@ -828,6 +873,36 @@ func (m *MockClient) GetInstallLatestDeploy(ctx context.Context, installID strin
 func (mr *MockClientMockRecorder) GetInstallLatestDeploy(ctx, installID interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallLatestDeploy", reflect.TypeOf((*MockClient)(nil).GetInstallLatestDeploy), ctx, installID)
+}
+
+// GetInstallSandboxRunLogs mocks base method.
+func (m *MockClient) GetInstallSandboxRunLogs(ctx context.Context, installID, runID string) ([]interface{}, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetInstallSandboxRunLogs", ctx, installID, runID)
+	ret0, _ := ret[0].([]interface{})
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetInstallSandboxRunLogs indicates an expected call of GetInstallSandboxRunLogs.
+func (mr *MockClientMockRecorder) GetInstallSandboxRunLogs(ctx, installID, runID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallSandboxRunLogs", reflect.TypeOf((*MockClient)(nil).GetInstallSandboxRunLogs), ctx, installID, runID)
+}
+
+// GetInstallSandboxRuns mocks base method.
+func (m *MockClient) GetInstallSandboxRuns(ctx context.Context, installID string) ([]*models.AppInstallSandboxRun, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetInstallSandboxRuns", ctx, installID)
+	ret0, _ := ret[0].([]*models.AppInstallSandboxRun)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetInstallSandboxRuns indicates an expected call of GetInstallSandboxRuns.
+func (mr *MockClientMockRecorder) GetInstallSandboxRuns(ctx, installID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallSandboxRuns", reflect.TypeOf((*MockClient)(nil).GetInstallSandboxRuns), ctx, installID)
 }
 
 // GetOrg mocks base method.

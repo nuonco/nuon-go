@@ -37,10 +37,15 @@ type Client interface {
 	UpdateApp(ctx context.Context, appID string, req *models.ServiceUpdateAppRequest) (*models.AppApp, error)
 	DeleteApp(ctx context.Context, appID string) (bool, error)
 
-	// app sandbox methods
+	// app sandbox config methods
 	CreateAppSandboxConfig(ctx context.Context, appID string, req *models.ServiceCreateAppSandboxConfigRequest) (*models.AppAppSandboxConfig, error)
 	GetAppSandboxLatestConfig(ctx context.Context, appID string) (*models.AppAppSandboxConfig, error)
 	GetAppSandboxConfigs(ctx context.Context, appID string) ([]*models.AppAppSandboxConfig, error)
+
+	// app input config methods
+	CreateAppInputConfig(ctx context.Context, appID string, req *models.ServiceCreateAppInputConfigRequest) (*models.AppAppInputConfig, error)
+	GetAppInputLatestConfig(ctx context.Context, appID string) (*models.AppAppInputConfig, error)
+	GetAppInputConfigs(ctx context.Context, appID string) ([]*models.AppAppInputConfig, error)
 
 	// app installer methods
 	CreateAppInstaller(ctx context.Context, appID string, req *models.ServiceCreateAppInstallerRequest) (*models.AppAppInstaller, error)
@@ -86,6 +91,10 @@ type Client interface {
 	GetInstallComponents(ctx context.Context, installID string) ([]*models.AppInstallComponent, error)
 	GetInstallComponentDeploys(ctx context.Context, installID, componentID string) ([]*models.AppInstallDeploy, error)
 	GetInstallComponentLatestDeploy(ctx context.Context, installID, componentID string) (*models.AppInstallDeploy, error)
+
+	// install sandbox runs
+	GetInstallSandboxRuns(ctx context.Context, installID string) ([]*models.AppInstallSandboxRun, error)
+	GetInstallSandboxRunLogs(ctx context.Context, installID, runID string) ([]interface{}, error)
 
 	// components
 	GetAllComponents(ctx context.Context) ([]*models.AppComponent, error)
