@@ -21,7 +21,7 @@ type ServiceCreateAppInputConfigRequest struct {
 
 	// inputs
 	// Required: true
-	Inputs map[string]string `json:"inputs"`
+	Inputs map[string]ServiceAppInputRequest `json:"inputs"`
 }
 
 // Validate validates this service create app input config request
@@ -44,11 +44,57 @@ func (m *ServiceCreateAppInputConfigRequest) validateInputs(formats strfmt.Regis
 		return err
 	}
 
+	for k := range m.Inputs {
+
+		if err := validate.Required("inputs"+"."+k, "body", m.Inputs[k]); err != nil {
+			return err
+		}
+		if val, ok := m.Inputs[k]; ok {
+			if err := val.Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("inputs" + "." + k)
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("inputs" + "." + k)
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
-// ContextValidate validates this service create app input config request based on context it is used
+// ContextValidate validate this service create app input config request based on the context it is used
 func (m *ServiceCreateAppInputConfigRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateInputs(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ServiceCreateAppInputConfigRequest) contextValidateInputs(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.Required("inputs", "body", m.Inputs); err != nil {
+		return err
+	}
+
+	for k := range m.Inputs {
+
+		if val, ok := m.Inputs[k]; ok {
+			if err := val.ContextValidate(ctx, formats); err != nil {
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

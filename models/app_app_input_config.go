@@ -29,9 +29,6 @@ type AppAppInputConfig struct {
 	// id
 	ID string `json:"id,omitempty"`
 
-	// inputs
-	Inputs map[string]string `json:"inputs,omitempty"`
-
 	// org id
 	OrgID string `json:"org_id,omitempty"`
 
