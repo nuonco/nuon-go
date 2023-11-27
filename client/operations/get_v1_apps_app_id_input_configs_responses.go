@@ -75,7 +75,7 @@ GetV1AppsAppIDInputConfigsOK describes a response with status code 200, with def
 OK
 */
 type GetV1AppsAppIDInputConfigsOK struct {
-	Payload []*models.AppAppSandboxConfig
+	Payload []*models.AppAppInputConfig
 }
 
 // IsSuccess returns true when this get v1 apps app Id input configs o k response has a 2xx status code
@@ -116,7 +116,7 @@ func (o *GetV1AppsAppIDInputConfigsOK) String() string {
 	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getV1AppsAppIdInputConfigsOK  %+v", 200, o.Payload)
 }
 
-func (o *GetV1AppsAppIDInputConfigsOK) GetPayload() []*models.AppAppSandboxConfig {
+func (o *GetV1AppsAppIDInputConfigsOK) GetPayload() []*models.AppAppInputConfig {
 	return o.Payload
 }
 

@@ -508,9 +508,9 @@ func (a *Client) GetV1AppsAppIDComponents(params *GetV1AppsAppIDComponentsParams
 }
 
 /*
-GetV1AppsAppIDInputConfigs gets app sandbox configs
+GetV1AppsAppIDInputConfigs gets app input configs
 
-get app sandbox configs
+get app input configs
 */
 func (a *Client) GetV1AppsAppIDInputConfigs(params *GetV1AppsAppIDInputConfigsParams, opts ...ClientOption) (*GetV1AppsAppIDInputConfigsOK, error) {
 	// TODO: Validate the params before sending
