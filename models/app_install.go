@@ -40,6 +40,12 @@ type AppInstall struct {
 	// install components
 	InstallComponents []*AppInstallComponent `json:"install_components"`
 
+	// install inputs
+	InstallInputs []*AppInstallInputs `json:"install_inputs"`
+
+	// install sandbox runs
+	InstallSandboxRuns []*AppInstallSandboxRun `json:"install_sandbox_runs"`
+
 	// name
 	Name string `json:"name,omitempty"`
 
@@ -66,6 +72,14 @@ func (m *AppInstall) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateInstallComponents(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInstallInputs(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInstallSandboxRuns(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -139,6 +153,58 @@ func (m *AppInstall) validateInstallComponents(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppInstall) validateInstallInputs(formats strfmt.Registry) error {
+	if swag.IsZero(m.InstallInputs) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.InstallInputs); i++ {
+		if swag.IsZero(m.InstallInputs[i]) { // not required
+			continue
+		}
+
+		if m.InstallInputs[i] != nil {
+			if err := m.InstallInputs[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("install_inputs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("install_inputs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *AppInstall) validateInstallSandboxRuns(formats strfmt.Registry) error {
+	if swag.IsZero(m.InstallSandboxRuns) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.InstallSandboxRuns); i++ {
+		if swag.IsZero(m.InstallSandboxRuns[i]) { // not required
+			continue
+		}
+
+		if m.InstallSandboxRuns[i] != nil {
+			if err := m.InstallSandboxRuns[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("install_sandbox_runs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("install_sandbox_runs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app install based on the context it is used
 func (m *AppInstall) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -152,6 +218,14 @@ func (m *AppInstall) ContextValidate(ctx context.Context, formats strfmt.Registr
 	}
 
 	if err := m.contextValidateInstallComponents(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateInstallInputs(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateInstallSandboxRuns(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -218,6 +292,56 @@ func (m *AppInstall) contextValidateInstallComponents(ctx context.Context, forma
 					return ve.ValidateName("install_components" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("install_components" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *AppInstall) contextValidateInstallInputs(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.InstallInputs); i++ {
+
+		if m.InstallInputs[i] != nil {
+
+			if swag.IsZero(m.InstallInputs[i]) { // not required
+				return nil
+			}
+
+			if err := m.InstallInputs[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("install_inputs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("install_inputs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *AppInstall) contextValidateInstallSandboxRuns(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.InstallSandboxRuns); i++ {
+
+		if m.InstallSandboxRuns[i] != nil {
+
+			if swag.IsZero(m.InstallSandboxRuns[i]) { // not required
+				return nil
+			}
+
+			if err := m.InstallSandboxRuns[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("install_sandbox_runs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("install_sandbox_runs" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
