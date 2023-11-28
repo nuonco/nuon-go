@@ -17,9 +17,6 @@ import (
 // swagger:model app.InstallInputs
 type AppInstallInputs struct {
 
-	// app input config ID
-	AppInputConfigID string `json:"appInputConfigID,omitempty"`
-
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 

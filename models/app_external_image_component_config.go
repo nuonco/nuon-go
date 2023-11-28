@@ -21,9 +21,6 @@ type AppExternalImageComponentConfig struct {
 	// aws ecr image config
 	AwsEcrImageConfig *AppAWSECRImageConfig `json:"aws_ecr_image_config,omitempty"`
 
-	// basic deploy config
-	BasicDeployConfig *AppBasicDeployConfig `json:"basic_deploy_config,omitempty"`
-
 	// value
 	ComponentConfigConnectionID string `json:"component_config_connection_id,omitempty"`
 
@@ -39,9 +36,6 @@ type AppExternalImageComponentConfig struct {
 	// image url
 	ImageURL string `json:"image_url,omitempty"`
 
-	// sync only
-	SyncOnly bool `json:"sync_only,omitempty"`
-
 	// tag
 	Tag string `json:"tag,omitempty"`
 
@@ -54,10 +48,6 @@ func (m *AppExternalImageComponentConfig) Validate(formats strfmt.Registry) erro
 	var res []error
 
 	if err := m.validateAwsEcrImageConfig(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateBasicDeployConfig(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -86,34 +76,11 @@ func (m *AppExternalImageComponentConfig) validateAwsEcrImageConfig(formats strf
 	return nil
 }
 
-func (m *AppExternalImageComponentConfig) validateBasicDeployConfig(formats strfmt.Registry) error {
-	if swag.IsZero(m.BasicDeployConfig) { // not required
-		return nil
-	}
-
-	if m.BasicDeployConfig != nil {
-		if err := m.BasicDeployConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("basic_deploy_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("basic_deploy_config")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 // ContextValidate validate this app external image component config based on the context it is used
 func (m *AppExternalImageComponentConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateAwsEcrImageConfig(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateBasicDeployConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -136,27 +103,6 @@ func (m *AppExternalImageComponentConfig) contextValidateAwsEcrImageConfig(ctx c
 				return ve.ValidateName("aws_ecr_image_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("aws_ecr_image_config")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *AppExternalImageComponentConfig) contextValidateBasicDeployConfig(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.BasicDeployConfig != nil {
-
-		if swag.IsZero(m.BasicDeployConfig) { // not required
-			return nil
-		}
-
-		if err := m.BasicDeployConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("basic_deploy_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("basic_deploy_config")
 			}
 			return err
 		}
