@@ -18,9 +18,6 @@ import (
 // swagger:model service.CreateDockerBuildComponentConfigRequest
 type ServiceCreateDockerBuildComponentConfigRequest struct {
 
-	// basic deploy config
-	BasicDeployConfig *ServiceBasicDeployConfigRequest `json:"basic_deploy_config,omitempty"`
-
 	// build args
 	BuildArgs []string `json:"build_args"`
 
@@ -36,9 +33,6 @@ type ServiceCreateDockerBuildComponentConfigRequest struct {
 	// public git vcs config
 	PublicGitVcsConfig *ServicePublicGitVCSConfigRequest `json:"public_git_vcs_config,omitempty"`
 
-	// sync only
-	SyncOnly bool `json:"sync_only,omitempty"`
-
 	// target
 	Target string `json:"target,omitempty"`
 }
@@ -46,10 +40,6 @@ type ServiceCreateDockerBuildComponentConfigRequest struct {
 // Validate validates this service create docker build component config request
 func (m *ServiceCreateDockerBuildComponentConfigRequest) Validate(formats strfmt.Registry) error {
 	var res []error
-
-	if err := m.validateBasicDeployConfig(formats); err != nil {
-		res = append(res, err)
-	}
 
 	if err := m.validateConnectedGithubVcsConfig(formats); err != nil {
 		res = append(res, err)
@@ -62,25 +52,6 @@ func (m *ServiceCreateDockerBuildComponentConfigRequest) Validate(formats strfmt
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *ServiceCreateDockerBuildComponentConfigRequest) validateBasicDeployConfig(formats strfmt.Registry) error {
-	if swag.IsZero(m.BasicDeployConfig) { // not required
-		return nil
-	}
-
-	if m.BasicDeployConfig != nil {
-		if err := m.BasicDeployConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("basic_deploy_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("basic_deploy_config")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -126,10 +97,6 @@ func (m *ServiceCreateDockerBuildComponentConfigRequest) validatePublicGitVcsCon
 func (m *ServiceCreateDockerBuildComponentConfigRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateBasicDeployConfig(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateConnectedGithubVcsConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -141,27 +108,6 @@ func (m *ServiceCreateDockerBuildComponentConfigRequest) ContextValidate(ctx con
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *ServiceCreateDockerBuildComponentConfigRequest) contextValidateBasicDeployConfig(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.BasicDeployConfig != nil {
-
-		if swag.IsZero(m.BasicDeployConfig) { // not required
-			return nil
-		}
-
-		if err := m.BasicDeployConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("basic_deploy_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("basic_deploy_config")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
