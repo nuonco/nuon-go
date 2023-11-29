@@ -45,7 +45,7 @@ if err != nil {
 
 ## Example usage
 
-### List an app
+### List all apps in an org
 
 ```go
 apps, err := apiClient.ListApps(ctx)
@@ -59,5 +59,15 @@ app, err := apiClient.GetApp(ctx, appID)
 
 ## Contributing
 
-This repo is currently not setup for local contributions. However, if you would like to contribute you can open an issue or contact us on our [shared slack](https://join.slack.com/t/nuoncommunity/shared_invite/zt-1q323vw9z-C8ztRP~HfWjZx6AXi50VRA).
+Please submit a PR, and if you would like help, contact us on our [community slack](https://join.slack.com/t/nuoncommunity/shared_invite/zt-1q323vw9z-C8ztRP~HfWjZx6AXi50VRA).
 
+Since this library relies on generating client code from our graphql api, please run to ensure your generated client code is up to date.
+```bash
+$ go generate ./...
+```
+
+You can also change the open api spec to generate against, by setting the `API_URL` field to a different value:
+
+```bash
+$ NUON_API_URL=http://localhost:8081 go generate ./...
+```
