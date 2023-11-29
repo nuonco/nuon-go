@@ -60,3 +60,4 @@ app, err := apiClient.GetApp(ctx, appID)
 ## Contributing
 
 This repo is currently not setup for local contributions. However, if you would like to contribute you can open an issue or contact us on our [shared slack](https://join.slack.com/t/nuoncommunity/shared_invite/zt-1q323vw9z-C8ztRP~HfWjZx6AXi50VRA).
+
