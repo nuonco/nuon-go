@@ -96,6 +96,11 @@ type Client interface {
 	GetInstallSandboxRuns(ctx context.Context, installID string) ([]*models.AppInstallSandboxRun, error)
 	GetInstallSandboxRunLogs(ctx context.Context, installID, runID string) ([]interface{}, error)
 
+	// install inputs
+	GetInstallInputs(ctx context.Context, installID string) ([]*models.AppInstallInputs, error)
+	GetInstallCurrentInputs(ctx context.Context, installID string) (*models.AppInstallInputs, error)
+	CreateInstallInputs(ctx context.Context, installID string, req *models.ServiceCreateInstallInputsRequest) (*models.AppInstallInputs, error)
+
 	// components
 	GetAllComponents(ctx context.Context) ([]*models.AppComponent, error)
 	GetAppComponents(ctx context.Context, appID string) ([]*models.AppComponent, error)
