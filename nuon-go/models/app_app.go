@@ -8,7 +8,6 @@ package models
 import (
 	"context"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -17,12 +16,6 @@ import (
 //
 // swagger:model app.App
 type AppApp struct {
-
-	// TODO(jm): there is no reason to have an app_sandbox field, so let's remove it, and just follow the pattern
-	// above.
-	AppSandbox struct {
-		AppAppSandbox
-	} `json:"app_sandbox,omitempty"`
 
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
@@ -51,42 +44,11 @@ type AppApp struct {
 
 // Validate validates this app app
 func (m *AppApp) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateAppSandbox(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
 	return nil
 }
 
-func (m *AppApp) validateAppSandbox(formats strfmt.Registry) error {
-	if swag.IsZero(m.AppSandbox) { // not required
-		return nil
-	}
-
-	return nil
-}
-
-// ContextValidate validate this app app based on the context it is used
+// ContextValidate validates this app app based on context it is used
 func (m *AppApp) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateAppSandbox(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *AppApp) contextValidateAppSandbox(ctx context.Context, formats strfmt.Registry) error {
-
 	return nil
 }
 

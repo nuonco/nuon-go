@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // ServiceCreateDockerBuildComponentConfigRequest service create docker build component config request
@@ -25,7 +26,8 @@ type ServiceCreateDockerBuildComponentConfigRequest struct {
 	ConnectedGithubVcsConfig *ServiceConnectedGithubVCSConfigRequest `json:"connected_github_vcs_config,omitempty"`
 
 	// dockerfile
-	Dockerfile string `json:"dockerfile,omitempty"`
+	// Required: true
+	Dockerfile *string `json:"dockerfile"`
 
 	// env vars
 	EnvVars map[string]string `json:"env_vars,omitempty"`
@@ -42,6 +44,10 @@ func (m *ServiceCreateDockerBuildComponentConfigRequest) Validate(formats strfmt
 	var res []error
 
 	if err := m.validateConnectedGithubVcsConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDockerfile(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -69,6 +75,15 @@ func (m *ServiceCreateDockerBuildComponentConfigRequest) validateConnectedGithub
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *ServiceCreateDockerBuildComponentConfigRequest) validateDockerfile(formats strfmt.Registry) error {
+
+	if err := validate.Required("dockerfile", "body", m.Dockerfile); err != nil {
+		return err
 	}
 
 	return nil
