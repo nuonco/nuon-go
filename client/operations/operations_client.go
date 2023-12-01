@@ -110,6 +110,10 @@ type ClientService interface {
 
 	GetV1InstallsInstallIDDeploysLatest(params *GetV1InstallsInstallIDDeploysLatestParams, opts ...ClientOption) (*GetV1InstallsInstallIDDeploysLatestOK, error)
 
+	GetV1InstallsInstallIDInputs(params *GetV1InstallsInstallIDInputsParams, opts ...ClientOption) (*GetV1InstallsInstallIDInputsOK, error)
+
+	GetV1InstallsInstallIDInputsCurrent(params *GetV1InstallsInstallIDInputsCurrentParams, opts ...ClientOption) (*GetV1InstallsInstallIDInputsCurrentOK, error)
+
 	GetV1InstallsInstallIDSandboxRunRunIDLogs(params *GetV1InstallsInstallIDSandboxRunRunIDLogsParams, opts ...ClientOption) (*GetV1InstallsInstallIDSandboxRunRunIDLogsOK, error)
 
 	GetV1InstallsInstallIDSandboxRuns(params *GetV1InstallsInstallIDSandboxRunsParams, opts ...ClientOption) (*GetV1InstallsInstallIDSandboxRunsOK, error)
@@ -175,6 +179,8 @@ type ClientService interface {
 	PostV1InstallerInstallerSlugInstalls(params *PostV1InstallerInstallerSlugInstallsParams, opts ...ClientOption) (*PostV1InstallerInstallerSlugInstallsCreated, error)
 
 	PostV1InstallsInstallIDDeploys(params *PostV1InstallsInstallIDDeploysParams, opts ...ClientOption) (*PostV1InstallsInstallIDDeploysCreated, error)
+
+	PostV1InstallsInstallIDInputs(params *PostV1InstallsInstallIDInputsParams, opts ...ClientOption) (*PostV1InstallsInstallIDInputsCreated, error)
 
 	PostV1Orgs(params *PostV1OrgsParams, opts ...ClientOption) (*PostV1OrgsCreated, error)
 
@@ -1788,6 +1794,86 @@ func (a *Client) GetV1InstallsInstallIDDeploysLatest(params *GetV1InstallsInstal
 }
 
 /*
+GetV1InstallsInstallIDInputs gets an installs inputs
+
+get all inputs for an install
+*/
+func (a *Client) GetV1InstallsInstallIDInputs(params *GetV1InstallsInstallIDInputsParams, opts ...ClientOption) (*GetV1InstallsInstallIDInputsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetV1InstallsInstallIDInputsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetV1InstallsInstallIDInputs",
+		Method:             "GET",
+		PathPattern:        "/v1/installs/{install_id}/inputs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetV1InstallsInstallIDInputsReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetV1InstallsInstallIDInputsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetV1InstallsInstallIDInputs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetV1InstallsInstallIDInputsCurrent gets an installs current inputs
+
+get an install's current inputs
+*/
+func (a *Client) GetV1InstallsInstallIDInputsCurrent(params *GetV1InstallsInstallIDInputsCurrentParams, opts ...ClientOption) (*GetV1InstallsInstallIDInputsCurrentOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetV1InstallsInstallIDInputsCurrentParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetV1InstallsInstallIDInputsCurrent",
+		Method:             "GET",
+		PathPattern:        "/v1/installs/{install_id}/inputs/current",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetV1InstallsInstallIDInputsCurrentReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetV1InstallsInstallIDInputsCurrentOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetV1InstallsInstallIDInputsCurrent: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetV1InstallsInstallIDSandboxRunRunIDLogs gets install deploy logs
 
 get install deploy logs
@@ -3104,6 +3190,46 @@ func (a *Client) PostV1InstallsInstallIDDeploys(params *PostV1InstallsInstallIDD
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for PostV1InstallsInstallIDDeploys: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+PostV1InstallsInstallIDInputs creates install inputs
+
+create install inputs
+*/
+func (a *Client) PostV1InstallsInstallIDInputs(params *PostV1InstallsInstallIDInputsParams, opts ...ClientOption) (*PostV1InstallsInstallIDInputsCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPostV1InstallsInstallIDInputsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PostV1InstallsInstallIDInputs",
+		Method:             "POST",
+		PathPattern:        "/v1/installs/{install_id}/inputs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PostV1InstallsInstallIDInputsReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PostV1InstallsInstallIDInputsCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for PostV1InstallsInstallIDInputs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

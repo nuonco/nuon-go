@@ -18,8 +18,9 @@ import (
 // swagger:model app.AppSandboxConfig
 type AppAppSandboxConfig struct {
 
-	// app sandbox
-	AppSandbox string `json:"app_sandbox,omitempty"`
+	// TODO(jm): add this back, once we have migrated all existing app sandbox configs
+	// `gorm:"not null;default null"`
+	AppID string `json:"app_id,omitempty"`
 
 	// connected github vcs config
 	ConnectedGithubVcsConfig *AppConnectedGithubVCSConfig `json:"connected_github_vcs_config,omitempty"`
@@ -39,9 +40,6 @@ type AppAppSandboxConfig struct {
 	// public git vcs config
 	PublicGitVcsConfig *AppPublicGitVCSConfig `json:"public_git_vcs_config,omitempty"`
 
-	// SandboxInputs are the inputs that need to be added to a sandbox for additional fields
-	SandboxInputs map[string]string `json:"sandbox_inputs,omitempty"`
-
 	// sandbox release
 	SandboxRelease *AppSandboxRelease `json:"sandbox_release,omitempty"`
 
@@ -53,6 +51,9 @@ type AppAppSandboxConfig struct {
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
+
+	// variables
+	Variables map[string]string `json:"variables,omitempty"`
 }
 
 // Validate validates this app app sandbox config
