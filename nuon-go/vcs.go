@@ -20,6 +20,18 @@ func (c *client) CreateVCSConnection(ctx context.Context, req *models.ServiceCre
 	return resp.Payload, nil
 }
 
+func (c *client) CreateVCSConnectionCallback(ctx context.Context, req *models.ServiceCreateConnectionCallbackRequest) (*models.AppVCSConnection, error) {
+	resp, err := c.genClient.Operations.PostV1VcsConnectionCallback(&operations.PostV1VcsConnectionCallbackParams{
+		Req:     req,
+		Context: ctx,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}
+
 func (c *client) GetVCSConnections(ctx context.Context) ([]*models.AppVCSConnection, error) {
 	resp, err := c.genClient.Operations.GetV1VcsConnections(&operations.GetV1VcsConnectionsParams{
 		Context: ctx,
