@@ -66,6 +66,7 @@ type Client interface {
 
 	// vcs connections
 	CreateVCSConnection(ctx context.Context, req *models.ServiceCreateConnectionRequest) (*models.AppVCSConnection, error)
+	CreateVCSConnectionCallback(ctx context.Context, req *models.ServiceCreateConnectionCallbackRequest) (*models.AppVCSConnection, error)
 	GetVCSConnections(ctx context.Context) ([]*models.AppVCSConnection, error)
 	GetVCSConnection(ctx context.Context, connID string) (*models.AppVCSConnection, error)
 	GetAllVCSConnectedRepos(ctx context.Context) ([]*models.ServiceRepository, error)

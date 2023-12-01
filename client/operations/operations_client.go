@@ -188,6 +188,8 @@ type ClientService interface {
 
 	PostV1Releases(params *PostV1ReleasesParams, opts ...ClientOption) (*PostV1ReleasesCreated, error)
 
+	PostV1VcsConnectionCallback(params *PostV1VcsConnectionCallbackParams, opts ...ClientOption) (*PostV1VcsConnectionCallbackCreated, error)
+
 	PostV1VcsConnections(params *PostV1VcsConnectionsParams, opts ...ClientOption) (*PostV1VcsConnectionsCreated, error)
 
 	SetTransport(transport runtime.ClientTransport)
@@ -3350,6 +3352,46 @@ func (a *Client) PostV1Releases(params *PostV1ReleasesParams, opts ...ClientOpti
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for PostV1Releases: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+PostV1VcsConnectionCallback publics connection to create a vcs connection via a callback
+
+public connection to create a vcs connection via a callback
+*/
+func (a *Client) PostV1VcsConnectionCallback(params *PostV1VcsConnectionCallbackParams, opts ...ClientOption) (*PostV1VcsConnectionCallbackCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPostV1VcsConnectionCallbackParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PostV1VcsConnectionCallback",
+		Method:             "POST",
+		PathPattern:        "/v1/vcs/connection-callback",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PostV1VcsConnectionCallbackReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PostV1VcsConnectionCallbackCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for PostV1VcsConnectionCallback: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
