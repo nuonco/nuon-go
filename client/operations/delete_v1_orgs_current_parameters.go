@@ -60,19 +60,6 @@ DeleteV1OrgsCurrentParams contains all the parameters to send to the API endpoin
 	Typically these are written to a http.Request.
 */
 type DeleteV1OrgsCurrentParams struct {
-
-	/* Authorization.
-
-	   bearer auth token
-	*/
-	Authorization string
-
-	/* XNuonOrgID.
-
-	   org ID
-	*/
-	XNuonOrgID string
-
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -126,28 +113,6 @@ func (o *DeleteV1OrgsCurrentParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithAuthorization adds the authorization to the delete v1 orgs current params
-func (o *DeleteV1OrgsCurrentParams) WithAuthorization(authorization string) *DeleteV1OrgsCurrentParams {
-	o.SetAuthorization(authorization)
-	return o
-}
-
-// SetAuthorization adds the authorization to the delete v1 orgs current params
-func (o *DeleteV1OrgsCurrentParams) SetAuthorization(authorization string) {
-	o.Authorization = authorization
-}
-
-// WithXNuonOrgID adds the xNuonOrgID to the delete v1 orgs current params
-func (o *DeleteV1OrgsCurrentParams) WithXNuonOrgID(xNuonOrgID string) *DeleteV1OrgsCurrentParams {
-	o.SetXNuonOrgID(xNuonOrgID)
-	return o
-}
-
-// SetXNuonOrgID adds the xNuonOrgId to the delete v1 orgs current params
-func (o *DeleteV1OrgsCurrentParams) SetXNuonOrgID(xNuonOrgID string) {
-	o.XNuonOrgID = xNuonOrgID
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *DeleteV1OrgsCurrentParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -155,16 +120,6 @@ func (o *DeleteV1OrgsCurrentParams) WriteToRequest(r runtime.ClientRequest, reg 
 		return err
 	}
 	var res []error
-
-	// header param Authorization
-	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
-		return err
-	}
-
-	// header param X-Nuon-Org-ID
-	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
-		return err
-	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

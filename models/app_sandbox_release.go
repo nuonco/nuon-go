@@ -8,7 +8,6 @@ package models
 import (
 	"context"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -36,9 +35,6 @@ type AppSandboxRelease struct {
 	// provision policy url
 	ProvisionPolicyURL string `json:"provision_policy_url,omitempty"`
 
-	// sandbox
-	Sandbox *AppSandbox `json:"sandbox,omitempty"`
-
 	// trust policy url
 	TrustPolicyURL string `json:"trust_policy_url,omitempty"`
 
@@ -51,69 +47,11 @@ type AppSandboxRelease struct {
 
 // Validate validates this app sandbox release
 func (m *AppSandboxRelease) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateSandbox(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
 	return nil
 }
 
-func (m *AppSandboxRelease) validateSandbox(formats strfmt.Registry) error {
-	if swag.IsZero(m.Sandbox) { // not required
-		return nil
-	}
-
-	if m.Sandbox != nil {
-		if err := m.Sandbox.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("sandbox")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("sandbox")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this app sandbox release based on the context it is used
+// ContextValidate validates this app sandbox release based on context it is used
 func (m *AppSandboxRelease) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateSandbox(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *AppSandboxRelease) contextValidateSandbox(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Sandbox != nil {
-
-		if swag.IsZero(m.Sandbox) { // not required
-			return nil
-		}
-
-		if err := m.Sandbox.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("sandbox")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("sandbox")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 

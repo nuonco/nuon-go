@@ -63,18 +63,6 @@ PatchV1InstallersInstallerIDParams contains all the parameters to send to the AP
 */
 type PatchV1InstallersInstallerIDParams struct {
 
-	/* Authorization.
-
-	   bearer auth token
-	*/
-	Authorization string
-
-	/* XNuonOrgID.
-
-	   org ID
-	*/
-	XNuonOrgID string
-
 	/* InstallerID.
 
 	   installer ID
@@ -140,28 +128,6 @@ func (o *PatchV1InstallersInstallerIDParams) SetHTTPClient(client *http.Client) 
 	o.HTTPClient = client
 }
 
-// WithAuthorization adds the authorization to the patch v1 installers installer ID params
-func (o *PatchV1InstallersInstallerIDParams) WithAuthorization(authorization string) *PatchV1InstallersInstallerIDParams {
-	o.SetAuthorization(authorization)
-	return o
-}
-
-// SetAuthorization adds the authorization to the patch v1 installers installer ID params
-func (o *PatchV1InstallersInstallerIDParams) SetAuthorization(authorization string) {
-	o.Authorization = authorization
-}
-
-// WithXNuonOrgID adds the xNuonOrgID to the patch v1 installers installer ID params
-func (o *PatchV1InstallersInstallerIDParams) WithXNuonOrgID(xNuonOrgID string) *PatchV1InstallersInstallerIDParams {
-	o.SetXNuonOrgID(xNuonOrgID)
-	return o
-}
-
-// SetXNuonOrgID adds the xNuonOrgId to the patch v1 installers installer ID params
-func (o *PatchV1InstallersInstallerIDParams) SetXNuonOrgID(xNuonOrgID string) {
-	o.XNuonOrgID = xNuonOrgID
-}
-
 // WithInstallerID adds the installerID to the patch v1 installers installer ID params
 func (o *PatchV1InstallersInstallerIDParams) WithInstallerID(installerID string) *PatchV1InstallersInstallerIDParams {
 	o.SetInstallerID(installerID)
@@ -191,16 +157,6 @@ func (o *PatchV1InstallersInstallerIDParams) WriteToRequest(r runtime.ClientRequ
 		return err
 	}
 	var res []error
-
-	// header param Authorization
-	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
-		return err
-	}
-
-	// header param X-Nuon-Org-ID
-	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
-		return err
-	}
 
 	// path param installer_id
 	if err := r.SetPathParam("installer_id", o.InstallerID); err != nil {

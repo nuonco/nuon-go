@@ -10,11 +10,11 @@ import (
 
 // installs
 func (c *client) CreateInstall(ctx context.Context, appID string, req *models.ServiceCreateInstallRequest) (*models.AppInstall, error) {
-	resp, err := c.genClient.Operations.PostV1AppsAppIDInstalls(&operations.PostV1AppsAppIDInstallsParams{
+	resp, err := c.genClient.Operations.CreateInstall(&operations.CreateInstallParams{
 		AppID:   appID,
 		Req:     req,
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -23,10 +23,10 @@ func (c *client) CreateInstall(ctx context.Context, appID string, req *models.Se
 }
 
 func (c *client) GetAppInstalls(ctx context.Context, appID string) ([]*models.AppInstall, error) {
-	resp, err := c.genClient.Operations.GetV1AppsAppIDInstalls(&operations.GetV1AppsAppIDInstallsParams{
+	resp, err := c.genClient.Operations.GetAppInstalls(&operations.GetAppInstallsParams{
 		AppID:   appID,
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -35,9 +35,9 @@ func (c *client) GetAppInstalls(ctx context.Context, appID string) ([]*models.Ap
 }
 
 func (c *client) GetAllInstalls(ctx context.Context) ([]*models.AppInstall, error) {
-	resp, err := c.genClient.Operations.GetV1Installs(&operations.GetV1InstallsParams{
+	resp, err := c.genClient.Operations.GetOrgInstalls(&operations.GetOrgInstallsParams{
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -46,10 +46,10 @@ func (c *client) GetAllInstalls(ctx context.Context) ([]*models.AppInstall, erro
 }
 
 func (c *client) GetInstall(ctx context.Context, installID string) (*models.AppInstall, error) {
-	resp, err := c.genClient.Operations.GetV1InstallsInstallID(&operations.GetV1InstallsInstallIDParams{
+	resp, err := c.genClient.Operations.GetInstall(&operations.GetInstallParams{
 		InstallID: installID,
 		Context:   ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -58,11 +58,11 @@ func (c *client) GetInstall(ctx context.Context, installID string) (*models.AppI
 }
 
 func (c *client) UpdateInstall(ctx context.Context, installID string, req *models.ServiceUpdateInstallRequest) (*models.AppInstall, error) {
-	resp, err := c.genClient.Operations.PatchV1InstallsInstallID(&operations.PatchV1InstallsInstallIDParams{
+	resp, err := c.genClient.Operations.UpdateInstall(&operations.UpdateInstallParams{
 		Req:       req,
 		InstallID: installID,
 		Context:   ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, fmt.Errorf("unable to update install: %w", err)
 	}
@@ -71,10 +71,10 @@ func (c *client) UpdateInstall(ctx context.Context, installID string, req *model
 }
 
 func (c *client) DeleteInstall(ctx context.Context, installID string) (bool, error) {
-	resp, err := c.genClient.Operations.DeleteV1InstallsInstallID(&operations.DeleteV1InstallsInstallIDParams{
+	resp, err := c.genClient.Operations.DeleteInstall(&operations.DeleteInstallParams{
 		InstallID: installID,
 		Context:   ctx,
-	})
+	}, nil)
 	if err != nil {
 		return false, err
 	}

@@ -63,18 +63,6 @@ PatchV1OrgsCurrentParams contains all the parameters to send to the API endpoint
 */
 type PatchV1OrgsCurrentParams struct {
 
-	/* Authorization.
-
-	   bearer auth token
-	*/
-	Authorization string
-
-	/* XNuonOrgID.
-
-	   org ID
-	*/
-	XNuonOrgID string
-
 	/* Req.
 
 	   Input
@@ -134,28 +122,6 @@ func (o *PatchV1OrgsCurrentParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithAuthorization adds the authorization to the patch v1 orgs current params
-func (o *PatchV1OrgsCurrentParams) WithAuthorization(authorization string) *PatchV1OrgsCurrentParams {
-	o.SetAuthorization(authorization)
-	return o
-}
-
-// SetAuthorization adds the authorization to the patch v1 orgs current params
-func (o *PatchV1OrgsCurrentParams) SetAuthorization(authorization string) {
-	o.Authorization = authorization
-}
-
-// WithXNuonOrgID adds the xNuonOrgID to the patch v1 orgs current params
-func (o *PatchV1OrgsCurrentParams) WithXNuonOrgID(xNuonOrgID string) *PatchV1OrgsCurrentParams {
-	o.SetXNuonOrgID(xNuonOrgID)
-	return o
-}
-
-// SetXNuonOrgID adds the xNuonOrgId to the patch v1 orgs current params
-func (o *PatchV1OrgsCurrentParams) SetXNuonOrgID(xNuonOrgID string) {
-	o.XNuonOrgID = xNuonOrgID
-}
-
 // WithReq adds the req to the patch v1 orgs current params
 func (o *PatchV1OrgsCurrentParams) WithReq(req *models.ServiceUpdateOrgRequest) *PatchV1OrgsCurrentParams {
 	o.SetReq(req)
@@ -174,16 +140,6 @@ func (o *PatchV1OrgsCurrentParams) WriteToRequest(r runtime.ClientRequest, reg s
 		return err
 	}
 	var res []error
-
-	// header param Authorization
-	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
-		return err
-	}
-
-	// header param X-Nuon-Org-ID
-	if err := r.SetHeaderParam("X-Nuon-Org-ID", o.XNuonOrgID); err != nil {
-		return err
-	}
 	if o.Req != nil {
 		if err := r.SetBodyParam(o.Req); err != nil {
 			return err

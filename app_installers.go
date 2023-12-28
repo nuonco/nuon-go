@@ -8,7 +8,7 @@ import (
 )
 
 func (c *client) RenderAppInstaller(ctx context.Context, slug string) (*models.ServiceAppInstaller, error) {
-	resp, err := c.genClient.Operations.GetV1InstallerInstallerSlugRender(&operations.GetV1InstallerInstallerSlugRenderParams{
+	resp, err := c.genClient.Operations.RenderAppInstaller(&operations.RenderAppInstallerParams{
 		Context:       ctx,
 		InstallerSlug: slug,
 	})
@@ -20,10 +20,10 @@ func (c *client) RenderAppInstaller(ctx context.Context, slug string) (*models.S
 }
 
 func (c *client) GetAppInstaller(ctx context.Context, appInstallerID string) (*models.AppAppInstaller, error) {
-	resp, err := c.genClient.Operations.GetV1InstallersInstallerID(&operations.GetV1InstallersInstallerIDParams{
+	resp, err := c.genClient.Operations.GetAppInstaller(&operations.GetAppInstallerParams{
 		Context:     ctx,
 		InstallerID: appInstallerID,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -32,11 +32,11 @@ func (c *client) GetAppInstaller(ctx context.Context, appInstallerID string) (*m
 }
 
 func (c *client) CreateAppInstaller(ctx context.Context, appID string, req *models.ServiceCreateAppInstallerRequest) (*models.AppAppInstaller, error) {
-	resp, err := c.genClient.Operations.PostV1AppsAppIDInstaller(&operations.PostV1AppsAppIDInstallerParams{
+	resp, err := c.genClient.Operations.CreateAppInstaller(&operations.CreateAppInstallerParams{
 		Req:     req,
 		AppID:   appID,
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -45,11 +45,11 @@ func (c *client) CreateAppInstaller(ctx context.Context, appID string, req *mode
 }
 
 func (c *client) UpdateAppInstaller(ctx context.Context, installerID string, req *models.ServiceUpdateAppInstallerRequest) (*models.AppAppInstaller, error) {
-	resp, err := c.genClient.Operations.PatchV1InstallersInstallerID(&operations.PatchV1InstallersInstallerIDParams{
+	resp, err := c.genClient.Operations.UpdateAppInstaller(&operations.UpdateAppInstallerParams{
 		InstallerID: installerID,
 		Req:         req,
 		Context:     ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -58,10 +58,10 @@ func (c *client) UpdateAppInstaller(ctx context.Context, installerID string, req
 }
 
 func (c *client) DeleteAppInstaller(ctx context.Context, installerID string) (bool, error) {
-	resp, err := c.genClient.Operations.DeleteV1InstallersInstallerID(&operations.DeleteV1InstallersInstallerIDParams{
+	resp, err := c.genClient.Operations.DeleteAppInstaller(&operations.DeleteAppInstallerParams{
 		InstallerID: installerID,
 		Context:     ctx,
-	})
+	}, nil)
 	if err != nil {
 		return false, err
 	}
