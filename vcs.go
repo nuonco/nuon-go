@@ -9,10 +9,10 @@ import (
 
 // vcs connections
 func (c *client) CreateVCSConnection(ctx context.Context, req *models.ServiceCreateConnectionRequest) (*models.AppVCSConnection, error) {
-	resp, err := c.genClient.Operations.PostV1VcsConnections(&operations.PostV1VcsConnectionsParams{
+	resp, err := c.genClient.Operations.CreateVCSConnection(&operations.CreateVCSConnectionParams{
 		Req:     req,
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -21,7 +21,7 @@ func (c *client) CreateVCSConnection(ctx context.Context, req *models.ServiceCre
 }
 
 func (c *client) CreateVCSConnectionCallback(ctx context.Context, req *models.ServiceCreateConnectionCallbackRequest) (*models.AppVCSConnection, error) {
-	resp, err := c.genClient.Operations.PostV1VcsConnectionCallback(&operations.PostV1VcsConnectionCallbackParams{
+	resp, err := c.genClient.Operations.CreateVCSConnectionCallback(&operations.CreateVCSConnectionCallbackParams{
 		Req:     req,
 		Context: ctx,
 	})
@@ -33,9 +33,9 @@ func (c *client) CreateVCSConnectionCallback(ctx context.Context, req *models.Se
 }
 
 func (c *client) GetVCSConnections(ctx context.Context) ([]*models.AppVCSConnection, error) {
-	resp, err := c.genClient.Operations.GetV1VcsConnections(&operations.GetV1VcsConnectionsParams{
+	resp, err := c.genClient.Operations.GetOrgVCSConnections(&operations.GetOrgVCSConnectionsParams{
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -44,10 +44,10 @@ func (c *client) GetVCSConnections(ctx context.Context) ([]*models.AppVCSConnect
 }
 
 func (c *client) GetVCSConnection(ctx context.Context, connID string) (*models.AppVCSConnection, error) {
-	resp, err := c.genClient.Operations.GetV1VcsConnectionsConnectionID(&operations.GetV1VcsConnectionsConnectionIDParams{
+	resp, err := c.genClient.Operations.GetVCSConnection(&operations.GetVCSConnectionParams{
 		ConnectionID: connID,
 		Context:      ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -56,9 +56,9 @@ func (c *client) GetVCSConnection(ctx context.Context, connID string) (*models.A
 }
 
 func (c *client) GetAllVCSConnectedRepos(ctx context.Context) ([]*models.ServiceRepository, error) {
-	resp, err := c.genClient.Operations.GetV1VcsConnectedRepos(&operations.GetV1VcsConnectedReposParams{
+	resp, err := c.genClient.Operations.GetAllVCSConnectedRepos(&operations.GetAllVCSConnectedReposParams{
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}

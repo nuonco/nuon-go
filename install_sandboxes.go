@@ -8,10 +8,10 @@ import (
 )
 
 func (c *client) GetInstallSandboxRuns(ctx context.Context, installID string) ([]*models.AppInstallSandboxRun, error) {
-	resp, err := c.genClient.Operations.GetV1InstallsInstallIDSandboxRuns(&operations.GetV1InstallsInstallIDSandboxRunsParams{
+	resp, err := c.genClient.Operations.GetInstallSandboxRuns(&operations.GetInstallSandboxRunsParams{
 		InstallID: installID,
 		Context:   ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -20,11 +20,11 @@ func (c *client) GetInstallSandboxRuns(ctx context.Context, installID string) ([
 }
 
 func (c *client) GetInstallSandboxRunLogs(ctx context.Context, installID, runID string) ([]interface{}, error) {
-	resp, err := c.genClient.Operations.GetV1InstallsInstallIDSandboxRunRunIDLogs(&operations.GetV1InstallsInstallIDSandboxRunRunIDLogsParams{
+	resp, err := c.genClient.Operations.GetInstallSandboxRunLogs(&operations.GetInstallSandboxRunLogsParams{
 		InstallID: installID,
 		RunID:     runID,
 		Context:   ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}

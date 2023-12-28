@@ -8,9 +8,9 @@ import (
 )
 
 func (c *client) GetOrg(ctx context.Context) (*models.AppOrg, error) {
-	resp, err := c.genClient.Operations.GetV1OrgsCurrent(&operations.GetV1OrgsCurrentParams{
+	resp, err := c.genClient.Operations.GetOrg(&operations.GetOrgParams{
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -19,9 +19,9 @@ func (c *client) GetOrg(ctx context.Context) (*models.AppOrg, error) {
 }
 
 func (c *client) GetOrgs(ctx context.Context) ([]*models.AppOrg, error) {
-	resp, err := c.genClient.Operations.GetV1Orgs(&operations.GetV1OrgsParams{
+	resp, err := c.genClient.Operations.GetOrgs(&operations.GetOrgsParams{
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -30,9 +30,9 @@ func (c *client) GetOrgs(ctx context.Context) ([]*models.AppOrg, error) {
 }
 
 func (c *client) DeleteOrg(ctx context.Context) (bool, error) {
-	resp, err := c.genClient.Operations.DeleteV1OrgsCurrent(&operations.DeleteV1OrgsCurrentParams{
+	resp, err := c.genClient.Operations.DeleteOrg(&operations.DeleteOrgParams{
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return false, err
 	}
@@ -41,10 +41,10 @@ func (c *client) DeleteOrg(ctx context.Context) (bool, error) {
 }
 
 func (c *client) CreateOrg(ctx context.Context, req *models.ServiceCreateOrgRequest) (*models.AppOrg, error) {
-	resp, err := c.genClient.Operations.PostV1Orgs(&operations.PostV1OrgsParams{
+	resp, err := c.genClient.Operations.CreateOrg(&operations.CreateOrgParams{
 		Req:     req,
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -53,10 +53,10 @@ func (c *client) CreateOrg(ctx context.Context, req *models.ServiceCreateOrgRequ
 }
 
 func (c *client) UpdateOrg(ctx context.Context, req *models.ServiceUpdateOrgRequest) (*models.AppOrg, error) {
-	resp, err := c.genClient.Operations.PatchV1OrgsCurrent(&operations.PatchV1OrgsCurrentParams{
+	resp, err := c.genClient.Operations.UpdateOrg(&operations.UpdateOrgParams{
 		Req:     req,
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -65,10 +65,10 @@ func (c *client) UpdateOrg(ctx context.Context, req *models.ServiceUpdateOrgRequ
 }
 
 func (c *client) CreateOrgUser(ctx context.Context, req *models.ServiceCreateOrgUserRequest) (*models.AppUserOrg, error) {
-	resp, err := c.genClient.Operations.PostV1OrgsCurrentUser(&operations.PostV1OrgsCurrentUserParams{
+	resp, err := c.genClient.Operations.AddUser(&operations.AddUserParams{
 		Req:     req,
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}

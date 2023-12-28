@@ -19,6 +19,9 @@ import (
 // swagger:model service.UpdateComponentRequest
 type ServiceUpdateComponentRequest struct {
 
+	// dependencies
+	Dependencies []string `json:"dependencies"`
+
 	// name
 	// Required: true
 	Name *string `json:"name"`

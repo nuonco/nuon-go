@@ -9,10 +9,10 @@ import (
 
 // releases methods
 func (c *client) GetRelease(ctx context.Context, releaseID string) (*models.AppComponentRelease, error) {
-	resp, err := c.genClient.Operations.GetV1ReleasesReleaseID(&operations.GetV1ReleasesReleaseIDParams{
+	resp, err := c.genClient.Operations.GetRelease(&operations.GetReleaseParams{
 		ReleaseID: releaseID,
 		Context:   ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -21,10 +21,10 @@ func (c *client) GetRelease(ctx context.Context, releaseID string) (*models.AppC
 }
 
 func (c *client) GetReleaseSteps(ctx context.Context, releaseID string) ([]*models.AppComponentReleaseStep, error) {
-	resp, err := c.genClient.Operations.GetV1ReleasesReleaseIDSteps(&operations.GetV1ReleasesReleaseIDStepsParams{
+	resp, err := c.genClient.Operations.GetReleaseSteps(&operations.GetReleaseStepsParams{
 		ReleaseID: releaseID,
 		Context:   ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -33,10 +33,10 @@ func (c *client) GetReleaseSteps(ctx context.Context, releaseID string) ([]*mode
 }
 
 func (c *client) GetAppReleases(ctx context.Context, appID string) ([]*models.AppComponentRelease, error) {
-	resp, err := c.genClient.Operations.GetV1AppsAppIDReleases(&operations.GetV1AppsAppIDReleasesParams{
+	resp, err := c.genClient.Operations.GetAppReleases(&operations.GetAppReleasesParams{
 		AppID:   appID,
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -45,10 +45,10 @@ func (c *client) GetAppReleases(ctx context.Context, appID string) ([]*models.Ap
 }
 
 func (c *client) GetComponentReleases(ctx context.Context, componentID string) ([]*models.AppComponentRelease, error) {
-	resp, err := c.genClient.Operations.GetV1ComponentsComponentIDReleases(&operations.GetV1ComponentsComponentIDReleasesParams{
+	resp, err := c.genClient.Operations.GetComponentReleases(&operations.GetComponentReleasesParams{
 		ComponentID: componentID,
 		Context:     ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -57,11 +57,11 @@ func (c *client) GetComponentReleases(ctx context.Context, componentID string) (
 }
 
 func (c *client) CreateComponentRelease(ctx context.Context, componentID string, req *models.ServiceCreateComponentReleaseRequest) (*models.AppComponentRelease, error) {
-	resp, err := c.genClient.Operations.PostV1ComponentsComponentIDReleases(&operations.PostV1ComponentsComponentIDReleasesParams{
+	resp, err := c.genClient.Operations.CreateComponentRelease(&operations.CreateComponentReleaseParams{
 		ComponentID: componentID,
 		Req:         req,
 		Context:     ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -70,10 +70,10 @@ func (c *client) CreateComponentRelease(ctx context.Context, componentID string,
 }
 
 func (c *client) CreateRelease(ctx context.Context, req *models.ServiceCreateComponentReleaseRequest) (*models.AppComponentRelease, error) {
-	resp, err := c.genClient.Operations.PostV1Releases(&operations.PostV1ReleasesParams{
+	resp, err := c.genClient.Operations.CreateBuildRelease(&operations.CreateBuildReleaseParams{
 		Req:     req,
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}

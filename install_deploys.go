@@ -10,10 +10,10 @@ import (
 
 // install deploys
 func (c *client) GetInstallDeploys(ctx context.Context, installID string) ([]*models.AppInstallDeploy, error) {
-	resp, err := c.genClient.Operations.GetV1InstallsInstallIDDeploys(&operations.GetV1InstallsInstallIDDeploysParams{
+	resp, err := c.genClient.Operations.GetInstallDeploys(&operations.GetInstallDeploysParams{
 		InstallID: installID,
 		Context:   ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -22,11 +22,11 @@ func (c *client) GetInstallDeploys(ctx context.Context, installID string) ([]*mo
 }
 
 func (c *client) CreateInstallDeploy(ctx context.Context, installID string, req *models.ServiceCreateInstallDeployRequest) (*models.AppInstallDeploy, error) {
-	resp, err := c.genClient.Operations.PostV1InstallsInstallIDDeploys(&operations.PostV1InstallsInstallIDDeploysParams{
+	resp, err := c.genClient.Operations.CreateInstallDeploy(&operations.CreateInstallDeployParams{
 		InstallID: installID,
 		Req:       req,
 		Context:   ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -35,10 +35,10 @@ func (c *client) CreateInstallDeploy(ctx context.Context, installID string, req 
 }
 
 func (c *client) GetInstallLatestDeploy(ctx context.Context, installID string) (*models.AppInstallDeploy, error) {
-	resp, err := c.genClient.Operations.GetV1InstallsInstallIDDeploysLatest(&operations.GetV1InstallsInstallIDDeploysLatestParams{
+	resp, err := c.genClient.Operations.GetInstallLatestDeploy(&operations.GetInstallLatestDeployParams{
 		InstallID: installID,
 		Context:   ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -47,11 +47,11 @@ func (c *client) GetInstallLatestDeploy(ctx context.Context, installID string) (
 }
 
 func (c *client) GetInstallDeploy(ctx context.Context, installID string, deployID string) (*models.AppInstallDeploy, error) {
-	resp, err := c.genClient.Operations.GetV1InstallsInstallIDDeploysDeployID(&operations.GetV1InstallsInstallIDDeploysDeployIDParams{
+	resp, err := c.genClient.Operations.GetInstallDeploy(&operations.GetInstallDeployParams{
 		InstallID: installID,
 		DeployID:  deployID,
 		Context:   ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -60,11 +60,11 @@ func (c *client) GetInstallDeploy(ctx context.Context, installID string, deployI
 }
 
 func (c *client) GetInstallDeployLogs(ctx context.Context, installID string, deployID string) ([]models.ServiceDeployLog, error) {
-	resp, err := c.genClient.Operations.GetV1InstallsInstallIDDeploysDeployIDLogs(&operations.GetV1InstallsInstallIDDeploysDeployIDLogsParams{
+	resp, err := c.genClient.Operations.GetInstallDeployLogs(&operations.GetInstallDeployLogsParams{
 		InstallID: installID,
 		DeployID:  deployID,
 		Context:   ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, fmt.Errorf("unable to get install deploy logs: %w", err)
 	}

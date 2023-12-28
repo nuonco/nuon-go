@@ -8,11 +8,11 @@ import (
 )
 
 func (c *client) CreateAppInputConfig(ctx context.Context, appID string, req *models.ServiceCreateAppInputConfigRequest) (*models.AppAppInputConfig, error) {
-	resp, err := c.genClient.Operations.PostV1AppsAppIDInputConfig(&operations.PostV1AppsAppIDInputConfigParams{
+	resp, err := c.genClient.Operations.CreateAppInputConfig(&operations.CreateAppInputConfigParams{
 		Req:     req,
 		AppID:   appID,
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -21,10 +21,10 @@ func (c *client) CreateAppInputConfig(ctx context.Context, appID string, req *mo
 }
 
 func (c *client) GetAppInputLatestConfig(ctx context.Context, appID string) (*models.AppAppInputConfig, error) {
-	resp, err := c.genClient.Operations.GetV1AppsAppIDInputLatestConfig(&operations.GetV1AppsAppIDInputLatestConfigParams{
+	resp, err := c.genClient.Operations.GetAppInputLatestConfig(&operations.GetAppInputLatestConfigParams{
 		AppID:   appID,
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -33,10 +33,10 @@ func (c *client) GetAppInputLatestConfig(ctx context.Context, appID string) (*mo
 }
 
 func (c *client) GetAppInputConfigs(ctx context.Context, appID string) ([]*models.AppAppInputConfig, error) {
-	resp, err := c.genClient.Operations.GetV1AppsAppIDInputConfigs(&operations.GetV1AppsAppIDInputConfigsParams{
+	resp, err := c.genClient.Operations.GetAppInputConfigs(&operations.GetAppInputConfigsParams{
 		AppID:   appID,
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}

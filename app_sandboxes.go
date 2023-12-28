@@ -8,11 +8,11 @@ import (
 )
 
 func (c *client) CreateAppSandboxConfig(ctx context.Context, appID string, req *models.ServiceCreateAppSandboxConfigRequest) (*models.AppAppSandboxConfig, error) {
-	resp, err := c.genClient.Operations.PostV1AppsAppIDSandboxConfig(&operations.PostV1AppsAppIDSandboxConfigParams{
+	resp, err := c.genClient.Operations.CreateAppSandboxConfig(&operations.CreateAppSandboxConfigParams{
 		Req:     req,
 		AppID:   appID,
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -21,10 +21,10 @@ func (c *client) CreateAppSandboxConfig(ctx context.Context, appID string, req *
 }
 
 func (c *client) GetAppSandboxLatestConfig(ctx context.Context, appID string) (*models.AppAppSandboxConfig, error) {
-	resp, err := c.genClient.Operations.GetV1AppsAppIDSandboxLatestConfig(&operations.GetV1AppsAppIDSandboxLatestConfigParams{
+	resp, err := c.genClient.Operations.GetAppSandboxLatestConfig(&operations.GetAppSandboxLatestConfigParams{
 		AppID:   appID,
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -33,10 +33,10 @@ func (c *client) GetAppSandboxLatestConfig(ctx context.Context, appID string) (*
 }
 
 func (c *client) GetAppSandboxConfigs(ctx context.Context, appID string) ([]*models.AppAppSandboxConfig, error) {
-	resp, err := c.genClient.Operations.GetV1AppsAppIDSandboxConfigs(&operations.GetV1AppsAppIDSandboxConfigsParams{
+	resp, err := c.genClient.Operations.GetAppSandboxConfigs(&operations.GetAppSandboxConfigsParams{
 		AppID:   appID,
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}

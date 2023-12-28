@@ -8,10 +8,10 @@ import (
 )
 
 func (c *client) GetInstallCurrentInputs(ctx context.Context, installID string) (*models.AppInstallInputs, error) {
-	resp, err := c.genClient.Operations.GetV1InstallsInstallIDInputsCurrent(&operations.GetV1InstallsInstallIDInputsCurrentParams{
+	resp, err := c.genClient.Operations.GetCurrentInstallInputs(&operations.GetCurrentInstallInputsParams{
 		InstallID: installID,
 		Context:   ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -20,10 +20,10 @@ func (c *client) GetInstallCurrentInputs(ctx context.Context, installID string) 
 }
 
 func (c *client) GetInstallInputs(ctx context.Context, appID string) ([]*models.AppInstallInputs, error) {
-	resp, err := c.genClient.Operations.GetV1InstallsInstallIDInputs(&operations.GetV1InstallsInstallIDInputsParams{
+	resp, err := c.genClient.Operations.GetInstallInputs(&operations.GetInstallInputsParams{
 		InstallID: appID,
 		Context:   ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -32,11 +32,11 @@ func (c *client) GetInstallInputs(ctx context.Context, appID string) ([]*models.
 }
 
 func (c *client) CreateInstallInputs(ctx context.Context, installID string, req *models.ServiceCreateInstallInputsRequest) (*models.AppInstallInputs, error) {
-	resp, err := c.genClient.Operations.PostV1InstallsInstallIDInputs(&operations.PostV1InstallsInstallIDInputsParams{
+	resp, err := c.genClient.Operations.CreateInstallInputs(&operations.CreateInstallInputsParams{
 		InstallID: installID,
 		Req:       req,
 		Context:   ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}

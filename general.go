@@ -9,9 +9,9 @@ import (
 
 // general methods
 func (c *client) GetCurrentUser(ctx context.Context) (*models.AppUserToken, error) {
-	resp, err := c.genClient.Operations.GetV1GeneralCurrentUser(&operations.GetV1GeneralCurrentUserParams{
+	resp, err := c.genClient.Operations.GetCurrentUser(&operations.GetCurrentUserParams{
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -20,10 +20,10 @@ func (c *client) GetCurrentUser(ctx context.Context) (*models.AppUserToken, erro
 }
 
 func (c *client) PublishMetrics(ctx context.Context, req []*models.ServicePublishMetricInput) error {
-	_, err := c.genClient.Operations.PostV1GeneralMetrics(&operations.PostV1GeneralMetricsParams{
+	_, err := c.genClient.Operations.PublishMetrics(&operations.PublishMetricsParams{
 		Req:     req,
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return err
 	}
@@ -32,7 +32,7 @@ func (c *client) PublishMetrics(ctx context.Context, req []*models.ServicePublis
 }
 
 func (c *client) GetCLIConfig(ctx context.Context) (*models.ServiceCLIConfig, error) {
-	resp, err := c.genClient.Operations.GetV1GeneralCliConfig(&operations.GetV1GeneralCliConfigParams{
+	resp, err := c.genClient.Operations.GetCLIConfig(&operations.GetCLIConfigParams{
 		Context: ctx,
 	})
 	if err != nil {

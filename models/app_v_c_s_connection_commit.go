@@ -7,9 +7,7 @@ package models
 
 import (
 	"context"
-	"strconv"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -24,9 +22,6 @@ type AppVCSConnectionCommit struct {
 
 	// author name
 	AuthorName string `json:"author_name,omitempty"`
-
-	// component builds
-	ComponentBuilds []*AppComponentBuild `json:"component_builds"`
 
 	// component config connection id
 	ComponentConfigConnectionID string `json:"component_config_connection_id,omitempty"`
@@ -52,80 +47,11 @@ type AppVCSConnectionCommit struct {
 
 // Validate validates this app v c s connection commit
 func (m *AppVCSConnectionCommit) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateComponentBuilds(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
 	return nil
 }
 
-func (m *AppVCSConnectionCommit) validateComponentBuilds(formats strfmt.Registry) error {
-	if swag.IsZero(m.ComponentBuilds) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(m.ComponentBuilds); i++ {
-		if swag.IsZero(m.ComponentBuilds[i]) { // not required
-			continue
-		}
-
-		if m.ComponentBuilds[i] != nil {
-			if err := m.ComponentBuilds[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("component_builds" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("component_builds" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-// ContextValidate validate this app v c s connection commit based on the context it is used
+// ContextValidate validates this app v c s connection commit based on context it is used
 func (m *AppVCSConnectionCommit) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateComponentBuilds(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *AppVCSConnectionCommit) contextValidateComponentBuilds(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.ComponentBuilds); i++ {
-
-		if m.ComponentBuilds[i] != nil {
-
-			if swag.IsZero(m.ComponentBuilds[i]) { // not required
-				return nil
-			}
-
-			if err := m.ComponentBuilds[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("component_builds" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("component_builds" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
 	return nil
 }
 
