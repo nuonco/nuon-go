@@ -9,7 +9,7 @@ import (
 
 // sandbox methods
 func (c *client) GetSandboxes(ctx context.Context) ([]*models.AppSandbox, error) {
-	resp, err := c.genClient.Operations.GetV1Sandboxes(&operations.GetV1SandboxesParams{
+	resp, err := c.genClient.Operations.GetSandboxes(&operations.GetSandboxesParams{
 		Context: ctx,
 	})
 	if err != nil {
@@ -20,10 +20,10 @@ func (c *client) GetSandboxes(ctx context.Context) ([]*models.AppSandbox, error)
 }
 
 func (c *client) GetSandbox(ctx context.Context, sandboxID string) (*models.AppSandbox, error) {
-	resp, err := c.genClient.Operations.GetV1SandboxesSandboxID(&operations.GetV1SandboxesSandboxIDParams{
+	resp, err := c.genClient.Operations.GetSandbox(&operations.GetSandboxParams{
 		SandboxID: sandboxID,
 		Context:   ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -32,10 +32,10 @@ func (c *client) GetSandbox(ctx context.Context, sandboxID string) (*models.AppS
 }
 
 func (c *client) GetSandboxReleases(ctx context.Context, sandboxID string) ([]*models.AppSandboxRelease, error) {
-	resp, err := c.genClient.Operations.GetV1SandboxesSandboxIDReleases(&operations.GetV1SandboxesSandboxIDReleasesParams{
+	resp, err := c.genClient.Operations.GetSandboxReleases(&operations.GetSandboxReleasesParams{
 		SandboxID: sandboxID,
 		Context:   ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}

@@ -9,10 +9,10 @@ import (
 
 // internal methods
 func (c *client) GetApp(ctx context.Context, appID string) (*models.AppApp, error) {
-	resp, err := c.genClient.Operations.GetV1AppsAppID(&operations.GetV1AppsAppIDParams{
+	resp, err := c.genClient.Operations.GetApp(&operations.GetAppParams{
 		Context: ctx,
 		AppID:   appID,
-	})
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -21,9 +21,9 @@ func (c *client) GetApp(ctx context.Context, appID string) (*models.AppApp, erro
 }
 
 func (c *client) GetApps(ctx context.Context) ([]*models.AppApp, error) {
-	resp, err := c.genClient.Operations.GetV1Apps(&operations.GetV1AppsParams{
+	resp, err := c.genClient.Operations.GetApps(&operations.GetAppsParams{
 		Context: ctx,
-	})
+	}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -32,10 +32,10 @@ func (c *client) GetApps(ctx context.Context) ([]*models.AppApp, error) {
 }
 
 func (c *client) CreateApp(ctx context.Context, req *models.ServiceCreateAppRequest) (*models.AppApp, error) {
-	resp, err := c.genClient.Operations.PostV1Apps(&operations.PostV1AppsParams{
+	resp, err := c.genClient.Operations.CreateApp(&operations.CreateAppParams{
 		Req:     req,
 		Context: ctx,
-	})
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -44,11 +44,11 @@ func (c *client) CreateApp(ctx context.Context, req *models.ServiceCreateAppRequ
 }
 
 func (c *client) UpdateApp(ctx context.Context, appID string, req *models.ServiceUpdateAppRequest) (*models.AppApp, error) {
-	resp, err := c.genClient.Operations.PatchV1AppsAppID(&operations.PatchV1AppsAppIDParams{
+	resp, err := c.genClient.Operations.UpdateApp(&operations.UpdateAppParams{
 		AppID:   appID,
 		Req:     req,
 		Context: ctx,
-	})
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -57,10 +57,10 @@ func (c *client) UpdateApp(ctx context.Context, appID string, req *models.Servic
 }
 
 func (c *client) DeleteApp(ctx context.Context, appID string) (bool, error) {
-	resp, err := c.genClient.Operations.DeleteV1AppsAppID(&operations.DeleteV1AppsAppIDParams{
+	resp, err := c.genClient.Operations.DeleteApp(&operations.DeleteAppParams{
 		AppID:   appID,
 		Context: ctx,
-	})
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return false, err
 	}
