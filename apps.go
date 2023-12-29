@@ -12,7 +12,7 @@ func (c *client) GetApp(ctx context.Context, appID string) (*models.AppApp, erro
 	resp, err := c.genClient.Operations.GetApp(&operations.GetAppParams{
 		Context: ctx,
 		AppID:   appID,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +35,7 @@ func (c *client) CreateApp(ctx context.Context, req *models.ServiceCreateAppRequ
 	resp, err := c.genClient.Operations.CreateApp(&operations.CreateAppParams{
 		Req:     req,
 		Context: ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ func (c *client) UpdateApp(ctx context.Context, appID string, req *models.Servic
 		AppID:   appID,
 		Req:     req,
 		Context: ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ func (c *client) DeleteApp(ctx context.Context, appID string) (bool, error) {
 	resp, err := c.genClient.Operations.DeleteApp(&operations.DeleteAppParams{
 		AppID:   appID,
 		Context: ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return false, err
 	}

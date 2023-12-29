@@ -12,7 +12,7 @@ func (c *client) CreateAppSandboxConfig(ctx context.Context, appID string, req *
 		Req:     req,
 		AppID:   appID,
 		Context: ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -24,7 +24,7 @@ func (c *client) GetAppSandboxLatestConfig(ctx context.Context, appID string) (*
 	resp, err := c.genClient.Operations.GetAppSandboxLatestConfig(&operations.GetAppSandboxLatestConfigParams{
 		AppID:   appID,
 		Context: ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -36,7 +36,7 @@ func (c *client) GetAppSandboxConfigs(ctx context.Context, appID string) ([]*mod
 	resp, err := c.genClient.Operations.GetAppSandboxConfigs(&operations.GetAppSandboxConfigsParams{
 		AppID:   appID,
 		Context: ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}

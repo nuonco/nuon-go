@@ -12,7 +12,7 @@ import (
 func (c *client) GetAllComponents(ctx context.Context) ([]*models.AppComponent, error) {
 	resp, err := c.genClient.Operations.GetOrgComponents(&operations.GetOrgComponentsParams{
 		Context: ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ func (c *client) CreateComponent(ctx context.Context, appID string, req *models.
 		AppID:   appID,
 		Req:     req,
 		Context: ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ func (c *client) GetComponent(ctx context.Context, componentID string) (*models.
 	resp, err := c.genClient.Operations.GetComponent(&operations.GetComponentParams{
 		ComponentID: componentID,
 		Context:     ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ func (c *client) UpdateComponent(ctx context.Context, componentID string, req *m
 		Req:         req,
 		ComponentID: componentID,
 		Context:     ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ func (c *client) DeleteComponent(ctx context.Context, componentID string) (bool,
 	resp, err := c.genClient.Operations.DeleteComponent(&operations.DeleteComponentParams{
 		ComponentID: componentID,
 		Context:     ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return false, err
 	}
@@ -88,7 +88,7 @@ func (c *client) CreateTerraformModuleComponentConfig(ctx context.Context, compo
 		ComponentID: componentID,
 		Req:         req,
 		Context:     ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -101,7 +101,7 @@ func (c *client) CreateHelmComponentConfig(ctx context.Context, componentID stri
 		ComponentID: componentID,
 		Req:         req,
 		Context:     ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -114,7 +114,7 @@ func (c *client) CreateDockerBuildComponentConfig(ctx context.Context, component
 		ComponentID: componentID,
 		Req:         req,
 		Context:     ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -127,7 +127,7 @@ func (c *client) CreateExternalImageComponentConfig(ctx context.Context, compone
 		ComponentID: componentID,
 		Req:         req,
 		Context:     ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, fmt.Errorf("unable to create external image component config: %w", err)
 	}
@@ -152,7 +152,7 @@ func (c *client) GetComponentConfigs(ctx context.Context, componentID string) ([
 	resp, err := c.genClient.Operations.GetComponentConfigs(&operations.GetComponentConfigsParams{
 		ComponentID: componentID,
 		Context:     ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, fmt.Errorf("unable to get component configs: %w", err)
 	}
@@ -178,7 +178,7 @@ func (c *client) CreateComponentBuild(ctx context.Context, componentID string, r
 		ComponentID: componentID,
 		Req:         req,
 		Context:     ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -190,7 +190,7 @@ func (c *client) GetComponentBuilds(ctx context.Context, componentID string) ([]
 	resp, err := c.genClient.Operations.GetComponentBuilds(&operations.GetComponentBuildsParams{
 		ComponentID: componentID,
 		Context:     ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -202,7 +202,7 @@ func (c *client) GetComponentLatestBuild(ctx context.Context, componentID string
 	resp, err := c.genClient.Operations.GetComponentLatestBuild(&operations.GetComponentLatestBuildParams{
 		ComponentID: componentID,
 		Context:     ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -215,7 +215,7 @@ func (c *client) GetComponentBuild(ctx context.Context, componentID string, buil
 		BuildID:     buildID,
 		ComponentID: componentID,
 		Context:     ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, fmt.Errorf("unable to get component build: %w", err)
 	}
@@ -228,7 +228,7 @@ func (c *client) GetComponentBuildLogs(ctx context.Context, componentID string, 
 		ComponentID: componentID,
 		BuildID:     buildID,
 		Context:     ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, fmt.Errorf("unable to get build logs: %w", err)
 	}
@@ -247,7 +247,7 @@ func (c *client) GetComponentBuildPlan(ctx context.Context, componentID, buildID
 		ComponentID: componentID,
 		BuildID:     buildID,
 		Context:     ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, fmt.Errorf("unable to get build plan: %w", err)
 	}

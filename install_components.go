@@ -12,7 +12,7 @@ func (c *client) GetInstallComponents(ctx context.Context, installID string) ([]
 	resp, err := c.genClient.Operations.GetInstallComponents(&operations.GetInstallComponentsParams{
 		InstallID: installID,
 		Context:   ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -25,7 +25,7 @@ func (c *client) GetInstallComponentDeploys(ctx context.Context, installID strin
 		ComponentID: componentID,
 		InstallID:   installID,
 		Context:     ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -38,7 +38,7 @@ func (c *client) GetInstallComponentLatestDeploy(ctx context.Context, installID 
 		ComponentID: componentID,
 		InstallID:   installID,
 		Context:     ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ func (c *client) GetInstallDeployPlan(ctx context.Context, installID string, dep
 		Context:   ctx,
 		InstallID: installID,
 		DeployID:  deployID,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}

@@ -12,7 +12,7 @@ func (c *client) CreateVCSConnection(ctx context.Context, req *models.ServiceCre
 	resp, err := c.genClient.Operations.CreateVCSConnection(&operations.CreateVCSConnectionParams{
 		Req:     req,
 		Context: ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +35,7 @@ func (c *client) CreateVCSConnectionCallback(ctx context.Context, req *models.Se
 func (c *client) GetVCSConnections(ctx context.Context) ([]*models.AppVCSConnection, error) {
 	resp, err := c.genClient.Operations.GetOrgVCSConnections(&operations.GetOrgVCSConnectionsParams{
 		Context: ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ func (c *client) GetVCSConnection(ctx context.Context, connID string) (*models.A
 	resp, err := c.genClient.Operations.GetVCSConnection(&operations.GetVCSConnectionParams{
 		ConnectionID: connID,
 		Context:      ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ func (c *client) GetVCSConnection(ctx context.Context, connID string) (*models.A
 func (c *client) GetAllVCSConnectedRepos(ctx context.Context) ([]*models.ServiceRepository, error) {
 	resp, err := c.genClient.Operations.GetAllVCSConnectedRepos(&operations.GetAllVCSConnectedReposParams{
 		Context: ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}

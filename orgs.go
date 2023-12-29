@@ -10,7 +10,7 @@ import (
 func (c *client) GetOrg(ctx context.Context) (*models.AppOrg, error) {
 	resp, err := c.genClient.Operations.GetOrg(&operations.GetOrgParams{
 		Context: ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -21,7 +21,7 @@ func (c *client) GetOrg(ctx context.Context) (*models.AppOrg, error) {
 func (c *client) GetOrgs(ctx context.Context) ([]*models.AppOrg, error) {
 	resp, err := c.genClient.Operations.GetOrgs(&operations.GetOrgsParams{
 		Context: ctx,
-	}, nil)
+	}, c.getApiKeyAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -32,7 +32,7 @@ func (c *client) GetOrgs(ctx context.Context) ([]*models.AppOrg, error) {
 func (c *client) DeleteOrg(ctx context.Context) (bool, error) {
 	resp, err := c.genClient.Operations.DeleteOrg(&operations.DeleteOrgParams{
 		Context: ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return false, err
 	}
@@ -44,7 +44,7 @@ func (c *client) CreateOrg(ctx context.Context, req *models.ServiceCreateOrgRequ
 	resp, err := c.genClient.Operations.CreateOrg(&operations.CreateOrgParams{
 		Req:     req,
 		Context: ctx,
-	}, nil)
+	}, c.getApiKeyAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ func (c *client) UpdateOrg(ctx context.Context, req *models.ServiceUpdateOrgRequ
 	resp, err := c.genClient.Operations.UpdateOrg(&operations.UpdateOrgParams{
 		Req:     req,
 		Context: ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ func (c *client) CreateOrgUser(ctx context.Context, req *models.ServiceCreateOrg
 	resp, err := c.genClient.Operations.AddUser(&operations.AddUserParams{
 		Req:     req,
 		Context: ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}

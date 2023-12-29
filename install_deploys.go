@@ -13,7 +13,7 @@ func (c *client) GetInstallDeploys(ctx context.Context, installID string) ([]*mo
 	resp, err := c.genClient.Operations.GetInstallDeploys(&operations.GetInstallDeploysParams{
 		InstallID: installID,
 		Context:   ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -26,7 +26,7 @@ func (c *client) CreateInstallDeploy(ctx context.Context, installID string, req 
 		InstallID: installID,
 		Req:       req,
 		Context:   ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -38,7 +38,7 @@ func (c *client) GetInstallLatestDeploy(ctx context.Context, installID string) (
 	resp, err := c.genClient.Operations.GetInstallLatestDeploy(&operations.GetInstallLatestDeployParams{
 		InstallID: installID,
 		Context:   ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ func (c *client) GetInstallDeploy(ctx context.Context, installID string, deployI
 		InstallID: installID,
 		DeployID:  deployID,
 		Context:   ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ func (c *client) GetInstallDeployLogs(ctx context.Context, installID string, dep
 		InstallID: installID,
 		DeployID:  deployID,
 		Context:   ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, fmt.Errorf("unable to get install deploy logs: %w", err)
 	}

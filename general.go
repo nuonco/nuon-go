@@ -11,7 +11,7 @@ import (
 func (c *client) GetCurrentUser(ctx context.Context) (*models.AppUserToken, error) {
 	resp, err := c.genClient.Operations.GetCurrentUser(&operations.GetCurrentUserParams{
 		Context: ctx,
-	}, nil)
+	}, c.getApiKeyAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -23,7 +23,7 @@ func (c *client) PublishMetrics(ctx context.Context, req []*models.ServicePublis
 	_, err := c.genClient.Operations.PublishMetrics(&operations.PublishMetricsParams{
 		Req:     req,
 		Context: ctx,
-	}, nil)
+	}, c.getApiKeyAuthInfo())
 	if err != nil {
 		return err
 	}

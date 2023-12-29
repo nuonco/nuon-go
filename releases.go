@@ -12,7 +12,7 @@ func (c *client) GetRelease(ctx context.Context, releaseID string) (*models.AppC
 	resp, err := c.genClient.Operations.GetRelease(&operations.GetReleaseParams{
 		ReleaseID: releaseID,
 		Context:   ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -24,7 +24,7 @@ func (c *client) GetReleaseSteps(ctx context.Context, releaseID string) ([]*mode
 	resp, err := c.genClient.Operations.GetReleaseSteps(&operations.GetReleaseStepsParams{
 		ReleaseID: releaseID,
 		Context:   ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -36,7 +36,7 @@ func (c *client) GetAppReleases(ctx context.Context, appID string) ([]*models.Ap
 	resp, err := c.genClient.Operations.GetAppReleases(&operations.GetAppReleasesParams{
 		AppID:   appID,
 		Context: ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ func (c *client) GetComponentReleases(ctx context.Context, componentID string) (
 	resp, err := c.genClient.Operations.GetComponentReleases(&operations.GetComponentReleasesParams{
 		ComponentID: componentID,
 		Context:     ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ func (c *client) CreateComponentRelease(ctx context.Context, componentID string,
 		ComponentID: componentID,
 		Req:         req,
 		Context:     ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ func (c *client) CreateRelease(ctx context.Context, req *models.ServiceCreateCom
 	resp, err := c.genClient.Operations.CreateBuildRelease(&operations.CreateBuildReleaseParams{
 		Req:     req,
 		Context: ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}

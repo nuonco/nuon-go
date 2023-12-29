@@ -12,7 +12,7 @@ func (c *client) CreateAppInputConfig(ctx context.Context, appID string, req *mo
 		Req:     req,
 		AppID:   appID,
 		Context: ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -24,7 +24,7 @@ func (c *client) GetAppInputLatestConfig(ctx context.Context, appID string) (*mo
 	resp, err := c.genClient.Operations.GetAppInputLatestConfig(&operations.GetAppInputLatestConfigParams{
 		AppID:   appID,
 		Context: ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -36,7 +36,7 @@ func (c *client) GetAppInputConfigs(ctx context.Context, appID string) ([]*model
 	resp, err := c.genClient.Operations.GetAppInputConfigs(&operations.GetAppInputConfigsParams{
 		AppID:   appID,
 		Context: ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}

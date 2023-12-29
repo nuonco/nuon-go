@@ -23,7 +23,7 @@ func (c *client) GetAppInstaller(ctx context.Context, appInstallerID string) (*m
 	resp, err := c.genClient.Operations.GetAppInstaller(&operations.GetAppInstallerParams{
 		Context:     ctx,
 		InstallerID: appInstallerID,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -36,7 +36,7 @@ func (c *client) CreateAppInstaller(ctx context.Context, appID string, req *mode
 		Req:     req,
 		AppID:   appID,
 		Context: ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ func (c *client) UpdateAppInstaller(ctx context.Context, installerID string, req
 		InstallerID: installerID,
 		Req:         req,
 		Context:     ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ func (c *client) DeleteAppInstaller(ctx context.Context, installerID string) (bo
 	resp, err := c.genClient.Operations.DeleteAppInstaller(&operations.DeleteAppInstallerParams{
 		InstallerID: installerID,
 		Context:     ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return false, err
 	}

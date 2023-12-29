@@ -11,7 +11,7 @@ func (c *client) GetInstallCurrentInputs(ctx context.Context, installID string) 
 	resp, err := c.genClient.Operations.GetCurrentInstallInputs(&operations.GetCurrentInstallInputsParams{
 		InstallID: installID,
 		Context:   ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -23,7 +23,7 @@ func (c *client) GetInstallInputs(ctx context.Context, appID string) ([]*models.
 	resp, err := c.genClient.Operations.GetInstallInputs(&operations.GetInstallInputsParams{
 		InstallID: appID,
 		Context:   ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
@@ -36,7 +36,7 @@ func (c *client) CreateInstallInputs(ctx context.Context, installID string, req 
 		InstallID: installID,
 		Req:       req,
 		Context:   ctx,
-	}, nil)
+	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
 	}
