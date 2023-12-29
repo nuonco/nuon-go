@@ -32,6 +32,9 @@ type AppInstallDeploy struct {
 	// install component id
 	InstallComponentID string `json:"install_component_id,omitempty"`
 
+	// install id
+	InstallID string `json:"install_id,omitempty"`
+
 	// release id
 	ReleaseID string `json:"release_id,omitempty"`
 
