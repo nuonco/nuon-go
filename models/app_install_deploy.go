@@ -8,7 +8,6 @@ package models
 import (
 	"context"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -18,11 +17,14 @@ import (
 // swagger:model app.InstallDeploy
 type AppInstallDeploy struct {
 
-	// build
-	Build *AppComponentBuild `json:"build,omitempty"`
-
 	// build id
 	BuildID string `json:"build_id,omitempty"`
+
+	// component id
+	ComponentID string `json:"component_id,omitempty"`
+
+	// component name
+	ComponentName string `json:"component_name,omitempty"`
 
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
@@ -33,11 +35,11 @@ type AppInstallDeploy struct {
 	// id
 	ID string `json:"id,omitempty"`
 
-	// install component
-	InstallComponent *AppInstallComponent `json:"install_component,omitempty"`
-
 	// install component id
 	InstallComponentID string `json:"install_component_id,omitempty"`
+
+	// Fields that are de-nested at read time
+	InstallID string `json:"install_id,omitempty"`
 
 	// release id
 	ReleaseID string `json:"release_id,omitempty"`
@@ -54,117 +56,11 @@ type AppInstallDeploy struct {
 
 // Validate validates this app install deploy
 func (m *AppInstallDeploy) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateBuild(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateInstallComponent(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
 	return nil
 }
 
-func (m *AppInstallDeploy) validateBuild(formats strfmt.Registry) error {
-	if swag.IsZero(m.Build) { // not required
-		return nil
-	}
-
-	if m.Build != nil {
-		if err := m.Build.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("build")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("build")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *AppInstallDeploy) validateInstallComponent(formats strfmt.Registry) error {
-	if swag.IsZero(m.InstallComponent) { // not required
-		return nil
-	}
-
-	if m.InstallComponent != nil {
-		if err := m.InstallComponent.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("install_component")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("install_component")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this app install deploy based on the context it is used
+// ContextValidate validates this app install deploy based on context it is used
 func (m *AppInstallDeploy) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateBuild(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateInstallComponent(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *AppInstallDeploy) contextValidateBuild(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Build != nil {
-
-		if swag.IsZero(m.Build) { // not required
-			return nil
-		}
-
-		if err := m.Build.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("build")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("build")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *AppInstallDeploy) contextValidateInstallComponent(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.InstallComponent != nil {
-
-		if swag.IsZero(m.InstallComponent) { // not required
-			return nil
-		}
-
-		if err := m.InstallComponent.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("install_component")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("install_component")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 

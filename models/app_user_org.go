@@ -8,7 +8,6 @@ package models
 import (
 	"context"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -27,9 +26,6 @@ type AppUserOrg struct {
 	// id
 	ID string `json:"id,omitempty"`
 
-	// org
-	Org *AppOrg `json:"org,omitempty"`
-
 	// parent relationship
 	OrgID string `json:"orgID,omitempty"`
 
@@ -42,69 +38,11 @@ type AppUserOrg struct {
 
 // Validate validates this app user org
 func (m *AppUserOrg) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateOrg(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
 	return nil
 }
 
-func (m *AppUserOrg) validateOrg(formats strfmt.Registry) error {
-	if swag.IsZero(m.Org) { // not required
-		return nil
-	}
-
-	if m.Org != nil {
-		if err := m.Org.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("org")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("org")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this app user org based on the context it is used
+// ContextValidate validates this app user org based on context it is used
 func (m *AppUserOrg) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateOrg(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *AppUserOrg) contextValidateOrg(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Org != nil {
-
-		if swag.IsZero(m.Org) { // not required
-			return nil
-		}
-
-		if err := m.Org.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("org")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("org")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 

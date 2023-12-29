@@ -320,6 +320,21 @@ func (mr *MockClientMockRecorder) CreateVCSConnection(ctx, req interface{}) *gom
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateVCSConnection", reflect.TypeOf((*MockClient)(nil).CreateVCSConnection), ctx, req)
 }
 
+// CreateVCSConnectionCallback mocks base method.
+func (m *MockClient) CreateVCSConnectionCallback(ctx context.Context, req *models.ServiceCreateConnectionCallbackRequest) (*models.AppVCSConnection, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateVCSConnectionCallback", ctx, req)
+	ret0, _ := ret[0].(*models.AppVCSConnection)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateVCSConnectionCallback indicates an expected call of CreateVCSConnectionCallback.
+func (mr *MockClientMockRecorder) CreateVCSConnectionCallback(ctx, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateVCSConnectionCallback", reflect.TypeOf((*MockClient)(nil).CreateVCSConnectionCallback), ctx, req)
+}
+
 // DeleteApp mocks base method.
 func (m *MockClient) DeleteApp(ctx context.Context, appID string) (bool, error) {
 	m.ctrl.T.Helper()

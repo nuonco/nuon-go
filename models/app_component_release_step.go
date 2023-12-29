@@ -19,9 +19,6 @@ import (
 // swagger:model app.ComponentReleaseStep
 type AppComponentReleaseStep struct {
 
-	// component release
-	ComponentRelease *AppComponentRelease `json:"componentRelease,omitempty"`
-
 	// parent release ID
 	ComponentReleaseID string `json:"component_release_id,omitempty"`
 
@@ -58,10 +55,6 @@ type AppComponentReleaseStep struct {
 func (m *AppComponentReleaseStep) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateComponentRelease(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateInstallDeploys(formats); err != nil {
 		res = append(res, err)
 	}
@@ -69,25 +62,6 @@ func (m *AppComponentReleaseStep) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *AppComponentReleaseStep) validateComponentRelease(formats strfmt.Registry) error {
-	if swag.IsZero(m.ComponentRelease) { // not required
-		return nil
-	}
-
-	if m.ComponentRelease != nil {
-		if err := m.ComponentRelease.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("componentRelease")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("componentRelease")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -121,10 +95,6 @@ func (m *AppComponentReleaseStep) validateInstallDeploys(formats strfmt.Registry
 func (m *AppComponentReleaseStep) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateComponentRelease(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateInstallDeploys(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -132,27 +102,6 @@ func (m *AppComponentReleaseStep) ContextValidate(ctx context.Context, formats s
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *AppComponentReleaseStep) contextValidateComponentRelease(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.ComponentRelease != nil {
-
-		if swag.IsZero(m.ComponentRelease) { // not required
-			return nil
-		}
-
-		if err := m.ComponentRelease.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("componentRelease")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("componentRelease")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
