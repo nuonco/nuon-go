@@ -20,6 +20,12 @@ type AppInstallDeploy struct {
 	// build id
 	BuildID string `json:"build_id,omitempty"`
 
+	// component id
+	ComponentID string `json:"component_id,omitempty"`
+
+	// component name
+	ComponentName string `json:"component_name,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
@@ -32,7 +38,7 @@ type AppInstallDeploy struct {
 	// install component id
 	InstallComponentID string `json:"install_component_id,omitempty"`
 
-	// install id
+	// Fields that are de-nested at read time
 	InstallID string `json:"install_id,omitempty"`
 
 	// release id
