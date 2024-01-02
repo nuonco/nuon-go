@@ -7,9 +7,7 @@ package models
 
 import (
 	"context"
-	"strconv"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -32,7 +30,7 @@ type AppComponent struct {
 	CreatedByID string `json:"created_by_id,omitempty"`
 
 	// dependencies
-	Dependencies []*AppComponent `json:"dependencies"`
+	Dependencies []string `json:"dependencies"`
 
 	// id
 	ID string `json:"id,omitempty"`
@@ -52,80 +50,11 @@ type AppComponent struct {
 
 // Validate validates this app component
 func (m *AppComponent) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateDependencies(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
 	return nil
 }
 
-func (m *AppComponent) validateDependencies(formats strfmt.Registry) error {
-	if swag.IsZero(m.Dependencies) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(m.Dependencies); i++ {
-		if swag.IsZero(m.Dependencies[i]) { // not required
-			continue
-		}
-
-		if m.Dependencies[i] != nil {
-			if err := m.Dependencies[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("dependencies" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("dependencies" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-// ContextValidate validate this app component based on the context it is used
+// ContextValidate validates this app component based on context it is used
 func (m *AppComponent) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateDependencies(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *AppComponent) contextValidateDependencies(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Dependencies); i++ {
-
-		if m.Dependencies[i] != nil {
-
-			if swag.IsZero(m.Dependencies[i]) { // not required
-				return nil
-			}
-
-			if err := m.Dependencies[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("dependencies" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("dependencies" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
 	return nil
 }
 
