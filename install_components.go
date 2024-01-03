@@ -58,3 +58,16 @@ func (c *client) GetInstallDeployPlan(ctx context.Context, installID string, dep
 
 	return resp.Payload, nil
 }
+
+func (c *client) TeardownInstallComponent(ctx context.Context, installID, componentID string) (*models.AppInstallDeploy, error) {
+	resp, err := c.genClient.Operations.TeardownInstallComponent(&operations.TeardownInstallComponentParams{
+		InstallID:   installID,
+		ComponentID: componentID,
+		Context:     ctx,
+	}, c.getOrgIDAuthInfo())
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}
