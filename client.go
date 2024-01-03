@@ -90,6 +90,7 @@ type Client interface {
 
 	// install components
 	GetInstallComponents(ctx context.Context, installID string) ([]*models.AppInstallComponent, error)
+	TeardownInstallComponent(ctx context.Context, installID, componentID string) (*models.AppInstallDeploy, error)
 	GetInstallComponentDeploys(ctx context.Context, installID, componentID string) ([]*models.AppInstallDeploy, error)
 	GetInstallComponentLatestDeploy(ctx context.Context, installID, componentID string) (*models.AppInstallDeploy, error)
 
