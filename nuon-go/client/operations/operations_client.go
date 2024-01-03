@@ -182,6 +182,8 @@ type ClientService interface {
 
 	RenderAppInstaller(params *RenderAppInstallerParams, opts ...ClientOption) (*RenderAppInstallerOK, error)
 
+	TeardownInstallComponent(params *TeardownInstallComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeardownInstallComponentCreated, error)
+
 	UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppOK, error)
 
 	UpdateAppInstaller(params *UpdateAppInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppInstallerCreated, error)
@@ -3150,6 +3152,45 @@ func (a *Client) RenderAppInstaller(params *RenderAppInstallerParams, opts ...Cl
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for RenderAppInstaller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+TeardownInstallComponent teardowns an install component
+*/
+func (a *Client) TeardownInstallComponent(params *TeardownInstallComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeardownInstallComponentCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewTeardownInstallComponentParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "TeardownInstallComponent",
+		Method:             "POST",
+		PathPattern:        "/v1/installs/{install_id}/component/{component_id}/teardown",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &TeardownInstallComponentReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*TeardownInstallComponentCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for TeardownInstallComponent: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

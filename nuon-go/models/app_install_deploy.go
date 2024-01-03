@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -38,6 +39,9 @@ type AppInstallDeploy struct {
 	// install component id
 	InstallComponentID string `json:"install_component_id,omitempty"`
 
+	// install deploy type
+	InstallDeployType AppInstallDeployType `json:"install_deploy_type,omitempty"`
+
 	// Fields that are de-nested at read time
 	InstallID string `json:"install_id,omitempty"`
 
@@ -56,11 +60,64 @@ type AppInstallDeploy struct {
 
 // Validate validates this app install deploy
 func (m *AppInstallDeploy) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateInstallDeployType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this app install deploy based on context it is used
+func (m *AppInstallDeploy) validateInstallDeployType(formats strfmt.Registry) error {
+	if swag.IsZero(m.InstallDeployType) { // not required
+		return nil
+	}
+
+	if err := m.InstallDeployType.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("install_deploy_type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("install_deploy_type")
+		}
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this app install deploy based on the context it is used
 func (m *AppInstallDeploy) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateInstallDeployType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *AppInstallDeploy) contextValidateInstallDeployType(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.InstallDeployType) { // not required
+		return nil
+	}
+
+	if err := m.InstallDeployType.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("install_deploy_type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("install_deploy_type")
+		}
+		return err
+	}
+
 	return nil
 }
 
