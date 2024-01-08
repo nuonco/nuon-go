@@ -80,6 +80,21 @@ func (mr *MockClientMockRecorder) CreateAppInstaller(ctx, appID, req interface{}
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAppInstaller", reflect.TypeOf((*MockClient)(nil).CreateAppInstaller), ctx, appID, req)
 }
 
+// CreateAppRunnerConfig mocks base method.
+func (m *MockClient) CreateAppRunnerConfig(ctx context.Context, appID string, req *models.ServiceCreateAppRunnerConfigRequest) (*models.AppAppRunnerConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateAppRunnerConfig", ctx, appID, req)
+	ret0, _ := ret[0].(*models.AppAppRunnerConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateAppRunnerConfig indicates an expected call of CreateAppRunnerConfig.
+func (mr *MockClientMockRecorder) CreateAppRunnerConfig(ctx, appID, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAppRunnerConfig", reflect.TypeOf((*MockClient)(nil).CreateAppRunnerConfig), ctx, appID, req)
+}
+
 // CreateAppSandboxConfig mocks base method.
 func (m *MockClient) CreateAppSandboxConfig(ctx context.Context, appID string, req *models.ServiceCreateAppSandboxConfigRequest) (*models.AppAppSandboxConfig, error) {
 	m.ctrl.T.Helper()
@@ -558,6 +573,36 @@ func (m *MockClient) GetAppReleases(ctx context.Context, appID string) ([]*model
 func (mr *MockClientMockRecorder) GetAppReleases(ctx, appID interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppReleases", reflect.TypeOf((*MockClient)(nil).GetAppReleases), ctx, appID)
+}
+
+// GetAppRunnerConfigs mocks base method.
+func (m *MockClient) GetAppRunnerConfigs(ctx context.Context, appID string) ([]*models.AppAppRunnerConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAppRunnerConfigs", ctx, appID)
+	ret0, _ := ret[0].([]*models.AppAppRunnerConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAppRunnerConfigs indicates an expected call of GetAppRunnerConfigs.
+func (mr *MockClientMockRecorder) GetAppRunnerConfigs(ctx, appID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppRunnerConfigs", reflect.TypeOf((*MockClient)(nil).GetAppRunnerConfigs), ctx, appID)
+}
+
+// GetAppRunnerLatestConfig mocks base method.
+func (m *MockClient) GetAppRunnerLatestConfig(ctx context.Context, appID string) (*models.AppAppRunnerConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAppRunnerLatestConfig", ctx, appID)
+	ret0, _ := ret[0].(*models.AppAppRunnerConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAppRunnerLatestConfig indicates an expected call of GetAppRunnerLatestConfig.
+func (mr *MockClientMockRecorder) GetAppRunnerLatestConfig(ctx, appID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppRunnerLatestConfig", reflect.TypeOf((*MockClient)(nil).GetAppRunnerLatestConfig), ctx, appID)
 }
 
 // GetAppSandboxConfigs mocks base method.
@@ -1139,6 +1184,21 @@ func (m *MockClient) SetOrgID(orgID string) {
 func (mr *MockClientMockRecorder) SetOrgID(orgID interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetOrgID", reflect.TypeOf((*MockClient)(nil).SetOrgID), orgID)
+}
+
+// TeardownInstallComponent mocks base method.
+func (m *MockClient) TeardownInstallComponent(ctx context.Context, installID, componentID string) (*models.AppInstallDeploy, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "TeardownInstallComponent", ctx, installID, componentID)
+	ret0, _ := ret[0].(*models.AppInstallDeploy)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// TeardownInstallComponent indicates an expected call of TeardownInstallComponent.
+func (mr *MockClientMockRecorder) TeardownInstallComponent(ctx, installID, componentID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TeardownInstallComponent", reflect.TypeOf((*MockClient)(nil).TeardownInstallComponent), ctx, installID, componentID)
 }
 
 // UpdateApp mocks base method.
