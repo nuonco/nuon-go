@@ -22,6 +22,9 @@ type AppInstall struct {
 	// app id
 	AppID string `json:"app_id,omitempty"`
 
+	// app runner config
+	AppRunnerConfig *AppAppRunnerConfig `json:"app_runner_config,omitempty"`
+
 	// app sandbox config
 	AppSandboxConfig *AppAppSandboxConfig `json:"app_sandbox_config,omitempty"`
 
@@ -63,6 +66,10 @@ type AppInstall struct {
 func (m *AppInstall) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAppRunnerConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateAppSandboxConfig(formats); err != nil {
 		res = append(res, err)
 	}
@@ -86,6 +93,25 @@ func (m *AppInstall) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppInstall) validateAppRunnerConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.AppRunnerConfig) { // not required
+		return nil
+	}
+
+	if m.AppRunnerConfig != nil {
+		if err := m.AppRunnerConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("app_runner_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("app_runner_config")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -209,6 +235,10 @@ func (m *AppInstall) validateInstallSandboxRuns(formats strfmt.Registry) error {
 func (m *AppInstall) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateAppRunnerConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateAppSandboxConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -232,6 +262,27 @@ func (m *AppInstall) ContextValidate(ctx context.Context, formats strfmt.Registr
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppInstall) contextValidateAppRunnerConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AppRunnerConfig != nil {
+
+		if swag.IsZero(m.AppRunnerConfig) { // not required
+			return nil
+		}
+
+		if err := m.AppRunnerConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("app_runner_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("app_runner_config")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

@@ -42,6 +42,11 @@ type Client interface {
 	GetAppSandboxLatestConfig(ctx context.Context, appID string) (*models.AppAppSandboxConfig, error)
 	GetAppSandboxConfigs(ctx context.Context, appID string) ([]*models.AppAppSandboxConfig, error)
 
+	// app runner config methods
+	CreateAppRunnerConfig(ctx context.Context, appID string, req *models.ServiceCreateAppRunnerConfigRequest) (*models.AppAppRunnerConfig, error)
+	GetAppRunnerLatestConfig(ctx context.Context, appID string) (*models.AppAppRunnerConfig, error)
+	GetAppRunnerConfigs(ctx context.Context, appID string) ([]*models.AppAppRunnerConfig, error)
+
 	// app input config methods
 	CreateAppInputConfig(ctx context.Context, appID string, req *models.ServiceCreateAppInputConfigRequest) (*models.AppAppInputConfig, error)
 	GetAppInputLatestConfig(ctx context.Context, appID string) (*models.AppAppInputConfig, error)
