@@ -133,6 +133,7 @@ type Client interface {
 	GetComponentBuild(ctx context.Context, componentID, buildID string) (*models.AppComponentBuild, error)
 	GetComponentBuildLogs(ctx context.Context, componentID, buildID string) ([]models.ServiceBuildLog, error)
 	GetComponentBuildPlan(ctx context.Context, componentsID, buildID string) (*models.Planv1Plan, error)
+	GetBuild(ctx context.Context, buildID string) (*models.AppComponentBuild, error)
 
 	// component releases
 	GetAppReleases(ctx context.Context, appID string) ([]*models.AppComponentRelease, error)
@@ -141,9 +142,6 @@ type Client interface {
 
 	GetRelease(ctx context.Context, releaseID string) (*models.AppComponentRelease, error)
 	GetReleaseSteps(ctx context.Context, releaseID string) ([]*models.AppComponentReleaseStep, error)
-
-	// releases
-	CreateRelease(ctx context.Context, req *models.ServiceCreateComponentReleaseRequest) (*models.AppComponentRelease, error)
 }
 
 var _ Client = (*client)(nil)
@@ -155,7 +153,7 @@ type client struct {
 	APIToken string
 	OrgID    string
 
-	genClient    *genclient.NuonAPI
+	genClient    *genclient.Nuon
 	appTransport *appTransport
 }
 
