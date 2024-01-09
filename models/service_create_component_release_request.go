@@ -18,6 +18,9 @@ import (
 // swagger:model service.CreateComponentReleaseRequest
 type ServiceCreateComponentReleaseRequest struct {
 
+	// auto build
+	AutoBuild bool `json:"auto_build,omitempty"`
+
 	// build id
 	BuildID string `json:"build_id,omitempty"`
 

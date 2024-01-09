@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/nuonco/nuon-go/models"
 )
 
 // NewTeardownInstallComponentParams creates a new TeardownInstallComponentParams object,
@@ -74,12 +72,6 @@ type TeardownInstallComponentParams struct {
 	   install ID
 	*/
 	InstallID string
-
-	/* Req.
-
-	   Input
-	*/
-	Req models.ServiceTeardownInstallComponentRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -156,17 +148,6 @@ func (o *TeardownInstallComponentParams) SetInstallID(installID string) {
 	o.InstallID = installID
 }
 
-// WithReq adds the req to the teardown install component params
-func (o *TeardownInstallComponentParams) WithReq(req models.ServiceTeardownInstallComponentRequest) *TeardownInstallComponentParams {
-	o.SetReq(req)
-	return o
-}
-
-// SetReq adds the req to the teardown install component params
-func (o *TeardownInstallComponentParams) SetReq(req models.ServiceTeardownInstallComponentRequest) {
-	o.Req = req
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *TeardownInstallComponentParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -183,11 +164,6 @@ func (o *TeardownInstallComponentParams) WriteToRequest(r runtime.ClientRequest,
 	// path param install_id
 	if err := r.SetPathParam("install_id", o.InstallID); err != nil {
 		return err
-	}
-	if o.Req != nil {
-		if err := r.SetBodyParam(o.Req); err != nil {
-			return err
-		}
 	}
 
 	if len(res) > 0 {

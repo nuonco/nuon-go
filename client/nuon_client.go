@@ -12,7 +12,7 @@ import (
 	"github.com/nuonco/nuon-go/client/operations"
 )
 
-// Default nuon API HTTP client.
+// Default nuon HTTP client.
 var Default = NewHTTPClient(nil)
 
 const (
@@ -27,14 +27,14 @@ const (
 // DefaultSchemes are the default schemes found in Meta (info) section of spec file
 var DefaultSchemes = []string{"http"}
 
-// NewHTTPClient creates a new nuon API HTTP client.
-func NewHTTPClient(formats strfmt.Registry) *NuonAPI {
+// NewHTTPClient creates a new nuon HTTP client.
+func NewHTTPClient(formats strfmt.Registry) *Nuon {
 	return NewHTTPClientWithConfig(formats, nil)
 }
 
-// NewHTTPClientWithConfig creates a new nuon API HTTP client,
+// NewHTTPClientWithConfig creates a new nuon HTTP client,
 // using a customizable transport config.
-func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *NuonAPI {
+func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *Nuon {
 	// ensure nullable parameters have default
 	if cfg == nil {
 		cfg = DefaultTransportConfig()
@@ -45,14 +45,14 @@ func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *Nuo
 	return New(transport, formats)
 }
 
-// New creates a new nuon API client
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *NuonAPI {
+// New creates a new nuon client
+func New(transport runtime.ClientTransport, formats strfmt.Registry) *Nuon {
 	// ensure nullable parameters have default
 	if formats == nil {
 		formats = strfmt.Default
 	}
 
-	cli := new(NuonAPI)
+	cli := new(Nuon)
 	cli.Transport = transport
 	cli.Operations = operations.New(transport, formats)
 	return cli
@@ -97,15 +97,15 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 	return cfg
 }
 
-// NuonAPI is a client for nuon API
-type NuonAPI struct {
+// Nuon is a client for nuon
+type Nuon struct {
 	Operations operations.ClientService
 
 	Transport runtime.ClientTransport
 }
 
 // SetTransport changes the transport on the client and all its subresources
-func (c *NuonAPI) SetTransport(transport runtime.ClientTransport) {
+func (c *Nuon) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 	c.Operations.SetTransport(transport)
 }

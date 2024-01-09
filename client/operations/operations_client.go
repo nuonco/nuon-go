@@ -42,8 +42,6 @@ type ClientService interface {
 
 	CreateAppSandboxConfig(params *CreateAppSandboxConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppSandboxConfigCreated, error)
 
-	CreateBuildRelease(params *CreateBuildReleaseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBuildReleaseCreated, error)
-
 	CreateComponent(params *CreateComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateComponentCreated, error)
 
 	CreateComponentBuild(params *CreateComponentBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateComponentBuildCreated, error)
@@ -107,6 +105,8 @@ type ClientService interface {
 	GetAppSandboxLatestConfig(params *GetAppSandboxLatestConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppSandboxLatestConfigOK, error)
 
 	GetApps(params *GetAppsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppsOK, error)
+
+	GetBuild(params *GetBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBuildOK, error)
 
 	GetCLIConfig(params *GetCLIConfigParams, opts ...ClientOption) (*GetCLIConfigOK, error)
 
@@ -434,45 +434,6 @@ func (a *Client) CreateAppSandboxConfig(params *CreateAppSandboxConfigParams, au
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppSandboxConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-CreateBuildRelease creates a release
-*/
-func (a *Client) CreateBuildRelease(params *CreateBuildReleaseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBuildReleaseCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewCreateBuildReleaseParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "CreateBuildRelease",
-		Method:             "POST",
-		PathPattern:        "/v1/releases",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &CreateBuildReleaseReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*CreateBuildReleaseCreated)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for CreateBuildRelease: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -1720,6 +1681,45 @@ func (a *Client) GetApps(params *GetAppsParams, authInfo runtime.ClientAuthInfoW
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetApps: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetBuild gets a build
+*/
+func (a *Client) GetBuild(params *GetBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBuildOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetBuildParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetBuild",
+		Method:             "GET",
+		PathPattern:        "/v1/components/builds/{build_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetBuildReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetBuildOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetBuild: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
