@@ -68,15 +68,3 @@ func (c *client) CreateComponentRelease(ctx context.Context, componentID string,
 
 	return resp.Payload, nil
 }
-
-func (c *client) CreateRelease(ctx context.Context, req *models.ServiceCreateComponentReleaseRequest) (*models.AppComponentRelease, error) {
-	resp, err := c.genClient.Operations.CreateBuildRelease(&operations.CreateBuildReleaseParams{
-		Req:     req,
-		Context: ctx,
-	}, c.getOrgIDAuthInfo())
-	if err != nil {
-		return nil, err
-	}
-
-	return resp.Payload, nil
-}

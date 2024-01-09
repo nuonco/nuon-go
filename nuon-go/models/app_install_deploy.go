@@ -42,7 +42,7 @@ type AppInstallDeploy struct {
 	// install deploy type
 	InstallDeployType AppInstallDeployType `json:"install_deploy_type,omitempty"`
 
-	// Fields that are de-nested at read time
+	// Fields that are de-nested at read time using AfterQuery
 	InstallID string `json:"install_id,omitempty"`
 
 	// release id

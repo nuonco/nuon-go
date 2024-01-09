@@ -290,21 +290,6 @@ func (mr *MockClientMockRecorder) CreateOrgUser(ctx, req interface{}) *gomock.Ca
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateOrgUser", reflect.TypeOf((*MockClient)(nil).CreateOrgUser), ctx, req)
 }
 
-// CreateRelease mocks base method.
-func (m *MockClient) CreateRelease(ctx context.Context, req *models.ServiceCreateComponentReleaseRequest) (*models.AppComponentRelease, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CreateRelease", ctx, req)
-	ret0, _ := ret[0].(*models.AppComponentRelease)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// CreateRelease indicates an expected call of CreateRelease.
-func (mr *MockClientMockRecorder) CreateRelease(ctx, req interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateRelease", reflect.TypeOf((*MockClient)(nil).CreateRelease), ctx, req)
-}
-
 // CreateTerraformModuleComponentConfig mocks base method.
 func (m *MockClient) CreateTerraformModuleComponentConfig(ctx context.Context, componentID string, req *models.ServiceCreateTerraformModuleComponentConfigRequest) (*models.AppTerraformModuleComponentConfig, error) {
 	m.ctrl.T.Helper()
@@ -648,6 +633,21 @@ func (m *MockClient) GetApps(ctx context.Context) ([]*models.AppApp, error) {
 func (mr *MockClientMockRecorder) GetApps(ctx interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetApps", reflect.TypeOf((*MockClient)(nil).GetApps), ctx)
+}
+
+// GetBuild mocks base method.
+func (m *MockClient) GetBuild(ctx context.Context, buildID string) (*models.AppComponentBuild, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetBuild", ctx, buildID)
+	ret0, _ := ret[0].(*models.AppComponentBuild)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetBuild indicates an expected call of GetBuild.
+func (mr *MockClientMockRecorder) GetBuild(ctx, buildID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBuild", reflect.TypeOf((*MockClient)(nil).GetBuild), ctx, buildID)
 }
 
 // GetCLIConfig mocks base method.
