@@ -58,6 +58,7 @@ type Client interface {
 	DeleteAppInstaller(ctx context.Context, appInstallerID string) (bool, error)
 	GetAppInstaller(ctx context.Context, appInstallerID string) (*models.AppAppInstaller, error)
 	RenderAppInstaller(ctx context.Context, slug string) (*models.ServiceAppInstaller, error)
+	CreateInstallFromInstaller(ctx context.Context, req *models.ServiceInstallerCreateInstallRequest) (*models.AppInstall, error)
 
 	// general methods
 	GetCLIConfig(ctx context.Context) (*models.ServiceCLIConfig, error)
