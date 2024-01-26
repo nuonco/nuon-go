@@ -68,3 +68,15 @@ func (c *client) DeleteAppInstaller(ctx context.Context, installerID string) (bo
 
 	return resp.IsSuccess(), nil
 }
+
+func (c *client) CreateInstallFromInstaller(ctx context.Context, req *models.ServiceInstallerCreateInstallRequest) (*models.AppInstall, error) {
+	resp, err := c.genClient.Operations.InstallerCreateInstall(&operations.InstallerCreateInstallParams{
+		Context: ctx,
+		Req:     req,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}

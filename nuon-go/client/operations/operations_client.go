@@ -180,7 +180,7 @@ type ClientService interface {
 
 	GetVCSConnection(params *GetVCSConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVCSConnectionOK, error)
 
-	InstallerCreateInstaller(params *InstallerCreateInstallerParams, opts ...ClientOption) (*InstallerCreateInstallerCreated, error)
+	InstallerCreateInstall(params *InstallerCreateInstallParams, opts ...ClientOption) (*InstallerCreateInstallCreated, error)
 
 	InstallerGetInstall(params *InstallerGetInstallParams, opts ...ClientOption) (*InstallerGetInstallOK, error)
 
@@ -3126,22 +3126,22 @@ func (a *Client) GetVCSConnection(params *GetVCSConnectionParams, authInfo runti
 }
 
 /*
-InstallerCreateInstaller creates an app install from an installer
+InstallerCreateInstall creates an app install from an installer
 */
-func (a *Client) InstallerCreateInstaller(params *InstallerCreateInstallerParams, opts ...ClientOption) (*InstallerCreateInstallerCreated, error) {
+func (a *Client) InstallerCreateInstall(params *InstallerCreateInstallParams, opts ...ClientOption) (*InstallerCreateInstallCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewInstallerCreateInstallerParams()
+		params = NewInstallerCreateInstallParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "InstallerCreateInstaller",
+		ID:                 "InstallerCreateInstall",
 		Method:             "POST",
 		PathPattern:        "/v1/installer/{installer_slug}/installs",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &InstallerCreateInstallerReader{formats: a.formats},
+		Reader:             &InstallerCreateInstallReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -3153,13 +3153,13 @@ func (a *Client) InstallerCreateInstaller(params *InstallerCreateInstallerParams
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*InstallerCreateInstallerCreated)
+	success, ok := result.(*InstallerCreateInstallCreated)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for InstallerCreateInstaller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for InstallerCreateInstall: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
