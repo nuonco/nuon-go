@@ -48,6 +48,11 @@ type Client interface {
 	GetAppRunnerLatestConfig(ctx context.Context, appID string) (*models.AppAppRunnerConfig, error)
 	GetAppRunnerConfigs(ctx context.Context, appID string) ([]*models.AppAppRunnerConfig, error)
 
+	// app config methods
+	CreateAppConfig(ctx context.Context, appID string, req *models.ServiceCreateAppConfigRequest) (*models.AppAppConfig, error)
+	GetAppLatestConfig(ctx context.Context, appID string) (*models.AppAppConfig, error)
+	GetAppConfigs(ctx context.Context, appID string) ([]*models.AppAppConfig, error)
+
 	// app input config methods
 	CreateAppInputConfig(ctx context.Context, appID string, req *models.ServiceCreateAppInputConfigRequest) (*models.AppAppInputConfig, error)
 	GetAppInputLatestConfig(ctx context.Context, appID string) (*models.AppAppInputConfig, error)
