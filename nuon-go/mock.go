@@ -230,6 +230,21 @@ func (mr *MockClientMockRecorder) CreateInstallDeploy(ctx, installID, req interf
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateInstallDeploy", reflect.TypeOf((*MockClient)(nil).CreateInstallDeploy), ctx, installID, req)
 }
 
+// CreateInstallFromInstaller mocks base method.
+func (m *MockClient) CreateInstallFromInstaller(ctx context.Context, req *models.ServiceInstallerCreateInstallRequest) (*models.AppInstall, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateInstallFromInstaller", ctx, req)
+	ret0, _ := ret[0].(*models.AppInstall)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateInstallFromInstaller indicates an expected call of CreateInstallFromInstaller.
+func (mr *MockClientMockRecorder) CreateInstallFromInstaller(ctx, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateInstallFromInstaller", reflect.TypeOf((*MockClient)(nil).CreateInstallFromInstaller), ctx, req)
+}
+
 // CreateInstallInputs mocks base method.
 func (m *MockClient) CreateInstallInputs(ctx context.Context, installID string, req *models.ServiceCreateInstallInputsRequest) (*models.AppInstallInputs, error) {
 	m.ctrl.T.Helper()
