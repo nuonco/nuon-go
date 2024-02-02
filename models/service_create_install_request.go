@@ -7,7 +7,6 @@ package models
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -152,7 +151,6 @@ type ServiceCreateInstallRequestAwsAccount struct {
 	IamRoleArn *string `json:"iam_role_arn"`
 
 	// region
-	// Enum: [us-east-1 us-east-2 us-west-2]
 	Region string `json:"region,omitempty"`
 }
 
@@ -161,10 +159,6 @@ func (m *ServiceCreateInstallRequestAwsAccount) Validate(formats strfmt.Registry
 	var res []error
 
 	if err := m.validateIamRoleArn(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateRegion(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -177,51 +171,6 @@ func (m *ServiceCreateInstallRequestAwsAccount) Validate(formats strfmt.Registry
 func (m *ServiceCreateInstallRequestAwsAccount) validateIamRoleArn(formats strfmt.Registry) error {
 
 	if err := validate.Required("aws_account"+"."+"iam_role_arn", "body", m.IamRoleArn); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var serviceCreateInstallRequestAwsAccountTypeRegionPropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["us-east-1","us-east-2","us-west-2"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		serviceCreateInstallRequestAwsAccountTypeRegionPropEnum = append(serviceCreateInstallRequestAwsAccountTypeRegionPropEnum, v)
-	}
-}
-
-const (
-
-	// ServiceCreateInstallRequestAwsAccountRegionUsDashEastDash1 captures enum value "us-east-1"
-	ServiceCreateInstallRequestAwsAccountRegionUsDashEastDash1 string = "us-east-1"
-
-	// ServiceCreateInstallRequestAwsAccountRegionUsDashEastDash2 captures enum value "us-east-2"
-	ServiceCreateInstallRequestAwsAccountRegionUsDashEastDash2 string = "us-east-2"
-
-	// ServiceCreateInstallRequestAwsAccountRegionUsDashWestDash2 captures enum value "us-west-2"
-	ServiceCreateInstallRequestAwsAccountRegionUsDashWestDash2 string = "us-west-2"
-)
-
-// prop value enum
-func (m *ServiceCreateInstallRequestAwsAccount) validateRegionEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, serviceCreateInstallRequestAwsAccountTypeRegionPropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *ServiceCreateInstallRequestAwsAccount) validateRegion(formats strfmt.Registry) error {
-	if swag.IsZero(m.Region) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateRegionEnum("aws_account"+"."+"region", "body", m.Region); err != nil {
 		return err
 	}
 
