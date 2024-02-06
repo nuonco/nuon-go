@@ -30,11 +30,14 @@ func (m AppAppConfigStatus) Pointer() *AppAppConfigStatus {
 
 const (
 
-	// AppAppConfigStatusApplied captures enum value "applied"
-	AppAppConfigStatusApplied AppAppConfigStatus = "applied"
+	// AppAppConfigStatusActive captures enum value "active"
+	AppAppConfigStatusActive AppAppConfigStatus = "active"
 
 	// AppAppConfigStatusPending captures enum value "pending"
 	AppAppConfigStatusPending AppAppConfigStatus = "pending"
+
+	// AppAppConfigStatusSyncing captures enum value "syncing"
+	AppAppConfigStatusSyncing AppAppConfigStatus = "syncing"
 
 	// AppAppConfigStatusError captures enum value "error"
 	AppAppConfigStatusError AppAppConfigStatus = "error"
@@ -48,7 +51,7 @@ var appAppConfigStatusEnum []interface{}
 
 func init() {
 	var res []AppAppConfigStatus
-	if err := json.Unmarshal([]byte(`["applied","pending","error","outdated"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["active","pending","syncing","error","outdated"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

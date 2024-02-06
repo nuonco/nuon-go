@@ -33,6 +33,9 @@ type AppAppConfig struct {
 	// format
 	Format AppAppConfigFmt `json:"format,omitempty"`
 
+	// generated terraform
+	GeneratedTerraform string `json:"generated_terraform,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
@@ -41,6 +44,9 @@ type AppAppConfig struct {
 
 	// status
 	Status AppAppConfigStatus `json:"status,omitempty"`
+
+	// status description
+	StatusDescription string `json:"status_description,omitempty"`
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`

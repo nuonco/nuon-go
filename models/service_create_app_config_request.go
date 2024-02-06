@@ -21,6 +21,7 @@ type ServiceCreateAppConfigRequest struct {
 
 	// content
 	// Required: true
+	// Min Length: 1
 	Content *string `json:"content"`
 
 	// format
@@ -49,6 +50,10 @@ func (m *ServiceCreateAppConfigRequest) Validate(formats strfmt.Registry) error 
 func (m *ServiceCreateAppConfigRequest) validateContent(formats strfmt.Registry) error {
 
 	if err := validate.Required("content", "body", m.Content); err != nil {
+		return err
+	}
+
+	if err := validate.MinLength("content", "body", *m.Content, 1); err != nil {
 		return err
 	}
 

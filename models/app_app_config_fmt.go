@@ -35,6 +35,9 @@ const (
 
 	// AppAppConfigFmtToml captures enum value "toml"
 	AppAppConfigFmtToml AppAppConfigFmt = "toml"
+
+	// AppAppConfigFmtYaml captures enum value "yaml"
+	AppAppConfigFmtYaml AppAppConfigFmt = "yaml"
 )
 
 // for schema
@@ -42,7 +45,7 @@ var appAppConfigFmtEnum []interface{}
 
 func init() {
 	var res []AppAppConfigFmt
-	if err := json.Unmarshal([]byte(`["json","toml"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["json","toml","yaml"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
