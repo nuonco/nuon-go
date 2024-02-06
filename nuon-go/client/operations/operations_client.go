@@ -162,6 +162,8 @@ type ClientService interface {
 
 	GetOrgComponents(params *GetOrgComponentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrgComponentsOK, error)
 
+	GetOrgHealthChecks(params *GetOrgHealthChecksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrgHealthChecksOK, error)
+
 	GetOrgInstalls(params *GetOrgInstallsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrgInstallsOK, error)
 
 	GetOrgVCSConnections(params *GetOrgVCSConnectionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrgVCSConnectionsOK, error)
@@ -2772,6 +2774,47 @@ func (a *Client) GetOrgComponents(params *GetOrgComponentsParams, authInfo runti
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetOrgComponents: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetOrgHealthChecks gets an org s health checks
+
+Fetch the most recent health checks for an org. Health checks are automatically performed once every 60 seconds.
+*/
+func (a *Client) GetOrgHealthChecks(params *GetOrgHealthChecksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrgHealthChecksOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetOrgHealthChecksParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetOrgHealthChecks",
+		Method:             "GET",
+		PathPattern:        "/v1/orgs/current/health-checks",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetOrgHealthChecksReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetOrgHealthChecksOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetOrgHealthChecks: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
