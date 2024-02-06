@@ -28,6 +28,9 @@ type AppOrg struct {
 	// custom cert
 	CustomCert bool `json:"custom_cert,omitempty"`
 
+	// health checks
+	HealthChecks []*AppOrgHealthCheck `json:"health_checks"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
@@ -58,6 +61,10 @@ type AppOrg struct {
 func (m *AppOrg) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateHealthChecks(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateUsers(formats); err != nil {
 		res = append(res, err)
 	}
@@ -69,6 +76,32 @@ func (m *AppOrg) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppOrg) validateHealthChecks(formats strfmt.Registry) error {
+	if swag.IsZero(m.HealthChecks) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.HealthChecks); i++ {
+		if swag.IsZero(m.HealthChecks[i]) { // not required
+			continue
+		}
+
+		if m.HealthChecks[i] != nil {
+			if err := m.HealthChecks[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("health_checks" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("health_checks" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -128,6 +161,10 @@ func (m *AppOrg) validateVcsConnections(formats strfmt.Registry) error {
 func (m *AppOrg) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateHealthChecks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateUsers(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -139,6 +176,31 @@ func (m *AppOrg) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppOrg) contextValidateHealthChecks(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.HealthChecks); i++ {
+
+		if m.HealthChecks[i] != nil {
+
+			if swag.IsZero(m.HealthChecks[i]) { // not required
+				return nil
+			}
+
+			if err := m.HealthChecks[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("health_checks" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("health_checks" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

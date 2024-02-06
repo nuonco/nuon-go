@@ -1040,6 +1040,21 @@ func (mr *MockClientMockRecorder) GetOrg(ctx interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrg", reflect.TypeOf((*MockClient)(nil).GetOrg), ctx)
 }
 
+// GetOrgHealthChecks mocks base method.
+func (m *MockClient) GetOrgHealthChecks(ctx context.Context, limit *int64) ([]*models.AppOrgHealthCheck, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOrgHealthChecks", ctx, limit)
+	ret0, _ := ret[0].([]*models.AppOrgHealthCheck)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetOrgHealthChecks indicates an expected call of GetOrgHealthChecks.
+func (mr *MockClientMockRecorder) GetOrgHealthChecks(ctx, limit interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrgHealthChecks", reflect.TypeOf((*MockClient)(nil).GetOrgHealthChecks), ctx, limit)
+}
+
 // GetOrgs mocks base method.
 func (m *MockClient) GetOrgs(ctx context.Context) ([]*models.AppOrg, error) {
 	m.ctrl.T.Helper()
