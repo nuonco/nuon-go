@@ -63,12 +63,6 @@ CreateAppInstallerParams contains all the parameters to send to the API endpoint
 */
 type CreateAppInstallerParams struct {
 
-	/* AppID.
-
-	   app ID
-	*/
-	AppID string
-
 	/* Req.
 
 	   Input
@@ -128,17 +122,6 @@ func (o *CreateAppInstallerParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithAppID adds the appID to the create app installer params
-func (o *CreateAppInstallerParams) WithAppID(appID string) *CreateAppInstallerParams {
-	o.SetAppID(appID)
-	return o
-}
-
-// SetAppID adds the appId to the create app installer params
-func (o *CreateAppInstallerParams) SetAppID(appID string) {
-	o.AppID = appID
-}
-
 // WithReq adds the req to the create app installer params
 func (o *CreateAppInstallerParams) WithReq(req *models.ServiceCreateAppInstallerRequest) *CreateAppInstallerParams {
 	o.SetReq(req)
@@ -157,11 +140,6 @@ func (o *CreateAppInstallerParams) WriteToRequest(r runtime.ClientRequest, reg s
 		return err
 	}
 	var res []error
-
-	// path param app_id
-	if err := r.SetPathParam("app_id", o.AppID); err != nil {
-		return err
-	}
 	if o.Req != nil {
 		if err := r.SetBodyParam(o.Req); err != nil {
 			return err

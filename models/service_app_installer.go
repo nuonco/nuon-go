@@ -21,6 +21,12 @@ type ServiceAppInstaller struct {
 	// app
 	App *AppApp `json:"app,omitempty"`
 
+	// app inputs
+	AppInputs *AppAppInputConfig `json:"app_inputs,omitempty"`
+
+	// app sandbox
+	AppSandbox *AppAppSandboxConfig `json:"app_sandbox,omitempty"`
+
 	// metadata
 	Metadata *AppAppInstallerMetadata `json:"metadata,omitempty"`
 
@@ -33,6 +39,14 @@ func (m *ServiceAppInstaller) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateApp(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAppInputs(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAppSandbox(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -57,6 +71,44 @@ func (m *ServiceAppInstaller) validateApp(formats strfmt.Registry) error {
 				return ve.ValidateName("app")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("app")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ServiceAppInstaller) validateAppInputs(formats strfmt.Registry) error {
+	if swag.IsZero(m.AppInputs) { // not required
+		return nil
+	}
+
+	if m.AppInputs != nil {
+		if err := m.AppInputs.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("app_inputs")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("app_inputs")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ServiceAppInstaller) validateAppSandbox(formats strfmt.Registry) error {
+	if swag.IsZero(m.AppSandbox) { // not required
+		return nil
+	}
+
+	if m.AppSandbox != nil {
+		if err := m.AppSandbox.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("app_sandbox")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("app_sandbox")
 			}
 			return err
 		}
@@ -92,6 +144,14 @@ func (m *ServiceAppInstaller) ContextValidate(ctx context.Context, formats strfm
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateAppInputs(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateAppSandbox(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateMetadata(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -115,6 +175,48 @@ func (m *ServiceAppInstaller) contextValidateApp(ctx context.Context, formats st
 				return ve.ValidateName("app")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("app")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ServiceAppInstaller) contextValidateAppInputs(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AppInputs != nil {
+
+		if swag.IsZero(m.AppInputs) { // not required
+			return nil
+		}
+
+		if err := m.AppInputs.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("app_inputs")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("app_inputs")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ServiceAppInstaller) contextValidateAppSandbox(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AppSandbox != nil {
+
+		if swag.IsZero(m.AppSandbox) { // not required
+			return nil
+		}
+
+		if err := m.AppSandbox.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("app_sandbox")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("app_sandbox")
 			}
 			return err
 		}

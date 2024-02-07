@@ -333,7 +333,7 @@ func (a *Client) CreateAppInstaller(params *CreateAppInstallerParams, authInfo r
 	op := &runtime.ClientOperation{
 		ID:                 "CreateAppInstaller",
 		Method:             "POST",
-		PathPattern:        "/v1/apps/{app_id}/installer",
+		PathPattern:        "/v1/installers",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
