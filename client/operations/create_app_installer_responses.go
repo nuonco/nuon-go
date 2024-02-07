@@ -60,7 +60,7 @@ func (o *CreateAppInstallerReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /v1/apps/{app_id}/installer] CreateAppInstaller", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /v1/installers] CreateAppInstaller", response, response.Code())
 	}
 }
 
@@ -109,11 +109,11 @@ func (o *CreateAppInstallerCreated) Code() int {
 }
 
 func (o *CreateAppInstallerCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installer][%d] createAppInstallerCreated  %+v", 201, o.Payload)
+	return fmt.Sprintf("[POST /v1/installers][%d] createAppInstallerCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateAppInstallerCreated) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installer][%d] createAppInstallerCreated  %+v", 201, o.Payload)
+	return fmt.Sprintf("[POST /v1/installers][%d] createAppInstallerCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateAppInstallerCreated) GetPayload() *models.AppAppInstaller {
@@ -177,11 +177,11 @@ func (o *CreateAppInstallerBadRequest) Code() int {
 }
 
 func (o *CreateAppInstallerBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installer][%d] createAppInstallerBadRequest  %+v", 400, o.Payload)
+	return fmt.Sprintf("[POST /v1/installers][%d] createAppInstallerBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateAppInstallerBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installer][%d] createAppInstallerBadRequest  %+v", 400, o.Payload)
+	return fmt.Sprintf("[POST /v1/installers][%d] createAppInstallerBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateAppInstallerBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +245,11 @@ func (o *CreateAppInstallerUnauthorized) Code() int {
 }
 
 func (o *CreateAppInstallerUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installer][%d] createAppInstallerUnauthorized  %+v", 401, o.Payload)
+	return fmt.Sprintf("[POST /v1/installers][%d] createAppInstallerUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateAppInstallerUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installer][%d] createAppInstallerUnauthorized  %+v", 401, o.Payload)
+	return fmt.Sprintf("[POST /v1/installers][%d] createAppInstallerUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateAppInstallerUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +313,11 @@ func (o *CreateAppInstallerForbidden) Code() int {
 }
 
 func (o *CreateAppInstallerForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installer][%d] createAppInstallerForbidden  %+v", 403, o.Payload)
+	return fmt.Sprintf("[POST /v1/installers][%d] createAppInstallerForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateAppInstallerForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installer][%d] createAppInstallerForbidden  %+v", 403, o.Payload)
+	return fmt.Sprintf("[POST /v1/installers][%d] createAppInstallerForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateAppInstallerForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +381,11 @@ func (o *CreateAppInstallerNotFound) Code() int {
 }
 
 func (o *CreateAppInstallerNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installer][%d] createAppInstallerNotFound  %+v", 404, o.Payload)
+	return fmt.Sprintf("[POST /v1/installers][%d] createAppInstallerNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateAppInstallerNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installer][%d] createAppInstallerNotFound  %+v", 404, o.Payload)
+	return fmt.Sprintf("[POST /v1/installers][%d] createAppInstallerNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateAppInstallerNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +449,11 @@ func (o *CreateAppInstallerInternalServerError) Code() int {
 }
 
 func (o *CreateAppInstallerInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installer][%d] createAppInstallerInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[POST /v1/installers][%d] createAppInstallerInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateAppInstallerInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/installer][%d] createAppInstallerInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[POST /v1/installers][%d] createAppInstallerInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateAppInstallerInternalServerError) GetPayload() *models.StderrErrResponse {
