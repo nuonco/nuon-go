@@ -19,6 +19,17 @@ func (c *client) RenderAppInstaller(ctx context.Context, slug string) (*models.S
 	return resp.Payload, nil
 }
 
+func (c *client) GetInstallers(ctx context.Context) ([]*models.AppAppInstaller, error) {
+	resp, err := c.genClient.Operations.GetInstallers(&operations.GetInstallersParams{
+		Context: ctx,
+	}, c.getOrgIDAuthInfo())
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}
+
 func (c *client) GetAppInstaller(ctx context.Context, appInstallerID string) (*models.AppAppInstaller, error) {
 	resp, err := c.genClient.Operations.GetAppInstaller(&operations.GetAppInstallerParams{
 		Context:     ctx,

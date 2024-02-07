@@ -34,6 +34,11 @@ type AppOrg struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// Filled in at read time
+	LatestHealthCheck struct {
+		AppOrgHealthCheck
+	} `json:"latest_health_check,omitempty"`
+
 	// name
 	Name string `json:"name,omitempty"`
 
@@ -62,6 +67,10 @@ func (m *AppOrg) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateHealthChecks(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLatestHealthCheck(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -100,6 +109,14 @@ func (m *AppOrg) validateHealthChecks(formats strfmt.Registry) error {
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *AppOrg) validateLatestHealthCheck(formats strfmt.Registry) error {
+	if swag.IsZero(m.LatestHealthCheck) { // not required
+		return nil
 	}
 
 	return nil
@@ -165,6 +182,10 @@ func (m *AppOrg) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateLatestHealthCheck(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateUsers(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -200,6 +221,11 @@ func (m *AppOrg) contextValidateHealthChecks(ctx context.Context, formats strfmt
 		}
 
 	}
+
+	return nil
+}
+
+func (m *AppOrg) contextValidateLatestHealthCheck(ctx context.Context, formats strfmt.Registry) error {
 
 	return nil
 }
