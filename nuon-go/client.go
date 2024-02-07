@@ -54,12 +54,12 @@ type Client interface {
 	GetAppInputConfigs(ctx context.Context, appID string) ([]*models.AppAppInputConfig, error)
 
 	// app installer methods
-	CreateAppInstaller(ctx context.Context, appID string, req *models.ServiceCreateAppInstallerRequest) (*models.AppAppInstaller, error)
+	CreateAppInstaller(ctx context.Context, req *models.ServiceCreateAppInstallerRequest) (*models.AppAppInstaller, error)
 	UpdateAppInstaller(ctx context.Context, appInstallerID string, req *models.ServiceUpdateAppInstallerRequest) (*models.AppAppInstaller, error)
 	DeleteAppInstaller(ctx context.Context, appInstallerID string) (bool, error)
 	GetAppInstaller(ctx context.Context, appInstallerID string) (*models.AppAppInstaller, error)
 	RenderAppInstaller(ctx context.Context, slug string) (*models.ServiceAppInstaller, error)
-	CreateInstallFromInstaller(ctx context.Context, req *models.ServiceInstallerCreateInstallRequest) (*models.AppInstall, error)
+	CreateInstallFromInstaller(ctx context.Context, req *models.ServiceCreateInstallRequest) (*models.AppInstall, error)
 
 	// general methods
 	GetCLIConfig(ctx context.Context) (*models.ServiceCLIConfig, error)

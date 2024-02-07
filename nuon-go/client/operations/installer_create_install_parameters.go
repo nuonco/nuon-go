@@ -73,7 +73,7 @@ type InstallerCreateInstallParams struct {
 
 	   Input
 	*/
-	Req *models.ServiceInstallerCreateInstallRequest
+	Req *models.ServiceCreateInstallRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -140,13 +140,13 @@ func (o *InstallerCreateInstallParams) SetInstallerSlug(installerSlug string) {
 }
 
 // WithReq adds the req to the installer create install params
-func (o *InstallerCreateInstallParams) WithReq(req *models.ServiceInstallerCreateInstallRequest) *InstallerCreateInstallParams {
+func (o *InstallerCreateInstallParams) WithReq(req *models.ServiceCreateInstallRequest) *InstallerCreateInstallParams {
 	o.SetReq(req)
 	return o
 }
 
 // SetReq adds the req to the installer create install params
-func (o *InstallerCreateInstallParams) SetReq(req *models.ServiceInstallerCreateInstallRequest) {
+func (o *InstallerCreateInstallParams) SetReq(req *models.ServiceCreateInstallRequest) {
 	o.Req = req
 }
 

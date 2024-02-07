@@ -31,10 +31,9 @@ func (c *client) GetAppInstaller(ctx context.Context, appInstallerID string) (*m
 	return resp.Payload, nil
 }
 
-func (c *client) CreateAppInstaller(ctx context.Context, appID string, req *models.ServiceCreateAppInstallerRequest) (*models.AppAppInstaller, error) {
+func (c *client) CreateAppInstaller(ctx context.Context, req *models.ServiceCreateAppInstallerRequest) (*models.AppAppInstaller, error) {
 	resp, err := c.genClient.Operations.CreateAppInstaller(&operations.CreateAppInstallerParams{
 		Req:     req,
-		AppID:   appID,
 		Context: ctx,
 	}, c.getOrgIDAuthInfo())
 	if err != nil {
@@ -69,7 +68,7 @@ func (c *client) DeleteAppInstaller(ctx context.Context, installerID string) (bo
 	return resp.IsSuccess(), nil
 }
 
-func (c *client) CreateInstallFromInstaller(ctx context.Context, req *models.ServiceInstallerCreateInstallRequest) (*models.AppInstall, error) {
+func (c *client) CreateInstallFromInstaller(ctx context.Context, req *models.ServiceCreateInstallRequest) (*models.AppInstall, error) {
 	resp, err := c.genClient.Operations.InstallerCreateInstall(&operations.InstallerCreateInstallParams{
 		Context: ctx,
 		Req:     req,

@@ -19,6 +19,10 @@ import (
 // swagger:model service.CreateAppInstallerRequest
 type ServiceCreateAppInstallerRequest struct {
 
+	// app id
+	// Required: true
+	AppID *string `json:"app_id"`
+
 	// description
 	// Required: true
 	Description *string `json:"description"`
@@ -39,6 +43,10 @@ type ServiceCreateAppInstallerRequest struct {
 func (m *ServiceCreateAppInstallerRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAppID(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateDescription(formats); err != nil {
 		res = append(res, err)
 	}
@@ -58,6 +66,15 @@ func (m *ServiceCreateAppInstallerRequest) Validate(formats strfmt.Registry) err
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ServiceCreateAppInstallerRequest) validateAppID(formats strfmt.Registry) error {
+
+	if err := validate.Required("app_id", "body", m.AppID); err != nil {
+		return err
+	}
+
 	return nil
 }
 

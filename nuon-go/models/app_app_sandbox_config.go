@@ -22,6 +22,9 @@ type AppAppSandboxConfig struct {
 	// `gorm:"not null;default null"`
 	AppID string `json:"app_id,omitempty"`
 
+	// artifacts
+	Artifacts *AppAppSandboxConfigArtifacts `json:"artifacts,omitempty"`
+
 	// connected github vcs config
 	ConnectedGithubVcsConfig *AppConnectedGithubVCSConfig `json:"connected_github_vcs_config,omitempty"`
 
@@ -60,6 +63,10 @@ type AppAppSandboxConfig struct {
 func (m *AppAppSandboxConfig) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateArtifacts(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateConnectedGithubVcsConfig(formats); err != nil {
 		res = append(res, err)
 	}
@@ -75,6 +82,25 @@ func (m *AppAppSandboxConfig) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppAppSandboxConfig) validateArtifacts(formats strfmt.Registry) error {
+	if swag.IsZero(m.Artifacts) { // not required
+		return nil
+	}
+
+	if m.Artifacts != nil {
+		if err := m.Artifacts.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("artifacts")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("artifacts")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -139,6 +165,10 @@ func (m *AppAppSandboxConfig) validateSandboxRelease(formats strfmt.Registry) er
 func (m *AppAppSandboxConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateArtifacts(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateConnectedGithubVcsConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -154,6 +184,27 @@ func (m *AppAppSandboxConfig) ContextValidate(ctx context.Context, formats strfm
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppAppSandboxConfig) contextValidateArtifacts(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Artifacts != nil {
+
+		if swag.IsZero(m.Artifacts) { // not required
+			return nil
+		}
+
+		if err := m.Artifacts.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("artifacts")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("artifacts")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -231,6 +282,52 @@ func (m *AppAppSandboxConfig) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *AppAppSandboxConfig) UnmarshalBinary(b []byte) error {
 	var res AppAppSandboxConfig
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// AppAppSandboxConfigArtifacts Links are dynamically loaded using an after query
+//
+// swagger:model AppAppSandboxConfigArtifacts
+type AppAppSandboxConfigArtifacts struct {
+
+	// cloudformation stack template
+	CloudformationStackTemplate string `json:"cloudformation_stack_template,omitempty"`
+
+	// deprovision policy
+	DeprovisionPolicy string `json:"deprovision_policy,omitempty"`
+
+	// provision policy
+	ProvisionPolicy string `json:"provision_policy,omitempty"`
+
+	// trust policy
+	TrustPolicy string `json:"trust_policy,omitempty"`
+}
+
+// Validate validates this app app sandbox config artifacts
+func (m *AppAppSandboxConfigArtifacts) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this app app sandbox config artifacts based on context it is used
+func (m *AppAppSandboxConfigArtifacts) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *AppAppSandboxConfigArtifacts) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *AppAppSandboxConfigArtifacts) UnmarshalBinary(b []byte) error {
+	var res AppAppSandboxConfigArtifacts
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

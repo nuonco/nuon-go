@@ -66,18 +66,18 @@ func (mr *MockClientMockRecorder) CreateAppInputConfig(ctx, appID, req interface
 }
 
 // CreateAppInstaller mocks base method.
-func (m *MockClient) CreateAppInstaller(ctx context.Context, appID string, req *models.ServiceCreateAppInstallerRequest) (*models.AppAppInstaller, error) {
+func (m *MockClient) CreateAppInstaller(ctx context.Context, req *models.ServiceCreateAppInstallerRequest) (*models.AppAppInstaller, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CreateAppInstaller", ctx, appID, req)
+	ret := m.ctrl.Call(m, "CreateAppInstaller", ctx, req)
 	ret0, _ := ret[0].(*models.AppAppInstaller)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // CreateAppInstaller indicates an expected call of CreateAppInstaller.
-func (mr *MockClientMockRecorder) CreateAppInstaller(ctx, appID, req interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) CreateAppInstaller(ctx, req interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAppInstaller", reflect.TypeOf((*MockClient)(nil).CreateAppInstaller), ctx, appID, req)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAppInstaller", reflect.TypeOf((*MockClient)(nil).CreateAppInstaller), ctx, req)
 }
 
 // CreateAppRunnerConfig mocks base method.
@@ -231,7 +231,7 @@ func (mr *MockClientMockRecorder) CreateInstallDeploy(ctx, installID, req interf
 }
 
 // CreateInstallFromInstaller mocks base method.
-func (m *MockClient) CreateInstallFromInstaller(ctx context.Context, req *models.ServiceInstallerCreateInstallRequest) (*models.AppInstall, error) {
+func (m *MockClient) CreateInstallFromInstaller(ctx context.Context, req *models.ServiceCreateInstallRequest) (*models.AppInstall, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateInstallFromInstaller", ctx, req)
 	ret0, _ := ret[0].(*models.AppInstall)
