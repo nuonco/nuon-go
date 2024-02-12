@@ -131,7 +131,7 @@ type Client interface {
 
 	// builds
 	CreateComponentBuild(ctx context.Context, componentID string, req *models.ServiceCreateComponentBuildRequest) (*models.AppComponentBuild, error)
-	GetComponentBuilds(ctx context.Context, componentID string) ([]*models.AppComponentBuild, error)
+	GetComponentBuilds(ctx context.Context, componentID, appID string, limit *int64) ([]*models.AppComponentBuild, error)
 	GetComponentLatestBuild(ctx context.Context, componentID string) (*models.AppComponentBuild, error)
 	GetComponentBuild(ctx context.Context, componentID, buildID string) (*models.AppComponentBuild, error)
 	GetComponentBuildLogs(ctx context.Context, componentID, buildID string) ([]models.ServiceBuildLog, error)

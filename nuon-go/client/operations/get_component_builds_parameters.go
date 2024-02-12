@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewGetComponentBuildsParams creates a new GetComponentBuildsParams object,
@@ -61,11 +62,25 @@ GetComponentBuildsParams contains all the parameters to send to the API endpoint
 */
 type GetComponentBuildsParams struct {
 
+	/* AppID.
+
+	   app id to filter by
+	*/
+	AppID *string
+
 	/* ComponentID.
 
-	   component ID
+	   component id to filter by
 	*/
-	ComponentID string
+	ComponentID *string
+
+	/* Limit.
+
+	   limit of builds to return
+
+	   Default: 60
+	*/
+	Limit *int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -84,7 +99,18 @@ func (o *GetComponentBuildsParams) WithDefaults() *GetComponentBuildsParams {
 //
 // All values with no default are reset to their zero value.
 func (o *GetComponentBuildsParams) SetDefaults() {
-	// no default values defined for this parameter
+	var (
+		limitDefault = int64(60)
+	)
+
+	val := GetComponentBuildsParams{
+		Limit: &limitDefault,
+	}
+
+	val.timeout = o.timeout
+	val.Context = o.Context
+	val.HTTPClient = o.HTTPClient
+	*o = val
 }
 
 // WithTimeout adds the timeout to the get component builds params
@@ -120,15 +146,37 @@ func (o *GetComponentBuildsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithAppID adds the appID to the get component builds params
+func (o *GetComponentBuildsParams) WithAppID(appID *string) *GetComponentBuildsParams {
+	o.SetAppID(appID)
+	return o
+}
+
+// SetAppID adds the appId to the get component builds params
+func (o *GetComponentBuildsParams) SetAppID(appID *string) {
+	o.AppID = appID
+}
+
 // WithComponentID adds the componentID to the get component builds params
-func (o *GetComponentBuildsParams) WithComponentID(componentID string) *GetComponentBuildsParams {
+func (o *GetComponentBuildsParams) WithComponentID(componentID *string) *GetComponentBuildsParams {
 	o.SetComponentID(componentID)
 	return o
 }
 
 // SetComponentID adds the componentId to the get component builds params
-func (o *GetComponentBuildsParams) SetComponentID(componentID string) {
+func (o *GetComponentBuildsParams) SetComponentID(componentID *string) {
 	o.ComponentID = componentID
+}
+
+// WithLimit adds the limit to the get component builds params
+func (o *GetComponentBuildsParams) WithLimit(limit *int64) *GetComponentBuildsParams {
+	o.SetLimit(limit)
+	return o
+}
+
+// SetLimit adds the limit to the get component builds params
+func (o *GetComponentBuildsParams) SetLimit(limit *int64) {
+	o.Limit = limit
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -139,9 +187,55 @@ func (o *GetComponentBuildsParams) WriteToRequest(r runtime.ClientRequest, reg s
 	}
 	var res []error
 
-	// path param component_id
-	if err := r.SetPathParam("component_id", o.ComponentID); err != nil {
-		return err
+	if o.AppID != nil {
+
+		// query param app_id
+		var qrAppID string
+
+		if o.AppID != nil {
+			qrAppID = *o.AppID
+		}
+		qAppID := qrAppID
+		if qAppID != "" {
+
+			if err := r.SetQueryParam("app_id", qAppID); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.ComponentID != nil {
+
+		// query param component_id
+		var qrComponentID string
+
+		if o.ComponentID != nil {
+			qrComponentID = *o.ComponentID
+		}
+		qComponentID := qrComponentID
+		if qComponentID != "" {
+
+			if err := r.SetQueryParam("component_id", qComponentID); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Limit != nil {
+
+		// query param limit
+		var qrLimit int64
+
+		if o.Limit != nil {
+			qrLimit = *o.Limit
+		}
+		qLimit := swag.FormatInt64(qrLimit)
+		if qLimit != "" {
+
+			if err := r.SetQueryParam("limit", qLimit); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {

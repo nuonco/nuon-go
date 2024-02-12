@@ -25,6 +25,9 @@ type AppComponentBuild struct {
 	// Read-only fields set on the object to de-nest data
 	ComponentID string `json:"component_id,omitempty"`
 
+	// component name
+	ComponentName string `json:"component_name,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
