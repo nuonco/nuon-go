@@ -741,18 +741,18 @@ func (mr *MockClientMockRecorder) GetComponentBuildPlan(ctx, componentsID, build
 }
 
 // GetComponentBuilds mocks base method.
-func (m *MockClient) GetComponentBuilds(ctx context.Context, componentID string) ([]*models.AppComponentBuild, error) {
+func (m *MockClient) GetComponentBuilds(ctx context.Context, componentID, appID string) ([]*models.AppComponentBuild, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetComponentBuilds", ctx, componentID)
+	ret := m.ctrl.Call(m, "GetComponentBuilds", ctx, componentID, appID)
 	ret0, _ := ret[0].([]*models.AppComponentBuild)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // GetComponentBuilds indicates an expected call of GetComponentBuilds.
-func (mr *MockClientMockRecorder) GetComponentBuilds(ctx, componentID interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetComponentBuilds(ctx, componentID, appID interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetComponentBuilds", reflect.TypeOf((*MockClient)(nil).GetComponentBuilds), ctx, componentID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetComponentBuilds", reflect.TypeOf((*MockClient)(nil).GetComponentBuilds), ctx, componentID, appID)
 }
 
 // GetComponentConfigs mocks base method.
@@ -1023,6 +1023,21 @@ func (m *MockClient) GetInstallSandboxRuns(ctx context.Context, installID string
 func (mr *MockClientMockRecorder) GetInstallSandboxRuns(ctx, installID interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallSandboxRuns", reflect.TypeOf((*MockClient)(nil).GetInstallSandboxRuns), ctx, installID)
+}
+
+// GetInstallers mocks base method.
+func (m *MockClient) GetInstallers(ctx context.Context) ([]*models.AppAppInstaller, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetInstallers", ctx)
+	ret0, _ := ret[0].([]*models.AppAppInstaller)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetInstallers indicates an expected call of GetInstallers.
+func (mr *MockClientMockRecorder) GetInstallers(ctx interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallers", reflect.TypeOf((*MockClient)(nil).GetInstallers), ctx)
 }
 
 // GetOrg mocks base method.
