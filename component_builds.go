@@ -6,6 +6,7 @@ import (
 
 	"github.com/nuonco/nuon-go/client/operations"
 	"github.com/nuonco/nuon-go/models"
+	"github.com/powertoolsdev/mono/pkg/generics"
 )
 
 // builds
@@ -22,9 +23,11 @@ func (c *client) CreateComponentBuild(ctx context.Context, componentID string, r
 	return resp.Payload, nil
 }
 
-func (c *client) GetComponentBuilds(ctx context.Context, componentID string) ([]*models.AppComponentBuild, error) {
+func (c *client) GetComponentBuilds(ctx context.Context, componentID, appID string, limit *int64) ([]*models.AppComponentBuild, error) {
 	resp, err := c.genClient.Operations.GetComponentBuilds(&operations.GetComponentBuildsParams{
-		ComponentID: componentID,
+		ComponentID: generics.ToPtr(componentID),
+		AppID:       generics.ToPtr(appID),
+		Limit:       limit,
 		Context:     ctx,
 	}, c.getOrgIDAuthInfo())
 	if err != nil {

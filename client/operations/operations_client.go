@@ -1690,6 +1690,8 @@ func (a *Client) GetApps(params *GetAppsParams, authInfo runtime.ClientAuthInfoW
 
 /*
 GetBuild gets a build
+
+Returns builds for one or all components in an app.
 */
 func (a *Client) GetBuild(params *GetBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBuildOK, error) {
 	// TODO: Validate the params before sending
@@ -1806,6 +1808,8 @@ func (a *Client) GetComponent(params *GetComponentParams, authInfo runtime.Clien
 
 /*
 GetComponentBuild gets a build for a component
+
+Returns builds for one or all components in an app.
 */
 func (a *Client) GetComponentBuild(params *GetComponentBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentBuildOK, error) {
 	// TODO: Validate the params before sending
@@ -1922,7 +1926,7 @@ func (a *Client) GetComponentBuildPlan(params *GetComponentBuildPlanParams, auth
 }
 
 /*
-GetComponentBuilds gets all builds for a component
+GetComponentBuilds gets builds for components
 */
 func (a *Client) GetComponentBuilds(params *GetComponentBuildsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentBuildsOK, error) {
 	// TODO: Validate the params before sending
@@ -1932,7 +1936,7 @@ func (a *Client) GetComponentBuilds(params *GetComponentBuildsParams, authInfo r
 	op := &runtime.ClientOperation{
 		ID:                 "GetComponentBuilds",
 		Method:             "GET",
-		PathPattern:        "/v1/components/{component_id}/builds",
+		PathPattern:        "/v1/builds",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
