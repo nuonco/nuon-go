@@ -53,6 +53,9 @@ type AppAppInstallerMetadata struct {
 	// name
 	Name string `json:"name,omitempty"`
 
+	// post install markdown
+	PostInstallMarkdown string `json:"post_install_markdown,omitempty"`
+
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
 }
