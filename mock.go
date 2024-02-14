@@ -65,21 +65,6 @@ func (mr *MockClientMockRecorder) CreateAppInputConfig(ctx, appID, req interface
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAppInputConfig", reflect.TypeOf((*MockClient)(nil).CreateAppInputConfig), ctx, appID, req)
 }
 
-// CreateAppInstaller mocks base method.
-func (m *MockClient) CreateAppInstaller(ctx context.Context, req *models.ServiceCreateAppInstallerRequest) (*models.AppAppInstaller, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CreateAppInstaller", ctx, req)
-	ret0, _ := ret[0].(*models.AppAppInstaller)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// CreateAppInstaller indicates an expected call of CreateAppInstaller.
-func (mr *MockClientMockRecorder) CreateAppInstaller(ctx, req interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAppInstaller", reflect.TypeOf((*MockClient)(nil).CreateAppInstaller), ctx, req)
-}
-
 // CreateAppRunnerConfig mocks base method.
 func (m *MockClient) CreateAppRunnerConfig(ctx context.Context, appID string, req *models.ServiceCreateAppRunnerConfigRequest) (*models.AppAppRunnerConfig, error) {
 	m.ctrl.T.Helper()
@@ -230,21 +215,6 @@ func (mr *MockClientMockRecorder) CreateInstallDeploy(ctx, installID, req interf
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateInstallDeploy", reflect.TypeOf((*MockClient)(nil).CreateInstallDeploy), ctx, installID, req)
 }
 
-// CreateInstallFromInstaller mocks base method.
-func (m *MockClient) CreateInstallFromInstaller(ctx context.Context, req *models.ServiceCreateInstallRequest) (*models.AppInstall, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CreateInstallFromInstaller", ctx, req)
-	ret0, _ := ret[0].(*models.AppInstall)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// CreateInstallFromInstaller indicates an expected call of CreateInstallFromInstaller.
-func (mr *MockClientMockRecorder) CreateInstallFromInstaller(ctx, req interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateInstallFromInstaller", reflect.TypeOf((*MockClient)(nil).CreateInstallFromInstaller), ctx, req)
-}
-
 // CreateInstallInputs mocks base method.
 func (m *MockClient) CreateInstallInputs(ctx context.Context, installID string, req *models.ServiceCreateInstallInputsRequest) (*models.AppInstallInputs, error) {
 	m.ctrl.T.Helper()
@@ -258,6 +228,36 @@ func (m *MockClient) CreateInstallInputs(ctx context.Context, installID string, 
 func (mr *MockClientMockRecorder) CreateInstallInputs(ctx, installID, req interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateInstallInputs", reflect.TypeOf((*MockClient)(nil).CreateInstallInputs), ctx, installID, req)
+}
+
+// CreateInstaller mocks base method.
+func (m *MockClient) CreateInstaller(ctx context.Context, req *models.ServiceCreateAppInstallerRequest) (*models.AppAppInstaller, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateInstaller", ctx, req)
+	ret0, _ := ret[0].(*models.AppAppInstaller)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateInstaller indicates an expected call of CreateInstaller.
+func (mr *MockClientMockRecorder) CreateInstaller(ctx, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateInstaller", reflect.TypeOf((*MockClient)(nil).CreateInstaller), ctx, req)
+}
+
+// CreateInstallerInstall mocks base method.
+func (m *MockClient) CreateInstallerInstall(ctx context.Context, req *models.ServiceCreateInstallRequest) (*models.AppInstall, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateInstallerInstall", ctx, req)
+	ret0, _ := ret[0].(*models.AppInstall)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateInstallerInstall indicates an expected call of CreateInstallerInstall.
+func (mr *MockClientMockRecorder) CreateInstallerInstall(ctx, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateInstallerInstall", reflect.TypeOf((*MockClient)(nil).CreateInstallerInstall), ctx, req)
 }
 
 // CreateJobComponentConfig mocks base method.
@@ -365,21 +365,6 @@ func (mr *MockClientMockRecorder) DeleteApp(ctx, appID interface{}) *gomock.Call
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteApp", reflect.TypeOf((*MockClient)(nil).DeleteApp), ctx, appID)
 }
 
-// DeleteAppInstaller mocks base method.
-func (m *MockClient) DeleteAppInstaller(ctx context.Context, appInstallerID string) (bool, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "DeleteAppInstaller", ctx, appInstallerID)
-	ret0, _ := ret[0].(bool)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// DeleteAppInstaller indicates an expected call of DeleteAppInstaller.
-func (mr *MockClientMockRecorder) DeleteAppInstaller(ctx, appInstallerID interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteAppInstaller", reflect.TypeOf((*MockClient)(nil).DeleteAppInstaller), ctx, appInstallerID)
-}
-
 // DeleteComponent mocks base method.
 func (m *MockClient) DeleteComponent(ctx context.Context, componentID string) (bool, error) {
 	m.ctrl.T.Helper()
@@ -408,6 +393,21 @@ func (m *MockClient) DeleteInstall(ctx context.Context, installID string) (bool,
 func (mr *MockClientMockRecorder) DeleteInstall(ctx, installID interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteInstall", reflect.TypeOf((*MockClient)(nil).DeleteInstall), ctx, installID)
+}
+
+// DeleteInstaller mocks base method.
+func (m *MockClient) DeleteInstaller(ctx context.Context, appInstallerID string) (bool, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteInstaller", ctx, appInstallerID)
+	ret0, _ := ret[0].(bool)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteInstaller indicates an expected call of DeleteInstaller.
+func (mr *MockClientMockRecorder) DeleteInstaller(ctx, appInstallerID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteInstaller", reflect.TypeOf((*MockClient)(nil).DeleteInstaller), ctx, appInstallerID)
 }
 
 // DeleteOrg mocks base method.
@@ -528,21 +528,6 @@ func (m *MockClient) GetAppInputLatestConfig(ctx context.Context, appID string) 
 func (mr *MockClientMockRecorder) GetAppInputLatestConfig(ctx, appID interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppInputLatestConfig", reflect.TypeOf((*MockClient)(nil).GetAppInputLatestConfig), ctx, appID)
-}
-
-// GetAppInstaller mocks base method.
-func (m *MockClient) GetAppInstaller(ctx context.Context, appInstallerID string) (*models.AppAppInstaller, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetAppInstaller", ctx, appInstallerID)
-	ret0, _ := ret[0].(*models.AppAppInstaller)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetAppInstaller indicates an expected call of GetAppInstaller.
-func (mr *MockClientMockRecorder) GetAppInstaller(ctx, appInstallerID interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppInstaller", reflect.TypeOf((*MockClient)(nil).GetAppInstaller), ctx, appInstallerID)
 }
 
 // GetAppInstalls mocks base method.
@@ -1025,6 +1010,36 @@ func (mr *MockClientMockRecorder) GetInstallSandboxRuns(ctx, installID interface
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallSandboxRuns", reflect.TypeOf((*MockClient)(nil).GetInstallSandboxRuns), ctx, installID)
 }
 
+// GetInstaller mocks base method.
+func (m *MockClient) GetInstaller(ctx context.Context, appInstallerID string) (*models.AppAppInstaller, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetInstaller", ctx, appInstallerID)
+	ret0, _ := ret[0].(*models.AppAppInstaller)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetInstaller indicates an expected call of GetInstaller.
+func (mr *MockClientMockRecorder) GetInstaller(ctx, appInstallerID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstaller", reflect.TypeOf((*MockClient)(nil).GetInstaller), ctx, appInstallerID)
+}
+
+// GetInstallerInstall mocks base method.
+func (m *MockClient) GetInstallerInstall(ctx context.Context, slug, installID string) (*models.AppInstall, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetInstallerInstall", ctx, slug, installID)
+	ret0, _ := ret[0].(*models.AppInstall)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetInstallerInstall indicates an expected call of GetInstallerInstall.
+func (mr *MockClientMockRecorder) GetInstallerInstall(ctx, slug, installID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallerInstall", reflect.TypeOf((*MockClient)(nil).GetInstallerInstall), ctx, slug, installID)
+}
+
 // GetInstallers mocks base method.
 func (m *MockClient) GetInstallers(ctx context.Context) ([]*models.AppAppInstaller, error) {
 	m.ctrl.T.Helper()
@@ -1204,19 +1219,34 @@ func (mr *MockClientMockRecorder) PublishMetrics(ctx, req interface{}) *gomock.C
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PublishMetrics", reflect.TypeOf((*MockClient)(nil).PublishMetrics), ctx, req)
 }
 
-// RenderAppInstaller mocks base method.
-func (m *MockClient) RenderAppInstaller(ctx context.Context, slug string) (*models.ServiceAppInstaller, error) {
+// RenderInstaller mocks base method.
+func (m *MockClient) RenderInstaller(ctx context.Context, slug string) (*models.ServiceRenderedInstaller, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "RenderAppInstaller", ctx, slug)
-	ret0, _ := ret[0].(*models.ServiceAppInstaller)
+	ret := m.ctrl.Call(m, "RenderInstaller", ctx, slug)
+	ret0, _ := ret[0].(*models.ServiceRenderedInstaller)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// RenderAppInstaller indicates an expected call of RenderAppInstaller.
-func (mr *MockClientMockRecorder) RenderAppInstaller(ctx, slug interface{}) *gomock.Call {
+// RenderInstaller indicates an expected call of RenderInstaller.
+func (mr *MockClientMockRecorder) RenderInstaller(ctx, slug interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RenderAppInstaller", reflect.TypeOf((*MockClient)(nil).RenderAppInstaller), ctx, slug)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RenderInstaller", reflect.TypeOf((*MockClient)(nil).RenderInstaller), ctx, slug)
+}
+
+// RenderInstallerInstall mocks base method.
+func (m *MockClient) RenderInstallerInstall(ctx context.Context, slug, installID string) (*models.ServiceRenderedInstall, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RenderInstallerInstall", ctx, slug, installID)
+	ret0, _ := ret[0].(*models.ServiceRenderedInstall)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RenderInstallerInstall indicates an expected call of RenderInstallerInstall.
+func (mr *MockClientMockRecorder) RenderInstallerInstall(ctx, slug, installID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RenderInstallerInstall", reflect.TypeOf((*MockClient)(nil).RenderInstallerInstall), ctx, slug, installID)
 }
 
 // SetOrgID mocks base method.
@@ -1261,21 +1291,6 @@ func (mr *MockClientMockRecorder) UpdateApp(ctx, appID, req interface{}) *gomock
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateApp", reflect.TypeOf((*MockClient)(nil).UpdateApp), ctx, appID, req)
 }
 
-// UpdateAppInstaller mocks base method.
-func (m *MockClient) UpdateAppInstaller(ctx context.Context, appInstallerID string, req *models.ServiceUpdateAppInstallerRequest) (*models.AppAppInstaller, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "UpdateAppInstaller", ctx, appInstallerID, req)
-	ret0, _ := ret[0].(*models.AppAppInstaller)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// UpdateAppInstaller indicates an expected call of UpdateAppInstaller.
-func (mr *MockClientMockRecorder) UpdateAppInstaller(ctx, appInstallerID, req interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateAppInstaller", reflect.TypeOf((*MockClient)(nil).UpdateAppInstaller), ctx, appInstallerID, req)
-}
-
 // UpdateComponent mocks base method.
 func (m *MockClient) UpdateComponent(ctx context.Context, componentID string, req *models.ServiceUpdateComponentRequest) (*models.AppComponent, error) {
 	m.ctrl.T.Helper()
@@ -1304,6 +1319,21 @@ func (m *MockClient) UpdateInstall(ctx context.Context, installID string, req *m
 func (mr *MockClientMockRecorder) UpdateInstall(ctx, installID, req interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateInstall", reflect.TypeOf((*MockClient)(nil).UpdateInstall), ctx, installID, req)
+}
+
+// UpdateInstaller mocks base method.
+func (m *MockClient) UpdateInstaller(ctx context.Context, appInstallerID string, req *models.ServiceUpdateInstallerRequest) (*models.AppAppInstaller, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateInstaller", ctx, appInstallerID, req)
+	ret0, _ := ret[0].(*models.AppAppInstaller)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateInstaller indicates an expected call of UpdateInstaller.
+func (mr *MockClientMockRecorder) UpdateInstaller(ctx, appInstallerID, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateInstaller", reflect.TypeOf((*MockClient)(nil).UpdateInstaller), ctx, appInstallerID, req)
 }
 
 // UpdateOrg mocks base method.

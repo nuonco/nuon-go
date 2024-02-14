@@ -32,6 +32,9 @@ type AppAppInput struct {
 	// description
 	Description string `json:"description,omitempty"`
 
+	// display name
+	DisplayName string `json:"display_name,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 

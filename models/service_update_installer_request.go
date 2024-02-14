@@ -14,25 +14,28 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ServiceUpdateAppInstallerRequest service update app installer request
+// ServiceUpdateInstallerRequest service update installer request
 //
-// swagger:model service.UpdateAppInstallerRequest
-type ServiceUpdateAppInstallerRequest struct {
+// swagger:model service.UpdateInstallerRequest
+type ServiceUpdateInstallerRequest struct {
 
 	// description
 	// Required: true
 	Description *string `json:"description"`
 
 	// links
-	Links *ServiceUpdateAppInstallerRequestLinks `json:"links,omitempty"`
+	Links *ServiceUpdateInstallerRequestLinks `json:"links,omitempty"`
 
 	// name
 	// Required: true
 	Name *string `json:"name"`
+
+	// post install markdown
+	PostInstallMarkdown string `json:"post_install_markdown,omitempty"`
 }
 
-// Validate validates this service update app installer request
-func (m *ServiceUpdateAppInstallerRequest) Validate(formats strfmt.Registry) error {
+// Validate validates this service update installer request
+func (m *ServiceUpdateInstallerRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateDescription(formats); err != nil {
@@ -53,7 +56,7 @@ func (m *ServiceUpdateAppInstallerRequest) Validate(formats strfmt.Registry) err
 	return nil
 }
 
-func (m *ServiceUpdateAppInstallerRequest) validateDescription(formats strfmt.Registry) error {
+func (m *ServiceUpdateInstallerRequest) validateDescription(formats strfmt.Registry) error {
 
 	if err := validate.Required("description", "body", m.Description); err != nil {
 		return err
@@ -62,7 +65,7 @@ func (m *ServiceUpdateAppInstallerRequest) validateDescription(formats strfmt.Re
 	return nil
 }
 
-func (m *ServiceUpdateAppInstallerRequest) validateLinks(formats strfmt.Registry) error {
+func (m *ServiceUpdateInstallerRequest) validateLinks(formats strfmt.Registry) error {
 	if swag.IsZero(m.Links) { // not required
 		return nil
 	}
@@ -81,7 +84,7 @@ func (m *ServiceUpdateAppInstallerRequest) validateLinks(formats strfmt.Registry
 	return nil
 }
 
-func (m *ServiceUpdateAppInstallerRequest) validateName(formats strfmt.Registry) error {
+func (m *ServiceUpdateInstallerRequest) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
 		return err
@@ -90,8 +93,8 @@ func (m *ServiceUpdateAppInstallerRequest) validateName(formats strfmt.Registry)
 	return nil
 }
 
-// ContextValidate validate this service update app installer request based on the context it is used
-func (m *ServiceUpdateAppInstallerRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this service update installer request based on the context it is used
+func (m *ServiceUpdateInstallerRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateLinks(ctx, formats); err != nil {
@@ -104,7 +107,7 @@ func (m *ServiceUpdateAppInstallerRequest) ContextValidate(ctx context.Context, 
 	return nil
 }
 
-func (m *ServiceUpdateAppInstallerRequest) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+func (m *ServiceUpdateInstallerRequest) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Links != nil {
 
@@ -126,7 +129,7 @@ func (m *ServiceUpdateAppInstallerRequest) contextValidateLinks(ctx context.Cont
 }
 
 // MarshalBinary interface implementation
-func (m *ServiceUpdateAppInstallerRequest) MarshalBinary() ([]byte, error) {
+func (m *ServiceUpdateInstallerRequest) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -134,8 +137,8 @@ func (m *ServiceUpdateAppInstallerRequest) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *ServiceUpdateAppInstallerRequest) UnmarshalBinary(b []byte) error {
-	var res ServiceUpdateAppInstallerRequest
+func (m *ServiceUpdateInstallerRequest) UnmarshalBinary(b []byte) error {
+	var res ServiceUpdateInstallerRequest
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
@@ -143,10 +146,10 @@ func (m *ServiceUpdateAppInstallerRequest) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-// ServiceUpdateAppInstallerRequestLinks service update app installer request links
+// ServiceUpdateInstallerRequestLinks service update installer request links
 //
-// swagger:model ServiceUpdateAppInstallerRequestLinks
-type ServiceUpdateAppInstallerRequestLinks struct {
+// swagger:model ServiceUpdateInstallerRequestLinks
+type ServiceUpdateInstallerRequestLinks struct {
 
 	// community
 	// Required: true
@@ -173,8 +176,8 @@ type ServiceUpdateAppInstallerRequestLinks struct {
 	Logo *string `json:"logo"`
 }
 
-// Validate validates this service update app installer request links
-func (m *ServiceUpdateAppInstallerRequestLinks) Validate(formats strfmt.Registry) error {
+// Validate validates this service update installer request links
+func (m *ServiceUpdateInstallerRequestLinks) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCommunity(formats); err != nil {
@@ -207,7 +210,7 @@ func (m *ServiceUpdateAppInstallerRequestLinks) Validate(formats strfmt.Registry
 	return nil
 }
 
-func (m *ServiceUpdateAppInstallerRequestLinks) validateCommunity(formats strfmt.Registry) error {
+func (m *ServiceUpdateInstallerRequestLinks) validateCommunity(formats strfmt.Registry) error {
 
 	if err := validate.Required("links"+"."+"community", "body", m.Community); err != nil {
 		return err
@@ -216,7 +219,7 @@ func (m *ServiceUpdateAppInstallerRequestLinks) validateCommunity(formats strfmt
 	return nil
 }
 
-func (m *ServiceUpdateAppInstallerRequestLinks) validateDemo(formats strfmt.Registry) error {
+func (m *ServiceUpdateInstallerRequestLinks) validateDemo(formats strfmt.Registry) error {
 
 	if err := validate.Required("links"+"."+"demo", "body", m.Demo); err != nil {
 		return err
@@ -225,7 +228,7 @@ func (m *ServiceUpdateAppInstallerRequestLinks) validateDemo(formats strfmt.Regi
 	return nil
 }
 
-func (m *ServiceUpdateAppInstallerRequestLinks) validateDocumentation(formats strfmt.Registry) error {
+func (m *ServiceUpdateInstallerRequestLinks) validateDocumentation(formats strfmt.Registry) error {
 
 	if err := validate.Required("links"+"."+"documentation", "body", m.Documentation); err != nil {
 		return err
@@ -234,7 +237,7 @@ func (m *ServiceUpdateAppInstallerRequestLinks) validateDocumentation(formats st
 	return nil
 }
 
-func (m *ServiceUpdateAppInstallerRequestLinks) validateGithub(formats strfmt.Registry) error {
+func (m *ServiceUpdateInstallerRequestLinks) validateGithub(formats strfmt.Registry) error {
 
 	if err := validate.Required("links"+"."+"github", "body", m.Github); err != nil {
 		return err
@@ -243,7 +246,7 @@ func (m *ServiceUpdateAppInstallerRequestLinks) validateGithub(formats strfmt.Re
 	return nil
 }
 
-func (m *ServiceUpdateAppInstallerRequestLinks) validateHomepage(formats strfmt.Registry) error {
+func (m *ServiceUpdateInstallerRequestLinks) validateHomepage(formats strfmt.Registry) error {
 
 	if err := validate.Required("links"+"."+"homepage", "body", m.Homepage); err != nil {
 		return err
@@ -252,7 +255,7 @@ func (m *ServiceUpdateAppInstallerRequestLinks) validateHomepage(formats strfmt.
 	return nil
 }
 
-func (m *ServiceUpdateAppInstallerRequestLinks) validateLogo(formats strfmt.Registry) error {
+func (m *ServiceUpdateInstallerRequestLinks) validateLogo(formats strfmt.Registry) error {
 
 	if err := validate.Required("links"+"."+"logo", "body", m.Logo); err != nil {
 		return err
@@ -261,13 +264,13 @@ func (m *ServiceUpdateAppInstallerRequestLinks) validateLogo(formats strfmt.Regi
 	return nil
 }
 
-// ContextValidate validates this service update app installer request links based on context it is used
-func (m *ServiceUpdateAppInstallerRequestLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this service update installer request links based on context it is used
+func (m *ServiceUpdateInstallerRequestLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *ServiceUpdateAppInstallerRequestLinks) MarshalBinary() ([]byte, error) {
+func (m *ServiceUpdateInstallerRequestLinks) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -275,8 +278,8 @@ func (m *ServiceUpdateAppInstallerRequestLinks) MarshalBinary() ([]byte, error) 
 }
 
 // UnmarshalBinary interface implementation
-func (m *ServiceUpdateAppInstallerRequestLinks) UnmarshalBinary(b []byte) error {
-	var res ServiceUpdateAppInstallerRequestLinks
+func (m *ServiceUpdateInstallerRequestLinks) UnmarshalBinary(b []byte) error {
+	var res ServiceUpdateInstallerRequestLinks
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
