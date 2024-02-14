@@ -29,6 +29,9 @@ type ServiceUpdateInstallerRequest struct {
 	// name
 	// Required: true
 	Name *string `json:"name"`
+
+	// post install markdown
+	PostInstallMarkdown string `json:"post_install_markdown,omitempty"`
 }
 
 // Validate validates this service update installer request
