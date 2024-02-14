@@ -34,6 +34,9 @@ type ServiceCreateAppInstallerRequest struct {
 	// Required: true
 	Name *string `json:"name"`
 
+	// post install markdown
+	PostInstallMarkdown string `json:"post_install_markdown,omitempty"`
+
 	// slug
 	// Required: true
 	Slug *string `json:"slug"`
