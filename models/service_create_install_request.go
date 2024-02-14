@@ -24,8 +24,7 @@ type ServiceCreateInstallRequest struct {
 	AwsAccount *ServiceCreateInstallRequestAwsAccount `json:"aws_account"`
 
 	// inputs
-	// Required: true
-	Inputs map[string]string `json:"inputs"`
+	Inputs map[string]string `json:"inputs,omitempty"`
 
 	// name
 	// Required: true
@@ -37,10 +36,6 @@ func (m *ServiceCreateInstallRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAwsAccount(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateInputs(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -69,15 +64,6 @@ func (m *ServiceCreateInstallRequest) validateAwsAccount(formats strfmt.Registry
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-func (m *ServiceCreateInstallRequest) validateInputs(formats strfmt.Registry) error {
-
-	if err := validate.Required("inputs", "body", m.Inputs); err != nil {
-		return err
 	}
 
 	return nil
