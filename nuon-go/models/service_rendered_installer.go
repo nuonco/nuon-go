@@ -13,10 +13,10 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ServiceAppInstaller service app installer
+// ServiceRenderedInstaller service rendered installer
 //
-// swagger:model service.AppInstaller
-type ServiceAppInstaller struct {
+// swagger:model service.RenderedInstaller
+type ServiceRenderedInstaller struct {
 
 	// app
 	App *AppApp `json:"app,omitempty"`
@@ -34,8 +34,8 @@ type ServiceAppInstaller struct {
 	SandboxMode bool `json:"sandbox_mode,omitempty"`
 }
 
-// Validate validates this service app installer
-func (m *ServiceAppInstaller) Validate(formats strfmt.Registry) error {
+// Validate validates this service rendered installer
+func (m *ServiceRenderedInstaller) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateApp(formats); err != nil {
@@ -60,7 +60,7 @@ func (m *ServiceAppInstaller) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ServiceAppInstaller) validateApp(formats strfmt.Registry) error {
+func (m *ServiceRenderedInstaller) validateApp(formats strfmt.Registry) error {
 	if swag.IsZero(m.App) { // not required
 		return nil
 	}
@@ -79,7 +79,7 @@ func (m *ServiceAppInstaller) validateApp(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ServiceAppInstaller) validateAppInputs(formats strfmt.Registry) error {
+func (m *ServiceRenderedInstaller) validateAppInputs(formats strfmt.Registry) error {
 	if swag.IsZero(m.AppInputs) { // not required
 		return nil
 	}
@@ -98,7 +98,7 @@ func (m *ServiceAppInstaller) validateAppInputs(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ServiceAppInstaller) validateAppSandbox(formats strfmt.Registry) error {
+func (m *ServiceRenderedInstaller) validateAppSandbox(formats strfmt.Registry) error {
 	if swag.IsZero(m.AppSandbox) { // not required
 		return nil
 	}
@@ -117,7 +117,7 @@ func (m *ServiceAppInstaller) validateAppSandbox(formats strfmt.Registry) error 
 	return nil
 }
 
-func (m *ServiceAppInstaller) validateMetadata(formats strfmt.Registry) error {
+func (m *ServiceRenderedInstaller) validateMetadata(formats strfmt.Registry) error {
 	if swag.IsZero(m.Metadata) { // not required
 		return nil
 	}
@@ -136,8 +136,8 @@ func (m *ServiceAppInstaller) validateMetadata(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validate this service app installer based on the context it is used
-func (m *ServiceAppInstaller) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this service rendered installer based on the context it is used
+func (m *ServiceRenderedInstaller) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateApp(ctx, formats); err != nil {
@@ -162,7 +162,7 @@ func (m *ServiceAppInstaller) ContextValidate(ctx context.Context, formats strfm
 	return nil
 }
 
-func (m *ServiceAppInstaller) contextValidateApp(ctx context.Context, formats strfmt.Registry) error {
+func (m *ServiceRenderedInstaller) contextValidateApp(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.App != nil {
 
@@ -183,7 +183,7 @@ func (m *ServiceAppInstaller) contextValidateApp(ctx context.Context, formats st
 	return nil
 }
 
-func (m *ServiceAppInstaller) contextValidateAppInputs(ctx context.Context, formats strfmt.Registry) error {
+func (m *ServiceRenderedInstaller) contextValidateAppInputs(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AppInputs != nil {
 
@@ -204,7 +204,7 @@ func (m *ServiceAppInstaller) contextValidateAppInputs(ctx context.Context, form
 	return nil
 }
 
-func (m *ServiceAppInstaller) contextValidateAppSandbox(ctx context.Context, formats strfmt.Registry) error {
+func (m *ServiceRenderedInstaller) contextValidateAppSandbox(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AppSandbox != nil {
 
@@ -225,7 +225,7 @@ func (m *ServiceAppInstaller) contextValidateAppSandbox(ctx context.Context, for
 	return nil
 }
 
-func (m *ServiceAppInstaller) contextValidateMetadata(ctx context.Context, formats strfmt.Registry) error {
+func (m *ServiceRenderedInstaller) contextValidateMetadata(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Metadata != nil {
 
@@ -247,7 +247,7 @@ func (m *ServiceAppInstaller) contextValidateMetadata(ctx context.Context, forma
 }
 
 // MarshalBinary interface implementation
-func (m *ServiceAppInstaller) MarshalBinary() ([]byte, error) {
+func (m *ServiceRenderedInstaller) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -255,8 +255,8 @@ func (m *ServiceAppInstaller) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *ServiceAppInstaller) UnmarshalBinary(b []byte) error {
-	var res ServiceAppInstaller
+func (m *ServiceRenderedInstaller) UnmarshalBinary(b []byte) error {
+	var res ServiceRenderedInstaller
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

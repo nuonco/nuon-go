@@ -36,8 +36,6 @@ type ClientService interface {
 
 	CreateAppInputConfig(params *CreateAppInputConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppInputConfigCreated, error)
 
-	CreateAppInstaller(params *CreateAppInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppInstallerCreated, error)
-
 	CreateAppRunnerConfig(params *CreateAppRunnerConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppRunnerConfigCreated, error)
 
 	CreateAppSandboxConfig(params *CreateAppSandboxConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppSandboxConfigCreated, error)
@@ -60,6 +58,8 @@ type ClientService interface {
 
 	CreateInstallInputs(params *CreateInstallInputsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallInputsCreated, error)
 
+	CreateInstaller(params *CreateInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallerCreated, error)
+
 	CreateJobComponentConfig(params *CreateJobComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateJobComponentConfigCreated, error)
 
 	CreateOrg(params *CreateOrgParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOrgCreated, error)
@@ -72,11 +72,11 @@ type ClientService interface {
 
 	DeleteApp(params *DeleteAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAppOK, error)
 
-	DeleteAppInstaller(params *DeleteAppInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAppInstallerOK, error)
-
 	DeleteComponent(params *DeleteComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteComponentOK, error)
 
 	DeleteInstall(params *DeleteInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteInstallOK, error)
+
+	DeleteInstaller(params *DeleteInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteInstallerOK, error)
 
 	DeleteOrg(params *DeleteOrgParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOrgOK, error)
 
@@ -89,8 +89,6 @@ type ClientService interface {
 	GetAppInputConfigs(params *GetAppInputConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppInputConfigsOK, error)
 
 	GetAppInputLatestConfig(params *GetAppInputLatestConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppInputLatestConfigOK, error)
-
-	GetAppInstaller(params *GetAppInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppInstallerOK, error)
 
 	GetAppInstalls(params *GetAppInstallsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppInstallsOK, error)
 
@@ -158,6 +156,10 @@ type ClientService interface {
 
 	GetInstallSandboxRuns(params *GetInstallSandboxRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallSandboxRunsOK, error)
 
+	GetInstaller(params *GetInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallerOK, error)
+
+	GetInstallerInstall(params *GetInstallerInstallParams, opts ...ClientOption) (*GetInstallerInstallOK, error)
+
 	GetInstallers(params *GetInstallersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallersOK, error)
 
 	GetOrg(params *GetOrgParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrgOK, error)
@@ -186,21 +188,21 @@ type ClientService interface {
 
 	InstallerCreateInstall(params *InstallerCreateInstallParams, opts ...ClientOption) (*InstallerCreateInstallCreated, error)
 
-	InstallerGetInstall(params *InstallerGetInstallParams, opts ...ClientOption) (*InstallerGetInstallOK, error)
-
 	PublishMetrics(params *PublishMetricsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PublishMetricsOK, error)
 
-	RenderAppInstaller(params *RenderAppInstallerParams, opts ...ClientOption) (*RenderAppInstallerOK, error)
+	RenderInstaller(params *RenderInstallerParams, opts ...ClientOption) (*RenderInstallerOK, error)
+
+	RenderInstallerInstall(params *RenderInstallerInstallParams, opts ...ClientOption) (*RenderInstallerInstallOK, error)
 
 	TeardownInstallComponent(params *TeardownInstallComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeardownInstallComponentCreated, error)
 
 	UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppOK, error)
 
-	UpdateAppInstaller(params *UpdateAppInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppInstallerCreated, error)
-
 	UpdateComponent(params *UpdateComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateComponentOK, error)
 
 	UpdateInstall(params *UpdateInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallOK, error)
+
+	UpdateInstaller(params *UpdateInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallerCreated, error)
 
 	UpdateOrg(params *UpdateOrgParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateOrgOK, error)
 
@@ -321,45 +323,6 @@ func (a *Client) CreateAppInputConfig(params *CreateAppInputConfigParams, authIn
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppInputConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-CreateAppInstaller creates an app installer
-*/
-func (a *Client) CreateAppInstaller(params *CreateAppInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppInstallerCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewCreateAppInstallerParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "CreateAppInstaller",
-		Method:             "POST",
-		PathPattern:        "/v1/installers",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &CreateAppInstallerReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*CreateAppInstallerCreated)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for CreateAppInstaller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -793,6 +756,45 @@ func (a *Client) CreateInstallInputs(params *CreateInstallInputsParams, authInfo
 }
 
 /*
+CreateInstaller creates an app installer
+*/
+func (a *Client) CreateInstaller(params *CreateInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallerCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateInstallerParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateInstaller",
+		Method:             "POST",
+		PathPattern:        "/v1/installers",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateInstallerReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateInstallerCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateInstaller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 CreateJobComponentConfig creates a job component config
 */
 func (a *Client) CreateJobComponentConfig(params *CreateJobComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateJobComponentConfigCreated, error) {
@@ -1026,45 +1028,6 @@ func (a *Client) DeleteApp(params *DeleteAppParams, authInfo runtime.ClientAuthI
 }
 
 /*
-DeleteAppInstaller deletes an app installer
-*/
-func (a *Client) DeleteAppInstaller(params *DeleteAppInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAppInstallerOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDeleteAppInstallerParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "DeleteAppInstaller",
-		Method:             "DELETE",
-		PathPattern:        "/v1/installers/{installer_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &DeleteAppInstallerReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*DeleteAppInstallerOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for DeleteAppInstaller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 DeleteComponent deletes a component
 */
 func (a *Client) DeleteComponent(params *DeleteComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteComponentOK, error) {
@@ -1139,6 +1102,45 @@ func (a *Client) DeleteInstall(params *DeleteInstallParams, authInfo runtime.Cli
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeleteInstall: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+DeleteInstaller deletes an installer
+*/
+func (a *Client) DeleteInstaller(params *DeleteInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteInstallerOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteInstallerParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteInstaller",
+		Method:             "DELETE",
+		PathPattern:        "/v1/installers/{installer_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteInstallerReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteInstallerOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeleteInstaller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -1373,45 +1375,6 @@ func (a *Client) GetAppInputLatestConfig(params *GetAppInputLatestConfigParams, 
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppInputLatestConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetAppInstaller gets an app installer
-*/
-func (a *Client) GetAppInstaller(params *GetAppInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppInstallerOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetAppInstallerParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetAppInstaller",
-		Method:             "GET",
-		PathPattern:        "/v1/installers/{installer_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetAppInstallerReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetAppInstallerOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetAppInstaller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -2706,6 +2669,83 @@ func (a *Client) GetInstallSandboxRuns(params *GetInstallSandboxRunsParams, auth
 }
 
 /*
+GetInstaller gets an installer
+*/
+func (a *Client) GetInstaller(params *GetInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallerOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetInstallerParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetInstaller",
+		Method:             "GET",
+		PathPattern:        "/v1/installers/{installer_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetInstallerReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetInstallerOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetInstaller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetInstallerInstall renders an installer install
+*/
+func (a *Client) GetInstallerInstall(params *GetInstallerInstallParams, opts ...ClientOption) (*GetInstallerInstallOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetInstallerInstallParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetInstallerInstall",
+		Method:             "GET",
+		PathPattern:        "/v1/installer/{installer_slug}/install/{install_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetInstallerInstallReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetInstallerInstallOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetInstallerInstall: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetInstallers gets installers for current org
 
 Return all installers for the current org.
@@ -3254,44 +3294,6 @@ func (a *Client) InstallerCreateInstall(params *InstallerCreateInstallParams, op
 }
 
 /*
-InstallerGetInstall gets an installer install
-*/
-func (a *Client) InstallerGetInstall(params *InstallerGetInstallParams, opts ...ClientOption) (*InstallerGetInstallOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewInstallerGetInstallParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "InstallerGetInstall",
-		Method:             "GET",
-		PathPattern:        "/v1/installer/{installer_slug}/install/{install_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &InstallerGetInstallReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*InstallerGetInstallOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for InstallerGetInstall: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 PublishMetrics publishes a metric from different nuon clients for telemetry purposes
 */
 func (a *Client) PublishMetrics(params *PublishMetricsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PublishMetricsOK, error) {
@@ -3331,22 +3333,22 @@ func (a *Client) PublishMetrics(params *PublishMetricsParams, authInfo runtime.C
 }
 
 /*
-RenderAppInstaller renders an app installer
+RenderInstaller renders an installer
 */
-func (a *Client) RenderAppInstaller(params *RenderAppInstallerParams, opts ...ClientOption) (*RenderAppInstallerOK, error) {
+func (a *Client) RenderInstaller(params *RenderInstallerParams, opts ...ClientOption) (*RenderInstallerOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewRenderAppInstallerParams()
+		params = NewRenderInstallerParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "RenderAppInstaller",
+		ID:                 "RenderInstaller",
 		Method:             "GET",
 		PathPattern:        "/v1/installer/{installer_slug}/render",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &RenderAppInstallerReader{formats: a.formats},
+		Reader:             &RenderInstallerReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -3358,13 +3360,53 @@ func (a *Client) RenderAppInstaller(params *RenderAppInstallerParams, opts ...Cl
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*RenderAppInstallerOK)
+	success, ok := result.(*RenderInstallerOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for RenderAppInstaller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for RenderInstaller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+RenderInstallerInstall renders an installer install
+
+Render an install in the context of an installer.
+*/
+func (a *Client) RenderInstallerInstall(params *RenderInstallerInstallParams, opts ...ClientOption) (*RenderInstallerInstallOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewRenderInstallerInstallParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "RenderInstallerInstall",
+		Method:             "GET",
+		PathPattern:        "/v1/installer/{installer_slug}/install/{install_id}/render",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &RenderInstallerInstallReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*RenderInstallerInstallOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for RenderInstallerInstall: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -3447,45 +3489,6 @@ func (a *Client) UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthI
 }
 
 /*
-UpdateAppInstaller updates an app installer
-*/
-func (a *Client) UpdateAppInstaller(params *UpdateAppInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppInstallerCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewUpdateAppInstallerParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "UpdateAppInstaller",
-		Method:             "PATCH",
-		PathPattern:        "/v1/installers/{installer_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &UpdateAppInstallerReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*UpdateAppInstallerCreated)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for UpdateAppInstaller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 UpdateComponent updates a component
 */
 func (a *Client) UpdateComponent(params *UpdateComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateComponentOK, error) {
@@ -3560,6 +3563,45 @@ func (a *Client) UpdateInstall(params *UpdateInstallParams, authInfo runtime.Cli
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateInstall: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateInstaller updates an installer
+*/
+func (a *Client) UpdateInstaller(params *UpdateInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallerCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateInstallerParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateInstaller",
+		Method:             "PATCH",
+		PathPattern:        "/v1/installers/{installer_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateInstallerReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateInstallerCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateInstaller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

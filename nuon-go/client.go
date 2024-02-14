@@ -54,13 +54,16 @@ type Client interface {
 	GetAppInputConfigs(ctx context.Context, appID string) ([]*models.AppAppInputConfig, error)
 
 	// app installer methods
-	CreateAppInstaller(ctx context.Context, req *models.ServiceCreateAppInstallerRequest) (*models.AppAppInstaller, error)
-	UpdateAppInstaller(ctx context.Context, appInstallerID string, req *models.ServiceUpdateAppInstallerRequest) (*models.AppAppInstaller, error)
-	DeleteAppInstaller(ctx context.Context, appInstallerID string) (bool, error)
-	GetAppInstaller(ctx context.Context, appInstallerID string) (*models.AppAppInstaller, error)
-	RenderAppInstaller(ctx context.Context, slug string) (*models.ServiceAppInstaller, error)
-	CreateInstallFromInstaller(ctx context.Context, req *models.ServiceCreateInstallRequest) (*models.AppInstall, error)
+	CreateInstaller(ctx context.Context, req *models.ServiceCreateAppInstallerRequest) (*models.AppAppInstaller, error)
+	UpdateInstaller(ctx context.Context, appInstallerID string, req *models.ServiceUpdateInstallerRequest) (*models.AppAppInstaller, error)
+	DeleteInstaller(ctx context.Context, appInstallerID string) (bool, error)
+	GetInstaller(ctx context.Context, appInstallerID string) (*models.AppAppInstaller, error)
 	GetInstallers(ctx context.Context) ([]*models.AppAppInstaller, error)
+	RenderInstaller(ctx context.Context, slug string) (*models.ServiceRenderedInstaller, error)
+
+	GetInstallerInstall(ctx context.Context, slug, installID string) (*models.AppInstall, error)
+	CreateInstallerInstall(ctx context.Context, req *models.ServiceCreateInstallRequest) (*models.AppInstall, error)
+	RenderInstallerInstall(ctx context.Context, slug, installID string) (*models.ServiceRenderedInstall, error)
 
 	// general methods
 	GetCLIConfig(ctx context.Context) (*models.ServiceCLIConfig, error)
