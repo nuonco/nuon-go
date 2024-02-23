@@ -28,11 +28,17 @@ type AppAppInputConfig struct {
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
+	// created by
+	CreatedBy *AppUserToken `json:"created_by,omitempty"`
+
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`
+
+	// install inputs
+	InstallInputs []*AppInstallInputs `json:"install_inputs"`
 
 	// org id
 	OrgID string `json:"org_id,omitempty"`
@@ -46,6 +52,14 @@ func (m *AppAppInputConfig) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAppInputs(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCreatedBy(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInstallInputs(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -81,11 +95,64 @@ func (m *AppAppInputConfig) validateAppInputs(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppAppInputConfig) validateCreatedBy(formats strfmt.Registry) error {
+	if swag.IsZero(m.CreatedBy) { // not required
+		return nil
+	}
+
+	if m.CreatedBy != nil {
+		if err := m.CreatedBy.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("created_by")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("created_by")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppAppInputConfig) validateInstallInputs(formats strfmt.Registry) error {
+	if swag.IsZero(m.InstallInputs) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.InstallInputs); i++ {
+		if swag.IsZero(m.InstallInputs[i]) { // not required
+			continue
+		}
+
+		if m.InstallInputs[i] != nil {
+			if err := m.InstallInputs[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("install_inputs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("install_inputs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app app input config based on the context it is used
 func (m *AppAppInputConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateAppInputs(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateInstallInputs(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -110,6 +177,52 @@ func (m *AppAppInputConfig) contextValidateAppInputs(ctx context.Context, format
 					return ve.ValidateName("app_inputs" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("app_inputs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *AppAppInputConfig) contextValidateCreatedBy(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.CreatedBy != nil {
+
+		if swag.IsZero(m.CreatedBy) { // not required
+			return nil
+		}
+
+		if err := m.CreatedBy.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("created_by")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("created_by")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppAppInputConfig) contextValidateInstallInputs(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.InstallInputs); i++ {
+
+		if m.InstallInputs[i] != nil {
+
+			if swag.IsZero(m.InstallInputs[i]) { // not required
+				return nil
+			}
+
+			if err := m.InstallInputs[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("install_inputs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("install_inputs" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
