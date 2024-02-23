@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -41,17 +42,73 @@ type AppUserToken struct {
 	// claim data
 	Subject string `json:"subject,omitempty"`
 
+	// token type
+	TokenType AppTokenType `json:"token_type,omitempty"`
+
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
 }
 
 // Validate validates this app user token
 func (m *AppUserToken) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateTokenType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this app user token based on context it is used
+func (m *AppUserToken) validateTokenType(formats strfmt.Registry) error {
+	if swag.IsZero(m.TokenType) { // not required
+		return nil
+	}
+
+	if err := m.TokenType.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("token_type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("token_type")
+		}
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this app user token based on the context it is used
 func (m *AppUserToken) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateTokenType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *AppUserToken) contextValidateTokenType(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.TokenType) { // not required
+		return nil
+	}
+
+	if err := m.TokenType.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("token_type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("token_type")
+		}
+		return err
+	}
+
 	return nil
 }
 

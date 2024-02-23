@@ -32,6 +32,9 @@ type ServiceAppInputRequest struct {
 
 	// required
 	Required bool `json:"required,omitempty"`
+
+	// sensitive
+	Sensitive bool `json:"sensitive,omitempty"`
 }
 
 // Validate validates this service app input request
