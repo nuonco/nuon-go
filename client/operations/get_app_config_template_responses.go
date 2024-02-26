@@ -75,7 +75,7 @@ GetAppConfigTemplateCreated describes a response with status code 201, with defa
 Created
 */
 type GetAppConfigTemplateCreated struct {
-	Payload *models.ServiceAppTemplate
+	Payload *models.ServiceAppConfigTemplate
 }
 
 // IsSuccess returns true when this get app config template created response has a 2xx status code
@@ -116,13 +116,13 @@ func (o *GetAppConfigTemplateCreated) String() string {
 	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateCreated  %+v", 201, o.Payload)
 }
 
-func (o *GetAppConfigTemplateCreated) GetPayload() *models.ServiceAppTemplate {
+func (o *GetAppConfigTemplateCreated) GetPayload() *models.ServiceAppConfigTemplate {
 	return o.Payload
 }
 
 func (o *GetAppConfigTemplateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ServiceAppTemplate)
+	o.Payload = new(models.ServiceAppConfigTemplate)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -515,6 +515,21 @@ func (mr *MockClientMockRecorder) GetAppComponents(ctx, appID interface{}) *gomo
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppComponents", reflect.TypeOf((*MockClient)(nil).GetAppComponents), ctx, appID)
 }
 
+// GetAppConfigTemplate mocks base method.
+func (m *MockClient) GetAppConfigTemplate(ctx context.Context, appID string, typ models.ServiceAppTemplateType) (*models.ServiceAppTemplate, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAppConfigTemplate", ctx, appID, typ)
+	ret0, _ := ret[0].(*models.ServiceAppTemplate)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAppConfigTemplate indicates an expected call of GetAppConfigTemplate.
+func (mr *MockClientMockRecorder) GetAppConfigTemplate(ctx, appID, typ interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppConfigTemplate", reflect.TypeOf((*MockClient)(nil).GetAppConfigTemplate), ctx, appID, typ)
+}
+
 // GetAppConfigs mocks base method.
 func (m *MockClient) GetAppConfigs(ctx context.Context, appID string) ([]*models.AppAppConfig, error) {
 	m.ctrl.T.Helper()

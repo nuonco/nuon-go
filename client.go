@@ -49,7 +49,7 @@ type Client interface {
 	GetAppRunnerConfigs(ctx context.Context, appID string) ([]*models.AppAppRunnerConfig, error)
 
 	// app config methods
-	GetAppConfigTemplate(ctx context.Context, appID string, typ models.ServiceAppTemplateType) (*models.ServiceAppTemplate, error)
+	GetAppConfigTemplate(ctx context.Context, appID string, typ models.ServiceAppConfigTemplateType) (*models.ServiceAppConfigTemplate, error)
 	CreateAppConfig(ctx context.Context, appID string, req *models.ServiceCreateAppConfigRequest) (*models.AppAppConfig, error)
 	GetAppLatestConfig(ctx context.Context, appID string) (*models.AppAppConfig, error)
 	GetAppConfigs(ctx context.Context, appID string) ([]*models.AppAppConfig, error)

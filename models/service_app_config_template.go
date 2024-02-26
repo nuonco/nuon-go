@@ -13,10 +13,10 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ServiceAppTemplate service app template
+// ServiceAppConfigTemplate service app config template
 //
-// swagger:model service.AppTemplate
-type ServiceAppTemplate struct {
+// swagger:model service.AppConfigTemplate
+type ServiceAppConfigTemplate struct {
 
 	// content
 	Content string `json:"content,omitempty"`
@@ -28,11 +28,11 @@ type ServiceAppTemplate struct {
 	Format AppAppConfigFmt `json:"format,omitempty"`
 
 	// type
-	Type ServiceAppTemplateType `json:"type,omitempty"`
+	Type ServiceAppConfigTemplateType `json:"type,omitempty"`
 }
 
-// Validate validates this service app template
-func (m *ServiceAppTemplate) Validate(formats strfmt.Registry) error {
+// Validate validates this service app config template
+func (m *ServiceAppConfigTemplate) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateFormat(formats); err != nil {
@@ -49,7 +49,7 @@ func (m *ServiceAppTemplate) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ServiceAppTemplate) validateFormat(formats strfmt.Registry) error {
+func (m *ServiceAppConfigTemplate) validateFormat(formats strfmt.Registry) error {
 	if swag.IsZero(m.Format) { // not required
 		return nil
 	}
@@ -66,7 +66,7 @@ func (m *ServiceAppTemplate) validateFormat(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ServiceAppTemplate) validateType(formats strfmt.Registry) error {
+func (m *ServiceAppConfigTemplate) validateType(formats strfmt.Registry) error {
 	if swag.IsZero(m.Type) { // not required
 		return nil
 	}
@@ -83,8 +83,8 @@ func (m *ServiceAppTemplate) validateType(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validate this service app template based on the context it is used
-func (m *ServiceAppTemplate) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this service app config template based on the context it is used
+func (m *ServiceAppConfigTemplate) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateFormat(ctx, formats); err != nil {
@@ -101,7 +101,7 @@ func (m *ServiceAppTemplate) ContextValidate(ctx context.Context, formats strfmt
 	return nil
 }
 
-func (m *ServiceAppTemplate) contextValidateFormat(ctx context.Context, formats strfmt.Registry) error {
+func (m *ServiceAppConfigTemplate) contextValidateFormat(ctx context.Context, formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Format) { // not required
 		return nil
@@ -119,7 +119,7 @@ func (m *ServiceAppTemplate) contextValidateFormat(ctx context.Context, formats 
 	return nil
 }
 
-func (m *ServiceAppTemplate) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
+func (m *ServiceAppConfigTemplate) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Type) { // not required
 		return nil
@@ -138,7 +138,7 @@ func (m *ServiceAppTemplate) contextValidateType(ctx context.Context, formats st
 }
 
 // MarshalBinary interface implementation
-func (m *ServiceAppTemplate) MarshalBinary() ([]byte, error) {
+func (m *ServiceAppConfigTemplate) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -146,8 +146,8 @@ func (m *ServiceAppTemplate) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *ServiceAppTemplate) UnmarshalBinary(b []byte) error {
-	var res ServiceAppTemplate
+func (m *ServiceAppConfigTemplate) UnmarshalBinary(b []byte) error {
+	var res ServiceAppConfigTemplate
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

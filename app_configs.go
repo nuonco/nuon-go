@@ -7,7 +7,7 @@ import (
 	"github.com/nuonco/nuon-go/models"
 )
 
-func (c *client) GetAppConfigTemplate(ctx context.Context, appID string, typ models.ServiceAppTemplateType) (*models.ServiceAppTemplate, error) {
+func (c *client) GetAppConfigTemplate(ctx context.Context, appID string, typ models.ServiceAppConfigTemplateType) (*models.ServiceAppConfigTemplate, error) {
 	resp, err := c.genClient.Operations.GetAppConfigTemplate(&operations.GetAppConfigTemplateParams{
 		AppID:   appID,
 		Type:    string(typ),
