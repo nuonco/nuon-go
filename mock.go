@@ -50,6 +50,21 @@ func (mr *MockClientMockRecorder) CreateApp(ctx, req interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateApp", reflect.TypeOf((*MockClient)(nil).CreateApp), ctx, req)
 }
 
+// CreateAppConfig mocks base method.
+func (m *MockClient) CreateAppConfig(ctx context.Context, appID string, req *models.ServiceCreateAppConfigRequest) (*models.AppAppConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateAppConfig", ctx, appID, req)
+	ret0, _ := ret[0].(*models.AppAppConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateAppConfig indicates an expected call of CreateAppConfig.
+func (mr *MockClientMockRecorder) CreateAppConfig(ctx, appID, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAppConfig", reflect.TypeOf((*MockClient)(nil).CreateAppConfig), ctx, appID, req)
+}
+
 // CreateAppInputConfig mocks base method.
 func (m *MockClient) CreateAppInputConfig(ctx context.Context, appID string, req *models.ServiceCreateAppInputConfigRequest) (*models.AppAppInputConfig, error) {
 	m.ctrl.T.Helper()
@@ -500,6 +515,21 @@ func (mr *MockClientMockRecorder) GetAppComponents(ctx, appID interface{}) *gomo
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppComponents", reflect.TypeOf((*MockClient)(nil).GetAppComponents), ctx, appID)
 }
 
+// GetAppConfigs mocks base method.
+func (m *MockClient) GetAppConfigs(ctx context.Context, appID string) ([]*models.AppAppConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAppConfigs", ctx, appID)
+	ret0, _ := ret[0].([]*models.AppAppConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAppConfigs indicates an expected call of GetAppConfigs.
+func (mr *MockClientMockRecorder) GetAppConfigs(ctx, appID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppConfigs", reflect.TypeOf((*MockClient)(nil).GetAppConfigs), ctx, appID)
+}
+
 // GetAppInputConfigs mocks base method.
 func (m *MockClient) GetAppInputConfigs(ctx context.Context, appID string) ([]*models.AppAppInputConfig, error) {
 	m.ctrl.T.Helper()
@@ -543,6 +573,21 @@ func (m *MockClient) GetAppInstalls(ctx context.Context, appID string) ([]*model
 func (mr *MockClientMockRecorder) GetAppInstalls(ctx, appID interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppInstalls", reflect.TypeOf((*MockClient)(nil).GetAppInstalls), ctx, appID)
+}
+
+// GetAppLatestConfig mocks base method.
+func (m *MockClient) GetAppLatestConfig(ctx context.Context, appID string) (*models.AppAppConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAppLatestConfig", ctx, appID)
+	ret0, _ := ret[0].(*models.AppAppConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAppLatestConfig indicates an expected call of GetAppLatestConfig.
+func (mr *MockClientMockRecorder) GetAppLatestConfig(ctx, appID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppLatestConfig", reflect.TypeOf((*MockClient)(nil).GetAppLatestConfig), ctx, appID)
 }
 
 // GetAppReleases mocks base method.
