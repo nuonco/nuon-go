@@ -88,6 +88,8 @@ type ClientService interface {
 
 	GetAppComponents(params *GetAppComponentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppComponentsOK, error)
 
+	GetAppConfigTemplate(params *GetAppConfigTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppConfigTemplateCreated, error)
+
 	GetAppConfigs(params *GetAppConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppConfigsOK, error)
 
 	GetAppInputConfigs(params *GetAppInputConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppInputConfigsOK, error)
@@ -1344,6 +1346,47 @@ func (a *Client) GetAppComponents(params *GetAppComponentsParams, authInfo runti
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppComponents: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAppConfigTemplate gets an app config template
+
+Create an application template which provides a fully rendered config that can be modified and used to kickstart any application.
+*/
+func (a *Client) GetAppConfigTemplate(params *GetAppConfigTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppConfigTemplateCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAppConfigTemplateParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetAppConfigTemplate",
+		Method:             "GET",
+		PathPattern:        "/v1/apps/{app_id}/template-config",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAppConfigTemplateReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAppConfigTemplateCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetAppConfigTemplate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
