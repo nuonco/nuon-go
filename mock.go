@@ -516,10 +516,10 @@ func (mr *MockClientMockRecorder) GetAppComponents(ctx, appID interface{}) *gomo
 }
 
 // GetAppConfigTemplate mocks base method.
-func (m *MockClient) GetAppConfigTemplate(ctx context.Context, appID string, typ models.ServiceAppTemplateType) (*models.ServiceAppTemplate, error) {
+func (m *MockClient) GetAppConfigTemplate(ctx context.Context, appID string, typ models.ServiceAppConfigTemplateType) (*models.ServiceAppConfigTemplate, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAppConfigTemplate", ctx, appID, typ)
-	ret0, _ := ret[0].(*models.ServiceAppTemplate)
+	ret0, _ := ret[0].(*models.ServiceAppConfigTemplate)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
