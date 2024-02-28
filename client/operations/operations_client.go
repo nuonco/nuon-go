@@ -1364,7 +1364,7 @@ func (a *Client) GetAppConfig(params *GetAppConfigParams, authInfo runtime.Clien
 	op := &runtime.ClientOperation{
 		ID:                 "GetAppConfig",
 		Method:             "GET",
-		PathPattern:        "/v1/apps/{app_id}/app-config/{app_config_id}",
+		PathPattern:        "/v1/apps/{app_id}/config/{app_config_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
