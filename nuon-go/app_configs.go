@@ -20,6 +20,19 @@ func (c *client) GetAppConfigTemplate(ctx context.Context, appID string, typ mod
 	return resp.Payload, nil
 }
 
+func (c *client) GetAppConfig(ctx context.Context, appID, appConfigID string) (*models.AppAppConfig, error) {
+	resp, err := c.genClient.Operations.GetAppConfig(&operations.GetAppConfigParams{
+		AppID:       appID,
+		AppConfigID: appConfigID,
+		Context:     ctx,
+	}, c.getOrgIDAuthInfo())
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}
+
 func (c *client) CreateAppConfig(ctx context.Context, appID string, req *models.ServiceCreateAppConfigRequest) (*models.AppAppConfig, error) {
 	resp, err := c.genClient.Operations.CreateAppConfig(&operations.CreateAppConfigParams{
 		Req:     req,
