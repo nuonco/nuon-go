@@ -39,6 +39,9 @@ type AppAppInstaller struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// filled in via after query
+	InstallerURL string `json:"installer_url,omitempty"`
+
 	// org id
 	OrgID string `json:"org_id,omitempty"`
 
