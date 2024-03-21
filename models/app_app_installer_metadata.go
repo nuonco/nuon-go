@@ -42,6 +42,9 @@ type AppAppInstallerMetadata struct {
 	// documentation url
 	DocumentationURL string `json:"documentation_url,omitempty"`
 
+	// formatted demo url
+	FormattedDemoURL string `json:"formatted_demo_url,omitempty"`
+
 	// github url
 	GithubURL string `json:"github_url,omitempty"`
 
