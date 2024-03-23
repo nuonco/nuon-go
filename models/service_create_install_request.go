@@ -20,8 +20,10 @@ import (
 type ServiceCreateInstallRequest struct {
 
 	// aws account
-	// Required: true
-	AwsAccount *ServiceCreateInstallRequestAwsAccount `json:"aws_account"`
+	AwsAccount *ServiceCreateInstallRequestAwsAccount `json:"aws_account,omitempty"`
+
+	// azure account
+	AzureAccount *ServiceCreateInstallRequestAzureAccount `json:"azure_account,omitempty"`
 
 	// inputs
 	Inputs map[string]string `json:"inputs,omitempty"`
@@ -39,6 +41,10 @@ func (m *ServiceCreateInstallRequest) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateAzureAccount(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
@@ -50,9 +56,8 @@ func (m *ServiceCreateInstallRequest) Validate(formats strfmt.Registry) error {
 }
 
 func (m *ServiceCreateInstallRequest) validateAwsAccount(formats strfmt.Registry) error {
-
-	if err := validate.Required("aws_account", "body", m.AwsAccount); err != nil {
-		return err
+	if swag.IsZero(m.AwsAccount) { // not required
+		return nil
 	}
 
 	if m.AwsAccount != nil {
@@ -61,6 +66,25 @@ func (m *ServiceCreateInstallRequest) validateAwsAccount(formats strfmt.Registry
 				return ve.ValidateName("aws_account")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("aws_account")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ServiceCreateInstallRequest) validateAzureAccount(formats strfmt.Registry) error {
+	if swag.IsZero(m.AzureAccount) { // not required
+		return nil
+	}
+
+	if m.AzureAccount != nil {
+		if err := m.AzureAccount.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("azure_account")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("azure_account")
 			}
 			return err
 		}
@@ -86,6 +110,10 @@ func (m *ServiceCreateInstallRequest) ContextValidate(ctx context.Context, forma
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateAzureAccount(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -96,11 +124,36 @@ func (m *ServiceCreateInstallRequest) contextValidateAwsAccount(ctx context.Cont
 
 	if m.AwsAccount != nil {
 
+		if swag.IsZero(m.AwsAccount) { // not required
+			return nil
+		}
+
 		if err := m.AwsAccount.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("aws_account")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("aws_account")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ServiceCreateInstallRequest) contextValidateAzureAccount(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AzureAccount != nil {
+
+		if swag.IsZero(m.AzureAccount) { // not required
+			return nil
+		}
+
+		if err := m.AzureAccount.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("azure_account")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("azure_account")
 			}
 			return err
 		}
@@ -179,6 +232,55 @@ func (m *ServiceCreateInstallRequestAwsAccount) MarshalBinary() ([]byte, error) 
 // UnmarshalBinary interface implementation
 func (m *ServiceCreateInstallRequestAwsAccount) UnmarshalBinary(b []byte) error {
 	var res ServiceCreateInstallRequestAwsAccount
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// ServiceCreateInstallRequestAzureAccount service create install request azure account
+//
+// swagger:model ServiceCreateInstallRequestAzureAccount
+type ServiceCreateInstallRequestAzureAccount struct {
+
+	// location
+	Location string `json:"location,omitempty"`
+
+	// service principal app id
+	ServicePrincipalAppID string `json:"service_principal_app_id,omitempty"`
+
+	// service principal password
+	ServicePrincipalPassword string `json:"service_principal_password,omitempty"`
+
+	// subscription id
+	SubscriptionID string `json:"subscription_id,omitempty"`
+
+	// subscription tenant id
+	SubscriptionTenantID string `json:"subscription_tenant_id,omitempty"`
+}
+
+// Validate validates this service create install request azure account
+func (m *ServiceCreateInstallRequestAzureAccount) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this service create install request azure account based on context it is used
+func (m *ServiceCreateInstallRequestAzureAccount) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *ServiceCreateInstallRequestAzureAccount) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *ServiceCreateInstallRequestAzureAccount) UnmarshalBinary(b []byte) error {
+	var res ServiceCreateInstallRequestAzureAccount
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

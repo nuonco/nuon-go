@@ -31,6 +31,9 @@ type AppInstall struct {
 	// aws account
 	AwsAccount *AppAWSAccount `json:"aws_account,omitempty"`
 
+	// azure account
+	AzureAccount *AppAzureAccount `json:"azure_account,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
@@ -45,6 +48,9 @@ type AppInstall struct {
 
 	// install components
 	InstallComponents []*AppInstallComponent `json:"install_components"`
+
+	// install events
+	InstallEvents []*AppInstallEvent `json:"install_events"`
 
 	// install inputs
 	InstallInputs []*AppInstallInputs `json:"install_inputs"`
@@ -81,11 +87,19 @@ func (m *AppInstall) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateAzureAccount(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCreatedBy(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateInstallComponents(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInstallEvents(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -160,6 +174,25 @@ func (m *AppInstall) validateAwsAccount(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppInstall) validateAzureAccount(formats strfmt.Registry) error {
+	if swag.IsZero(m.AzureAccount) { // not required
+		return nil
+	}
+
+	if m.AzureAccount != nil {
+		if err := m.AzureAccount.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("azure_account")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("azure_account")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *AppInstall) validateCreatedBy(formats strfmt.Registry) error {
 	if swag.IsZero(m.CreatedBy) { // not required
 		return nil
@@ -195,6 +228,32 @@ func (m *AppInstall) validateInstallComponents(formats strfmt.Registry) error {
 					return ve.ValidateName("install_components" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("install_components" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *AppInstall) validateInstallEvents(formats strfmt.Registry) error {
+	if swag.IsZero(m.InstallEvents) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.InstallEvents); i++ {
+		if swag.IsZero(m.InstallEvents[i]) { // not required
+			continue
+		}
+
+		if m.InstallEvents[i] != nil {
+			if err := m.InstallEvents[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("install_events" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("install_events" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -273,11 +332,19 @@ func (m *AppInstall) ContextValidate(ctx context.Context, formats strfmt.Registr
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateAzureAccount(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.contextValidateInstallComponents(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateInstallEvents(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -358,6 +425,27 @@ func (m *AppInstall) contextValidateAwsAccount(ctx context.Context, formats strf
 	return nil
 }
 
+func (m *AppInstall) contextValidateAzureAccount(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AzureAccount != nil {
+
+		if swag.IsZero(m.AzureAccount) { // not required
+			return nil
+		}
+
+		if err := m.AzureAccount.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("azure_account")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("azure_account")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *AppInstall) contextValidateCreatedBy(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.CreatedBy != nil {
@@ -394,6 +482,31 @@ func (m *AppInstall) contextValidateInstallComponents(ctx context.Context, forma
 					return ve.ValidateName("install_components" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("install_components" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *AppInstall) contextValidateInstallEvents(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.InstallEvents); i++ {
+
+		if m.InstallEvents[i] != nil {
+
+			if swag.IsZero(m.InstallEvents[i]) { // not required
+				return nil
+			}
+
+			if err := m.InstallEvents[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("install_events" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("install_events" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
