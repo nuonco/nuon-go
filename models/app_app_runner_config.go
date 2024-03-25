@@ -24,10 +24,8 @@ type AppAppRunnerConfig struct {
 	// app runner type
 	AppRunnerType AppAppRunnerType `json:"app_runner_type,omitempty"`
 
-	// set via after query
-	CloudPlatform struct {
-		AppCloudPlatform
-	} `json:"cloud_platform,omitempty"`
+	// cloud platform
+	CloudPlatform AppCloudPlatform `json:"cloud_platform,omitempty"`
 
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
@@ -95,6 +93,15 @@ func (m *AppAppRunnerConfig) validateCloudPlatform(formats strfmt.Registry) erro
 		return nil
 	}
 
+	if err := m.CloudPlatform.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("cloud_platform")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("cloud_platform")
+		}
+		return err
+	}
+
 	return nil
 }
 
@@ -158,6 +165,19 @@ func (m *AppAppRunnerConfig) contextValidateAppRunnerType(ctx context.Context, f
 }
 
 func (m *AppAppRunnerConfig) contextValidateCloudPlatform(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.CloudPlatform) { // not required
+		return nil
+	}
+
+	if err := m.CloudPlatform.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("cloud_platform")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("cloud_platform")
+		}
+		return err
+	}
 
 	return nil
 }

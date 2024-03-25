@@ -25,10 +25,8 @@ type AppAppSandboxConfig struct {
 	// artifacts
 	Artifacts *AppAppSandboxConfigArtifacts `json:"artifacts,omitempty"`
 
-	// filled in via after query
-	CloudPlatform struct {
-		AppCloudPlatform
-	} `json:"cloud_platform,omitempty"`
+	// cloud platform
+	CloudPlatform AppCloudPlatform `json:"cloud_platform,omitempty"`
 
 	// connected github vcs config
 	ConnectedGithubVcsConfig *AppConnectedGithubVCSConfig `json:"connected_github_vcs_config,omitempty"`
@@ -123,6 +121,15 @@ func (m *AppAppSandboxConfig) validateArtifacts(formats strfmt.Registry) error {
 func (m *AppAppSandboxConfig) validateCloudPlatform(formats strfmt.Registry) error {
 	if swag.IsZero(m.CloudPlatform) { // not required
 		return nil
+	}
+
+	if err := m.CloudPlatform.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("cloud_platform")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("cloud_platform")
+		}
+		return err
 	}
 
 	return nil
@@ -260,6 +267,19 @@ func (m *AppAppSandboxConfig) contextValidateArtifacts(ctx context.Context, form
 }
 
 func (m *AppAppSandboxConfig) contextValidateCloudPlatform(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.CloudPlatform) { // not required
+		return nil
+	}
+
+	if err := m.CloudPlatform.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("cloud_platform")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("cloud_platform")
+		}
+		return err
+	}
 
 	return nil
 }

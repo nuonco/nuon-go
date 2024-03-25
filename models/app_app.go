@@ -18,10 +18,8 @@ import (
 // swagger:model app.App
 type AppApp struct {
 
-	// filled in via after query
-	CloudPlatform struct {
-		AppCloudPlatform
-	} `json:"cloud_platform,omitempty"`
+	// cloud platform
+	CloudPlatform AppCloudPlatform `json:"cloud_platform,omitempty"`
 
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
@@ -74,6 +72,15 @@ func (m *AppApp) validateCloudPlatform(formats strfmt.Registry) error {
 		return nil
 	}
 
+	if err := m.CloudPlatform.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("cloud_platform")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("cloud_platform")
+		}
+		return err
+	}
+
 	return nil
 }
 
@@ -115,6 +122,19 @@ func (m *AppApp) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 }
 
 func (m *AppApp) contextValidateCloudPlatform(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.CloudPlatform) { // not required
+		return nil
+	}
+
+	if err := m.CloudPlatform.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("cloud_platform")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("cloud_platform")
+		}
+		return err
+	}
 
 	return nil
 }
