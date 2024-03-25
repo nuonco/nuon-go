@@ -25,6 +25,9 @@ type AppAppSandboxConfig struct {
 	// artifacts
 	Artifacts *AppAppSandboxConfigArtifacts `json:"artifacts,omitempty"`
 
+	// cloud platform
+	CloudPlatform AppCloudPlatform `json:"cloud_platform,omitempty"`
+
 	// connected github vcs config
 	ConnectedGithubVcsConfig *AppConnectedGithubVCSConfig `json:"connected_github_vcs_config,omitempty"`
 
@@ -70,6 +73,10 @@ func (m *AppAppSandboxConfig) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateCloudPlatform(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateConnectedGithubVcsConfig(formats); err != nil {
 		res = append(res, err)
 	}
@@ -106,6 +113,23 @@ func (m *AppAppSandboxConfig) validateArtifacts(formats strfmt.Registry) error {
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *AppAppSandboxConfig) validateCloudPlatform(formats strfmt.Registry) error {
+	if swag.IsZero(m.CloudPlatform) { // not required
+		return nil
+	}
+
+	if err := m.CloudPlatform.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("cloud_platform")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("cloud_platform")
+		}
+		return err
 	}
 
 	return nil
@@ -195,6 +219,10 @@ func (m *AppAppSandboxConfig) ContextValidate(ctx context.Context, formats strfm
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateCloudPlatform(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateConnectedGithubVcsConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -233,6 +261,24 @@ func (m *AppAppSandboxConfig) contextValidateArtifacts(ctx context.Context, form
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *AppAppSandboxConfig) contextValidateCloudPlatform(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.CloudPlatform) { // not required
+		return nil
+	}
+
+	if err := m.CloudPlatform.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("cloud_platform")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("cloud_platform")
+		}
+		return err
 	}
 
 	return nil
