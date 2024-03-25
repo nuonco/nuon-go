@@ -36,6 +36,9 @@ type AppInstallEvent struct {
 	// operation
 	Operation GithubComPowertoolsdevMonoServicesCtlAPIInternalAppInstallsWorkerSignalsOperation `json:"operation,omitempty"`
 
+	// operation name
+	OperationName string `json:"operation_name,omitempty"`
+
 	// operation status
 	OperationStatus AppOperationStatus `json:"operation_status,omitempty"`
 
