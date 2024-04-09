@@ -18,8 +18,7 @@ import (
 // swagger:model app.AppSandboxConfig
 type AppAppSandboxConfig struct {
 
-	// TODO(jm): add this back, once we have migrated all existing app sandbox configs
-	// `gorm:"not null;default null"`
+	// app id
 	AppID string `json:"app_id,omitempty"`
 
 	// artifacts
