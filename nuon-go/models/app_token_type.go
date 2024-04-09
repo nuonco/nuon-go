@@ -41,6 +41,9 @@ const (
 
 	// AppTokenTypeAdmin captures enum value "admin"
 	AppTokenTypeAdmin AppTokenType = "admin"
+
+	// AppTokenTypeStatic captures enum value "static"
+	AppTokenTypeStatic AppTokenType = "static"
 )
 
 // for schema
@@ -48,7 +51,7 @@ var appTokenTypeEnum []interface{}
 
 func init() {
 	var res []AppTokenType
-	if err := json.Unmarshal([]byte(`["auth0","integration","canary","admin"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["auth0","integration","canary","admin","static"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

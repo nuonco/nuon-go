@@ -60,6 +60,11 @@ type Client interface {
 	GetAppInputLatestConfig(ctx context.Context, appID string) (*models.AppAppInputConfig, error)
 	GetAppInputConfigs(ctx context.Context, appID string) ([]*models.AppAppInputConfig, error)
 
+	// app secret methods
+	CreateAppSecret(ctx context.Context, appID string, req *models.ServiceCreateAppSecretRequest) (*models.AppAppSecret, error)
+	GetAppSecrets(ctx context.Context, appID string) ([]*models.AppAppSecret, error)
+	DeleteAppSecret(ctx context.Context, appID, secretID string) (bool, error)
+
 	// app installer methods
 	CreateInstaller(ctx context.Context, req *models.ServiceCreateAppInstallerRequest) (*models.AppAppInstaller, error)
 	UpdateInstaller(ctx context.Context, appInstallerID string, req *models.ServiceUpdateInstallerRequest) (*models.AppAppInstaller, error)

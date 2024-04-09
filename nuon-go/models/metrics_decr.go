@@ -22,9 +22,6 @@ type MetricsDecr struct {
 
 	// tags
 	Tags []string `json:"tags"`
-
-	// value
-	Value int64 `json:"value,omitempty"`
 }
 
 // Validate validates this metrics decr
