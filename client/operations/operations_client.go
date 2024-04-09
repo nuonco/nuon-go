@@ -42,6 +42,8 @@ type ClientService interface {
 
 	CreateAppSandboxConfig(params *CreateAppSandboxConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppSandboxConfigCreated, error)
 
+	CreateAppSecret(params *CreateAppSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppSecretCreated, error)
+
 	CreateComponent(params *CreateComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateComponentCreated, error)
 
 	CreateComponentBuild(params *CreateComponentBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateComponentBuildCreated, error)
@@ -73,6 +75,8 @@ type ClientService interface {
 	CreateVCSConnectionCallback(params *CreateVCSConnectionCallbackParams, opts ...ClientOption) (*CreateVCSConnectionCallbackCreated, error)
 
 	DeleteApp(params *DeleteAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAppOK, error)
+
+	DeleteAppSecret(params *DeleteAppSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAppSecretOK, error)
 
 	DeleteComponent(params *DeleteComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteComponentOK, error)
 
@@ -111,6 +115,8 @@ type ClientService interface {
 	GetAppSandboxConfigs(params *GetAppSandboxConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppSandboxConfigsOK, error)
 
 	GetAppSandboxLatestConfig(params *GetAppSandboxLatestConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppSandboxLatestConfigOK, error)
+
+	GetAppSecrets(params *GetAppSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppSecretsOK, error)
 
 	GetApps(params *GetAppsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppsOK, error)
 
@@ -456,6 +462,49 @@ func (a *Client) CreateAppSandboxConfig(params *CreateAppSandboxConfigParams, au
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppSandboxConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	CreateAppSecret creates an app secret
+
+	Create an app secret that can be used to configure components. To reference an app secret, use `.nuon.secrets.<secret_name>`.
+
+**NOTE** secrets can only be written, or deleted, not read.
+*/
+func (a *Client) CreateAppSecret(params *CreateAppSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppSecretCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateAppSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateAppSecret",
+		Method:             "POST",
+		PathPattern:        "/v1/apps/{app_id}/secret",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateAppSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateAppSecretCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateAppSecret: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -1079,6 +1128,47 @@ func (a *Client) DeleteApp(params *DeleteAppParams, authInfo runtime.ClientAuthI
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeleteApp: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+DeleteAppSecret deletes an app secret
+
+Delete an app secret.
+*/
+func (a *Client) DeleteAppSecret(params *DeleteAppSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAppSecretOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteAppSecretParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteAppSecret",
+		Method:             "DELETE",
+		PathPattern:        "/v1/apps/{app_id}/secret/{secret_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteAppSecretReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteAppSecretOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeleteAppSecret: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -1828,6 +1918,49 @@ func (a *Client) GetAppSandboxLatestConfig(params *GetAppSandboxLatestConfigPara
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppSandboxLatestConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GetAppSecrets gets app secrets
+
+	List all secrets for an app.
+
+**NOTE** this does not return any sensitive values, as secrets are write only.
+*/
+func (a *Client) GetAppSecrets(params *GetAppSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppSecretsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAppSecretsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetAppSecrets",
+		Method:             "GET",
+		PathPattern:        "/v1/apps/{app_id}/secrets",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAppSecretsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAppSecretsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetAppSecrets: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
