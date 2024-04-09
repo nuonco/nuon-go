@@ -75,7 +75,7 @@ GetAppSecretsOK describes a response with status code 200, with default header v
 OK
 */
 type GetAppSecretsOK struct {
-	Payload *models.AppAppConfig
+	Payload []*models.AppAppSecret
 }
 
 // IsSuccess returns true when this get app secrets o k response has a 2xx status code
@@ -116,16 +116,14 @@ func (o *GetAppSecretsOK) String() string {
 	return fmt.Sprintf("[GET /v1/apps/{app_id}/secrets][%d] getAppSecretsOK  %+v", 200, o.Payload)
 }
 
-func (o *GetAppSecretsOK) GetPayload() *models.AppAppConfig {
+func (o *GetAppSecretsOK) GetPayload() []*models.AppAppSecret {
 	return o.Payload
 }
 
 func (o *GetAppSecretsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.AppAppConfig)
-
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

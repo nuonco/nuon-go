@@ -75,7 +75,7 @@ CreateAppSecretCreated describes a response with status code 201, with default h
 Created
 */
 type CreateAppSecretCreated struct {
-	Payload *models.AppApp
+	Payload *models.AppAppSecret
 }
 
 // IsSuccess returns true when this create app secret created response has a 2xx status code
@@ -116,13 +116,13 @@ func (o *CreateAppSecretCreated) String() string {
 	return fmt.Sprintf("[POST /v1/apps/{app_id}/secret][%d] createAppSecretCreated  %+v", 201, o.Payload)
 }
 
-func (o *CreateAppSecretCreated) GetPayload() *models.AppApp {
+func (o *CreateAppSecretCreated) GetPayload() *models.AppAppSecret {
 	return o.Payload
 }
 
 func (o *CreateAppSecretCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.AppApp)
+	o.Payload = new(models.AppAppSecret)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
