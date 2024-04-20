@@ -47,6 +47,9 @@ type AppHelmComponentConfig struct {
 
 	// values
 	Values map[string]string `json:"values,omitempty"`
+
+	// values files
+	ValuesFiles []string `json:"values_files"`
 }
 
 // Validate validates this app helm component config

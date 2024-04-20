@@ -32,6 +32,9 @@ type ServiceCreateHelmComponentConfigRequest struct {
 	// values
 	// Required: true
 	Values map[string]string `json:"values"`
+
+	// values files
+	ValuesFiles []string `json:"values_files"`
 }
 
 // Validate validates this service create helm component config request
