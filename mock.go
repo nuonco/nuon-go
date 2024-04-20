@@ -110,6 +110,21 @@ func (mr *MockClientMockRecorder) CreateAppSandboxConfig(ctx, appID, req interfa
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAppSandboxConfig", reflect.TypeOf((*MockClient)(nil).CreateAppSandboxConfig), ctx, appID, req)
 }
 
+// CreateAppSecret mocks base method.
+func (m *MockClient) CreateAppSecret(ctx context.Context, appID string, req *models.ServiceCreateAppSecretRequest) (*models.AppAppSecret, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateAppSecret", ctx, appID, req)
+	ret0, _ := ret[0].(*models.AppAppSecret)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateAppSecret indicates an expected call of CreateAppSecret.
+func (mr *MockClientMockRecorder) CreateAppSecret(ctx, appID, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAppSecret", reflect.TypeOf((*MockClient)(nil).CreateAppSecret), ctx, appID, req)
+}
+
 // CreateComponent mocks base method.
 func (m *MockClient) CreateComponent(ctx context.Context, appID string, req *models.ServiceCreateComponentRequest) (*models.AppComponent, error) {
 	m.ctrl.T.Helper()
@@ -378,6 +393,21 @@ func (m *MockClient) DeleteApp(ctx context.Context, appID string) (bool, error) 
 func (mr *MockClientMockRecorder) DeleteApp(ctx, appID interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteApp", reflect.TypeOf((*MockClient)(nil).DeleteApp), ctx, appID)
+}
+
+// DeleteAppSecret mocks base method.
+func (m *MockClient) DeleteAppSecret(ctx context.Context, appID, secretID string) (bool, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteAppSecret", ctx, appID, secretID)
+	ret0, _ := ret[0].(bool)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteAppSecret indicates an expected call of DeleteAppSecret.
+func (mr *MockClientMockRecorder) DeleteAppSecret(ctx, appID, secretID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteAppSecret", reflect.TypeOf((*MockClient)(nil).DeleteAppSecret), ctx, appID, secretID)
 }
 
 // DeleteComponent mocks base method.
@@ -693,6 +723,21 @@ func (m *MockClient) GetAppSandboxLatestConfig(ctx context.Context, appID string
 func (mr *MockClientMockRecorder) GetAppSandboxLatestConfig(ctx, appID interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppSandboxLatestConfig", reflect.TypeOf((*MockClient)(nil).GetAppSandboxLatestConfig), ctx, appID)
+}
+
+// GetAppSecrets mocks base method.
+func (m *MockClient) GetAppSecrets(ctx context.Context, appID string) ([]*models.AppAppSecret, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAppSecrets", ctx, appID)
+	ret0, _ := ret[0].([]*models.AppAppSecret)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAppSecrets indicates an expected call of GetAppSecrets.
+func (mr *MockClientMockRecorder) GetAppSecrets(ctx, appID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppSecrets", reflect.TypeOf((*MockClient)(nil).GetAppSecrets), ctx, appID)
 }
 
 // GetApps mocks base method.
