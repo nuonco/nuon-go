@@ -75,15 +75,3 @@ func (c *client) UpdateOrg(ctx context.Context, req *models.ServiceUpdateOrgRequ
 
 	return resp.Payload, nil
 }
-
-func (c *client) CreateOrgUser(ctx context.Context, req *models.ServiceCreateOrgUserRequest) (*models.AppUserOrg, error) {
-	resp, err := c.genClient.Operations.AddUser(&operations.AddUserParams{
-		Req:     req,
-		Context: ctx,
-	}, c.getOrgIDAuthInfo())
-	if err != nil {
-		return nil, err
-	}
-
-	return resp.Payload, nil
-}

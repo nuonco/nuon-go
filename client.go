@@ -29,6 +29,10 @@ type Client interface {
 	GetOrgHealthChecks(ctx context.Context, limit *int64) ([]*models.AppOrgHealthCheck, error)
 	UpdateOrg(ctx context.Context, req *models.ServiceUpdateOrgRequest) (*models.AppOrg, error)
 	DeleteOrg(ctx context.Context) (bool, error)
+
+	// org invites and users
+	CreateOrgInvite(ctx context.Context, req *models.ServiceCreateOrgInviteRequest) (*models.AppOrgInvite, error)
+	GetOrgInvites(ctx context.Context, limit *int64) ([]*models.AppOrgInvite, error)
 	CreateOrgUser(ctx context.Context, req *models.ServiceCreateOrgUserRequest) (*models.AppUserOrg, error)
 
 	// app methods
