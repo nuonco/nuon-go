@@ -320,6 +320,21 @@ func (mr *MockClientMockRecorder) CreateOrg(ctx, req interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateOrg", reflect.TypeOf((*MockClient)(nil).CreateOrg), ctx, req)
 }
 
+// CreateOrgInvite mocks base method.
+func (m *MockClient) CreateOrgInvite(ctx context.Context, req *models.ServiceCreateOrgInviteRequest) (*models.AppOrgInvite, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateOrgInvite", ctx, req)
+	ret0, _ := ret[0].(*models.AppOrgInvite)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateOrgInvite indicates an expected call of CreateOrgInvite.
+func (mr *MockClientMockRecorder) CreateOrgInvite(ctx, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateOrgInvite", reflect.TypeOf((*MockClient)(nil).CreateOrgInvite), ctx, req)
+}
+
 // CreateOrgUser mocks base method.
 func (m *MockClient) CreateOrgUser(ctx context.Context, req *models.ServiceCreateOrgUserRequest) (*models.AppUserOrg, error) {
 	m.ctrl.T.Helper()
@@ -1203,6 +1218,21 @@ func (m *MockClient) GetOrgHealthChecks(ctx context.Context, limit *int64) ([]*m
 func (mr *MockClientMockRecorder) GetOrgHealthChecks(ctx, limit interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrgHealthChecks", reflect.TypeOf((*MockClient)(nil).GetOrgHealthChecks), ctx, limit)
+}
+
+// GetOrgInvites mocks base method.
+func (m *MockClient) GetOrgInvites(ctx context.Context, limit *int64) ([]*models.AppOrgInvite, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOrgInvites", ctx, limit)
+	ret0, _ := ret[0].([]*models.AppOrgInvite)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetOrgInvites indicates an expected call of GetOrgInvites.
+func (mr *MockClientMockRecorder) GetOrgInvites(ctx, limit interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrgInvites", reflect.TypeOf((*MockClient)(nil).GetOrgInvites), ctx, limit)
 }
 
 // GetOrgs mocks base method.
