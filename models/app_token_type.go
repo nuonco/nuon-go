@@ -33,17 +33,17 @@ const (
 	// AppTokenTypeAuth0 captures enum value "auth0"
 	AppTokenTypeAuth0 AppTokenType = "auth0"
 
-	// AppTokenTypeIntegration captures enum value "integration"
-	AppTokenTypeIntegration AppTokenType = "integration"
-
-	// AppTokenTypeCanary captures enum value "canary"
-	AppTokenTypeCanary AppTokenType = "canary"
-
 	// AppTokenTypeAdmin captures enum value "admin"
 	AppTokenTypeAdmin AppTokenType = "admin"
 
 	// AppTokenTypeStatic captures enum value "static"
 	AppTokenTypeStatic AppTokenType = "static"
+
+	// AppTokenTypeIntegration captures enum value "integration"
+	AppTokenTypeIntegration AppTokenType = "integration"
+
+	// AppTokenTypeCanary captures enum value "canary"
+	AppTokenTypeCanary AppTokenType = "canary"
 )
 
 // for schema
@@ -51,7 +51,7 @@ var appTokenTypeEnum []interface{}
 
 func init() {
 	var res []AppTokenType
-	if err := json.Unmarshal([]byte(`["auth0","integration","canary","admin","static"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["auth0","admin","static","integration","canary"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
