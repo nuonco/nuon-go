@@ -24,9 +24,8 @@ type ServiceCreateAppConfigRequest struct {
 	// Min Length: 1
 	Content *string `json:"content"`
 
-	// format
-	// Required: true
-	Format *AppAppConfigFmt `json:"format"`
+	// generated terraform json
+	GeneratedTerraformJSON string `json:"generated_terraform_json,omitempty"`
 }
 
 // Validate validates this service create app config request
@@ -34,10 +33,6 @@ func (m *ServiceCreateAppConfigRequest) Validate(formats strfmt.Registry) error 
 	var res []error
 
 	if err := m.validateContent(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateFormat(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -60,58 +55,8 @@ func (m *ServiceCreateAppConfigRequest) validateContent(formats strfmt.Registry)
 	return nil
 }
 
-func (m *ServiceCreateAppConfigRequest) validateFormat(formats strfmt.Registry) error {
-
-	if err := validate.Required("format", "body", m.Format); err != nil {
-		return err
-	}
-
-	if err := validate.Required("format", "body", m.Format); err != nil {
-		return err
-	}
-
-	if m.Format != nil {
-		if err := m.Format.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("format")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("format")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this service create app config request based on the context it is used
+// ContextValidate validates this service create app config request based on context it is used
 func (m *ServiceCreateAppConfigRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateFormat(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *ServiceCreateAppConfigRequest) contextValidateFormat(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Format != nil {
-
-		if err := m.Format.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("format")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("format")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
