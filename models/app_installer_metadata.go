@@ -21,6 +21,9 @@ type AppInstallerMetadata struct {
 	// community url
 	CommunityURL string `json:"community_url,omitempty"`
 
+	// copyright markdown
+	CopyrightMarkdown string `json:"copyright_markdown,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
@@ -41,6 +44,9 @@ type AppInstallerMetadata struct {
 
 	// favicon url
 	FaviconURL string `json:"favicon_url,omitempty"`
+
+	// footer markdown
+	FooterMarkdown string `json:"footer_markdown,omitempty"`
 
 	// formatted demo url
 	FormattedDemoURL string `json:"formatted_demo_url,omitempty"`
