@@ -39,6 +39,9 @@ type AppInstallerMetadata struct {
 	// documentation url
 	DocumentationURL string `json:"documentation_url,omitempty"`
 
+	// favicon url
+	FaviconURL string `json:"favicon_url,omitempty"`
+
 	// formatted demo url
 	FormattedDemoURL string `json:"formatted_demo_url,omitempty"`
 

@@ -3827,7 +3827,7 @@ func (a *Client) RenderInstallerInstall(params *RenderInstallerInstallParams, op
 	op := &runtime.ClientOperation{
 		ID:                 "RenderInstallerInstall",
 		Method:             "GET",
-		PathPattern:        "/v1/installer/{installer_slug}/install/{install_id}/render",
+		PathPattern:        "/v1/installer/{installer_id}/install/{install_id}/render",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},

@@ -23,19 +23,12 @@ type ServiceCreateInstallerRequest struct {
 	// Required: true
 	AppIds []string `json:"app_ids"`
 
-	// description
-	// Required: true
-	Description *string `json:"description"`
-
-	// links
-	Links *ServiceCreateInstallerRequestLinks `json:"links,omitempty"`
+	// metadata
+	Metadata *ServiceCreateInstallerRequestMetadata `json:"metadata,omitempty"`
 
 	// name
 	// Required: true
 	Name *string `json:"name"`
-
-	// post install markdown
-	PostInstallMarkdown string `json:"post_install_markdown,omitempty"`
 }
 
 // Validate validates this service create installer request
@@ -46,11 +39,7 @@ func (m *ServiceCreateInstallerRequest) Validate(formats strfmt.Registry) error 
 		res = append(res, err)
 	}
 
-	if err := m.validateDescription(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateLinks(formats); err != nil {
+	if err := m.validateMetadata(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -73,26 +62,17 @@ func (m *ServiceCreateInstallerRequest) validateAppIds(formats strfmt.Registry) 
 	return nil
 }
 
-func (m *ServiceCreateInstallerRequest) validateDescription(formats strfmt.Registry) error {
-
-	if err := validate.Required("description", "body", m.Description); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *ServiceCreateInstallerRequest) validateLinks(formats strfmt.Registry) error {
-	if swag.IsZero(m.Links) { // not required
+func (m *ServiceCreateInstallerRequest) validateMetadata(formats strfmt.Registry) error {
+	if swag.IsZero(m.Metadata) { // not required
 		return nil
 	}
 
-	if m.Links != nil {
-		if err := m.Links.Validate(formats); err != nil {
+	if m.Metadata != nil {
+		if err := m.Metadata.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("links")
+				return ve.ValidateName("metadata")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("links")
+				return ce.ValidateName("metadata")
 			}
 			return err
 		}
@@ -114,7 +94,7 @@ func (m *ServiceCreateInstallerRequest) validateName(formats strfmt.Registry) er
 func (m *ServiceCreateInstallerRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateLinks(ctx, formats); err != nil {
+	if err := m.contextValidateMetadata(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -124,19 +104,19 @@ func (m *ServiceCreateInstallerRequest) ContextValidate(ctx context.Context, for
 	return nil
 }
 
-func (m *ServiceCreateInstallerRequest) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+func (m *ServiceCreateInstallerRequest) contextValidateMetadata(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.Links != nil {
+	if m.Metadata != nil {
 
-		if swag.IsZero(m.Links) { // not required
+		if swag.IsZero(m.Metadata) { // not required
 			return nil
 		}
 
-		if err := m.Links.ContextValidate(ctx, formats); err != nil {
+		if err := m.Metadata.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("links")
+				return ve.ValidateName("metadata")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("links")
+				return ce.ValidateName("metadata")
 			}
 			return err
 		}
@@ -163,56 +143,70 @@ func (m *ServiceCreateInstallerRequest) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-// ServiceCreateInstallerRequestLinks service create installer request links
+// ServiceCreateInstallerRequestMetadata service create installer request metadata
 //
-// swagger:model ServiceCreateInstallerRequestLinks
-type ServiceCreateInstallerRequestLinks struct {
+// swagger:model ServiceCreateInstallerRequestMetadata
+type ServiceCreateInstallerRequestMetadata struct {
 
-	// community
+	// community url
 	// Required: true
-	Community *string `json:"community"`
+	CommunityURL *string `json:"community_url"`
 
-	// demo
-	Demo string `json:"demo,omitempty"`
+	// demo url
+	DemoURL string `json:"demo_url,omitempty"`
 
-	// documentation
+	// description
 	// Required: true
-	Documentation *string `json:"documentation"`
+	Description *string `json:"description"`
 
-	// github
+	// documentation url
 	// Required: true
-	Github *string `json:"github"`
+	DocumentationURL *string `json:"documentation_url"`
 
-	// homepage
-	// Required: true
-	Homepage *string `json:"homepage"`
+	// favicon url
+	FaviconURL string `json:"favicon_url,omitempty"`
 
-	// logo
+	// github url
 	// Required: true
-	Logo *string `json:"logo"`
+	GithubURL *string `json:"github_url"`
+
+	// homepage url
+	// Required: true
+	HomepageURL *string `json:"homepage_url"`
+
+	// logo url
+	// Required: true
+	LogoURL *string `json:"logo_url"`
+
+	// post install markdown
+	PostInstallMarkdown string `json:"post_install_markdown,omitempty"`
 }
 
-// Validate validates this service create installer request links
-func (m *ServiceCreateInstallerRequestLinks) Validate(formats strfmt.Registry) error {
+// Validate validates this service create installer request metadata
+func (m *ServiceCreateInstallerRequestMetadata) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateCommunity(formats); err != nil {
+	if err := m.validateCommunityURL(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateDocumentation(formats); err != nil {
+	if err := m.validateDescription(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateGithub(formats); err != nil {
+	if err := m.validateDocumentationURL(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateHomepage(formats); err != nil {
+	if err := m.validateGithubURL(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateLogo(formats); err != nil {
+	if err := m.validateHomepageURL(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLogoURL(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -222,58 +216,67 @@ func (m *ServiceCreateInstallerRequestLinks) Validate(formats strfmt.Registry) e
 	return nil
 }
 
-func (m *ServiceCreateInstallerRequestLinks) validateCommunity(formats strfmt.Registry) error {
+func (m *ServiceCreateInstallerRequestMetadata) validateCommunityURL(formats strfmt.Registry) error {
 
-	if err := validate.Required("links"+"."+"community", "body", m.Community); err != nil {
+	if err := validate.Required("metadata"+"."+"community_url", "body", m.CommunityURL); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (m *ServiceCreateInstallerRequestLinks) validateDocumentation(formats strfmt.Registry) error {
+func (m *ServiceCreateInstallerRequestMetadata) validateDescription(formats strfmt.Registry) error {
 
-	if err := validate.Required("links"+"."+"documentation", "body", m.Documentation); err != nil {
+	if err := validate.Required("metadata"+"."+"description", "body", m.Description); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (m *ServiceCreateInstallerRequestLinks) validateGithub(formats strfmt.Registry) error {
+func (m *ServiceCreateInstallerRequestMetadata) validateDocumentationURL(formats strfmt.Registry) error {
 
-	if err := validate.Required("links"+"."+"github", "body", m.Github); err != nil {
+	if err := validate.Required("metadata"+"."+"documentation_url", "body", m.DocumentationURL); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (m *ServiceCreateInstallerRequestLinks) validateHomepage(formats strfmt.Registry) error {
+func (m *ServiceCreateInstallerRequestMetadata) validateGithubURL(formats strfmt.Registry) error {
 
-	if err := validate.Required("links"+"."+"homepage", "body", m.Homepage); err != nil {
+	if err := validate.Required("metadata"+"."+"github_url", "body", m.GithubURL); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (m *ServiceCreateInstallerRequestLinks) validateLogo(formats strfmt.Registry) error {
+func (m *ServiceCreateInstallerRequestMetadata) validateHomepageURL(formats strfmt.Registry) error {
 
-	if err := validate.Required("links"+"."+"logo", "body", m.Logo); err != nil {
+	if err := validate.Required("metadata"+"."+"homepage_url", "body", m.HomepageURL); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-// ContextValidate validates this service create installer request links based on context it is used
-func (m *ServiceCreateInstallerRequestLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m *ServiceCreateInstallerRequestMetadata) validateLogoURL(formats strfmt.Registry) error {
+
+	if err := validate.Required("metadata"+"."+"logo_url", "body", m.LogoURL); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validates this service create installer request metadata based on context it is used
+func (m *ServiceCreateInstallerRequestMetadata) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *ServiceCreateInstallerRequestLinks) MarshalBinary() ([]byte, error) {
+func (m *ServiceCreateInstallerRequestMetadata) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -281,8 +284,8 @@ func (m *ServiceCreateInstallerRequestLinks) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *ServiceCreateInstallerRequestLinks) UnmarshalBinary(b []byte) error {
-	var res ServiceCreateInstallerRequestLinks
+func (m *ServiceCreateInstallerRequestMetadata) UnmarshalBinary(b []byte) error {
+	var res ServiceCreateInstallerRequestMetadata
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

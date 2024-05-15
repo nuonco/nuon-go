@@ -34,8 +34,8 @@ type AppInstaller struct {
 	// id
 	ID string `json:"id,omitempty"`
 
-	// installer metadata
-	InstallerMetadata *AppInstallerMetadata `json:"installer_metadata,omitempty"`
+	// metadata
+	Metadata *AppInstallerMetadata `json:"metadata,omitempty"`
 
 	// org id
 	OrgID string `json:"org_id,omitempty"`
@@ -59,7 +59,7 @@ func (m *AppInstaller) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateInstallerMetadata(formats); err != nil {
+	if err := m.validateMetadata(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -118,17 +118,17 @@ func (m *AppInstaller) validateCreatedBy(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *AppInstaller) validateInstallerMetadata(formats strfmt.Registry) error {
-	if swag.IsZero(m.InstallerMetadata) { // not required
+func (m *AppInstaller) validateMetadata(formats strfmt.Registry) error {
+	if swag.IsZero(m.Metadata) { // not required
 		return nil
 	}
 
-	if m.InstallerMetadata != nil {
-		if err := m.InstallerMetadata.Validate(formats); err != nil {
+	if m.Metadata != nil {
+		if err := m.Metadata.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("installer_metadata")
+				return ve.ValidateName("metadata")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("installer_metadata")
+				return ce.ValidateName("metadata")
 			}
 			return err
 		}
@@ -166,7 +166,7 @@ func (m *AppInstaller) ContextValidate(ctx context.Context, formats strfmt.Regis
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateInstallerMetadata(ctx, formats); err != nil {
+	if err := m.contextValidateMetadata(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -226,19 +226,19 @@ func (m *AppInstaller) contextValidateCreatedBy(ctx context.Context, formats str
 	return nil
 }
 
-func (m *AppInstaller) contextValidateInstallerMetadata(ctx context.Context, formats strfmt.Registry) error {
+func (m *AppInstaller) contextValidateMetadata(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.InstallerMetadata != nil {
+	if m.Metadata != nil {
 
-		if swag.IsZero(m.InstallerMetadata) { // not required
+		if swag.IsZero(m.Metadata) { // not required
 			return nil
 		}
 
-		if err := m.InstallerMetadata.ContextValidate(ctx, formats); err != nil {
+		if err := m.Metadata.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("installer_metadata")
+				return ve.ValidateName("metadata")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("installer_metadata")
+				return ce.ValidateName("metadata")
 			}
 			return err
 		}

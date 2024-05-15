@@ -19,30 +19,27 @@ import (
 // swagger:model service.UpdateInstallerRequest
 type ServiceUpdateInstallerRequest struct {
 
-	// description
+	// app ids
 	// Required: true
-	Description *string `json:"description"`
+	AppIds []string `json:"app_ids"`
 
-	// links
-	Links *ServiceUpdateInstallerRequestLinks `json:"links,omitempty"`
+	// metadata
+	Metadata *ServiceUpdateInstallerRequestMetadata `json:"metadata,omitempty"`
 
 	// name
 	// Required: true
 	Name *string `json:"name"`
-
-	// post install markdown
-	PostInstallMarkdown string `json:"post_install_markdown,omitempty"`
 }
 
 // Validate validates this service update installer request
 func (m *ServiceUpdateInstallerRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateDescription(formats); err != nil {
+	if err := m.validateAppIds(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateLinks(formats); err != nil {
+	if err := m.validateMetadata(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -56,26 +53,26 @@ func (m *ServiceUpdateInstallerRequest) Validate(formats strfmt.Registry) error 
 	return nil
 }
 
-func (m *ServiceUpdateInstallerRequest) validateDescription(formats strfmt.Registry) error {
+func (m *ServiceUpdateInstallerRequest) validateAppIds(formats strfmt.Registry) error {
 
-	if err := validate.Required("description", "body", m.Description); err != nil {
+	if err := validate.Required("app_ids", "body", m.AppIds); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (m *ServiceUpdateInstallerRequest) validateLinks(formats strfmt.Registry) error {
-	if swag.IsZero(m.Links) { // not required
+func (m *ServiceUpdateInstallerRequest) validateMetadata(formats strfmt.Registry) error {
+	if swag.IsZero(m.Metadata) { // not required
 		return nil
 	}
 
-	if m.Links != nil {
-		if err := m.Links.Validate(formats); err != nil {
+	if m.Metadata != nil {
+		if err := m.Metadata.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("links")
+				return ve.ValidateName("metadata")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("links")
+				return ce.ValidateName("metadata")
 			}
 			return err
 		}
@@ -97,7 +94,7 @@ func (m *ServiceUpdateInstallerRequest) validateName(formats strfmt.Registry) er
 func (m *ServiceUpdateInstallerRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateLinks(ctx, formats); err != nil {
+	if err := m.contextValidateMetadata(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -107,19 +104,19 @@ func (m *ServiceUpdateInstallerRequest) ContextValidate(ctx context.Context, for
 	return nil
 }
 
-func (m *ServiceUpdateInstallerRequest) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+func (m *ServiceUpdateInstallerRequest) contextValidateMetadata(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.Links != nil {
+	if m.Metadata != nil {
 
-		if swag.IsZero(m.Links) { // not required
+		if swag.IsZero(m.Metadata) { // not required
 			return nil
 		}
 
-		if err := m.Links.ContextValidate(ctx, formats); err != nil {
+		if err := m.Metadata.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("links")
+				return ve.ValidateName("metadata")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("links")
+				return ce.ValidateName("metadata")
 			}
 			return err
 		}
@@ -146,61 +143,70 @@ func (m *ServiceUpdateInstallerRequest) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-// ServiceUpdateInstallerRequestLinks service update installer request links
+// ServiceUpdateInstallerRequestMetadata service update installer request metadata
 //
-// swagger:model ServiceUpdateInstallerRequestLinks
-type ServiceUpdateInstallerRequestLinks struct {
+// swagger:model ServiceUpdateInstallerRequestMetadata
+type ServiceUpdateInstallerRequestMetadata struct {
 
-	// community
+	// community url
 	// Required: true
-	Community *string `json:"community"`
+	CommunityURL *string `json:"community_url"`
 
-	// demo
-	// Required: true
-	Demo *string `json:"demo"`
+	// demo url
+	DemoURL string `json:"demo_url,omitempty"`
 
-	// documentation
+	// description
 	// Required: true
-	Documentation *string `json:"documentation"`
+	Description *string `json:"description"`
 
-	// github
+	// documentation url
 	// Required: true
-	Github *string `json:"github"`
+	DocumentationURL *string `json:"documentation_url"`
 
-	// homepage
-	// Required: true
-	Homepage *string `json:"homepage"`
+	// favicon url
+	FaviconURL string `json:"favicon_url,omitempty"`
 
-	// logo
+	// github url
 	// Required: true
-	Logo *string `json:"logo"`
+	GithubURL *string `json:"github_url"`
+
+	// homepage url
+	// Required: true
+	HomepageURL *string `json:"homepage_url"`
+
+	// logo url
+	// Required: true
+	LogoURL *string `json:"logo_url"`
+
+	// post install markdown
+	PostInstallMarkdown string `json:"post_install_markdown,omitempty"`
 }
 
-// Validate validates this service update installer request links
-func (m *ServiceUpdateInstallerRequestLinks) Validate(formats strfmt.Registry) error {
+// Validate validates this service update installer request metadata
+func (m *ServiceUpdateInstallerRequestMetadata) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateCommunity(formats); err != nil {
+	if err := m.validateCommunityURL(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateDemo(formats); err != nil {
+	if err := m.validateDescription(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateDocumentation(formats); err != nil {
+	if err := m.validateDocumentationURL(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateGithub(formats); err != nil {
+	if err := m.validateGithubURL(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateHomepage(formats); err != nil {
+	if err := m.validateHomepageURL(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateLogo(formats); err != nil {
+	if err := m.validateLogoURL(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -210,67 +216,67 @@ func (m *ServiceUpdateInstallerRequestLinks) Validate(formats strfmt.Registry) e
 	return nil
 }
 
-func (m *ServiceUpdateInstallerRequestLinks) validateCommunity(formats strfmt.Registry) error {
+func (m *ServiceUpdateInstallerRequestMetadata) validateCommunityURL(formats strfmt.Registry) error {
 
-	if err := validate.Required("links"+"."+"community", "body", m.Community); err != nil {
+	if err := validate.Required("metadata"+"."+"community_url", "body", m.CommunityURL); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (m *ServiceUpdateInstallerRequestLinks) validateDemo(formats strfmt.Registry) error {
+func (m *ServiceUpdateInstallerRequestMetadata) validateDescription(formats strfmt.Registry) error {
 
-	if err := validate.Required("links"+"."+"demo", "body", m.Demo); err != nil {
+	if err := validate.Required("metadata"+"."+"description", "body", m.Description); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (m *ServiceUpdateInstallerRequestLinks) validateDocumentation(formats strfmt.Registry) error {
+func (m *ServiceUpdateInstallerRequestMetadata) validateDocumentationURL(formats strfmt.Registry) error {
 
-	if err := validate.Required("links"+"."+"documentation", "body", m.Documentation); err != nil {
+	if err := validate.Required("metadata"+"."+"documentation_url", "body", m.DocumentationURL); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (m *ServiceUpdateInstallerRequestLinks) validateGithub(formats strfmt.Registry) error {
+func (m *ServiceUpdateInstallerRequestMetadata) validateGithubURL(formats strfmt.Registry) error {
 
-	if err := validate.Required("links"+"."+"github", "body", m.Github); err != nil {
+	if err := validate.Required("metadata"+"."+"github_url", "body", m.GithubURL); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (m *ServiceUpdateInstallerRequestLinks) validateHomepage(formats strfmt.Registry) error {
+func (m *ServiceUpdateInstallerRequestMetadata) validateHomepageURL(formats strfmt.Registry) error {
 
-	if err := validate.Required("links"+"."+"homepage", "body", m.Homepage); err != nil {
+	if err := validate.Required("metadata"+"."+"homepage_url", "body", m.HomepageURL); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (m *ServiceUpdateInstallerRequestLinks) validateLogo(formats strfmt.Registry) error {
+func (m *ServiceUpdateInstallerRequestMetadata) validateLogoURL(formats strfmt.Registry) error {
 
-	if err := validate.Required("links"+"."+"logo", "body", m.Logo); err != nil {
+	if err := validate.Required("metadata"+"."+"logo_url", "body", m.LogoURL); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-// ContextValidate validates this service update installer request links based on context it is used
-func (m *ServiceUpdateInstallerRequestLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this service update installer request metadata based on context it is used
+func (m *ServiceUpdateInstallerRequestMetadata) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *ServiceUpdateInstallerRequestLinks) MarshalBinary() ([]byte, error) {
+func (m *ServiceUpdateInstallerRequestMetadata) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -278,8 +284,8 @@ func (m *ServiceUpdateInstallerRequestLinks) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *ServiceUpdateInstallerRequestLinks) UnmarshalBinary(b []byte) error {
-	var res ServiceUpdateInstallerRequestLinks
+func (m *ServiceUpdateInstallerRequestMetadata) UnmarshalBinary(b []byte) error {
+	var res ServiceUpdateInstallerRequestMetadata
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
