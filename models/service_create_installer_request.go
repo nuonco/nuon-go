@@ -14,25 +14,25 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ServiceUpdateInstallerRequest service update installer request
+// ServiceCreateInstallerRequest service create installer request
 //
-// swagger:model service.UpdateInstallerRequest
-type ServiceUpdateInstallerRequest struct {
+// swagger:model service.CreateInstallerRequest
+type ServiceCreateInstallerRequest struct {
 
 	// app ids
 	// Required: true
 	AppIds []string `json:"app_ids"`
 
 	// metadata
-	Metadata *ServiceUpdateInstallerRequestMetadata `json:"metadata,omitempty"`
+	Metadata *ServiceCreateInstallerRequestMetadata `json:"metadata,omitempty"`
 
 	// name
 	// Required: true
 	Name *string `json:"name"`
 }
 
-// Validate validates this service update installer request
-func (m *ServiceUpdateInstallerRequest) Validate(formats strfmt.Registry) error {
+// Validate validates this service create installer request
+func (m *ServiceCreateInstallerRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAppIds(formats); err != nil {
@@ -53,7 +53,7 @@ func (m *ServiceUpdateInstallerRequest) Validate(formats strfmt.Registry) error 
 	return nil
 }
 
-func (m *ServiceUpdateInstallerRequest) validateAppIds(formats strfmt.Registry) error {
+func (m *ServiceCreateInstallerRequest) validateAppIds(formats strfmt.Registry) error {
 
 	if err := validate.Required("app_ids", "body", m.AppIds); err != nil {
 		return err
@@ -62,7 +62,7 @@ func (m *ServiceUpdateInstallerRequest) validateAppIds(formats strfmt.Registry) 
 	return nil
 }
 
-func (m *ServiceUpdateInstallerRequest) validateMetadata(formats strfmt.Registry) error {
+func (m *ServiceCreateInstallerRequest) validateMetadata(formats strfmt.Registry) error {
 	if swag.IsZero(m.Metadata) { // not required
 		return nil
 	}
@@ -81,7 +81,7 @@ func (m *ServiceUpdateInstallerRequest) validateMetadata(formats strfmt.Registry
 	return nil
 }
 
-func (m *ServiceUpdateInstallerRequest) validateName(formats strfmt.Registry) error {
+func (m *ServiceCreateInstallerRequest) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
 		return err
@@ -90,8 +90,8 @@ func (m *ServiceUpdateInstallerRequest) validateName(formats strfmt.Registry) er
 	return nil
 }
 
-// ContextValidate validate this service update installer request based on the context it is used
-func (m *ServiceUpdateInstallerRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this service create installer request based on the context it is used
+func (m *ServiceCreateInstallerRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateMetadata(ctx, formats); err != nil {
@@ -104,7 +104,7 @@ func (m *ServiceUpdateInstallerRequest) ContextValidate(ctx context.Context, for
 	return nil
 }
 
-func (m *ServiceUpdateInstallerRequest) contextValidateMetadata(ctx context.Context, formats strfmt.Registry) error {
+func (m *ServiceCreateInstallerRequest) contextValidateMetadata(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Metadata != nil {
 
@@ -126,7 +126,7 @@ func (m *ServiceUpdateInstallerRequest) contextValidateMetadata(ctx context.Cont
 }
 
 // MarshalBinary interface implementation
-func (m *ServiceUpdateInstallerRequest) MarshalBinary() ([]byte, error) {
+func (m *ServiceCreateInstallerRequest) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -134,8 +134,8 @@ func (m *ServiceUpdateInstallerRequest) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *ServiceUpdateInstallerRequest) UnmarshalBinary(b []byte) error {
-	var res ServiceUpdateInstallerRequest
+func (m *ServiceCreateInstallerRequest) UnmarshalBinary(b []byte) error {
+	var res ServiceCreateInstallerRequest
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
@@ -143,10 +143,10 @@ func (m *ServiceUpdateInstallerRequest) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-// ServiceUpdateInstallerRequestMetadata service update installer request metadata
+// ServiceCreateInstallerRequestMetadata service create installer request metadata
 //
-// swagger:model ServiceUpdateInstallerRequestMetadata
-type ServiceUpdateInstallerRequestMetadata struct {
+// swagger:model ServiceCreateInstallerRequestMetadata
+type ServiceCreateInstallerRequestMetadata struct {
 
 	// community url
 	// Required: true
@@ -182,8 +182,8 @@ type ServiceUpdateInstallerRequestMetadata struct {
 	PostInstallMarkdown string `json:"post_install_markdown,omitempty"`
 }
 
-// Validate validates this service update installer request metadata
-func (m *ServiceUpdateInstallerRequestMetadata) Validate(formats strfmt.Registry) error {
+// Validate validates this service create installer request metadata
+func (m *ServiceCreateInstallerRequestMetadata) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCommunityURL(formats); err != nil {
@@ -216,7 +216,7 @@ func (m *ServiceUpdateInstallerRequestMetadata) Validate(formats strfmt.Registry
 	return nil
 }
 
-func (m *ServiceUpdateInstallerRequestMetadata) validateCommunityURL(formats strfmt.Registry) error {
+func (m *ServiceCreateInstallerRequestMetadata) validateCommunityURL(formats strfmt.Registry) error {
 
 	if err := validate.Required("metadata"+"."+"community_url", "body", m.CommunityURL); err != nil {
 		return err
@@ -225,7 +225,7 @@ func (m *ServiceUpdateInstallerRequestMetadata) validateCommunityURL(formats str
 	return nil
 }
 
-func (m *ServiceUpdateInstallerRequestMetadata) validateDescription(formats strfmt.Registry) error {
+func (m *ServiceCreateInstallerRequestMetadata) validateDescription(formats strfmt.Registry) error {
 
 	if err := validate.Required("metadata"+"."+"description", "body", m.Description); err != nil {
 		return err
@@ -234,7 +234,7 @@ func (m *ServiceUpdateInstallerRequestMetadata) validateDescription(formats strf
 	return nil
 }
 
-func (m *ServiceUpdateInstallerRequestMetadata) validateDocumentationURL(formats strfmt.Registry) error {
+func (m *ServiceCreateInstallerRequestMetadata) validateDocumentationURL(formats strfmt.Registry) error {
 
 	if err := validate.Required("metadata"+"."+"documentation_url", "body", m.DocumentationURL); err != nil {
 		return err
@@ -243,7 +243,7 @@ func (m *ServiceUpdateInstallerRequestMetadata) validateDocumentationURL(formats
 	return nil
 }
 
-func (m *ServiceUpdateInstallerRequestMetadata) validateGithubURL(formats strfmt.Registry) error {
+func (m *ServiceCreateInstallerRequestMetadata) validateGithubURL(formats strfmt.Registry) error {
 
 	if err := validate.Required("metadata"+"."+"github_url", "body", m.GithubURL); err != nil {
 		return err
@@ -252,7 +252,7 @@ func (m *ServiceUpdateInstallerRequestMetadata) validateGithubURL(formats strfmt
 	return nil
 }
 
-func (m *ServiceUpdateInstallerRequestMetadata) validateHomepageURL(formats strfmt.Registry) error {
+func (m *ServiceCreateInstallerRequestMetadata) validateHomepageURL(formats strfmt.Registry) error {
 
 	if err := validate.Required("metadata"+"."+"homepage_url", "body", m.HomepageURL); err != nil {
 		return err
@@ -261,7 +261,7 @@ func (m *ServiceUpdateInstallerRequestMetadata) validateHomepageURL(formats strf
 	return nil
 }
 
-func (m *ServiceUpdateInstallerRequestMetadata) validateLogoURL(formats strfmt.Registry) error {
+func (m *ServiceCreateInstallerRequestMetadata) validateLogoURL(formats strfmt.Registry) error {
 
 	if err := validate.Required("metadata"+"."+"logo_url", "body", m.LogoURL); err != nil {
 		return err
@@ -270,13 +270,13 @@ func (m *ServiceUpdateInstallerRequestMetadata) validateLogoURL(formats strfmt.R
 	return nil
 }
 
-// ContextValidate validates this service update installer request metadata based on context it is used
-func (m *ServiceUpdateInstallerRequestMetadata) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this service create installer request metadata based on context it is used
+func (m *ServiceCreateInstallerRequestMetadata) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *ServiceUpdateInstallerRequestMetadata) MarshalBinary() ([]byte, error) {
+func (m *ServiceCreateInstallerRequestMetadata) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -284,8 +284,8 @@ func (m *ServiceUpdateInstallerRequestMetadata) MarshalBinary() ([]byte, error) 
 }
 
 // UnmarshalBinary interface implementation
-func (m *ServiceUpdateInstallerRequestMetadata) UnmarshalBinary(b []byte) error {
-	var res ServiceUpdateInstallerRequestMetadata
+func (m *ServiceCreateInstallerRequestMetadata) UnmarshalBinary(b []byte) error {
+	var res ServiceCreateInstallerRequestMetadata
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

@@ -60,7 +60,7 @@ func (o *RenderInstallerReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /v1/installer/{installer_slug}/render] RenderInstaller", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /v1/installer/{installer_id}/render] RenderInstaller", response, response.Code())
 	}
 }
 
@@ -109,11 +109,11 @@ func (o *RenderInstallerOK) Code() int {
 }
 
 func (o *RenderInstallerOK) Error() string {
-	return fmt.Sprintf("[GET /v1/installer/{installer_slug}/render][%d] renderInstallerOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /v1/installer/{installer_id}/render][%d] renderInstallerOK  %+v", 200, o.Payload)
 }
 
 func (o *RenderInstallerOK) String() string {
-	return fmt.Sprintf("[GET /v1/installer/{installer_slug}/render][%d] renderInstallerOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /v1/installer/{installer_id}/render][%d] renderInstallerOK  %+v", 200, o.Payload)
 }
 
 func (o *RenderInstallerOK) GetPayload() *models.ServiceRenderedInstaller {
@@ -177,11 +177,11 @@ func (o *RenderInstallerBadRequest) Code() int {
 }
 
 func (o *RenderInstallerBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/installer/{installer_slug}/render][%d] renderInstallerBadRequest  %+v", 400, o.Payload)
+	return fmt.Sprintf("[GET /v1/installer/{installer_id}/render][%d] renderInstallerBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *RenderInstallerBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/installer/{installer_slug}/render][%d] renderInstallerBadRequest  %+v", 400, o.Payload)
+	return fmt.Sprintf("[GET /v1/installer/{installer_id}/render][%d] renderInstallerBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *RenderInstallerBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +245,11 @@ func (o *RenderInstallerUnauthorized) Code() int {
 }
 
 func (o *RenderInstallerUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/installer/{installer_slug}/render][%d] renderInstallerUnauthorized  %+v", 401, o.Payload)
+	return fmt.Sprintf("[GET /v1/installer/{installer_id}/render][%d] renderInstallerUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *RenderInstallerUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/installer/{installer_slug}/render][%d] renderInstallerUnauthorized  %+v", 401, o.Payload)
+	return fmt.Sprintf("[GET /v1/installer/{installer_id}/render][%d] renderInstallerUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *RenderInstallerUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +313,11 @@ func (o *RenderInstallerForbidden) Code() int {
 }
 
 func (o *RenderInstallerForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/installer/{installer_slug}/render][%d] renderInstallerForbidden  %+v", 403, o.Payload)
+	return fmt.Sprintf("[GET /v1/installer/{installer_id}/render][%d] renderInstallerForbidden  %+v", 403, o.Payload)
 }
 
 func (o *RenderInstallerForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/installer/{installer_slug}/render][%d] renderInstallerForbidden  %+v", 403, o.Payload)
+	return fmt.Sprintf("[GET /v1/installer/{installer_id}/render][%d] renderInstallerForbidden  %+v", 403, o.Payload)
 }
 
 func (o *RenderInstallerForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +381,11 @@ func (o *RenderInstallerNotFound) Code() int {
 }
 
 func (o *RenderInstallerNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/installer/{installer_slug}/render][%d] renderInstallerNotFound  %+v", 404, o.Payload)
+	return fmt.Sprintf("[GET /v1/installer/{installer_id}/render][%d] renderInstallerNotFound  %+v", 404, o.Payload)
 }
 
 func (o *RenderInstallerNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/installer/{installer_slug}/render][%d] renderInstallerNotFound  %+v", 404, o.Payload)
+	return fmt.Sprintf("[GET /v1/installer/{installer_id}/render][%d] renderInstallerNotFound  %+v", 404, o.Payload)
 }
 
 func (o *RenderInstallerNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +449,11 @@ func (o *RenderInstallerInternalServerError) Code() int {
 }
 
 func (o *RenderInstallerInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/installer/{installer_slug}/render][%d] renderInstallerInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[GET /v1/installer/{installer_id}/render][%d] renderInstallerInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *RenderInstallerInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/installer/{installer_slug}/render][%d] renderInstallerInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[GET /v1/installer/{installer_id}/render][%d] renderInstallerInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *RenderInstallerInternalServerError) GetPayload() *models.StderrErrResponse {

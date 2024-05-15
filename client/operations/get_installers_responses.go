@@ -75,7 +75,7 @@ GetInstallersOK describes a response with status code 200, with default header v
 OK
 */
 type GetInstallersOK struct {
-	Payload []*models.AppAppInstaller
+	Payload []*models.AppInstaller
 }
 
 // IsSuccess returns true when this get installers o k response has a 2xx status code
@@ -116,7 +116,7 @@ func (o *GetInstallersOK) String() string {
 	return fmt.Sprintf("[GET /v1/installers][%d] getInstallersOK  %+v", 200, o.Payload)
 }
 
-func (o *GetInstallersOK) GetPayload() []*models.AppAppInstaller {
+func (o *GetInstallersOK) GetPayload() []*models.AppInstaller {
 	return o.Payload
 }
 
