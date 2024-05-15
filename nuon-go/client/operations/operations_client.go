@@ -180,8 +180,6 @@ type ClientService interface {
 
 	GetInstaller(params *GetInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallerOK, error)
 
-	GetInstallerInstall(params *GetInstallerInstallParams, opts ...ClientOption) (*GetInstallerInstallOK, error)
-
 	GetInstallers(params *GetInstallersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallersOK, error)
 
 	GetOrg(params *GetOrgParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrgOK, error)
@@ -209,8 +207,6 @@ type ClientService interface {
 	GetSandboxes(params *GetSandboxesParams, opts ...ClientOption) (*GetSandboxesOK, error)
 
 	GetVCSConnection(params *GetVCSConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVCSConnectionOK, error)
-
-	InstallerCreateInstall(params *InstallerCreateInstallParams, opts ...ClientOption) (*InstallerCreateInstallCreated, error)
 
 	PublishMetrics(params *PublishMetricsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PublishMetricsOK, error)
 
@@ -864,7 +860,7 @@ func (a *Client) CreateInstallInputs(params *CreateInstallInputsParams, authInfo
 }
 
 /*
-CreateInstaller creates an app installer
+CreateInstaller creates an installer
 */
 func (a *Client) CreateInstaller(params *CreateInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallerCreated, error) {
 	// TODO: Validate the params before sending
@@ -3191,44 +3187,6 @@ func (a *Client) GetInstaller(params *GetInstallerParams, authInfo runtime.Clien
 }
 
 /*
-GetInstallerInstall renders an installer install
-*/
-func (a *Client) GetInstallerInstall(params *GetInstallerInstallParams, opts ...ClientOption) (*GetInstallerInstallOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetInstallerInstallParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetInstallerInstall",
-		Method:             "GET",
-		PathPattern:        "/v1/installer/{installer_slug}/install/{install_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetInstallerInstallReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetInstallerInstallOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetInstallerInstall: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 GetInstallers gets installers for current org
 
 Return all installers for the current org.
@@ -3780,44 +3738,6 @@ func (a *Client) GetVCSConnection(params *GetVCSConnectionParams, authInfo runti
 }
 
 /*
-InstallerCreateInstall creates an app install from an installer
-*/
-func (a *Client) InstallerCreateInstall(params *InstallerCreateInstallParams, opts ...ClientOption) (*InstallerCreateInstallCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewInstallerCreateInstallParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "InstallerCreateInstall",
-		Method:             "POST",
-		PathPattern:        "/v1/installer/{installer_slug}/installs",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &InstallerCreateInstallReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*InstallerCreateInstallCreated)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for InstallerCreateInstall: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 PublishMetrics publishes a metric from different nuon clients for telemetry purposes
 */
 func (a *Client) PublishMetrics(params *PublishMetricsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PublishMetricsOK, error) {
@@ -3867,7 +3787,7 @@ func (a *Client) RenderInstaller(params *RenderInstallerParams, opts ...ClientOp
 	op := &runtime.ClientOperation{
 		ID:                 "RenderInstaller",
 		Method:             "GET",
-		PathPattern:        "/v1/installer/{installer_slug}/render",
+		PathPattern:        "/v1/installer/{installer_id}/render",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -3907,7 +3827,7 @@ func (a *Client) RenderInstallerInstall(params *RenderInstallerInstallParams, op
 	op := &runtime.ClientOperation{
 		ID:                 "RenderInstallerInstall",
 		Method:             "GET",
-		PathPattern:        "/v1/installer/{installer_slug}/install/{install_id}/render",
+		PathPattern:        "/v1/installer/{installer_id}/install/{install_id}/render",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},

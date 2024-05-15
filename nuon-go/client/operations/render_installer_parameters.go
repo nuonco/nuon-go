@@ -61,11 +61,11 @@ RenderInstallerParams contains all the parameters to send to the API endpoint
 */
 type RenderInstallerParams struct {
 
-	/* InstallerSlug.
+	/* InstallerID.
 
-	   installer slug or ID
+	   installer ID
 	*/
-	InstallerSlug string
+	InstallerID string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -120,15 +120,15 @@ func (o *RenderInstallerParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithInstallerSlug adds the installerSlug to the render installer params
-func (o *RenderInstallerParams) WithInstallerSlug(installerSlug string) *RenderInstallerParams {
-	o.SetInstallerSlug(installerSlug)
+// WithInstallerID adds the installerID to the render installer params
+func (o *RenderInstallerParams) WithInstallerID(installerID string) *RenderInstallerParams {
+	o.SetInstallerID(installerID)
 	return o
 }
 
-// SetInstallerSlug adds the installerSlug to the render installer params
-func (o *RenderInstallerParams) SetInstallerSlug(installerSlug string) {
-	o.InstallerSlug = installerSlug
+// SetInstallerID adds the installerId to the render installer params
+func (o *RenderInstallerParams) SetInstallerID(installerID string) {
+	o.InstallerID = installerID
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -139,8 +139,8 @@ func (o *RenderInstallerParams) WriteToRequest(r runtime.ClientRequest, reg strf
 	}
 	var res []error
 
-	// path param installer_slug
-	if err := r.SetPathParam("installer_slug", o.InstallerSlug); err != nil {
+	// path param installer_id
+	if err := r.SetPathParam("installer_id", o.InstallerID); err != nil {
 		return err
 	}
 

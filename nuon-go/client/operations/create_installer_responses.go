@@ -75,7 +75,7 @@ CreateInstallerCreated describes a response with status code 201, with default h
 Created
 */
 type CreateInstallerCreated struct {
-	Payload *models.AppAppInstaller
+	Payload *models.AppInstaller
 }
 
 // IsSuccess returns true when this create installer created response has a 2xx status code
@@ -116,13 +116,13 @@ func (o *CreateInstallerCreated) String() string {
 	return fmt.Sprintf("[POST /v1/installers][%d] createInstallerCreated  %+v", 201, o.Payload)
 }
 
-func (o *CreateInstallerCreated) GetPayload() *models.AppAppInstaller {
+func (o *CreateInstallerCreated) GetPayload() *models.AppInstaller {
 	return o.Payload
 }
 
 func (o *CreateInstallerCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.AppAppInstaller)
+	o.Payload = new(models.AppInstaller)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

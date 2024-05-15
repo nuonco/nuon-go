@@ -7,10 +7,10 @@ import (
 	"github.com/nuonco/nuon-go/models"
 )
 
-func (c *client) RenderInstaller(ctx context.Context, slug string) (*models.ServiceRenderedInstaller, error) {
+func (c *client) RenderInstaller(ctx context.Context, id string) (*models.ServiceRenderedInstaller, error) {
 	resp, err := c.genClient.Operations.RenderInstaller(&operations.RenderInstallerParams{
-		Context:       ctx,
-		InstallerSlug: slug,
+		Context:     ctx,
+		InstallerID: id,
 	})
 	if err != nil {
 		return nil, err
@@ -19,11 +19,11 @@ func (c *client) RenderInstaller(ctx context.Context, slug string) (*models.Serv
 	return resp.Payload, nil
 }
 
-func (c *client) RenderInstallerInstall(ctx context.Context, slug, installID string) (*models.ServiceRenderedInstall, error) {
+func (c *client) RenderInstallerInstall(ctx context.Context, installerID, installID string) (*models.ServiceRenderedInstall, error) {
 	resp, err := c.genClient.Operations.RenderInstallerInstall(&operations.RenderInstallerInstallParams{
-		Context:       ctx,
-		InstallerSlug: slug,
-		InstallID:     installID,
+		Context:     ctx,
+		InstallerID: installerID,
+		InstallID:   installID,
 	})
 	if err != nil {
 		return nil, err
@@ -32,20 +32,7 @@ func (c *client) RenderInstallerInstall(ctx context.Context, slug, installID str
 	return resp.Payload, nil
 }
 
-func (c *client) GetInstallerInstall(ctx context.Context, slug, installID string) (*models.AppInstall, error) {
-	resp, err := c.genClient.Operations.GetInstallerInstall(&operations.GetInstallerInstallParams{
-		Context:       ctx,
-		InstallerSlug: slug,
-		InstallID:     installID,
-	})
-	if err != nil {
-		return nil, err
-	}
-
-	return resp.Payload, nil
-}
-
-func (c *client) GetInstallers(ctx context.Context) ([]*models.AppAppInstaller, error) {
+func (c *client) GetInstallers(ctx context.Context) ([]*models.AppInstaller, error) {
 	resp, err := c.genClient.Operations.GetInstallers(&operations.GetInstallersParams{
 		Context: ctx,
 	}, c.getOrgIDAuthInfo())
@@ -56,7 +43,7 @@ func (c *client) GetInstallers(ctx context.Context) ([]*models.AppAppInstaller, 
 	return resp.Payload, nil
 }
 
-func (c *client) GetInstaller(ctx context.Context, appInstallerID string) (*models.AppAppInstaller, error) {
+func (c *client) GetInstaller(ctx context.Context, appInstallerID string) (*models.AppInstaller, error) {
 	resp, err := c.genClient.Operations.GetInstaller(&operations.GetInstallerParams{
 		Context:     ctx,
 		InstallerID: appInstallerID,
@@ -68,7 +55,7 @@ func (c *client) GetInstaller(ctx context.Context, appInstallerID string) (*mode
 	return resp.Payload, nil
 }
 
-func (c *client) CreateInstaller(ctx context.Context, req *models.ServiceCreateAppInstallerRequest) (*models.AppAppInstaller, error) {
+func (c *client) CreateInstaller(ctx context.Context, req *models.ServiceCreateInstallerRequest) (*models.AppInstaller, error) {
 	resp, err := c.genClient.Operations.CreateInstaller(&operations.CreateInstallerParams{
 		Req:     req,
 		Context: ctx,
@@ -80,7 +67,7 @@ func (c *client) CreateInstaller(ctx context.Context, req *models.ServiceCreateA
 	return resp.Payload, nil
 }
 
-func (c *client) UpdateInstaller(ctx context.Context, installerID string, req *models.ServiceUpdateInstallerRequest) (*models.AppAppInstaller, error) {
+func (c *client) UpdateInstaller(ctx context.Context, installerID string, req *models.ServiceUpdateInstallerRequest) (*models.AppInstaller, error) {
 	resp, err := c.genClient.Operations.UpdateInstaller(&operations.UpdateInstallerParams{
 		InstallerID: installerID,
 		Req:         req,
@@ -103,16 +90,4 @@ func (c *client) DeleteInstaller(ctx context.Context, installerID string) (bool,
 	}
 
 	return resp.IsSuccess(), nil
-}
-
-func (c *client) CreateInstallerInstall(ctx context.Context, req *models.ServiceCreateInstallRequest) (*models.AppInstall, error) {
-	resp, err := c.genClient.Operations.InstallerCreateInstall(&operations.InstallerCreateInstallParams{
-		Context: ctx,
-		Req:     req,
-	})
-	if err != nil {
-		return nil, err
-	}
-
-	return resp.Payload, nil
 }
