@@ -67,7 +67,7 @@ type CreateInstallerParams struct {
 
 	   Input
 	*/
-	Req *models.ServiceCreateAppInstallerRequest
+	Req *models.ServiceCreateInstallerRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -123,13 +123,13 @@ func (o *CreateInstallerParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithReq adds the req to the create installer params
-func (o *CreateInstallerParams) WithReq(req *models.ServiceCreateAppInstallerRequest) *CreateInstallerParams {
+func (o *CreateInstallerParams) WithReq(req *models.ServiceCreateInstallerRequest) *CreateInstallerParams {
 	o.SetReq(req)
 	return o
 }
 
 // SetReq adds the req to the create installer params
-func (o *CreateInstallerParams) SetReq(req *models.ServiceCreateAppInstallerRequest) {
+func (o *CreateInstallerParams) SetReq(req *models.ServiceCreateInstallerRequest) {
 	o.Req = req
 }
 
