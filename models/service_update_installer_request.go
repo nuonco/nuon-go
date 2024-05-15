@@ -152,6 +152,9 @@ type ServiceUpdateInstallerRequestMetadata struct {
 	// Required: true
 	CommunityURL *string `json:"community_url"`
 
+	// copyright markdown
+	CopyrightMarkdown string `json:"copyright_markdown,omitempty"`
+
 	// demo url
 	DemoURL string `json:"demo_url,omitempty"`
 
@@ -165,6 +168,9 @@ type ServiceUpdateInstallerRequestMetadata struct {
 
 	// favicon url
 	FaviconURL string `json:"favicon_url,omitempty"`
+
+	// footer markdown
+	FooterMarkdown string `json:"footer_markdown,omitempty"`
 
 	// github url
 	// Required: true
