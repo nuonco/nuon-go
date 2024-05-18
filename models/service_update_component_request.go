@@ -22,6 +22,9 @@ type ServiceUpdateComponentRequest struct {
 	// dependencies
 	Dependencies []string `json:"dependencies"`
 
+	// interpolation name
+	InterpolationName string `json:"interpolation_name,omitempty"`
+
 	// name
 	// Required: true
 	Name *string `json:"name"`

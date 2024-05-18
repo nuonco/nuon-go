@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *AddUserCreated) Code() int {
 }
 
 func (o *AddUserCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserCreated %s", 201, payload)
 }
 
 func (o *AddUserCreated) String() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserCreated %s", 201, payload)
 }
 
 func (o *AddUserCreated) GetPayload() *models.AppUserOrg {
@@ -177,11 +180,13 @@ func (o *AddUserBadRequest) Code() int {
 }
 
 func (o *AddUserBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserBadRequest %s", 400, payload)
 }
 
 func (o *AddUserBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserBadRequest %s", 400, payload)
 }
 
 func (o *AddUserBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +250,13 @@ func (o *AddUserUnauthorized) Code() int {
 }
 
 func (o *AddUserUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserUnauthorized %s", 401, payload)
 }
 
 func (o *AddUserUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserUnauthorized %s", 401, payload)
 }
 
 func (o *AddUserUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +320,13 @@ func (o *AddUserForbidden) Code() int {
 }
 
 func (o *AddUserForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserForbidden %s", 403, payload)
 }
 
 func (o *AddUserForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserForbidden %s", 403, payload)
 }
 
 func (o *AddUserForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +390,13 @@ func (o *AddUserNotFound) Code() int {
 }
 
 func (o *AddUserNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserNotFound %s", 404, payload)
 }
 
 func (o *AddUserNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserNotFound %s", 404, payload)
 }
 
 func (o *AddUserNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +460,13 @@ func (o *AddUserInternalServerError) Code() int {
 }
 
 func (o *AddUserInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserInternalServerError %s", 500, payload)
 }
 
 func (o *AddUserInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserInternalServerError %s", 500, payload)
 }
 
 func (o *AddUserInternalServerError) GetPayload() *models.StderrErrResponse {

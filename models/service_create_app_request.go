@@ -19,6 +19,9 @@ import (
 // swagger:model service.CreateAppRequest
 type ServiceCreateAppRequest struct {
 
+	// description
+	Description string `json:"description,omitempty"`
+
 	// name
 	// Required: true
 	Name *string `json:"name"`
