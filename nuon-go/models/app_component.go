@@ -39,9 +39,6 @@ type AppComponent struct {
 	// id
 	ID string `json:"id,omitempty"`
 
-	// interpolation name
-	InterpolationName string `json:"interpolation_name,omitempty"`
-
 	// name
 	Name string `json:"name,omitempty"`
 
@@ -53,6 +50,9 @@ type AppComponent struct {
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
+
+	// var name
+	VarName string `json:"var_name,omitempty"`
 }
 
 // Validate validates this app component
