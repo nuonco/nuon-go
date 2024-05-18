@@ -30,14 +30,28 @@ type AppApp struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
+	// description
+	Description string `json:"description,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
+
+	// fields set via after query
+	InputConfig struct {
+		AppAppInputConfig
+	} `json:"input_config,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
 
 	// org id
 	OrgID string `json:"org_id,omitempty"`
+
+	// runner config
+	RunnerConfig *AppAppRunnerConfig `json:"runner_config,omitempty"`
+
+	// sandbox config
+	SandboxConfig *AppAppSandboxConfig `json:"sandbox_config,omitempty"`
 
 	// status
 	Status string `json:"status,omitempty"`
@@ -58,6 +72,18 @@ func (m *AppApp) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCreatedBy(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInputConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRunnerConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSandboxConfig(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -103,6 +129,52 @@ func (m *AppApp) validateCreatedBy(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppApp) validateInputConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.InputConfig) { // not required
+		return nil
+	}
+
+	return nil
+}
+
+func (m *AppApp) validateRunnerConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.RunnerConfig) { // not required
+		return nil
+	}
+
+	if m.RunnerConfig != nil {
+		if err := m.RunnerConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("runner_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("runner_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppApp) validateSandboxConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.SandboxConfig) { // not required
+		return nil
+	}
+
+	if m.SandboxConfig != nil {
+		if err := m.SandboxConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("sandbox_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("sandbox_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app app based on the context it is used
 func (m *AppApp) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -112,6 +184,18 @@ func (m *AppApp) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 	}
 
 	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateInputConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRunnerConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSandboxConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -152,6 +236,53 @@ func (m *AppApp) contextValidateCreatedBy(ctx context.Context, formats strfmt.Re
 				return ve.ValidateName("created_by")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("created_by")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppApp) contextValidateInputConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	return nil
+}
+
+func (m *AppApp) contextValidateRunnerConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.RunnerConfig != nil {
+
+		if swag.IsZero(m.RunnerConfig) { // not required
+			return nil
+		}
+
+		if err := m.RunnerConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("runner_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("runner_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppApp) contextValidateSandboxConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SandboxConfig != nil {
+
+		if swag.IsZero(m.SandboxConfig) { // not required
+			return nil
+		}
+
+		if err := m.SandboxConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("sandbox_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("sandbox_config")
 			}
 			return err
 		}

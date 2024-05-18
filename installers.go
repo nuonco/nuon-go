@@ -19,19 +19,6 @@ func (c *client) RenderInstaller(ctx context.Context, id string) (*models.Servic
 	return resp.Payload, nil
 }
 
-func (c *client) RenderInstallerInstall(ctx context.Context, installerID, installID string) (*models.ServiceRenderedInstall, error) {
-	resp, err := c.genClient.Operations.RenderInstallerInstall(&operations.RenderInstallerInstallParams{
-		Context:     ctx,
-		InstallerID: installerID,
-		InstallID:   installID,
-	})
-	if err != nil {
-		return nil, err
-	}
-
-	return resp.Payload, nil
-}
-
 func (c *client) GetInstallers(ctx context.Context) ([]*models.AppInstaller, error) {
 	resp, err := c.genClient.Operations.GetInstallers(&operations.GetInstallersParams{
 		Context: ctx,

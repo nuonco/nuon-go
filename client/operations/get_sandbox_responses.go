@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetSandboxOK) Code() int {
 }
 
 func (o *GetSandboxOK) Error() string {
-	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxOK %s", 200, payload)
 }
 
 func (o *GetSandboxOK) String() string {
-	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxOK %s", 200, payload)
 }
 
 func (o *GetSandboxOK) GetPayload() *models.AppSandbox {
@@ -177,11 +180,13 @@ func (o *GetSandboxBadRequest) Code() int {
 }
 
 func (o *GetSandboxBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxBadRequest %s", 400, payload)
 }
 
 func (o *GetSandboxBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxBadRequest %s", 400, payload)
 }
 
 func (o *GetSandboxBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +250,13 @@ func (o *GetSandboxUnauthorized) Code() int {
 }
 
 func (o *GetSandboxUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxUnauthorized %s", 401, payload)
 }
 
 func (o *GetSandboxUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxUnauthorized %s", 401, payload)
 }
 
 func (o *GetSandboxUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +320,13 @@ func (o *GetSandboxForbidden) Code() int {
 }
 
 func (o *GetSandboxForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxForbidden %s", 403, payload)
 }
 
 func (o *GetSandboxForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxForbidden %s", 403, payload)
 }
 
 func (o *GetSandboxForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +390,13 @@ func (o *GetSandboxNotFound) Code() int {
 }
 
 func (o *GetSandboxNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxNotFound %s", 404, payload)
 }
 
 func (o *GetSandboxNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxNotFound %s", 404, payload)
 }
 
 func (o *GetSandboxNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +460,13 @@ func (o *GetSandboxInternalServerError) Code() int {
 }
 
 func (o *GetSandboxInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxInternalServerError %s", 500, payload)
 }
 
 func (o *GetSandboxInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/sandboxes/{sandbox_id}][%d] getSandboxInternalServerError %s", 500, payload)
 }
 
 func (o *GetSandboxInternalServerError) GetPayload() *models.StderrErrResponse {

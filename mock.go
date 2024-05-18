@@ -1354,21 +1354,6 @@ func (mr *MockClientMockRecorder) RenderInstaller(ctx, installerID interface{}) 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RenderInstaller", reflect.TypeOf((*MockClient)(nil).RenderInstaller), ctx, installerID)
 }
 
-// RenderInstallerInstall mocks base method.
-func (m *MockClient) RenderInstallerInstall(ctx context.Context, installerID, installID string) (*models.ServiceRenderedInstall, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "RenderInstallerInstall", ctx, installerID, installID)
-	ret0, _ := ret[0].(*models.ServiceRenderedInstall)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// RenderInstallerInstall indicates an expected call of RenderInstallerInstall.
-func (mr *MockClientMockRecorder) RenderInstallerInstall(ctx, installerID, installID interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RenderInstallerInstall", reflect.TypeOf((*MockClient)(nil).RenderInstallerInstall), ctx, installerID, installID)
-}
-
 // SetOrgID mocks base method.
 func (m *MockClient) SetOrgID(orgID string) {
 	m.ctrl.T.Helper()
