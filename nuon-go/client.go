@@ -76,7 +76,6 @@ type Client interface {
 	GetInstaller(ctx context.Context, installerID string) (*models.AppInstaller, error)
 	GetInstallers(ctx context.Context) ([]*models.AppInstaller, error)
 	RenderInstaller(ctx context.Context, installerID string) (*models.ServiceRenderedInstaller, error)
-	RenderInstallerInstall(ctx context.Context, installerID, installID string) (*models.ServiceRenderedInstall, error)
 
 	// general methods
 	GetCLIConfig(ctx context.Context) (*models.ServiceCLIConfig, error)

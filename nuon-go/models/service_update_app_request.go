@@ -17,6 +17,9 @@ import (
 // swagger:model service.UpdateAppRequest
 type ServiceUpdateAppRequest struct {
 
+	// description
+	Description string `json:"description,omitempty"`
+
 	// name
 	Name string `json:"name,omitempty"`
 }

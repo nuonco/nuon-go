@@ -39,6 +39,9 @@ type AppComponent struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// interpolation name
+	InterpolationName string `json:"interpolation_name,omitempty"`
+
 	// name
 	Name string `json:"name,omitempty"`
 
