@@ -22,12 +22,12 @@ type ServiceUpdateComponentRequest struct {
 	// dependencies
 	Dependencies []string `json:"dependencies"`
 
-	// interpolation name
-	InterpolationName string `json:"interpolation_name,omitempty"`
-
 	// name
 	// Required: true
 	Name *string `json:"name"`
+
+	// var name
+	VarName string `json:"var_name,omitempty"`
 }
 
 // Validate validates this service update component request
