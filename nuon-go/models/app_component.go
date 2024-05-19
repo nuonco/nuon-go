@@ -42,6 +42,9 @@ type AppComponent struct {
 	// name
 	Name string `json:"name,omitempty"`
 
+	// resolved var name
+	ResolvedVarName string `json:"resolved_var_name,omitempty"`
+
 	// status
 	Status string `json:"status,omitempty"`
 
