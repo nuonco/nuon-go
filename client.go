@@ -81,6 +81,7 @@ type Client interface {
 	GetCLIConfig(ctx context.Context) (*models.ServiceCLIConfig, error)
 	GetCurrentUser(ctx context.Context) (*models.AppUserToken, error)
 	PublishMetrics(ctx context.Context, req []*models.ServicePublishMetricInput) error
+	GetCloudPlatformRegions(ctx context.Context, cloudPlatform string) ([]*models.AppCloudPlatformRegion, error)
 
 	// sandbox methods
 	GetSandboxes(ctx context.Context) ([]*models.AppSandbox, error)
