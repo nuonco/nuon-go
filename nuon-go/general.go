@@ -41,3 +41,15 @@ func (c *client) GetCLIConfig(ctx context.Context) (*models.ServiceCLIConfig, er
 
 	return resp.Payload, nil
 }
+
+func (c *client) GetCloudPlatformRegions(ctx context.Context, cloudPlatform string) ([]*models.AppCloudPlatformRegion, error) {
+	resp, err := c.genClient.Operations.GetCloudPlatformRegions(&operations.GetCloudPlatformRegionsParams{
+		Context:       ctx,
+		CloudPlatform: cloudPlatform,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}
