@@ -103,6 +103,8 @@ type Client interface {
 	GetInstall(ctx context.Context, installID string) (*models.AppInstall, error)
 	UpdateInstall(ctx context.Context, installID string, req *models.ServiceUpdateInstallRequest) (*models.AppInstall, error)
 	DeleteInstall(ctx context.Context, installID string) (bool, error)
+	ReprovisionInstall(ctx context.Context, installID string) error
+	DeprovisionInstall(ctx context.Context, installID string) error
 
 	// install deploys
 	GetInstallDeploys(ctx context.Context, installID string) ([]*models.AppInstallDeploy, error)
@@ -115,6 +117,7 @@ type Client interface {
 	// install components
 	GetInstallComponents(ctx context.Context, installID string) ([]*models.AppInstallComponent, error)
 	TeardownInstallComponent(ctx context.Context, installID, componentID string) (*models.AppInstallDeploy, error)
+	TeardownInstallComponents(ctx context.Context, installID string) error
 	GetInstallComponentDeploys(ctx context.Context, installID, componentID string) ([]*models.AppInstallDeploy, error)
 	GetInstallComponentLatestDeploy(ctx context.Context, installID, componentID string) (*models.AppInstallDeploy, error)
 
