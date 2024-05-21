@@ -114,6 +114,8 @@ type ClientService interface {
 
 	DeleteOrg(params *DeleteOrgParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOrgOK, error)
 
+	DeprovisionInstall(params *DeprovisionInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeprovisionInstallCreated, error)
+
 	GetAllVCSConnectedRepos(params *GetAllVCSConnectedReposParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllVCSConnectedReposOK, error)
 
 	GetApp(params *GetAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppOK, error)
@@ -240,7 +242,11 @@ type ClientService interface {
 
 	RenderInstaller(params *RenderInstallerParams, opts ...ClientOption) (*RenderInstallerOK, error)
 
+	ReprovisionInstall(params *ReprovisionInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReprovisionInstallCreated, error)
+
 	TeardownInstallComponent(params *TeardownInstallComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeardownInstallComponentCreated, error)
+
+	TeardownInstallComponents(params *TeardownInstallComponentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeardownInstallComponentsCreated, error)
 
 	UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppOK, error)
 
@@ -1394,6 +1400,47 @@ func (a *Client) DeleteOrg(params *DeleteOrgParams, authInfo runtime.ClientAuthI
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeleteOrg: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+DeprovisionInstall deprovisions an install
+
+Deprovision an install sandbox.
+*/
+func (a *Client) DeprovisionInstall(params *DeprovisionInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeprovisionInstallCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeprovisionInstallParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeprovisionInstall",
+		Method:             "POST",
+		PathPattern:        "/v1/installs/{install_id}/deprovision",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeprovisionInstallReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeprovisionInstallCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeprovisionInstall: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -3881,6 +3928,47 @@ func (a *Client) RenderInstaller(params *RenderInstallerParams, opts ...ClientOp
 }
 
 /*
+ReprovisionInstall reprovisions an install
+
+Reprovision an install sandbox.
+*/
+func (a *Client) ReprovisionInstall(params *ReprovisionInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReprovisionInstallCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewReprovisionInstallParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ReprovisionInstall",
+		Method:             "POST",
+		PathPattern:        "/v1/installs/{install_id}/reprovision",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ReprovisionInstallReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ReprovisionInstallCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ReprovisionInstall: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 TeardownInstallComponent teardowns an install component
 */
 func (a *Client) TeardownInstallComponent(params *TeardownInstallComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeardownInstallComponentCreated, error) {
@@ -3916,6 +4004,47 @@ func (a *Client) TeardownInstallComponent(params *TeardownInstallComponentParams
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for TeardownInstallComponent: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+TeardownInstallComponents teardowns an install s components
+
+Teardown all components on an install.
+*/
+func (a *Client) TeardownInstallComponents(params *TeardownInstallComponentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeardownInstallComponentsCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewTeardownInstallComponentsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "TeardownInstallComponents",
+		Method:             "POST",
+		PathPattern:        "/v1/installs/{install_id}/components/teardown-all",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &TeardownInstallComponentsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*TeardownInstallComponentsCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for TeardownInstallComponents: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
