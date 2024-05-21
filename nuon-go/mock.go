@@ -470,6 +470,20 @@ func (mr *MockClientMockRecorder) DeleteOrg(ctx interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteOrg", reflect.TypeOf((*MockClient)(nil).DeleteOrg), ctx)
 }
 
+// DeprovisionInstall mocks base method.
+func (m *MockClient) DeprovisionInstall(ctx context.Context, installID string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeprovisionInstall", ctx, installID)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeprovisionInstall indicates an expected call of DeprovisionInstall.
+func (mr *MockClientMockRecorder) DeprovisionInstall(ctx, installID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeprovisionInstall", reflect.TypeOf((*MockClient)(nil).DeprovisionInstall), ctx, installID)
+}
+
 // GetAllComponents mocks base method.
 func (m *MockClient) GetAllComponents(ctx context.Context) ([]*models.AppComponent, error) {
 	m.ctrl.T.Helper()
@@ -783,6 +797,21 @@ func (m *MockClient) GetCLIConfig(ctx context.Context) (*models.ServiceCLIConfig
 func (mr *MockClientMockRecorder) GetCLIConfig(ctx interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCLIConfig", reflect.TypeOf((*MockClient)(nil).GetCLIConfig), ctx)
+}
+
+// GetCloudPlatformRegions mocks base method.
+func (m *MockClient) GetCloudPlatformRegions(ctx context.Context, cloudPlatform string) ([]*models.AppCloudPlatformRegion, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetCloudPlatformRegions", ctx, cloudPlatform)
+	ret0, _ := ret[0].([]*models.AppCloudPlatformRegion)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetCloudPlatformRegions indicates an expected call of GetCloudPlatformRegions.
+func (mr *MockClientMockRecorder) GetCloudPlatformRegions(ctx, cloudPlatform interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCloudPlatformRegions", reflect.TypeOf((*MockClient)(nil).GetCloudPlatformRegions), ctx, cloudPlatform)
 }
 
 // GetComponent mocks base method.
@@ -1354,6 +1383,20 @@ func (mr *MockClientMockRecorder) RenderInstaller(ctx, installerID interface{}) 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RenderInstaller", reflect.TypeOf((*MockClient)(nil).RenderInstaller), ctx, installerID)
 }
 
+// ReprovisionInstall mocks base method.
+func (m *MockClient) ReprovisionInstall(ctx context.Context, installID string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ReprovisionInstall", ctx, installID)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// ReprovisionInstall indicates an expected call of ReprovisionInstall.
+func (mr *MockClientMockRecorder) ReprovisionInstall(ctx, installID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReprovisionInstall", reflect.TypeOf((*MockClient)(nil).ReprovisionInstall), ctx, installID)
+}
+
 // SetOrgID mocks base method.
 func (m *MockClient) SetOrgID(orgID string) {
 	m.ctrl.T.Helper()
@@ -1379,6 +1422,20 @@ func (m *MockClient) TeardownInstallComponent(ctx context.Context, installID, co
 func (mr *MockClientMockRecorder) TeardownInstallComponent(ctx, installID, componentID interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TeardownInstallComponent", reflect.TypeOf((*MockClient)(nil).TeardownInstallComponent), ctx, installID, componentID)
+}
+
+// TeardownInstallComponents mocks base method.
+func (m *MockClient) TeardownInstallComponents(ctx context.Context, installID string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "TeardownInstallComponents", ctx, installID)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// TeardownInstallComponents indicates an expected call of TeardownInstallComponents.
+func (mr *MockClientMockRecorder) TeardownInstallComponents(ctx, installID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TeardownInstallComponents", reflect.TypeOf((*MockClient)(nil).TeardownInstallComponents), ctx, installID)
 }
 
 // UpdateApp mocks base method.

@@ -81,3 +81,35 @@ func (c *client) DeleteInstall(ctx context.Context, installID string) (bool, err
 
 	return resp.IsSuccess(), nil
 }
+
+func (c *client) ReprovisionInstall(ctx context.Context, installID string) error {
+	resp, err := c.genClient.Operations.ReprovisionInstall(&operations.ReprovisionInstallParams{
+		InstallID: installID,
+		Context:   ctx,
+	}, c.getOrgIDAuthInfo())
+	if err != nil {
+		return err
+	}
+
+	if resp.Payload != "ok" {
+		return statusErr{resp.Payload}
+	}
+
+	return nil
+}
+
+func (c *client) DeprovisionInstall(ctx context.Context, installID string) error {
+	resp, err := c.genClient.Operations.DeprovisionInstall(&operations.DeprovisionInstallParams{
+		InstallID: installID,
+		Context:   ctx,
+	}, c.getOrgIDAuthInfo())
+	if err != nil {
+		return err
+	}
+
+	if resp.Payload != "ok" {
+		return statusErr{resp.Payload}
+	}
+
+	return nil
+}
