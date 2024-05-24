@@ -20,11 +20,11 @@ import (
 type Client interface {
 	SetOrgID(orgID string)
 
-	//get / create org
+	//  get / create org
 	GetOrgs(ctx context.Context) ([]*models.AppOrg, error)
 	CreateOrg(ctx context.Context, req *models.ServiceCreateOrgRequest) (*models.AppOrg, error)
 
-	//current org
+	//  current org
 	GetOrg(ctx context.Context) (*models.AppOrg, error)
 	GetOrgHealthChecks(ctx context.Context, limit *int64) ([]*models.AppOrgHealthCheck, error)
 	UpdateOrg(ctx context.Context, req *models.ServiceUpdateOrgRequest) (*models.AppOrg, error)
@@ -118,6 +118,7 @@ type Client interface {
 	GetInstallComponents(ctx context.Context, installID string) ([]*models.AppInstallComponent, error)
 	TeardownInstallComponent(ctx context.Context, installID, componentID string) (*models.AppInstallDeploy, error)
 	TeardownInstallComponents(ctx context.Context, installID string) error
+	DeployInstallComponents(ctx context.Context, installID string) error
 	GetInstallComponentDeploys(ctx context.Context, installID, componentID string) ([]*models.AppInstallDeploy, error)
 	GetInstallComponentLatestDeploy(ctx context.Context, installID, componentID string) (*models.AppInstallDeploy, error)
 
