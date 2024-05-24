@@ -22,6 +22,9 @@ type AppComponentBuild struct {
 	// component config connection id
 	ComponentConfigConnectionID string `json:"component_config_connection_id,omitempty"`
 
+	// component config version
+	ComponentConfigVersion int64 `json:"component_config_version,omitempty"`
+
 	// Read-only fields set on the object to de-nest data
 	ComponentID string `json:"component_id,omitempty"`
 
