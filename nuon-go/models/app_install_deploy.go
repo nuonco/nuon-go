@@ -21,6 +21,9 @@ type AppInstallDeploy struct {
 	// build id
 	BuildID string `json:"build_id,omitempty"`
 
+	// component config version
+	ComponentConfigVersion int64 `json:"component_config_version,omitempty"`
+
 	// component id
 	ComponentID string `json:"component_id,omitempty"`
 

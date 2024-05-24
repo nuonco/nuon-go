@@ -45,6 +45,9 @@ type AppOrg struct {
 	// name
 	Name string `json:"name,omitempty"`
 
+	// notifications config
+	NotificationsConfig *AppNotificationsConfig `json:"notifications_config,omitempty"`
+
 	// These fields are used to control the behaviour of the org
 	// NOTE: these are starting as nullable, so we can update stage/prod before resetting locally.
 	SandboxMode bool `json:"sandbox_mode,omitempty"`
@@ -78,6 +81,10 @@ func (m *AppOrg) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateLatestHealthCheck(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateNotificationsConfig(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -143,6 +150,25 @@ func (m *AppOrg) validateHealthChecks(formats strfmt.Registry) error {
 func (m *AppOrg) validateLatestHealthCheck(formats strfmt.Registry) error {
 	if swag.IsZero(m.LatestHealthCheck) { // not required
 		return nil
+	}
+
+	return nil
+}
+
+func (m *AppOrg) validateNotificationsConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.NotificationsConfig) { // not required
+		return nil
+	}
+
+	if m.NotificationsConfig != nil {
+		if err := m.NotificationsConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("notifications_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("notifications_config")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -216,6 +242,10 @@ func (m *AppOrg) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateNotificationsConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateUsers(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -277,6 +307,27 @@ func (m *AppOrg) contextValidateHealthChecks(ctx context.Context, formats strfmt
 }
 
 func (m *AppOrg) contextValidateLatestHealthCheck(ctx context.Context, formats strfmt.Registry) error {
+
+	return nil
+}
+
+func (m *AppOrg) contextValidateNotificationsConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.NotificationsConfig != nil {
+
+		if swag.IsZero(m.NotificationsConfig) { // not required
+			return nil
+		}
+
+		if err := m.NotificationsConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("notifications_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("notifications_config")
+			}
+			return err
+		}
+	}
 
 	return nil
 }

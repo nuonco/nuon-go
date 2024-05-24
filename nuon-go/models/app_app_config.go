@@ -53,6 +53,9 @@ type AppAppConfig struct {
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
+
+	// fields that are filled in via after query or views
+	Version int64 `json:"version,omitempty"`
 }
 
 // Validate validates this app app config
