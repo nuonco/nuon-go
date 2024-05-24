@@ -87,3 +87,19 @@ func (c *client) TeardownInstallComponents(ctx context.Context, installID string
 
 	return nil
 }
+
+func (c *client) DeployInstallComponents(ctx context.Context, installID string) error {
+	resp, err := c.genClient.Operations.DeployInstallComponents(&operations.DeployInstallComponentsParams{
+		InstallID: installID,
+		Context:   ctx,
+	}, c.getOrgIDAuthInfo())
+	if err != nil {
+		return err
+	}
+
+	if resp.Payload != "ok" {
+		return statusErr{resp.Payload}
+	}
+
+	return nil
+}
