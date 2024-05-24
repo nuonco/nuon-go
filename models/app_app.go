@@ -33,6 +33,9 @@ type AppApp struct {
 	// description
 	Description string `json:"description,omitempty"`
 
+	// display name
+	DisplayName string `json:"display_name,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
@@ -44,6 +47,9 @@ type AppApp struct {
 	// name
 	Name string `json:"name,omitempty"`
 
+	// notifications config
+	NotificationsConfig *AppNotificationsConfig `json:"notifications_config,omitempty"`
+
 	// org id
 	OrgID string `json:"org_id,omitempty"`
 
@@ -52,6 +58,9 @@ type AppApp struct {
 
 	// sandbox config
 	SandboxConfig *AppAppSandboxConfig `json:"sandbox_config,omitempty"`
+
+	// slack webhook url
+	SlackWebhookURL string `json:"slack_webhook_url,omitempty"`
 
 	// status
 	Status string `json:"status,omitempty"`
@@ -76,6 +85,10 @@ func (m *AppApp) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateInputConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateNotificationsConfig(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -137,6 +150,25 @@ func (m *AppApp) validateInputConfig(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppApp) validateNotificationsConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.NotificationsConfig) { // not required
+		return nil
+	}
+
+	if m.NotificationsConfig != nil {
+		if err := m.NotificationsConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("notifications_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("notifications_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *AppApp) validateRunnerConfig(formats strfmt.Registry) error {
 	if swag.IsZero(m.RunnerConfig) { // not required
 		return nil
@@ -188,6 +220,10 @@ func (m *AppApp) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 	}
 
 	if err := m.contextValidateInputConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateNotificationsConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -245,6 +281,27 @@ func (m *AppApp) contextValidateCreatedBy(ctx context.Context, formats strfmt.Re
 }
 
 func (m *AppApp) contextValidateInputConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	return nil
+}
+
+func (m *AppApp) contextValidateNotificationsConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.NotificationsConfig != nil {
+
+		if swag.IsZero(m.NotificationsConfig) { // not required
+			return nil
+		}
+
+		if err := m.NotificationsConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("notifications_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("notifications_config")
+			}
+			return err
+		}
+	}
 
 	return nil
 }

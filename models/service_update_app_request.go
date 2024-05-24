@@ -20,8 +20,14 @@ type ServiceUpdateAppRequest struct {
 	// description
 	Description string `json:"description,omitempty"`
 
+	// display name
+	DisplayName string `json:"display_name,omitempty"`
+
 	// name
 	Name string `json:"name,omitempty"`
+
+	// slack webhook url
+	SlackWebhookURL string `json:"slack_webhook_url,omitempty"`
 }
 
 // Validate validates this service update app request
