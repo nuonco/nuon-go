@@ -8,6 +8,7 @@ import (
 
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-playground/validator/v10"
+
 	genclient "github.com/nuonco/nuon-go/client"
 	"github.com/nuonco/nuon-go/models"
 )
@@ -182,12 +183,16 @@ type client struct {
 
 type clientOption func(*client) error
 
-func New(v *validator.Validate, opts ...clientOption) (*client, error) {
-	c := &client{v: v}
+func New(opts ...clientOption) (*client, error) {
+	c := &client{}
 	for _, opt := range opts {
 		if err := opt(c); err != nil {
 			return nil, err
 		}
+	}
+
+	if c.v == nil {
+		c.v = validator.New()
 	}
 
 	if err := c.v.Struct(c); err != nil {
@@ -233,6 +238,14 @@ func WithURL(url string) clientOption {
 func WithOrgID(orgID string) clientOption {
 	return func(c *client) error {
 		c.OrgID = orgID
+		return nil
+	}
+}
+
+// WithValidator specifies a validator to use
+func WithValidator(v *validator.Validate) clientOption {
+	return func(c *client) error {
+		c.v = v
 		return nil
 	}
 }
