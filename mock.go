@@ -470,6 +470,20 @@ func (mr *MockClientMockRecorder) DeleteOrg(ctx interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteOrg", reflect.TypeOf((*MockClient)(nil).DeleteOrg), ctx)
 }
 
+// DeployInstallComponents mocks base method.
+func (m *MockClient) DeployInstallComponents(ctx context.Context, installID string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeployInstallComponents", ctx, installID)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeployInstallComponents indicates an expected call of DeployInstallComponents.
+func (mr *MockClientMockRecorder) DeployInstallComponents(ctx, installID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeployInstallComponents", reflect.TypeOf((*MockClient)(nil).DeployInstallComponents), ctx, installID)
+}
+
 // DeprovisionInstall mocks base method.
 func (m *MockClient) DeprovisionInstall(ctx context.Context, installID string) error {
 	m.ctrl.T.Helper()

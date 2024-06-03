@@ -383,7 +383,9 @@ func (a *Client) CreateAppConfig(params *CreateAppConfigParams, authInfo runtime
 }
 
 /*
-CreateAppInputConfig create app input config API
+	CreateAppInputConfig App input configs allow you to declare the inputs for your application, and do things such as require customer inputs or
+
+expose configuration knobs in your application.
 */
 func (a *Client) CreateAppInputConfig(params *CreateAppInputConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppInputConfigCreated, error) {
 	// TODO: Validate the params before sending

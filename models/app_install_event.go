@@ -34,7 +34,7 @@ type AppInstallEvent struct {
 	InstallID string `json:"install_id,omitempty"`
 
 	// operation
-	Operation GithubComPowertoolsdevMonoServicesCtlAPIInternalAppInstallsWorkerSignalsOperation `json:"operation,omitempty"`
+	Operation string `json:"operation,omitempty"`
 
 	// operation name
 	OperationName string `json:"operation_name,omitempty"`
@@ -57,10 +57,6 @@ func (m *AppInstallEvent) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCreatedBy(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateOperation(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -93,23 +89,6 @@ func (m *AppInstallEvent) validateCreatedBy(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *AppInstallEvent) validateOperation(formats strfmt.Registry) error {
-	if swag.IsZero(m.Operation) { // not required
-		return nil
-	}
-
-	if err := m.Operation.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("operation")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("operation")
-		}
-		return err
-	}
-
-	return nil
-}
-
 func (m *AppInstallEvent) validateOperationStatus(formats strfmt.Registry) error {
 	if swag.IsZero(m.OperationStatus) { // not required
 		return nil
@@ -132,10 +111,6 @@ func (m *AppInstallEvent) ContextValidate(ctx context.Context, formats strfmt.Re
 	var res []error
 
 	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateOperation(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -165,24 +140,6 @@ func (m *AppInstallEvent) contextValidateCreatedBy(ctx context.Context, formats 
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-func (m *AppInstallEvent) contextValidateOperation(ctx context.Context, formats strfmt.Registry) error {
-
-	if swag.IsZero(m.Operation) { // not required
-		return nil
-	}
-
-	if err := m.Operation.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("operation")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("operation")
-		}
-		return err
 	}
 
 	return nil
