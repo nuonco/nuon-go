@@ -22,9 +22,6 @@ type AppAppInputConfig struct {
 	// app id
 	AppID string `json:"app_id,omitempty"`
 
-	// app inputs
-	AppInputs []*AppAppInput `json:"app_inputs"`
-
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
@@ -36,6 +33,12 @@ type AppAppInputConfig struct {
 
 	// id
 	ID string `json:"id,omitempty"`
+
+	// input groups
+	InputGroups []*AppAppInputGroup `json:"input_groups"`
+
+	// inputs
+	Inputs []*AppAppInput `json:"inputs"`
 
 	// install inputs
 	InstallInputs []*AppInstallInputs `json:"install_inputs"`
@@ -51,11 +54,15 @@ type AppAppInputConfig struct {
 func (m *AppAppInputConfig) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateAppInputs(formats); err != nil {
+	if err := m.validateCreatedBy(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateCreatedBy(formats); err != nil {
+	if err := m.validateInputGroups(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInputs(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -66,32 +73,6 @@ func (m *AppAppInputConfig) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *AppAppInputConfig) validateAppInputs(formats strfmt.Registry) error {
-	if swag.IsZero(m.AppInputs) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(m.AppInputs); i++ {
-		if swag.IsZero(m.AppInputs[i]) { // not required
-			continue
-		}
-
-		if m.AppInputs[i] != nil {
-			if err := m.AppInputs[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("app_inputs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("app_inputs" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
 	return nil
 }
 
@@ -109,6 +90,58 @@ func (m *AppAppInputConfig) validateCreatedBy(formats strfmt.Registry) error {
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *AppAppInputConfig) validateInputGroups(formats strfmt.Registry) error {
+	if swag.IsZero(m.InputGroups) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.InputGroups); i++ {
+		if swag.IsZero(m.InputGroups[i]) { // not required
+			continue
+		}
+
+		if m.InputGroups[i] != nil {
+			if err := m.InputGroups[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("input_groups" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("input_groups" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *AppAppInputConfig) validateInputs(formats strfmt.Registry) error {
+	if swag.IsZero(m.Inputs) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Inputs); i++ {
+		if swag.IsZero(m.Inputs[i]) { // not required
+			continue
+		}
+
+		if m.Inputs[i] != nil {
+			if err := m.Inputs[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("inputs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("inputs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -144,11 +177,15 @@ func (m *AppAppInputConfig) validateInstallInputs(formats strfmt.Registry) error
 func (m *AppAppInputConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateAppInputs(ctx, formats); err != nil {
+	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
+	if err := m.contextValidateInputGroups(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateInputs(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -159,31 +196,6 @@ func (m *AppAppInputConfig) ContextValidate(ctx context.Context, formats strfmt.
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *AppAppInputConfig) contextValidateAppInputs(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.AppInputs); i++ {
-
-		if m.AppInputs[i] != nil {
-
-			if swag.IsZero(m.AppInputs[i]) { // not required
-				return nil
-			}
-
-			if err := m.AppInputs[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("app_inputs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("app_inputs" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
 	return nil
 }
 
@@ -203,6 +215,56 @@ func (m *AppAppInputConfig) contextValidateCreatedBy(ctx context.Context, format
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *AppAppInputConfig) contextValidateInputGroups(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.InputGroups); i++ {
+
+		if m.InputGroups[i] != nil {
+
+			if swag.IsZero(m.InputGroups[i]) { // not required
+				return nil
+			}
+
+			if err := m.InputGroups[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("input_groups" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("input_groups" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *AppAppInputConfig) contextValidateInputs(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Inputs); i++ {
+
+		if m.Inputs[i] != nil {
+
+			if swag.IsZero(m.Inputs[i]) { // not required
+				return nil
+			}
+
+			if err := m.Inputs[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("inputs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("inputs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

@@ -39,6 +39,12 @@ type AppAppInput struct {
 	// display name
 	DisplayName string `json:"display_name,omitempty"`
 
+	// group
+	Group *AppAppInputGroup `json:"group,omitempty"`
+
+	// group id
+	GroupID string `json:"group_id,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
@@ -63,6 +69,10 @@ func (m *AppAppInput) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCreatedBy(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGroup(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -91,11 +101,34 @@ func (m *AppAppInput) validateCreatedBy(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppAppInput) validateGroup(formats strfmt.Registry) error {
+	if swag.IsZero(m.Group) { // not required
+		return nil
+	}
+
+	if m.Group != nil {
+		if err := m.Group.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("group")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("group")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app app input based on the context it is used
 func (m *AppAppInput) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateGroup(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -118,6 +151,27 @@ func (m *AppAppInput) contextValidateCreatedBy(ctx context.Context, formats strf
 				return ve.ValidateName("created_by")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("created_by")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppAppInput) contextValidateGroup(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Group != nil {
+
+		if swag.IsZero(m.Group) { // not required
+			return nil
+		}
+
+		if err := m.Group.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("group")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("group")
 			}
 			return err
 		}

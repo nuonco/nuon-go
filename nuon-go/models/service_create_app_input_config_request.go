@@ -19,6 +19,10 @@ import (
 // swagger:model service.CreateAppInputConfigRequest
 type ServiceCreateAppInputConfigRequest struct {
 
+	// groups
+	// Required: true
+	Groups map[string]ServiceAppGroupRequest `json:"groups"`
+
 	// inputs
 	// Required: true
 	Inputs map[string]ServiceAppInputRequest `json:"inputs"`
@@ -28,6 +32,10 @@ type ServiceCreateAppInputConfigRequest struct {
 func (m *ServiceCreateAppInputConfigRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateGroups(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateInputs(formats); err != nil {
 		res = append(res, err)
 	}
@@ -35,6 +43,33 @@ func (m *ServiceCreateAppInputConfigRequest) Validate(formats strfmt.Registry) e
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ServiceCreateAppInputConfigRequest) validateGroups(formats strfmt.Registry) error {
+
+	if err := validate.Required("groups", "body", m.Groups); err != nil {
+		return err
+	}
+
+	for k := range m.Groups {
+
+		if err := validate.Required("groups"+"."+k, "body", m.Groups[k]); err != nil {
+			return err
+		}
+		if val, ok := m.Groups[k]; ok {
+			if err := val.Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("groups" + "." + k)
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("groups" + "." + k)
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -69,6 +104,10 @@ func (m *ServiceCreateAppInputConfigRequest) validateInputs(formats strfmt.Regis
 func (m *ServiceCreateAppInputConfigRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateGroups(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateInputs(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -76,6 +115,25 @@ func (m *ServiceCreateAppInputConfigRequest) ContextValidate(ctx context.Context
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ServiceCreateAppInputConfigRequest) contextValidateGroups(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.Required("groups", "body", m.Groups); err != nil {
+		return err
+	}
+
+	for k := range m.Groups {
+
+		if val, ok := m.Groups[k]; ok {
+			if err := val.ContextValidate(ctx, formats); err != nil {
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
