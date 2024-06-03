@@ -55,6 +55,9 @@ type AppInstall struct {
 	// install inputs
 	InstallInputs []*AppInstallInputs `json:"install_inputs"`
 
+	// install number
+	InstallNumber int64 `json:"install_number,omitempty"`
+
 	// install sandbox runs
 	InstallSandboxRuns []*AppInstallSandboxRun `json:"install_sandbox_runs"`
 

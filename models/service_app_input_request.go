@@ -30,6 +30,10 @@ type ServiceAppInputRequest struct {
 	// Required: true
 	DisplayName *string `json:"display_name"`
 
+	// group
+	// Required: true
+	Group *string `json:"group"`
+
 	// required
 	Required bool `json:"required,omitempty"`
 
@@ -46,6 +50,10 @@ func (m *ServiceAppInputRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateDisplayName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGroup(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -67,6 +75,15 @@ func (m *ServiceAppInputRequest) validateDescription(formats strfmt.Registry) er
 func (m *ServiceAppInputRequest) validateDisplayName(formats strfmt.Registry) error {
 
 	if err := validate.Required("display_name", "body", m.DisplayName); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ServiceAppInputRequest) validateGroup(formats strfmt.Registry) error {
+
+	if err := validate.Required("group", "body", m.Group); err != nil {
 		return err
 	}
 
