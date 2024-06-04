@@ -59,9 +59,6 @@ type AppApp struct {
 	// sandbox config
 	SandboxConfig *AppAppSandboxConfig `json:"sandbox_config,omitempty"`
 
-	// slack webhook url
-	SlackWebhookURL string `json:"slack_webhook_url,omitempty"`
-
 	// status
 	Status string `json:"status,omitempty"`
 
