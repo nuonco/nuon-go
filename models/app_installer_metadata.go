@@ -34,7 +34,7 @@ type AppInstallerMetadata struct {
 	CreatedByID string `json:"created_by_id,omitempty"`
 
 	// demo url
-	DemoURL *GenericsNullString `json:"demo_url,omitempty"`
+	DemoURL string `json:"demo_url,omitempty"`
 
 	// description
 	Description string `json:"description,omitempty"`
@@ -84,10 +84,6 @@ func (m *AppInstallerMetadata) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateDemoURL(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -113,34 +109,11 @@ func (m *AppInstallerMetadata) validateCreatedBy(formats strfmt.Registry) error 
 	return nil
 }
 
-func (m *AppInstallerMetadata) validateDemoURL(formats strfmt.Registry) error {
-	if swag.IsZero(m.DemoURL) { // not required
-		return nil
-	}
-
-	if m.DemoURL != nil {
-		if err := m.DemoURL.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("demo_url")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("demo_url")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 // ContextValidate validate this app installer metadata based on the context it is used
 func (m *AppInstallerMetadata) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateDemoURL(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -163,27 +136,6 @@ func (m *AppInstallerMetadata) contextValidateCreatedBy(ctx context.Context, for
 				return ve.ValidateName("created_by")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("created_by")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *AppInstallerMetadata) contextValidateDemoURL(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.DemoURL != nil {
-
-		if swag.IsZero(m.DemoURL) { // not required
-			return nil
-		}
-
-		if err := m.DemoURL.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("demo_url")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("demo_url")
 			}
 			return err
 		}
