@@ -43,9 +43,6 @@ type AppAppInputGroup struct {
 	// id
 	ID string `json:"id,omitempty"`
 
-	// is default
-	IsDefault bool `json:"is_default,omitempty"`
-
 	// name
 	Name string `json:"name,omitempty"`
 
