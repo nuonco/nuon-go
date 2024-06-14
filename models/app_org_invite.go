@@ -22,7 +22,7 @@ type AppOrgInvite struct {
 	CreatedAt string `json:"created_at,omitempty"`
 
 	// created by
-	CreatedBy *AppUserToken `json:"created_by,omitempty"`
+	CreatedBy *AppAccount `json:"created_by,omitempty"`
 
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
@@ -36,6 +36,9 @@ type AppOrgInvite struct {
 	// parent relationship
 	OrgID string `json:"orgID,omitempty"`
 
+	// role type
+	RoleType AppRoleType `json:"role_type,omitempty"`
+
 	// status
 	Status AppOrgInviteStatus `json:"status,omitempty"`
 
@@ -48,6 +51,10 @@ func (m *AppOrgInvite) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCreatedBy(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRoleType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -80,6 +87,23 @@ func (m *AppOrgInvite) validateCreatedBy(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppOrgInvite) validateRoleType(formats strfmt.Registry) error {
+	if swag.IsZero(m.RoleType) { // not required
+		return nil
+	}
+
+	if err := m.RoleType.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("role_type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("role_type")
+		}
+		return err
+	}
+
+	return nil
+}
+
 func (m *AppOrgInvite) validateStatus(formats strfmt.Registry) error {
 	if swag.IsZero(m.Status) { // not required
 		return nil
@@ -102,6 +126,10 @@ func (m *AppOrgInvite) ContextValidate(ctx context.Context, formats strfmt.Regis
 	var res []error
 
 	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRoleType(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -131,6 +159,24 @@ func (m *AppOrgInvite) contextValidateCreatedBy(ctx context.Context, formats str
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *AppOrgInvite) contextValidateRoleType(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.RoleType) { // not required
+		return nil
+	}
+
+	if err := m.RoleType.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("role_type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("role_type")
+		}
+		return err
 	}
 
 	return nil

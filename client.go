@@ -34,7 +34,6 @@ type Client interface {
 	// org invites and users
 	CreateOrgInvite(ctx context.Context, req *models.ServiceCreateOrgInviteRequest) (*models.AppOrgInvite, error)
 	GetOrgInvites(ctx context.Context, limit *int64) ([]*models.AppOrgInvite, error)
-	CreateOrgUser(ctx context.Context, req *models.ServiceCreateOrgUserRequest) (*models.AppUserOrg, error)
 
 	// app methods
 	GetApp(ctx context.Context, appID string) (*models.AppApp, error)
@@ -80,14 +79,9 @@ type Client interface {
 
 	// general methods
 	GetCLIConfig(ctx context.Context) (*models.ServiceCLIConfig, error)
-	GetCurrentUser(ctx context.Context) (*models.AppUserToken, error)
+	GetCurrentUser(ctx context.Context) (*models.AppAccount, error)
 	PublishMetrics(ctx context.Context, req []*models.ServicePublishMetricInput) error
 	GetCloudPlatformRegions(ctx context.Context, cloudPlatform string) ([]*models.AppCloudPlatformRegion, error)
-
-	// sandbox methods
-	GetSandboxes(ctx context.Context) ([]*models.AppSandbox, error)
-	GetSandbox(ctx context.Context, sandboxID string) (*models.AppSandbox, error)
-	GetSandboxReleases(ctx context.Context, sandboxID string) ([]*models.AppSandboxRelease, error)
 
 	// vcs connections
 	CreateVCSConnection(ctx context.Context, req *models.ServiceCreateConnectionRequest) (*models.AppVCSConnection, error)
