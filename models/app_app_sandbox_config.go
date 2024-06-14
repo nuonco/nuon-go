@@ -34,7 +34,7 @@ type AppAppSandboxConfig struct {
 	CreatedAt string `json:"created_at,omitempty"`
 
 	// created by
-	CreatedBy *AppUserToken `json:"created_by,omitempty"`
+	CreatedBy *AppAccount `json:"created_by,omitempty"`
 
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
@@ -47,12 +47,6 @@ type AppAppSandboxConfig struct {
 
 	// public git vcs config
 	PublicGitVcsConfig *AppPublicGitVCSConfig `json:"public_git_vcs_config,omitempty"`
-
-	// sandbox release
-	SandboxRelease *AppSandboxRelease `json:"sandbox_release,omitempty"`
-
-	// sandbox release id
-	SandboxReleaseID string `json:"sandbox_release_id,omitempty"`
 
 	// terraform version
 	TerraformVersion string `json:"terraform_version,omitempty"`
@@ -85,10 +79,6 @@ func (m *AppAppSandboxConfig) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validatePublicGitVcsConfig(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateSandboxRelease(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -191,25 +181,6 @@ func (m *AppAppSandboxConfig) validatePublicGitVcsConfig(formats strfmt.Registry
 	return nil
 }
 
-func (m *AppAppSandboxConfig) validateSandboxRelease(formats strfmt.Registry) error {
-	if swag.IsZero(m.SandboxRelease) { // not required
-		return nil
-	}
-
-	if m.SandboxRelease != nil {
-		if err := m.SandboxRelease.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("sandbox_release")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("sandbox_release")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 // ContextValidate validate this app app sandbox config based on the context it is used
 func (m *AppAppSandboxConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -231,10 +202,6 @@ func (m *AppAppSandboxConfig) ContextValidate(ctx context.Context, formats strfm
 	}
 
 	if err := m.contextValidatePublicGitVcsConfig(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateSandboxRelease(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -338,27 +305,6 @@ func (m *AppAppSandboxConfig) contextValidatePublicGitVcsConfig(ctx context.Cont
 				return ve.ValidateName("public_git_vcs_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("public_git_vcs_config")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *AppAppSandboxConfig) contextValidateSandboxRelease(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.SandboxRelease != nil {
-
-		if swag.IsZero(m.SandboxRelease) { // not required
-			return nil
-		}
-
-		if err := m.SandboxRelease.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("sandbox_release")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("sandbox_release")
 			}
 			return err
 		}

@@ -22,7 +22,7 @@ type AppSandboxRelease struct {
 	CreatedAt string `json:"created_at,omitempty"`
 
 	// created by
-	CreatedBy *AppUserToken `json:"created_by,omitempty"`
+	CreatedBy *AppAccount `json:"created_by,omitempty"`
 
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`

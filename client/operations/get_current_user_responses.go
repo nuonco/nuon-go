@@ -76,7 +76,7 @@ GetCurrentUserOK describes a response with status code 200, with default header 
 OK
 */
 type GetCurrentUserOK struct {
-	Payload *models.AppUserToken
+	Payload *models.AppAccount
 }
 
 // IsSuccess returns true when this get current user o k response has a 2xx status code
@@ -119,13 +119,13 @@ func (o *GetCurrentUserOK) String() string {
 	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserOK %s", 200, payload)
 }
 
-func (o *GetCurrentUserOK) GetPayload() *models.AppUserToken {
+func (o *GetCurrentUserOK) GetPayload() *models.AppAccount {
 	return o.Payload
 }
 
 func (o *GetCurrentUserOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.AppUserToken)
+	o.Payload = new(models.AppAccount)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

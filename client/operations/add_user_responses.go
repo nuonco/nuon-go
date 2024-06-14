@@ -76,7 +76,7 @@ AddUserCreated describes a response with status code 201, with default header va
 Created
 */
 type AddUserCreated struct {
-	Payload *models.AppUserOrg
+	Payload *models.AppAccount
 }
 
 // IsSuccess returns true when this add user created response has a 2xx status code
@@ -119,13 +119,13 @@ func (o *AddUserCreated) String() string {
 	return fmt.Sprintf("[POST /v1/orgs/current/user][%d] addUserCreated %s", 201, payload)
 }
 
-func (o *AddUserCreated) GetPayload() *models.AppUserOrg {
+func (o *AddUserCreated) GetPayload() *models.AppAccount {
 	return o.Payload
 }
 
 func (o *AddUserCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.AppUserOrg)
+	o.Payload = new(models.AppAccount)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
