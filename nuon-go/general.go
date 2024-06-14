@@ -8,7 +8,7 @@ import (
 )
 
 // general methods
-func (c *client) GetCurrentUser(ctx context.Context) (*models.AppUserToken, error) {
+func (c *client) GetCurrentUser(ctx context.Context) (*models.AppAccount, error) {
 	resp, err := c.genClient.Operations.GetCurrentUser(&operations.GetCurrentUserParams{
 		Context: ctx,
 	}, c.getApiKeyAuthInfo())

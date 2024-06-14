@@ -13,19 +13,10 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// AppAWSECRImageConfig app a w s e c r image config
+// AppPolicy app policy
 //
-// swagger:model app.AWSECRImageConfig
-type AppAWSECRImageConfig struct {
-
-	// aws region
-	AwsRegion string `json:"aws_region,omitempty"`
-
-	// connection to parent model
-	ComponentConfigID string `json:"component_config_id,omitempty"`
-
-	// component config type
-	ComponentConfigType string `json:"component_config_type,omitempty"`
+// swagger:model app.Policy
+type AppPolicy struct {
 
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
@@ -36,21 +27,31 @@ type AppAWSECRImageConfig struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
-	// actual configuration
-	IamRoleArn string `json:"iam_role_arn,omitempty"`
-
 	// id
 	ID string `json:"id,omitempty"`
+
+	// name
+	Name AppPolicyName `json:"name,omitempty"`
+
+	// Permissions are used to track granular permissions for each domain
+	Permissions map[string]string `json:"permissions,omitempty"`
+
+	// role id
+	RoleID string `json:"role_id,omitempty"`
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
 }
 
-// Validate validates this app a w s e c r image config
-func (m *AppAWSECRImageConfig) Validate(formats strfmt.Registry) error {
+// Validate validates this app policy
+func (m *AppPolicy) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCreatedBy(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -60,7 +61,7 @@ func (m *AppAWSECRImageConfig) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *AppAWSECRImageConfig) validateCreatedBy(formats strfmt.Registry) error {
+func (m *AppPolicy) validateCreatedBy(formats strfmt.Registry) error {
 	if swag.IsZero(m.CreatedBy) { // not required
 		return nil
 	}
@@ -79,11 +80,32 @@ func (m *AppAWSECRImageConfig) validateCreatedBy(formats strfmt.Registry) error 
 	return nil
 }
 
-// ContextValidate validate this app a w s e c r image config based on the context it is used
-func (m *AppAWSECRImageConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m *AppPolicy) validateName(formats strfmt.Registry) error {
+	if swag.IsZero(m.Name) { // not required
+		return nil
+	}
+
+	if err := m.Name.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("name")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("name")
+		}
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this app policy based on the context it is used
+func (m *AppPolicy) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateName(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -93,7 +115,7 @@ func (m *AppAWSECRImageConfig) ContextValidate(ctx context.Context, formats strf
 	return nil
 }
 
-func (m *AppAWSECRImageConfig) contextValidateCreatedBy(ctx context.Context, formats strfmt.Registry) error {
+func (m *AppPolicy) contextValidateCreatedBy(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.CreatedBy != nil {
 
@@ -114,8 +136,26 @@ func (m *AppAWSECRImageConfig) contextValidateCreatedBy(ctx context.Context, for
 	return nil
 }
 
+func (m *AppPolicy) contextValidateName(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Name) { // not required
+		return nil
+	}
+
+	if err := m.Name.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("name")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("name")
+		}
+		return err
+	}
+
+	return nil
+}
+
 // MarshalBinary interface implementation
-func (m *AppAWSECRImageConfig) MarshalBinary() ([]byte, error) {
+func (m *AppPolicy) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -123,8 +163,8 @@ func (m *AppAWSECRImageConfig) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *AppAWSECRImageConfig) UnmarshalBinary(b []byte) error {
-	var res AppAWSECRImageConfig
+func (m *AppPolicy) UnmarshalBinary(b []byte) error {
+	var res AppPolicy
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

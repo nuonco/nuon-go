@@ -23,7 +23,7 @@ type AppOrg struct {
 	CreatedAt string `json:"created_at,omitempty"`
 
 	// created by
-	CreatedBy *AppUserToken `json:"created_by,omitempty"`
+	CreatedBy *AppAccount `json:"created_by,omitempty"`
 
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
@@ -61,9 +61,6 @@ type AppOrg struct {
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
 
-	// users
-	Users []*AppUserOrg `json:"users"`
-
 	// vcs connections
 	VcsConnections []*AppVCSConnection `json:"vcs_connections"`
 }
@@ -85,10 +82,6 @@ func (m *AppOrg) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateNotificationsConfig(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateUsers(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -174,32 +167,6 @@ func (m *AppOrg) validateNotificationsConfig(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *AppOrg) validateUsers(formats strfmt.Registry) error {
-	if swag.IsZero(m.Users) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(m.Users); i++ {
-		if swag.IsZero(m.Users[i]) { // not required
-			continue
-		}
-
-		if m.Users[i] != nil {
-			if err := m.Users[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("users" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("users" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
 func (m *AppOrg) validateVcsConnections(formats strfmt.Registry) error {
 	if swag.IsZero(m.VcsConnections) { // not required
 		return nil
@@ -243,10 +210,6 @@ func (m *AppOrg) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 	}
 
 	if err := m.contextValidateNotificationsConfig(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateUsers(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -327,31 +290,6 @@ func (m *AppOrg) contextValidateNotificationsConfig(ctx context.Context, formats
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-func (m *AppOrg) contextValidateUsers(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Users); i++ {
-
-		if m.Users[i] != nil {
-
-			if swag.IsZero(m.Users[i]) { // not required
-				return nil
-			}
-
-			if err := m.Users[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("users" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("users" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
 	}
 
 	return nil

@@ -320,21 +320,6 @@ func (mr *MockClientMockRecorder) CreateOrgInvite(ctx, req interface{}) *gomock.
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateOrgInvite", reflect.TypeOf((*MockClient)(nil).CreateOrgInvite), ctx, req)
 }
 
-// CreateOrgUser mocks base method.
-func (m *MockClient) CreateOrgUser(ctx context.Context, req *models.ServiceCreateOrgUserRequest) (*models.AppUserOrg, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CreateOrgUser", ctx, req)
-	ret0, _ := ret[0].(*models.AppUserOrg)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// CreateOrgUser indicates an expected call of CreateOrgUser.
-func (mr *MockClientMockRecorder) CreateOrgUser(ctx, req interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateOrgUser", reflect.TypeOf((*MockClient)(nil).CreateOrgUser), ctx, req)
-}
-
 // CreateTerraformModuleComponentConfig mocks base method.
 func (m *MockClient) CreateTerraformModuleComponentConfig(ctx context.Context, componentID string, req *models.ServiceCreateTerraformModuleComponentConfigRequest) (*models.AppTerraformModuleComponentConfig, error) {
 	m.ctrl.T.Helper()
@@ -964,10 +949,10 @@ func (mr *MockClientMockRecorder) GetComponentReleases(ctx, componentID interfac
 }
 
 // GetCurrentUser mocks base method.
-func (m *MockClient) GetCurrentUser(ctx context.Context) (*models.AppUserToken, error) {
+func (m *MockClient) GetCurrentUser(ctx context.Context) (*models.AppAccount, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetCurrentUser", ctx)
-	ret0, _ := ret[0].(*models.AppUserToken)
+	ret0, _ := ret[0].(*models.AppAccount)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

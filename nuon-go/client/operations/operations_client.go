@@ -232,12 +232,6 @@ type ClientService interface {
 
 	GetReleaseSteps(params *GetReleaseStepsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetReleaseStepsOK, error)
 
-	GetSandbox(params *GetSandboxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSandboxOK, error)
-
-	GetSandboxReleases(params *GetSandboxReleasesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSandboxReleasesOK, error)
-
-	GetSandboxes(params *GetSandboxesParams, opts ...ClientOption) (*GetSandboxesOK, error)
-
 	GetVCSConnection(params *GetVCSConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVCSConnectionOK, error)
 
 	PublishMetrics(params *PublishMetricsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PublishMetricsOK, error)
@@ -3739,122 +3733,6 @@ func (a *Client) GetReleaseSteps(params *GetReleaseStepsParams, authInfo runtime
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetReleaseSteps: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetSandbox gets a sandbox
-*/
-func (a *Client) GetSandbox(params *GetSandboxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSandboxOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetSandboxParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetSandbox",
-		Method:             "GET",
-		PathPattern:        "/v1/sandboxes/{sandbox_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetSandboxReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetSandboxOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetSandbox: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetSandboxReleases gets sandbox releases
-*/
-func (a *Client) GetSandboxReleases(params *GetSandboxReleasesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSandboxReleasesOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetSandboxReleasesParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetSandboxReleases",
-		Method:             "GET",
-		PathPattern:        "/v1/sandboxes/{sandbox_id}/releases",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetSandboxReleasesReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetSandboxReleasesOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetSandboxReleases: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetSandboxes gets all sandboxes
-*/
-func (a *Client) GetSandboxes(params *GetSandboxesParams, opts ...ClientOption) (*GetSandboxesOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetSandboxesParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetSandboxes",
-		Method:             "GET",
-		PathPattern:        "/v1/sandboxes",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetSandboxesReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetSandboxesOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetSandboxes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
