@@ -1278,51 +1278,6 @@ func (mr *MockClientMockRecorder) GetReleaseSteps(ctx, releaseID interface{}) *g
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetReleaseSteps", reflect.TypeOf((*MockClient)(nil).GetReleaseSteps), ctx, releaseID)
 }
 
-// GetSandbox mocks base method.
-func (m *MockClient) GetSandbox(ctx context.Context, sandboxID string) (*models.AppSandbox, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetSandbox", ctx, sandboxID)
-	ret0, _ := ret[0].(*models.AppSandbox)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetSandbox indicates an expected call of GetSandbox.
-func (mr *MockClientMockRecorder) GetSandbox(ctx, sandboxID interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSandbox", reflect.TypeOf((*MockClient)(nil).GetSandbox), ctx, sandboxID)
-}
-
-// GetSandboxReleases mocks base method.
-func (m *MockClient) GetSandboxReleases(ctx context.Context, sandboxID string) ([]*models.AppSandboxRelease, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetSandboxReleases", ctx, sandboxID)
-	ret0, _ := ret[0].([]*models.AppSandboxRelease)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetSandboxReleases indicates an expected call of GetSandboxReleases.
-func (mr *MockClientMockRecorder) GetSandboxReleases(ctx, sandboxID interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSandboxReleases", reflect.TypeOf((*MockClient)(nil).GetSandboxReleases), ctx, sandboxID)
-}
-
-// GetSandboxes mocks base method.
-func (m *MockClient) GetSandboxes(ctx context.Context) ([]*models.AppSandbox, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetSandboxes", ctx)
-	ret0, _ := ret[0].([]*models.AppSandbox)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetSandboxes indicates an expected call of GetSandboxes.
-func (mr *MockClientMockRecorder) GetSandboxes(ctx interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSandboxes", reflect.TypeOf((*MockClient)(nil).GetSandboxes), ctx)
-}
-
 // GetVCSConnection mocks base method.
 func (m *MockClient) GetVCSConnection(ctx context.Context, connID string) (*models.AppVCSConnection, error) {
 	m.ctrl.T.Helper()

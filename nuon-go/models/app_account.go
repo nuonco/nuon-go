@@ -34,9 +34,6 @@ type AppAccount struct {
 	// ReadOnly Fields
 	OrgIds []string `json:"org_ids"`
 
-	// orgs
-	Orgs []*AppOrg `json:"orgs"`
-
 	// permissions
 	Permissions PermissionsSet `json:"permissions,omitempty"`
 
@@ -55,10 +52,6 @@ func (m *AppAccount) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAccountType(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateOrgs(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -88,32 +81,6 @@ func (m *AppAccount) validateAccountType(formats strfmt.Registry) error {
 			return ce.ValidateName("account_type")
 		}
 		return err
-	}
-
-	return nil
-}
-
-func (m *AppAccount) validateOrgs(formats strfmt.Registry) error {
-	if swag.IsZero(m.Orgs) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(m.Orgs); i++ {
-		if swag.IsZero(m.Orgs[i]) { // not required
-			continue
-		}
-
-		if m.Orgs[i] != nil {
-			if err := m.Orgs[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("orgs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("orgs" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
 	}
 
 	return nil
@@ -172,10 +139,6 @@ func (m *AppAccount) ContextValidate(ctx context.Context, formats strfmt.Registr
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateOrgs(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidatePermissions(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -203,31 +166,6 @@ func (m *AppAccount) contextValidateAccountType(ctx context.Context, formats str
 			return ce.ValidateName("account_type")
 		}
 		return err
-	}
-
-	return nil
-}
-
-func (m *AppAccount) contextValidateOrgs(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Orgs); i++ {
-
-		if m.Orgs[i] != nil {
-
-			if swag.IsZero(m.Orgs[i]) { // not required
-				return nil
-			}
-
-			if err := m.Orgs[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("orgs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("orgs" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
 	}
 
 	return nil
