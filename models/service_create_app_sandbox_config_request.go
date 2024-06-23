@@ -29,9 +29,6 @@ type ServiceCreateAppSandboxConfigRequest struct {
 	// Required: true
 	SandboxInputs map[string]string `json:"sandbox_inputs"`
 
-	// sandbox release id
-	SandboxReleaseID string `json:"sandbox_release_id,omitempty"`
-
 	// terraform version
 	// Required: true
 	TerraformVersion *string `json:"terraform_version"`
