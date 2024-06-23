@@ -19,7 +19,7 @@ import (
 type AppApp struct {
 
 	// cloud platform
-	CloudPlatform AppCloudPlatform `json:"cloud_platform,omitempty"`
+	CloudPlatform string `json:"cloud_platform,omitempty"`
 
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
@@ -73,10 +73,6 @@ type AppApp struct {
 func (m *AppApp) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateCloudPlatform(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateCreatedBy(formats); err != nil {
 		res = append(res, err)
 	}
@@ -100,23 +96,6 @@ func (m *AppApp) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *AppApp) validateCloudPlatform(formats strfmt.Registry) error {
-	if swag.IsZero(m.CloudPlatform) { // not required
-		return nil
-	}
-
-	if err := m.CloudPlatform.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("cloud_platform")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("cloud_platform")
-		}
-		return err
-	}
-
 	return nil
 }
 
@@ -208,10 +187,6 @@ func (m *AppApp) validateSandboxConfig(formats strfmt.Registry) error {
 func (m *AppApp) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateCloudPlatform(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -235,24 +210,6 @@ func (m *AppApp) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *AppApp) contextValidateCloudPlatform(ctx context.Context, formats strfmt.Registry) error {
-
-	if swag.IsZero(m.CloudPlatform) { // not required
-		return nil
-	}
-
-	if err := m.CloudPlatform.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("cloud_platform")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("cloud_platform")
-		}
-		return err
-	}
-
 	return nil
 }
 
