@@ -167,7 +167,8 @@ type ServiceCreateInstallerRequestMetadata struct {
 	DocumentationURL *string `json:"documentation_url"`
 
 	// favicon url
-	FaviconURL string `json:"favicon_url,omitempty"`
+	// Required: true
+	FaviconURL *string `json:"favicon_url"`
 
 	// footer markdown
 	FooterMarkdown string `json:"footer_markdown,omitempty"`
@@ -201,6 +202,10 @@ func (m *ServiceCreateInstallerRequestMetadata) Validate(formats strfmt.Registry
 	}
 
 	if err := m.validateDocumentationURL(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFaviconURL(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -243,6 +248,15 @@ func (m *ServiceCreateInstallerRequestMetadata) validateDescription(formats strf
 func (m *ServiceCreateInstallerRequestMetadata) validateDocumentationURL(formats strfmt.Registry) error {
 
 	if err := validate.Required("metadata"+"."+"documentation_url", "body", m.DocumentationURL); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ServiceCreateInstallerRequestMetadata) validateFaviconURL(formats strfmt.Registry) error {
+
+	if err := validate.Required("metadata"+"."+"favicon_url", "body", m.FaviconURL); err != nil {
 		return err
 	}
 
