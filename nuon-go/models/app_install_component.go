@@ -43,6 +43,9 @@ type AppInstallComponent struct {
 	// install id
 	InstallID string `json:"install_id,omitempty"`
 
+	// after query fields filled in after querying
+	Status string `json:"status,omitempty"`
+
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
 }
