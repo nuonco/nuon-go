@@ -34,6 +34,12 @@ type AppInstall struct {
 	// azure account
 	AzureAccount *AppAzureAccount `json:"azure_account,omitempty"`
 
+	// component statuses
+	ComponentStatuses map[string]string `json:"component_statuses,omitempty"`
+
+	// composite component status
+	CompositeComponentStatus string `json:"composite_component_status,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
@@ -63,6 +69,12 @@ type AppInstall struct {
 
 	// name
 	Name string `json:"name,omitempty"`
+
+	// runner status
+	RunnerStatus string `json:"runner_status,omitempty"`
+
+	// sandbox status
+	SandboxStatus string `json:"sandbox_status,omitempty"`
 
 	// status
 	Status string `json:"status,omitempty"`
