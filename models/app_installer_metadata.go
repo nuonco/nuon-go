@@ -69,6 +69,9 @@ type AppInstallerMetadata struct {
 	// name
 	Name string `json:"name,omitempty"`
 
+	// og image url
+	OgImageURL string `json:"og_image_url,omitempty"`
+
 	// post install markdown
 	PostInstallMarkdown string `json:"post_install_markdown,omitempty"`
 
