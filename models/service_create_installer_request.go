@@ -185,6 +185,9 @@ type ServiceCreateInstallerRequestMetadata struct {
 	// Required: true
 	LogoURL *string `json:"logo_url"`
 
+	// og image url
+	OgImageURL string `json:"og_image_url,omitempty"`
+
 	// post install markdown
 	PostInstallMarkdown string `json:"post_install_markdown,omitempty"`
 }
