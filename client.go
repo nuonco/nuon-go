@@ -58,6 +58,7 @@ type Client interface {
 	GetAppConfig(ctx context.Context, appID, appConfigID string) (*models.AppAppConfig, error)
 	GetAppLatestConfig(ctx context.Context, appID string) (*models.AppAppConfig, error)
 	GetAppConfigs(ctx context.Context, appID string) ([]*models.AppAppConfig, error)
+	SetAppConfigStatus(ctx context.Context, appID, appConfigID string, req *models.ServiceSetAppConfigStatusRequest) (bool, error)
 
 	// app input config methods
 	CreateAppInputConfig(ctx context.Context, appID string, req *models.ServiceCreateAppInputConfigRequest) (*models.AppAppInputConfig, error)
