@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetInstallComponentLatestDeployOK) Code() int {
 }
 
 func (o *GetInstallComponentLatestDeployOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployOK  %+v", 200, o.Payload)
 }
 
 func (o *GetInstallComponentLatestDeployOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployOK  %+v", 200, o.Payload)
 }
 
 func (o *GetInstallComponentLatestDeployOK) GetPayload() *models.AppInstallDeploy {
@@ -180,13 +177,11 @@ func (o *GetInstallComponentLatestDeployBadRequest) Code() int {
 }
 
 func (o *GetInstallComponentLatestDeployBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetInstallComponentLatestDeployBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetInstallComponentLatestDeployBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *GetInstallComponentLatestDeployUnauthorized) Code() int {
 }
 
 func (o *GetInstallComponentLatestDeployUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetInstallComponentLatestDeployUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetInstallComponentLatestDeployUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *GetInstallComponentLatestDeployForbidden) Code() int {
 }
 
 func (o *GetInstallComponentLatestDeployForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetInstallComponentLatestDeployForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetInstallComponentLatestDeployForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *GetInstallComponentLatestDeployNotFound) Code() int {
 }
 
 func (o *GetInstallComponentLatestDeployNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetInstallComponentLatestDeployNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetInstallComponentLatestDeployNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *GetInstallComponentLatestDeployInternalServerError) Code() int {
 }
 
 func (o *GetInstallComponentLatestDeployInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetInstallComponentLatestDeployInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys/latest][%d] getInstallComponentLatestDeployInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetInstallComponentLatestDeployInternalServerError) GetPayload() *models.StderrErrResponse {

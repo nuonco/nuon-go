@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // ServiceCreateOrgInviteRequest service create org invite request
@@ -18,11 +20,30 @@ import (
 type ServiceCreateOrgInviteRequest struct {
 
 	// email
-	Email string `json:"email,omitempty"`
+	// Required: true
+	Email *string `json:"email"`
 }
 
 // Validate validates this service create org invite request
 func (m *ServiceCreateOrgInviteRequest) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateEmail(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ServiceCreateOrgInviteRequest) validateEmail(formats strfmt.Registry) error {
+
+	if err := validate.Required("email", "body", m.Email); err != nil {
+		return err
+	}
+
 	return nil
 }
 

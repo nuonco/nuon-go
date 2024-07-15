@@ -69,3 +69,17 @@ func (c *client) GetAppConfigs(ctx context.Context, appID string) ([]*models.App
 
 	return resp.Payload, nil
 }
+
+func (c *client) SetAppConfigStatus(ctx context.Context, appID, appConfigID string, req *models.ServiceSetAppConfigStatusRequest) (bool, error) {
+	resp, err := c.genClient.Operations.SetAppConfigStatus(&operations.SetAppConfigStatusParams{
+		AppID:       appID,
+		AppConfigID: appConfigID,
+		Req: req,
+		Context:     ctx,
+	}, c.getOrgIDAuthInfo())
+	if err != nil {
+		return false, err
+	}
+
+	return resp.Payload, nil
+}
