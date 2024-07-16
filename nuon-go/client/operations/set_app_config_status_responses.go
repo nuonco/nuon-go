@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *SetAppConfigStatusOK) Code() int {
 }
 
 func (o *SetAppConfigStatusOK) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusOK %s", 200, payload)
 }
 
 func (o *SetAppConfigStatusOK) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusOK %s", 200, payload)
 }
 
 func (o *SetAppConfigStatusOK) GetPayload() bool {
@@ -175,11 +178,13 @@ func (o *SetAppConfigStatusBadRequest) Code() int {
 }
 
 func (o *SetAppConfigStatusBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusBadRequest %s", 400, payload)
 }
 
 func (o *SetAppConfigStatusBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusBadRequest %s", 400, payload)
 }
 
 func (o *SetAppConfigStatusBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +248,13 @@ func (o *SetAppConfigStatusUnauthorized) Code() int {
 }
 
 func (o *SetAppConfigStatusUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusUnauthorized %s", 401, payload)
 }
 
 func (o *SetAppConfigStatusUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusUnauthorized %s", 401, payload)
 }
 
 func (o *SetAppConfigStatusUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +318,13 @@ func (o *SetAppConfigStatusForbidden) Code() int {
 }
 
 func (o *SetAppConfigStatusForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusForbidden %s", 403, payload)
 }
 
 func (o *SetAppConfigStatusForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusForbidden %s", 403, payload)
 }
 
 func (o *SetAppConfigStatusForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +388,13 @@ func (o *SetAppConfigStatusNotFound) Code() int {
 }
 
 func (o *SetAppConfigStatusNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusNotFound %s", 404, payload)
 }
 
 func (o *SetAppConfigStatusNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusNotFound %s", 404, payload)
 }
 
 func (o *SetAppConfigStatusNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +458,13 @@ func (o *SetAppConfigStatusInternalServerError) Code() int {
 }
 
 func (o *SetAppConfigStatusInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusInternalServerError %s", 500, payload)
 }
 
 func (o *SetAppConfigStatusInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/set-status][%d] setAppConfigStatusInternalServerError %s", 500, payload)
 }
 
 func (o *SetAppConfigStatusInternalServerError) GetPayload() *models.StderrErrResponse {

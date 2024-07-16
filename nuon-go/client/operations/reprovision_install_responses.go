@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *ReprovisionInstallCreated) Code() int {
 }
 
 func (o *ReprovisionInstallCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallCreated %s", 201, payload)
 }
 
 func (o *ReprovisionInstallCreated) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallCreated %s", 201, payload)
 }
 
 func (o *ReprovisionInstallCreated) GetPayload() string {
@@ -175,11 +178,13 @@ func (o *ReprovisionInstallBadRequest) Code() int {
 }
 
 func (o *ReprovisionInstallBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallBadRequest %s", 400, payload)
 }
 
 func (o *ReprovisionInstallBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallBadRequest %s", 400, payload)
 }
 
 func (o *ReprovisionInstallBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +248,13 @@ func (o *ReprovisionInstallUnauthorized) Code() int {
 }
 
 func (o *ReprovisionInstallUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallUnauthorized %s", 401, payload)
 }
 
 func (o *ReprovisionInstallUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallUnauthorized %s", 401, payload)
 }
 
 func (o *ReprovisionInstallUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +318,13 @@ func (o *ReprovisionInstallForbidden) Code() int {
 }
 
 func (o *ReprovisionInstallForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallForbidden %s", 403, payload)
 }
 
 func (o *ReprovisionInstallForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallForbidden %s", 403, payload)
 }
 
 func (o *ReprovisionInstallForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +388,13 @@ func (o *ReprovisionInstallNotFound) Code() int {
 }
 
 func (o *ReprovisionInstallNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallNotFound %s", 404, payload)
 }
 
 func (o *ReprovisionInstallNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallNotFound %s", 404, payload)
 }
 
 func (o *ReprovisionInstallNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +458,13 @@ func (o *ReprovisionInstallInternalServerError) Code() int {
 }
 
 func (o *ReprovisionInstallInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallInternalServerError %s", 500, payload)
 }
 
 func (o *ReprovisionInstallInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision][%d] reprovisionInstallInternalServerError %s", 500, payload)
 }
 
 func (o *ReprovisionInstallInternalServerError) GetPayload() *models.StderrErrResponse {
