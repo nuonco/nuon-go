@@ -58,7 +58,7 @@ type Client interface {
 	GetAppConfig(ctx context.Context, appID, appConfigID string) (*models.AppAppConfig, error)
 	GetAppLatestConfig(ctx context.Context, appID string) (*models.AppAppConfig, error)
 	GetAppConfigs(ctx context.Context, appID string) ([]*models.AppAppConfig, error)
-	SetAppConfigStatus(ctx context.Context, appID, appConfigID string, req *models.ServiceSetAppConfigStatusRequest) (bool, error)
+	UpdateAppConfig(ctx context.Context, appID, appConfigID string, req *models.ServiceUpdateAppConfigRequest) (*models.AppAppConfig, error)
 
 	// app input config methods
 	CreateAppInputConfig(ctx context.Context, appID string, req *models.ServiceCreateAppInputConfigRequest) (*models.AppAppInputConfig, error)
@@ -130,6 +130,7 @@ type Client interface {
 	// components
 	GetAllComponents(ctx context.Context) ([]*models.AppComponent, error)
 	GetAppComponents(ctx context.Context, appID string) ([]*models.AppComponent, error)
+	GetAppComponent(ctx context.Context, appID, componentNameOrID string) (*models.AppComponent, error)
 	CreateComponent(ctx context.Context, appID string, req *models.ServiceCreateComponentRequest) (*models.AppComponent, error)
 
 	GetComponent(ctx context.Context, componentID string) (*models.AppComponent, error)
