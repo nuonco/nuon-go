@@ -73,7 +73,7 @@ type CreateAppConfigParams struct {
 
 	   Input
 	*/
-	Req *models.ServiceCreateAppConfigRequest
+	Req models.ServiceCreateAppConfigRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -140,13 +140,13 @@ func (o *CreateAppConfigParams) SetAppID(appID string) {
 }
 
 // WithReq adds the req to the create app config params
-func (o *CreateAppConfigParams) WithReq(req *models.ServiceCreateAppConfigRequest) *CreateAppConfigParams {
+func (o *CreateAppConfigParams) WithReq(req models.ServiceCreateAppConfigRequest) *CreateAppConfigParams {
 	o.SetReq(req)
 	return o
 }
 
 // SetReq adds the req to the create app config params
-func (o *CreateAppConfigParams) SetReq(req *models.ServiceCreateAppConfigRequest) {
+func (o *CreateAppConfigParams) SetReq(req models.ServiceCreateAppConfigRequest) {
 	o.Req = req
 }
 

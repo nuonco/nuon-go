@@ -21,9 +21,6 @@ type AppAppConfig struct {
 	// app id
 	AppID string `json:"app_id,omitempty"`
 
-	// content
-	Content string `json:"content,omitempty"`
-
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
@@ -32,9 +29,6 @@ type AppAppConfig struct {
 
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
-
-	// format
-	Format AppAppConfigFmt `json:"format,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`
@@ -63,10 +57,6 @@ func (m *AppAppConfig) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCreatedBy(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateFormat(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -99,23 +89,6 @@ func (m *AppAppConfig) validateCreatedBy(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *AppAppConfig) validateFormat(formats strfmt.Registry) error {
-	if swag.IsZero(m.Format) { // not required
-		return nil
-	}
-
-	if err := m.Format.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("format")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("format")
-		}
-		return err
-	}
-
-	return nil
-}
-
 func (m *AppAppConfig) validateStatus(formats strfmt.Registry) error {
 	if swag.IsZero(m.Status) { // not required
 		return nil
@@ -138,10 +111,6 @@ func (m *AppAppConfig) ContextValidate(ctx context.Context, formats strfmt.Regis
 	var res []error
 
 	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateFormat(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -171,24 +140,6 @@ func (m *AppAppConfig) contextValidateCreatedBy(ctx context.Context, formats str
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-func (m *AppAppConfig) contextValidateFormat(ctx context.Context, formats strfmt.Registry) error {
-
-	if swag.IsZero(m.Format) { // not required
-		return nil
-	}
-
-	if err := m.Format.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("format")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("format")
-		}
-		return err
 	}
 
 	return nil
