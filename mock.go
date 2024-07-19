@@ -543,6 +543,21 @@ func (mr *MockClientMockRecorder) GetApp(ctx, appID interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetApp", reflect.TypeOf((*MockClient)(nil).GetApp), ctx, appID)
 }
 
+// GetAppComponent mocks base method.
+func (m *MockClient) GetAppComponent(ctx context.Context, appID, componentNameOrID string) (*models.AppComponent, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAppComponent", ctx, appID, componentNameOrID)
+	ret0, _ := ret[0].(*models.AppComponent)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAppComponent indicates an expected call of GetAppComponent.
+func (mr *MockClientMockRecorder) GetAppComponent(ctx, appID, componentNameOrID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppComponent", reflect.TypeOf((*MockClient)(nil).GetAppComponent), ctx, appID, componentNameOrID)
+}
+
 // GetAppComponents mocks base method.
 func (m *MockClient) GetAppComponents(ctx context.Context, appID string) ([]*models.AppComponent, error) {
 	m.ctrl.T.Helper()
@@ -1351,21 +1366,6 @@ func (mr *MockClientMockRecorder) ReprovisionInstall(ctx, installID interface{})
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReprovisionInstall", reflect.TypeOf((*MockClient)(nil).ReprovisionInstall), ctx, installID)
 }
 
-// SetAppConfigStatus mocks base method.
-func (m *MockClient) SetAppConfigStatus(ctx context.Context, appID, appConfigID string, req *models.ServiceSetAppConfigStatusRequest) (bool, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetAppConfigStatus", ctx, appID, appConfigID, req)
-	ret0, _ := ret[0].(bool)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// SetAppConfigStatus indicates an expected call of SetAppConfigStatus.
-func (mr *MockClientMockRecorder) SetAppConfigStatus(ctx, appID, appConfigID, req interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetAppConfigStatus", reflect.TypeOf((*MockClient)(nil).SetAppConfigStatus), ctx, appID, appConfigID, req)
-}
-
 // SetOrgID mocks base method.
 func (m *MockClient) SetOrgID(orgID string) {
 	m.ctrl.T.Helper()
@@ -1420,6 +1420,21 @@ func (m *MockClient) UpdateApp(ctx context.Context, appID string, req *models.Se
 func (mr *MockClientMockRecorder) UpdateApp(ctx, appID, req interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateApp", reflect.TypeOf((*MockClient)(nil).UpdateApp), ctx, appID, req)
+}
+
+// UpdateAppConfig mocks base method.
+func (m *MockClient) UpdateAppConfig(ctx context.Context, appID, appConfigID string, req *models.ServiceUpdateAppConfigRequest) (*models.AppAppConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateAppConfig", ctx, appID, appConfigID, req)
+	ret0, _ := ret[0].(*models.AppAppConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateAppConfig indicates an expected call of UpdateAppConfig.
+func (mr *MockClientMockRecorder) UpdateAppConfig(ctx, appID, appConfigID, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateAppConfig", reflect.TypeOf((*MockClient)(nil).UpdateAppConfig), ctx, appID, appConfigID, req)
 }
 
 // UpdateComponent mocks base method.

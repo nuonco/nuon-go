@@ -23,9 +23,6 @@ type ServiceCreateAppConfigRequest struct {
 	// Required: true
 	// Min Length: 1
 	Content *string `json:"content"`
-
-	// generated terraform json
-	GeneratedTerraformJSON string `json:"generated_terraform_json,omitempty"`
 }
 
 // Validate validates this service create app config request

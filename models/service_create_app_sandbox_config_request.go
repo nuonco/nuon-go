@@ -19,6 +19,9 @@ import (
 // swagger:model service.CreateAppSandboxConfigRequest
 type ServiceCreateAppSandboxConfigRequest struct {
 
+	// aws delegation iam role arn
+	AwsDelegationIamRoleArn string `json:"aws_delegation_iam_role_arn,omitempty"`
+
 	// connected github vcs config
 	ConnectedGithubVcsConfig *ServiceConnectedGithubVCSSandboxConfigRequest `json:"connected_github_vcs_config,omitempty"`
 
