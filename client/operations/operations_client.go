@@ -122,6 +122,8 @@ type ClientService interface {
 
 	GetApp(params *GetAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppOK, error)
 
+	GetAppComponent(params *GetAppComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppComponentOK, error)
+
 	GetAppComponents(params *GetAppComponentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppComponentsOK, error)
 
 	GetAppConfig(params *GetAppConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppConfigOK, error)
@@ -240,13 +242,13 @@ type ClientService interface {
 
 	ReprovisionInstall(params *ReprovisionInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReprovisionInstallCreated, error)
 
-	SetAppConfigStatus(params *SetAppConfigStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SetAppConfigStatusOK, error)
-
 	TeardownInstallComponent(params *TeardownInstallComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeardownInstallComponentCreated, error)
 
 	TeardownInstallComponents(params *TeardownInstallComponentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeardownInstallComponentsCreated, error)
 
 	UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppOK, error)
+
+	UpdateAppConfig(params *UpdateAppConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppConfigCreated, error)
 
 	UpdateComponent(params *UpdateComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateComponentOK, error)
 
@@ -1562,6 +1564,47 @@ func (a *Client) GetApp(params *GetAppParams, authInfo runtime.ClientAuthInfoWri
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetApp: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAppComponent gets a components for a specific app
+
+Return an app component by id or name.
+*/
+func (a *Client) GetAppComponent(params *GetAppComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppComponentOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAppComponentParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetAppComponent",
+		Method:             "GET",
+		PathPattern:        "/v1/apps/{app_id}/component/{component_name_or_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAppComponentReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAppComponentOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetAppComponent: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -3896,45 +3939,6 @@ func (a *Client) ReprovisionInstall(params *ReprovisionInstallParams, authInfo r
 }
 
 /*
-SetAppConfigStatus updates an app config sync status
-*/
-func (a *Client) SetAppConfigStatus(params *SetAppConfigStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SetAppConfigStatusOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewSetAppConfigStatusParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "SetAppConfigStatus",
-		Method:             "POST",
-		PathPattern:        "/v1/apps/{app_id}/config/{app_config_id}/set-status",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &SetAppConfigStatusReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*SetAppConfigStatusOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for SetAppConfigStatus: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 TeardownInstallComponent teardowns an install component
 */
 func (a *Client) TeardownInstallComponent(params *TeardownInstallComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeardownInstallComponentCreated, error) {
@@ -4050,6 +4054,45 @@ func (a *Client) UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthI
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateApp: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateAppConfig Update an app config, setting status and state.
+*/
+func (a *Client) UpdateAppConfig(params *UpdateAppConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppConfigCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateAppConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateAppConfig",
+		Method:             "PATCH",
+		PathPattern:        "/v1/apps/{app_id}/config/{app_config_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateAppConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateAppConfigCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateAppConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

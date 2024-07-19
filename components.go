@@ -32,6 +32,19 @@ func (c *client) GetAppComponents(ctx context.Context, appID string) ([]*models.
 	return resp.Payload, nil
 }
 
+func (c *client) GetAppComponent(ctx context.Context, appID, nameOrID string) (*models.AppComponent, error) {
+	resp, err := c.genClient.Operations.GetAppComponent(&operations.GetAppComponentParams{
+		AppID:             appID,
+		ComponentNameOrID: nameOrID,
+		Context:           ctx,
+	}, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}
+
 func (c *client) CreateComponent(ctx context.Context, appID string, req *models.ServiceCreateComponentRequest) (*models.AppComponent, error) {
 	resp, err := c.genClient.Operations.CreateComponent(&operations.CreateComponentParams{
 		AppID:   appID,
