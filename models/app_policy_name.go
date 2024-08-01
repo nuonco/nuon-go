@@ -38,6 +38,9 @@ const (
 
 	// AppPolicyNameRunner captures enum value "runner"
 	AppPolicyNameRunner AppPolicyName = "runner"
+
+	// AppPolicyNameHostedInstaller captures enum value "hosted_installer"
+	AppPolicyNameHostedInstaller AppPolicyName = "hosted_installer"
 )
 
 // for schema
@@ -45,7 +48,7 @@ var appPolicyNameEnum []interface{}
 
 func init() {
 	var res []AppPolicyName
-	if err := json.Unmarshal([]byte(`["org_admin","installer","runner"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["org_admin","installer","runner","hosted_installer"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
