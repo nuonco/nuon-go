@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetAllVCSConnectedReposOK) Code() int {
 }
 
 func (o *GetAllVCSConnectedReposOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposOK  %+v", 200, o.Payload)
 }
 
 func (o *GetAllVCSConnectedReposOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposOK  %+v", 200, o.Payload)
 }
 
 func (o *GetAllVCSConnectedReposOK) GetPayload() []*models.ServiceRepository {
@@ -178,13 +175,11 @@ func (o *GetAllVCSConnectedReposBadRequest) Code() int {
 }
 
 func (o *GetAllVCSConnectedReposBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetAllVCSConnectedReposBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetAllVCSConnectedReposBadRequest) GetPayload() *models.StderrErrResponse {
@@ -248,13 +243,11 @@ func (o *GetAllVCSConnectedReposUnauthorized) Code() int {
 }
 
 func (o *GetAllVCSConnectedReposUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetAllVCSConnectedReposUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetAllVCSConnectedReposUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -318,13 +311,11 @@ func (o *GetAllVCSConnectedReposForbidden) Code() int {
 }
 
 func (o *GetAllVCSConnectedReposForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetAllVCSConnectedReposForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetAllVCSConnectedReposForbidden) GetPayload() *models.StderrErrResponse {
@@ -388,13 +379,11 @@ func (o *GetAllVCSConnectedReposNotFound) Code() int {
 }
 
 func (o *GetAllVCSConnectedReposNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetAllVCSConnectedReposNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetAllVCSConnectedReposNotFound) GetPayload() *models.StderrErrResponse {
@@ -458,13 +447,11 @@ func (o *GetAllVCSConnectedReposInternalServerError) Code() int {
 }
 
 func (o *GetAllVCSConnectedReposInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetAllVCSConnectedReposInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connected-repos][%d] getAllVCSConnectedReposInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetAllVCSConnectedReposInternalServerError) GetPayload() *models.StderrErrResponse {

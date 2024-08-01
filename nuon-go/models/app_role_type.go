@@ -38,6 +38,9 @@ const (
 
 	// AppRoleTypeRunner captures enum value "runner"
 	AppRoleTypeRunner AppRoleType = "runner"
+
+	// AppRoleTypeHostedDashInstaller captures enum value "hosted-installer"
+	AppRoleTypeHostedDashInstaller AppRoleType = "hosted-installer"
 )
 
 // for schema
@@ -45,7 +48,7 @@ var appRoleTypeEnum []interface{}
 
 func init() {
 	var res []AppRoleType
-	if err := json.Unmarshal([]byte(`["org_admin","installer","runner"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["org_admin","installer","runner","hosted-installer"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
