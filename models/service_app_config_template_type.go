@@ -41,6 +41,48 @@ const (
 
 	// ServiceAppConfigTemplateTypeAwsDashEksDashByovpc captures enum value "aws-eks-byovpc"
 	ServiceAppConfigTemplateTypeAwsDashEksDashByovpc ServiceAppConfigTemplateType = "aws-eks-byovpc"
+
+	// ServiceAppConfigTemplateTypeAzureDashAks captures enum value "azure-aks"
+	ServiceAppConfigTemplateTypeAzureDashAks ServiceAppConfigTemplateType = "azure-aks"
+
+	// ServiceAppConfigTemplateTypeFlat captures enum value "flat"
+	ServiceAppConfigTemplateTypeFlat ServiceAppConfigTemplateType = "flat"
+
+	// ServiceAppConfigTemplateTypeTopDashLevel captures enum value "top-level"
+	ServiceAppConfigTemplateTypeTopDashLevel ServiceAppConfigTemplateType = "top-level"
+
+	// ServiceAppConfigTemplateTypeInstaller captures enum value "installer"
+	ServiceAppConfigTemplateTypeInstaller ServiceAppConfigTemplateType = "installer"
+
+	// ServiceAppConfigTemplateTypeRunner captures enum value "runner"
+	ServiceAppConfigTemplateTypeRunner ServiceAppConfigTemplateType = "runner"
+
+	// ServiceAppConfigTemplateTypeSandbox captures enum value "sandbox"
+	ServiceAppConfigTemplateTypeSandbox ServiceAppConfigTemplateType = "sandbox"
+
+	// ServiceAppConfigTemplateTypeInputs captures enum value "inputs"
+	ServiceAppConfigTemplateTypeInputs ServiceAppConfigTemplateType = "inputs"
+
+	// ServiceAppConfigTemplateTypeTerraform captures enum value "terraform"
+	ServiceAppConfigTemplateTypeTerraform ServiceAppConfigTemplateType = "terraform"
+
+	// ServiceAppConfigTemplateTypeTerraformInfra captures enum value "terraformInfra"
+	ServiceAppConfigTemplateTypeTerraformInfra ServiceAppConfigTemplateType = "terraformInfra"
+
+	// ServiceAppConfigTemplateTypeHelm captures enum value "helm"
+	ServiceAppConfigTemplateTypeHelm ServiceAppConfigTemplateType = "helm"
+
+	// ServiceAppConfigTemplateTypeDockerDashBuild captures enum value "docker-build"
+	ServiceAppConfigTemplateTypeDockerDashBuild ServiceAppConfigTemplateType = "docker-build"
+
+	// ServiceAppConfigTemplateTypeJob captures enum value "job"
+	ServiceAppConfigTemplateTypeJob ServiceAppConfigTemplateType = "job"
+
+	// ServiceAppConfigTemplateTypeContainerDashImage captures enum value "container-image"
+	ServiceAppConfigTemplateTypeContainerDashImage ServiceAppConfigTemplateType = "container-image"
+
+	// ServiceAppConfigTemplateTypeEcrDashContainerDashImage captures enum value "ecr-container-image"
+	ServiceAppConfigTemplateTypeEcrDashContainerDashImage ServiceAppConfigTemplateType = "ecr-container-image"
 )
 
 // for schema
@@ -48,7 +90,7 @@ var serviceAppConfigTemplateTypeEnum []interface{}
 
 func init() {
 	var res []ServiceAppConfigTemplateType
-	if err := json.Unmarshal([]byte(`["aws-ecs","aws-ecs-byovpc","aws-eks","aws-eks-byovpc"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["aws-ecs","aws-ecs-byovpc","aws-eks","aws-eks-byovpc","azure-aks","flat","top-level","installer","runner","sandbox","inputs","terraform","terraformInfra","helm","docker-build","job","container-image","ecr-container-image"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

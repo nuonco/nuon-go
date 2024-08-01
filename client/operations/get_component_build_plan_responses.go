@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetComponentBuildPlanOK) Code() int {
 }
 
 func (o *GetComponentBuildPlanOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanOK  %+v", 200, o.Payload)
 }
 
 func (o *GetComponentBuildPlanOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanOK  %+v", 200, o.Payload)
 }
 
 func (o *GetComponentBuildPlanOK) GetPayload() *models.Planv1Plan {
@@ -180,13 +177,11 @@ func (o *GetComponentBuildPlanBadRequest) Code() int {
 }
 
 func (o *GetComponentBuildPlanBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetComponentBuildPlanBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetComponentBuildPlanBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *GetComponentBuildPlanUnauthorized) Code() int {
 }
 
 func (o *GetComponentBuildPlanUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetComponentBuildPlanUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetComponentBuildPlanUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *GetComponentBuildPlanForbidden) Code() int {
 }
 
 func (o *GetComponentBuildPlanForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetComponentBuildPlanForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetComponentBuildPlanForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *GetComponentBuildPlanNotFound) Code() int {
 }
 
 func (o *GetComponentBuildPlanNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetComponentBuildPlanNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetComponentBuildPlanNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *GetComponentBuildPlanInternalServerError) Code() int {
 }
 
 func (o *GetComponentBuildPlanInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetComponentBuildPlanInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/builds/{build_id}/plan][%d] getComponentBuildPlanInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetComponentBuildPlanInternalServerError) GetPayload() *models.StderrErrResponse {

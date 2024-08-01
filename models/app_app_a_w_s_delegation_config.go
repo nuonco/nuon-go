@@ -18,11 +18,6 @@ import (
 // swagger:model app.AppAWSDelegationConfig
 type AppAppAWSDelegationConfig struct {
 
-	// static credentials for long lived cross account access.
-	// NOTE: this is not recommended for long-term usage, just to be used for short term access before gov-cloud
-	// support is fully spun up.
-	AccessKeyID string `json:"access_key_id,omitempty"`
-
 	// app sandbox config id
 	AppSandboxConfigID string `json:"app_sandbox_config_id,omitempty"`
 
@@ -43,9 +38,6 @@ type AppAppAWSDelegationConfig struct {
 
 	// org id
 	OrgID string `json:"org_id,omitempty"`
-
-	// secret access key
-	SecretAccessKey string `json:"secret_access_key,omitempty"`
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`

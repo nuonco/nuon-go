@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetInstallDeployLogsOK) Code() int {
 }
 
 func (o *GetInstallDeployLogsOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsOK  %+v", 200, o.Payload)
 }
 
 func (o *GetInstallDeployLogsOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsOK  %+v", 200, o.Payload)
 }
 
 func (o *GetInstallDeployLogsOK) GetPayload() []interface{} {
@@ -178,13 +175,11 @@ func (o *GetInstallDeployLogsBadRequest) Code() int {
 }
 
 func (o *GetInstallDeployLogsBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetInstallDeployLogsBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetInstallDeployLogsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -248,13 +243,11 @@ func (o *GetInstallDeployLogsUnauthorized) Code() int {
 }
 
 func (o *GetInstallDeployLogsUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetInstallDeployLogsUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetInstallDeployLogsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -318,13 +311,11 @@ func (o *GetInstallDeployLogsForbidden) Code() int {
 }
 
 func (o *GetInstallDeployLogsForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetInstallDeployLogsForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetInstallDeployLogsForbidden) GetPayload() *models.StderrErrResponse {
@@ -388,13 +379,11 @@ func (o *GetInstallDeployLogsNotFound) Code() int {
 }
 
 func (o *GetInstallDeployLogsNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetInstallDeployLogsNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetInstallDeployLogsNotFound) GetPayload() *models.StderrErrResponse {
@@ -458,13 +447,11 @@ func (o *GetInstallDeployLogsInternalServerError) Code() int {
 }
 
 func (o *GetInstallDeployLogsInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetInstallDeployLogsInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/logs][%d] getInstallDeployLogsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetInstallDeployLogsInternalServerError) GetPayload() *models.StderrErrResponse {
