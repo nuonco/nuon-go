@@ -2661,7 +2661,7 @@ func (a *Client) GetComponentReleases(params *GetComponentReleasesParams, authIn
 [Taplo](https://taplo.tamasfe.dev/) configured.
 
 ```toml
-#:schema https://api.nuon.co/v1/general/config-schema?source=input
+#:schema https://api.nuon.co/v1/general/config-schema?source=inputs
 
 description = "description"
 ```
