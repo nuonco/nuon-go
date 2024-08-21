@@ -24,6 +24,9 @@ type ServiceCreateComponentReleaseRequest struct {
 	// build id
 	BuildID string `json:"build_id,omitempty"`
 
+	// install ids
+	InstallIds []string `json:"install_ids"`
+
 	// strategy
 	Strategy *ServiceCreateComponentReleaseRequestStrategy `json:"strategy,omitempty"`
 }

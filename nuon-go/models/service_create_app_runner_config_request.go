@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // ServiceCreateAppRunnerConfigRequest service create app runner config request
@@ -22,7 +23,8 @@ type ServiceCreateAppRunnerConfigRequest struct {
 	EnvVars map[string]string `json:"env_vars,omitempty"`
 
 	// type
-	Type AppAppRunnerType `json:"type,omitempty"`
+	// Required: true
+	Type *AppAppRunnerType `json:"type"`
 }
 
 // Validate validates this service create app runner config request
@@ -40,17 +42,24 @@ func (m *ServiceCreateAppRunnerConfigRequest) Validate(formats strfmt.Registry) 
 }
 
 func (m *ServiceCreateAppRunnerConfigRequest) validateType(formats strfmt.Registry) error {
-	if swag.IsZero(m.Type) { // not required
-		return nil
+
+	if err := validate.Required("type", "body", m.Type); err != nil {
+		return err
 	}
 
-	if err := m.Type.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("type")
-		}
+	if err := validate.Required("type", "body", m.Type); err != nil {
 		return err
+	}
+
+	if m.Type != nil {
+		if err := m.Type.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("type")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("type")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -72,17 +81,16 @@ func (m *ServiceCreateAppRunnerConfigRequest) ContextValidate(ctx context.Contex
 
 func (m *ServiceCreateAppRunnerConfigRequest) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Type) { // not required
-		return nil
-	}
+	if m.Type != nil {
 
-	if err := m.Type.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("type")
+		if err := m.Type.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("type")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("type")
+			}
+			return err
 		}
-		return err
 	}
 
 	return nil
