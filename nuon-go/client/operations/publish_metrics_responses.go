@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *PublishMetricsOK) Code() int {
 }
 
 func (o *PublishMetricsOK) Error() string {
-	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsOK %s", 200, payload)
 }
 
 func (o *PublishMetricsOK) String() string {
-	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsOK %s", 200, payload)
 }
 
 func (o *PublishMetricsOK) GetPayload() string {
@@ -175,11 +178,13 @@ func (o *PublishMetricsBadRequest) Code() int {
 }
 
 func (o *PublishMetricsBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsBadRequest %s", 400, payload)
 }
 
 func (o *PublishMetricsBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsBadRequest %s", 400, payload)
 }
 
 func (o *PublishMetricsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +248,13 @@ func (o *PublishMetricsUnauthorized) Code() int {
 }
 
 func (o *PublishMetricsUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsUnauthorized %s", 401, payload)
 }
 
 func (o *PublishMetricsUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsUnauthorized %s", 401, payload)
 }
 
 func (o *PublishMetricsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +318,13 @@ func (o *PublishMetricsForbidden) Code() int {
 }
 
 func (o *PublishMetricsForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsForbidden %s", 403, payload)
 }
 
 func (o *PublishMetricsForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsForbidden %s", 403, payload)
 }
 
 func (o *PublishMetricsForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +388,13 @@ func (o *PublishMetricsNotFound) Code() int {
 }
 
 func (o *PublishMetricsNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsNotFound %s", 404, payload)
 }
 
 func (o *PublishMetricsNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsNotFound %s", 404, payload)
 }
 
 func (o *PublishMetricsNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +458,13 @@ func (o *PublishMetricsInternalServerError) Code() int {
 }
 
 func (o *PublishMetricsInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsInternalServerError %s", 500, payload)
 }
 
 func (o *PublishMetricsInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/general/metrics][%d] publishMetricsInternalServerError %s", 500, payload)
 }
 
 func (o *PublishMetricsInternalServerError) GetPayload() *models.StderrErrResponse {
