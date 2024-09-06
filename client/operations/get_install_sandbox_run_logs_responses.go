@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetInstallSandboxRunLogsOK) Code() int {
 }
 
 func (o *GetInstallSandboxRunLogsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsOK %s", 200, payload)
 }
 
 func (o *GetInstallSandboxRunLogsOK) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsOK %s", 200, payload)
 }
 
 func (o *GetInstallSandboxRunLogsOK) GetPayload() []interface{} {
@@ -175,11 +178,13 @@ func (o *GetInstallSandboxRunLogsBadRequest) Code() int {
 }
 
 func (o *GetInstallSandboxRunLogsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsBadRequest %s", 400, payload)
 }
 
 func (o *GetInstallSandboxRunLogsBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsBadRequest %s", 400, payload)
 }
 
 func (o *GetInstallSandboxRunLogsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +248,13 @@ func (o *GetInstallSandboxRunLogsUnauthorized) Code() int {
 }
 
 func (o *GetInstallSandboxRunLogsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsUnauthorized %s", 401, payload)
 }
 
 func (o *GetInstallSandboxRunLogsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsUnauthorized %s", 401, payload)
 }
 
 func (o *GetInstallSandboxRunLogsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +318,13 @@ func (o *GetInstallSandboxRunLogsForbidden) Code() int {
 }
 
 func (o *GetInstallSandboxRunLogsForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsForbidden %s", 403, payload)
 }
 
 func (o *GetInstallSandboxRunLogsForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsForbidden %s", 403, payload)
 }
 
 func (o *GetInstallSandboxRunLogsForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +388,13 @@ func (o *GetInstallSandboxRunLogsNotFound) Code() int {
 }
 
 func (o *GetInstallSandboxRunLogsNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsNotFound %s", 404, payload)
 }
 
 func (o *GetInstallSandboxRunLogsNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsNotFound %s", 404, payload)
 }
 
 func (o *GetInstallSandboxRunLogsNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +458,13 @@ func (o *GetInstallSandboxRunLogsInternalServerError) Code() int {
 }
 
 func (o *GetInstallSandboxRunLogsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsInternalServerError %s", 500, payload)
 }
 
 func (o *GetInstallSandboxRunLogsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-run/{run_id}/logs][%d] getInstallSandboxRunLogsInternalServerError %s", 500, payload)
 }
 
 func (o *GetInstallSandboxRunLogsInternalServerError) GetPayload() *models.StderrErrResponse {

@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *DeleteInstallerOK) Code() int {
 }
 
 func (o *DeleteInstallerOK) Error() string {
-	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerOK %s", 200, payload)
 }
 
 func (o *DeleteInstallerOK) String() string {
-	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerOK %s", 200, payload)
 }
 
 func (o *DeleteInstallerOK) GetPayload() bool {
@@ -175,11 +178,13 @@ func (o *DeleteInstallerBadRequest) Code() int {
 }
 
 func (o *DeleteInstallerBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerBadRequest %s", 400, payload)
 }
 
 func (o *DeleteInstallerBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerBadRequest %s", 400, payload)
 }
 
 func (o *DeleteInstallerBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +248,13 @@ func (o *DeleteInstallerUnauthorized) Code() int {
 }
 
 func (o *DeleteInstallerUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerUnauthorized %s", 401, payload)
 }
 
 func (o *DeleteInstallerUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerUnauthorized %s", 401, payload)
 }
 
 func (o *DeleteInstallerUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +318,13 @@ func (o *DeleteInstallerForbidden) Code() int {
 }
 
 func (o *DeleteInstallerForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerForbidden %s", 403, payload)
 }
 
 func (o *DeleteInstallerForbidden) String() string {
-	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerForbidden %s", 403, payload)
 }
 
 func (o *DeleteInstallerForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +388,13 @@ func (o *DeleteInstallerNotFound) Code() int {
 }
 
 func (o *DeleteInstallerNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerNotFound %s", 404, payload)
 }
 
 func (o *DeleteInstallerNotFound) String() string {
-	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerNotFound %s", 404, payload)
 }
 
 func (o *DeleteInstallerNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +458,13 @@ func (o *DeleteInstallerInternalServerError) Code() int {
 }
 
 func (o *DeleteInstallerInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteInstallerInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installers/{installer_id}][%d] deleteInstallerInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteInstallerInternalServerError) GetPayload() *models.StderrErrResponse {

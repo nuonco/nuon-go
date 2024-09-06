@@ -26,6 +26,9 @@ type ServiceCreateOrgRequest struct {
 	// These fields are used to control the behaviour of the org.
 	UseCustomCert bool `json:"use_custom_cert,omitempty"`
 
+	// use new runner
+	UseNewRunner bool `json:"use_new_runner,omitempty"`
+
 	// use sandbox mode
 	UseSandboxMode bool `json:"use_sandbox_mode,omitempty"`
 }
