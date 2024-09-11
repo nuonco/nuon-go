@@ -39,11 +39,11 @@ type AppInstallInputs struct {
 	// org id
 	OrgID string `json:"org_id,omitempty"`
 
+	// redacted values
+	RedactedValues map[string]string `json:"redacted_values,omitempty"`
+
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
-
-	// values
-	Values map[string]string `json:"values,omitempty"`
 }
 
 // Validate validates this app install inputs
