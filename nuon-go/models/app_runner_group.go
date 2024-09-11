@@ -40,11 +40,17 @@ type AppRunnerGroup struct {
 	// owner type
 	OwnerType string `json:"owner_type,omitempty"`
 
+	// platform
+	Platform AppRunnerPlatformType `json:"platform,omitempty"`
+
 	// runners
 	Runners []*AppRunner `json:"runners"`
 
 	// settings
 	Settings *AppRunnerGroupSettings `json:"settings,omitempty"`
+
+	// type
+	Type AppRunnerGroupType `json:"type,omitempty"`
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
@@ -58,11 +64,19 @@ func (m *AppRunnerGroup) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validatePlatform(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateRunners(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateSettings(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -86,6 +100,23 @@ func (m *AppRunnerGroup) validateCreatedBy(formats strfmt.Registry) error {
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *AppRunnerGroup) validatePlatform(formats strfmt.Registry) error {
+	if swag.IsZero(m.Platform) { // not required
+		return nil
+	}
+
+	if err := m.Platform.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("platform")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("platform")
+		}
+		return err
 	}
 
 	return nil
@@ -136,6 +167,23 @@ func (m *AppRunnerGroup) validateSettings(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppRunnerGroup) validateType(formats strfmt.Registry) error {
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
+
+	if err := m.Type.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("type")
+		}
+		return err
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app runner group based on the context it is used
 func (m *AppRunnerGroup) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -144,11 +192,19 @@ func (m *AppRunnerGroup) ContextValidate(ctx context.Context, formats strfmt.Reg
 		res = append(res, err)
 	}
 
+	if err := m.contextValidatePlatform(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateRunners(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.contextValidateSettings(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateType(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -174,6 +230,24 @@ func (m *AppRunnerGroup) contextValidateCreatedBy(ctx context.Context, formats s
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *AppRunnerGroup) contextValidatePlatform(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Platform) { // not required
+		return nil
+	}
+
+	if err := m.Platform.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("platform")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("platform")
+		}
+		return err
 	}
 
 	return nil
@@ -220,6 +294,24 @@ func (m *AppRunnerGroup) contextValidateSettings(ctx context.Context, formats st
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *AppRunnerGroup) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
+
+	if err := m.Type.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("type")
+		}
+		return err
 	}
 
 	return nil

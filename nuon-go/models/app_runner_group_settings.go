@@ -18,6 +18,12 @@ import (
 // swagger:model app.RunnerGroupSettings
 type AppRunnerGroupSettings struct {
 
+	// container image tag
+	ContainerImageTag string `json:"container_image_tag,omitempty"`
+
+	// configuration for deploying the runner
+	ContainerImageURL string `json:"container_image_url,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
@@ -27,23 +33,20 @@ type AppRunnerGroupSettings struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
-	// health check timeout
-	HealthCheckTimeout int64 `json:"health_check_timeout,omitempty"`
-
-	// Various settings for the runner group
+	// Various settings for the runner to handle internally
 	HeartBeatTimeout int64 `json:"heart_beat_timeout,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`
-
-	// job execution heart beat timeout
-	JobExecutionHeartBeatTimeout int64 `json:"job_execution_heart_beat_timeout,omitempty"`
 
 	// org id
 	OrgID string `json:"org_id,omitempty"`
 
 	// otel collector config
 	OtelCollectorConfig string `json:"otel_collector_config,omitempty"`
+
+	// runner api url
+	RunnerAPIURL string `json:"runner_api_url,omitempty"`
 
 	// runner group id
 	RunnerGroupID string `json:"runner_group_id,omitempty"`
