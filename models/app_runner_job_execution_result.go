@@ -27,8 +27,11 @@ type AppRunnerJobExecutionResult struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
-	// error message
-	ErrorMessage string `json:"error_message,omitempty"`
+	// error code
+	ErrorCode int64 `json:"error_code,omitempty"`
+
+	// error metadata
+	ErrorMetadata map[string]string `json:"error_metadata,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`
@@ -42,7 +45,7 @@ type AppRunnerJobExecutionResult struct {
 	// runner job execution id
 	RunnerJobExecutionID string `json:"runner_job_execution_id,omitempty"`
 
-	// success
+	// TODO(jm): add richer information on the error or other tied to a job execution.
 	Success bool `json:"success,omitempty"`
 
 	// updated at

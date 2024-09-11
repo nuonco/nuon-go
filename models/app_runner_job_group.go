@@ -33,14 +33,14 @@ const (
 	// AppRunnerJobGroupHealthDashChecks captures enum value "health-checks"
 	AppRunnerJobGroupHealthDashChecks AppRunnerJobGroup = "health-checks"
 
-	// AppRunnerJobGroupBuilds captures enum value "builds"
-	AppRunnerJobGroupBuilds AppRunnerJobGroup = "builds"
+	// AppRunnerJobGroupSync captures enum value "sync"
+	AppRunnerJobGroupSync AppRunnerJobGroup = "sync"
 
-	// AppRunnerJobGroupSyncing captures enum value "syncing"
-	AppRunnerJobGroupSyncing AppRunnerJobGroup = "syncing"
+	// AppRunnerJobGroupBuild captures enum value "build"
+	AppRunnerJobGroupBuild AppRunnerJobGroup = "build"
 
-	// AppRunnerJobGroupDeploys captures enum value "deploys"
-	AppRunnerJobGroupDeploys AppRunnerJobGroup = "deploys"
+	// AppRunnerJobGroupDeploy captures enum value "deploy"
+	AppRunnerJobGroupDeploy AppRunnerJobGroup = "deploy"
 
 	// AppRunnerJobGroupSandbox captures enum value "sandbox"
 	AppRunnerJobGroupSandbox AppRunnerJobGroup = "sandbox"
@@ -66,7 +66,7 @@ var appRunnerJobGroupEnum []interface{}
 
 func init() {
 	var res []AppRunnerJobGroup
-	if err := json.Unmarshal([]byte(`["health-checks","builds","syncing","deploys","sandbox","runner","operations","user","","any"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["health-checks","sync","build","deploy","sandbox","runner","operations","user","","any"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

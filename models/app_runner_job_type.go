@@ -75,17 +75,17 @@ const (
 	// AppRunnerJobTypeNoop captures enum value "noop"
 	AppRunnerJobTypeNoop AppRunnerJobType = "noop"
 
-	// AppRunnerJobTypeSandboxDashProvision captures enum value "sandbox-provision"
-	AppRunnerJobTypeSandboxDashProvision AppRunnerJobType = "sandbox-provision"
+	// AppRunnerJobTypeSandboxDashTerraform captures enum value "sandbox-terraform"
+	AppRunnerJobTypeSandboxDashTerraform AppRunnerJobType = "sandbox-terraform"
 
-	// AppRunnerJobTypeSandboxDashDeprovision captures enum value "sandbox-deprovision"
-	AppRunnerJobTypeSandboxDashDeprovision AppRunnerJobType = "sandbox-deprovision"
+	// AppRunnerJobTypeRunnerDashHelm captures enum value "runner-helm"
+	AppRunnerJobTypeRunnerDashHelm AppRunnerJobType = "runner-helm"
 
-	// AppRunnerJobTypeRunnerDashProvision captures enum value "runner-provision"
-	AppRunnerJobTypeRunnerDashProvision AppRunnerJobType = "runner-provision"
+	// AppRunnerJobTypeRunnerDashTerraform captures enum value "runner-terraform"
+	AppRunnerJobTypeRunnerDashTerraform AppRunnerJobType = "runner-terraform"
 
-	// AppRunnerJobTypeRunnerDashDeprovision captures enum value "runner-deprovision"
-	AppRunnerJobTypeRunnerDashDeprovision AppRunnerJobType = "runner-deprovision"
+	// AppRunnerJobTypeRunnerDashLocal captures enum value "runner-local"
+	AppRunnerJobTypeRunnerDashLocal AppRunnerJobType = "runner-local"
 )
 
 // for schema
@@ -93,7 +93,7 @@ var appRunnerJobTypeEnum []interface{}
 
 func init() {
 	var res []AppRunnerJobType
-	if err := json.Unmarshal([]byte(`["health-check","docker-build","container-image-build","terraform-module-build","helm-chart-build","noop-build","oci-sync","container-image-sync","noop-sync","terraform-deploy","helm-chart-deploy","job-deploy","noop-deploy","shut-down","noop","sandbox-provision","sandbox-deprovision","runner-provision","runner-deprovision"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["health-check","docker-build","container-image-build","terraform-module-build","helm-chart-build","noop-build","oci-sync","container-image-sync","noop-sync","terraform-deploy","helm-chart-deploy","job-deploy","noop-deploy","shut-down","noop","sandbox-terraform","runner-helm","runner-terraform","runner-local"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
