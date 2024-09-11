@@ -38,6 +38,9 @@ const (
 
 	// AppInstallDeployTypeTeardown captures enum value "teardown"
 	AppInstallDeployTypeTeardown AppInstallDeployType = "teardown"
+
+	// AppInstallDeployTypePlanDashOnly captures enum value "plan-only"
+	AppInstallDeployTypePlanDashOnly AppInstallDeployType = "plan-only"
 )
 
 // for schema
@@ -45,7 +48,7 @@ var appInstallDeployTypeEnum []interface{}
 
 func init() {
 	var res []AppInstallDeployType
-	if err := json.Unmarshal([]byte(`["release","install","teardown"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["release","install","teardown","plan-only"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

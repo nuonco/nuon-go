@@ -46,6 +46,9 @@ type AppRunnerJob struct {
 	// max executions
 	MaxExecutions int64 `json:"max_executions,omitempty"`
 
+	// operation
+	Operation AppRunnerJobOperationType `json:"operation,omitempty"`
+
 	// org
 	Org *AppOrg `json:"org,omitempty"`
 
@@ -87,6 +90,10 @@ func (m *AppRunnerJob) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateGroup(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOperation(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -170,6 +177,23 @@ func (m *AppRunnerJob) validateGroup(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppRunnerJob) validateOperation(formats strfmt.Registry) error {
+	if swag.IsZero(m.Operation) { // not required
+		return nil
+	}
+
+	if err := m.Operation.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("operation")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("operation")
+		}
+		return err
+	}
+
+	return nil
+}
+
 func (m *AppRunnerJob) validateOrg(formats strfmt.Registry) error {
 	if swag.IsZero(m.Org) { // not required
 		return nil
@@ -236,6 +260,10 @@ func (m *AppRunnerJob) ContextValidate(ctx context.Context, formats strfmt.Regis
 	}
 
 	if err := m.contextValidateGroup(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateOperation(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -314,6 +342,24 @@ func (m *AppRunnerJob) contextValidateGroup(ctx context.Context, formats strfmt.
 			return ve.ValidateName("group")
 		} else if ce, ok := err.(*errors.CompositeError); ok {
 			return ce.ValidateName("group")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *AppRunnerJob) contextValidateOperation(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Operation) { // not required
+		return nil
+	}
+
+	if err := m.Operation.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("operation")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("operation")
 		}
 		return err
 	}
