@@ -33,6 +33,9 @@ type AppRunnerGroupSettings struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
+	// Never persisted, populated at runtime from the overall ctl-api settings
+	Env string `json:"env,omitempty"`
+
 	// Various settings for the runner to handle internally
 	HeartBeatTimeout int64 `json:"heart_beat_timeout,omitempty"`
 
@@ -50,6 +53,9 @@ type AppRunnerGroupSettings struct {
 
 	// runner group id
 	RunnerGroupID string `json:"runner_group_id,omitempty"`
+
+	// settings refresh timeout
+	SettingsRefreshTimeout int64 `json:"settings_refresh_timeout,omitempty"`
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`

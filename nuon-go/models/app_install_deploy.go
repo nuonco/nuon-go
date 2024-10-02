@@ -54,6 +54,11 @@ type AppInstallDeploy struct {
 	// release id
 	ReleaseID string `json:"release_id,omitempty"`
 
+	// runner details
+	RunnerJob struct {
+		AppRunnerJob
+	} `json:"runner_job,omitempty"`
+
 	// status
 	Status string `json:"status,omitempty"`
 
@@ -73,6 +78,10 @@ func (m *AppInstallDeploy) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateInstallDeployType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRunnerJob(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -118,6 +127,14 @@ func (m *AppInstallDeploy) validateInstallDeployType(formats strfmt.Registry) er
 	return nil
 }
 
+func (m *AppInstallDeploy) validateRunnerJob(formats strfmt.Registry) error {
+	if swag.IsZero(m.RunnerJob) { // not required
+		return nil
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app install deploy based on the context it is used
 func (m *AppInstallDeploy) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -127,6 +144,10 @@ func (m *AppInstallDeploy) ContextValidate(ctx context.Context, formats strfmt.R
 	}
 
 	if err := m.contextValidateInstallDeployType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRunnerJob(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -171,6 +192,11 @@ func (m *AppInstallDeploy) contextValidateInstallDeployType(ctx context.Context,
 		}
 		return err
 	}
+
+	return nil
+}
+
+func (m *AppInstallDeploy) contextValidateRunnerJob(ctx context.Context, formats strfmt.Registry) error {
 
 	return nil
 }

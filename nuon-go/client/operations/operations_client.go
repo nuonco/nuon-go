@@ -174,6 +174,8 @@ type ClientService interface {
 
 	GetComponentConfigs(params *GetComponentConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentConfigsOK, error)
 
+	GetComponentDependencies(params *GetComponentDependenciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentDependenciesOK, error)
+
 	GetComponentLatestBuild(params *GetComponentLatestBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentLatestBuildOK, error)
 
 	GetComponentLatestConfig(params *GetComponentLatestConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentLatestConfigOK, error)
@@ -257,6 +259,8 @@ type ClientService interface {
 	GetRunnerSettings(params *GetRunnerSettingsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerSettingsOK, error)
 
 	GetVCSConnection(params *GetVCSConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVCSConnectionOK, error)
+
+	OtelReadLogs(params *OtelReadLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OtelReadLogsOK, error)
 
 	PublishMetrics(params *PublishMetricsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PublishMetricsOK, error)
 
@@ -2624,6 +2628,45 @@ func (a *Client) GetComponentConfigs(params *GetComponentConfigsParams, authInfo
 }
 
 /*
+GetComponentDependencies gets a component s dependencies
+*/
+func (a *Client) GetComponentDependencies(params *GetComponentDependenciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentDependenciesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetComponentDependenciesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetComponentDependencies",
+		Method:             "GET",
+		PathPattern:        "/v1/components/{component_id}/dependencies",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetComponentDependenciesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetComponentDependenciesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetComponentDependencies: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetComponentLatestBuild gets latest build for a component
 */
 func (a *Client) GetComponentLatestBuild(params *GetComponentLatestBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentLatestBuildOK, error) {
@@ -4312,6 +4355,61 @@ func (a *Client) GetVCSConnection(params *GetVCSConnectionParams, authInfo runti
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetVCSConnection: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	OtelReadLogs gets a runner s logs
+
+	Runner log retrieval endpoint.
+
+Supports pagination via a header:`X-Nuon-API-Offset`. This header can be passed
+back to the api and controls the timestamp from which the pagination on the
+request.
+
+The endpoint returns the offset for the next page in the header:
+`X-Nuon-API-Next`. To use the next page, use that value in the
+`X-Nuon-API-Offset` header.
+
+The implicit offset in a request that provides to `X-Nuon-API-Offset` is 0. This
+returns the first page.
+
+This endpoint accepts two query params: `job_id` and `job_execution_id`. Neither
+is required.
+*/
+func (a *Client) OtelReadLogs(params *OtelReadLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OtelReadLogsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewOtelReadLogsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "OtelReadLogs",
+		Method:             "GET",
+		PathPattern:        "/v1/runners/{runner_id}/logs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &OtelReadLogsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*OtelReadLogsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for OtelReadLogs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

@@ -58,6 +58,12 @@ type AppRunnerJob struct {
 	// overall timeout is how long a job can be attempted, before being cancelled
 	OverallTimeout int64 `json:"overall_timeout,omitempty"`
 
+	// owner id
+	OwnerID string `json:"owner_id,omitempty"`
+
+	// owner type
+	OwnerType string `json:"owner_type,omitempty"`
+
 	// queue timeout is how long a job can be queued, before being made available
 	QueueTimeout int64 `json:"queue_timeout,omitempty"`
 
