@@ -44,6 +44,9 @@ type AppInstallInputs struct {
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
+
+	// values
+	Values map[string]string `json:"values,omitempty"`
 }
 
 // Validate validates this app install inputs

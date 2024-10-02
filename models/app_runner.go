@@ -49,6 +49,9 @@ type AppRunner struct {
 	// runner id
 	RunnerID string `json:"runner_id,omitempty"`
 
+	// runner job
+	RunnerJob *AppRunnerJob `json:"runner_job,omitempty"`
+
 	// status
 	Status string `json:"status,omitempty"`
 
@@ -72,6 +75,10 @@ func (m *AppRunner) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateOrg(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRunnerJob(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -145,6 +152,25 @@ func (m *AppRunner) validateOrg(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppRunner) validateRunnerJob(formats strfmt.Registry) error {
+	if swag.IsZero(m.RunnerJob) { // not required
+		return nil
+	}
+
+	if m.RunnerJob != nil {
+		if err := m.RunnerJob.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("runner_job")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("runner_job")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app runner based on the context it is used
 func (m *AppRunner) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -158,6 +184,10 @@ func (m *AppRunner) ContextValidate(ctx context.Context, formats strfmt.Registry
 	}
 
 	if err := m.contextValidateOrg(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRunnerJob(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -226,6 +256,27 @@ func (m *AppRunner) contextValidateOrg(ctx context.Context, formats strfmt.Regis
 				return ve.ValidateName("org")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("org")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppRunner) contextValidateRunnerJob(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.RunnerJob != nil {
+
+		if swag.IsZero(m.RunnerJob) { // not required
+			return nil
+		}
+
+		if err := m.RunnerJob.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("runner_job")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("runner_job")
 			}
 			return err
 		}

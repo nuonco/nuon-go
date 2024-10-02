@@ -52,6 +52,11 @@ type AppComponentBuild struct {
 	// releases
 	Releases []*AppComponentRelease `json:"releases"`
 
+	// runner details
+	RunnerJob struct {
+		AppRunnerJob
+	} `json:"runner_job,omitempty"`
+
 	// status
 	Status string `json:"status,omitempty"`
 
@@ -78,6 +83,10 @@ func (m *AppComponentBuild) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateReleases(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRunnerJob(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -162,6 +171,14 @@ func (m *AppComponentBuild) validateReleases(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppComponentBuild) validateRunnerJob(formats strfmt.Registry) error {
+	if swag.IsZero(m.RunnerJob) { // not required
+		return nil
+	}
+
+	return nil
+}
+
 func (m *AppComponentBuild) validateVcsConnectionCommit(formats strfmt.Registry) error {
 	if swag.IsZero(m.VcsConnectionCommit) { // not required
 		return nil
@@ -194,6 +211,10 @@ func (m *AppComponentBuild) ContextValidate(ctx context.Context, formats strfmt.
 	}
 
 	if err := m.contextValidateReleases(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRunnerJob(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -274,6 +295,11 @@ func (m *AppComponentBuild) contextValidateReleases(ctx context.Context, formats
 		}
 
 	}
+
+	return nil
+}
+
+func (m *AppComponentBuild) contextValidateRunnerJob(ctx context.Context, formats strfmt.Registry) error {
 
 	return nil
 }

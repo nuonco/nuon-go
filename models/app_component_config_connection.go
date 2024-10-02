@@ -48,6 +48,9 @@ type AppComponentConfigConnection struct {
 	// terraform module
 	TerraformModule *AppTerraformModuleComponentConfig `json:"terraform_module,omitempty"`
 
+	// type
+	Type AppComponentType `json:"type,omitempty"`
+
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
 
@@ -80,6 +83,10 @@ func (m *AppComponentConfigConnection) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateTerraformModule(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -203,6 +210,23 @@ func (m *AppComponentConfigConnection) validateTerraformModule(formats strfmt.Re
 	return nil
 }
 
+func (m *AppComponentConfigConnection) validateType(formats strfmt.Registry) error {
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
+
+	if err := m.Type.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("type")
+		}
+		return err
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app component config connection based on the context it is used
 func (m *AppComponentConfigConnection) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -228,6 +252,10 @@ func (m *AppComponentConfigConnection) ContextValidate(ctx context.Context, form
 	}
 
 	if err := m.contextValidateTerraformModule(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateType(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -358,6 +386,24 @@ func (m *AppComponentConfigConnection) contextValidateTerraformModule(ctx contex
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *AppComponentConfigConnection) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
+
+	if err := m.Type.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("type")
+		}
+		return err
 	}
 
 	return nil

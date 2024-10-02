@@ -41,7 +41,7 @@ type AppRunnerGroup struct {
 	OwnerType string `json:"owner_type,omitempty"`
 
 	// platform
-	Platform AppRunnerPlatformType `json:"platform,omitempty"`
+	Platform AppAppRunnerType `json:"platform,omitempty"`
 
 	// runners
 	Runners []*AppRunner `json:"runners"`
