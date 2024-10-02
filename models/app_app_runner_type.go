@@ -41,6 +41,9 @@ const (
 
 	// AppAppRunnerTypeAzureDashAcs captures enum value "azure-acs"
 	AppAppRunnerTypeAzureDashAcs AppAppRunnerType = "azure-acs"
+
+	// AppAppRunnerTypeLocal captures enum value "local"
+	AppAppRunnerTypeLocal AppAppRunnerType = "local"
 )
 
 // for schema
@@ -48,7 +51,7 @@ var appAppRunnerTypeEnum []interface{}
 
 func init() {
 	var res []AppAppRunnerType
-	if err := json.Unmarshal([]byte(`["aws-ecs","aws-eks","azure-aks","azure-acs"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["aws-ecs","aws-eks","azure-aks","azure-acs","local"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

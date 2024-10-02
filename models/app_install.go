@@ -76,7 +76,7 @@ type AppInstall struct {
 	// sandbox status
 	SandboxStatus string `json:"sandbox_status,omitempty"`
 
-	// status
+	// TODO(jm): deprecate these fields once the terraform provider has been updated
 	Status string `json:"status,omitempty"`
 
 	// status description
