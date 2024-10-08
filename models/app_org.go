@@ -28,9 +28,6 @@ type AppOrg struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
-	// custom cert
-	CustomCert bool `json:"custom_cert,omitempty"`
-
 	// health checks
 	HealthChecks []*AppOrgHealthCheck `json:"health_checks"`
 
@@ -42,14 +39,16 @@ type AppOrg struct {
 		AppOrgHealthCheck
 	} `json:"latest_health_check,omitempty"`
 
+	// logo url
+	LogoURL string `json:"logo_url,omitempty"`
+
 	// name
 	Name string `json:"name,omitempty"`
 
 	// notifications config
 	NotificationsConfig *AppNotificationsConfig `json:"notifications_config,omitempty"`
 
-	// These fields are used to control the behaviour of the org
-	// NOTE: these are starting as nullable, so we can update stage/prod before resetting locally.
+	// sandbox mode
 	SandboxMode bool `json:"sandbox_mode,omitempty"`
 
 	// status
