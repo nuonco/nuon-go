@@ -33,14 +33,26 @@ type AppRunnerGroupSettings struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
-	// Never persisted, populated at runtime from the overall ctl-api settings
-	Env string `json:"env,omitempty"`
+	// enable logging
+	EnableLogging bool `json:"enable_logging,omitempty"`
+
+	// enable metrics
+	EnableMetrics bool `json:"enable_metrics,omitempty"`
+
+	// enable sentry
+	EnableSentry bool `json:"enable_sentry,omitempty"`
 
 	// Various settings for the runner to handle internally
 	HeartBeatTimeout int64 `json:"heart_beat_timeout,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`
+
+	// logging level
+	LoggingLevel string `json:"logging_level,omitempty"`
+
+	// Metadata is used as both log and metric tags/attributes in the runner when emitting data
+	Metadata map[string]string `json:"metadata,omitempty"`
 
 	// org id
 	OrgID string `json:"org_id,omitempty"`
@@ -54,8 +66,8 @@ type AppRunnerGroupSettings struct {
 	// runner group id
 	RunnerGroupID string `json:"runner_group_id,omitempty"`
 
-	// settings refresh timeout
-	SettingsRefreshTimeout int64 `json:"settings_refresh_timeout,omitempty"`
+	// configuration for managing the runner server side
+	SandboxMode bool `json:"sandbox_mode,omitempty"`
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`

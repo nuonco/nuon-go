@@ -8,7 +8,8 @@ The Nuon API allows you to configure your Nuon apps, release to them and create 
 
 Full documentation is available at https://docs.nuon.co.
 
-All endpoints in the API follow REST conventions and standard HTTP methods. You can find the OpenAPI Spec [here](https://ctl.prod.nuon.co/docs/doc.json)
+All endpoints in the API follow REST conventions and standard HTTP methods. You can find the OpenAPI Spec
+[here](https://api.nuon.co/docs/doc.json)
 
 ## Installation
 
@@ -27,9 +28,10 @@ import nuon "github.com/nuonco/nuon-go"
 ## Create a client
 
 Create a new api client, using an API key set in the environment.
+
 ```go
 
-apiURL := "https://ctl.prod.nuon.co"
+apiURL := "https://api.nuon.co"
 apiToken := os.Getenv("NUON_API_TOKEN")
 orgID := os.Getenv("NUON_ORG_ID")
 
@@ -62,6 +64,7 @@ app, err := apiClient.GetApp(ctx, appID)
 Please submit a PR, and if you would like help, contact us on our [community slack](https://join.slack.com/t/nuoncommunity/shared_invite/zt-1q323vw9z-C8ztRP~HfWjZx6AXi50VRA).
 
 Since this library relies on generating client code from our graphql api, please run to ensure your generated client code is up to date.
+
 ```bash
 $ go generate ./...
 ```
