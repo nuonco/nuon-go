@@ -25,6 +25,9 @@ type ServiceCLIConfig struct {
 
 	// auth domain
 	AuthDomain string `json:"auth_domain,omitempty"`
+
+	// dashboard url
+	DashboardURL string `json:"dashboard_url,omitempty"`
 }
 
 // Validate validates this service c l i config
