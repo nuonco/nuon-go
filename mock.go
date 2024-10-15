@@ -768,6 +768,21 @@ func (mr *MockClientMockRecorder) GetAppSecrets(ctx, appID interface{}) *gomock.
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppSecrets", reflect.TypeOf((*MockClient)(nil).GetAppSecrets), ctx, appID)
 }
 
+// GetAppStatus mocks base method.
+func (m *MockClient) GetAppStatus(ctx context.Context, appID string) (*models.AppStatus, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAppStatus", ctx, appID)
+	ret0, _ := ret[0].(*models.AppStatus)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAppStatus indicates an expected call of GetAppStatus.
+func (mr *MockClientMockRecorder) GetAppStatus(ctx, appID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppStatus", reflect.TypeOf((*MockClient)(nil).GetAppStatus), ctx, appID)
+}
+
 // GetApps mocks base method.
 func (m *MockClient) GetApps(ctx context.Context) ([]*models.AppApp, error) {
 	m.ctrl.T.Helper()

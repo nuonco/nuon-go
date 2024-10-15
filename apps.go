@@ -20,6 +20,18 @@ func (c *client) GetApp(ctx context.Context, appID string) (*models.AppApp, erro
 	return resp.Payload, nil
 }
 
+func (c *client) GetAppStatus(ctx context.Context, appID string) (*models.AppStatus, error) {
+	resp, err := c.genClient.Operations.GetAppStatus(&operations.GetAppStatusParams{
+		Context: ctx,
+		AppID:   appID,
+	}, c.getOrgIDAuthInfo())
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}
+
 func (c *client) GetApps(ctx context.Context) ([]*models.AppApp, error) {
 	resp, err := c.genClient.Operations.GetApps(&operations.GetAppsParams{
 		Context: ctx,

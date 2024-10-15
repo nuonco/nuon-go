@@ -41,6 +41,7 @@ type Client interface {
 	CreateApp(ctx context.Context, req *models.ServiceCreateAppRequest) (*models.AppApp, error)
 	UpdateApp(ctx context.Context, appID string, req *models.ServiceUpdateAppRequest) (*models.AppApp, error)
 	DeleteApp(ctx context.Context, appID string) (bool, error)
+	GetAppStatus(ctx context.Context, appID string) (*models.AppStatus, error)
 
 	// app sandbox config methods
 	CreateAppSandboxConfig(ctx context.Context, appID string, req *models.ServiceCreateAppSandboxConfigRequest) (*models.AppAppSandboxConfig, error)
