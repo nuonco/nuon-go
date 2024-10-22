@@ -61,6 +61,18 @@ OtelReadLogsParams contains all the parameters to send to the API endpoint
 */
 type OtelReadLogsParams struct {
 
+	/* JobExecutionID.
+
+	   job execution id
+	*/
+	JobExecutionID *string
+
+	/* JobID.
+
+	   job id
+	*/
+	JobID *string
+
 	/* RunnerID.
 
 	   runner ID
@@ -120,6 +132,28 @@ func (o *OtelReadLogsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithJobExecutionID adds the jobExecutionID to the otel read logs params
+func (o *OtelReadLogsParams) WithJobExecutionID(jobExecutionID *string) *OtelReadLogsParams {
+	o.SetJobExecutionID(jobExecutionID)
+	return o
+}
+
+// SetJobExecutionID adds the jobExecutionId to the otel read logs params
+func (o *OtelReadLogsParams) SetJobExecutionID(jobExecutionID *string) {
+	o.JobExecutionID = jobExecutionID
+}
+
+// WithJobID adds the jobID to the otel read logs params
+func (o *OtelReadLogsParams) WithJobID(jobID *string) *OtelReadLogsParams {
+	o.SetJobID(jobID)
+	return o
+}
+
+// SetJobID adds the jobId to the otel read logs params
+func (o *OtelReadLogsParams) SetJobID(jobID *string) {
+	o.JobID = jobID
+}
+
 // WithRunnerID adds the runnerID to the otel read logs params
 func (o *OtelReadLogsParams) WithRunnerID(runnerID string) *OtelReadLogsParams {
 	o.SetRunnerID(runnerID)
@@ -138,6 +172,40 @@ func (o *OtelReadLogsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		return err
 	}
 	var res []error
+
+	if o.JobExecutionID != nil {
+
+		// query param job_execution_id
+		var qrJobExecutionID string
+
+		if o.JobExecutionID != nil {
+			qrJobExecutionID = *o.JobExecutionID
+		}
+		qJobExecutionID := qrJobExecutionID
+		if qJobExecutionID != "" {
+
+			if err := r.SetQueryParam("job_execution_id", qJobExecutionID); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.JobID != nil {
+
+		// query param job_id
+		var qrJobID string
+
+		if o.JobID != nil {
+			qrJobID = *o.JobID
+		}
+		qJobID := qrJobID
+		if qJobID != "" {
+
+			if err := r.SetQueryParam("job_id", qJobID); err != nil {
+				return err
+			}
+		}
+	}
 
 	// path param runner_id
 	if err := r.SetPathParam("runner_id", o.RunnerID); err != nil {

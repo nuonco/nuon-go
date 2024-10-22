@@ -18,16 +18,3 @@ func (c *client) GetInstallSandboxRuns(ctx context.Context, installID string) ([
 
 	return resp.Payload, nil
 }
-
-func (c *client) GetInstallSandboxRunLogs(ctx context.Context, installID, runID string) ([]interface{}, error) {
-	resp, err := c.genClient.Operations.GetInstallSandboxRunLogs(&operations.GetInstallSandboxRunLogsParams{
-		InstallID: installID,
-		RunID:     runID,
-		Context:   ctx,
-	}, c.getOrgIDAuthInfo())
-	if err != nil {
-		return nil, err
-	}
-
-	return resp.Payload, nil
-}

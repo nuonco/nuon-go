@@ -39,6 +39,11 @@ type AppInstallSandboxRun struct {
 	// run type
 	RunType AppSandboxRunType `json:"run_type,omitempty"`
 
+	// runner details
+	RunnerJob struct {
+		AppRunnerJob
+	} `json:"runner_job,omitempty"`
+
 	// status
 	Status string `json:"status,omitempty"`
 
@@ -62,6 +67,10 @@ func (m *AppInstallSandboxRun) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateRunType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRunnerJob(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -126,6 +135,14 @@ func (m *AppInstallSandboxRun) validateRunType(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppInstallSandboxRun) validateRunnerJob(formats strfmt.Registry) error {
+	if swag.IsZero(m.RunnerJob) { // not required
+		return nil
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app install sandbox run based on the context it is used
 func (m *AppInstallSandboxRun) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -139,6 +156,10 @@ func (m *AppInstallSandboxRun) ContextValidate(ctx context.Context, formats strf
 	}
 
 	if err := m.contextValidateRunType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRunnerJob(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -204,6 +225,11 @@ func (m *AppInstallSandboxRun) contextValidateRunType(ctx context.Context, forma
 		}
 		return err
 	}
+
+	return nil
+}
+
+func (m *AppInstallSandboxRun) contextValidateRunnerJob(ctx context.Context, formats strfmt.Registry) error {
 
 	return nil
 }
