@@ -9,12 +9,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new operations API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new operations API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new operations API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -25,7 +51,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -140,10 +166,6 @@ type ClientService interface {
 
 	GetComponentBuild(params *GetComponentBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentBuildOK, error)
 
-	GetComponentBuildLogs(params *GetComponentBuildLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentBuildLogsOK, error)
-
-	GetComponentBuildPlan(params *GetComponentBuildPlanParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentBuildPlanOK, error)
-
 	GetComponentBuilds(params *GetComponentBuildsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentBuildsOK, error)
 
 	GetComponentConfigs(params *GetComponentConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentConfigsOK, error)
@@ -174,8 +196,6 @@ type ClientService interface {
 
 	GetInstallDeploy(params *GetInstallDeployParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallDeployOK, error)
 
-	GetInstallDeployLogs(params *GetInstallDeployLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallDeployLogsOK, error)
-
 	GetInstallDeployPlan(params *GetInstallDeployPlanParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallDeployPlanOK, error)
 
 	GetInstallDeploys(params *GetInstallDeploysParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallDeploysOK, error)
@@ -189,8 +209,6 @@ type ClientService interface {
 	GetInstallLatestDeploy(params *GetInstallLatestDeployParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallLatestDeployOK, error)
 
 	GetInstallRunnerGroup(params *GetInstallRunnerGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallRunnerGroupOK, error)
-
-	GetInstallSandboxRunLogs(params *GetInstallSandboxRunLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallSandboxRunLogsOK, error)
 
 	GetInstallSandboxRuns(params *GetInstallSandboxRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallSandboxRunsOK, error)
 
@@ -2446,84 +2464,6 @@ func (a *Client) GetComponentBuild(params *GetComponentBuildParams, authInfo run
 }
 
 /*
-GetComponentBuildLogs gets component build logs
-*/
-func (a *Client) GetComponentBuildLogs(params *GetComponentBuildLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentBuildLogsOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetComponentBuildLogsParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetComponentBuildLogs",
-		Method:             "GET",
-		PathPattern:        "/v1/components/{component_id}/builds/{build_id}/logs",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetComponentBuildLogsReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetComponentBuildLogsOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetComponentBuildLogs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetComponentBuildPlan gets component build plan
-*/
-func (a *Client) GetComponentBuildPlan(params *GetComponentBuildPlanParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentBuildPlanOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetComponentBuildPlanParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetComponentBuildPlan",
-		Method:             "GET",
-		PathPattern:        "/v1/components/{component_id}/builds/{build_id}/plan",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetComponentBuildPlanReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetComponentBuildPlanOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetComponentBuildPlan: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 GetComponentBuilds gets builds for components
 */
 func (a *Client) GetComponentBuilds(params *GetComponentBuildsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentBuildsOK, error) {
@@ -3133,45 +3073,6 @@ func (a *Client) GetInstallDeploy(params *GetInstallDeployParams, authInfo runti
 }
 
 /*
-GetInstallDeployLogs gets install deploy logs
-*/
-func (a *Client) GetInstallDeployLogs(params *GetInstallDeployLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallDeployLogsOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetInstallDeployLogsParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetInstallDeployLogs",
-		Method:             "GET",
-		PathPattern:        "/v1/installs/{install_id}/deploys/{deploy_id}/logs",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetInstallDeployLogsReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetInstallDeployLogsOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetInstallDeployLogs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 GetInstallDeployPlan gets install deploy plan
 */
 func (a *Client) GetInstallDeployPlan(params *GetInstallDeployPlanParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallDeployPlanOK, error) {
@@ -3449,45 +3350,6 @@ func (a *Client) GetInstallRunnerGroup(params *GetInstallRunnerGroupParams, auth
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallRunnerGroup: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetInstallSandboxRunLogs gets install sandbox run logs
-*/
-func (a *Client) GetInstallSandboxRunLogs(params *GetInstallSandboxRunLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallSandboxRunLogsOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetInstallSandboxRunLogsParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetInstallSandboxRunLogs",
-		Method:             "GET",
-		PathPattern:        "/v1/installs/{install_id}/sandbox-run/{run_id}/logs",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetInstallSandboxRunLogsReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetInstallSandboxRunLogsOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetInstallSandboxRunLogs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

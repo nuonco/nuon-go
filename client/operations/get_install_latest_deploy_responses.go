@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetInstallLatestDeployOK) Code() int {
 }
 
 func (o *GetInstallLatestDeployOK) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployOK %s", 200, payload)
 }
 
 func (o *GetInstallLatestDeployOK) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployOK %s", 200, payload)
 }
 
 func (o *GetInstallLatestDeployOK) GetPayload() *models.AppInstallDeploy {
@@ -177,11 +180,13 @@ func (o *GetInstallLatestDeployBadRequest) Code() int {
 }
 
 func (o *GetInstallLatestDeployBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployBadRequest %s", 400, payload)
 }
 
 func (o *GetInstallLatestDeployBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployBadRequest %s", 400, payload)
 }
 
 func (o *GetInstallLatestDeployBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +250,13 @@ func (o *GetInstallLatestDeployUnauthorized) Code() int {
 }
 
 func (o *GetInstallLatestDeployUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployUnauthorized %s", 401, payload)
 }
 
 func (o *GetInstallLatestDeployUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployUnauthorized %s", 401, payload)
 }
 
 func (o *GetInstallLatestDeployUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +320,13 @@ func (o *GetInstallLatestDeployForbidden) Code() int {
 }
 
 func (o *GetInstallLatestDeployForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployForbidden %s", 403, payload)
 }
 
 func (o *GetInstallLatestDeployForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployForbidden %s", 403, payload)
 }
 
 func (o *GetInstallLatestDeployForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +390,13 @@ func (o *GetInstallLatestDeployNotFound) Code() int {
 }
 
 func (o *GetInstallLatestDeployNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployNotFound %s", 404, payload)
 }
 
 func (o *GetInstallLatestDeployNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployNotFound %s", 404, payload)
 }
 
 func (o *GetInstallLatestDeployNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +460,13 @@ func (o *GetInstallLatestDeployInternalServerError) Code() int {
 }
 
 func (o *GetInstallLatestDeployInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployInternalServerError %s", 500, payload)
 }
 
 func (o *GetInstallLatestDeployInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/latest][%d] getInstallLatestDeployInternalServerError %s", 500, payload)
 }
 
 func (o *GetInstallLatestDeployInternalServerError) GetPayload() *models.StderrErrResponse {

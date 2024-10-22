@@ -18,6 +18,9 @@ import (
 // swagger:model app.RunnerGroupSettings
 type AppRunnerGroupSettings struct {
 
+	// specific configuration for cloud specific runners, such as AWS or Azure
+	AwsIamRoleArn string `json:"aws_iam_role_arn,omitempty"`
+
 	// container image tag
 	ContainerImageTag string `json:"container_image_tag,omitempty"`
 
@@ -47,6 +50,9 @@ type AppRunnerGroupSettings struct {
 
 	// id
 	ID string `json:"id,omitempty"`
+
+	// k8s service account name
+	K8sServiceAccountName string `json:"k8s_service_account_name,omitempty"`
 
 	// logging level
 	LoggingLevel string `json:"logging_level,omitempty"`
