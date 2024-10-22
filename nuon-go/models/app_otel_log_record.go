@@ -47,6 +47,9 @@ type AppOtelLogRecord struct {
 	// runner job execution id
 	RunnerJobExecutionID string `json:"runner_job_execution_id,omitempty"`
 
+	// runner job execution step
+	RunnerJobExecutionStep string `json:"runner_job_execution_step,omitempty"`
+
 	// runner job id
 	RunnerJobID string `json:"runner_job_id,omitempty"`
 

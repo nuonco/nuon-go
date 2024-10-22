@@ -106,9 +106,7 @@ type Client interface {
 	GetInstallDeploys(ctx context.Context, installID string) ([]*models.AppInstallDeploy, error)
 	CreateInstallDeploy(ctx context.Context, installID string, req *models.ServiceCreateInstallDeployRequest) (*models.AppInstallDeploy, error)
 	GetInstallDeploy(ctx context.Context, installID, deployID string) (*models.AppInstallDeploy, error)
-	GetInstallDeployPlan(ctx context.Context, installID, deployID string) (*models.Planv1Plan, error)
 	GetInstallLatestDeploy(ctx context.Context, installID string) (*models.AppInstallDeploy, error)
-	GetInstallDeployLogs(ctx context.Context, installID, deployID string) ([]models.ServiceDeployLog, error)
 
 	// install components
 	GetInstallComponents(ctx context.Context, installID string) ([]*models.AppInstallComponent, error)
@@ -120,7 +118,6 @@ type Client interface {
 
 	// install sandbox runs
 	GetInstallSandboxRuns(ctx context.Context, installID string) ([]*models.AppInstallSandboxRun, error)
-	GetInstallSandboxRunLogs(ctx context.Context, installID, runID string) ([]interface{}, error)
 
 	// install inputs
 	GetInstallInputs(ctx context.Context, installID string) ([]*models.AppInstallInputs, error)
@@ -151,8 +148,6 @@ type Client interface {
 	GetComponentBuilds(ctx context.Context, componentID, appID string, limit *int64) ([]*models.AppComponentBuild, error)
 	GetComponentLatestBuild(ctx context.Context, componentID string) (*models.AppComponentBuild, error)
 	GetComponentBuild(ctx context.Context, componentID, buildID string) (*models.AppComponentBuild, error)
-	GetComponentBuildLogs(ctx context.Context, componentID, buildID string) ([]models.ServiceBuildLog, error)
-	GetComponentBuildPlan(ctx context.Context, componentsID, buildID string) (*models.Planv1Plan, error)
 	GetBuild(ctx context.Context, buildID string) (*models.AppComponentBuild, error)
 
 	// component releases
