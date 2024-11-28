@@ -81,7 +81,6 @@ type Client interface {
 	// general methods
 	GetCLIConfig(ctx context.Context) (*models.ServiceCLIConfig, error)
 	GetCurrentUser(ctx context.Context) (*models.AppAccount, error)
-	PublishMetrics(ctx context.Context, req []*models.ServicePublishMetricInput) error
 	GetCloudPlatformRegions(ctx context.Context, cloudPlatform string) ([]*models.AppCloudPlatformRegion, error)
 
 	// vcs connections
@@ -157,6 +156,16 @@ type Client interface {
 
 	GetRelease(ctx context.Context, releaseID string) (*models.AppComponentRelease, error)
 	GetReleaseSteps(ctx context.Context, releaseID string) ([]*models.AppComponentReleaseStep, error)
+
+	// actions
+	GetActionWorkflows(ctx context.Context, appID string) ([]*models.AppActionWorkflow, error)
+	GetActionWorkflow(ctx context.Context, actionWorkflowID string) (*models.AppActionWorkflow, error)
+	CreateActionWorkflow(ctx context.Context, appID string, req *models.ServiceCreateAppActionWorkflowRequest) (*models.AppActionWorkflow, error)
+	UpdateActionWorkflow(ctx context.Context, actionWorkflowID string, req *models.ServiceUpdateActionWorkflowRequest) (*models.AppActionWorkflow, error)
+	DeleteActionWorkflow(ctx context.Context, actionWorkflowID string) error
+	GetActionWorkflowConfigs(ctx context.Context, actionWorkflowID string) ([]*models.AppActionWorkflowConfig, error)
+	GetActionWorkflowConfig(ctx context.Context, actionWorkflowConfigID string) (*models.AppActionWorkflowConfig, error)
+	CreateActionWorkflowConfig(ctx context.Context, actionWorkflowID string, req *models.ServiceCreateActionWorkflowConfigRequest) (*models.AppActionWorkflowConfig, error)
 }
 
 var _ Client = (*client)(nil)

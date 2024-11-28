@@ -19,18 +19,6 @@ func (c *client) GetCurrentUser(ctx context.Context) (*models.AppAccount, error)
 	return resp.Payload, nil
 }
 
-func (c *client) PublishMetrics(ctx context.Context, req []*models.ServicePublishMetricInput) error {
-	_, err := c.genClient.Operations.PublishMetrics(&operations.PublishMetricsParams{
-		Req:     req,
-		Context: ctx,
-	}, c.getApiKeyAuthInfo())
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func (c *client) GetCLIConfig(ctx context.Context) (*models.ServiceCLIConfig, error) {
 	resp, err := c.genClient.Operations.GetCLIConfig(&operations.GetCLIConfigParams{
 		Context: ctx,

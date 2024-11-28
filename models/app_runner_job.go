@@ -25,9 +25,6 @@ type AppRunnerJob struct {
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
-	// created by
-	CreatedBy *AppAccount `json:"created_by,omitempty"`
-
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
@@ -43,14 +40,14 @@ type AppRunnerJob struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// log stream id
+	LogStreamID string `json:"log_stream_id,omitempty"`
+
 	// max executions
 	MaxExecutions int64 `json:"max_executions,omitempty"`
 
 	// operation
 	Operation AppRunnerJobOperationType `json:"operation,omitempty"`
-
-	// org
-	Org *AppOrg `json:"org,omitempty"`
 
 	// org id
 	OrgID string `json:"org_id,omitempty"`
@@ -87,10 +84,6 @@ type AppRunnerJob struct {
 func (m *AppRunnerJob) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateCreatedBy(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateExecutions(formats); err != nil {
 		res = append(res, err)
 	}
@@ -100,10 +93,6 @@ func (m *AppRunnerJob) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateOperation(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateOrg(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -118,25 +107,6 @@ func (m *AppRunnerJob) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *AppRunnerJob) validateCreatedBy(formats strfmt.Registry) error {
-	if swag.IsZero(m.CreatedBy) { // not required
-		return nil
-	}
-
-	if m.CreatedBy != nil {
-		if err := m.CreatedBy.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("created_by")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -200,25 +170,6 @@ func (m *AppRunnerJob) validateOperation(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *AppRunnerJob) validateOrg(formats strfmt.Registry) error {
-	if swag.IsZero(m.Org) { // not required
-		return nil
-	}
-
-	if m.Org != nil {
-		if err := m.Org.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("org")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("org")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *AppRunnerJob) validateStatus(formats strfmt.Registry) error {
 	if swag.IsZero(m.Status) { // not required
 		return nil
@@ -257,10 +208,6 @@ func (m *AppRunnerJob) validateType(formats strfmt.Registry) error {
 func (m *AppRunnerJob) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateExecutions(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -270,10 +217,6 @@ func (m *AppRunnerJob) ContextValidate(ctx context.Context, formats strfmt.Regis
 	}
 
 	if err := m.contextValidateOperation(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateOrg(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -288,27 +231,6 @@ func (m *AppRunnerJob) ContextValidate(ctx context.Context, formats strfmt.Regis
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *AppRunnerJob) contextValidateCreatedBy(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.CreatedBy != nil {
-
-		if swag.IsZero(m.CreatedBy) { // not required
-			return nil
-		}
-
-		if err := m.CreatedBy.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("created_by")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -368,27 +290,6 @@ func (m *AppRunnerJob) contextValidateOperation(ctx context.Context, formats str
 			return ce.ValidateName("operation")
 		}
 		return err
-	}
-
-	return nil
-}
-
-func (m *AppRunnerJob) contextValidateOrg(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Org != nil {
-
-		if swag.IsZero(m.Org) { // not required
-			return nil
-		}
-
-		if err := m.Org.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("org")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("org")
-			}
-			return err
-		}
 	}
 
 	return nil
