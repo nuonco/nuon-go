@@ -22,9 +22,6 @@ type AppRunner struct {
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
-	// created by
-	CreatedBy *AppAccount `json:"created_by,omitempty"`
-
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
@@ -40,14 +37,14 @@ type AppRunner struct {
 	// name
 	Name string `json:"name,omitempty"`
 
-	// org
-	Org *AppOrg `json:"org,omitempty"`
+	// operations
+	Operations []*AppRunnerOperation `json:"operations"`
 
 	// org id
 	OrgID string `json:"org_id,omitempty"`
 
-	// runner id
-	RunnerID string `json:"runner_id,omitempty"`
+	// runner group id
+	RunnerGroupID string `json:"runner_group_id,omitempty"`
 
 	// runner job
 	RunnerJob *AppRunnerJob `json:"runner_job,omitempty"`
@@ -66,15 +63,11 @@ type AppRunner struct {
 func (m *AppRunner) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateCreatedBy(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateJobs(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateOrg(formats); err != nil {
+	if err := m.validateOperations(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -85,25 +78,6 @@ func (m *AppRunner) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *AppRunner) validateCreatedBy(formats strfmt.Registry) error {
-	if swag.IsZero(m.CreatedBy) { // not required
-		return nil
-	}
-
-	if m.CreatedBy != nil {
-		if err := m.CreatedBy.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("created_by")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -133,20 +107,27 @@ func (m *AppRunner) validateJobs(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *AppRunner) validateOrg(formats strfmt.Registry) error {
-	if swag.IsZero(m.Org) { // not required
+func (m *AppRunner) validateOperations(formats strfmt.Registry) error {
+	if swag.IsZero(m.Operations) { // not required
 		return nil
 	}
 
-	if m.Org != nil {
-		if err := m.Org.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("org")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("org")
-			}
-			return err
+	for i := 0; i < len(m.Operations); i++ {
+		if swag.IsZero(m.Operations[i]) { // not required
+			continue
 		}
+
+		if m.Operations[i] != nil {
+			if err := m.Operations[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("operations" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("operations" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -175,15 +156,11 @@ func (m *AppRunner) validateRunnerJob(formats strfmt.Registry) error {
 func (m *AppRunner) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateJobs(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateOrg(ctx, formats); err != nil {
+	if err := m.contextValidateOperations(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -194,27 +171,6 @@ func (m *AppRunner) ContextValidate(ctx context.Context, formats strfmt.Registry
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *AppRunner) contextValidateCreatedBy(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.CreatedBy != nil {
-
-		if swag.IsZero(m.CreatedBy) { // not required
-			return nil
-		}
-
-		if err := m.CreatedBy.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("created_by")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -243,22 +199,26 @@ func (m *AppRunner) contextValidateJobs(ctx context.Context, formats strfmt.Regi
 	return nil
 }
 
-func (m *AppRunner) contextValidateOrg(ctx context.Context, formats strfmt.Registry) error {
+func (m *AppRunner) contextValidateOperations(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.Org != nil {
+	for i := 0; i < len(m.Operations); i++ {
 
-		if swag.IsZero(m.Org) { // not required
-			return nil
-		}
+		if m.Operations[i] != nil {
 
-		if err := m.Org.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("org")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("org")
+			if swag.IsZero(m.Operations[i]) { // not required
+				return nil
 			}
-			return err
+
+			if err := m.Operations[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("operations" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("operations" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
 		}
+
 	}
 
 	return nil

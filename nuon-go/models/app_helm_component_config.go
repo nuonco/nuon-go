@@ -30,9 +30,6 @@ type AppHelmComponentConfig struct {
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
-	// created by
-	CreatedBy *AppAccount `json:"created_by,omitempty"`
-
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
@@ -60,10 +57,6 @@ func (m *AppHelmComponentConfig) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateCreatedBy(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validatePublicGitVcsConfig(formats); err != nil {
 		res = append(res, err)
 	}
@@ -85,25 +78,6 @@ func (m *AppHelmComponentConfig) validateConnectedGithubVcsConfig(formats strfmt
 				return ve.ValidateName("connected_github_vcs_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("connected_github_vcs_config")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *AppHelmComponentConfig) validateCreatedBy(formats strfmt.Registry) error {
-	if swag.IsZero(m.CreatedBy) { // not required
-		return nil
-	}
-
-	if m.CreatedBy != nil {
-		if err := m.CreatedBy.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("created_by")
 			}
 			return err
 		}
@@ -139,10 +113,6 @@ func (m *AppHelmComponentConfig) ContextValidate(ctx context.Context, formats st
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidatePublicGitVcsConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -166,27 +136,6 @@ func (m *AppHelmComponentConfig) contextValidateConnectedGithubVcsConfig(ctx con
 				return ve.ValidateName("connected_github_vcs_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("connected_github_vcs_config")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *AppHelmComponentConfig) contextValidateCreatedBy(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.CreatedBy != nil {
-
-		if swag.IsZero(m.CreatedBy) { // not required
-			return nil
-		}
-
-		if err := m.CreatedBy.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("created_by")
 			}
 			return err
 		}

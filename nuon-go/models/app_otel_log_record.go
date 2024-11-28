@@ -32,6 +32,9 @@ type AppOtelLogRecord struct {
 	// log attributes
 	LogAttributes map[string]string `json:"log_attributes,omitempty"`
 
+	// log stream id
+	LogStreamID string `json:"log_stream_id,omitempty"`
+
 	// resource attributes
 	ResourceAttributes map[string]string `json:"resource_attributes,omitempty"`
 

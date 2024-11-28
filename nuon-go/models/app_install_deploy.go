@@ -33,9 +33,6 @@ type AppInstallDeploy struct {
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
-	// created by
-	CreatedBy *AppAccount `json:"created_by,omitempty"`
-
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
@@ -50,6 +47,9 @@ type AppInstallDeploy struct {
 
 	// Fields that are de-nested at read time using AfterQuery
 	InstallID string `json:"install_id,omitempty"`
+
+	// log stream
+	LogStream *AppLogStream `json:"log_stream,omitempty"`
 
 	// release id
 	ReleaseID string `json:"release_id,omitempty"`
@@ -73,11 +73,11 @@ type AppInstallDeploy struct {
 func (m *AppInstallDeploy) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateCreatedBy(formats); err != nil {
+	if err := m.validateInstallDeployType(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateInstallDeployType(formats); err != nil {
+	if err := m.validateLogStream(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -88,25 +88,6 @@ func (m *AppInstallDeploy) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *AppInstallDeploy) validateCreatedBy(formats strfmt.Registry) error {
-	if swag.IsZero(m.CreatedBy) { // not required
-		return nil
-	}
-
-	if m.CreatedBy != nil {
-		if err := m.CreatedBy.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("created_by")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -127,6 +108,25 @@ func (m *AppInstallDeploy) validateInstallDeployType(formats strfmt.Registry) er
 	return nil
 }
 
+func (m *AppInstallDeploy) validateLogStream(formats strfmt.Registry) error {
+	if swag.IsZero(m.LogStream) { // not required
+		return nil
+	}
+
+	if m.LogStream != nil {
+		if err := m.LogStream.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("log_stream")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("log_stream")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *AppInstallDeploy) validateRunnerJob(formats strfmt.Registry) error {
 	if swag.IsZero(m.RunnerJob) { // not required
 		return nil
@@ -139,11 +139,11 @@ func (m *AppInstallDeploy) validateRunnerJob(formats strfmt.Registry) error {
 func (m *AppInstallDeploy) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
+	if err := m.contextValidateInstallDeployType(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateInstallDeployType(ctx, formats); err != nil {
+	if err := m.contextValidateLogStream(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -154,27 +154,6 @@ func (m *AppInstallDeploy) ContextValidate(ctx context.Context, formats strfmt.R
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *AppInstallDeploy) contextValidateCreatedBy(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.CreatedBy != nil {
-
-		if swag.IsZero(m.CreatedBy) { // not required
-			return nil
-		}
-
-		if err := m.CreatedBy.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("created_by")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -191,6 +170,27 @@ func (m *AppInstallDeploy) contextValidateInstallDeployType(ctx context.Context,
 			return ce.ValidateName("install_deploy_type")
 		}
 		return err
+	}
+
+	return nil
+}
+
+func (m *AppInstallDeploy) contextValidateLogStream(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.LogStream != nil {
+
+		if swag.IsZero(m.LogStream) { // not required
+			return nil
+		}
+
+		if err := m.LogStream.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("log_stream")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("log_stream")
+			}
+			return err
+		}
 	}
 
 	return nil
