@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetInstallerOK) Code() int {
 }
 
 func (o *GetInstallerOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerOK  %+v", 200, o.Payload)
 }
 
 func (o *GetInstallerOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerOK  %+v", 200, o.Payload)
 }
 
 func (o *GetInstallerOK) GetPayload() *models.AppInstaller {
@@ -180,13 +177,11 @@ func (o *GetInstallerBadRequest) Code() int {
 }
 
 func (o *GetInstallerBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetInstallerBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetInstallerBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *GetInstallerUnauthorized) Code() int {
 }
 
 func (o *GetInstallerUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetInstallerUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetInstallerUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *GetInstallerForbidden) Code() int {
 }
 
 func (o *GetInstallerForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetInstallerForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetInstallerForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *GetInstallerNotFound) Code() int {
 }
 
 func (o *GetInstallerNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetInstallerNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetInstallerNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *GetInstallerInternalServerError) Code() int {
 }
 
 func (o *GetInstallerInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetInstallerInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/installers/{installer_id}][%d] getInstallerInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetInstallerInternalServerError) GetPayload() *models.StderrErrResponse {

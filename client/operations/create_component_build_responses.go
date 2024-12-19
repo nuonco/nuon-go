@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *CreateComponentBuildCreated) Code() int {
 }
 
 func (o *CreateComponentBuildCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateComponentBuildCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateComponentBuildCreated) GetPayload() *models.AppComponentBuild {
@@ -180,13 +177,11 @@ func (o *CreateComponentBuildBadRequest) Code() int {
 }
 
 func (o *CreateComponentBuildBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateComponentBuildBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateComponentBuildBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *CreateComponentBuildUnauthorized) Code() int {
 }
 
 func (o *CreateComponentBuildUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateComponentBuildUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateComponentBuildUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *CreateComponentBuildForbidden) Code() int {
 }
 
 func (o *CreateComponentBuildForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateComponentBuildForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateComponentBuildForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *CreateComponentBuildNotFound) Code() int {
 }
 
 func (o *CreateComponentBuildNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateComponentBuildNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateComponentBuildNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *CreateComponentBuildInternalServerError) Code() int {
 }
 
 func (o *CreateComponentBuildInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateComponentBuildInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/builds][%d] createComponentBuildInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateComponentBuildInternalServerError) GetPayload() *models.StderrErrResponse {

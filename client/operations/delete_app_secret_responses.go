@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *DeleteAppSecretOK) Code() int {
 }
 
 func (o *DeleteAppSecretOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretOK  %+v", 200, o.Payload)
 }
 
 func (o *DeleteAppSecretOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretOK  %+v", 200, o.Payload)
 }
 
 func (o *DeleteAppSecretOK) GetPayload() bool {
@@ -178,13 +175,11 @@ func (o *DeleteAppSecretBadRequest) Code() int {
 }
 
 func (o *DeleteAppSecretBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretBadRequest %s", 400, payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *DeleteAppSecretBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretBadRequest %s", 400, payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *DeleteAppSecretBadRequest) GetPayload() *models.StderrErrResponse {
@@ -248,13 +243,11 @@ func (o *DeleteAppSecretUnauthorized) Code() int {
 }
 
 func (o *DeleteAppSecretUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *DeleteAppSecretUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *DeleteAppSecretUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -318,13 +311,11 @@ func (o *DeleteAppSecretForbidden) Code() int {
 }
 
 func (o *DeleteAppSecretForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretForbidden %s", 403, payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretForbidden  %+v", 403, o.Payload)
 }
 
 func (o *DeleteAppSecretForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretForbidden %s", 403, payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretForbidden  %+v", 403, o.Payload)
 }
 
 func (o *DeleteAppSecretForbidden) GetPayload() *models.StderrErrResponse {
@@ -388,13 +379,11 @@ func (o *DeleteAppSecretNotFound) Code() int {
 }
 
 func (o *DeleteAppSecretNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretNotFound %s", 404, payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretNotFound  %+v", 404, o.Payload)
 }
 
 func (o *DeleteAppSecretNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretNotFound %s", 404, payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretNotFound  %+v", 404, o.Payload)
 }
 
 func (o *DeleteAppSecretNotFound) GetPayload() *models.StderrErrResponse {
@@ -458,13 +447,11 @@ func (o *DeleteAppSecretInternalServerError) Code() int {
 }
 
 func (o *DeleteAppSecretInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *DeleteAppSecretInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *DeleteAppSecretInternalServerError) GetPayload() *models.StderrErrResponse {

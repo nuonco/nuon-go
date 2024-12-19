@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetVCSConnectionOK) Code() int {
 }
 
 func (o *GetVCSConnectionOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionOK  %+v", 200, o.Payload)
 }
 
 func (o *GetVCSConnectionOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionOK  %+v", 200, o.Payload)
 }
 
 func (o *GetVCSConnectionOK) GetPayload() *models.AppVCSConnection {
@@ -180,13 +177,11 @@ func (o *GetVCSConnectionBadRequest) Code() int {
 }
 
 func (o *GetVCSConnectionBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetVCSConnectionBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetVCSConnectionBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *GetVCSConnectionUnauthorized) Code() int {
 }
 
 func (o *GetVCSConnectionUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetVCSConnectionUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetVCSConnectionUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *GetVCSConnectionForbidden) Code() int {
 }
 
 func (o *GetVCSConnectionForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetVCSConnectionForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetVCSConnectionForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *GetVCSConnectionNotFound) Code() int {
 }
 
 func (o *GetVCSConnectionNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetVCSConnectionNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetVCSConnectionNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *GetVCSConnectionInternalServerError) Code() int {
 }
 
 func (o *GetVCSConnectionInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetVCSConnectionInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections/{connection_id}][%d] getVCSConnectionInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetVCSConnectionInternalServerError) GetPayload() *models.StderrErrResponse {

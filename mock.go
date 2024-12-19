@@ -1352,20 +1352,6 @@ func (mr *MockClientMockRecorder) GetVCSConnections(ctx interface{}) *gomock.Cal
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVCSConnections", reflect.TypeOf((*MockClient)(nil).GetVCSConnections), ctx)
 }
 
-// PublishMetrics mocks base method.
-func (m *MockClient) PublishMetrics(ctx context.Context, req []*models.ServicePublishMetricInput) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "PublishMetrics", ctx, req)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// PublishMetrics indicates an expected call of PublishMetrics.
-func (mr *MockClientMockRecorder) PublishMetrics(ctx, req interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PublishMetrics", reflect.TypeOf((*MockClient)(nil).PublishMetrics), ctx, req)
-}
-
 // RenderInstaller mocks base method.
 func (m *MockClient) RenderInstaller(ctx context.Context, installerID string) (*models.ServiceRenderedInstaller, error) {
 	m.ctrl.T.Helper()

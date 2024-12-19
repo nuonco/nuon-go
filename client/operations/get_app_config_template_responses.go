@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetAppConfigTemplateCreated) Code() int {
 }
 
 func (o *GetAppConfigTemplateCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateCreated %s", 201, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateCreated  %+v", 201, o.Payload)
 }
 
 func (o *GetAppConfigTemplateCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateCreated %s", 201, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateCreated  %+v", 201, o.Payload)
 }
 
 func (o *GetAppConfigTemplateCreated) GetPayload() *models.ServiceAppConfigTemplate {
@@ -180,13 +177,11 @@ func (o *GetAppConfigTemplateBadRequest) Code() int {
 }
 
 func (o *GetAppConfigTemplateBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetAppConfigTemplateBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetAppConfigTemplateBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *GetAppConfigTemplateUnauthorized) Code() int {
 }
 
 func (o *GetAppConfigTemplateUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetAppConfigTemplateUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetAppConfigTemplateUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *GetAppConfigTemplateForbidden) Code() int {
 }
 
 func (o *GetAppConfigTemplateForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetAppConfigTemplateForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetAppConfigTemplateForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *GetAppConfigTemplateNotFound) Code() int {
 }
 
 func (o *GetAppConfigTemplateNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetAppConfigTemplateNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetAppConfigTemplateNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *GetAppConfigTemplateInternalServerError) Code() int {
 }
 
 func (o *GetAppConfigTemplateInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetAppConfigTemplateInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetAppConfigTemplateInternalServerError) GetPayload() *models.StderrErrResponse {

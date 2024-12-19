@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetInstallEventOK) Code() int {
 }
 
 func (o *GetInstallEventOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventOK  %+v", 200, o.Payload)
 }
 
 func (o *GetInstallEventOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventOK  %+v", 200, o.Payload)
 }
 
 func (o *GetInstallEventOK) GetPayload() *models.AppInstallEvent {
@@ -180,13 +177,11 @@ func (o *GetInstallEventBadRequest) Code() int {
 }
 
 func (o *GetInstallEventBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetInstallEventBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetInstallEventBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *GetInstallEventUnauthorized) Code() int {
 }
 
 func (o *GetInstallEventUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetInstallEventUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetInstallEventUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *GetInstallEventForbidden) Code() int {
 }
 
 func (o *GetInstallEventForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetInstallEventForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetInstallEventForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *GetInstallEventNotFound) Code() int {
 }
 
 func (o *GetInstallEventNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetInstallEventNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetInstallEventNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *GetInstallEventInternalServerError) Code() int {
 }
 
 func (o *GetInstallEventInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetInstallEventInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/events/{event_id}][%d] getInstallEventInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetInstallEventInternalServerError) GetPayload() *models.StderrErrResponse {
