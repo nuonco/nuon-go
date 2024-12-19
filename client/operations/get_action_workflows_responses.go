@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetActionWorkflowsOK) Code() int {
 }
 
 func (o *GetActionWorkflowsOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsOK  %+v", 200, o.Payload)
 }
 
 func (o *GetActionWorkflowsOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsOK  %+v", 200, o.Payload)
 }
 
 func (o *GetActionWorkflowsOK) GetPayload() []*models.AppActionWorkflow {
@@ -178,13 +175,11 @@ func (o *GetActionWorkflowsBadRequest) Code() int {
 }
 
 func (o *GetActionWorkflowsBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetActionWorkflowsBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetActionWorkflowsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -248,13 +243,11 @@ func (o *GetActionWorkflowsUnauthorized) Code() int {
 }
 
 func (o *GetActionWorkflowsUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetActionWorkflowsUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetActionWorkflowsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -318,13 +311,11 @@ func (o *GetActionWorkflowsForbidden) Code() int {
 }
 
 func (o *GetActionWorkflowsForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetActionWorkflowsForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetActionWorkflowsForbidden) GetPayload() *models.StderrErrResponse {
@@ -388,13 +379,11 @@ func (o *GetActionWorkflowsNotFound) Code() int {
 }
 
 func (o *GetActionWorkflowsNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetActionWorkflowsNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetActionWorkflowsNotFound) GetPayload() *models.StderrErrResponse {
@@ -458,13 +447,11 @@ func (o *GetActionWorkflowsInternalServerError) Code() int {
 }
 
 func (o *GetActionWorkflowsInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetActionWorkflowsInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows][%d] getActionWorkflowsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetActionWorkflowsInternalServerError) GetPayload() *models.StderrErrResponse {

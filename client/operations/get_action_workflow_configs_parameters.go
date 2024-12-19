@@ -63,7 +63,7 @@ type GetActionWorkflowConfigsParams struct {
 
 	/* ActionWorkflowID.
 
-	   app ID
+	   action workflow ID
 	*/
 	ActionWorkflowID string
 
