@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *CreateHelmComponentConfigCreated) Code() int {
 }
 
 func (o *CreateHelmComponentConfigCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateHelmComponentConfigCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateHelmComponentConfigCreated) GetPayload() *models.AppHelmComponentConfig {
@@ -180,13 +177,11 @@ func (o *CreateHelmComponentConfigBadRequest) Code() int {
 }
 
 func (o *CreateHelmComponentConfigBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateHelmComponentConfigBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateHelmComponentConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *CreateHelmComponentConfigUnauthorized) Code() int {
 }
 
 func (o *CreateHelmComponentConfigUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateHelmComponentConfigUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateHelmComponentConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *CreateHelmComponentConfigForbidden) Code() int {
 }
 
 func (o *CreateHelmComponentConfigForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateHelmComponentConfigForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateHelmComponentConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *CreateHelmComponentConfigNotFound) Code() int {
 }
 
 func (o *CreateHelmComponentConfigNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateHelmComponentConfigNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateHelmComponentConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *CreateHelmComponentConfigInternalServerError) Code() int {
 }
 
 func (o *CreateHelmComponentConfigInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateHelmComponentConfigInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateHelmComponentConfigInternalServerError) GetPayload() *models.StderrErrResponse {

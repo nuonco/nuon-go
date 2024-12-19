@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *UpdateComponentOK) Code() int {
 }
 
 func (o *UpdateComponentOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentOK %s", 200, payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentOK  %+v", 200, o.Payload)
 }
 
 func (o *UpdateComponentOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentOK %s", 200, payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentOK  %+v", 200, o.Payload)
 }
 
 func (o *UpdateComponentOK) GetPayload() *models.AppComponent {
@@ -180,13 +177,11 @@ func (o *UpdateComponentBadRequest) Code() int {
 }
 
 func (o *UpdateComponentBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentBadRequest %s", 400, payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *UpdateComponentBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentBadRequest %s", 400, payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *UpdateComponentBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *UpdateComponentUnauthorized) Code() int {
 }
 
 func (o *UpdateComponentUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *UpdateComponentUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *UpdateComponentUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *UpdateComponentForbidden) Code() int {
 }
 
 func (o *UpdateComponentForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentForbidden %s", 403, payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentForbidden  %+v", 403, o.Payload)
 }
 
 func (o *UpdateComponentForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentForbidden %s", 403, payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentForbidden  %+v", 403, o.Payload)
 }
 
 func (o *UpdateComponentForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *UpdateComponentNotFound) Code() int {
 }
 
 func (o *UpdateComponentNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentNotFound %s", 404, payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentNotFound  %+v", 404, o.Payload)
 }
 
 func (o *UpdateComponentNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentNotFound %s", 404, payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentNotFound  %+v", 404, o.Payload)
 }
 
 func (o *UpdateComponentNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *UpdateComponentInternalServerError) Code() int {
 }
 
 func (o *UpdateComponentInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *UpdateComponentInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *UpdateComponentInternalServerError) GetPayload() *models.StderrErrResponse {

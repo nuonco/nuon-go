@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *CreateAppCreated) Code() int {
 }
 
 func (o *CreateAppCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps][%d] createAppCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] createAppCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateAppCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps][%d] createAppCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] createAppCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateAppCreated) GetPayload() *models.AppApp {
@@ -180,13 +177,11 @@ func (o *CreateAppBadRequest) Code() int {
 }
 
 func (o *CreateAppBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps][%d] createAppBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] createAppBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateAppBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps][%d] createAppBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] createAppBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateAppBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *CreateAppUnauthorized) Code() int {
 }
 
 func (o *CreateAppUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps][%d] createAppUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] createAppUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateAppUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps][%d] createAppUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] createAppUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateAppUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *CreateAppForbidden) Code() int {
 }
 
 func (o *CreateAppForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps][%d] createAppForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] createAppForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateAppForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps][%d] createAppForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] createAppForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateAppForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *CreateAppNotFound) Code() int {
 }
 
 func (o *CreateAppNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps][%d] createAppNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] createAppNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateAppNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps][%d] createAppNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] createAppNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateAppNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *CreateAppInternalServerError) Code() int {
 }
 
 func (o *CreateAppInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps][%d] createAppInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] createAppInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateAppInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps][%d] createAppInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/apps][%d] createAppInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateAppInternalServerError) GetPayload() *models.StderrErrResponse {

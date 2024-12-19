@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *CreateOrgInviteCreated) Code() int {
 }
 
 func (o *CreateOrgInviteCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateOrgInviteCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateOrgInviteCreated) GetPayload() *models.AppOrgInvite {
@@ -180,13 +177,11 @@ func (o *CreateOrgInviteBadRequest) Code() int {
 }
 
 func (o *CreateOrgInviteBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateOrgInviteBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateOrgInviteBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *CreateOrgInviteUnauthorized) Code() int {
 }
 
 func (o *CreateOrgInviteUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateOrgInviteUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateOrgInviteUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *CreateOrgInviteForbidden) Code() int {
 }
 
 func (o *CreateOrgInviteForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateOrgInviteForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateOrgInviteForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *CreateOrgInviteNotFound) Code() int {
 }
 
 func (o *CreateOrgInviteNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateOrgInviteNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateOrgInviteNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *CreateOrgInviteInternalServerError) Code() int {
 }
 
 func (o *CreateOrgInviteInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateOrgInviteInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/invites][%d] createOrgInviteInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateOrgInviteInternalServerError) GetPayload() *models.StderrErrResponse {

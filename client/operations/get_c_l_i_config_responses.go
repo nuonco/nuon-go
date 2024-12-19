@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetCLIConfigOK) Code() int {
 }
 
 func (o *GetCLIConfigOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigOK  %+v", 200, o.Payload)
 }
 
 func (o *GetCLIConfigOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigOK  %+v", 200, o.Payload)
 }
 
 func (o *GetCLIConfigOK) GetPayload() *models.ServiceCLIConfig {
@@ -180,13 +177,11 @@ func (o *GetCLIConfigBadRequest) Code() int {
 }
 
 func (o *GetCLIConfigBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetCLIConfigBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetCLIConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *GetCLIConfigUnauthorized) Code() int {
 }
 
 func (o *GetCLIConfigUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetCLIConfigUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetCLIConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *GetCLIConfigForbidden) Code() int {
 }
 
 func (o *GetCLIConfigForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetCLIConfigForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetCLIConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *GetCLIConfigNotFound) Code() int {
 }
 
 func (o *GetCLIConfigNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetCLIConfigNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetCLIConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *GetCLIConfigInternalServerError) Code() int {
 }
 
 func (o *GetCLIConfigInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetCLIConfigInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/general/cli-config][%d] getCLIConfigInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetCLIConfigInternalServerError) GetPayload() *models.StderrErrResponse {

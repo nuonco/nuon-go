@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetBuildOK) Code() int {
 }
 
 func (o *GetBuildOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildOK  %+v", 200, o.Payload)
 }
 
 func (o *GetBuildOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildOK  %+v", 200, o.Payload)
 }
 
 func (o *GetBuildOK) GetPayload() *models.AppComponentBuild {
@@ -180,13 +177,11 @@ func (o *GetBuildBadRequest) Code() int {
 }
 
 func (o *GetBuildBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetBuildBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetBuildBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *GetBuildUnauthorized) Code() int {
 }
 
 func (o *GetBuildUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetBuildUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetBuildUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *GetBuildForbidden) Code() int {
 }
 
 func (o *GetBuildForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetBuildForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetBuildForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *GetBuildNotFound) Code() int {
 }
 
 func (o *GetBuildNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetBuildNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetBuildNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *GetBuildInternalServerError) Code() int {
 }
 
 func (o *GetBuildInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetBuildInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetBuildInternalServerError) GetPayload() *models.StderrErrResponse {

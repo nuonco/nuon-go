@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *UpdateAppActionWorkflowCreated) Code() int {
 }
 
 func (o *UpdateAppActionWorkflowCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowCreated %s", 201, payload)
+	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowCreated  %+v", 201, o.Payload)
 }
 
 func (o *UpdateAppActionWorkflowCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowCreated %s", 201, payload)
+	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowCreated  %+v", 201, o.Payload)
 }
 
 func (o *UpdateAppActionWorkflowCreated) GetPayload() *models.AppActionWorkflow {
@@ -180,13 +177,11 @@ func (o *UpdateAppActionWorkflowBadRequest) Code() int {
 }
 
 func (o *UpdateAppActionWorkflowBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowBadRequest %s", 400, payload)
+	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *UpdateAppActionWorkflowBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowBadRequest %s", 400, payload)
+	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *UpdateAppActionWorkflowBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *UpdateAppActionWorkflowUnauthorized) Code() int {
 }
 
 func (o *UpdateAppActionWorkflowUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *UpdateAppActionWorkflowUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *UpdateAppActionWorkflowUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *UpdateAppActionWorkflowForbidden) Code() int {
 }
 
 func (o *UpdateAppActionWorkflowForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowForbidden %s", 403, payload)
+	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowForbidden  %+v", 403, o.Payload)
 }
 
 func (o *UpdateAppActionWorkflowForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowForbidden %s", 403, payload)
+	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowForbidden  %+v", 403, o.Payload)
 }
 
 func (o *UpdateAppActionWorkflowForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *UpdateAppActionWorkflowNotFound) Code() int {
 }
 
 func (o *UpdateAppActionWorkflowNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowNotFound %s", 404, payload)
+	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowNotFound  %+v", 404, o.Payload)
 }
 
 func (o *UpdateAppActionWorkflowNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowNotFound %s", 404, payload)
+	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowNotFound  %+v", 404, o.Payload)
 }
 
 func (o *UpdateAppActionWorkflowNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *UpdateAppActionWorkflowInternalServerError) Code() int {
 }
 
 func (o *UpdateAppActionWorkflowInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *UpdateAppActionWorkflowInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[PATCH /v1/action-workflows/{action_workflow_id}][%d] updateAppActionWorkflowInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *UpdateAppActionWorkflowInternalServerError) GetPayload() *models.StderrErrResponse {

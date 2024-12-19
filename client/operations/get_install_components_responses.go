@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetInstallComponentsOK) Code() int {
 }
 
 func (o *GetInstallComponentsOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsOK  %+v", 200, o.Payload)
 }
 
 func (o *GetInstallComponentsOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsOK  %+v", 200, o.Payload)
 }
 
 func (o *GetInstallComponentsOK) GetPayload() []*models.AppInstallComponent {
@@ -178,13 +175,11 @@ func (o *GetInstallComponentsBadRequest) Code() int {
 }
 
 func (o *GetInstallComponentsBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetInstallComponentsBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetInstallComponentsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -248,13 +243,11 @@ func (o *GetInstallComponentsUnauthorized) Code() int {
 }
 
 func (o *GetInstallComponentsUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetInstallComponentsUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetInstallComponentsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -318,13 +311,11 @@ func (o *GetInstallComponentsForbidden) Code() int {
 }
 
 func (o *GetInstallComponentsForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetInstallComponentsForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetInstallComponentsForbidden) GetPayload() *models.StderrErrResponse {
@@ -388,13 +379,11 @@ func (o *GetInstallComponentsNotFound) Code() int {
 }
 
 func (o *GetInstallComponentsNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetInstallComponentsNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetInstallComponentsNotFound) GetPayload() *models.StderrErrResponse {
@@ -458,13 +447,11 @@ func (o *GetInstallComponentsInternalServerError) Code() int {
 }
 
 func (o *GetInstallComponentsInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetInstallComponentsInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components][%d] getInstallComponentsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetInstallComponentsInternalServerError) GetPayload() *models.StderrErrResponse {

@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *UpdateAppOK) Code() int {
 }
 
 func (o *UpdateAppOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppOK %s", 200, payload)
+	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppOK  %+v", 200, o.Payload)
 }
 
 func (o *UpdateAppOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppOK %s", 200, payload)
+	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppOK  %+v", 200, o.Payload)
 }
 
 func (o *UpdateAppOK) GetPayload() *models.AppApp {
@@ -180,13 +177,11 @@ func (o *UpdateAppBadRequest) Code() int {
 }
 
 func (o *UpdateAppBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppBadRequest %s", 400, payload)
+	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *UpdateAppBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppBadRequest %s", 400, payload)
+	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *UpdateAppBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *UpdateAppUnauthorized) Code() int {
 }
 
 func (o *UpdateAppUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *UpdateAppUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *UpdateAppUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *UpdateAppForbidden) Code() int {
 }
 
 func (o *UpdateAppForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppForbidden %s", 403, payload)
+	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppForbidden  %+v", 403, o.Payload)
 }
 
 func (o *UpdateAppForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppForbidden %s", 403, payload)
+	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppForbidden  %+v", 403, o.Payload)
 }
 
 func (o *UpdateAppForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *UpdateAppNotFound) Code() int {
 }
 
 func (o *UpdateAppNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppNotFound %s", 404, payload)
+	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppNotFound  %+v", 404, o.Payload)
 }
 
 func (o *UpdateAppNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppNotFound %s", 404, payload)
+	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppNotFound  %+v", 404, o.Payload)
 }
 
 func (o *UpdateAppNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *UpdateAppInternalServerError) Code() int {
 }
 
 func (o *UpdateAppInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *UpdateAppInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[PATCH /v1/apps/{app_id}][%d] updateAppInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *UpdateAppInternalServerError) GetPayload() *models.StderrErrResponse {

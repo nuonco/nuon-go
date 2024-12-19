@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetOrgInstallsOK) Code() int {
 }
 
 func (o *GetOrgInstallsOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsOK  %+v", 200, o.Payload)
 }
 
 func (o *GetOrgInstallsOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsOK  %+v", 200, o.Payload)
 }
 
 func (o *GetOrgInstallsOK) GetPayload() []*models.AppInstall {
@@ -178,13 +175,11 @@ func (o *GetOrgInstallsBadRequest) Code() int {
 }
 
 func (o *GetOrgInstallsBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetOrgInstallsBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetOrgInstallsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -248,13 +243,11 @@ func (o *GetOrgInstallsUnauthorized) Code() int {
 }
 
 func (o *GetOrgInstallsUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetOrgInstallsUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetOrgInstallsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -318,13 +311,11 @@ func (o *GetOrgInstallsForbidden) Code() int {
 }
 
 func (o *GetOrgInstallsForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetOrgInstallsForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetOrgInstallsForbidden) GetPayload() *models.StderrErrResponse {
@@ -388,13 +379,11 @@ func (o *GetOrgInstallsNotFound) Code() int {
 }
 
 func (o *GetOrgInstallsNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetOrgInstallsNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetOrgInstallsNotFound) GetPayload() *models.StderrErrResponse {
@@ -458,13 +447,11 @@ func (o *GetOrgInstallsInternalServerError) Code() int {
 }
 
 func (o *GetOrgInstallsInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetOrgInstallsInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/installs][%d] getOrgInstallsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetOrgInstallsInternalServerError) GetPayload() *models.StderrErrResponse {

@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *TeardownInstallComponentCreated) Code() int {
 }
 
 func (o *TeardownInstallComponentCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentCreated  %+v", 201, o.Payload)
 }
 
 func (o *TeardownInstallComponentCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentCreated  %+v", 201, o.Payload)
 }
 
 func (o *TeardownInstallComponentCreated) GetPayload() *models.AppInstallDeploy {
@@ -180,13 +177,11 @@ func (o *TeardownInstallComponentBadRequest) Code() int {
 }
 
 func (o *TeardownInstallComponentBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *TeardownInstallComponentBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *TeardownInstallComponentBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *TeardownInstallComponentUnauthorized) Code() int {
 }
 
 func (o *TeardownInstallComponentUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *TeardownInstallComponentUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *TeardownInstallComponentUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *TeardownInstallComponentForbidden) Code() int {
 }
 
 func (o *TeardownInstallComponentForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentForbidden  %+v", 403, o.Payload)
 }
 
 func (o *TeardownInstallComponentForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentForbidden  %+v", 403, o.Payload)
 }
 
 func (o *TeardownInstallComponentForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *TeardownInstallComponentNotFound) Code() int {
 }
 
 func (o *TeardownInstallComponentNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentNotFound  %+v", 404, o.Payload)
 }
 
 func (o *TeardownInstallComponentNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentNotFound  %+v", 404, o.Payload)
 }
 
 func (o *TeardownInstallComponentNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *TeardownInstallComponentInternalServerError) Code() int {
 }
 
 func (o *TeardownInstallComponentInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *TeardownInstallComponentInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *TeardownInstallComponentInternalServerError) GetPayload() *models.StderrErrResponse {
