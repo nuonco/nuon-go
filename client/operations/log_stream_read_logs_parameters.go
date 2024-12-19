@@ -61,6 +61,12 @@ LogStreamReadLogsParams contains all the parameters to send to the API endpoint
 */
 type LogStreamReadLogsParams struct {
 
+	/* XNuonAPIOffset.
+
+	   log stream offset
+	*/
+	XNuonAPIOffset string
+
 	/* LogStreamID.
 
 	   log stream ID
@@ -120,6 +126,17 @@ func (o *LogStreamReadLogsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXNuonAPIOffset adds the xNuonAPIOffset to the log stream read logs params
+func (o *LogStreamReadLogsParams) WithXNuonAPIOffset(xNuonAPIOffset string) *LogStreamReadLogsParams {
+	o.SetXNuonAPIOffset(xNuonAPIOffset)
+	return o
+}
+
+// SetXNuonAPIOffset adds the xNuonApiOffset to the log stream read logs params
+func (o *LogStreamReadLogsParams) SetXNuonAPIOffset(xNuonAPIOffset string) {
+	o.XNuonAPIOffset = xNuonAPIOffset
+}
+
 // WithLogStreamID adds the logStreamID to the log stream read logs params
 func (o *LogStreamReadLogsParams) WithLogStreamID(logStreamID string) *LogStreamReadLogsParams {
 	o.SetLogStreamID(logStreamID)
@@ -138,6 +155,11 @@ func (o *LogStreamReadLogsParams) WriteToRequest(r runtime.ClientRequest, reg st
 		return err
 	}
 	var res []error
+
+	// header param X-Nuon-API-Offset
+	if err := r.SetHeaderParam("X-Nuon-API-Offset", o.XNuonAPIOffset); err != nil {
+		return err
+	}
 
 	// path param log_stream_id
 	if err := r.SetPathParam("log_stream_id", o.LogStreamID); err != nil {
