@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *CancelRunnerJobAccepted) Code() int {
 }
 
 func (o *CancelRunnerJobAccepted) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobAccepted %s", 202, payload)
+	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobAccepted  %+v", 202, o.Payload)
 }
 
 func (o *CancelRunnerJobAccepted) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobAccepted %s", 202, payload)
+	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobAccepted  %+v", 202, o.Payload)
 }
 
 func (o *CancelRunnerJobAccepted) GetPayload() *models.AppRunnerJob {
@@ -180,13 +177,11 @@ func (o *CancelRunnerJobBadRequest) Code() int {
 }
 
 func (o *CancelRunnerJobBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobBadRequest %s", 400, payload)
+	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CancelRunnerJobBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobBadRequest %s", 400, payload)
+	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CancelRunnerJobBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *CancelRunnerJobUnauthorized) Code() int {
 }
 
 func (o *CancelRunnerJobUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CancelRunnerJobUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CancelRunnerJobUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *CancelRunnerJobForbidden) Code() int {
 }
 
 func (o *CancelRunnerJobForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobForbidden %s", 403, payload)
+	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CancelRunnerJobForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobForbidden %s", 403, payload)
+	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CancelRunnerJobForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *CancelRunnerJobNotFound) Code() int {
 }
 
 func (o *CancelRunnerJobNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobNotFound %s", 404, payload)
+	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CancelRunnerJobNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobNotFound %s", 404, payload)
+	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CancelRunnerJobNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *CancelRunnerJobInternalServerError) Code() int {
 }
 
 func (o *CancelRunnerJobInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CancelRunnerJobInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[DELETE /v1/runner-jobs/{runner_job_id}/cancel][%d] cancelRunnerJobInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CancelRunnerJobInternalServerError) GetPayload() *models.StderrErrResponse {
