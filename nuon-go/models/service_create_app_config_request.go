@@ -18,7 +18,7 @@ import (
 type ServiceCreateAppConfigRequest struct {
 
 	// not required Readme
-	ReadMe string `json:"read_me,omitempty"`
+	Readme string `json:"readme,omitempty"`
 }
 
 // Validate validates this service create app config request
