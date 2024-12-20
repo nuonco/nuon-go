@@ -28,6 +28,9 @@ type AppRunnerJob struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
+	// execution count
+	ExecutionCount int64 `json:"execution_count,omitempty"`
+
 	// execution timeout is how long a job can be marked as "exeucuting" before being requeued
 	ExecutionTimeout int64 `json:"execution_timeout,omitempty"`
 
