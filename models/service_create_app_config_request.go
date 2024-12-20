@@ -17,7 +17,7 @@ import (
 // swagger:model service.CreateAppConfigRequest
 type ServiceCreateAppConfigRequest struct {
 
-	// not required ReadMe
+	// not required Readme
 	ReadMe string `json:"read_me,omitempty"`
 }
 

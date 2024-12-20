@@ -33,8 +33,8 @@ type AppAppConfig struct {
 	// org id
 	OrgID string `json:"org_id,omitempty"`
 
-	// read me
-	ReadMe string `json:"read_me,omitempty"`
+	// readme
+	Readme string `json:"readme,omitempty"`
 
 	// state
 	State string `json:"state,omitempty"`
