@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *CreateComponentReleaseCreated) Code() int {
 }
 
 func (o *CreateComponentReleaseCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateComponentReleaseCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateComponentReleaseCreated) GetPayload() *models.AppComponentRelease {
@@ -180,13 +177,11 @@ func (o *CreateComponentReleaseBadRequest) Code() int {
 }
 
 func (o *CreateComponentReleaseBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateComponentReleaseBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateComponentReleaseBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *CreateComponentReleaseUnauthorized) Code() int {
 }
 
 func (o *CreateComponentReleaseUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateComponentReleaseUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateComponentReleaseUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *CreateComponentReleaseForbidden) Code() int {
 }
 
 func (o *CreateComponentReleaseForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateComponentReleaseForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateComponentReleaseForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *CreateComponentReleaseNotFound) Code() int {
 }
 
 func (o *CreateComponentReleaseNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateComponentReleaseNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateComponentReleaseNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *CreateComponentReleaseInternalServerError) Code() int {
 }
 
 func (o *CreateComponentReleaseInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateComponentReleaseInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateComponentReleaseInternalServerError) GetPayload() *models.StderrErrResponse {
