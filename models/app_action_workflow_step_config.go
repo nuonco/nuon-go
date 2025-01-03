@@ -27,6 +27,9 @@ type AppActionWorkflowStepConfig struct {
 	// app id
 	AppID string `json:"app_id,omitempty"`
 
+	// command
+	Command string `json:"command,omitempty"`
+
 	// connected github vcs config
 	ConnectedGithubVcsConfig *AppConnectedGithubVCSConfig `json:"connected_github_vcs_config,omitempty"`
 
