@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -30,22 +31,30 @@ type AppInstallActionWorkflowRun struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
+	// after query
+	// TODO: update runner to track start and finish timestamps
+	ExecutionTime int64 `json:"execution_time,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
 	// install id
 	InstallID string `json:"install_id,omitempty"`
 
-	// runner details
-	RunnerJob struct {
-		AppRunnerJob
-	} `json:"runner_job,omitempty"`
+	// log stream
+	LogStream *AppLogStream `json:"log_stream,omitempty"`
+
+	// runner job
+	RunnerJob *AppRunnerJob `json:"runner_job,omitempty"`
 
 	// status
 	Status string `json:"status,omitempty"`
 
 	// status description
 	StatusDescription string `json:"status_description,omitempty"`
+
+	// steps
+	Steps []*AppInstallActionWorkflowRunStep `json:"steps"`
 
 	// trigger type
 	TriggerType AppActionWorkflowTriggerType `json:"trigger_type,omitempty"`
@@ -62,7 +71,15 @@ func (m *AppInstallActionWorkflowRun) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateLogStream(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateRunnerJob(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSteps(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -95,9 +112,65 @@ func (m *AppInstallActionWorkflowRun) validateConfig(formats strfmt.Registry) er
 	return nil
 }
 
+func (m *AppInstallActionWorkflowRun) validateLogStream(formats strfmt.Registry) error {
+	if swag.IsZero(m.LogStream) { // not required
+		return nil
+	}
+
+	if m.LogStream != nil {
+		if err := m.LogStream.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("log_stream")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("log_stream")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *AppInstallActionWorkflowRun) validateRunnerJob(formats strfmt.Registry) error {
 	if swag.IsZero(m.RunnerJob) { // not required
 		return nil
+	}
+
+	if m.RunnerJob != nil {
+		if err := m.RunnerJob.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("runner_job")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("runner_job")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppInstallActionWorkflowRun) validateSteps(formats strfmt.Registry) error {
+	if swag.IsZero(m.Steps) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Steps); i++ {
+		if swag.IsZero(m.Steps[i]) { // not required
+			continue
+		}
+
+		if m.Steps[i] != nil {
+			if err := m.Steps[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("steps" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("steps" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -128,7 +201,15 @@ func (m *AppInstallActionWorkflowRun) ContextValidate(ctx context.Context, forma
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateLogStream(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateRunnerJob(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSteps(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -163,7 +244,69 @@ func (m *AppInstallActionWorkflowRun) contextValidateConfig(ctx context.Context,
 	return nil
 }
 
+func (m *AppInstallActionWorkflowRun) contextValidateLogStream(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.LogStream != nil {
+
+		if swag.IsZero(m.LogStream) { // not required
+			return nil
+		}
+
+		if err := m.LogStream.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("log_stream")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("log_stream")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *AppInstallActionWorkflowRun) contextValidateRunnerJob(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.RunnerJob != nil {
+
+		if swag.IsZero(m.RunnerJob) { // not required
+			return nil
+		}
+
+		if err := m.RunnerJob.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("runner_job")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("runner_job")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppInstallActionWorkflowRun) contextValidateSteps(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Steps); i++ {
+
+		if m.Steps[i] != nil {
+
+			if swag.IsZero(m.Steps[i]) { // not required
+				return nil
+			}
+
+			if err := m.Steps[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("steps" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("steps" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
 
 	return nil
 }

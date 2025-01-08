@@ -8,7 +8,6 @@ package models
 import (
 	"context"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -40,9 +39,7 @@ type AppActionWorkflowTriggerConfig struct {
 	ID string `json:"id,omitempty"`
 
 	// individual fields for different types
-	Type struct {
-		AppActionWorkflowTriggerType
-	} `json:"type,omitempty"`
+	Type string `json:"type,omitempty"`
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
@@ -50,42 +47,11 @@ type AppActionWorkflowTriggerConfig struct {
 
 // Validate validates this app action workflow trigger config
 func (m *AppActionWorkflowTriggerConfig) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateType(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
 	return nil
 }
 
-func (m *AppActionWorkflowTriggerConfig) validateType(formats strfmt.Registry) error {
-	if swag.IsZero(m.Type) { // not required
-		return nil
-	}
-
-	return nil
-}
-
-// ContextValidate validate this app action workflow trigger config based on the context it is used
+// ContextValidate validates this app action workflow trigger config based on context it is used
 func (m *AppActionWorkflowTriggerConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateType(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *AppActionWorkflowTriggerConfig) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
-
 	return nil
 }
 
