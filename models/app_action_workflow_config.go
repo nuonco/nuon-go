@@ -22,7 +22,7 @@ type AppActionWorkflowConfig struct {
 	// action workflow id
 	ActionWorkflowID string `json:"action_workflow_id,omitempty"`
 
-	// this belongs to an app config id
+	// app config id
 	AppConfigID string `json:"app_config_id,omitempty"`
 
 	// app id
@@ -39,6 +39,9 @@ type AppActionWorkflowConfig struct {
 
 	// steps
 	Steps []*AppActionWorkflowStepConfig `json:"steps"`
+
+	// timeout
+	Timeout int64 `json:"timeout,omitempty"`
 
 	// triggers
 	Triggers []*AppActionWorkflowTriggerConfig `json:"triggers"`

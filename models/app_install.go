@@ -67,6 +67,9 @@ type AppInstall struct {
 	// name
 	Name string `json:"name,omitempty"`
 
+	// runner id
+	RunnerID string `json:"runner_id,omitempty"`
+
 	// runner status
 	RunnerStatus string `json:"runner_status,omitempty"`
 
