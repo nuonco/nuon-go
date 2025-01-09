@@ -160,6 +160,7 @@ type Client interface {
 	// actions
 	GetActionWorkflows(ctx context.Context, appID string) ([]*models.AppActionWorkflow, error)
 	GetActionWorkflow(ctx context.Context, actionWorkflowID string) (*models.AppActionWorkflow, error)
+	GetAppActionWorkflow(ctx context.Context, appID, actionWorkflowID string) (*models.AppActionWorkflow, error)
 	CreateActionWorkflow(ctx context.Context, appID string, req *models.ServiceCreateAppActionWorkflowRequest) (*models.AppActionWorkflow, error)
 	UpdateActionWorkflow(ctx context.Context, actionWorkflowID string, req *models.ServiceUpdateActionWorkflowRequest) (*models.AppActionWorkflow, error)
 	DeleteActionWorkflow(ctx context.Context, actionWorkflowID string) error

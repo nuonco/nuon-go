@@ -647,6 +647,21 @@ func (mr *MockClientMockRecorder) GetApp(ctx, appID interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetApp", reflect.TypeOf((*MockClient)(nil).GetApp), ctx, appID)
 }
 
+// GetAppActionWorkflow mocks base method.
+func (m *MockClient) GetAppActionWorkflow(ctx context.Context, appID, actionWorkflowID string) (*models.AppActionWorkflow, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAppActionWorkflow", ctx, appID, actionWorkflowID)
+	ret0, _ := ret[0].(*models.AppActionWorkflow)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAppActionWorkflow indicates an expected call of GetAppActionWorkflow.
+func (mr *MockClientMockRecorder) GetAppActionWorkflow(ctx, appID, actionWorkflowID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppActionWorkflow", reflect.TypeOf((*MockClient)(nil).GetAppActionWorkflow), ctx, appID, actionWorkflowID)
+}
+
 // GetAppComponent mocks base method.
 func (m *MockClient) GetAppComponent(ctx context.Context, appID, componentNameOrID string) (*models.AppComponent, error) {
 	m.ctrl.T.Helper()

@@ -28,6 +28,9 @@ type ServiceCreateActionWorkflowConfigRequest struct {
 	// Required: true
 	Steps []*ServiceCreateActionWorkflowConfigStepRequest `json:"steps"`
 
+	// timeout
+	Timeout int64 `json:"timeout,omitempty"`
+
 	// triggers
 	// Required: true
 	Triggers []*ServiceCreateActionWorkflowConfigTriggerRequest `json:"triggers"`
