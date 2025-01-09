@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetAppComponentOK) Code() int {
 }
 
 func (o *GetAppComponentOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentOK  %+v", 200, o.Payload)
 }
 
 func (o *GetAppComponentOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentOK  %+v", 200, o.Payload)
 }
 
 func (o *GetAppComponentOK) GetPayload() *models.AppComponent {
@@ -180,13 +177,11 @@ func (o *GetAppComponentBadRequest) Code() int {
 }
 
 func (o *GetAppComponentBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetAppComponentBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetAppComponentBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *GetAppComponentUnauthorized) Code() int {
 }
 
 func (o *GetAppComponentUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetAppComponentUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetAppComponentUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *GetAppComponentForbidden) Code() int {
 }
 
 func (o *GetAppComponentForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetAppComponentForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetAppComponentForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *GetAppComponentNotFound) Code() int {
 }
 
 func (o *GetAppComponentNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetAppComponentNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetAppComponentNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *GetAppComponentInternalServerError) Code() int {
 }
 
 func (o *GetAppComponentInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetAppComponentInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/component/{component_name_or_id}][%d] getAppComponentInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetAppComponentInternalServerError) GetPayload() *models.StderrErrResponse {

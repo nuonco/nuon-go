@@ -20,10 +20,25 @@ func (c *client) GetActionWorkflows(ctx context.Context, appID string) ([]*model
 	return resp.Payload, nil
 }
 
+// deprecated
 func (c *client) GetActionWorkflow(ctx context.Context, actionWorkflowID string) (*models.AppActionWorkflow, error) {
 	resp, err := c.genClient.Operations.GetActionWorkflow(&operations.GetActionWorkflowParams{
 		ActionWorkflowID: actionWorkflowID,
 		Context:          ctx,
+	}, c.getOrgIDAuthInfo())
+
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}
+
+func (c *client) GetAppActionWorkflow(ctx context.Context, appID, actionWorkflowID string) (*models.AppActionWorkflow, error) {
+	resp, err := c.genClient.Operations.GetAppActionWorkflow(&operations.GetAppActionWorkflowParams{
+		AppID:           appID,
+		ActionWorkflowID: actionWorkflowID,
+		Context:         ctx,
 	}, c.getOrgIDAuthInfo())
 
 	if err != nil {

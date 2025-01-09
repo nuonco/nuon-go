@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -80,13 +79,11 @@ func (o *CreateWaitlistOK) Code() int {
 }
 
 func (o *CreateWaitlistOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/general/waitlist][%d] createWaitlistOK %s", 200, payload)
+	return fmt.Sprintf("[POST /v1/general/waitlist][%d] createWaitlistOK  %+v", 200, o.Payload)
 }
 
 func (o *CreateWaitlistOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/general/waitlist][%d] createWaitlistOK %s", 200, payload)
+	return fmt.Sprintf("[POST /v1/general/waitlist][%d] createWaitlistOK  %+v", 200, o.Payload)
 }
 
 func (o *CreateWaitlistOK) GetPayload() *models.AppWaitlist {
