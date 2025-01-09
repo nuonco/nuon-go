@@ -31,11 +31,17 @@ type AppRunnerJob struct {
 	// execution count
 	ExecutionCount int64 `json:"execution_count,omitempty"`
 
+	// execution time
+	ExecutionTime int64 `json:"execution_time,omitempty"`
+
 	// execution timeout is how long a job can be marked as "exeucuting" before being requeued
 	ExecutionTimeout int64 `json:"execution_timeout,omitempty"`
 
 	// executions
 	Executions []*AppRunnerJobExecution `json:"executions"`
+
+	// finished at
+	FinishedAt string `json:"finished_at,omitempty"`
 
 	// group
 	Group AppRunnerJobGroup `json:"group,omitempty"`
@@ -69,6 +75,9 @@ type AppRunnerJob struct {
 
 	// runner id
 	RunnerID string `json:"runner_id,omitempty"`
+
+	// started at
+	StartedAt string `json:"started_at,omitempty"`
 
 	// status
 	Status AppRunnerJobStatus `json:"status,omitempty"`
