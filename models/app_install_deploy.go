@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -55,9 +56,7 @@ type AppInstallDeploy struct {
 	ReleaseID string `json:"release_id,omitempty"`
 
 	// runner details
-	RunnerJob struct {
-		AppRunnerJob
-	} `json:"runner_job,omitempty"`
+	RunnerJobs []*AppRunnerJob `json:"runner_jobs"`
 
 	// status
 	Status string `json:"status,omitempty"`
@@ -81,7 +80,7 @@ func (m *AppInstallDeploy) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateRunnerJob(formats); err != nil {
+	if err := m.validateRunnerJobs(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -127,9 +126,27 @@ func (m *AppInstallDeploy) validateLogStream(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *AppInstallDeploy) validateRunnerJob(formats strfmt.Registry) error {
-	if swag.IsZero(m.RunnerJob) { // not required
+func (m *AppInstallDeploy) validateRunnerJobs(formats strfmt.Registry) error {
+	if swag.IsZero(m.RunnerJobs) { // not required
 		return nil
+	}
+
+	for i := 0; i < len(m.RunnerJobs); i++ {
+		if swag.IsZero(m.RunnerJobs[i]) { // not required
+			continue
+		}
+
+		if m.RunnerJobs[i] != nil {
+			if err := m.RunnerJobs[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("runner_jobs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("runner_jobs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -147,7 +164,7 @@ func (m *AppInstallDeploy) ContextValidate(ctx context.Context, formats strfmt.R
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateRunnerJob(ctx, formats); err != nil {
+	if err := m.contextValidateRunnerJobs(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -196,7 +213,27 @@ func (m *AppInstallDeploy) contextValidateLogStream(ctx context.Context, formats
 	return nil
 }
 
-func (m *AppInstallDeploy) contextValidateRunnerJob(ctx context.Context, formats strfmt.Registry) error {
+func (m *AppInstallDeploy) contextValidateRunnerJobs(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.RunnerJobs); i++ {
+
+		if m.RunnerJobs[i] != nil {
+
+			if swag.IsZero(m.RunnerJobs[i]) { // not required
+				return nil
+			}
+
+			if err := m.RunnerJobs[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("runner_jobs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("runner_jobs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
 
 	return nil
 }

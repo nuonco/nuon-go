@@ -30,6 +30,9 @@ type AppRunnerJobExecution struct {
 	// org id
 	OrgID string `json:"org_id,omitempty"`
 
+	// outputs
+	Outputs *AppRunnerJobExecutionOutputs `json:"outputs,omitempty"`
+
 	// result
 	Result *AppRunnerJobExecutionResult `json:"result,omitempty"`
 
@@ -47,6 +50,10 @@ type AppRunnerJobExecution struct {
 func (m *AppRunnerJobExecution) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateOutputs(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateResult(formats); err != nil {
 		res = append(res, err)
 	}
@@ -58,6 +65,25 @@ func (m *AppRunnerJobExecution) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppRunnerJobExecution) validateOutputs(formats strfmt.Registry) error {
+	if swag.IsZero(m.Outputs) { // not required
+		return nil
+	}
+
+	if m.Outputs != nil {
+		if err := m.Outputs.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("outputs")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("outputs")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -101,6 +127,10 @@ func (m *AppRunnerJobExecution) validateStatus(formats strfmt.Registry) error {
 func (m *AppRunnerJobExecution) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateOutputs(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateResult(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -112,6 +142,27 @@ func (m *AppRunnerJobExecution) ContextValidate(ctx context.Context, formats str
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppRunnerJobExecution) contextValidateOutputs(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Outputs != nil {
+
+		if swag.IsZero(m.Outputs) { // not required
+			return nil
+		}
+
+		if err := m.Outputs.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("outputs")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("outputs")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

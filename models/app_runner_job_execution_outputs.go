@@ -12,10 +12,10 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// AppRunnerJobExecutionResult app runner job execution result
+// AppRunnerJobExecutionOutputs app runner job execution outputs
 //
-// swagger:model app.RunnerJobExecutionResult
-type AppRunnerJobExecutionResult struct {
+// swagger:model app.RunnerJobExecutionOutputs
+type AppRunnerJobExecutionOutputs struct {
 
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
@@ -23,40 +23,37 @@ type AppRunnerJobExecutionResult struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
-	// error code
-	ErrorCode int64 `json:"error_code,omitempty"`
-
-	// error metadata
-	ErrorMetadata map[string]string `json:"error_metadata,omitempty"`
-
 	// id
 	ID string `json:"id,omitempty"`
 
 	// org id
 	OrgID string `json:"org_id,omitempty"`
 
+	// outputs
+	Outputs map[string]interface{} `json:"outputs,omitempty"`
+
+	// outputs json
+	OutputsJSON string `json:"outputs_json,omitempty"`
+
 	// runner job execution id
 	RunnerJobExecutionID string `json:"runner_job_execution_id,omitempty"`
-
-	// success
-	Success bool `json:"success,omitempty"`
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
 }
 
-// Validate validates this app runner job execution result
-func (m *AppRunnerJobExecutionResult) Validate(formats strfmt.Registry) error {
+// Validate validates this app runner job execution outputs
+func (m *AppRunnerJobExecutionOutputs) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this app runner job execution result based on context it is used
-func (m *AppRunnerJobExecutionResult) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this app runner job execution outputs based on context it is used
+func (m *AppRunnerJobExecutionOutputs) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *AppRunnerJobExecutionResult) MarshalBinary() ([]byte, error) {
+func (m *AppRunnerJobExecutionOutputs) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -64,8 +61,8 @@ func (m *AppRunnerJobExecutionResult) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *AppRunnerJobExecutionResult) UnmarshalBinary(b []byte) error {
-	var res AppRunnerJobExecutionResult
+func (m *AppRunnerJobExecutionOutputs) UnmarshalBinary(b []byte) error {
+	var res AppRunnerJobExecutionOutputs
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
