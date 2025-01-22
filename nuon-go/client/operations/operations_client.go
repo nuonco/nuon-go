@@ -194,6 +194,8 @@ type ClientService interface {
 
 	GetInstallComponentLatestDeploy(params *GetInstallComponentLatestDeployParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallComponentLatestDeployOK, error)
 
+	GetInstallComponentOutputs(params *GetInstallComponentOutputsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallComponentOutputsOK, error)
+
 	GetInstallComponents(params *GetInstallComponentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallComponentsOK, error)
 
 	GetInstallDeploy(params *GetInstallDeployParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallDeployOK, error)
@@ -277,6 +279,8 @@ type ClientService interface {
 	UpdateComponent(params *UpdateComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateComponentOK, error)
 
 	UpdateInstall(params *UpdateInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallOK, error)
+
+	UpdateInstallInput(params *UpdateInstallInputParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallInputOK, error)
 
 	UpdateInstaller(params *UpdateInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallerCreated, error)
 
@@ -3547,6 +3551,49 @@ func (a *Client) GetInstallComponentLatestDeploy(params *GetInstallComponentLate
 }
 
 /*
+	GetInstallComponentOutputs gets an install component outputs
+
+	Return the latest outputs for a component.
+
+**NOTE** requires a valid install.
+*/
+func (a *Client) GetInstallComponentOutputs(params *GetInstallComponentOutputsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallComponentOutputsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetInstallComponentOutputsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetInstallComponentOutputs",
+		Method:             "GET",
+		PathPattern:        "/v1/installs/{install_id}/components/{component_id}/outputs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetInstallComponentOutputsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetInstallComponentOutputsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetInstallComponentOutputs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetInstallComponents gets an installs components
 */
 func (a *Client) GetInstallComponents(params *GetInstallComponentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallComponentsOK, error) {
@@ -5222,6 +5269,45 @@ func (a *Client) UpdateInstall(params *UpdateInstallParams, authInfo runtime.Cli
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateInstall: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateInstallInput updates install input config for app
+*/
+func (a *Client) UpdateInstallInput(params *UpdateInstallInputParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallInputOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateInstallInputParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateInstallInput",
+		Method:             "PATCH",
+		PathPattern:        "/v1/installs/{install_id}/inputs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateInstallInputReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateInstallInputOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateInstallInput: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

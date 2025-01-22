@@ -1512,6 +1512,21 @@ func (mr *MockClientMockRecorder) UpdateInstall(ctx, installID, req interface{})
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateInstall", reflect.TypeOf((*MockClient)(nil).UpdateInstall), ctx, installID, req)
 }
 
+// UpdateInstallInput mocks base method.
+func (m *MockClient) UpdateInstallInput(ctx context.Context, installID string, req *models.ServiceUpdateInstallInputRequest) (*models.AppInstallInputs, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateInstallInput", ctx, installID, req)
+	ret0, _ := ret[0].(*models.AppInstallInputs)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateInstallInput indicates an expected call of UpdateInstallInput.
+func (mr *MockClientMockRecorder) UpdateInstallInput(ctx, installID, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateInstallInput", reflect.TypeOf((*MockClient)(nil).UpdateInstallInput), ctx, installID, req)
+}
+
 // UpdateInstaller mocks base method.
 func (m *MockClient) UpdateInstaller(ctx context.Context, installerID string, req *models.ServiceUpdateInstallerRequest) (*models.AppInstaller, error) {
 	m.ctrl.T.Helper()

@@ -40,6 +40,9 @@ type AppRunnerJob struct {
 	// executions
 	Executions []*AppRunnerJobExecution `json:"executions"`
 
+	// final runner job execution id
+	FinalRunnerJobExecutionID string `json:"final_runner_job_execution_id,omitempty"`
+
 	// finished at
 	FinishedAt string `json:"finished_at,omitempty"`
 
@@ -60,6 +63,12 @@ type AppRunnerJob struct {
 
 	// org id
 	OrgID string `json:"org_id,omitempty"`
+
+	// outputs
+	Outputs interface{} `json:"outputs,omitempty"`
+
+	// outputs json
+	OutputsJSON []int64 `json:"outputs_json"`
 
 	// overall timeout is how long a job can be attempted, before being cancelled
 	OverallTimeout int64 `json:"overall_timeout,omitempty"`
