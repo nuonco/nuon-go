@@ -43,3 +43,16 @@ func (c *client) CreateInstallInputs(ctx context.Context, installID string, req 
 
 	return resp.Payload, nil
 }
+
+func (c *client) UpdateInstallInput(ctx context.Context, installID string, req *models.ServiceUpdateInstallInputRequest) (*models.AppInstallInputs, error) {
+	resp, err := c.genClient.Operations.UpdateInstallInput(&operations.UpdateInstallInputParams{
+		InstallID: installID,
+		Req:       req,
+		Context:   ctx,
+	}, c.getOrgIDAuthInfo())
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}

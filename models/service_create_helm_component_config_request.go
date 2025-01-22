@@ -21,6 +21,8 @@ type ServiceCreateHelmComponentConfigRequest struct {
 
 	// chart name
 	// Required: true
+	// Max Length: 62
+	// Min Length: 5
 	ChartName *string `json:"chart_name"`
 
 	// connected github vcs config
@@ -66,6 +68,14 @@ func (m *ServiceCreateHelmComponentConfigRequest) Validate(formats strfmt.Regist
 func (m *ServiceCreateHelmComponentConfigRequest) validateChartName(formats strfmt.Registry) error {
 
 	if err := validate.Required("chart_name", "body", m.ChartName); err != nil {
+		return err
+	}
+
+	if err := validate.MinLength("chart_name", "body", *m.ChartName, 5); err != nil {
+		return err
+	}
+
+	if err := validate.MaxLength("chart_name", "body", *m.ChartName, 62); err != nil {
 		return err
 	}
 
