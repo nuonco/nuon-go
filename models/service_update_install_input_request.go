@@ -19,24 +19,16 @@ import (
 // swagger:model service.UpdateInstallInputRequest
 type ServiceUpdateInstallInputRequest struct {
 
-	// name
+	// inputs
 	// Required: true
-	Name *string `json:"name"`
-
-	// value
-	// Required: true
-	Value *string `json:"value"`
+	Inputs map[string]string `json:"inputs"`
 }
 
 // Validate validates this service update install input request
 func (m *ServiceUpdateInstallInputRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateName(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateValue(formats); err != nil {
+	if err := m.validateInputs(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -46,18 +38,9 @@ func (m *ServiceUpdateInstallInputRequest) Validate(formats strfmt.Registry) err
 	return nil
 }
 
-func (m *ServiceUpdateInstallInputRequest) validateName(formats strfmt.Registry) error {
+func (m *ServiceUpdateInstallInputRequest) validateInputs(formats strfmt.Registry) error {
 
-	if err := validate.Required("name", "body", m.Name); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *ServiceUpdateInstallInputRequest) validateValue(formats strfmt.Registry) error {
-
-	if err := validate.Required("value", "body", m.Value); err != nil {
+	if err := validate.Required("inputs", "body", m.Inputs); err != nil {
 		return err
 	}
 
