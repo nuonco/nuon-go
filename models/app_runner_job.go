@@ -68,7 +68,7 @@ type AppRunnerJob struct {
 	Outputs interface{} `json:"outputs,omitempty"`
 
 	// outputs json
-	OutputsJSON []int64 `json:"outputs_json"`
+	OutputsJSON string `json:"outputs_json,omitempty"`
 
 	// overall timeout is how long a job can be attempted, before being cancelled
 	OverallTimeout int64 `json:"overall_timeout,omitempty"`
