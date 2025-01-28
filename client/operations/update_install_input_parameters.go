@@ -73,7 +73,7 @@ type UpdateInstallInputParams struct {
 
 	   Input
 	*/
-	Req *models.ServiceUpdateInstallInputRequest
+	Req *models.ServiceUpdateInstallInputsRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -140,13 +140,13 @@ func (o *UpdateInstallInputParams) SetInstallID(installID string) {
 }
 
 // WithReq adds the req to the update install input params
-func (o *UpdateInstallInputParams) WithReq(req *models.ServiceUpdateInstallInputRequest) *UpdateInstallInputParams {
+func (o *UpdateInstallInputParams) WithReq(req *models.ServiceUpdateInstallInputsRequest) *UpdateInstallInputParams {
 	o.SetReq(req)
 	return o
 }
 
 // SetReq adds the req to the update install input params
-func (o *UpdateInstallInputParams) SetReq(req *models.ServiceUpdateInstallInputRequest) {
+func (o *UpdateInstallInputParams) SetReq(req *models.ServiceUpdateInstallInputsRequest) {
 	o.Req = req
 }
 

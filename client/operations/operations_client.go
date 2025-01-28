@@ -9,12 +9,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new operations API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new operations API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new operations API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -25,7 +51,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -110,6 +136,8 @@ type ClientService interface {
 
 	GetActionWorkflowConfigs(params *GetActionWorkflowConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionWorkflowConfigsOK, error)
 
+	GetActionWorkflowLatestConfig(params *GetActionWorkflowLatestConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionWorkflowLatestConfigOK, error)
+
 	GetActionWorkflows(params *GetActionWorkflowsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionWorkflowsOK, error)
 
 	GetAllVCSConnectedRepos(params *GetAllVCSConnectedReposParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllVCSConnectedReposOK, error)
@@ -184,6 +212,8 @@ type ClientService interface {
 
 	GetInstallActionWorkflowRun(params *GetInstallActionWorkflowRunParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowRunOK, error)
 
+	GetInstallActionWorkflowRunStep(params *GetInstallActionWorkflowRunStepParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowRunStepOK, error)
+
 	GetInstallActionWorkflowRuns(params *GetInstallActionWorkflowRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowRunsOK, error)
 
 	GetInstallActionWorkflowsLatestRun(params *GetInstallActionWorkflowsLatestRunParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowsLatestRunOK, error)
@@ -217,6 +247,8 @@ type ClientService interface {
 	GetInstallRunnerGroup(params *GetInstallRunnerGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallRunnerGroupOK, error)
 
 	GetInstallSandboxRuns(params *GetInstallSandboxRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallSandboxRunsOK, error)
+
+	GetInstallState(params *GetInstallStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallStateOK, error)
 
 	GetInstaller(params *GetInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallerOK, error)
 
@@ -340,7 +372,7 @@ func (a *Client) CancelRunnerJob(params *CancelRunnerJobParams, authInfo runtime
 	}
 	op := &runtime.ClientOperation{
 		ID:                 "CancelRunnerJob",
-		Method:             "DELETE",
+		Method:             "POST",
 		PathPattern:        "/v1/runner-jobs/{runner_job_id}/cancel",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
@@ -1871,6 +1903,47 @@ func (a *Client) GetActionWorkflowConfigs(params *GetActionWorkflowConfigsParams
 }
 
 /*
+GetActionWorkflowLatestConfig gets an app action workflow s latest config
+
+Return the latest config for an action workflow.
+*/
+func (a *Client) GetActionWorkflowLatestConfig(params *GetActionWorkflowLatestConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionWorkflowLatestConfigOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetActionWorkflowLatestConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetActionWorkflowLatestConfig",
+		Method:             "GET",
+		PathPattern:        "/v1/action-workflows/{action_workflow_id}/latest-config",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetActionWorkflowLatestConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetActionWorkflowLatestConfigOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetActionWorkflowLatestConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetActionWorkflows gets action workflows for an app
 */
 func (a *Client) GetActionWorkflows(params *GetActionWorkflowsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionWorkflowsOK, error) {
@@ -3356,6 +3429,47 @@ func (a *Client) GetInstallActionWorkflowRun(params *GetInstallActionWorkflowRun
 }
 
 /*
+GetInstallActionWorkflowRunStep gets action workflow run step by install id and step id
+
+Get an install action workflow run step.
+*/
+func (a *Client) GetInstallActionWorkflowRunStep(params *GetInstallActionWorkflowRunStepParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowRunStepOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetInstallActionWorkflowRunStepParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetInstallActionWorkflowRunStep",
+		Method:             "GET",
+		PathPattern:        "/v1/installs/{install_id}/action-workflows/runs/{workflow_run_id}/steps/{step_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetInstallActionWorkflowRunStepReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetInstallActionWorkflowRunStepOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetInstallActionWorkflowRunStep: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetInstallActionWorkflowRuns gets action workflow runs by install id
 */
 func (a *Client) GetInstallActionWorkflowRuns(params *GetInstallActionWorkflowRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowRunsOK, error) {
@@ -4031,6 +4145,45 @@ func (a *Client) GetInstallSandboxRuns(params *GetInstallSandboxRunsParams, auth
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallSandboxRuns: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetInstallState gets the current state of an install
+*/
+func (a *Client) GetInstallState(params *GetInstallStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallStateOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetInstallStateParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetInstallState",
+		Method:             "GET",
+		PathPattern:        "/v1/installs/{install_id}/state",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetInstallStateReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetInstallStateOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetInstallState: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

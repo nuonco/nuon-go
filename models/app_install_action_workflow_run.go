@@ -31,8 +31,7 @@ type AppInstallActionWorkflowRun struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
-	// after query
-	// TODO: update runner to track start and finish timestamps
+	// execution time
 	ExecutionTime int64 `json:"execution_time,omitempty"`
 
 	// id
@@ -43,6 +42,12 @@ type AppInstallActionWorkflowRun struct {
 
 	// log stream
 	LogStream *AppLogStream `json:"log_stream,omitempty"`
+
+	// after query
+	Outputs interface{} `json:"outputs,omitempty"`
+
+	// run env vars
+	RunEnvVars map[string]string `json:"run_env_vars,omitempty"`
 
 	// runner job
 	RunnerJob *AppRunnerJob `json:"runner_job,omitempty"`

@@ -44,7 +44,7 @@ func (c *client) CreateInstallInputs(ctx context.Context, installID string, req 
 	return resp.Payload, nil
 }
 
-func (c *client) UpdateInstallInput(ctx context.Context, installID string, req *models.ServiceUpdateInstallInputRequest) (*models.AppInstallInputs, error) {
+func (c *client) UpdateInstallInputs(ctx context.Context, installID string, req *models.ServiceUpdateInstallInputsRequest) (*models.AppInstallInputs, error) {
 	resp, err := c.genClient.Operations.UpdateInstallInput(&operations.UpdateInstallInputParams{
 		InstallID: installID,
 		Req:       req,
