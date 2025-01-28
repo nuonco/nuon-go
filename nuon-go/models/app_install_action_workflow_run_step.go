@@ -24,6 +24,9 @@ type AppInstallActionWorkflowRunStep struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
+	// execution duration
+	ExecutionDuration int64 `json:"execution_duration,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 

@@ -38,7 +38,7 @@ type AppActionWorkflowTriggerConfig struct {
 	// id
 	ID string `json:"id,omitempty"`
 
-	// individual fields for different types
+	// type
 	Type string `json:"type,omitempty"`
 
 	// updated at
