@@ -312,7 +312,7 @@ type ClientService interface {
 
 	UpdateInstall(params *UpdateInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallOK, error)
 
-	UpdateInstallInput(params *UpdateInstallInputParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallInputOK, error)
+	UpdateInstallInputs(params *UpdateInstallInputsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallInputsOK, error)
 
 	UpdateInstaller(params *UpdateInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallerCreated, error)
 
@@ -5426,22 +5426,22 @@ func (a *Client) UpdateInstall(params *UpdateInstallParams, authInfo runtime.Cli
 }
 
 /*
-UpdateInstallInput updates install input config for app
+UpdateInstallInputs updates install input config for app
 */
-func (a *Client) UpdateInstallInput(params *UpdateInstallInputParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallInputOK, error) {
+func (a *Client) UpdateInstallInputs(params *UpdateInstallInputsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallInputsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateInstallInputParams()
+		params = NewUpdateInstallInputsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "UpdateInstallInput",
+		ID:                 "UpdateInstallInputs",
 		Method:             "PATCH",
 		PathPattern:        "/v1/installs/{install_id}/inputs",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateInstallInputReader{formats: a.formats},
+		Reader:             &UpdateInstallInputsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -5454,13 +5454,13 @@ func (a *Client) UpdateInstallInput(params *UpdateInstallInputParams, authInfo r
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*UpdateInstallInputOK)
+	success, ok := result.(*UpdateInstallInputsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for UpdateInstallInput: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for UpdateInstallInputs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
