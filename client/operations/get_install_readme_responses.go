@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetInstallReadmeOK) Code() int {
 }
 
 func (o *GetInstallReadmeOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeOK  %+v", 200, o.Payload)
 }
 
 func (o *GetInstallReadmeOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeOK  %+v", 200, o.Payload)
 }
 
 func (o *GetInstallReadmeOK) GetPayload() *models.ServiceReadme {
@@ -180,13 +177,11 @@ func (o *GetInstallReadmeBadRequest) Code() int {
 }
 
 func (o *GetInstallReadmeBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetInstallReadmeBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetInstallReadmeBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *GetInstallReadmeUnauthorized) Code() int {
 }
 
 func (o *GetInstallReadmeUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetInstallReadmeUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetInstallReadmeUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *GetInstallReadmeForbidden) Code() int {
 }
 
 func (o *GetInstallReadmeForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetInstallReadmeForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetInstallReadmeForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *GetInstallReadmeNotFound) Code() int {
 }
 
 func (o *GetInstallReadmeNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetInstallReadmeNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetInstallReadmeNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *GetInstallReadmeInternalServerError) Code() int {
 }
 
 func (o *GetInstallReadmeInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetInstallReadmeInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/readme][%d] getInstallReadmeInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetInstallReadmeInternalServerError) GetPayload() *models.StderrErrResponse {

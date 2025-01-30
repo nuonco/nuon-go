@@ -260,6 +260,21 @@ func (mr *MockClientMockRecorder) CreateInstall(ctx, appID, req interface{}) *go
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateInstall", reflect.TypeOf((*MockClient)(nil).CreateInstall), ctx, appID, req)
 }
 
+// CreateInstallActionWorkflowRun mocks base method.
+func (m *MockClient) CreateInstallActionWorkflowRun(ctx context.Context, installID string, req *models.ServiceCreateInstallActionWorkflowRunRequest) (*models.AppInstallActionWorkflowRun, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateInstallActionWorkflowRun", ctx, installID, req)
+	ret0, _ := ret[0].(*models.AppInstallActionWorkflowRun)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateInstallActionWorkflowRun indicates an expected call of CreateInstallActionWorkflowRun.
+func (mr *MockClientMockRecorder) CreateInstallActionWorkflowRun(ctx, installID, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateInstallActionWorkflowRun", reflect.TypeOf((*MockClient)(nil).CreateInstallActionWorkflowRun), ctx, installID, req)
+}
+
 // CreateInstallDeploy mocks base method.
 func (m *MockClient) CreateInstallDeploy(ctx context.Context, installID string, req *models.ServiceCreateInstallDeployRequest) (*models.AppInstallDeploy, error) {
 	m.ctrl.T.Helper()
@@ -570,6 +585,21 @@ func (m *MockClient) GetActionWorkflowConfigs(ctx context.Context, actionWorkflo
 func (mr *MockClientMockRecorder) GetActionWorkflowConfigs(ctx, actionWorkflowID interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetActionWorkflowConfigs", reflect.TypeOf((*MockClient)(nil).GetActionWorkflowConfigs), ctx, actionWorkflowID)
+}
+
+// GetActionWorkflowLatestConfig mocks base method.
+func (m *MockClient) GetActionWorkflowLatestConfig(ctx context.Context, actionWorkflowID string) (*models.AppActionWorkflowConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetActionWorkflowLatestConfig", ctx, actionWorkflowID)
+	ret0, _ := ret[0].(*models.AppActionWorkflowConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetActionWorkflowLatestConfig indicates an expected call of GetActionWorkflowLatestConfig.
+func (mr *MockClientMockRecorder) GetActionWorkflowLatestConfig(ctx, actionWorkflowID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetActionWorkflowLatestConfig", reflect.TypeOf((*MockClient)(nil).GetActionWorkflowLatestConfig), ctx, actionWorkflowID)
 }
 
 // GetActionWorkflows mocks base method.
@@ -1080,6 +1110,36 @@ func (m *MockClient) GetInstall(ctx context.Context, installID string) (*models.
 func (mr *MockClientMockRecorder) GetInstall(ctx, installID interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstall", reflect.TypeOf((*MockClient)(nil).GetInstall), ctx, installID)
+}
+
+// GetInstallActionWorkflowRecentRuns mocks base method.
+func (m *MockClient) GetInstallActionWorkflowRecentRuns(ctx context.Context, actionWorkflowID, installID string) (*models.ServiceActionWorkflowRecentRunsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetInstallActionWorkflowRecentRuns", ctx, actionWorkflowID, installID)
+	ret0, _ := ret[0].(*models.ServiceActionWorkflowRecentRunsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetInstallActionWorkflowRecentRuns indicates an expected call of GetInstallActionWorkflowRecentRuns.
+func (mr *MockClientMockRecorder) GetInstallActionWorkflowRecentRuns(ctx, actionWorkflowID, installID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallActionWorkflowRecentRuns", reflect.TypeOf((*MockClient)(nil).GetInstallActionWorkflowRecentRuns), ctx, actionWorkflowID, installID)
+}
+
+// GetInstallActionWorkflowRun mocks base method.
+func (m *MockClient) GetInstallActionWorkflowRun(ctx context.Context, installID, runID string) (*models.AppInstallActionWorkflowRun, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetInstallActionWorkflowRun", ctx, installID, runID)
+	ret0, _ := ret[0].(*models.AppInstallActionWorkflowRun)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetInstallActionWorkflowRun indicates an expected call of GetInstallActionWorkflowRun.
+func (mr *MockClientMockRecorder) GetInstallActionWorkflowRun(ctx, installID, runID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallActionWorkflowRun", reflect.TypeOf((*MockClient)(nil).GetInstallActionWorkflowRun), ctx, installID, runID)
 }
 
 // GetInstallComponentDeploys mocks base method.

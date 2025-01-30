@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetOrgOK) Code() int {
 }
 
 func (o *GetOrgOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgOK  %+v", 200, o.Payload)
 }
 
 func (o *GetOrgOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgOK  %+v", 200, o.Payload)
 }
 
 func (o *GetOrgOK) GetPayload() *models.AppOrg {
@@ -180,13 +177,11 @@ func (o *GetOrgBadRequest) Code() int {
 }
 
 func (o *GetOrgBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetOrgBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetOrgBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *GetOrgUnauthorized) Code() int {
 }
 
 func (o *GetOrgUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetOrgUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetOrgUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *GetOrgForbidden) Code() int {
 }
 
 func (o *GetOrgForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetOrgForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetOrgForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *GetOrgNotFound) Code() int {
 }
 
 func (o *GetOrgNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetOrgNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetOrgNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *GetOrgInternalServerError) Code() int {
 }
 
 func (o *GetOrgInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetOrgInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetOrgInternalServerError) GetPayload() *models.StderrErrResponse {
