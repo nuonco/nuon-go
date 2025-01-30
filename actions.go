@@ -36,9 +36,9 @@ func (c *client) GetActionWorkflow(ctx context.Context, actionWorkflowID string)
 
 func (c *client) GetAppActionWorkflow(ctx context.Context, appID, actionWorkflowID string) (*models.AppActionWorkflow, error) {
 	resp, err := c.genClient.Operations.GetAppActionWorkflow(&operations.GetAppActionWorkflowParams{
-		AppID:           appID,
+		AppID:            appID,
 		ActionWorkflowID: actionWorkflowID,
-		Context:         ctx,
+		Context:          ctx,
 	}, c.getOrgIDAuthInfo())
 
 	if err != nil {
@@ -115,6 +115,61 @@ func (c *client) CreateActionWorkflowConfig(ctx context.Context, actionWorkflowI
 	resp, err := c.genClient.Operations.CreateActionWorkflowConfig(&operations.CreateActionWorkflowConfigParams{
 		ActionWorkflowID: actionWorkflowID,
 		Req:              req,
+		Context:          ctx,
+	}, c.getOrgIDAuthInfo())
+
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}
+
+func (c *client) GetInstallActionWorkflowRecentRuns(ctx context.Context, installID, actionWorkflowID string) (*models.ServiceActionWorkflowRecentRunsResponse, error) {
+	resp, err := c.genClient.Operations.GetInstallActionWorkflowRecentRuns(&operations.GetInstallActionWorkflowRecentRunsParams{
+		InstallID:        installID,
+		ActionWorkflowID: actionWorkflowID,
+		Context:          ctx,
+	}, c.getOrgIDAuthInfo())
+
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}
+
+func (c *client) CreateInstallActionWorkflowRun(ctx context.Context, installID string, req *models.ServiceCreateInstallActionWorkflowRunRequest) (*models.AppInstallActionWorkflowRun, error) {
+	resp, err := c.genClient.Operations.CreateInstallActionWorkflowRun(&operations.CreateInstallActionWorkflowRunParams{
+		InstallID: installID,
+		Req:       req,
+		Context:   ctx,
+	}, c.getOrgIDAuthInfo())
+
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}
+
+func (c *client) GetInstallActionWorkflowRun(ctx context.Context, installID, runID string) (*models.AppInstallActionWorkflowRun, error) {
+	resp, err := c.genClient.Operations.GetInstallActionWorkflowRun(&operations.GetInstallActionWorkflowRunParams{
+		InstallID: installID,
+		RunID:     runID,
+		Context:   ctx,
+	}, c.getOrgIDAuthInfo())
+
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}
+
+func (c *client) GetActionWorkflowLatestConfig(ctx context.Context, actionWorkflowID string) (*models.AppActionWorkflowConfig, error) {
+	resp, err := c.genClient.Operations.GetActionWorkflowLatestConfig(&operations.GetActionWorkflowLatestConfigParams{
+		ActionWorkflowID: actionWorkflowID,
 		Context:          ctx,
 	}, c.getOrgIDAuthInfo())
 
