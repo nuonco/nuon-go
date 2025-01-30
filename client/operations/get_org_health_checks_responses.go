@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetOrgHealthChecksOK) Code() int {
 }
 
 func (o *GetOrgHealthChecksOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksOK  %+v", 200, o.Payload)
 }
 
 func (o *GetOrgHealthChecksOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksOK  %+v", 200, o.Payload)
 }
 
 func (o *GetOrgHealthChecksOK) GetPayload() []*models.AppOrgHealthCheck {
@@ -178,13 +175,11 @@ func (o *GetOrgHealthChecksBadRequest) Code() int {
 }
 
 func (o *GetOrgHealthChecksBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetOrgHealthChecksBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetOrgHealthChecksBadRequest) GetPayload() *models.StderrErrResponse {
@@ -248,13 +243,11 @@ func (o *GetOrgHealthChecksUnauthorized) Code() int {
 }
 
 func (o *GetOrgHealthChecksUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetOrgHealthChecksUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetOrgHealthChecksUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -318,13 +311,11 @@ func (o *GetOrgHealthChecksForbidden) Code() int {
 }
 
 func (o *GetOrgHealthChecksForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetOrgHealthChecksForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetOrgHealthChecksForbidden) GetPayload() *models.StderrErrResponse {
@@ -388,13 +379,11 @@ func (o *GetOrgHealthChecksNotFound) Code() int {
 }
 
 func (o *GetOrgHealthChecksNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetOrgHealthChecksNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetOrgHealthChecksNotFound) GetPayload() *models.StderrErrResponse {
@@ -458,13 +447,11 @@ func (o *GetOrgHealthChecksInternalServerError) Code() int {
 }
 
 func (o *GetOrgHealthChecksInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetOrgHealthChecksInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/health-checks][%d] getOrgHealthChecksInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetOrgHealthChecksInternalServerError) GetPayload() *models.StderrErrResponse {
