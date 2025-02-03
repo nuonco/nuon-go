@@ -65,8 +65,6 @@ type GetRunnerJobsParams struct {
 	/* Group.
 
 	   job group
-
-	   Default: "\"any\""
 	*/
 	Group *string
 
@@ -87,10 +85,14 @@ type GetRunnerJobsParams struct {
 	/* Status.
 
 	   job status
-
-	   Default: "\"available\""
 	*/
 	Status *string
+
+	/* Statuses.
+
+	   job statuses
+	*/
+	Statuses *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -110,17 +112,11 @@ func (o *GetRunnerJobsParams) WithDefaults() *GetRunnerJobsParams {
 // All values with no default are reset to their zero value.
 func (o *GetRunnerJobsParams) SetDefaults() {
 	var (
-		groupDefault = string("\"any\"")
-
 		limitDefault = int64(10)
-
-		statusDefault = string("\"available\"")
 	)
 
 	val := GetRunnerJobsParams{
-		Group:  &groupDefault,
-		Limit:  &limitDefault,
-		Status: &statusDefault,
+		Limit: &limitDefault,
 	}
 
 	val.timeout = o.timeout
@@ -206,6 +202,17 @@ func (o *GetRunnerJobsParams) SetStatus(status *string) {
 	o.Status = status
 }
 
+// WithStatuses adds the statuses to the get runner jobs params
+func (o *GetRunnerJobsParams) WithStatuses(statuses *string) *GetRunnerJobsParams {
+	o.SetStatuses(statuses)
+	return o
+}
+
+// SetStatuses adds the statuses to the get runner jobs params
+func (o *GetRunnerJobsParams) SetStatuses(statuses *string) {
+	o.Statuses = statuses
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *GetRunnerJobsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -265,6 +272,23 @@ func (o *GetRunnerJobsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		if qStatus != "" {
 
 			if err := r.SetQueryParam("status", qStatus); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Statuses != nil {
+
+		// query param statuses
+		var qrStatuses string
+
+		if o.Statuses != nil {
+			qrStatuses = *o.Statuses
+		}
+		qStatuses := qrStatuses
+		if qStatuses != "" {
+
+			if err := r.SetQueryParam("statuses", qStatuses); err != nil {
 				return err
 			}
 		}

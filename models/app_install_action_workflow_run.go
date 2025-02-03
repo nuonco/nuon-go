@@ -43,7 +43,7 @@ type AppInstallActionWorkflowRun struct {
 	// log stream
 	LogStream *AppLogStream `json:"log_stream,omitempty"`
 
-	// after query
+	// outputs
 	Outputs interface{} `json:"outputs,omitempty"`
 
 	// run env vars
@@ -63,6 +63,12 @@ type AppInstallActionWorkflowRun struct {
 
 	// trigger type
 	TriggerType AppActionWorkflowTriggerType `json:"trigger_type,omitempty"`
+
+	// triggered by id
+	TriggeredByID string `json:"triggered_by_id,omitempty"`
+
+	// triggered by type
+	TriggeredByType string `json:"triggered_by_type,omitempty"`
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`

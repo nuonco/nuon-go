@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -17,6 +18,9 @@ import (
 //
 // swagger:model app.InstallSandboxRun
 type AppInstallSandboxRun struct {
+
+	// action workflow runs
+	ActionWorkflowRuns []*AppInstallActionWorkflowRun `json:"action_workflow_runs"`
 
 	// app sandbox config
 	AppSandboxConfig *AppAppSandboxConfig `json:"app_sandbox_config,omitempty"`
@@ -58,6 +62,10 @@ type AppInstallSandboxRun struct {
 func (m *AppInstallSandboxRun) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateActionWorkflowRuns(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateAppSandboxConfig(formats); err != nil {
 		res = append(res, err)
 	}
@@ -77,6 +85,32 @@ func (m *AppInstallSandboxRun) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppInstallSandboxRun) validateActionWorkflowRuns(formats strfmt.Registry) error {
+	if swag.IsZero(m.ActionWorkflowRuns) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.ActionWorkflowRuns); i++ {
+		if swag.IsZero(m.ActionWorkflowRuns[i]) { // not required
+			continue
+		}
+
+		if m.ActionWorkflowRuns[i] != nil {
+			if err := m.ActionWorkflowRuns[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("action_workflow_runs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("action_workflow_runs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -147,6 +181,10 @@ func (m *AppInstallSandboxRun) validateRunnerJob(formats strfmt.Registry) error 
 func (m *AppInstallSandboxRun) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateActionWorkflowRuns(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateAppSandboxConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -166,6 +204,31 @@ func (m *AppInstallSandboxRun) ContextValidate(ctx context.Context, formats strf
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppInstallSandboxRun) contextValidateActionWorkflowRuns(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.ActionWorkflowRuns); i++ {
+
+		if m.ActionWorkflowRuns[i] != nil {
+
+			if swag.IsZero(m.ActionWorkflowRuns[i]) { // not required
+				return nil
+			}
+
+			if err := m.ActionWorkflowRuns[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("action_workflow_runs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("action_workflow_runs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
