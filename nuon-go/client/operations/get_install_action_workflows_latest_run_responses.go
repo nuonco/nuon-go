@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetInstallActionWorkflowsLatestRunOK) Code() int {
 }
 
 func (o *GetInstallActionWorkflowsLatestRunOK) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunOK %s", 200, payload)
 }
 
 func (o *GetInstallActionWorkflowsLatestRunOK) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunOK %s", 200, payload)
 }
 
 func (o *GetInstallActionWorkflowsLatestRunOK) GetPayload() []*models.ServiceActionWorkflowLatestRunResponse {
@@ -175,11 +178,13 @@ func (o *GetInstallActionWorkflowsLatestRunBadRequest) Code() int {
 }
 
 func (o *GetInstallActionWorkflowsLatestRunBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunBadRequest %s", 400, payload)
 }
 
 func (o *GetInstallActionWorkflowsLatestRunBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunBadRequest %s", 400, payload)
 }
 
 func (o *GetInstallActionWorkflowsLatestRunBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +248,13 @@ func (o *GetInstallActionWorkflowsLatestRunUnauthorized) Code() int {
 }
 
 func (o *GetInstallActionWorkflowsLatestRunUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunUnauthorized %s", 401, payload)
 }
 
 func (o *GetInstallActionWorkflowsLatestRunUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunUnauthorized %s", 401, payload)
 }
 
 func (o *GetInstallActionWorkflowsLatestRunUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +318,13 @@ func (o *GetInstallActionWorkflowsLatestRunForbidden) Code() int {
 }
 
 func (o *GetInstallActionWorkflowsLatestRunForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunForbidden %s", 403, payload)
 }
 
 func (o *GetInstallActionWorkflowsLatestRunForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunForbidden %s", 403, payload)
 }
 
 func (o *GetInstallActionWorkflowsLatestRunForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +388,13 @@ func (o *GetInstallActionWorkflowsLatestRunNotFound) Code() int {
 }
 
 func (o *GetInstallActionWorkflowsLatestRunNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunNotFound %s", 404, payload)
 }
 
 func (o *GetInstallActionWorkflowsLatestRunNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunNotFound %s", 404, payload)
 }
 
 func (o *GetInstallActionWorkflowsLatestRunNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +458,13 @@ func (o *GetInstallActionWorkflowsLatestRunInternalServerError) Code() int {
 }
 
 func (o *GetInstallActionWorkflowsLatestRunInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunInternalServerError %s", 500, payload)
 }
 
 func (o *GetInstallActionWorkflowsLatestRunInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunInternalServerError %s", 500, payload)
 }
 
 func (o *GetInstallActionWorkflowsLatestRunInternalServerError) GetPayload() *models.StderrErrResponse {

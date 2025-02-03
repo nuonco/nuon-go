@@ -22,6 +22,9 @@ type ServiceCreateInstallActionWorkflowRunRequest struct {
 	// action workflow config id
 	// Required: true
 	ActionWorkflowConfigID *string `json:"action_workflow_config_id"`
+
+	// run env vars
+	RunEnvVars map[string]string `json:"run_env_vars,omitempty"`
 }
 
 // Validate validates this service create install action workflow run request

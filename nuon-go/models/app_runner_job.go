@@ -58,6 +58,9 @@ type AppRunnerJob struct {
 	// max executions
 	MaxExecutions int64 `json:"max_executions,omitempty"`
 
+	// metadata
+	Metadata map[string]string `json:"metadata,omitempty"`
+
 	// operation
 	Operation AppRunnerJobOperationType `json:"operation,omitempty"`
 
