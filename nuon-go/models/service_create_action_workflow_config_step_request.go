@@ -27,8 +27,7 @@ type ServiceCreateActionWorkflowConfigStepRequest struct {
 	ConnectedGithubVcsConfig *ServiceConnectedGithubVCSActionWorkflowConfigRequest `json:"connected_github_vcs_config,omitempty"`
 
 	// env vars
-	// Required: true
-	EnvVars map[string]string `json:"env_vars"`
+	EnvVars map[string]string `json:"env_vars,omitempty"`
 
 	// name
 	// Required: true
@@ -47,10 +46,6 @@ func (m *ServiceCreateActionWorkflowConfigStepRequest) Validate(formats strfmt.R
 	}
 
 	if err := m.validateConnectedGithubVcsConfig(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateEnvVars(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -91,15 +86,6 @@ func (m *ServiceCreateActionWorkflowConfigStepRequest) validateConnectedGithubVc
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-func (m *ServiceCreateActionWorkflowConfigStepRequest) validateEnvVars(formats strfmt.Registry) error {
-
-	if err := validate.Required("env_vars", "body", m.EnvVars); err != nil {
-		return err
 	}
 
 	return nil

@@ -76,13 +76,13 @@ func (c *client) UpdateActionWorkflow(ctx context.Context, actionWorkflowID stri
 	return resp.Payload, nil
 }
 
-func (c *client) DeleteActionWorkflow(ctx context.Context, actionWorkflowID string) error {
-	_, err := c.genClient.Operations.DeleteActionWorkflow(&operations.DeleteActionWorkflowParams{
+func (c *client) DeleteActionWorkflow(ctx context.Context, actionWorkflowID string) (bool, error) {
+	resp, err := c.genClient.Operations.DeleteActionWorkflow(&operations.DeleteActionWorkflowParams{
 		ActionWorkflowID: actionWorkflowID,
 		Context:          ctx,
 	}, c.getOrgIDAuthInfo())
 
-	return err
+	return resp.Payload, err
 }
 
 func (c *client) GetActionWorkflowConfigs(ctx context.Context, actionWorkflowID string) ([]*models.AppActionWorkflowConfig, error) {

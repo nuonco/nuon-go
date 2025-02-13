@@ -15,7 +15,7 @@ import (
 
 // StateInstallState state install state
 //
-// swagger:model state.installState
+// swagger:model state.InstallState
 type StateInstallState struct {
 
 	// id
@@ -27,11 +27,17 @@ type StateInstallState struct {
 	// internal domain
 	InternalDomain string `json:"internal_domain,omitempty"`
 
+	// name
+	Name string `json:"name,omitempty"`
+
+	// populated
+	Populated bool `json:"populated,omitempty"`
+
 	// public domain
 	PublicDomain string `json:"public_domain,omitempty"`
 
 	// sandbox
-	Sandbox *StateInstallSandboxState `json:"sandbox,omitempty"`
+	Sandbox *StateSandboxState `json:"sandbox,omitempty"`
 }
 
 // Validate validates this state install state

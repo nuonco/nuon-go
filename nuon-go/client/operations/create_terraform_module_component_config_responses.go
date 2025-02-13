@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *CreateTerraformModuleComponentConfigCreated) Code() int {
 }
 
 func (o *CreateTerraformModuleComponentConfigCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateTerraformModuleComponentConfigCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateTerraformModuleComponentConfigCreated) GetPayload() *models.AppTerraformModuleComponentConfig {
@@ -180,13 +177,11 @@ func (o *CreateTerraformModuleComponentConfigBadRequest) Code() int {
 }
 
 func (o *CreateTerraformModuleComponentConfigBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateTerraformModuleComponentConfigBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateTerraformModuleComponentConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *CreateTerraformModuleComponentConfigUnauthorized) Code() int {
 }
 
 func (o *CreateTerraformModuleComponentConfigUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateTerraformModuleComponentConfigUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateTerraformModuleComponentConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *CreateTerraformModuleComponentConfigForbidden) Code() int {
 }
 
 func (o *CreateTerraformModuleComponentConfigForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateTerraformModuleComponentConfigForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateTerraformModuleComponentConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *CreateTerraformModuleComponentConfigNotFound) Code() int {
 }
 
 func (o *CreateTerraformModuleComponentConfigNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateTerraformModuleComponentConfigNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateTerraformModuleComponentConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *CreateTerraformModuleComponentConfigInternalServerError) Code() int {
 }
 
 func (o *CreateTerraformModuleComponentConfigInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateTerraformModuleComponentConfigInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/terraform-module][%d] createTerraformModuleComponentConfigInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateTerraformModuleComponentConfigInternalServerError) GetPayload() *models.StderrErrResponse {
