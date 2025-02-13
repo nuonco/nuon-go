@@ -49,6 +49,9 @@ type AppInstall struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// install action workflows
+	InstallActionWorkflows []*AppInstallActionWorkflow `json:"install_action_workflows"`
+
 	// install components
 	InstallComponents []*AppInstallComponent `json:"install_components"`
 
@@ -103,6 +106,10 @@ func (m *AppInstall) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateAzureAccount(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInstallActionWorkflows(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -199,6 +206,32 @@ func (m *AppInstall) validateAzureAccount(formats strfmt.Registry) error {
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *AppInstall) validateInstallActionWorkflows(formats strfmt.Registry) error {
+	if swag.IsZero(m.InstallActionWorkflows) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.InstallActionWorkflows); i++ {
+		if swag.IsZero(m.InstallActionWorkflows[i]) { // not required
+			continue
+		}
+
+		if m.InstallActionWorkflows[i] != nil {
+			if err := m.InstallActionWorkflows[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("install_action_workflows" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("install_action_workflows" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -328,6 +361,10 @@ func (m *AppInstall) ContextValidate(ctx context.Context, formats strfmt.Registr
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateInstallActionWorkflows(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateInstallComponents(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -429,6 +466,31 @@ func (m *AppInstall) contextValidateAzureAccount(ctx context.Context, formats st
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *AppInstall) contextValidateInstallActionWorkflows(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.InstallActionWorkflows); i++ {
+
+		if m.InstallActionWorkflows[i] != nil {
+
+			if swag.IsZero(m.InstallActionWorkflows[i]) { // not required
+				return nil
+			}
+
+			if err := m.InstallActionWorkflows[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("install_action_workflows" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("install_action_workflows" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

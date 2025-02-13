@@ -9,38 +9,12 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new operations API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
-}
-
-// New creates a new operations API client with basic auth credentials.
-// It takes the following parameters:
-// - host: http host (github.com).
-// - basePath: any base path for the API client ("/v1", "/v3").
-// - scheme: http scheme ("http", "https").
-// - user: user for basic authentication header.
-// - password: password for basic authentication header.
-func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
-	transport := httptransport.New(host, basePath, []string{scheme})
-	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
-	return &Client{transport: transport, formats: strfmt.Default}
-}
-
-// New creates a new operations API client with a bearer token for authentication.
-// It takes the following parameters:
-// - host: http host (github.com).
-// - basePath: any base path for the API client ("/v1", "/v3").
-// - scheme: http scheme ("http", "https").
-// - bearerToken: bearer token for Bearer authentication header.
-func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
-	transport := httptransport.New(host, basePath, []string{scheme})
-	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
-	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -51,7 +25,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption may be used to customize the behavior of Client methods.
+// ClientOption is the option for Client methods
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -208,6 +182,8 @@ type ClientService interface {
 
 	GetInstall(params *GetInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallOK, error)
 
+	GetInstallActionWorkflow(params *GetInstallActionWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowOK, error)
+
 	GetInstallActionWorkflowRecentRuns(params *GetInstallActionWorkflowRecentRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowRecentRunsOK, error)
 
 	GetInstallActionWorkflowRun(params *GetInstallActionWorkflowRunParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowRunOK, error)
@@ -215,6 +191,8 @@ type ClientService interface {
 	GetInstallActionWorkflowRunStep(params *GetInstallActionWorkflowRunStepParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowRunStepOK, error)
 
 	GetInstallActionWorkflowRuns(params *GetInstallActionWorkflowRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowRunsOK, error)
+
+	GetInstallActionWorkflows(params *GetInstallActionWorkflowsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowsOK, error)
 
 	GetInstallActionWorkflowsLatestRun(params *GetInstallActionWorkflowsLatestRunParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowsLatestRunOK, error)
 
@@ -242,7 +220,7 @@ type ClientService interface {
 
 	GetInstallLatestDeploy(params *GetInstallLatestDeployParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallLatestDeployOK, error)
 
-	GetInstallReadme(params *GetInstallReadmeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallReadmeOK, error)
+	GetInstallReadme(params *GetInstallReadmeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallReadmeOK, *GetInstallReadmePartialContent, error)
 
 	GetInstallRunnerGroup(params *GetInstallRunnerGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallRunnerGroupOK, error)
 
@@ -288,7 +266,9 @@ type ClientService interface {
 
 	GetRunnerJobs(params *GetRunnerJobsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobsOK, error)
 
-	GetRunnerRecentHeartBeats(params *GetRunnerRecentHeartBeatsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerRecentHeartBeatsOK, error)
+	GetRunnerLatestHeartBeat(params *GetRunnerLatestHeartBeatParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerLatestHeartBeatOK, error)
+
+	GetRunnerRecentHealthChecks(params *GetRunnerRecentHealthChecksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerRecentHealthChecksOK, error)
 
 	GetRunnerSettings(params *GetRunnerSettingsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerSettingsOK, error)
 
@@ -3353,6 +3333,47 @@ func (a *Client) GetInstall(params *GetInstallParams, authInfo runtime.ClientAut
 }
 
 /*
+GetInstallActionWorkflow gets an install action workflow
+
+Get an install action workflow.
+*/
+func (a *Client) GetInstallActionWorkflow(params *GetInstallActionWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetInstallActionWorkflowParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetInstallActionWorkflow",
+		Method:             "GET",
+		PathPattern:        "/v1/installs/{install_id}/action-workflows/{action_workflow_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetInstallActionWorkflowReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetInstallActionWorkflowOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetInstallActionWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetInstallActionWorkflowRecentRuns gets recent runs for an action workflow by install id
 */
 func (a *Client) GetInstallActionWorkflowRecentRuns(params *GetInstallActionWorkflowRecentRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowRecentRunsOK, error) {
@@ -3507,6 +3528,47 @@ func (a *Client) GetInstallActionWorkflowRuns(params *GetInstallActionWorkflowRu
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallActionWorkflowRuns: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetInstallActionWorkflows gets an installs action workflows
+
+Get install action workflows.
+*/
+func (a *Client) GetInstallActionWorkflows(params *GetInstallActionWorkflowsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetInstallActionWorkflowsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetInstallActionWorkflows",
+		Method:             "GET",
+		PathPattern:        "/v1/installs/{install_id}/action-workflows",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetInstallActionWorkflowsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetInstallActionWorkflowsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetInstallActionWorkflows: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -4034,7 +4096,7 @@ func (a *Client) GetInstallLatestDeploy(params *GetInstallLatestDeployParams, au
 
 inputs and component outputs.
 */
-func (a *Client) GetInstallReadme(params *GetInstallReadmeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallReadmeOK, error) {
+func (a *Client) GetInstallReadme(params *GetInstallReadmeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallReadmeOK, *GetInstallReadmePartialContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetInstallReadmeParams()
@@ -4058,15 +4120,16 @@ func (a *Client) GetInstallReadme(params *GetInstallReadmeParams, authInfo runti
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	success, ok := result.(*GetInstallReadmeOK)
-	if ok {
-		return success, nil
+	switch value := result.(type) {
+	case *GetInstallReadmeOK:
+		return value, nil, nil
+	case *GetInstallReadmePartialContent:
+		return nil, value, nil
 	}
-	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetInstallReadme: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for operations: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -4953,22 +5016,22 @@ func (a *Client) GetRunnerJobs(params *GetRunnerJobsParams, authInfo runtime.Cli
 }
 
 /*
-GetRunnerRecentHeartBeats gets a runner
+GetRunnerLatestHeartBeat gets a runner
 */
-func (a *Client) GetRunnerRecentHeartBeats(params *GetRunnerRecentHeartBeatsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerRecentHeartBeatsOK, error) {
+func (a *Client) GetRunnerLatestHeartBeat(params *GetRunnerLatestHeartBeatParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerLatestHeartBeatOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetRunnerRecentHeartBeatsParams()
+		params = NewGetRunnerLatestHeartBeatParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetRunnerRecentHeartBeats",
+		ID:                 "GetRunnerLatestHeartBeat",
 		Method:             "GET",
-		PathPattern:        "/v1/runners/{runner_id}/recent-heart-beats",
+		PathPattern:        "/v1/runners/{runner_id}/latest-heart-beat",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetRunnerRecentHeartBeatsReader{formats: a.formats},
+		Reader:             &GetRunnerLatestHeartBeatReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -4981,13 +5044,52 @@ func (a *Client) GetRunnerRecentHeartBeats(params *GetRunnerRecentHeartBeatsPara
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetRunnerRecentHeartBeatsOK)
+	success, ok := result.(*GetRunnerLatestHeartBeatOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetRunnerRecentHeartBeats: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for GetRunnerLatestHeartBeat: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetRunnerRecentHealthChecks gets recent health checks
+*/
+func (a *Client) GetRunnerRecentHealthChecks(params *GetRunnerRecentHealthChecksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerRecentHealthChecksOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetRunnerRecentHealthChecksParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetRunnerRecentHealthChecks",
+		Method:             "GET",
+		PathPattern:        "/v1/runners/{runner_id}/recent-health-checks",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetRunnerRecentHealthChecksReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetRunnerRecentHealthChecksOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetRunnerRecentHealthChecks: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

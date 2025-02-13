@@ -35,6 +35,9 @@ type AppOtelLogRecord struct {
 	// log stream id
 	LogStreamID string `json:"log_stream_id,omitempty"`
 
+	// internal attributes
+	OrgID string `json:"org_id,omitempty"`
+
 	// resource attributes
 	ResourceAttributes map[string]string `json:"resource_attributes,omitempty"`
 
@@ -44,7 +47,7 @@ type AppOtelLogRecord struct {
 	// runner group id
 	RunnerGroupID string `json:"runner_group_id,omitempty"`
 
-	// internal attributes
+	// runner id
 	RunnerID string `json:"runner_id,omitempty"`
 
 	// runner job execution id
