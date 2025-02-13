@@ -75,7 +75,7 @@ GetInstallActionWorkflowRecentRunsOK describes a response with status code 200, 
 OK
 */
 type GetInstallActionWorkflowRecentRunsOK struct {
-	Payload *models.ServiceActionWorkflowRecentRunsResponse
+	Payload *models.AppInstallActionWorkflow
 }
 
 // IsSuccess returns true when this get install action workflow recent runs o k response has a 2xx status code
@@ -116,13 +116,13 @@ func (o *GetInstallActionWorkflowRecentRunsOK) String() string {
 	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}/recent-runs][%d] getInstallActionWorkflowRecentRunsOK  %+v", 200, o.Payload)
 }
 
-func (o *GetInstallActionWorkflowRecentRunsOK) GetPayload() *models.ServiceActionWorkflowRecentRunsResponse {
+func (o *GetInstallActionWorkflowRecentRunsOK) GetPayload() *models.AppInstallActionWorkflow {
 	return o.Payload
 }
 
 func (o *GetInstallActionWorkflowRecentRunsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ServiceActionWorkflowRecentRunsResponse)
+	o.Payload = new(models.AppInstallActionWorkflow)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

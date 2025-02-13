@@ -75,7 +75,7 @@ GetInstallActionWorkflowsLatestRunOK describes a response with status code 200, 
 OK
 */
 type GetInstallActionWorkflowsLatestRunOK struct {
-	Payload []*models.ServiceActionWorkflowLatestRunResponse
+	Payload []*models.AppInstallActionWorkflow
 }
 
 // IsSuccess returns true when this get install action workflows latest run o k response has a 2xx status code
@@ -116,7 +116,7 @@ func (o *GetInstallActionWorkflowsLatestRunOK) String() string {
 	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/latest-runs][%d] getInstallActionWorkflowsLatestRunOK  %+v", 200, o.Payload)
 }
 
-func (o *GetInstallActionWorkflowsLatestRunOK) GetPayload() []*models.ServiceActionWorkflowLatestRunResponse {
+func (o *GetInstallActionWorkflowsLatestRunOK) GetPayload() []*models.AppInstallActionWorkflow {
 	return o.Payload
 }
 
