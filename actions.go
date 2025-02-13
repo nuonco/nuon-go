@@ -125,7 +125,7 @@ func (c *client) CreateActionWorkflowConfig(ctx context.Context, actionWorkflowI
 	return resp.Payload, nil
 }
 
-func (c *client) GetInstallActionWorkflowRecentRuns(ctx context.Context, installID, actionWorkflowID string) (*models.ServiceActionWorkflowRecentRunsResponse, error) {
+func (c *client) GetInstallActionWorkflowRecentRuns(ctx context.Context, installID, actionWorkflowID string) (*models.AppInstallActionWorkflow, error) {
 	resp, err := c.genClient.Operations.GetInstallActionWorkflowRecentRuns(&operations.GetInstallActionWorkflowRecentRunsParams{
 		InstallID:        installID,
 		ActionWorkflowID: actionWorkflowID,
