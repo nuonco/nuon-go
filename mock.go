@@ -1114,10 +1114,10 @@ func (mr *MockClientMockRecorder) GetInstall(ctx, installID interface{}) *gomock
 }
 
 // GetInstallActionWorkflowRecentRuns mocks base method.
-func (m *MockClient) GetInstallActionWorkflowRecentRuns(ctx context.Context, actionWorkflowID, installID string) (*models.ServiceActionWorkflowRecentRunsResponse, error) {
+func (m *MockClient) GetInstallActionWorkflowRecentRuns(ctx context.Context, actionWorkflowID, installID string) (*models.AppInstallActionWorkflow, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetInstallActionWorkflowRecentRuns", ctx, actionWorkflowID, installID)
-	ret0, _ := ret[0].(*models.ServiceActionWorkflowRecentRunsResponse)
+	ret0, _ := ret[0].(*models.AppInstallActionWorkflow)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
