@@ -411,11 +411,12 @@ func (mr *MockClientMockRecorder) CreateVCSConnectionCallback(ctx, req interface
 }
 
 // DeleteActionWorkflow mocks base method.
-func (m *MockClient) DeleteActionWorkflow(ctx context.Context, actionWorkflowID string) error {
+func (m *MockClient) DeleteActionWorkflow(ctx context.Context, actionWorkflowID string) (bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteActionWorkflow", ctx, actionWorkflowID)
-	ret0, _ := ret[0].(error)
-	return ret0
+	ret0, _ := ret[0].(bool)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
 }
 
 // DeleteActionWorkflow indicates an expected call of DeleteActionWorkflow.

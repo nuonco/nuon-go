@@ -68,6 +68,12 @@ type GetRunnerJobsParams struct {
 	*/
 	Group *string
 
+	/* Groups.
+
+	   job groups
+	*/
+	Groups *string
+
 	/* Limit.
 
 	   limit of jobs to return
@@ -169,6 +175,17 @@ func (o *GetRunnerJobsParams) SetGroup(group *string) {
 	o.Group = group
 }
 
+// WithGroups adds the groups to the get runner jobs params
+func (o *GetRunnerJobsParams) WithGroups(groups *string) *GetRunnerJobsParams {
+	o.SetGroups(groups)
+	return o
+}
+
+// SetGroups adds the groups to the get runner jobs params
+func (o *GetRunnerJobsParams) SetGroups(groups *string) {
+	o.Groups = groups
+}
+
 // WithLimit adds the limit to the get runner jobs params
 func (o *GetRunnerJobsParams) WithLimit(limit *int64) *GetRunnerJobsParams {
 	o.SetLimit(limit)
@@ -233,6 +250,23 @@ func (o *GetRunnerJobsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		if qGroup != "" {
 
 			if err := r.SetQueryParam("group", qGroup); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Groups != nil {
+
+		// query param groups
+		var qrGroups string
+
+		if o.Groups != nil {
+			qrGroups = *o.Groups
+		}
+		qGroups := qrGroups
+		if qGroups != "" {
+
+			if err := r.SetQueryParam("groups", qGroups); err != nil {
 				return err
 			}
 		}

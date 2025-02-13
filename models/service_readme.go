@@ -17,8 +17,14 @@ import (
 // swagger:model service.Readme
 type ServiceReadme struct {
 
+	// original
+	Original string `json:"original,omitempty"`
+
 	// readme
 	Readme string `json:"readme,omitempty"`
+
+	// warnings
+	Warnings []string `json:"warnings"`
 }
 
 // Validate validates this service readme

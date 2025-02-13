@@ -37,6 +37,12 @@ type AppInstallActionWorkflowRun struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// install action workflow
+	InstallActionWorkflow *AppInstallActionWorkflow `json:"install_action_workflow,omitempty"`
+
+	// install action workflow id
+	InstallActionWorkflowID string `json:"install_action_workflow_id,omitempty"`
+
 	// install id
 	InstallID string `json:"install_id,omitempty"`
 
@@ -82,6 +88,10 @@ func (m *AppInstallActionWorkflowRun) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateInstallActionWorkflow(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateLogStream(formats); err != nil {
 		res = append(res, err)
 	}
@@ -115,6 +125,25 @@ func (m *AppInstallActionWorkflowRun) validateConfig(formats strfmt.Registry) er
 				return ve.ValidateName("config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppInstallActionWorkflowRun) validateInstallActionWorkflow(formats strfmt.Registry) error {
+	if swag.IsZero(m.InstallActionWorkflow) { // not required
+		return nil
+	}
+
+	if m.InstallActionWorkflow != nil {
+		if err := m.InstallActionWorkflow.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("install_action_workflow")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("install_action_workflow")
 			}
 			return err
 		}
@@ -212,6 +241,10 @@ func (m *AppInstallActionWorkflowRun) ContextValidate(ctx context.Context, forma
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateInstallActionWorkflow(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateLogStream(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -247,6 +280,27 @@ func (m *AppInstallActionWorkflowRun) contextValidateConfig(ctx context.Context,
 				return ve.ValidateName("config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppInstallActionWorkflowRun) contextValidateInstallActionWorkflow(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.InstallActionWorkflow != nil {
+
+		if swag.IsZero(m.InstallActionWorkflow) { // not required
+			return nil
+		}
+
+		if err := m.InstallActionWorkflow.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("install_action_workflow")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("install_action_workflow")
 			}
 			return err
 		}
