@@ -18,18 +18,6 @@ func (c *client) GetOrg(ctx context.Context) (*models.AppOrg, error) {
 	return resp.Payload, nil
 }
 
-func (c *client) GetOrgHealthChecks(ctx context.Context, limit *int64) ([]*models.AppOrgHealthCheck, error) {
-	resp, err := c.genClient.Operations.GetOrgHealthChecks(&operations.GetOrgHealthChecksParams{
-		Limit:   limit,
-		Context: ctx,
-	}, c.getOrgIDAuthInfo())
-	if err != nil {
-		return nil, err
-	}
-
-	return resp.Payload, nil
-}
-
 func (c *client) GetOrgs(ctx context.Context) ([]*models.AppOrg, error) {
 	resp, err := c.genClient.Operations.GetOrgs(&operations.GetOrgsParams{
 		Context: ctx,
