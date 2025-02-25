@@ -33,6 +33,9 @@ type AppRunnerHealthCheck struct {
 	// runner id
 	RunnerID string `json:"runner_id,omitempty"`
 
+	// runner job
+	RunnerJob *AppRunnerJob `json:"runner_job,omitempty"`
+
 	// status
 	Status AppRunnerStatus `json:"status,omitempty"`
 
@@ -47,6 +50,10 @@ type AppRunnerHealthCheck struct {
 func (m *AppRunnerHealthCheck) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateRunnerJob(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateStatus(formats); err != nil {
 		res = append(res, err)
 	}
@@ -54,6 +61,25 @@ func (m *AppRunnerHealthCheck) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppRunnerHealthCheck) validateRunnerJob(formats strfmt.Registry) error {
+	if swag.IsZero(m.RunnerJob) { // not required
+		return nil
+	}
+
+	if m.RunnerJob != nil {
+		if err := m.RunnerJob.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("runner_job")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("runner_job")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -78,6 +104,10 @@ func (m *AppRunnerHealthCheck) validateStatus(formats strfmt.Registry) error {
 func (m *AppRunnerHealthCheck) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateRunnerJob(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateStatus(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -85,6 +115,27 @@ func (m *AppRunnerHealthCheck) ContextValidate(ctx context.Context, formats strf
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppRunnerHealthCheck) contextValidateRunnerJob(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.RunnerJob != nil {
+
+		if swag.IsZero(m.RunnerJob) { // not required
+			return nil
+		}
+
+		if err := m.RunnerJob.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("runner_job")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("runner_job")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
