@@ -69,6 +69,9 @@ const (
 	// AppRunnerJobTypeShutDashDown captures enum value "shut-down"
 	AppRunnerJobTypeShutDashDown AppRunnerJobType = "shut-down"
 
+	// AppRunnerJobTypeUpdateDashVersion captures enum value "update-version"
+	AppRunnerJobTypeUpdateDashVersion AppRunnerJobType = "update-version"
+
 	// AppRunnerJobTypeNoop captures enum value "noop"
 	AppRunnerJobTypeNoop AppRunnerJobType = "noop"
 
@@ -93,7 +96,7 @@ var appRunnerJobTypeEnum []interface{}
 
 func init() {
 	var res []AppRunnerJobType
-	if err := json.Unmarshal([]byte(`["health-check","docker-build","container-image-build","terraform-module-build","helm-chart-build","noop-build","oci-sync","noop-sync","terraform-deploy","helm-chart-deploy","job-deploy","noop-deploy","shut-down","noop","sandbox-terraform","runner-helm","runner-terraform","runner-local","actions-workflow"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["health-check","docker-build","container-image-build","terraform-module-build","helm-chart-build","noop-build","oci-sync","noop-sync","terraform-deploy","helm-chart-deploy","job-deploy","noop-deploy","shut-down","update-version","noop","sandbox-terraform","runner-helm","runner-terraform","runner-local","actions-workflow"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

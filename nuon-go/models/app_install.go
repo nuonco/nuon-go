@@ -40,6 +40,9 @@ type AppInstall struct {
 	// composite component status
 	CompositeComponentStatus string `json:"composite_component_status,omitempty"`
 
+	// composite component status description
+	CompositeComponentStatusDescription string `json:"composite_component_status_description,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
@@ -76,8 +79,14 @@ type AppInstall struct {
 	// runner status
 	RunnerStatus string `json:"runner_status,omitempty"`
 
+	// runner status description
+	RunnerStatusDescription string `json:"runner_status_description,omitempty"`
+
 	// sandbox status
 	SandboxStatus string `json:"sandbox_status,omitempty"`
+
+	// sandbox status description
+	SandboxStatusDescription string `json:"sandbox_status_description,omitempty"`
 
 	// TODO(jm): deprecate these fields once the terraform provider has been updated
 	Status string `json:"status,omitempty"`
