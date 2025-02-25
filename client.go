@@ -23,7 +23,6 @@ type Client interface {
 
 	//  current org
 	GetOrg(ctx context.Context) (*models.AppOrg, error)
-	GetOrgHealthChecks(ctx context.Context, limit *int64) ([]*models.AppOrgHealthCheck, error)
 	UpdateOrg(ctx context.Context, req *models.ServiceUpdateOrgRequest) (*models.AppOrg, error)
 	DeleteOrg(ctx context.Context) (bool, error)
 
