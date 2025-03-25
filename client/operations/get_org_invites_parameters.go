@@ -64,11 +64,23 @@ type GetOrgInvitesParams struct {
 
 	/* Limit.
 
-	   limit of health checks to return
+	   limit of results to return
 
-	   Default: 60
+	   Default: 10
 	*/
 	Limit *int64
+
+	/* Offset.
+
+	   offset of results to return
+	*/
+	Offset *int64
+
+	/* XNuonPaginationEnabled.
+
+	   Enable pagination
+	*/
+	XNuonPaginationEnabled *bool
 
 	timeout    time.Duration
 	Context    context.Context
@@ -88,11 +100,14 @@ func (o *GetOrgInvitesParams) WithDefaults() *GetOrgInvitesParams {
 // All values with no default are reset to their zero value.
 func (o *GetOrgInvitesParams) SetDefaults() {
 	var (
-		limitDefault = int64(60)
+		limitDefault = int64(10)
+
+		offsetDefault = int64(0)
 	)
 
 	val := GetOrgInvitesParams{
-		Limit: &limitDefault,
+		Limit:  &limitDefault,
+		Offset: &offsetDefault,
 	}
 
 	val.timeout = o.timeout
@@ -145,6 +160,28 @@ func (o *GetOrgInvitesParams) SetLimit(limit *int64) {
 	o.Limit = limit
 }
 
+// WithOffset adds the offset to the get org invites params
+func (o *GetOrgInvitesParams) WithOffset(offset *int64) *GetOrgInvitesParams {
+	o.SetOffset(offset)
+	return o
+}
+
+// SetOffset adds the offset to the get org invites params
+func (o *GetOrgInvitesParams) SetOffset(offset *int64) {
+	o.Offset = offset
+}
+
+// WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get org invites params
+func (o *GetOrgInvitesParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetOrgInvitesParams {
+	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
+	return o
+}
+
+// SetXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get org invites params
+func (o *GetOrgInvitesParams) SetXNuonPaginationEnabled(xNuonPaginationEnabled *bool) {
+	o.XNuonPaginationEnabled = xNuonPaginationEnabled
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *GetOrgInvitesParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -167,6 +204,31 @@ func (o *GetOrgInvitesParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 			if err := r.SetQueryParam("limit", qLimit); err != nil {
 				return err
 			}
+		}
+	}
+
+	if o.Offset != nil {
+
+		// query param offset
+		var qrOffset int64
+
+		if o.Offset != nil {
+			qrOffset = *o.Offset
+		}
+		qOffset := swag.FormatInt64(qrOffset)
+		if qOffset != "" {
+
+			if err := r.SetQueryParam("offset", qOffset); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.XNuonPaginationEnabled != nil {
+
+		// header param x-nuon-pagination-enabled
+		if err := r.SetHeaderParam("x-nuon-pagination-enabled", swag.FormatBool(*o.XNuonPaginationEnabled)); err != nil {
+			return err
 		}
 	}
 

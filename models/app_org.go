@@ -25,6 +25,9 @@ type AppOrg struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
+	// features
+	Features TypesStringBoolMap `json:"features,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
@@ -60,6 +63,10 @@ type AppOrg struct {
 func (m *AppOrg) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateFeatures(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateNotificationsConfig(formats); err != nil {
 		res = append(res, err)
 	}
@@ -75,6 +82,25 @@ func (m *AppOrg) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppOrg) validateFeatures(formats strfmt.Registry) error {
+	if swag.IsZero(m.Features) { // not required
+		return nil
+	}
+
+	if m.Features != nil {
+		if err := m.Features.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("features")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("features")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -146,6 +172,10 @@ func (m *AppOrg) validateVcsConnections(formats strfmt.Registry) error {
 func (m *AppOrg) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateFeatures(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateNotificationsConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -161,6 +191,24 @@ func (m *AppOrg) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppOrg) contextValidateFeatures(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Features) { // not required
+		return nil
+	}
+
+	if err := m.Features.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("features")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("features")
+		}
+		return err
+	}
+
 	return nil
 }
 

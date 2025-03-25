@@ -9,27 +9,57 @@ import (
 )
 
 // components
-func (c *client) GetAllComponents(ctx context.Context) ([]*models.AppComponent, error) {
-	resp, err := c.genClient.Operations.GetOrgComponents(&operations.GetOrgComponentsParams{
+func (c *client) GetAllComponents(ctx context.Context, query *models.GetAllComponentsQuery) ([]*models.AppComponent, bool, error) {
+	params := &operations.GetOrgComponentsParams{
 		Context: ctx,
-	}, c.getOrgIDAuthInfo())
-	if err != nil {
-		return nil, err
 	}
 
-	return resp.Payload, nil
+	if query != nil {
+		offset := int64(query.Offset)
+		limit := int64(query.Limit)
+		params.Offset = &offset
+		params.Limit = &limit
+		params.XNuonPaginationEnabled = &query.PaginationEnabled
+	}
+
+	resp, err := c.genClient.Operations.GetOrgComponents(params, c.getOrgIDAuthInfo())
+	if err != nil {
+		return nil, false, err
+	}
+
+	if query != nil {
+		items, hasMore := handlePagination(resp.Payload, int64(query.Offset), int64(query.Limit))
+		return items, hasMore, nil
+	}
+
+	return resp.Payload, false, nil
 }
 
-func (c *client) GetAppComponents(ctx context.Context, appID string) ([]*models.AppComponent, error) {
-	resp, err := c.genClient.Operations.GetAppComponents(&operations.GetAppComponentsParams{
+func (c *client) GetAppComponents(ctx context.Context, appID string, query *models.GetAppComponentsQuery) ([]*models.AppComponent, bool, error) {
+	params := &operations.GetAppComponentsParams{
 		AppID:   appID,
 		Context: ctx,
-	}, nil)
-	if err != nil {
-		return nil, err
 	}
 
-	return resp.Payload, nil
+	if query != nil {
+		offset := int64(query.Offset)
+		limit := int64(query.Limit)
+		params.Offset = &offset
+		params.Limit = &limit
+		params.XNuonPaginationEnabled = &query.PaginationEnabled
+	}
+
+	resp, err := c.genClient.Operations.GetAppComponents(params, c.getOrgIDAuthInfo())
+	if err != nil {
+		return nil, false, err
+	}
+
+	if query != nil {
+		items, hasMore := handlePagination(resp.Payload, int64(query.Offset), int64(query.Limit))
+		return items, hasMore, nil
+	}
+
+	return resp.Payload, false, nil
 }
 
 func (c *client) GetAppComponent(ctx context.Context, appID, nameOrID string) (*models.AppComponent, error) {
@@ -161,16 +191,31 @@ func (c *client) CreateJobComponentConfig(ctx context.Context, componentID strin
 	return resp.Payload, nil
 }
 
-func (c *client) GetComponentConfigs(ctx context.Context, componentID string) ([]*models.AppComponentConfigConnection, error) {
-	resp, err := c.genClient.Operations.GetComponentConfigs(&operations.GetComponentConfigsParams{
+func (c *client) GetComponentConfigs(ctx context.Context, componentID string, query *models.GetComponentConfigsQuery) ([]*models.AppComponentConfigConnection, bool, error) {
+	params := &operations.GetComponentConfigsParams{
 		ComponentID: componentID,
 		Context:     ctx,
-	}, c.getOrgIDAuthInfo())
-	if err != nil {
-		return nil, fmt.Errorf("unable to get component configs: %w", err)
 	}
 
-	return resp.Payload, nil
+	if query != nil {
+		offset := int64(query.Offset)
+		limit := int64(query.Limit)
+		params.Offset = &offset
+		params.Limit = &limit
+		params.XNuonPaginationEnabled = &query.PaginationEnabled
+	}
+
+	resp, err := c.genClient.Operations.GetComponentConfigs(params, c.getOrgIDAuthInfo())
+	if err != nil {
+		return nil, false, fmt.Errorf("unable to get component configs: %w", err)
+	}
+
+	if query != nil {
+		items, hasMore := handlePagination(resp.Payload, int64(query.Offset), int64(query.Limit))
+		return items, hasMore, nil
+	}
+
+	return resp.Payload, false, nil
 }
 
 func (c *client) GetComponentLatestConfig(ctx context.Context, componentID string) (*models.AppComponentConfigConnection, error) {

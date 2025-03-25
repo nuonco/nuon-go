@@ -18,7 +18,7 @@ type Client interface {
 	SetOrgID(orgID string)
 
 	//  get / create org
-	GetOrgs(ctx context.Context) ([]*models.AppOrg, error)
+	GetOrgs(ctx context.Context, query *models.GetOrgsQuery) ([]*models.AppOrg, bool, error)
 	CreateOrg(ctx context.Context, req *models.ServiceCreateOrgRequest) (*models.AppOrg, error)
 
 	//  current org
@@ -28,11 +28,11 @@ type Client interface {
 
 	// org invites and users
 	CreateOrgInvite(ctx context.Context, req *models.ServiceCreateOrgInviteRequest) (*models.AppOrgInvite, error)
-	GetOrgInvites(ctx context.Context, limit *int64) ([]*models.AppOrgInvite, error)
+	GetOrgInvites(ctx context.Context, query *models.GetOrgInvitesQuery) ([]*models.AppOrgInvite, bool, error)
 
 	// app methods
 	GetApp(ctx context.Context, appID string) (*models.AppApp, error)
-	GetApps(ctx context.Context) ([]*models.AppApp, error)
+	GetApps(ctx context.Context, query *models.GetAppsQuery) ([]*models.AppApp, bool, error)
 	CreateApp(ctx context.Context, req *models.ServiceCreateAppRequest) (*models.AppApp, error)
 	UpdateApp(ctx context.Context, appID string, req *models.ServiceUpdateAppRequest) (*models.AppApp, error)
 	DeleteApp(ctx context.Context, appID string) (bool, error)
@@ -40,29 +40,29 @@ type Client interface {
 	// app sandbox config methods
 	CreateAppSandboxConfig(ctx context.Context, appID string, req *models.ServiceCreateAppSandboxConfigRequest) (*models.AppAppSandboxConfig, error)
 	GetAppSandboxLatestConfig(ctx context.Context, appID string) (*models.AppAppSandboxConfig, error)
-	GetAppSandboxConfigs(ctx context.Context, appID string) ([]*models.AppAppSandboxConfig, error)
+	GetAppSandboxConfigs(ctx context.Context, appID string, query *models.GetAppSandboxConfigsQuery) ([]*models.AppAppSandboxConfig, bool, error)
 
 	// app runner config methods
 	CreateAppRunnerConfig(ctx context.Context, appID string, req *models.ServiceCreateAppRunnerConfigRequest) (*models.AppAppRunnerConfig, error)
 	GetAppRunnerLatestConfig(ctx context.Context, appID string) (*models.AppAppRunnerConfig, error)
-	GetAppRunnerConfigs(ctx context.Context, appID string) ([]*models.AppAppRunnerConfig, error)
+	GetAppRunnerConfigs(ctx context.Context, appID string, query *models.GetAppRunnerConfigsQuery) ([]*models.AppAppRunnerConfig, bool, error)
 
 	// app config methods
 	GetAppConfigTemplate(ctx context.Context, appID string, typ models.ServiceAppConfigTemplateType) (*models.ServiceAppConfigTemplate, error)
 	CreateAppConfig(ctx context.Context, appID string, req *models.ServiceCreateAppConfigRequest) (*models.AppAppConfig, error)
 	GetAppConfig(ctx context.Context, appID, appConfigID string) (*models.AppAppConfig, error)
 	GetAppLatestConfig(ctx context.Context, appID string) (*models.AppAppConfig, error)
-	GetAppConfigs(ctx context.Context, appID string) ([]*models.AppAppConfig, error)
+	GetAppConfigs(ctx context.Context, appID string, query *models.GetAppConfigsQuery) ([]*models.AppAppConfig, bool, error)
 	UpdateAppConfig(ctx context.Context, appID, appConfigID string, req *models.ServiceUpdateAppConfigRequest) (*models.AppAppConfig, error)
 
 	// app input config methods
 	CreateAppInputConfig(ctx context.Context, appID string, req *models.ServiceCreateAppInputConfigRequest) (*models.AppAppInputConfig, error)
 	GetAppInputLatestConfig(ctx context.Context, appID string) (*models.AppAppInputConfig, error)
-	GetAppInputConfigs(ctx context.Context, appID string) ([]*models.AppAppInputConfig, error)
+	GetAppInputConfigs(ctx context.Context, appID string, query *models.GetAppInputConfigsQuery) ([]*models.AppAppInputConfig, bool, error)
 
 	// app secret methods
 	CreateAppSecret(ctx context.Context, appID string, req *models.ServiceCreateAppSecretRequest) (*models.AppAppSecret, error)
-	GetAppSecrets(ctx context.Context, appID string) ([]*models.AppAppSecret, error)
+	GetAppSecrets(ctx context.Context, appID string, query *models.GetAppSecretsQuery) ([]*models.AppAppSecret, bool, error)
 	DeleteAppSecret(ctx context.Context, appID, secretID string) (bool, error)
 
 	// app installer methods
@@ -70,7 +70,7 @@ type Client interface {
 	UpdateInstaller(ctx context.Context, installerID string, req *models.ServiceUpdateInstallerRequest) (*models.AppInstaller, error)
 	DeleteInstaller(ctx context.Context, installerID string) (bool, error)
 	GetInstaller(ctx context.Context, installerID string) (*models.AppInstaller, error)
-	GetInstallers(ctx context.Context) ([]*models.AppInstaller, error)
+	GetInstallers(ctx context.Context, query *models.GetInstallersQuery) ([]*models.AppInstaller, bool, error)
 	RenderInstaller(ctx context.Context, installerID string) (*models.ServiceRenderedInstaller, error)
 
 	// general methods
@@ -81,14 +81,14 @@ type Client interface {
 	// vcs connections
 	CreateVCSConnection(ctx context.Context, req *models.ServiceCreateConnectionRequest) (*models.AppVCSConnection, error)
 	CreateVCSConnectionCallback(ctx context.Context, req *models.ServiceCreateConnectionCallbackRequest) (*models.AppVCSConnection, error)
-	GetVCSConnections(ctx context.Context) ([]*models.AppVCSConnection, error)
+	GetVCSConnections(ctx context.Context, query *models.GetVCSConnectionsQuery) ([]*models.AppVCSConnection, bool, error)
 	GetVCSConnection(ctx context.Context, connID string) (*models.AppVCSConnection, error)
-	GetAllVCSConnectedRepos(ctx context.Context) ([]*models.ServiceRepository, error)
+	GetAllVCSConnectedRepos(ctx context.Context, query *models.GetAllVCSConnectedReposQuery) ([]*models.ServiceRepository, bool, error)
 
 	// installs
 	CreateInstall(ctx context.Context, appID string, req *models.ServiceCreateInstallRequest) (*models.AppInstall, error)
-	GetAppInstalls(ctx context.Context, appID string) ([]*models.AppInstall, error)
-	GetAllInstalls(ctx context.Context) ([]*models.AppInstall, error)
+	GetAppInstalls(ctx context.Context, appID string, query *models.GetAppInstallsQuery) ([]*models.AppInstall, bool, error)
+	GetAllInstalls(ctx context.Context, query *models.GetAllInstallsQuery) ([]*models.AppInstall, bool, error)
 
 	GetInstall(ctx context.Context, installID string) (*models.AppInstall, error)
 	UpdateInstall(ctx context.Context, installID string, req *models.ServiceUpdateInstallRequest) (*models.AppInstall, error)
@@ -97,31 +97,31 @@ type Client interface {
 	DeprovisionInstall(ctx context.Context, installID string) error
 
 	// install deploys
-	GetInstallDeploys(ctx context.Context, installID string) ([]*models.AppInstallDeploy, error)
+	GetInstallDeploys(ctx context.Context, installID string, query *models.GetInstallDeploysQuery) ([]*models.AppInstallDeploy, bool, error)
 	CreateInstallDeploy(ctx context.Context, installID string, req *models.ServiceCreateInstallDeployRequest) (*models.AppInstallDeploy, error)
 	GetInstallDeploy(ctx context.Context, installID, deployID string) (*models.AppInstallDeploy, error)
 	GetInstallLatestDeploy(ctx context.Context, installID string) (*models.AppInstallDeploy, error)
 
 	// install components
-	GetInstallComponents(ctx context.Context, installID string) ([]*models.AppInstallComponent, error)
+	GetInstallComponents(ctx context.Context, installID string, query *models.GetInstallComponentsQuery) ([]*models.AppInstallComponent, bool, error)
 	TeardownInstallComponent(ctx context.Context, installID, componentID string) (*models.AppInstallDeploy, error)
 	TeardownInstallComponents(ctx context.Context, installID string) error
 	DeployInstallComponents(ctx context.Context, installID string) error
-	GetInstallComponentDeploys(ctx context.Context, installID, componentID string) ([]*models.AppInstallDeploy, error)
+	GetInstallComponentDeploys(ctx context.Context, installID, componentID string, query *models.GetInstallComponentDeploysQuery) ([]*models.AppInstallDeploy, bool, error)
 	GetInstallComponentLatestDeploy(ctx context.Context, installID, componentID string) (*models.AppInstallDeploy, error)
 
 	// install sandbox runs
-	GetInstallSandboxRuns(ctx context.Context, installID string) ([]*models.AppInstallSandboxRun, error)
+	GetInstallSandboxRuns(ctx context.Context, installID string, query *models.GetInstallSandboxRunsQuery) ([]*models.AppInstallSandboxRun, bool, error)
 
 	// install inputs
-	GetInstallInputs(ctx context.Context, installID string) ([]*models.AppInstallInputs, error)
+	GetInstallInputs(ctx context.Context, installID string, query *models.GetInstallInputsQuery) ([]*models.AppInstallInputs, bool, error)
 	GetInstallCurrentInputs(ctx context.Context, installID string) (*models.AppInstallInputs, error)
 	CreateInstallInputs(ctx context.Context, installID string, req *models.ServiceCreateInstallInputsRequest) (*models.AppInstallInputs, error)
 	UpdateInstallInputs(ctx context.Context, installID string, req *models.ServiceUpdateInstallInputsRequest) (*models.AppInstallInputs, error)
 
 	// components
-	GetAllComponents(ctx context.Context) ([]*models.AppComponent, error)
-	GetAppComponents(ctx context.Context, appID string) ([]*models.AppComponent, error)
+	GetAllComponents(ctx context.Context, query *models.GetAllComponentsQuery) ([]*models.AppComponent, bool, error)
+	GetAppComponents(ctx context.Context, appID string, query *models.GetAppComponentsQuery) ([]*models.AppComponent, bool, error)
 	GetAppComponent(ctx context.Context, appID, componentNameOrID string) (*models.AppComponent, error)
 	CreateComponent(ctx context.Context, appID string, req *models.ServiceCreateComponentRequest) (*models.AppComponent, error)
 
@@ -135,26 +135,26 @@ type Client interface {
 	CreateDockerBuildComponentConfig(ctx context.Context, componentID string, req *models.ServiceCreateDockerBuildComponentConfigRequest) (*models.AppDockerBuildComponentConfig, error)
 	CreateExternalImageComponentConfig(ctx context.Context, componentID string, req *models.ServiceCreateExternalImageComponentConfigRequest) (*models.AppExternalImageComponentConfig, error)
 	CreateJobComponentConfig(ctx context.Context, componentID string, req *models.ServiceCreateJobComponentConfigRequest) (*models.AppJobComponentConfig, error)
-	GetComponentConfigs(ctx context.Context, componentID string) ([]*models.AppComponentConfigConnection, error)
+	GetComponentConfigs(ctx context.Context, componentID string, query *models.GetComponentConfigsQuery) ([]*models.AppComponentConfigConnection, bool, error)
 	GetComponentLatestConfig(ctx context.Context, componentID string) (*models.AppComponentConfigConnection, error)
 
 	// builds
 	CreateComponentBuild(ctx context.Context, componentID string, req *models.ServiceCreateComponentBuildRequest) (*models.AppComponentBuild, error)
-	GetComponentBuilds(ctx context.Context, componentID, appID string, limit *int64) ([]*models.AppComponentBuild, error)
+	GetComponentBuilds(ctx context.Context, componentID, appID string, query *models.GetComponentBuildsQuery) ([]*models.AppComponentBuild, bool, error)
 	GetComponentLatestBuild(ctx context.Context, componentID string) (*models.AppComponentBuild, error)
 	GetComponentBuild(ctx context.Context, componentID, buildID string) (*models.AppComponentBuild, error)
 	GetBuild(ctx context.Context, buildID string) (*models.AppComponentBuild, error)
 
 	// component releases
-	GetAppReleases(ctx context.Context, appID string) ([]*models.AppComponentRelease, error)
-	GetComponentReleases(ctx context.Context, componentID string) ([]*models.AppComponentRelease, error)
+	GetAppReleases(ctx context.Context, appID string, query *models.GetAppReleasesQuery) ([]*models.AppComponentRelease, bool, error)
+	GetComponentReleases(ctx context.Context, componentID string, query *models.GetComponentReleasesQuery) ([]*models.AppComponentRelease, bool, error)
 	CreateComponentRelease(ctx context.Context, componentID string, req *models.ServiceCreateComponentReleaseRequest) (*models.AppComponentRelease, error)
 
 	GetRelease(ctx context.Context, releaseID string) (*models.AppComponentRelease, error)
-	GetReleaseSteps(ctx context.Context, releaseID string) ([]*models.AppComponentReleaseStep, error)
+	GetReleaseSteps(ctx context.Context, releaseID string, query *models.GetReleaseStepsQuery) ([]*models.AppComponentReleaseStep, bool, error)
 
 	// actions
-	GetActionWorkflows(ctx context.Context, appID string) ([]*models.AppActionWorkflow, error)
+	GetActionWorkflows(ctx context.Context, appID string, query *models.GetActionWorkflowsQuery) ([]*models.AppActionWorkflow, bool, error)
 	GetActionWorkflow(ctx context.Context, actionWorkflowID string) (*models.AppActionWorkflow, error)
 	GetAppActionWorkflow(ctx context.Context, appID, actionWorkflowID string) (*models.AppActionWorkflow, error)
 	CreateActionWorkflow(ctx context.Context, appID string, req *models.ServiceCreateAppActionWorkflowRequest) (*models.AppActionWorkflow, error)
@@ -163,7 +163,7 @@ type Client interface {
 	GetActionWorkflowConfigs(ctx context.Context, actionWorkflowID string) ([]*models.AppActionWorkflowConfig, error)
 	GetActionWorkflowConfig(ctx context.Context, actionWorkflowConfigID string) (*models.AppActionWorkflowConfig, error)
 	CreateActionWorkflowConfig(ctx context.Context, actionWorkflowID string, req *models.ServiceCreateActionWorkflowConfigRequest) (*models.AppActionWorkflowConfig, error)
-	GetInstallActionWorkflowRecentRuns(ctx context.Context, actionWorkflowID string, installID string) (*models.AppInstallActionWorkflow, error)
+	GetInstallActionWorkflowRecentRuns(ctx context.Context, installID, actionWorkflowID string, query *models.GetInstallActionWorkflowRecentRunsQuery) (*models.AppInstallActionWorkflow, bool, error)
 	CreateInstallActionWorkflowRun(ctx context.Context, installID string, req *models.ServiceCreateInstallActionWorkflowRunRequest) (*models.AppInstallActionWorkflowRun, error)
 	GetInstallActionWorkflowRun(ctx context.Context, installID, runID string) (*models.AppInstallActionWorkflowRun, error)
 	GetActionWorkflowLatestConfig(ctx context.Context, actionWorkflowID string) (*models.AppActionWorkflowConfig, error)

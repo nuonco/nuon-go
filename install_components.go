@@ -7,30 +7,66 @@ import (
 	"github.com/nuonco/nuon-go/models"
 )
 
-// install components
-func (c *client) GetInstallComponents(ctx context.Context, installID string) ([]*models.AppInstallComponent, error) {
-	resp, err := c.genClient.Operations.GetInstallComponents(&operations.GetInstallComponentsParams{
-		InstallID: installID,
-		Context:   ctx,
-	}, c.getOrgIDAuthInfo())
-	if err != nil {
-		return nil, err
-	}
-
-	return resp.Payload, nil
+type getinstallcomponentsquery struct {
+	Offset int
+	Limit  int
 }
 
-func (c *client) GetInstallComponentDeploys(ctx context.Context, installID string, componentID string) ([]*models.AppInstallDeploy, error) {
-	resp, err := c.genClient.Operations.GetInstallComponentDeploys(&operations.GetInstallComponentDeploysParams{
-		ComponentID: componentID,
-		InstallID:   installID,
-		Context:     ctx,
-	}, c.getOrgIDAuthInfo())
-	if err != nil {
-		return nil, err
+// install components
+func (c *client) GetInstallComponents(ctx context.Context, installID string, query *models.GetInstallComponentsQuery) ([]*models.AppInstallComponent, bool, error) {
+	params := &operations.GetInstallComponentsParams{
+		InstallID: installID,
+		Context:   ctx,
 	}
 
-	return resp.Payload, nil
+	if query != nil {
+		paginationEnabled := true
+		offset := int64(query.Offset)
+		limit := int64(query.Limit)
+		params.XNuonPaginationEnabled = &paginationEnabled
+		params.Offset = &offset
+		params.Limit = &limit
+	}
+
+	resp, err := c.genClient.Operations.GetInstallComponents(params, c.getOrgIDAuthInfo())
+	if err != nil {
+		return nil, false, err
+	}
+
+	if query != nil {
+		items, hasMore := handlePagination(resp.Payload, int64(query.Offset), int64(query.Limit))
+		return items, hasMore, nil
+	}
+
+	return resp.Payload, false, nil
+}
+
+func (c *client) GetInstallComponentDeploys(ctx context.Context, installID string, componentID string, query *models.GetInstallComponentDeploysQuery) ([]*models.AppInstallDeploy, bool, error) {
+	params := &operations.GetInstallComponentDeploysParams{
+		InstallID:   installID,
+		ComponentID: componentID,
+		Context:     ctx,
+	}
+
+	if query != nil {
+		offset := int64(query.Offset)
+		limit := int64(query.Limit)
+		params.XNuonPaginationEnabled = &query.PaginationEnabled
+		params.Offset = &offset
+		params.Limit = &limit
+	}
+
+	resp, err := c.genClient.Operations.GetInstallComponentDeploys(params, c.getOrgIDAuthInfo())
+	if err != nil {
+		return nil, false, err
+	}
+
+	if query != nil {
+		items, hasMore := handlePagination(resp.Payload, int64(query.Offset), int64(query.Limit))
+		return items, hasMore, nil
+	}
+
+	return resp.Payload, false, nil
 }
 
 func (c *client) GetInstallComponentLatestDeploy(ctx context.Context, installID string, componentID string) (*models.AppInstallDeploy, error) {

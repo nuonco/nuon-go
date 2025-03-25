@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewGetAppSandboxConfigsParams creates a new GetAppSandboxConfigsParams object,
@@ -67,6 +68,26 @@ type GetAppSandboxConfigsParams struct {
 	*/
 	AppID string
 
+	/* Limit.
+
+	   limit of jobs to return
+
+	   Default: 10
+	*/
+	Limit *int64
+
+	/* Offset.
+
+	   offset of jobs to return
+	*/
+	Offset *int64
+
+	/* XNuonPaginationEnabled.
+
+	   Enable pagination
+	*/
+	XNuonPaginationEnabled *bool
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -84,7 +105,21 @@ func (o *GetAppSandboxConfigsParams) WithDefaults() *GetAppSandboxConfigsParams 
 //
 // All values with no default are reset to their zero value.
 func (o *GetAppSandboxConfigsParams) SetDefaults() {
-	// no default values defined for this parameter
+	var (
+		limitDefault = int64(10)
+
+		offsetDefault = int64(0)
+	)
+
+	val := GetAppSandboxConfigsParams{
+		Limit:  &limitDefault,
+		Offset: &offsetDefault,
+	}
+
+	val.timeout = o.timeout
+	val.Context = o.Context
+	val.HTTPClient = o.HTTPClient
+	*o = val
 }
 
 // WithTimeout adds the timeout to the get app sandbox configs params
@@ -131,6 +166,39 @@ func (o *GetAppSandboxConfigsParams) SetAppID(appID string) {
 	o.AppID = appID
 }
 
+// WithLimit adds the limit to the get app sandbox configs params
+func (o *GetAppSandboxConfigsParams) WithLimit(limit *int64) *GetAppSandboxConfigsParams {
+	o.SetLimit(limit)
+	return o
+}
+
+// SetLimit adds the limit to the get app sandbox configs params
+func (o *GetAppSandboxConfigsParams) SetLimit(limit *int64) {
+	o.Limit = limit
+}
+
+// WithOffset adds the offset to the get app sandbox configs params
+func (o *GetAppSandboxConfigsParams) WithOffset(offset *int64) *GetAppSandboxConfigsParams {
+	o.SetOffset(offset)
+	return o
+}
+
+// SetOffset adds the offset to the get app sandbox configs params
+func (o *GetAppSandboxConfigsParams) SetOffset(offset *int64) {
+	o.Offset = offset
+}
+
+// WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get app sandbox configs params
+func (o *GetAppSandboxConfigsParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetAppSandboxConfigsParams {
+	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
+	return o
+}
+
+// SetXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get app sandbox configs params
+func (o *GetAppSandboxConfigsParams) SetXNuonPaginationEnabled(xNuonPaginationEnabled *bool) {
+	o.XNuonPaginationEnabled = xNuonPaginationEnabled
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *GetAppSandboxConfigsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -142,6 +210,48 @@ func (o *GetAppSandboxConfigsParams) WriteToRequest(r runtime.ClientRequest, reg
 	// path param app_id
 	if err := r.SetPathParam("app_id", o.AppID); err != nil {
 		return err
+	}
+
+	if o.Limit != nil {
+
+		// query param limit
+		var qrLimit int64
+
+		if o.Limit != nil {
+			qrLimit = *o.Limit
+		}
+		qLimit := swag.FormatInt64(qrLimit)
+		if qLimit != "" {
+
+			if err := r.SetQueryParam("limit", qLimit); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Offset != nil {
+
+		// query param offset
+		var qrOffset int64
+
+		if o.Offset != nil {
+			qrOffset = *o.Offset
+		}
+		qOffset := swag.FormatInt64(qrOffset)
+		if qOffset != "" {
+
+			if err := r.SetQueryParam("offset", qOffset); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.XNuonPaginationEnabled != nil {
+
+		// header param x-nuon-pagination-enabled
+		if err := r.SetHeaderParam("x-nuon-pagination-enabled", swag.FormatBool(*o.XNuonPaginationEnabled)); err != nil {
+			return err
+		}
 	}
 
 	if len(res) > 0 {

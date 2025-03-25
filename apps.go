@@ -20,15 +20,30 @@ func (c *client) GetApp(ctx context.Context, appID string) (*models.AppApp, erro
 	return resp.Payload, nil
 }
 
-func (c *client) GetApps(ctx context.Context) ([]*models.AppApp, error) {
-	resp, err := c.genClient.Operations.GetApps(&operations.GetAppsParams{
+func (c *client) GetApps(ctx context.Context, query *models.GetAppsQuery) ([]*models.AppApp, bool, error) {
+	params := &operations.GetAppsParams{
 		Context: ctx,
-	}, nil)
-	if err != nil {
-		return nil, err
 	}
 
-	return resp.Payload, nil
+	if query != nil {
+		offset := int64(query.Offset)
+		limit := int64(query.Limit)
+		params.Offset = &offset
+		params.Limit = &limit
+		params.XNuonPaginationEnabled = &query.PaginationEnabled
+	}
+
+	resp, err := c.genClient.Operations.GetApps(params, nil)
+	if err != nil {
+		return nil, false, err
+	}
+
+	if query != nil {
+		items, hasMore := handlePagination(resp.Payload, int64(query.Offset), int64(query.Limit))
+		return items, hasMore, nil
+	}
+
+	return resp.Payload, false, nil
 }
 
 func (c *client) CreateApp(ctx context.Context, req *models.ServiceCreateAppRequest) (*models.AppApp, error) {
