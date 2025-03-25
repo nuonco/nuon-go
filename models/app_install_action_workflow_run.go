@@ -28,6 +28,9 @@ type AppInstallActionWorkflowRun struct {
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
+	// created by
+	CreatedBy *AppAccount `json:"created_by,omitempty"`
+
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
@@ -88,6 +91,10 @@ func (m *AppInstallActionWorkflowRun) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateCreatedBy(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateInstallActionWorkflow(formats); err != nil {
 		res = append(res, err)
 	}
@@ -125,6 +132,25 @@ func (m *AppInstallActionWorkflowRun) validateConfig(formats strfmt.Registry) er
 				return ve.ValidateName("config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppInstallActionWorkflowRun) validateCreatedBy(formats strfmt.Registry) error {
+	if swag.IsZero(m.CreatedBy) { // not required
+		return nil
+	}
+
+	if m.CreatedBy != nil {
+		if err := m.CreatedBy.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("created_by")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("created_by")
 			}
 			return err
 		}
@@ -241,6 +267,10 @@ func (m *AppInstallActionWorkflowRun) ContextValidate(ctx context.Context, forma
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateInstallActionWorkflow(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -280,6 +310,27 @@ func (m *AppInstallActionWorkflowRun) contextValidateConfig(ctx context.Context,
 				return ve.ValidateName("config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppInstallActionWorkflowRun) contextValidateCreatedBy(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.CreatedBy != nil {
+
+		if swag.IsZero(m.CreatedBy) { // not required
+			return nil
+		}
+
+		if err := m.CreatedBy.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("created_by")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("created_by")
 			}
 			return err
 		}

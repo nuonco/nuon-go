@@ -76,11 +76,23 @@ type GetComponentBuildsParams struct {
 
 	/* Limit.
 
-	   limit of builds to return
+	   limit of results to return
 
-	   Default: 60
+	   Default: 10
 	*/
 	Limit *int64
+
+	/* Offset.
+
+	   offset of results to return
+	*/
+	Offset *int64
+
+	/* XNuonPaginationEnabled.
+
+	   Enable pagination
+	*/
+	XNuonPaginationEnabled *bool
 
 	timeout    time.Duration
 	Context    context.Context
@@ -100,11 +112,14 @@ func (o *GetComponentBuildsParams) WithDefaults() *GetComponentBuildsParams {
 // All values with no default are reset to their zero value.
 func (o *GetComponentBuildsParams) SetDefaults() {
 	var (
-		limitDefault = int64(60)
+		limitDefault = int64(10)
+
+		offsetDefault = int64(0)
 	)
 
 	val := GetComponentBuildsParams{
-		Limit: &limitDefault,
+		Limit:  &limitDefault,
+		Offset: &offsetDefault,
 	}
 
 	val.timeout = o.timeout
@@ -179,6 +194,28 @@ func (o *GetComponentBuildsParams) SetLimit(limit *int64) {
 	o.Limit = limit
 }
 
+// WithOffset adds the offset to the get component builds params
+func (o *GetComponentBuildsParams) WithOffset(offset *int64) *GetComponentBuildsParams {
+	o.SetOffset(offset)
+	return o
+}
+
+// SetOffset adds the offset to the get component builds params
+func (o *GetComponentBuildsParams) SetOffset(offset *int64) {
+	o.Offset = offset
+}
+
+// WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get component builds params
+func (o *GetComponentBuildsParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetComponentBuildsParams {
+	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
+	return o
+}
+
+// SetXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get component builds params
+func (o *GetComponentBuildsParams) SetXNuonPaginationEnabled(xNuonPaginationEnabled *bool) {
+	o.XNuonPaginationEnabled = xNuonPaginationEnabled
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *GetComponentBuildsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -235,6 +272,31 @@ func (o *GetComponentBuildsParams) WriteToRequest(r runtime.ClientRequest, reg s
 			if err := r.SetQueryParam("limit", qLimit); err != nil {
 				return err
 			}
+		}
+	}
+
+	if o.Offset != nil {
+
+		// query param offset
+		var qrOffset int64
+
+		if o.Offset != nil {
+			qrOffset = *o.Offset
+		}
+		qOffset := swag.FormatInt64(qrOffset)
+		if qOffset != "" {
+
+			if err := r.SetQueryParam("offset", qOffset); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.XNuonPaginationEnabled != nil {
+
+		// header param x-nuon-pagination-enabled
+		if err := r.SetHeaderParam("x-nuon-pagination-enabled", swag.FormatBool(*o.XNuonPaginationEnabled)); err != nil {
+			return err
 		}
 	}
 

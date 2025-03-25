@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewGetRunnerRecentHealthChecksParams creates a new GetRunnerRecentHealthChecksParams object,
@@ -61,6 +62,20 @@ GetRunnerRecentHealthChecksParams contains all the parameters to send to the API
 */
 type GetRunnerRecentHealthChecksParams struct {
 
+	/* Limit.
+
+	   limit of results to return
+
+	   Default: 10
+	*/
+	Limit *int64
+
+	/* Offset.
+
+	   offset of results to return
+	*/
+	Offset *int64
+
 	/* RunnerID.
 
 	   runner ID
@@ -74,6 +89,12 @@ type GetRunnerRecentHealthChecksParams struct {
 	   Default: "1h"
 	*/
 	Window *string
+
+	/* XNuonPaginationEnabled.
+
+	   Enable pagination
+	*/
+	XNuonPaginationEnabled *bool
 
 	timeout    time.Duration
 	Context    context.Context
@@ -93,10 +114,16 @@ func (o *GetRunnerRecentHealthChecksParams) WithDefaults() *GetRunnerRecentHealt
 // All values with no default are reset to their zero value.
 func (o *GetRunnerRecentHealthChecksParams) SetDefaults() {
 	var (
+		limitDefault = int64(10)
+
+		offsetDefault = int64(0)
+
 		windowDefault = string("1h")
 	)
 
 	val := GetRunnerRecentHealthChecksParams{
+		Limit:  &limitDefault,
+		Offset: &offsetDefault,
 		Window: &windowDefault,
 	}
 
@@ -139,6 +166,28 @@ func (o *GetRunnerRecentHealthChecksParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithLimit adds the limit to the get runner recent health checks params
+func (o *GetRunnerRecentHealthChecksParams) WithLimit(limit *int64) *GetRunnerRecentHealthChecksParams {
+	o.SetLimit(limit)
+	return o
+}
+
+// SetLimit adds the limit to the get runner recent health checks params
+func (o *GetRunnerRecentHealthChecksParams) SetLimit(limit *int64) {
+	o.Limit = limit
+}
+
+// WithOffset adds the offset to the get runner recent health checks params
+func (o *GetRunnerRecentHealthChecksParams) WithOffset(offset *int64) *GetRunnerRecentHealthChecksParams {
+	o.SetOffset(offset)
+	return o
+}
+
+// SetOffset adds the offset to the get runner recent health checks params
+func (o *GetRunnerRecentHealthChecksParams) SetOffset(offset *int64) {
+	o.Offset = offset
+}
+
 // WithRunnerID adds the runnerID to the get runner recent health checks params
 func (o *GetRunnerRecentHealthChecksParams) WithRunnerID(runnerID string) *GetRunnerRecentHealthChecksParams {
 	o.SetRunnerID(runnerID)
@@ -161,6 +210,17 @@ func (o *GetRunnerRecentHealthChecksParams) SetWindow(window *string) {
 	o.Window = window
 }
 
+// WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get runner recent health checks params
+func (o *GetRunnerRecentHealthChecksParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetRunnerRecentHealthChecksParams {
+	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
+	return o
+}
+
+// SetXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get runner recent health checks params
+func (o *GetRunnerRecentHealthChecksParams) SetXNuonPaginationEnabled(xNuonPaginationEnabled *bool) {
+	o.XNuonPaginationEnabled = xNuonPaginationEnabled
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *GetRunnerRecentHealthChecksParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -168,6 +228,40 @@ func (o *GetRunnerRecentHealthChecksParams) WriteToRequest(r runtime.ClientReque
 		return err
 	}
 	var res []error
+
+	if o.Limit != nil {
+
+		// query param limit
+		var qrLimit int64
+
+		if o.Limit != nil {
+			qrLimit = *o.Limit
+		}
+		qLimit := swag.FormatInt64(qrLimit)
+		if qLimit != "" {
+
+			if err := r.SetQueryParam("limit", qLimit); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Offset != nil {
+
+		// query param offset
+		var qrOffset int64
+
+		if o.Offset != nil {
+			qrOffset = *o.Offset
+		}
+		qOffset := swag.FormatInt64(qrOffset)
+		if qOffset != "" {
+
+			if err := r.SetQueryParam("offset", qOffset); err != nil {
+				return err
+			}
+		}
+	}
 
 	// path param runner_id
 	if err := r.SetPathParam("runner_id", o.RunnerID); err != nil {
@@ -188,6 +282,14 @@ func (o *GetRunnerRecentHealthChecksParams) WriteToRequest(r runtime.ClientReque
 			if err := r.SetQueryParam("window", qWindow); err != nil {
 				return err
 			}
+		}
+	}
+
+	if o.XNuonPaginationEnabled != nil {
+
+		// header param x-nuon-pagination-enabled
+		if err := r.SetHeaderParam("x-nuon-pagination-enabled", swag.FormatBool(*o.XNuonPaginationEnabled)); err != nil {
+			return err
 		}
 	}
 

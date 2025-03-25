@@ -41,6 +41,9 @@ type AppRunnerGroupSettings struct {
 	// enable sentry
 	EnableSentry bool `json:"enable_sentry,omitempty"`
 
+	// the job loop groups the runner should poll for
+	Groups []string `json:"groups"`
+
 	// Various settings for the runner to handle internally
 	HeartBeatTimeout int64 `json:"heart_beat_timeout,omitempty"`
 

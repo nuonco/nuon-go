@@ -19,15 +19,25 @@ func (c *client) RenderInstaller(ctx context.Context, id string) (*models.Servic
 	return resp.Payload, nil
 }
 
-func (c *client) GetInstallers(ctx context.Context) ([]*models.AppInstaller, error) {
-	resp, err := c.genClient.Operations.GetInstallers(&operations.GetInstallersParams{
+func (c *client) GetInstallers(ctx context.Context, query *models.GetInstallersQuery) ([]*models.AppInstaller, bool, error) {
+	params := &operations.GetInstallersParams{
 		Context: ctx,
-	}, c.getOrgIDAuthInfo())
-	if err != nil {
-		return nil, err
 	}
 
-	return resp.Payload, nil
+	if query != nil {
+		offset := int64(query.Offset)
+		limit := int64(query.Limit)
+		params.Offset = &offset
+		params.Limit = &limit
+		params.XNuonPaginationEnabled = &query.PaginationEnabled
+	}
+
+	resp, err := c.genClient.Operations.GetInstallers(params, c.getOrgIDAuthInfo())
+	if err != nil {
+		return nil, false, err
+	}
+
+	return resp.Payload, false, nil
 }
 
 func (c *client) GetInstaller(ctx context.Context, appInstallerID string) (*models.AppInstaller, error) {
