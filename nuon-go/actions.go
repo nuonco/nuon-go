@@ -7,17 +7,32 @@ import (
 	"github.com/nuonco/nuon-go/models"
 )
 
-func (c *client) GetActionWorkflows(ctx context.Context, appID string) ([]*models.AppActionWorkflow, error) {
-	resp, err := c.genClient.Operations.GetActionWorkflows(&operations.GetActionWorkflowsParams{
+func (c *client) GetActionWorkflows(ctx context.Context, appID string, query *models.GetActionWorkflowsQuery) ([]*models.AppActionWorkflow, bool, error) {
+	params := &operations.GetActionWorkflowsParams{
 		AppID:   appID,
 		Context: ctx,
-	}, c.getOrgIDAuthInfo())
-
-	if err != nil {
-		return nil, err
 	}
 
-	return resp.Payload, nil
+	if query != nil {
+		paginationEnabled := true
+		offset := int64(query.Offset)
+		limit := int64(query.Limit)
+		params.Offset = &offset
+		params.Limit = &limit
+		params.XNuonPaginationEnabled = &paginationEnabled
+	}
+
+	resp, err := c.genClient.Operations.GetActionWorkflows(params, c.getOrgIDAuthInfo())
+	if err != nil {
+		return nil, false, err
+	}
+
+	if query != nil {
+		items, hasMore := handlePagination(resp.Payload, int64(query.Offset), int64(query.Limit))
+		return items, hasMore, nil
+	}
+
+	return resp.Payload, false, nil
 }
 
 // deprecated
@@ -125,18 +140,34 @@ func (c *client) CreateActionWorkflowConfig(ctx context.Context, actionWorkflowI
 	return resp.Payload, nil
 }
 
-func (c *client) GetInstallActionWorkflowRecentRuns(ctx context.Context, installID, actionWorkflowID string) (*models.AppInstallActionWorkflow, error) {
-	resp, err := c.genClient.Operations.GetInstallActionWorkflowRecentRuns(&operations.GetInstallActionWorkflowRecentRunsParams{
+func (c *client) GetInstallActionWorkflowRecentRuns(ctx context.Context, installID, actionWorkflowID string, query *models.GetInstallActionWorkflowRecentRunsQuery) (*models.AppInstallActionWorkflow, bool, error) {
+	params := &operations.GetInstallActionWorkflowRecentRunsParams{
 		InstallID:        installID,
 		ActionWorkflowID: actionWorkflowID,
 		Context:          ctx,
-	}, c.getOrgIDAuthInfo())
-
-	if err != nil {
-		return nil, err
 	}
 
-	return resp.Payload, nil
+	if query != nil {
+		offset := int64(query.Offset)
+		limit := int64(query.Limit)
+		params.XNuonPaginationEnabled = &query.PaginationEnabled
+		params.Offset = &offset
+		params.Limit = &limit
+	}
+
+	resp, err := c.genClient.Operations.GetInstallActionWorkflowRecentRuns(params, c.getOrgIDAuthInfo())
+
+	if err != nil {
+		return nil, false, err
+	}
+
+	if query != nil {
+		runs, hasMore := handlePagination(resp.Payload.Runs, int64(query.Offset), int64(query.Limit))
+		resp.Payload.Runs = runs
+		return resp.Payload, hasMore, nil
+	}
+
+	return resp.Payload, false, nil
 }
 
 func (c *client) CreateInstallActionWorkflowRun(ctx context.Context, installID string, req *models.ServiceCreateInstallActionWorkflowRunRequest) (*models.AppInstallActionWorkflowRun, error) {

@@ -7,16 +7,31 @@ import (
 	"github.com/nuonco/nuon-go/models"
 )
 
-func (c *client) GetAppSecrets(ctx context.Context, appID string) ([]*models.AppAppSecret, error) {
-	resp, err := c.genClient.Operations.GetAppSecrets(&operations.GetAppSecretsParams{
+func (c *client) GetAppSecrets(ctx context.Context, appID string, query *models.GetAppSecretsQuery) ([]*models.AppAppSecret, bool, error) {
+	params := &operations.GetAppSecretsParams{
 		AppID:   appID,
 		Context: ctx,
-	}, c.getOrgIDAuthInfo())
-	if err != nil {
-		return nil, err
 	}
 
-	return resp.Payload, nil
+	if query != nil {
+		offset := int64(query.Offset)
+		limit := int64(query.Limit)
+		params.Offset = &offset
+		params.Limit = &limit
+		params.XNuonPaginationEnabled = &query.PaginationEnabled
+	}
+
+	resp, err := c.genClient.Operations.GetAppSecrets(params, c.getOrgIDAuthInfo())
+	if err != nil {
+		return nil, false, err
+	}
+
+	if query != nil {
+		items, hasMore := handlePagination(resp.Payload, int64(query.Offset), int64(query.Limit))
+		return items, hasMore, nil
+	}
+
+	return resp.Payload, false, nil
 }
 
 func (c *client) CreateAppSecret(ctx context.Context, appID string, req *models.ServiceCreateAppSecretRequest) (*models.AppAppSecret, error) {

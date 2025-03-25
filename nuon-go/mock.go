@@ -604,63 +604,67 @@ func (mr *MockClientMockRecorder) GetActionWorkflowLatestConfig(ctx, actionWorkf
 }
 
 // GetActionWorkflows mocks base method.
-func (m *MockClient) GetActionWorkflows(ctx context.Context, appID string) ([]*models.AppActionWorkflow, error) {
+func (m *MockClient) GetActionWorkflows(ctx context.Context, appID string, query *models.GetActionWorkflowsQuery) ([]*models.AppActionWorkflow, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetActionWorkflows", ctx, appID)
+	ret := m.ctrl.Call(m, "GetActionWorkflows", ctx, appID, query)
 	ret0, _ := ret[0].([]*models.AppActionWorkflow)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetActionWorkflows indicates an expected call of GetActionWorkflows.
-func (mr *MockClientMockRecorder) GetActionWorkflows(ctx, appID interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetActionWorkflows(ctx, appID, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetActionWorkflows", reflect.TypeOf((*MockClient)(nil).GetActionWorkflows), ctx, appID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetActionWorkflows", reflect.TypeOf((*MockClient)(nil).GetActionWorkflows), ctx, appID, query)
 }
 
 // GetAllComponents mocks base method.
-func (m *MockClient) GetAllComponents(ctx context.Context) ([]*models.AppComponent, error) {
+func (m *MockClient) GetAllComponents(ctx context.Context, query *models.GetAllComponentsQuery) ([]*models.AppComponent, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetAllComponents", ctx)
+	ret := m.ctrl.Call(m, "GetAllComponents", ctx, query)
 	ret0, _ := ret[0].([]*models.AppComponent)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetAllComponents indicates an expected call of GetAllComponents.
-func (mr *MockClientMockRecorder) GetAllComponents(ctx interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetAllComponents(ctx, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAllComponents", reflect.TypeOf((*MockClient)(nil).GetAllComponents), ctx)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAllComponents", reflect.TypeOf((*MockClient)(nil).GetAllComponents), ctx, query)
 }
 
 // GetAllInstalls mocks base method.
-func (m *MockClient) GetAllInstalls(ctx context.Context) ([]*models.AppInstall, error) {
+func (m *MockClient) GetAllInstalls(ctx context.Context, query *models.GetAllInstallsQuery) ([]*models.AppInstall, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetAllInstalls", ctx)
+	ret := m.ctrl.Call(m, "GetAllInstalls", ctx, query)
 	ret0, _ := ret[0].([]*models.AppInstall)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetAllInstalls indicates an expected call of GetAllInstalls.
-func (mr *MockClientMockRecorder) GetAllInstalls(ctx interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetAllInstalls(ctx, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAllInstalls", reflect.TypeOf((*MockClient)(nil).GetAllInstalls), ctx)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAllInstalls", reflect.TypeOf((*MockClient)(nil).GetAllInstalls), ctx, query)
 }
 
 // GetAllVCSConnectedRepos mocks base method.
-func (m *MockClient) GetAllVCSConnectedRepos(ctx context.Context) ([]*models.ServiceRepository, error) {
+func (m *MockClient) GetAllVCSConnectedRepos(ctx context.Context, query *models.GetAllVCSConnectedReposQuery) ([]*models.ServiceRepository, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetAllVCSConnectedRepos", ctx)
+	ret := m.ctrl.Call(m, "GetAllVCSConnectedRepos", ctx, query)
 	ret0, _ := ret[0].([]*models.ServiceRepository)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetAllVCSConnectedRepos indicates an expected call of GetAllVCSConnectedRepos.
-func (mr *MockClientMockRecorder) GetAllVCSConnectedRepos(ctx interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetAllVCSConnectedRepos(ctx, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAllVCSConnectedRepos", reflect.TypeOf((*MockClient)(nil).GetAllVCSConnectedRepos), ctx)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAllVCSConnectedRepos", reflect.TypeOf((*MockClient)(nil).GetAllVCSConnectedRepos), ctx, query)
 }
 
 // GetApp mocks base method.
@@ -709,18 +713,19 @@ func (mr *MockClientMockRecorder) GetAppComponent(ctx, appID, componentNameOrID 
 }
 
 // GetAppComponents mocks base method.
-func (m *MockClient) GetAppComponents(ctx context.Context, appID string) ([]*models.AppComponent, error) {
+func (m *MockClient) GetAppComponents(ctx context.Context, appID string, query *models.GetAppComponentsQuery) ([]*models.AppComponent, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetAppComponents", ctx, appID)
+	ret := m.ctrl.Call(m, "GetAppComponents", ctx, appID, query)
 	ret0, _ := ret[0].([]*models.AppComponent)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetAppComponents indicates an expected call of GetAppComponents.
-func (mr *MockClientMockRecorder) GetAppComponents(ctx, appID interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetAppComponents(ctx, appID, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppComponents", reflect.TypeOf((*MockClient)(nil).GetAppComponents), ctx, appID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppComponents", reflect.TypeOf((*MockClient)(nil).GetAppComponents), ctx, appID, query)
 }
 
 // GetAppConfig mocks base method.
@@ -754,33 +759,35 @@ func (mr *MockClientMockRecorder) GetAppConfigTemplate(ctx, appID, typ interface
 }
 
 // GetAppConfigs mocks base method.
-func (m *MockClient) GetAppConfigs(ctx context.Context, appID string) ([]*models.AppAppConfig, error) {
+func (m *MockClient) GetAppConfigs(ctx context.Context, appID string, query *models.GetAppConfigsQuery) ([]*models.AppAppConfig, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetAppConfigs", ctx, appID)
+	ret := m.ctrl.Call(m, "GetAppConfigs", ctx, appID, query)
 	ret0, _ := ret[0].([]*models.AppAppConfig)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetAppConfigs indicates an expected call of GetAppConfigs.
-func (mr *MockClientMockRecorder) GetAppConfigs(ctx, appID interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetAppConfigs(ctx, appID, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppConfigs", reflect.TypeOf((*MockClient)(nil).GetAppConfigs), ctx, appID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppConfigs", reflect.TypeOf((*MockClient)(nil).GetAppConfigs), ctx, appID, query)
 }
 
 // GetAppInputConfigs mocks base method.
-func (m *MockClient) GetAppInputConfigs(ctx context.Context, appID string) ([]*models.AppAppInputConfig, error) {
+func (m *MockClient) GetAppInputConfigs(ctx context.Context, appID string, query *models.GetAppInputConfigsQuery) ([]*models.AppAppInputConfig, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetAppInputConfigs", ctx, appID)
+	ret := m.ctrl.Call(m, "GetAppInputConfigs", ctx, appID, query)
 	ret0, _ := ret[0].([]*models.AppAppInputConfig)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetAppInputConfigs indicates an expected call of GetAppInputConfigs.
-func (mr *MockClientMockRecorder) GetAppInputConfigs(ctx, appID interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetAppInputConfigs(ctx, appID, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppInputConfigs", reflect.TypeOf((*MockClient)(nil).GetAppInputConfigs), ctx, appID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppInputConfigs", reflect.TypeOf((*MockClient)(nil).GetAppInputConfigs), ctx, appID, query)
 }
 
 // GetAppInputLatestConfig mocks base method.
@@ -799,18 +806,19 @@ func (mr *MockClientMockRecorder) GetAppInputLatestConfig(ctx, appID interface{}
 }
 
 // GetAppInstalls mocks base method.
-func (m *MockClient) GetAppInstalls(ctx context.Context, appID string) ([]*models.AppInstall, error) {
+func (m *MockClient) GetAppInstalls(ctx context.Context, appID string, query *models.GetAppInstallsQuery) ([]*models.AppInstall, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetAppInstalls", ctx, appID)
+	ret := m.ctrl.Call(m, "GetAppInstalls", ctx, appID, query)
 	ret0, _ := ret[0].([]*models.AppInstall)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetAppInstalls indicates an expected call of GetAppInstalls.
-func (mr *MockClientMockRecorder) GetAppInstalls(ctx, appID interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetAppInstalls(ctx, appID, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppInstalls", reflect.TypeOf((*MockClient)(nil).GetAppInstalls), ctx, appID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppInstalls", reflect.TypeOf((*MockClient)(nil).GetAppInstalls), ctx, appID, query)
 }
 
 // GetAppLatestConfig mocks base method.
@@ -829,33 +837,35 @@ func (mr *MockClientMockRecorder) GetAppLatestConfig(ctx, appID interface{}) *go
 }
 
 // GetAppReleases mocks base method.
-func (m *MockClient) GetAppReleases(ctx context.Context, appID string) ([]*models.AppComponentRelease, error) {
+func (m *MockClient) GetAppReleases(ctx context.Context, appID string, query *models.GetAppReleasesQuery) ([]*models.AppComponentRelease, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetAppReleases", ctx, appID)
+	ret := m.ctrl.Call(m, "GetAppReleases", ctx, appID, query)
 	ret0, _ := ret[0].([]*models.AppComponentRelease)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetAppReleases indicates an expected call of GetAppReleases.
-func (mr *MockClientMockRecorder) GetAppReleases(ctx, appID interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetAppReleases(ctx, appID, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppReleases", reflect.TypeOf((*MockClient)(nil).GetAppReleases), ctx, appID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppReleases", reflect.TypeOf((*MockClient)(nil).GetAppReleases), ctx, appID, query)
 }
 
 // GetAppRunnerConfigs mocks base method.
-func (m *MockClient) GetAppRunnerConfigs(ctx context.Context, appID string) ([]*models.AppAppRunnerConfig, error) {
+func (m *MockClient) GetAppRunnerConfigs(ctx context.Context, appID string, query *models.GetAppRunnerConfigsQuery) ([]*models.AppAppRunnerConfig, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetAppRunnerConfigs", ctx, appID)
+	ret := m.ctrl.Call(m, "GetAppRunnerConfigs", ctx, appID, query)
 	ret0, _ := ret[0].([]*models.AppAppRunnerConfig)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetAppRunnerConfigs indicates an expected call of GetAppRunnerConfigs.
-func (mr *MockClientMockRecorder) GetAppRunnerConfigs(ctx, appID interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetAppRunnerConfigs(ctx, appID, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppRunnerConfigs", reflect.TypeOf((*MockClient)(nil).GetAppRunnerConfigs), ctx, appID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppRunnerConfigs", reflect.TypeOf((*MockClient)(nil).GetAppRunnerConfigs), ctx, appID, query)
 }
 
 // GetAppRunnerLatestConfig mocks base method.
@@ -874,18 +884,19 @@ func (mr *MockClientMockRecorder) GetAppRunnerLatestConfig(ctx, appID interface{
 }
 
 // GetAppSandboxConfigs mocks base method.
-func (m *MockClient) GetAppSandboxConfigs(ctx context.Context, appID string) ([]*models.AppAppSandboxConfig, error) {
+func (m *MockClient) GetAppSandboxConfigs(ctx context.Context, appID string, query *models.GetAppSandboxConfigsQuery) ([]*models.AppAppSandboxConfig, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetAppSandboxConfigs", ctx, appID)
+	ret := m.ctrl.Call(m, "GetAppSandboxConfigs", ctx, appID, query)
 	ret0, _ := ret[0].([]*models.AppAppSandboxConfig)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetAppSandboxConfigs indicates an expected call of GetAppSandboxConfigs.
-func (mr *MockClientMockRecorder) GetAppSandboxConfigs(ctx, appID interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetAppSandboxConfigs(ctx, appID, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppSandboxConfigs", reflect.TypeOf((*MockClient)(nil).GetAppSandboxConfigs), ctx, appID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppSandboxConfigs", reflect.TypeOf((*MockClient)(nil).GetAppSandboxConfigs), ctx, appID, query)
 }
 
 // GetAppSandboxLatestConfig mocks base method.
@@ -904,33 +915,35 @@ func (mr *MockClientMockRecorder) GetAppSandboxLatestConfig(ctx, appID interface
 }
 
 // GetAppSecrets mocks base method.
-func (m *MockClient) GetAppSecrets(ctx context.Context, appID string) ([]*models.AppAppSecret, error) {
+func (m *MockClient) GetAppSecrets(ctx context.Context, appID string, query *models.GetAppSecretsQuery) ([]*models.AppAppSecret, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetAppSecrets", ctx, appID)
+	ret := m.ctrl.Call(m, "GetAppSecrets", ctx, appID, query)
 	ret0, _ := ret[0].([]*models.AppAppSecret)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetAppSecrets indicates an expected call of GetAppSecrets.
-func (mr *MockClientMockRecorder) GetAppSecrets(ctx, appID interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetAppSecrets(ctx, appID, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppSecrets", reflect.TypeOf((*MockClient)(nil).GetAppSecrets), ctx, appID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppSecrets", reflect.TypeOf((*MockClient)(nil).GetAppSecrets), ctx, appID, query)
 }
 
 // GetApps mocks base method.
-func (m *MockClient) GetApps(ctx context.Context) ([]*models.AppApp, error) {
+func (m *MockClient) GetApps(ctx context.Context, query *models.GetAppsQuery) ([]*models.AppApp, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetApps", ctx)
+	ret := m.ctrl.Call(m, "GetApps", ctx, query)
 	ret0, _ := ret[0].([]*models.AppApp)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetApps indicates an expected call of GetApps.
-func (mr *MockClientMockRecorder) GetApps(ctx interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetApps(ctx, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetApps", reflect.TypeOf((*MockClient)(nil).GetApps), ctx)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetApps", reflect.TypeOf((*MockClient)(nil).GetApps), ctx, query)
 }
 
 // GetBuild mocks base method.
@@ -1009,33 +1022,35 @@ func (mr *MockClientMockRecorder) GetComponentBuild(ctx, componentID, buildID in
 }
 
 // GetComponentBuilds mocks base method.
-func (m *MockClient) GetComponentBuilds(ctx context.Context, componentID, appID string, limit *int64) ([]*models.AppComponentBuild, error) {
+func (m *MockClient) GetComponentBuilds(ctx context.Context, componentID, appID string, query *models.GetComponentBuildsQuery) ([]*models.AppComponentBuild, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetComponentBuilds", ctx, componentID, appID, limit)
+	ret := m.ctrl.Call(m, "GetComponentBuilds", ctx, componentID, appID, query)
 	ret0, _ := ret[0].([]*models.AppComponentBuild)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetComponentBuilds indicates an expected call of GetComponentBuilds.
-func (mr *MockClientMockRecorder) GetComponentBuilds(ctx, componentID, appID, limit interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetComponentBuilds(ctx, componentID, appID, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetComponentBuilds", reflect.TypeOf((*MockClient)(nil).GetComponentBuilds), ctx, componentID, appID, limit)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetComponentBuilds", reflect.TypeOf((*MockClient)(nil).GetComponentBuilds), ctx, componentID, appID, query)
 }
 
 // GetComponentConfigs mocks base method.
-func (m *MockClient) GetComponentConfigs(ctx context.Context, componentID string) ([]*models.AppComponentConfigConnection, error) {
+func (m *MockClient) GetComponentConfigs(ctx context.Context, componentID string, query *models.GetComponentConfigsQuery) ([]*models.AppComponentConfigConnection, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetComponentConfigs", ctx, componentID)
+	ret := m.ctrl.Call(m, "GetComponentConfigs", ctx, componentID, query)
 	ret0, _ := ret[0].([]*models.AppComponentConfigConnection)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetComponentConfigs indicates an expected call of GetComponentConfigs.
-func (mr *MockClientMockRecorder) GetComponentConfigs(ctx, componentID interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetComponentConfigs(ctx, componentID, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetComponentConfigs", reflect.TypeOf((*MockClient)(nil).GetComponentConfigs), ctx, componentID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetComponentConfigs", reflect.TypeOf((*MockClient)(nil).GetComponentConfigs), ctx, componentID, query)
 }
 
 // GetComponentLatestBuild mocks base method.
@@ -1069,18 +1084,19 @@ func (mr *MockClientMockRecorder) GetComponentLatestConfig(ctx, componentID inte
 }
 
 // GetComponentReleases mocks base method.
-func (m *MockClient) GetComponentReleases(ctx context.Context, componentID string) ([]*models.AppComponentRelease, error) {
+func (m *MockClient) GetComponentReleases(ctx context.Context, componentID string, query *models.GetComponentReleasesQuery) ([]*models.AppComponentRelease, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetComponentReleases", ctx, componentID)
+	ret := m.ctrl.Call(m, "GetComponentReleases", ctx, componentID, query)
 	ret0, _ := ret[0].([]*models.AppComponentRelease)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetComponentReleases indicates an expected call of GetComponentReleases.
-func (mr *MockClientMockRecorder) GetComponentReleases(ctx, componentID interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetComponentReleases(ctx, componentID, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetComponentReleases", reflect.TypeOf((*MockClient)(nil).GetComponentReleases), ctx, componentID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetComponentReleases", reflect.TypeOf((*MockClient)(nil).GetComponentReleases), ctx, componentID, query)
 }
 
 // GetCurrentUser mocks base method.
@@ -1114,18 +1130,19 @@ func (mr *MockClientMockRecorder) GetInstall(ctx, installID interface{}) *gomock
 }
 
 // GetInstallActionWorkflowRecentRuns mocks base method.
-func (m *MockClient) GetInstallActionWorkflowRecentRuns(ctx context.Context, actionWorkflowID, installID string) (*models.AppInstallActionWorkflow, error) {
+func (m *MockClient) GetInstallActionWorkflowRecentRuns(ctx context.Context, installID, actionWorkflowID string, query *models.GetInstallActionWorkflowRecentRunsQuery) (*models.AppInstallActionWorkflow, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetInstallActionWorkflowRecentRuns", ctx, actionWorkflowID, installID)
+	ret := m.ctrl.Call(m, "GetInstallActionWorkflowRecentRuns", ctx, installID, actionWorkflowID, query)
 	ret0, _ := ret[0].(*models.AppInstallActionWorkflow)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetInstallActionWorkflowRecentRuns indicates an expected call of GetInstallActionWorkflowRecentRuns.
-func (mr *MockClientMockRecorder) GetInstallActionWorkflowRecentRuns(ctx, actionWorkflowID, installID interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetInstallActionWorkflowRecentRuns(ctx, installID, actionWorkflowID, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallActionWorkflowRecentRuns", reflect.TypeOf((*MockClient)(nil).GetInstallActionWorkflowRecentRuns), ctx, actionWorkflowID, installID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallActionWorkflowRecentRuns", reflect.TypeOf((*MockClient)(nil).GetInstallActionWorkflowRecentRuns), ctx, installID, actionWorkflowID, query)
 }
 
 // GetInstallActionWorkflowRun mocks base method.
@@ -1144,18 +1161,19 @@ func (mr *MockClientMockRecorder) GetInstallActionWorkflowRun(ctx, installID, ru
 }
 
 // GetInstallComponentDeploys mocks base method.
-func (m *MockClient) GetInstallComponentDeploys(ctx context.Context, installID, componentID string) ([]*models.AppInstallDeploy, error) {
+func (m *MockClient) GetInstallComponentDeploys(ctx context.Context, installID, componentID string, query *models.GetInstallComponentDeploysQuery) ([]*models.AppInstallDeploy, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetInstallComponentDeploys", ctx, installID, componentID)
+	ret := m.ctrl.Call(m, "GetInstallComponentDeploys", ctx, installID, componentID, query)
 	ret0, _ := ret[0].([]*models.AppInstallDeploy)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetInstallComponentDeploys indicates an expected call of GetInstallComponentDeploys.
-func (mr *MockClientMockRecorder) GetInstallComponentDeploys(ctx, installID, componentID interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetInstallComponentDeploys(ctx, installID, componentID, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallComponentDeploys", reflect.TypeOf((*MockClient)(nil).GetInstallComponentDeploys), ctx, installID, componentID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallComponentDeploys", reflect.TypeOf((*MockClient)(nil).GetInstallComponentDeploys), ctx, installID, componentID, query)
 }
 
 // GetInstallComponentLatestDeploy mocks base method.
@@ -1174,18 +1192,19 @@ func (mr *MockClientMockRecorder) GetInstallComponentLatestDeploy(ctx, installID
 }
 
 // GetInstallComponents mocks base method.
-func (m *MockClient) GetInstallComponents(ctx context.Context, installID string) ([]*models.AppInstallComponent, error) {
+func (m *MockClient) GetInstallComponents(ctx context.Context, installID string, query *models.GetInstallComponentsQuery) ([]*models.AppInstallComponent, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetInstallComponents", ctx, installID)
+	ret := m.ctrl.Call(m, "GetInstallComponents", ctx, installID, query)
 	ret0, _ := ret[0].([]*models.AppInstallComponent)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetInstallComponents indicates an expected call of GetInstallComponents.
-func (mr *MockClientMockRecorder) GetInstallComponents(ctx, installID interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetInstallComponents(ctx, installID, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallComponents", reflect.TypeOf((*MockClient)(nil).GetInstallComponents), ctx, installID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallComponents", reflect.TypeOf((*MockClient)(nil).GetInstallComponents), ctx, installID, query)
 }
 
 // GetInstallCurrentInputs mocks base method.
@@ -1219,33 +1238,35 @@ func (mr *MockClientMockRecorder) GetInstallDeploy(ctx, installID, deployID inte
 }
 
 // GetInstallDeploys mocks base method.
-func (m *MockClient) GetInstallDeploys(ctx context.Context, installID string) ([]*models.AppInstallDeploy, error) {
+func (m *MockClient) GetInstallDeploys(ctx context.Context, installID string, query *models.GetInstallDeploysQuery) ([]*models.AppInstallDeploy, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetInstallDeploys", ctx, installID)
+	ret := m.ctrl.Call(m, "GetInstallDeploys", ctx, installID, query)
 	ret0, _ := ret[0].([]*models.AppInstallDeploy)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetInstallDeploys indicates an expected call of GetInstallDeploys.
-func (mr *MockClientMockRecorder) GetInstallDeploys(ctx, installID interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetInstallDeploys(ctx, installID, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallDeploys", reflect.TypeOf((*MockClient)(nil).GetInstallDeploys), ctx, installID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallDeploys", reflect.TypeOf((*MockClient)(nil).GetInstallDeploys), ctx, installID, query)
 }
 
 // GetInstallInputs mocks base method.
-func (m *MockClient) GetInstallInputs(ctx context.Context, installID string) ([]*models.AppInstallInputs, error) {
+func (m *MockClient) GetInstallInputs(ctx context.Context, installID string, query *models.GetInstallInputsQuery) ([]*models.AppInstallInputs, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetInstallInputs", ctx, installID)
+	ret := m.ctrl.Call(m, "GetInstallInputs", ctx, installID, query)
 	ret0, _ := ret[0].([]*models.AppInstallInputs)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetInstallInputs indicates an expected call of GetInstallInputs.
-func (mr *MockClientMockRecorder) GetInstallInputs(ctx, installID interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetInstallInputs(ctx, installID, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallInputs", reflect.TypeOf((*MockClient)(nil).GetInstallInputs), ctx, installID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallInputs", reflect.TypeOf((*MockClient)(nil).GetInstallInputs), ctx, installID, query)
 }
 
 // GetInstallLatestDeploy mocks base method.
@@ -1264,18 +1285,19 @@ func (mr *MockClientMockRecorder) GetInstallLatestDeploy(ctx, installID interfac
 }
 
 // GetInstallSandboxRuns mocks base method.
-func (m *MockClient) GetInstallSandboxRuns(ctx context.Context, installID string) ([]*models.AppInstallSandboxRun, error) {
+func (m *MockClient) GetInstallSandboxRuns(ctx context.Context, installID string, query *models.GetInstallSandboxRunsQuery) ([]*models.AppInstallSandboxRun, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetInstallSandboxRuns", ctx, installID)
+	ret := m.ctrl.Call(m, "GetInstallSandboxRuns", ctx, installID, query)
 	ret0, _ := ret[0].([]*models.AppInstallSandboxRun)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetInstallSandboxRuns indicates an expected call of GetInstallSandboxRuns.
-func (mr *MockClientMockRecorder) GetInstallSandboxRuns(ctx, installID interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetInstallSandboxRuns(ctx, installID, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallSandboxRuns", reflect.TypeOf((*MockClient)(nil).GetInstallSandboxRuns), ctx, installID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallSandboxRuns", reflect.TypeOf((*MockClient)(nil).GetInstallSandboxRuns), ctx, installID, query)
 }
 
 // GetInstaller mocks base method.
@@ -1294,18 +1316,19 @@ func (mr *MockClientMockRecorder) GetInstaller(ctx, installerID interface{}) *go
 }
 
 // GetInstallers mocks base method.
-func (m *MockClient) GetInstallers(ctx context.Context) ([]*models.AppInstaller, error) {
+func (m *MockClient) GetInstallers(ctx context.Context, query *models.GetInstallersQuery) ([]*models.AppInstaller, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetInstallers", ctx)
+	ret := m.ctrl.Call(m, "GetInstallers", ctx, query)
 	ret0, _ := ret[0].([]*models.AppInstaller)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetInstallers indicates an expected call of GetInstallers.
-func (mr *MockClientMockRecorder) GetInstallers(ctx interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetInstallers(ctx, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallers", reflect.TypeOf((*MockClient)(nil).GetInstallers), ctx)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallers", reflect.TypeOf((*MockClient)(nil).GetInstallers), ctx, query)
 }
 
 // GetOrg mocks base method.
@@ -1323,49 +1346,36 @@ func (mr *MockClientMockRecorder) GetOrg(ctx interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrg", reflect.TypeOf((*MockClient)(nil).GetOrg), ctx)
 }
 
-// GetOrgHealthChecks mocks base method.
-func (m *MockClient) GetOrgHealthChecks(ctx context.Context, limit *int64) ([]*models.AppOrgHealthCheck, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetOrgHealthChecks", ctx, limit)
-	ret0, _ := ret[0].([]*models.AppOrgHealthCheck)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetOrgHealthChecks indicates an expected call of GetOrgHealthChecks.
-func (mr *MockClientMockRecorder) GetOrgHealthChecks(ctx, limit interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrgHealthChecks", reflect.TypeOf((*MockClient)(nil).GetOrgHealthChecks), ctx, limit)
-}
-
 // GetOrgInvites mocks base method.
-func (m *MockClient) GetOrgInvites(ctx context.Context, limit *int64) ([]*models.AppOrgInvite, error) {
+func (m *MockClient) GetOrgInvites(ctx context.Context, query *models.GetOrgInvitesQuery) ([]*models.AppOrgInvite, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetOrgInvites", ctx, limit)
+	ret := m.ctrl.Call(m, "GetOrgInvites", ctx, query)
 	ret0, _ := ret[0].([]*models.AppOrgInvite)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetOrgInvites indicates an expected call of GetOrgInvites.
-func (mr *MockClientMockRecorder) GetOrgInvites(ctx, limit interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetOrgInvites(ctx, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrgInvites", reflect.TypeOf((*MockClient)(nil).GetOrgInvites), ctx, limit)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrgInvites", reflect.TypeOf((*MockClient)(nil).GetOrgInvites), ctx, query)
 }
 
 // GetOrgs mocks base method.
-func (m *MockClient) GetOrgs(ctx context.Context) ([]*models.AppOrg, error) {
+func (m *MockClient) GetOrgs(ctx context.Context, query *models.GetOrgsQuery) ([]*models.AppOrg, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetOrgs", ctx)
+	ret := m.ctrl.Call(m, "GetOrgs", ctx, query)
 	ret0, _ := ret[0].([]*models.AppOrg)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetOrgs indicates an expected call of GetOrgs.
-func (mr *MockClientMockRecorder) GetOrgs(ctx interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetOrgs(ctx, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrgs", reflect.TypeOf((*MockClient)(nil).GetOrgs), ctx)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrgs", reflect.TypeOf((*MockClient)(nil).GetOrgs), ctx, query)
 }
 
 // GetRelease mocks base method.
@@ -1384,18 +1394,19 @@ func (mr *MockClientMockRecorder) GetRelease(ctx, releaseID interface{}) *gomock
 }
 
 // GetReleaseSteps mocks base method.
-func (m *MockClient) GetReleaseSteps(ctx context.Context, releaseID string) ([]*models.AppComponentReleaseStep, error) {
+func (m *MockClient) GetReleaseSteps(ctx context.Context, releaseID string, query *models.GetReleaseStepsQuery) ([]*models.AppComponentReleaseStep, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetReleaseSteps", ctx, releaseID)
+	ret := m.ctrl.Call(m, "GetReleaseSteps", ctx, releaseID, query)
 	ret0, _ := ret[0].([]*models.AppComponentReleaseStep)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetReleaseSteps indicates an expected call of GetReleaseSteps.
-func (mr *MockClientMockRecorder) GetReleaseSteps(ctx, releaseID interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetReleaseSteps(ctx, releaseID, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetReleaseSteps", reflect.TypeOf((*MockClient)(nil).GetReleaseSteps), ctx, releaseID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetReleaseSteps", reflect.TypeOf((*MockClient)(nil).GetReleaseSteps), ctx, releaseID, query)
 }
 
 // GetVCSConnection mocks base method.
@@ -1414,18 +1425,19 @@ func (mr *MockClientMockRecorder) GetVCSConnection(ctx, connID interface{}) *gom
 }
 
 // GetVCSConnections mocks base method.
-func (m *MockClient) GetVCSConnections(ctx context.Context) ([]*models.AppVCSConnection, error) {
+func (m *MockClient) GetVCSConnections(ctx context.Context, query *models.GetVCSConnectionsQuery) ([]*models.AppVCSConnection, bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetVCSConnections", ctx)
+	ret := m.ctrl.Call(m, "GetVCSConnections", ctx, query)
 	ret0, _ := ret[0].([]*models.AppVCSConnection)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // GetVCSConnections indicates an expected call of GetVCSConnections.
-func (mr *MockClientMockRecorder) GetVCSConnections(ctx interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetVCSConnections(ctx, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVCSConnections", reflect.TypeOf((*MockClient)(nil).GetVCSConnections), ctx)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVCSConnections", reflect.TypeOf((*MockClient)(nil).GetVCSConnections), ctx, query)
 }
 
 // RenderInstaller mocks base method.
