@@ -109,6 +109,8 @@ type Client interface {
 	DeployInstallComponents(ctx context.Context, installID string) error
 	GetInstallComponentDeploys(ctx context.Context, installID, componentID string, query *models.GetInstallComponentDeploysQuery) ([]*models.AppInstallDeploy, bool, error)
 	GetInstallComponentLatestDeploy(ctx context.Context, installID, componentID string) (*models.AppInstallDeploy, error)
+	DeleteInstallComponent(ctx context.Context, installID, componentID string, force bool) (bool, error)
+	DeleteInstallComponents(ctx context.Context, installID string, force bool) (bool, error)
 
 	// install sandbox runs
 	GetInstallSandboxRuns(ctx context.Context, installID string, query *models.GetInstallSandboxRunsQuery) ([]*models.AppInstallSandboxRun, bool, error)

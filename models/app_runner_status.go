@@ -51,6 +51,9 @@ const (
 	// AppRunnerStatusReprovisioning captures enum value "reprovisioning"
 	AppRunnerStatusReprovisioning AppRunnerStatus = "reprovisioning"
 
+	// AppRunnerStatusOffline captures enum value "offline"
+	AppRunnerStatusOffline AppRunnerStatus = "offline"
+
 	// AppRunnerStatusUnknown captures enum value "unknown"
 	AppRunnerStatusUnknown AppRunnerStatus = "unknown"
 )
@@ -60,7 +63,7 @@ var appRunnerStatusEnum []interface{}
 
 func init() {
 	var res []AppRunnerStatus
-	if err := json.Unmarshal([]byte(`["error","active","pending","provisioning","deprovisioning","deprovisioned","reprovisioning","unknown"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["error","active","pending","provisioning","deprovisioning","deprovisioned","reprovisioning","offline","unknown"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
