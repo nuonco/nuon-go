@@ -25,7 +25,7 @@ type ServiceAppConfigTemplate struct {
 	Filename string `json:"filename,omitempty"`
 
 	// format
-	Format AppAppConfigFmt `json:"format,omitempty"`
+	Format AppAppConfigVersion `json:"format,omitempty"`
 
 	// type
 	Type ServiceAppConfigTemplateType `json:"type,omitempty"`

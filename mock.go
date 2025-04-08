@@ -80,6 +80,21 @@ func (mr *MockClientMockRecorder) CreateApp(ctx, req interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateApp", reflect.TypeOf((*MockClient)(nil).CreateApp), ctx, req)
 }
 
+// CreateAppBreakGlassConfig mocks base method.
+func (m *MockClient) CreateAppBreakGlassConfig(ctx context.Context, appID string, req *models.ServiceCreateAppBreakGlassConfigRequest) (*models.AppAppBreakGlassConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateAppBreakGlassConfig", ctx, appID, req)
+	ret0, _ := ret[0].(*models.AppAppBreakGlassConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateAppBreakGlassConfig indicates an expected call of CreateAppBreakGlassConfig.
+func (mr *MockClientMockRecorder) CreateAppBreakGlassConfig(ctx, appID, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAppBreakGlassConfig", reflect.TypeOf((*MockClient)(nil).CreateAppBreakGlassConfig), ctx, appID, req)
+}
+
 // CreateAppConfig mocks base method.
 func (m *MockClient) CreateAppConfig(ctx context.Context, appID string, req *models.ServiceCreateAppConfigRequest) (*models.AppAppConfig, error) {
 	m.ctrl.T.Helper()
@@ -108,6 +123,36 @@ func (m *MockClient) CreateAppInputConfig(ctx context.Context, appID string, req
 func (mr *MockClientMockRecorder) CreateAppInputConfig(ctx, appID, req interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAppInputConfig", reflect.TypeOf((*MockClient)(nil).CreateAppInputConfig), ctx, appID, req)
+}
+
+// CreateAppPermissionsConfig mocks base method.
+func (m *MockClient) CreateAppPermissionsConfig(ctx context.Context, appID string, req *models.ServiceCreateAppPermissionsConfigRequest) (*models.AppAppPermissionsConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateAppPermissionsConfig", ctx, appID, req)
+	ret0, _ := ret[0].(*models.AppAppPermissionsConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateAppPermissionsConfig indicates an expected call of CreateAppPermissionsConfig.
+func (mr *MockClientMockRecorder) CreateAppPermissionsConfig(ctx, appID, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAppPermissionsConfig", reflect.TypeOf((*MockClient)(nil).CreateAppPermissionsConfig), ctx, appID, req)
+}
+
+// CreateAppPoliciesConfig mocks base method.
+func (m *MockClient) CreateAppPoliciesConfig(ctx context.Context, appID string, req *models.ServiceCreateAppPoliciesConfigRequest) (*models.AppAppPoliciesConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateAppPoliciesConfig", ctx, appID, req)
+	ret0, _ := ret[0].(*models.AppAppPoliciesConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateAppPoliciesConfig indicates an expected call of CreateAppPoliciesConfig.
+func (mr *MockClientMockRecorder) CreateAppPoliciesConfig(ctx, appID, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAppPoliciesConfig", reflect.TypeOf((*MockClient)(nil).CreateAppPoliciesConfig), ctx, appID, req)
 }
 
 // CreateAppRunnerConfig mocks base method.
@@ -153,6 +198,21 @@ func (m *MockClient) CreateAppSecret(ctx context.Context, appID string, req *mod
 func (mr *MockClientMockRecorder) CreateAppSecret(ctx, appID, req interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAppSecret", reflect.TypeOf((*MockClient)(nil).CreateAppSecret), ctx, appID, req)
+}
+
+// CreateAppSecretsConfig mocks base method.
+func (m *MockClient) CreateAppSecretsConfig(ctx context.Context, appID string, req *models.ServiceCreateAppSecretsConfigRequest) (*models.AppAppSecretsConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateAppSecretsConfig", ctx, appID, req)
+	ret0, _ := ret[0].(*models.AppAppSecretsConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateAppSecretsConfig indicates an expected call of CreateAppSecretsConfig.
+func (mr *MockClientMockRecorder) CreateAppSecretsConfig(ctx, appID, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAppSecretsConfig", reflect.TypeOf((*MockClient)(nil).CreateAppSecretsConfig), ctx, appID, req)
 }
 
 // CreateComponent mocks base method.
@@ -727,6 +787,21 @@ func (mr *MockClientMockRecorder) GetAppActionWorkflow(ctx, appID, actionWorkflo
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppActionWorkflow", reflect.TypeOf((*MockClient)(nil).GetAppActionWorkflow), ctx, appID, actionWorkflowID)
 }
 
+// GetAppBreakGlassConfig mocks base method.
+func (m *MockClient) GetAppBreakGlassConfig(ctx context.Context, appID, appSecretConfigID string) (*models.AppAppBreakGlassConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAppBreakGlassConfig", ctx, appID, appSecretConfigID)
+	ret0, _ := ret[0].(*models.AppAppBreakGlassConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAppBreakGlassConfig indicates an expected call of GetAppBreakGlassConfig.
+func (mr *MockClientMockRecorder) GetAppBreakGlassConfig(ctx, appID, appSecretConfigID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppBreakGlassConfig", reflect.TypeOf((*MockClient)(nil).GetAppBreakGlassConfig), ctx, appID, appSecretConfigID)
+}
+
 // GetAppComponent mocks base method.
 func (m *MockClient) GetAppComponent(ctx context.Context, appID, componentNameOrID string) (*models.AppComponent, error) {
 	m.ctrl.T.Helper()
@@ -866,6 +941,36 @@ func (mr *MockClientMockRecorder) GetAppLatestConfig(ctx, appID interface{}) *go
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppLatestConfig", reflect.TypeOf((*MockClient)(nil).GetAppLatestConfig), ctx, appID)
 }
 
+// GetAppPermissionsConfig mocks base method.
+func (m *MockClient) GetAppPermissionsConfig(ctx context.Context, appID, appSecretConfigID string) (*models.AppAppPermissionsConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAppPermissionsConfig", ctx, appID, appSecretConfigID)
+	ret0, _ := ret[0].(*models.AppAppPermissionsConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAppPermissionsConfig indicates an expected call of GetAppPermissionsConfig.
+func (mr *MockClientMockRecorder) GetAppPermissionsConfig(ctx, appID, appSecretConfigID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppPermissionsConfig", reflect.TypeOf((*MockClient)(nil).GetAppPermissionsConfig), ctx, appID, appSecretConfigID)
+}
+
+// GetAppPoliciesConfig mocks base method.
+func (m *MockClient) GetAppPoliciesConfig(ctx context.Context, appID, appSecretConfigID string) (*models.AppAppPoliciesConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAppPoliciesConfig", ctx, appID, appSecretConfigID)
+	ret0, _ := ret[0].(*models.AppAppPoliciesConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAppPoliciesConfig indicates an expected call of GetAppPoliciesConfig.
+func (mr *MockClientMockRecorder) GetAppPoliciesConfig(ctx, appID, appSecretConfigID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppPoliciesConfig", reflect.TypeOf((*MockClient)(nil).GetAppPoliciesConfig), ctx, appID, appSecretConfigID)
+}
+
 // GetAppReleases mocks base method.
 func (m *MockClient) GetAppReleases(ctx context.Context, appID string, query *models.GetAppReleasesQuery) ([]*models.AppComponentRelease, bool, error) {
 	m.ctrl.T.Helper()
@@ -958,6 +1063,21 @@ func (m *MockClient) GetAppSecrets(ctx context.Context, appID string, query *mod
 func (mr *MockClientMockRecorder) GetAppSecrets(ctx, appID, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppSecrets", reflect.TypeOf((*MockClient)(nil).GetAppSecrets), ctx, appID, query)
+}
+
+// GetAppSecretsConfig mocks base method.
+func (m *MockClient) GetAppSecretsConfig(ctx context.Context, appID, appSecretConfigID string) (*models.AppAppSecretsConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAppSecretsConfig", ctx, appID, appSecretConfigID)
+	ret0, _ := ret[0].(*models.AppAppSecretsConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAppSecretsConfig indicates an expected call of GetAppSecretsConfig.
+func (mr *MockClientMockRecorder) GetAppSecretsConfig(ctx, appID, appSecretConfigID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppSecretsConfig", reflect.TypeOf((*MockClient)(nil).GetAppSecretsConfig), ctx, appID, appSecretConfigID)
 }
 
 // GetApps mocks base method.
@@ -1359,6 +1479,66 @@ func (m *MockClient) GetInstallers(ctx context.Context, query *models.GetInstall
 func (mr *MockClientMockRecorder) GetInstallers(ctx, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallers", reflect.TypeOf((*MockClient)(nil).GetInstallers), ctx, query)
+}
+
+// GetLatestAppBreakGlassConfig mocks base method.
+func (m *MockClient) GetLatestAppBreakGlassConfig(ctx context.Context, appID string) (*models.AppAppBreakGlassConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetLatestAppBreakGlassConfig", ctx, appID)
+	ret0, _ := ret[0].(*models.AppAppBreakGlassConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetLatestAppBreakGlassConfig indicates an expected call of GetLatestAppBreakGlassConfig.
+func (mr *MockClientMockRecorder) GetLatestAppBreakGlassConfig(ctx, appID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLatestAppBreakGlassConfig", reflect.TypeOf((*MockClient)(nil).GetLatestAppBreakGlassConfig), ctx, appID)
+}
+
+// GetLatestAppPermissionsConfig mocks base method.
+func (m *MockClient) GetLatestAppPermissionsConfig(ctx context.Context, appID string) (*models.AppAppPermissionsConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetLatestAppPermissionsConfig", ctx, appID)
+	ret0, _ := ret[0].(*models.AppAppPermissionsConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetLatestAppPermissionsConfig indicates an expected call of GetLatestAppPermissionsConfig.
+func (mr *MockClientMockRecorder) GetLatestAppPermissionsConfig(ctx, appID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLatestAppPermissionsConfig", reflect.TypeOf((*MockClient)(nil).GetLatestAppPermissionsConfig), ctx, appID)
+}
+
+// GetLatestAppPoliciesConfig mocks base method.
+func (m *MockClient) GetLatestAppPoliciesConfig(ctx context.Context, appID string) (*models.AppAppPoliciesConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetLatestAppPoliciesConfig", ctx, appID)
+	ret0, _ := ret[0].(*models.AppAppPoliciesConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetLatestAppPoliciesConfig indicates an expected call of GetLatestAppPoliciesConfig.
+func (mr *MockClientMockRecorder) GetLatestAppPoliciesConfig(ctx, appID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLatestAppPoliciesConfig", reflect.TypeOf((*MockClient)(nil).GetLatestAppPoliciesConfig), ctx, appID)
+}
+
+// GetLatestAppSecretsConfig mocks base method.
+func (m *MockClient) GetLatestAppSecretsConfig(ctx context.Context, appID string) (*models.AppAppSecretsConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetLatestAppSecretsConfig", ctx, appID)
+	ret0, _ := ret[0].(*models.AppAppSecretsConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetLatestAppSecretsConfig indicates an expected call of GetLatestAppSecretsConfig.
+func (mr *MockClientMockRecorder) GetLatestAppSecretsConfig(ctx, appID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLatestAppSecretsConfig", reflect.TypeOf((*MockClient)(nil).GetLatestAppSecretsConfig), ctx, appID)
 }
 
 // GetOrg mocks base method.

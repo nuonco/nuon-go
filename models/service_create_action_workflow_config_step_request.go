@@ -20,14 +20,16 @@ import (
 type ServiceCreateActionWorkflowConfigStepRequest struct {
 
 	// command
-	// Required: true
-	Command *string `json:"command"`
+	Command string `json:"command,omitempty"`
 
 	// connected github vcs config
 	ConnectedGithubVcsConfig *ServiceConnectedGithubVCSActionWorkflowConfigRequest `json:"connected_github_vcs_config,omitempty"`
 
 	// env vars
 	EnvVars map[string]string `json:"env_vars,omitempty"`
+
+	// inline contents
+	InlineContents string `json:"inline_contents,omitempty"`
 
 	// name
 	// Required: true
@@ -40,10 +42,6 @@ type ServiceCreateActionWorkflowConfigStepRequest struct {
 // Validate validates this service create action workflow config step request
 func (m *ServiceCreateActionWorkflowConfigStepRequest) Validate(formats strfmt.Registry) error {
 	var res []error
-
-	if err := m.validateCommand(formats); err != nil {
-		res = append(res, err)
-	}
 
 	if err := m.validateConnectedGithubVcsConfig(formats); err != nil {
 		res = append(res, err)
@@ -60,15 +58,6 @@ func (m *ServiceCreateActionWorkflowConfigStepRequest) Validate(formats strfmt.R
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *ServiceCreateActionWorkflowConfigStepRequest) validateCommand(formats strfmt.Registry) error {
-
-	if err := validate.Required("command", "body", m.Command); err != nil {
-		return err
-	}
-
 	return nil
 }
 

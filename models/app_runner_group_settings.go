@@ -17,8 +17,17 @@ import (
 // swagger:model app.RunnerGroupSettings
 type AppRunnerGroupSettings struct {
 
+	// aws cloudformation stack type
+	AwsCloudformationStackType string `json:"aws_cloudformation_stack_type,omitempty"`
+
 	// specific configuration for cloud specific runners, such as AWS or Azure
 	AwsIamRoleArn string `json:"aws_iam_role_arn,omitempty"`
+
+	// new fields for the runner-v2
+	AwsInstanceType string `json:"aws_instance_type,omitempty"`
+
+	// aws tags
+	AwsTags map[string]string `json:"aws_tags,omitempty"`
 
 	// container image tag
 	ContainerImageTag string `json:"container_image_tag,omitempty"`

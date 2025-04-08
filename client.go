@@ -60,6 +60,30 @@ type Client interface {
 	GetAppInputLatestConfig(ctx context.Context, appID string) (*models.AppAppInputConfig, error)
 	GetAppInputConfigs(ctx context.Context, appID string, query *models.GetAppInputConfigsQuery) ([]*models.AppAppInputConfig, bool, error)
 
+	// app secrets config methods
+	CreateAppSecretsConfig(ctx context.Context, appID string, req *models.ServiceCreateAppSecretsConfigRequest) (*models.AppAppSecretsConfig, error)
+	GetLatestAppSecretsConfig(ctx context.Context, appID string) (*models.AppAppSecretsConfig, error)
+	GetAppSecretsConfig(ctx context.Context, appID, appSecretConfigID string) (*models.AppAppSecretsConfig, error)
+
+	// app permissions config methods
+	CreateAppPermissionsConfig(ctx context.Context, appID string, req *models.ServiceCreateAppPermissionsConfigRequest) (*models.AppAppPermissionsConfig, error)
+	GetLatestAppPermissionsConfig(ctx context.Context, appID string) (*models.AppAppPermissionsConfig, error)
+	GetAppPermissionsConfig(ctx context.Context, appID, appSecretConfigID string) (*models.AppAppPermissionsConfig, error)
+
+	// app cloudformation stack config methods
+	CreateAppCloudFormationStackConfig(ctx context.Context, appID string, req *models.ServiceCreateAppCloudFormationStackConfigRequest) (*models.AppAppCloudFormationStackConfig, error)
+	GetAppCloudFormationStackConfig(ctx context.Context, appID, appCloudFormationStackID string) (*models.AppAppCloudFormationStackConfig, error)
+
+	// app permissions config methods
+	CreateAppBreakGlassConfig(ctx context.Context, appID string, req *models.ServiceCreateAppBreakGlassConfigRequest) (*models.AppAppBreakGlassConfig, error)
+	GetLatestAppBreakGlassConfig(ctx context.Context, appID string) (*models.AppAppBreakGlassConfig, error)
+	GetAppBreakGlassConfig(ctx context.Context, appID, appSecretConfigID string) (*models.AppAppBreakGlassConfig, error)
+
+	// app permissions config methods
+	CreateAppPoliciesConfig(ctx context.Context, appID string, req *models.ServiceCreateAppPoliciesConfigRequest) (*models.AppAppPoliciesConfig, error)
+	GetLatestAppPoliciesConfig(ctx context.Context, appID string) (*models.AppAppPoliciesConfig, error)
+	GetAppPoliciesConfig(ctx context.Context, appID, appSecretConfigID string) (*models.AppAppPoliciesConfig, error)
+
 	// app secret methods
 	CreateAppSecret(ctx context.Context, appID string, req *models.ServiceCreateAppSecretRequest) (*models.AppAppSecret, error)
 	GetAppSecrets(ctx context.Context, appID string, query *models.GetAppSecretsQuery) ([]*models.AppAppSecret, bool, error)

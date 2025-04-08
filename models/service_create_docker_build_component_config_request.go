@@ -19,6 +19,9 @@ import (
 // swagger:model service.CreateDockerBuildComponentConfigRequest
 type ServiceCreateDockerBuildComponentConfigRequest struct {
 
+	// app config id
+	AppConfigID string `json:"app_config_id,omitempty"`
+
 	// build args
 	BuildArgs []string `json:"build_args"`
 

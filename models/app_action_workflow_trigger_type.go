@@ -42,6 +42,18 @@ const (
 	// AppActionWorkflowTriggerTypePostDashSandboxDashRun captures enum value "post-sandbox-run"
 	AppActionWorkflowTriggerTypePostDashSandboxDashRun AppActionWorkflowTriggerType = "post-sandbox-run"
 
+	// AppActionWorkflowTriggerTypePreDashComponentDashDeploy captures enum value "pre-component-deploy"
+	AppActionWorkflowTriggerTypePreDashComponentDashDeploy AppActionWorkflowTriggerType = "pre-component-deploy"
+
+	// AppActionWorkflowTriggerTypePostDashComponentDashDeploy captures enum value "post-component-deploy"
+	AppActionWorkflowTriggerTypePostDashComponentDashDeploy AppActionWorkflowTriggerType = "post-component-deploy"
+
+	// AppActionWorkflowTriggerTypePreDashComponentDashDelete captures enum value "pre-component-delete"
+	AppActionWorkflowTriggerTypePreDashComponentDashDelete AppActionWorkflowTriggerType = "pre-component-delete"
+
+	// AppActionWorkflowTriggerTypePostDashComponentDashDelete captures enum value "post-component-delete"
+	AppActionWorkflowTriggerTypePostDashComponentDashDelete AppActionWorkflowTriggerType = "post-component-delete"
+
 	// AppActionWorkflowTriggerTypePreDashDeploy captures enum value "pre-deploy"
 	AppActionWorkflowTriggerTypePreDashDeploy AppActionWorkflowTriggerType = "pre-deploy"
 
@@ -54,7 +66,7 @@ var appActionWorkflowTriggerTypeEnum []interface{}
 
 func init() {
 	var res []AppActionWorkflowTriggerType
-	if err := json.Unmarshal([]byte(`["manual","cron","pre-sandbox-run","post-sandbox-run","pre-deploy","post-deploy"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["manual","cron","pre-sandbox-run","post-sandbox-run","pre-component-deploy","post-component-deploy","pre-component-delete","post-component-delete","pre-deploy","post-deploy"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
