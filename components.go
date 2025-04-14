@@ -218,6 +218,19 @@ func (c *client) GetComponentConfigs(ctx context.Context, componentID string, qu
 	return resp.Payload, false, nil
 }
 
+func (c *client) GetComponentConfig(ctx context.Context, componentID, configID string) (*models.AppComponentConfigConnection, error) {
+	resp, err := c.genClient.Operations.GetComponentConfig(&operations.GetComponentConfigParams{
+		ComponentID: componentID,
+		ConfigID:    configID,
+		Context:     ctx,
+	}, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}
+
 func (c *client) GetComponentLatestConfig(ctx context.Context, componentID string) (*models.AppComponentConfigConnection, error) {
 	resp, err := c.genClient.Operations.GetComponentLatestConfig(&operations.GetComponentLatestConfigParams{
 		ComponentID: componentID,

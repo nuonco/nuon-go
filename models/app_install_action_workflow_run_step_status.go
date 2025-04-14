@@ -39,6 +39,9 @@ const (
 	// AppInstallActionWorkflowRunStepStatusInDashProgress captures enum value "in-progress"
 	AppInstallActionWorkflowRunStepStatusInDashProgress AppInstallActionWorkflowRunStepStatus = "in-progress"
 
+	// AppInstallActionWorkflowRunStepStatusTimedDashOut captures enum value "timed-out"
+	AppInstallActionWorkflowRunStepStatusTimedDashOut AppInstallActionWorkflowRunStepStatus = "timed-out"
+
 	// AppInstallActionWorkflowRunStepStatusError captures enum value "error"
 	AppInstallActionWorkflowRunStepStatusError AppInstallActionWorkflowRunStepStatus = "error"
 )
@@ -48,7 +51,7 @@ var appInstallActionWorkflowRunStepStatusEnum []interface{}
 
 func init() {
 	var res []AppInstallActionWorkflowRunStepStatus
-	if err := json.Unmarshal([]byte(`["finished","pending","in-progress","error"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["finished","pending","in-progress","timed-out","error"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
