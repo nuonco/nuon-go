@@ -136,6 +136,8 @@ type ClientService interface {
 
 	GetAppConfigs(params *GetAppConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppConfigsOK, error)
 
+	GetAppInputConfig(params *GetAppInputConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppInputConfigOK, error)
+
 	GetAppInputConfigs(params *GetAppInputConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppInputConfigsOK, error)
 
 	GetAppInputLatestConfig(params *GetAppInputLatestConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppInputLatestConfigOK, error)
@@ -169,6 +171,8 @@ type ClientService interface {
 	GetComponentBuild(params *GetComponentBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentBuildOK, error)
 
 	GetComponentBuilds(params *GetComponentBuildsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentBuildsOK, error)
+
+	GetComponentConfig(params *GetComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentConfigOK, error)
 
 	GetComponentConfigs(params *GetComponentConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentConfigsOK, error)
 
@@ -2414,6 +2418,47 @@ func (a *Client) GetAppConfigs(params *GetAppConfigsParams, authInfo runtime.Cli
 }
 
 /*
+GetAppInputConfig gets app input config
+
+Return an input config by id.
+*/
+func (a *Client) GetAppInputConfig(params *GetAppInputConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppInputConfigOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAppInputConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetAppInputConfig",
+		Method:             "GET",
+		PathPattern:        "/v1/apps/{app_id}/input-configs/{input_config_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAppInputConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAppInputConfigOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetAppInputConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetAppInputConfigs gets app input configs
 */
 func (a *Client) GetAppInputConfigs(params *GetAppInputConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppInputConfigsOK, error) {
@@ -3083,6 +3128,45 @@ func (a *Client) GetComponentBuilds(params *GetComponentBuildsParams, authInfo r
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetComponentBuilds: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetComponentConfig gets config for a component by ID
+*/
+func (a *Client) GetComponentConfig(params *GetComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentConfigOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetComponentConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetComponentConfig",
+		Method:             "GET",
+		PathPattern:        "/v1/components/{component_id}/configs/{config_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetComponentConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetComponentConfigOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetComponentConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
