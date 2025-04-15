@@ -19,6 +19,9 @@ import (
 // swagger:model service.CreateAppRunnerConfigRequest
 type ServiceCreateAppRunnerConfigRequest struct {
 
+	// app config id
+	AppConfigID string `json:"app_config_id,omitempty"`
+
 	// env vars
 	EnvVars map[string]string `json:"env_vars,omitempty"`
 

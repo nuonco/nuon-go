@@ -73,7 +73,7 @@ type DeprovisionInstallParams struct {
 
 	   Input
 	*/
-	Req models.ServiceDeprovisionInstallRequest
+	Req *models.ServiceDeprovisionInstallRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -140,13 +140,13 @@ func (o *DeprovisionInstallParams) SetInstallID(installID string) {
 }
 
 // WithReq adds the req to the deprovision install params
-func (o *DeprovisionInstallParams) WithReq(req models.ServiceDeprovisionInstallRequest) *DeprovisionInstallParams {
+func (o *DeprovisionInstallParams) WithReq(req *models.ServiceDeprovisionInstallRequest) *DeprovisionInstallParams {
 	o.SetReq(req)
 	return o
 }
 
 // SetReq adds the req to the deprovision install params
-func (o *DeprovisionInstallParams) SetReq(req models.ServiceDeprovisionInstallRequest) {
+func (o *DeprovisionInstallParams) SetReq(req *models.ServiceDeprovisionInstallRequest) {
 	o.Req = req
 }
 

@@ -19,6 +19,9 @@ import (
 // swagger:model service.CreateJobComponentConfigRequest
 type ServiceCreateJobComponentConfigRequest struct {
 
+	// app config id
+	AppConfigID string `json:"app_config_id,omitempty"`
+
 	// args
 	Args []string `json:"args"`
 

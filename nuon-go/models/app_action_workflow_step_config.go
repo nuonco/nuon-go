@@ -48,6 +48,9 @@ type AppActionWorkflowStepConfig struct {
 	// idx
 	Idx int64 `json:"idx,omitempty"`
 
+	// inline contents
+	InlineContents string `json:"inline_contents,omitempty"`
+
 	// metadata
 	Name string `json:"name,omitempty"`
 

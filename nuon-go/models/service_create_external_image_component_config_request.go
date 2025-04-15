@@ -19,6 +19,9 @@ import (
 // swagger:model service.CreateExternalImageComponentConfigRequest
 type ServiceCreateExternalImageComponentConfigRequest struct {
 
+	// app config id
+	AppConfigID string `json:"app_config_id,omitempty"`
+
 	// aws ecr image config
 	AwsEcrImageConfig *ServiceAwsECRImageConfigRequest `json:"aws_ecr_image_config,omitempty"`
 
