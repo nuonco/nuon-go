@@ -19,6 +19,9 @@ import (
 // swagger:model service.CreateHelmComponentConfigRequest
 type ServiceCreateHelmComponentConfigRequest struct {
 
+	// app config id
+	AppConfigID string `json:"app_config_id,omitempty"`
+
 	// chart name
 	// Required: true
 	// Max Length: 62

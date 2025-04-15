@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewGetAppConfigParams creates a new GetAppConfigParams object,
@@ -73,6 +74,12 @@ type GetAppConfigParams struct {
 	*/
 	AppID string
 
+	/* Recurse.
+
+	   load all children configs
+	*/
+	Recurse *bool
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -90,7 +97,18 @@ func (o *GetAppConfigParams) WithDefaults() *GetAppConfigParams {
 //
 // All values with no default are reset to their zero value.
 func (o *GetAppConfigParams) SetDefaults() {
-	// no default values defined for this parameter
+	var (
+		recurseDefault = bool(false)
+	)
+
+	val := GetAppConfigParams{
+		Recurse: &recurseDefault,
+	}
+
+	val.timeout = o.timeout
+	val.Context = o.Context
+	val.HTTPClient = o.HTTPClient
+	*o = val
 }
 
 // WithTimeout adds the timeout to the get app config params
@@ -148,6 +166,17 @@ func (o *GetAppConfigParams) SetAppID(appID string) {
 	o.AppID = appID
 }
 
+// WithRecurse adds the recurse to the get app config params
+func (o *GetAppConfigParams) WithRecurse(recurse *bool) *GetAppConfigParams {
+	o.SetRecurse(recurse)
+	return o
+}
+
+// SetRecurse adds the recurse to the get app config params
+func (o *GetAppConfigParams) SetRecurse(recurse *bool) {
+	o.Recurse = recurse
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *GetAppConfigParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -164,6 +193,23 @@ func (o *GetAppConfigParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 	// path param app_id
 	if err := r.SetPathParam("app_id", o.AppID); err != nil {
 		return err
+	}
+
+	if o.Recurse != nil {
+
+		// query param recurse
+		var qrRecurse bool
+
+		if o.Recurse != nil {
+			qrRecurse = *o.Recurse
+		}
+		qRecurse := swag.FormatBool(qrRecurse)
+		if qRecurse != "" {
+
+			if err := r.SetQueryParam("recurse", qRecurse); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {

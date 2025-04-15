@@ -19,6 +19,9 @@ import (
 // swagger:model service.CreateActionWorkflowConfigTriggerRequest
 type ServiceCreateActionWorkflowConfigTriggerRequest struct {
 
+	// component name
+	ComponentName string `json:"component_name,omitempty"`
+
 	// cron schedule
 	CronSchedule string `json:"cron_schedule,omitempty"`
 

@@ -19,6 +19,9 @@ import (
 // swagger:model app.AppInputConfig
 type AppAppInputConfig struct {
 
+	// app config id
+	AppConfigID string `json:"app_config_id,omitempty"`
+
 	// app id
 	AppID string `json:"app_id,omitempty"`
 

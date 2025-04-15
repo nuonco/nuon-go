@@ -49,7 +49,6 @@ func (c *client) GetAppInstalls(ctx context.Context, appID string, query *models
 	return resp.Payload, false, nil
 }
 
-
 func (c *client) GetAllInstalls(ctx context.Context, query *models.GetAllInstallsQuery) ([]*models.AppInstall, bool, error) {
 	params := &operations.GetOrgInstallsParams{
 		Context: ctx,
@@ -117,6 +116,10 @@ func (c *client) ReprovisionInstall(ctx context.Context, installID string) error
 	resp, err := c.genClient.Operations.ReprovisionInstall(&operations.ReprovisionInstallParams{
 		InstallID: installID,
 		Context:   ctx,
+		// TODO(jm): make this configurable
+		Req: &models.ServiceReprovisionInstallRequest{
+			"abort",
+		},
 	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return err
@@ -133,6 +136,10 @@ func (c *client) DeprovisionInstall(ctx context.Context, installID string) error
 	resp, err := c.genClient.Operations.DeprovisionInstall(&operations.DeprovisionInstallParams{
 		InstallID: installID,
 		Context:   ctx,
+		// TODO(jm): make this configurable
+		Req: &models.ServiceDeprovisionInstallRequest{
+			"abort",
+		},
 	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return err

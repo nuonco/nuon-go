@@ -18,6 +18,9 @@ import (
 // swagger:model app.ComponentConfigConnection
 type AppComponentConfigConnection struct {
 
+	// app config id
+	AppConfigID string `json:"app_config_id,omitempty"`
+
 	// component id
 	ComponentID string `json:"component_id,omitempty"`
 

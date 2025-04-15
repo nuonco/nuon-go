@@ -19,6 +19,9 @@ import (
 // swagger:model service.CreateAppInputConfigRequest
 type ServiceCreateAppInputConfigRequest struct {
 
+	// app config id
+	AppConfigID string `json:"app_config_id,omitempty"`
+
 	// groups
 	// Required: true
 	Groups map[string]ServiceAppGroupRequest `json:"groups"`

@@ -18,6 +18,9 @@ import (
 // swagger:model app.AppSandboxConfig
 type AppAppSandboxConfig struct {
 
+	// app config id
+	AppConfigID string `json:"app_config_id,omitempty"`
+
 	// app id
 	AppID string `json:"app_id,omitempty"`
 

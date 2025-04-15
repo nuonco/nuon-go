@@ -19,6 +19,9 @@ import (
 // swagger:model service.CreateTerraformModuleComponentConfigRequest
 type ServiceCreateTerraformModuleComponentConfigRequest struct {
 
+	// app config id
+	AppConfigID string `json:"app_config_id,omitempty"`
+
 	// connected github vcs config
 	ConnectedGithubVcsConfig *ServiceConnectedGithubVCSConfigRequest `json:"connected_github_vcs_config,omitempty"`
 

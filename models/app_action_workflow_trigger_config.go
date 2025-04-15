@@ -26,6 +26,9 @@ type AppActionWorkflowTriggerConfig struct {
 	// app id
 	AppID string `json:"app_id,omitempty"`
 
+	// component id
+	ComponentID string `json:"component_id,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
