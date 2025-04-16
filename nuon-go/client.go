@@ -71,8 +71,8 @@ type Client interface {
 	GetAppPermissionsConfig(ctx context.Context, appID, appSecretConfigID string) (*models.AppAppPermissionsConfig, error)
 
 	// app cloudformation stack config methods
-	CreateAppCloudFormationStackConfig(ctx context.Context, appID string, req *models.ServiceCreateAppCloudFormationStackConfigRequest) (*models.AppAppCloudFormationStackConfig, error)
-	GetAppCloudFormationStackConfig(ctx context.Context, appID, appCloudFormationStackID string) (*models.AppAppCloudFormationStackConfig, error)
+	CreateAppStackConfig(ctx context.Context, appID string, req *models.ServiceCreateAppStackConfigRequest) (*models.AppAppStackConfig, error)
+	GetAppStackConfig(ctx context.Context, appID, appStackConfigID string) (*models.AppAppStackConfig, error)
 
 	// app permissions config methods
 	CreateAppBreakGlassConfig(ctx context.Context, appID string, req *models.ServiceCreateAppBreakGlassConfigRequest) (*models.AppAppBreakGlassConfig, error)

@@ -95,6 +95,21 @@ func (mr *MockClientMockRecorder) CreateAppBreakGlassConfig(ctx, appID, req inte
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAppBreakGlassConfig", reflect.TypeOf((*MockClient)(nil).CreateAppBreakGlassConfig), ctx, appID, req)
 }
 
+// CreateAppCloudFormationStackConfig mocks base method.
+func (m *MockClient) CreateAppCloudFormationStackConfig(ctx context.Context, appID string, req *models.ServiceCreateAppCloudFormationStackConfigRequest) (*models.AppAppCloudFormationStackConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateAppCloudFormationStackConfig", ctx, appID, req)
+	ret0, _ := ret[0].(*models.AppAppCloudFormationStackConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateAppCloudFormationStackConfig indicates an expected call of CreateAppCloudFormationStackConfig.
+func (mr *MockClientMockRecorder) CreateAppCloudFormationStackConfig(ctx, appID, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAppCloudFormationStackConfig", reflect.TypeOf((*MockClient)(nil).CreateAppCloudFormationStackConfig), ctx, appID, req)
+}
+
 // CreateAppConfig mocks base method.
 func (m *MockClient) CreateAppConfig(ctx context.Context, appID string, req *models.ServiceCreateAppConfigRequest) (*models.AppAppConfig, error) {
 	m.ctrl.T.Helper()
@@ -800,6 +815,21 @@ func (m *MockClient) GetAppBreakGlassConfig(ctx context.Context, appID, appSecre
 func (mr *MockClientMockRecorder) GetAppBreakGlassConfig(ctx, appID, appSecretConfigID interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppBreakGlassConfig", reflect.TypeOf((*MockClient)(nil).GetAppBreakGlassConfig), ctx, appID, appSecretConfigID)
+}
+
+// GetAppCloudFormationStackConfig mocks base method.
+func (m *MockClient) GetAppCloudFormationStackConfig(ctx context.Context, appID, appCloudFormationStackID string) (*models.AppAppCloudFormationStackConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAppCloudFormationStackConfig", ctx, appID, appCloudFormationStackID)
+	ret0, _ := ret[0].(*models.AppAppCloudFormationStackConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAppCloudFormationStackConfig indicates an expected call of GetAppCloudFormationStackConfig.
+func (mr *MockClientMockRecorder) GetAppCloudFormationStackConfig(ctx, appID, appCloudFormationStackID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppCloudFormationStackConfig", reflect.TypeOf((*MockClient)(nil).GetAppCloudFormationStackConfig), ctx, appID, appCloudFormationStackID)
 }
 
 // GetAppComponent mocks base method.

@@ -20,7 +20,8 @@ import (
 type ServiceCreateAppCloudFormationStackConfigRequest struct {
 
 	// app config id
-	AppConfigID string `json:"app_config_id,omitempty"`
+	// Required: true
+	AppConfigID *string `json:"app_config_id"`
 
 	// description
 	// Required: true
@@ -41,6 +42,10 @@ type ServiceCreateAppCloudFormationStackConfigRequest struct {
 func (m *ServiceCreateAppCloudFormationStackConfigRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAppConfigID(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateDescription(formats); err != nil {
 		res = append(res, err)
 	}
@@ -52,6 +57,15 @@ func (m *ServiceCreateAppCloudFormationStackConfigRequest) Validate(formats strf
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ServiceCreateAppCloudFormationStackConfigRequest) validateAppConfigID(formats strfmt.Registry) error {
+
+	if err := validate.Required("app_config_id", "body", m.AppConfigID); err != nil {
+		return err
+	}
+
 	return nil
 }
 

@@ -26,6 +26,9 @@ type AppAppSecretConfig struct {
 	// app secrets config id
 	AppSecretsConfigID string `json:"app_secrets_config_id,omitempty"`
 
+	// cloudformation param name
+	CloudformationParamName string `json:"cloudformation_param_name,omitempty"`
+
 	// cloudformation stack name
 	CloudformationStackName string `json:"cloudformation_stack_name,omitempty"`
 

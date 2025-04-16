@@ -29,7 +29,7 @@ type AppAppConfig struct {
 	Checksum string `json:"checksum,omitempty"`
 
 	// cloudformation stack
-	CloudformationStack *AppAppCloudFormationStackConfig `json:"cloudformation_stack,omitempty"`
+	CloudformationStack *AppAppStackConfig `json:"cloudformation_stack,omitempty"`
 
 	// component config connections
 	ComponentConfigConnections []*AppComponentConfigConnection `json:"component_config_connections"`

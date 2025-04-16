@@ -59,7 +59,7 @@ type AppInstall struct {
 	InstallActionWorkflows []*AppInstallActionWorkflow `json:"install_action_workflows"`
 
 	// install aws cloudformation stack
-	InstallAwsCloudformationStack *AppInstallAWSCloudFormationStack `json:"install_aws_cloudformation_stack,omitempty"`
+	InstallAwsCloudformationStack *AppInstallStack `json:"install_aws_cloudformation_stack,omitempty"`
 
 	// install components
 	InstallComponents []*AppInstallComponent `json:"install_components"`
