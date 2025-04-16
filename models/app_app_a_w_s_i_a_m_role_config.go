@@ -22,6 +22,9 @@ type AppAppAWSIAMRoleConfig struct {
 	// app config id
 	AppConfigID string `json:"app_config_id,omitempty"`
 
+	// cloudformation param name
+	CloudformationParamName string `json:"cloudformation_param_name,omitempty"`
+
 	// cloudformation stack name
 	CloudformationStackName string `json:"cloudformation_stack_name,omitempty"`
 
