@@ -68,8 +68,6 @@ type ClientService interface {
 
 	CreateAppBreakGlassConfig(params *CreateAppBreakGlassConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppBreakGlassConfigCreated, error)
 
-	CreateAppCloudFormationStackConfig(params *CreateAppCloudFormationStackConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppCloudFormationStackConfigCreated, error)
-
 	CreateAppConfig(params *CreateAppConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppConfigCreated, error)
 
 	CreateAppInputConfig(params *CreateAppInputConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppInputConfigCreated, error)
@@ -85,6 +83,8 @@ type ClientService interface {
 	CreateAppSecret(params *CreateAppSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppSecretCreated, error)
 
 	CreateAppSecretsConfig(params *CreateAppSecretsConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppSecretsConfigCreated, error)
+
+	CreateAppStackConfig(params *CreateAppStackConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppStackConfigCreated, error)
 
 	CreateComponent(params *CreateComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateComponentCreated, error)
 
@@ -164,8 +164,6 @@ type ClientService interface {
 
 	GetAppBreakGlassConfig(params *GetAppBreakGlassConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppBreakGlassConfigOK, error)
 
-	GetAppCloudFormationStackConfig(params *GetAppCloudFormationStackConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppCloudFormationStackConfigOK, error)
-
 	GetAppComponent(params *GetAppComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppComponentOK, error)
 
 	GetAppComponents(params *GetAppComponentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppComponentsOK, error)
@@ -203,6 +201,8 @@ type ClientService interface {
 	GetAppSecrets(params *GetAppSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppSecretsOK, error)
 
 	GetAppSecretsConfig(params *GetAppSecretsConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppSecretsConfigOK, error)
+
+	GetAppStackConfig(params *GetAppStackConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppStackConfigOK, error)
 
 	GetApps(params *GetAppsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppsOK, error)
 
@@ -614,47 +614,6 @@ func (a *Client) CreateAppBreakGlassConfig(params *CreateAppBreakGlassConfigPara
 }
 
 /*
-CreateAppCloudFormationStackConfig creates an app cloudformation stack config
-
-Create a cloudformation stack config
-*/
-func (a *Client) CreateAppCloudFormationStackConfig(params *CreateAppCloudFormationStackConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppCloudFormationStackConfigCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewCreateAppCloudFormationStackConfigParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "CreateAppCloudFormationStackConfig",
-		Method:             "POST",
-		PathPattern:        "/v1/apps/{app_id}/cloudformation-stack-configs",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &CreateAppCloudFormationStackConfigReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*CreateAppCloudFormationStackConfigCreated)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for CreateAppCloudFormationStackConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 	CreateAppConfig Create an app config, by pushing the contents of a config file.
 
 The API will automatically configure the app according to the config file in the background.
@@ -971,6 +930,47 @@ func (a *Client) CreateAppSecretsConfig(params *CreateAppSecretsConfigParams, au
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppSecretsConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreateAppStackConfig creates an app stack config
+
+Create a cloudformation stack config
+*/
+func (a *Client) CreateAppStackConfig(params *CreateAppStackConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppStackConfigCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateAppStackConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateAppStackConfig",
+		Method:             "POST",
+		PathPattern:        "/v1/apps/{app_id}/stack-configs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateAppStackConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateAppStackConfigCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateAppStackConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -2521,47 +2521,6 @@ func (a *Client) GetAppBreakGlassConfig(params *GetAppBreakGlassConfigParams, au
 }
 
 /*
-GetAppCloudFormationStackConfig gets app cloudformation stack config
-
-Return a cloudformation stack config
-*/
-func (a *Client) GetAppCloudFormationStackConfig(params *GetAppCloudFormationStackConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppCloudFormationStackConfigOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetAppCloudFormationStackConfigParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetAppCloudFormationStackConfig",
-		Method:             "GET",
-		PathPattern:        "/v1/apps/{app_id}/cloudformation-stack-configs/{config_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetAppCloudFormationStackConfigReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetAppCloudFormationStackConfigOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetAppCloudFormationStackConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 GetAppComponent gets a components for a specific app
 
 Return an app component by id or name.
@@ -3321,6 +3280,47 @@ func (a *Client) GetAppSecretsConfig(params *GetAppSecretsConfigParams, authInfo
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppSecretsConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAppStackConfig gets app stack config
+
+Return a cloudformation stack config
+*/
+func (a *Client) GetAppStackConfig(params *GetAppStackConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppStackConfigOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAppStackConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetAppStackConfig",
+		Method:             "GET",
+		PathPattern:        "/v1/apps/{app_id}/stack-configs/{config_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAppStackConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAppStackConfigOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetAppStackConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
