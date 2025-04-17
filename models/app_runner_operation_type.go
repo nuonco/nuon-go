@@ -33,6 +33,9 @@ const (
 	// AppRunnerOperationTypeProvision captures enum value "provision"
 	AppRunnerOperationTypeProvision AppRunnerOperationType = "provision"
 
+	// AppRunnerOperationTypeProvisionServiceAccount captures enum value "provision_service_account"
+	AppRunnerOperationTypeProvisionServiceAccount AppRunnerOperationType = "provision_service_account"
+
 	// AppRunnerOperationTypeReprovision captures enum value "reprovision"
 	AppRunnerOperationTypeReprovision AppRunnerOperationType = "reprovision"
 
@@ -45,7 +48,7 @@ var appRunnerOperationTypeEnum []interface{}
 
 func init() {
 	var res []AppRunnerOperationType
-	if err := json.Unmarshal([]byte(`["provision","reprovision","deprovision"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["provision","provision_service_account","reprovision","deprovision"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

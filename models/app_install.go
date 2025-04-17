@@ -58,9 +58,6 @@ type AppInstall struct {
 	// install action workflows
 	InstallActionWorkflows []*AppInstallActionWorkflow `json:"install_action_workflows"`
 
-	// install aws cloudformation stack
-	InstallAwsCloudformationStack *AppInstallStack `json:"install_aws_cloudformation_stack,omitempty"`
-
 	// install components
 	InstallComponents []*AppInstallComponent `json:"install_components"`
 
@@ -75,6 +72,9 @@ type AppInstall struct {
 
 	// install sandbox runs
 	InstallSandboxRuns []*AppInstallSandboxRun `json:"install_sandbox_runs"`
+
+	// install stack
+	InstallStack *AppInstallStack `json:"install_stack,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
@@ -128,10 +128,6 @@ func (m *AppInstall) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateInstallAwsCloudformationStack(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateInstallComponents(formats); err != nil {
 		res = append(res, err)
 	}
@@ -145,6 +141,10 @@ func (m *AppInstall) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateInstallSandboxRuns(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInstallStack(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -256,25 +256,6 @@ func (m *AppInstall) validateInstallActionWorkflows(formats strfmt.Registry) err
 	return nil
 }
 
-func (m *AppInstall) validateInstallAwsCloudformationStack(formats strfmt.Registry) error {
-	if swag.IsZero(m.InstallAwsCloudformationStack) { // not required
-		return nil
-	}
-
-	if m.InstallAwsCloudformationStack != nil {
-		if err := m.InstallAwsCloudformationStack.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("install_aws_cloudformation_stack")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("install_aws_cloudformation_stack")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *AppInstall) validateInstallComponents(formats strfmt.Registry) error {
 	if swag.IsZero(m.InstallComponents) { // not required
 		return nil
@@ -379,6 +360,25 @@ func (m *AppInstall) validateInstallSandboxRuns(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppInstall) validateInstallStack(formats strfmt.Registry) error {
+	if swag.IsZero(m.InstallStack) { // not required
+		return nil
+	}
+
+	if m.InstallStack != nil {
+		if err := m.InstallStack.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("install_stack")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("install_stack")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app install based on the context it is used
 func (m *AppInstall) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -403,10 +403,6 @@ func (m *AppInstall) ContextValidate(ctx context.Context, formats strfmt.Registr
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateInstallAwsCloudformationStack(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateInstallComponents(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -420,6 +416,10 @@ func (m *AppInstall) ContextValidate(ctx context.Context, formats strfmt.Registr
 	}
 
 	if err := m.contextValidateInstallSandboxRuns(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateInstallStack(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -538,27 +538,6 @@ func (m *AppInstall) contextValidateInstallActionWorkflows(ctx context.Context, 
 	return nil
 }
 
-func (m *AppInstall) contextValidateInstallAwsCloudformationStack(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.InstallAwsCloudformationStack != nil {
-
-		if swag.IsZero(m.InstallAwsCloudformationStack) { // not required
-			return nil
-		}
-
-		if err := m.InstallAwsCloudformationStack.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("install_aws_cloudformation_stack")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("install_aws_cloudformation_stack")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *AppInstall) contextValidateInstallComponents(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.InstallComponents); i++ {
@@ -654,6 +633,27 @@ func (m *AppInstall) contextValidateInstallSandboxRuns(ctx context.Context, form
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *AppInstall) contextValidateInstallStack(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.InstallStack != nil {
+
+		if swag.IsZero(m.InstallStack) { // not required
+			return nil
+		}
+
+		if err := m.InstallStack.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("install_stack")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("install_stack")
+			}
+			return err
+		}
 	}
 
 	return nil

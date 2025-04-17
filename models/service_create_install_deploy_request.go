@@ -19,6 +19,9 @@ type ServiceCreateInstallDeployRequest struct {
 
 	// build id
 	BuildID string `json:"build_id,omitempty"`
+
+	// deploy dependents
+	DeployDependents bool `json:"deploy_dependents,omitempty"`
 }
 
 // Validate validates this service create install deploy request
