@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *PhoneHomeCreated) Code() int {
 }
 
 func (o *PhoneHomeCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeCreated  %+v", 201, o.Payload)
 }
 
 func (o *PhoneHomeCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeCreated  %+v", 201, o.Payload)
 }
 
 func (o *PhoneHomeCreated) GetPayload() string {
@@ -178,13 +175,11 @@ func (o *PhoneHomeBadRequest) Code() int {
 }
 
 func (o *PhoneHomeBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *PhoneHomeBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *PhoneHomeBadRequest) GetPayload() *models.StderrErrResponse {
@@ -248,13 +243,11 @@ func (o *PhoneHomeUnauthorized) Code() int {
 }
 
 func (o *PhoneHomeUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *PhoneHomeUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *PhoneHomeUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -318,13 +311,11 @@ func (o *PhoneHomeForbidden) Code() int {
 }
 
 func (o *PhoneHomeForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeForbidden  %+v", 403, o.Payload)
 }
 
 func (o *PhoneHomeForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeForbidden  %+v", 403, o.Payload)
 }
 
 func (o *PhoneHomeForbidden) GetPayload() *models.StderrErrResponse {
@@ -388,13 +379,11 @@ func (o *PhoneHomeNotFound) Code() int {
 }
 
 func (o *PhoneHomeNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeNotFound  %+v", 404, o.Payload)
 }
 
 func (o *PhoneHomeNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeNotFound  %+v", 404, o.Payload)
 }
 
 func (o *PhoneHomeNotFound) GetPayload() *models.StderrErrResponse {
@@ -458,13 +447,11 @@ func (o *PhoneHomeInternalServerError) Code() int {
 }
 
 func (o *PhoneHomeInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *PhoneHomeInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *PhoneHomeInternalServerError) GetPayload() *models.StderrErrResponse {

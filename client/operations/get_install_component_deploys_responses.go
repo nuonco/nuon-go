@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetInstallComponentDeploysOK) Code() int {
 }
 
 func (o *GetInstallComponentDeploysOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysOK  %+v", 200, o.Payload)
 }
 
 func (o *GetInstallComponentDeploysOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysOK  %+v", 200, o.Payload)
 }
 
 func (o *GetInstallComponentDeploysOK) GetPayload() []*models.AppInstallDeploy {
@@ -178,13 +175,11 @@ func (o *GetInstallComponentDeploysBadRequest) Code() int {
 }
 
 func (o *GetInstallComponentDeploysBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetInstallComponentDeploysBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetInstallComponentDeploysBadRequest) GetPayload() *models.StderrErrResponse {
@@ -248,13 +243,11 @@ func (o *GetInstallComponentDeploysUnauthorized) Code() int {
 }
 
 func (o *GetInstallComponentDeploysUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetInstallComponentDeploysUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetInstallComponentDeploysUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -318,13 +311,11 @@ func (o *GetInstallComponentDeploysForbidden) Code() int {
 }
 
 func (o *GetInstallComponentDeploysForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetInstallComponentDeploysForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetInstallComponentDeploysForbidden) GetPayload() *models.StderrErrResponse {
@@ -388,13 +379,11 @@ func (o *GetInstallComponentDeploysNotFound) Code() int {
 }
 
 func (o *GetInstallComponentDeploysNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetInstallComponentDeploysNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetInstallComponentDeploysNotFound) GetPayload() *models.StderrErrResponse {
@@ -458,13 +447,11 @@ func (o *GetInstallComponentDeploysInternalServerError) Code() int {
 }
 
 func (o *GetInstallComponentDeploysInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetInstallComponentDeploysInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/components/{component_id}/deploys][%d] getInstallComponentDeploysInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetInstallComponentDeploysInternalServerError) GetPayload() *models.StderrErrResponse {

@@ -25,6 +25,12 @@ type AppInstallWorkflow struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
+	// execution time
+	ExecutionTime int64 `json:"execution_time,omitempty"`
+
+	// finished at
+	FinishedAt string `json:"finished_at,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
@@ -33,6 +39,12 @@ type AppInstallWorkflow struct {
 
 	// metadata
 	Metadata map[string]string `json:"metadata,omitempty"`
+
+	// name
+	Name string `json:"name,omitempty"`
+
+	// started at
+	StartedAt string `json:"started_at,omitempty"`
 
 	// status
 	Status *AppCompositeStatus `json:"status,omitempty"`

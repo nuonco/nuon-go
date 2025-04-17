@@ -79,7 +79,7 @@ type PhoneHomeParams struct {
 
 	   Input
 	*/
-	Req *models.ServiceInstallPhoneHomeRequest
+	Req models.ServiceInstallPhoneHomeRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -157,13 +157,13 @@ func (o *PhoneHomeParams) SetPhoneHomeID(phoneHomeID string) {
 }
 
 // WithReq adds the req to the phone home params
-func (o *PhoneHomeParams) WithReq(req *models.ServiceInstallPhoneHomeRequest) *PhoneHomeParams {
+func (o *PhoneHomeParams) WithReq(req models.ServiceInstallPhoneHomeRequest) *PhoneHomeParams {
 	o.SetReq(req)
 	return o
 }
 
 // SetReq adds the req to the phone home params
-func (o *PhoneHomeParams) SetReq(req *models.ServiceInstallPhoneHomeRequest) {
+func (o *PhoneHomeParams) SetReq(req models.ServiceInstallPhoneHomeRequest) {
 	o.Req = req
 }
 
