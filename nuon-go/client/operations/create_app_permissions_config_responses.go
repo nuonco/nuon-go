@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *CreateAppPermissionsConfigCreated) Code() int {
 }
 
 func (o *CreateAppPermissionsConfigCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateAppPermissionsConfigCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateAppPermissionsConfigCreated) GetPayload() *models.AppAppPermissionsConfig {
@@ -180,13 +177,11 @@ func (o *CreateAppPermissionsConfigBadRequest) Code() int {
 }
 
 func (o *CreateAppPermissionsConfigBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateAppPermissionsConfigBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateAppPermissionsConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *CreateAppPermissionsConfigUnauthorized) Code() int {
 }
 
 func (o *CreateAppPermissionsConfigUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateAppPermissionsConfigUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateAppPermissionsConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *CreateAppPermissionsConfigForbidden) Code() int {
 }
 
 func (o *CreateAppPermissionsConfigForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateAppPermissionsConfigForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateAppPermissionsConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *CreateAppPermissionsConfigNotFound) Code() int {
 }
 
 func (o *CreateAppPermissionsConfigNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateAppPermissionsConfigNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateAppPermissionsConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *CreateAppPermissionsConfigInternalServerError) Code() int {
 }
 
 func (o *CreateAppPermissionsConfigInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateAppPermissionsConfigInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateAppPermissionsConfigInternalServerError) GetPayload() *models.StderrErrResponse {

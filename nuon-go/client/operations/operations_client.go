@@ -9,38 +9,12 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new operations API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
-}
-
-// New creates a new operations API client with basic auth credentials.
-// It takes the following parameters:
-// - host: http host (github.com).
-// - basePath: any base path for the API client ("/v1", "/v3").
-// - scheme: http scheme ("http", "https").
-// - user: user for basic authentication header.
-// - password: password for basic authentication header.
-func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
-	transport := httptransport.New(host, basePath, []string{scheme})
-	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
-	return &Client{transport: transport, formats: strfmt.Default}
-}
-
-// New creates a new operations API client with a bearer token for authentication.
-// It takes the following parameters:
-// - host: http host (github.com).
-// - basePath: any base path for the API client ("/v1", "/v3").
-// - scheme: http scheme ("http", "https").
-// - bearerToken: bearer token for Bearer authentication header.
-func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
-	transport := httptransport.New(host, basePath, []string{scheme})
-	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
-	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -51,7 +25,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption may be used to customize the behavior of Client methods.
+// ClientOption is the option for Client methods
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -282,6 +256,10 @@ type ClientService interface {
 
 	GetInstallSandboxRuns(params *GetInstallSandboxRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallSandboxRunsOK, error)
 
+	GetInstallStack(params *GetInstallStackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallStackOK, error)
+
+	GetInstallStackByInstallID(params *GetInstallStackByInstallIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallStackByInstallIDOK, error)
+
 	GetInstallState(params *GetInstallStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallStateOK, error)
 
 	GetInstallWorkflow(params *GetInstallWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallWorkflowOK, error)
@@ -353,6 +331,8 @@ type ClientService interface {
 	RenderInstaller(params *RenderInstallerParams, opts ...ClientOption) (*RenderInstallerOK, error)
 
 	ReprovisionInstall(params *ReprovisionInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReprovisionInstallCreated, error)
+
+	ReprovisionInstallSandbox(params *ReprovisionInstallSandboxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReprovisionInstallSandboxCreated, error)
 
 	TeardownInstallComponent(params *TeardownInstallComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeardownInstallComponentCreated, error)
 
@@ -4901,6 +4881,84 @@ func (a *Client) GetInstallSandboxRuns(params *GetInstallSandboxRunsParams, auth
 }
 
 /*
+GetInstallStack gets an install stack by stack ID
+*/
+func (a *Client) GetInstallStack(params *GetInstallStackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallStackOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetInstallStackParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetInstallStack",
+		Method:             "GET",
+		PathPattern:        "/v1/installs/stacks/{stack_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetInstallStackReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetInstallStackOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetInstallStack: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetInstallStackByInstallID gets an install stack by install ID
+*/
+func (a *Client) GetInstallStackByInstallID(params *GetInstallStackByInstallIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallStackByInstallIDOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetInstallStackByInstallIDParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetInstallStackByInstallID",
+		Method:             "GET",
+		PathPattern:        "/v1/installs/{install_id}/stack",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetInstallStackByInstallIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetInstallStackByInstallIDOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetInstallStackByInstallID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetInstallState gets the current state of an install
 */
 func (a *Client) GetInstallState(params *GetInstallStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallStateOK, error) {
@@ -6344,6 +6402,47 @@ func (a *Client) ReprovisionInstall(params *ReprovisionInstallParams, authInfo r
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for ReprovisionInstall: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+ReprovisionInstallSandbox reprovisions an install sandbox
+
+Reprovision an install sandbox and redeploy all components on top.
+*/
+func (a *Client) ReprovisionInstallSandbox(params *ReprovisionInstallSandboxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReprovisionInstallSandboxCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewReprovisionInstallSandboxParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ReprovisionInstallSandbox",
+		Method:             "POST",
+		PathPattern:        "/v1/installs/{install_id}/reprovision-sandbox",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ReprovisionInstallSandboxReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ReprovisionInstallSandboxCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ReprovisionInstallSandbox: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

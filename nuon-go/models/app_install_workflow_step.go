@@ -29,6 +29,12 @@ type AppInstallWorkflowStep struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
+	// execution time
+	ExecutionTime int64 `json:"execution_time,omitempty"`
+
+	// finished at
+	FinishedAt string `json:"finished_at,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
@@ -46,6 +52,9 @@ type AppInstallWorkflowStep struct {
 
 	// policy validation
 	PolicyValidation *AppInstallWorkflowStepPolicyValidation `json:"policy_validation,omitempty"`
+
+	// started at
+	StartedAt string `json:"started_at,omitempty"`
 
 	// status
 	Status struct {
