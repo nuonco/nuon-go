@@ -20,10 +20,7 @@ type AppRunnerGroupSettings struct {
 	// aws cloudformation stack type
 	AwsCloudformationStackType string `json:"aws_cloudformation_stack_type,omitempty"`
 
-	// specific configuration for cloud specific runners, such as AWS or Azure
-	AwsIamRoleArn string `json:"aws_iam_role_arn,omitempty"`
-
-	// new fields for the runner-v2
+	// aws runner specifics runner-v2
 	AwsInstanceType string `json:"aws_instance_type,omitempty"`
 
 	// aws tags
@@ -59,8 +56,8 @@ type AppRunnerGroupSettings struct {
 	// id
 	ID string `json:"id,omitempty"`
 
-	// k8s service account name
-	K8sServiceAccountName string `json:"k8s_service_account_name,omitempty"`
+	// local aws iam role arn
+	LocalAwsIamRoleArn string `json:"local_aws_iam_role_arn,omitempty"`
 
 	// logging level
 	LoggingLevel string `json:"logging_level,omitempty"`
@@ -68,8 +65,14 @@ type AppRunnerGroupSettings struct {
 	// Metadata is used as both log and metric tags/attributes in the runner when emitting data
 	Metadata map[string]string `json:"metadata,omitempty"`
 
+	// org runner specifics
+	OrgAwsIamRoleArn string `json:"org_aws_iam_role_arn,omitempty"`
+
 	// org id
 	OrgID string `json:"org_id,omitempty"`
+
+	// org k8s service account name
+	OrgK8sServiceAccountName string `json:"org_k8s_service_account_name,omitempty"`
 
 	// otel collector config
 	OtelCollectorConfig string `json:"otel_collector_config,omitempty"`

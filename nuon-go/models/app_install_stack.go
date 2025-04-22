@@ -31,6 +31,9 @@ type AppInstallStack struct {
 	// install id
 	InstallID string `json:"install_id,omitempty"`
 
+	// install stack outputs
+	InstallStackOutputs *AppInstallStackOutputs `json:"install_stack_outputs,omitempty"`
+
 	// org id
 	OrgID string `json:"org_id,omitempty"`
 
@@ -45,6 +48,10 @@ type AppInstallStack struct {
 func (m *AppInstallStack) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateInstallStackOutputs(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateVersions(formats); err != nil {
 		res = append(res, err)
 	}
@@ -52,6 +59,25 @@ func (m *AppInstallStack) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppInstallStack) validateInstallStackOutputs(formats strfmt.Registry) error {
+	if swag.IsZero(m.InstallStackOutputs) { // not required
+		return nil
+	}
+
+	if m.InstallStackOutputs != nil {
+		if err := m.InstallStackOutputs.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("install_stack_outputs")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("install_stack_outputs")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -85,6 +111,10 @@ func (m *AppInstallStack) validateVersions(formats strfmt.Registry) error {
 func (m *AppInstallStack) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateInstallStackOutputs(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateVersions(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -92,6 +122,27 @@ func (m *AppInstallStack) ContextValidate(ctx context.Context, formats strfmt.Re
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppInstallStack) contextValidateInstallStackOutputs(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.InstallStackOutputs != nil {
+
+		if swag.IsZero(m.InstallStackOutputs) { // not required
+			return nil
+		}
+
+		if err := m.InstallStackOutputs.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("install_stack_outputs")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("install_stack_outputs")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
