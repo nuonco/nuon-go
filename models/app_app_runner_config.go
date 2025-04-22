@@ -39,6 +39,10 @@ type AppAppRunnerConfig struct {
 	// env vars
 	EnvVars map[string]string `json:"env_vars,omitempty"`
 
+	// for the runner helm client: only relevant for k8s sandboxes
+	// default for legacy purposes - once this is backfilled, make the defalt not null
+	HelmDriver string `json:"helm_driver,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
