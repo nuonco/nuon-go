@@ -32,6 +32,9 @@ type AppInstallWorkflowStep struct {
 	// execution time
 	ExecutionTime int64 `json:"execution_time,omitempty"`
 
+	// finished
+	Finished bool `json:"finished,omitempty"`
+
 	// finished at
 	FinishedAt string `json:"finished_at,omitempty"`
 

@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *CreateAppSandboxConfigCreated) Code() int {
 }
 
 func (o *CreateAppSandboxConfigCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigCreated %s", 201, payload)
 }
 
 func (o *CreateAppSandboxConfigCreated) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigCreated %s", 201, payload)
 }
 
 func (o *CreateAppSandboxConfigCreated) GetPayload() *models.AppAppSandboxConfig {
@@ -177,11 +180,13 @@ func (o *CreateAppSandboxConfigBadRequest) Code() int {
 }
 
 func (o *CreateAppSandboxConfigBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppSandboxConfigBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppSandboxConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +250,13 @@ func (o *CreateAppSandboxConfigUnauthorized) Code() int {
 }
 
 func (o *CreateAppSandboxConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppSandboxConfigUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppSandboxConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +320,13 @@ func (o *CreateAppSandboxConfigForbidden) Code() int {
 }
 
 func (o *CreateAppSandboxConfigForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateAppSandboxConfigForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateAppSandboxConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +390,13 @@ func (o *CreateAppSandboxConfigNotFound) Code() int {
 }
 
 func (o *CreateAppSandboxConfigNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateAppSandboxConfigNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateAppSandboxConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +460,13 @@ func (o *CreateAppSandboxConfigInternalServerError) Code() int {
 }
 
 func (o *CreateAppSandboxConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppSandboxConfigInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppSandboxConfigInternalServerError) GetPayload() *models.StderrErrResponse {
