@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *CreateAppConfigCreated) Code() int {
 }
 
 func (o *CreateAppConfigCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigCreated %s", 201, payload)
 }
 
 func (o *CreateAppConfigCreated) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigCreated %s", 201, payload)
 }
 
 func (o *CreateAppConfigCreated) GetPayload() *models.AppAppConfig {
@@ -177,11 +180,13 @@ func (o *CreateAppConfigBadRequest) Code() int {
 }
 
 func (o *CreateAppConfigBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppConfigBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +250,13 @@ func (o *CreateAppConfigUnauthorized) Code() int {
 }
 
 func (o *CreateAppConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppConfigUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +320,13 @@ func (o *CreateAppConfigForbidden) Code() int {
 }
 
 func (o *CreateAppConfigForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateAppConfigForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateAppConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +390,13 @@ func (o *CreateAppConfigNotFound) Code() int {
 }
 
 func (o *CreateAppConfigNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateAppConfigNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateAppConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +460,13 @@ func (o *CreateAppConfigInternalServerError) Code() int {
 }
 
 func (o *CreateAppConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppConfigInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config][%d] createAppConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppConfigInternalServerError) GetPayload() *models.StderrErrResponse {

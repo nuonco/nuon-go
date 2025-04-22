@@ -29,7 +29,7 @@ type AppCompositeStatus struct {
 	History []*AppCompositeStatus `json:"history"`
 
 	// metadata
-	Metadata interface{} `json:"metadata,omitempty"`
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
 
 	// status
 	Status AppStatus `json:"status,omitempty"`
