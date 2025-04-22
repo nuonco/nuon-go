@@ -25,6 +25,9 @@ type ServiceCreateAppRunnerConfigRequest struct {
 	// env vars
 	EnvVars map[string]string `json:"env_vars,omitempty"`
 
+	// helm driver
+	HelmDriver AppAppRunnerConfigHelmDriverType `json:"helm_driver,omitempty"`
+
 	// type
 	// Required: true
 	Type *AppAppRunnerType `json:"type"`
@@ -34,6 +37,10 @@ type ServiceCreateAppRunnerConfigRequest struct {
 func (m *ServiceCreateAppRunnerConfigRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateHelmDriver(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
@@ -41,6 +48,23 @@ func (m *ServiceCreateAppRunnerConfigRequest) Validate(formats strfmt.Registry) 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ServiceCreateAppRunnerConfigRequest) validateHelmDriver(formats strfmt.Registry) error {
+	if swag.IsZero(m.HelmDriver) { // not required
+		return nil
+	}
+
+	if err := m.HelmDriver.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("helm_driver")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("helm_driver")
+		}
+		return err
+	}
+
 	return nil
 }
 
@@ -72,6 +96,10 @@ func (m *ServiceCreateAppRunnerConfigRequest) validateType(formats strfmt.Regist
 func (m *ServiceCreateAppRunnerConfigRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateHelmDriver(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateType(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -79,6 +107,24 @@ func (m *ServiceCreateAppRunnerConfigRequest) ContextValidate(ctx context.Contex
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ServiceCreateAppRunnerConfigRequest) contextValidateHelmDriver(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.HelmDriver) { // not required
+		return nil
+	}
+
+	if err := m.HelmDriver.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("helm_driver")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("helm_driver")
+		}
+		return err
+	}
+
 	return nil
 }
 

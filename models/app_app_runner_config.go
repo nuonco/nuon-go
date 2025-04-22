@@ -39,6 +39,9 @@ type AppAppRunnerConfig struct {
 	// env vars
 	EnvVars map[string]string `json:"env_vars,omitempty"`
 
+	// helm driver
+	HelmDriver string `json:"helm_driver,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
