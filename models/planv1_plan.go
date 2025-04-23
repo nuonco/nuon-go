@@ -17,7 +17,7 @@ import (
 // swagger:model planv1.Plan
 type Planv1Plan struct {
 
-	// Types that are assignable to Actual:
+	// Types that are valid to be assigned to Actual:
 	//
 	// 	*Plan_WaypointPlan
 	// 	*Plan_NoopPlan

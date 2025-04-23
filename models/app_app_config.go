@@ -28,9 +28,6 @@ type AppAppConfig struct {
 	// checksum
 	Checksum string `json:"checksum,omitempty"`
 
-	// cloudformation stack
-	CloudformationStack *AppAppStackConfig `json:"cloudformation_stack,omitempty"`
-
 	// component config connections
 	ComponentConfigConnections []*AppComponentConfigConnection `json:"component_config_connections"`
 
@@ -49,10 +46,8 @@ type AppAppConfig struct {
 	// org id
 	OrgID string `json:"org_id,omitempty"`
 
-	// Lookups on the app config
-	Permissions struct {
-		AppAppPermissionsConfig
-	} `json:"permissions,omitempty"`
+	// permissions
+	Permissions *AppAppPermissionsConfig `json:"permissions,omitempty"`
 
 	// policies
 	Policies *AppAppPoliciesConfig `json:"policies,omitempty"`
@@ -68,6 +63,9 @@ type AppAppConfig struct {
 
 	// secrets
 	Secrets *AppAppSecretsConfig `json:"secrets,omitempty"`
+
+	// stack
+	Stack *AppAppStackConfig `json:"stack,omitempty"`
 
 	// state
 	State string `json:"state,omitempty"`
@@ -90,10 +88,6 @@ func (m *AppAppConfig) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateBreakGlass(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateCloudformationStack(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -125,6 +119,10 @@ func (m *AppAppConfig) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateStack(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateStatus(formats); err != nil {
 		res = append(res, err)
 	}
@@ -146,25 +144,6 @@ func (m *AppAppConfig) validateBreakGlass(formats strfmt.Registry) error {
 				return ve.ValidateName("break_glass")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("break_glass")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *AppAppConfig) validateCloudformationStack(formats strfmt.Registry) error {
-	if swag.IsZero(m.CloudformationStack) { // not required
-		return nil
-	}
-
-	if m.CloudformationStack != nil {
-		if err := m.CloudformationStack.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("cloudformation_stack")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("cloudformation_stack")
 			}
 			return err
 		}
@@ -221,6 +200,17 @@ func (m *AppAppConfig) validateInput(formats strfmt.Registry) error {
 func (m *AppAppConfig) validatePermissions(formats strfmt.Registry) error {
 	if swag.IsZero(m.Permissions) { // not required
 		return nil
+	}
+
+	if m.Permissions != nil {
+		if err := m.Permissions.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("permissions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("permissions")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -302,6 +292,25 @@ func (m *AppAppConfig) validateSecrets(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppAppConfig) validateStack(formats strfmt.Registry) error {
+	if swag.IsZero(m.Stack) { // not required
+		return nil
+	}
+
+	if m.Stack != nil {
+		if err := m.Stack.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("stack")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("stack")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *AppAppConfig) validateStatus(formats strfmt.Registry) error {
 	if swag.IsZero(m.Status) { // not required
 		return nil
@@ -324,10 +333,6 @@ func (m *AppAppConfig) ContextValidate(ctx context.Context, formats strfmt.Regis
 	var res []error
 
 	if err := m.contextValidateBreakGlass(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateCloudformationStack(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -359,6 +364,10 @@ func (m *AppAppConfig) ContextValidate(ctx context.Context, formats strfmt.Regis
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateStack(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateStatus(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -382,27 +391,6 @@ func (m *AppAppConfig) contextValidateBreakGlass(ctx context.Context, formats st
 				return ve.ValidateName("break_glass")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("break_glass")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *AppAppConfig) contextValidateCloudformationStack(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.CloudformationStack != nil {
-
-		if swag.IsZero(m.CloudformationStack) { // not required
-			return nil
-		}
-
-		if err := m.CloudformationStack.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("cloudformation_stack")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("cloudformation_stack")
 			}
 			return err
 		}
@@ -458,6 +446,22 @@ func (m *AppAppConfig) contextValidateInput(ctx context.Context, formats strfmt.
 }
 
 func (m *AppAppConfig) contextValidatePermissions(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Permissions != nil {
+
+		if swag.IsZero(m.Permissions) { // not required
+			return nil
+		}
+
+		if err := m.Permissions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("permissions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("permissions")
+			}
+			return err
+		}
+	}
 
 	return nil
 }
@@ -538,6 +542,27 @@ func (m *AppAppConfig) contextValidateSecrets(ctx context.Context, formats strfm
 				return ve.ValidateName("secrets")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("secrets")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppAppConfig) contextValidateStack(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Stack != nil {
+
+		if swag.IsZero(m.Stack) { // not required
+			return nil
+		}
+
+		if err := m.Stack.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("stack")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("stack")
 			}
 			return err
 		}
