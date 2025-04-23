@@ -40,7 +40,7 @@ type AppInstallStackOutputs struct {
 	InstallStackID string `json:"install_stack_id,omitempty"`
 
 	// install version run id
-	InstallVersionRunID *GenericsNullString `json:"install_version_run_id,omitempty"`
+	InstallVersionRunID string `json:"install_version_run_id,omitempty"`
 
 	// maintenance iam role arn
 	MaintenanceIamRoleArn string `json:"maintenance_iam_role_arn,omitempty"`
@@ -56,6 +56,9 @@ type AppInstallStackOutputs struct {
 
 	// public subnets
 	PublicSubnets []string `json:"public_subnets"`
+
+	// region
+	Region string `json:"region,omitempty"`
 
 	// runner iam role arn
 	RunnerIamRoleArn string `json:"runner_iam_role_arn,omitempty"`
@@ -75,10 +78,6 @@ func (m *AppInstallStackOutputs) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAws(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateInstallVersionRunID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -107,34 +106,11 @@ func (m *AppInstallStackOutputs) validateAws(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *AppInstallStackOutputs) validateInstallVersionRunID(formats strfmt.Registry) error {
-	if swag.IsZero(m.InstallVersionRunID) { // not required
-		return nil
-	}
-
-	if m.InstallVersionRunID != nil {
-		if err := m.InstallVersionRunID.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("install_version_run_id")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("install_version_run_id")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 // ContextValidate validate this app install stack outputs based on the context it is used
 func (m *AppInstallStackOutputs) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateAws(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateInstallVersionRunID(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -157,27 +133,6 @@ func (m *AppInstallStackOutputs) contextValidateAws(ctx context.Context, formats
 				return ve.ValidateName("aws")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("aws")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *AppInstallStackOutputs) contextValidateInstallVersionRunID(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.InstallVersionRunID != nil {
-
-		if swag.IsZero(m.InstallVersionRunID) { // not required
-			return nil
-		}
-
-		if err := m.InstallVersionRunID.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("install_version_run_id")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("install_version_run_id")
 			}
 			return err
 		}
