@@ -32,6 +32,9 @@ type AppAWSStackOutputs struct {
 	// public subnets
 	PublicSubnets []string `json:"public_subnets"`
 
+	// region
+	Region string `json:"region,omitempty"`
+
 	// runner iam role arn
 	RunnerIamRoleArn string `json:"runner_iam_role_arn,omitempty"`
 

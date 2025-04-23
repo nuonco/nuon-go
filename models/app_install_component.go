@@ -46,6 +46,9 @@ type AppInstallComponent struct {
 	// status description
 	StatusDescription string `json:"status_description,omitempty"`
 
+	// terraform workspace
+	TerraformWorkspace *AppTerraformWorkspace `json:"terraform_workspace,omitempty"`
+
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
 }
@@ -59,6 +62,10 @@ func (m *AppInstallComponent) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateInstallDeploys(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTerraformWorkspace(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -113,6 +120,25 @@ func (m *AppInstallComponent) validateInstallDeploys(formats strfmt.Registry) er
 	return nil
 }
 
+func (m *AppInstallComponent) validateTerraformWorkspace(formats strfmt.Registry) error {
+	if swag.IsZero(m.TerraformWorkspace) { // not required
+		return nil
+	}
+
+	if m.TerraformWorkspace != nil {
+		if err := m.TerraformWorkspace.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("terraform_workspace")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("terraform_workspace")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app install component based on the context it is used
 func (m *AppInstallComponent) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -122,6 +148,10 @@ func (m *AppInstallComponent) ContextValidate(ctx context.Context, formats strfm
 	}
 
 	if err := m.contextValidateInstallDeploys(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTerraformWorkspace(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -172,6 +202,27 @@ func (m *AppInstallComponent) contextValidateInstallDeploys(ctx context.Context,
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *AppInstallComponent) contextValidateTerraformWorkspace(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.TerraformWorkspace != nil {
+
+		if swag.IsZero(m.TerraformWorkspace) { // not required
+			return nil
+		}
+
+		if err := m.TerraformWorkspace.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("terraform_workspace")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("terraform_workspace")
+			}
+			return err
+		}
 	}
 
 	return nil
