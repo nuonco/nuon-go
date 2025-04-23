@@ -30,9 +30,6 @@ type AppInstallStackOutputs struct {
 	// data
 	Data map[string]string `json:"data,omitempty"`
 
-	// deprovision iam role arn
-	DeprovisionIamRoleArn string `json:"deprovision_iam_role_arn,omitempty"`
-
 	// id
 	ID string `json:"id,omitempty"`
 
@@ -42,35 +39,11 @@ type AppInstallStackOutputs struct {
 	// install version run id
 	InstallVersionRunID string `json:"install_version_run_id,omitempty"`
 
-	// maintenance iam role arn
-	MaintenanceIamRoleArn string `json:"maintenance_iam_role_arn,omitempty"`
-
 	// org id
 	OrgID string `json:"org_id,omitempty"`
 
-	// private subnets
-	PrivateSubnets []string `json:"private_subnets"`
-
-	// provision iam role arn
-	ProvisionIamRoleArn string `json:"provision_iam_role_arn,omitempty"`
-
-	// public subnets
-	PublicSubnets []string `json:"public_subnets"`
-
-	// region
-	Region string `json:"region,omitempty"`
-
-	// runner iam role arn
-	RunnerIamRoleArn string `json:"runner_iam_role_arn,omitempty"`
-
-	// runner subnet
-	RunnerSubnet string `json:"runner_subnet,omitempty"`
-
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
-
-	// vpc id
-	VpcID string `json:"vpc_id,omitempty"`
 }
 
 // Validate validates this app install stack outputs

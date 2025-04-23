@@ -36,6 +36,9 @@ const (
 	// AppInstallWorkflowTypeDeprovision captures enum value "deprovision"
 	AppInstallWorkflowTypeDeprovision AppInstallWorkflowType = "deprovision"
 
+	// AppInstallWorkflowTypeDeprovisionSandbox captures enum value "deprovision_sandbox"
+	AppInstallWorkflowTypeDeprovisionSandbox AppInstallWorkflowType = "deprovision_sandbox"
+
 	// AppInstallWorkflowTypeManualDeploy captures enum value "manual_deploy"
 	AppInstallWorkflowTypeManualDeploy AppInstallWorkflowType = "manual_deploy"
 
@@ -60,7 +63,7 @@ var appInstallWorkflowTypeEnum []interface{}
 
 func init() {
 	var res []AppInstallWorkflowType
-	if err := json.Unmarshal([]byte(`["provision","deprovision","manual_deploy","input_update","deploy_components","teardown_components","reprovision_sandbox","reprovision"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["provision","deprovision","deprovision_sandbox","manual_deploy","input_update","deploy_components","teardown_components","reprovision_sandbox","reprovision"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

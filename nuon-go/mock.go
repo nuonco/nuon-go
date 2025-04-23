@@ -648,6 +648,20 @@ func (mr *MockClientMockRecorder) DeprovisionInstall(ctx, installID interface{})
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeprovisionInstall", reflect.TypeOf((*MockClient)(nil).DeprovisionInstall), ctx, installID)
 }
 
+// DeprovisionInstallSandbox mocks base method.
+func (m *MockClient) DeprovisionInstallSandbox(ctx context.Context, installID string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeprovisionInstallSandbox", ctx, installID)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeprovisionInstallSandbox indicates an expected call of DeprovisionInstallSandbox.
+func (mr *MockClientMockRecorder) DeprovisionInstallSandbox(ctx, installID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeprovisionInstallSandbox", reflect.TypeOf((*MockClient)(nil).DeprovisionInstallSandbox), ctx, installID)
+}
+
 // GetActionWorkflow mocks base method.
 func (m *MockClient) GetActionWorkflow(ctx context.Context, actionWorkflowID string) (*models.AppActionWorkflow, error) {
 	m.ctrl.T.Helper()
