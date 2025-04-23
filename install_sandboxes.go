@@ -33,3 +33,19 @@ func (c *client) GetInstallSandboxRuns(ctx context.Context, installID string, qu
 
 	return resp.Payload, false, nil
 }
+
+func (c *client) DeprovisionInstallSandbox(ctx context.Context, installID string) error {
+	_, err := c.genClient.Operations.DeprovisionInstallSandbox(&operations.DeprovisionInstallSandboxParams{
+		InstallID: installID,
+		Context:   ctx,
+		// TODO: make this configurable
+		Req: &models.ServiceDeprovisionInstallSandboxRequest{
+			"abort",
+		},
+	}, c.getOrgIDAuthInfo())
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

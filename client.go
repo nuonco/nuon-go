@@ -136,7 +136,8 @@ type Client interface {
 	DeleteInstallComponent(ctx context.Context, installID, componentID string, force bool) (bool, error)
 	DeleteInstallComponents(ctx context.Context, installID string, force bool) (bool, error)
 
-	// install sandbox runs
+	// install sandbox
+	DeprovisionInstallSandbox(ctx context.Context, installID string) error
 	GetInstallSandboxRuns(ctx context.Context, installID string, query *models.GetInstallSandboxRunsQuery) ([]*models.AppInstallSandboxRun, bool, error)
 
 	// install inputs
