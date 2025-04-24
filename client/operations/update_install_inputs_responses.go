@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *UpdateInstallInputsOK) Code() int {
 }
 
 func (o *UpdateInstallInputsOK) Error() string {
-	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsOK %s", 200, payload)
 }
 
 func (o *UpdateInstallInputsOK) String() string {
-	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsOK %s", 200, payload)
 }
 
 func (o *UpdateInstallInputsOK) GetPayload() *models.AppInstallInputs {
@@ -177,11 +180,13 @@ func (o *UpdateInstallInputsBadRequest) Code() int {
 }
 
 func (o *UpdateInstallInputsBadRequest) Error() string {
-	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsBadRequest %s", 400, payload)
 }
 
 func (o *UpdateInstallInputsBadRequest) String() string {
-	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsBadRequest %s", 400, payload)
 }
 
 func (o *UpdateInstallInputsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +250,13 @@ func (o *UpdateInstallInputsUnauthorized) Code() int {
 }
 
 func (o *UpdateInstallInputsUnauthorized) Error() string {
-	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsUnauthorized %s", 401, payload)
 }
 
 func (o *UpdateInstallInputsUnauthorized) String() string {
-	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsUnauthorized %s", 401, payload)
 }
 
 func (o *UpdateInstallInputsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +320,13 @@ func (o *UpdateInstallInputsForbidden) Code() int {
 }
 
 func (o *UpdateInstallInputsForbidden) Error() string {
-	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsForbidden %s", 403, payload)
 }
 
 func (o *UpdateInstallInputsForbidden) String() string {
-	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsForbidden %s", 403, payload)
 }
 
 func (o *UpdateInstallInputsForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +390,13 @@ func (o *UpdateInstallInputsNotFound) Code() int {
 }
 
 func (o *UpdateInstallInputsNotFound) Error() string {
-	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsNotFound %s", 404, payload)
 }
 
 func (o *UpdateInstallInputsNotFound) String() string {
-	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsNotFound %s", 404, payload)
 }
 
 func (o *UpdateInstallInputsNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +460,13 @@ func (o *UpdateInstallInputsInternalServerError) Code() int {
 }
 
 func (o *UpdateInstallInputsInternalServerError) Error() string {
-	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateInstallInputsInternalServerError) String() string {
-	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/installs/{install_id}/inputs][%d] updateInstallInputsInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateInstallInputsInternalServerError) GetPayload() *models.StderrErrResponse {
