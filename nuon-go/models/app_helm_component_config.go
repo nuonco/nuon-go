@@ -36,6 +36,9 @@ type AppHelmComponentConfig struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// namespace
+	Namespace string `json:"namespace,omitempty"`
+
 	// public git vcs config
 	PublicGitVcsConfig *AppPublicGitVCSConfig `json:"public_git_vcs_config,omitempty"`
 
