@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetCurrentUserOK) Code() int {
 }
 
 func (o *GetCurrentUserOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserOK  %+v", 200, o.Payload)
 }
 
 func (o *GetCurrentUserOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserOK  %+v", 200, o.Payload)
 }
 
 func (o *GetCurrentUserOK) GetPayload() *models.AppAccount {
@@ -180,13 +177,11 @@ func (o *GetCurrentUserBadRequest) Code() int {
 }
 
 func (o *GetCurrentUserBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetCurrentUserBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetCurrentUserBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *GetCurrentUserUnauthorized) Code() int {
 }
 
 func (o *GetCurrentUserUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetCurrentUserUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetCurrentUserUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *GetCurrentUserForbidden) Code() int {
 }
 
 func (o *GetCurrentUserForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetCurrentUserForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetCurrentUserForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *GetCurrentUserNotFound) Code() int {
 }
 
 func (o *GetCurrentUserNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetCurrentUserNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetCurrentUserNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *GetCurrentUserInternalServerError) Code() int {
 }
 
 func (o *GetCurrentUserInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetCurrentUserInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/general/current-user][%d] getCurrentUserInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetCurrentUserInternalServerError) GetPayload() *models.StderrErrResponse {
