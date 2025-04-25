@@ -146,6 +146,9 @@ type Client interface {
 	CreateInstallInputs(ctx context.Context, installID string, req *models.ServiceCreateInstallInputsRequest) (*models.AppInstallInputs, error)
 	UpdateInstallInputs(ctx context.Context, installID string, req *models.ServiceUpdateInstallInputsRequest) (*models.AppInstallInputs, error)
 
+	// install workflows
+	GetInstallWorkflows(ctx context.Context, installID string, query *models.GetInstallWorkflowsQuery) ([]*models.AppInstallWorkflow, bool, error)
+
 	// components
 	GetAllComponents(ctx context.Context, query *models.GetAllComponentsQuery) ([]*models.AppComponent, bool, error)
 	GetAppComponents(ctx context.Context, appID string, query *models.GetAppComponentsQuery) ([]*models.AppComponent, bool, error)

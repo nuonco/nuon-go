@@ -18,7 +18,6 @@ import (
 //
 // swagger:model app.InstallWorkflow
 type AppInstallWorkflow struct {
-
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
@@ -197,7 +196,6 @@ func (m *AppInstallWorkflow) ContextValidate(ctx context.Context, formats strfmt
 }
 
 func (m *AppInstallWorkflow) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
-
 	if m.Status != nil {
 
 		if swag.IsZero(m.Status) { // not required
@@ -218,7 +216,6 @@ func (m *AppInstallWorkflow) contextValidateStatus(ctx context.Context, formats 
 }
 
 func (m *AppInstallWorkflow) contextValidateStepErrorBehavior(ctx context.Context, formats strfmt.Registry) error {
-
 	if swag.IsZero(m.StepErrorBehavior) { // not required
 		return nil
 	}
@@ -236,9 +233,7 @@ func (m *AppInstallWorkflow) contextValidateStepErrorBehavior(ctx context.Contex
 }
 
 func (m *AppInstallWorkflow) contextValidateSteps(ctx context.Context, formats strfmt.Registry) error {
-
 	for i := 0; i < len(m.Steps); i++ {
-
 		if m.Steps[i] != nil {
 
 			if swag.IsZero(m.Steps[i]) { // not required
@@ -254,14 +249,12 @@ func (m *AppInstallWorkflow) contextValidateSteps(ctx context.Context, formats s
 				return err
 			}
 		}
-
 	}
 
 	return nil
 }
 
 func (m *AppInstallWorkflow) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Type) { // not required
 		return nil
 	}

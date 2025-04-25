@@ -186,8 +186,7 @@ func (m *ServiceCreateInstallRequest) UnmarshalBinary(b []byte) error {
 type ServiceCreateInstallRequestAwsAccount struct {
 
 	// iam role arn
-	// Required: true
-	IamRoleArn *string `json:"iam_role_arn"`
+	IamRoleArn string `json:"iam_role_arn,omitempty"`
 
 	// region
 	Region string `json:"region,omitempty"`
@@ -195,24 +194,6 @@ type ServiceCreateInstallRequestAwsAccount struct {
 
 // Validate validates this service create install request aws account
 func (m *ServiceCreateInstallRequestAwsAccount) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateIamRoleArn(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *ServiceCreateInstallRequestAwsAccount) validateIamRoleArn(formats strfmt.Registry) error {
-
-	if err := validate.Required("aws_account"+"."+"iam_role_arn", "body", m.IamRoleArn); err != nil {
-		return err
-	}
-
 	return nil
 }
 
