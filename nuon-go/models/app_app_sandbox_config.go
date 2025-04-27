@@ -67,6 +67,9 @@ type AppAppSandboxConfig struct {
 
 	// variables
 	Variables map[string]string `json:"variables,omitempty"`
+
+	// variables files
+	VariablesFiles []string `json:"variables_files"`
 }
 
 // Validate validates this app app sandbox config
