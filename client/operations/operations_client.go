@@ -5194,7 +5194,7 @@ func (a *Client) GetInstallWorkflowSteps(params *GetInstallWorkflowStepsParams, 
 }
 
 /*
-GetInstallWorkflows gets an install workflows
+GetInstallWorkflows gets a install workflows
 
 Return install workflows for an install.
 */

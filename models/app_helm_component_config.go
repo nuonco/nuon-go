@@ -42,6 +42,9 @@ type AppHelmComponentConfig struct {
 	// public git vcs config
 	PublicGitVcsConfig *AppPublicGitVCSConfig `json:"public_git_vcs_config,omitempty"`
 
+	// storage drive
+	StorageDrive string `json:"storage_drive,omitempty"`
+
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
 
