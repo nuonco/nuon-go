@@ -36,6 +36,9 @@ type ServiceCreateTerraformModuleComponentConfigRequest struct {
 	// Required: true
 	Variables map[string]string `json:"variables"`
 
+	// variables files
+	VariablesFiles []string `json:"variables_files"`
+
 	// version
 	Version string `json:"version,omitempty"`
 }
