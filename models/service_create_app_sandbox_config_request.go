@@ -28,16 +28,23 @@ type ServiceCreateAppSandboxConfigRequest struct {
 	// connected github vcs config
 	ConnectedGithubVcsConfig *ServiceConnectedGithubVCSSandboxConfigRequest `json:"connected_github_vcs_config,omitempty"`
 
+	// env vars
+	// Required: true
+	EnvVars map[string]string `json:"env_vars"`
+
 	// public git vcs config
 	PublicGitVcsConfig *ServicePublicGitVCSSandboxConfigRequest `json:"public_git_vcs_config,omitempty"`
-
-	// sandbox inputs
-	// Required: true
-	SandboxInputs map[string]string `json:"sandbox_inputs"`
 
 	// terraform version
 	// Required: true
 	TerraformVersion *string `json:"terraform_version"`
+
+	// variables
+	// Required: true
+	Variables map[string]string `json:"variables"`
+
+	// variables files
+	VariablesFiles []string `json:"variables_files"`
 }
 
 // Validate validates this service create app sandbox config request
@@ -48,15 +55,19 @@ func (m *ServiceCreateAppSandboxConfigRequest) Validate(formats strfmt.Registry)
 		res = append(res, err)
 	}
 
+	if err := m.validateEnvVars(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validatePublicGitVcsConfig(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateSandboxInputs(formats); err != nil {
+	if err := m.validateTerraformVersion(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateTerraformVersion(formats); err != nil {
+	if err := m.validateVariables(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -85,6 +96,15 @@ func (m *ServiceCreateAppSandboxConfigRequest) validateConnectedGithubVcsConfig(
 	return nil
 }
 
+func (m *ServiceCreateAppSandboxConfigRequest) validateEnvVars(formats strfmt.Registry) error {
+
+	if err := validate.Required("env_vars", "body", m.EnvVars); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *ServiceCreateAppSandboxConfigRequest) validatePublicGitVcsConfig(formats strfmt.Registry) error {
 	if swag.IsZero(m.PublicGitVcsConfig) { // not required
 		return nil
@@ -104,18 +124,18 @@ func (m *ServiceCreateAppSandboxConfigRequest) validatePublicGitVcsConfig(format
 	return nil
 }
 
-func (m *ServiceCreateAppSandboxConfigRequest) validateSandboxInputs(formats strfmt.Registry) error {
+func (m *ServiceCreateAppSandboxConfigRequest) validateTerraformVersion(formats strfmt.Registry) error {
 
-	if err := validate.Required("sandbox_inputs", "body", m.SandboxInputs); err != nil {
+	if err := validate.Required("terraform_version", "body", m.TerraformVersion); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (m *ServiceCreateAppSandboxConfigRequest) validateTerraformVersion(formats strfmt.Registry) error {
+func (m *ServiceCreateAppSandboxConfigRequest) validateVariables(formats strfmt.Registry) error {
 
-	if err := validate.Required("terraform_version", "body", m.TerraformVersion); err != nil {
+	if err := validate.Required("variables", "body", m.Variables); err != nil {
 		return err
 	}
 

@@ -45,6 +45,9 @@ type AppTerraformModuleComponentConfig struct {
 	// variables
 	Variables map[string]string `json:"variables,omitempty"`
 
+	// variables files
+	VariablesFiles []string `json:"variables_files"`
+
 	// terraform configuration values
 	Version string `json:"version,omitempty"`
 }
