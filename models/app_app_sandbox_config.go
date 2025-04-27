@@ -47,6 +47,9 @@ type AppAppSandboxConfig struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
+	// env vars
+	EnvVars map[string]string `json:"env_vars,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 

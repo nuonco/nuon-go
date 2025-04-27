@@ -17,6 +17,9 @@ import (
 // swagger:model app.AWSStackOutputs
 type AppAWSStackOutputs struct {
 
+	// account id
+	AccountID string `json:"account_id,omitempty"`
+
 	// deprovision iam role arn
 	DeprovisionIamRoleArn string `json:"deprovision_iam_role_arn,omitempty"`
 
