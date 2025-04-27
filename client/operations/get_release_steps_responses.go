@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetReleaseStepsOK) Code() int {
 }
 
 func (o *GetReleaseStepsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsOK %s", 200, payload)
 }
 
 func (o *GetReleaseStepsOK) String() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsOK %s", 200, payload)
 }
 
 func (o *GetReleaseStepsOK) GetPayload() []*models.AppComponentReleaseStep {
@@ -175,11 +178,13 @@ func (o *GetReleaseStepsBadRequest) Code() int {
 }
 
 func (o *GetReleaseStepsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsBadRequest %s", 400, payload)
 }
 
 func (o *GetReleaseStepsBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsBadRequest %s", 400, payload)
 }
 
 func (o *GetReleaseStepsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +248,13 @@ func (o *GetReleaseStepsUnauthorized) Code() int {
 }
 
 func (o *GetReleaseStepsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsUnauthorized %s", 401, payload)
 }
 
 func (o *GetReleaseStepsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsUnauthorized %s", 401, payload)
 }
 
 func (o *GetReleaseStepsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +318,13 @@ func (o *GetReleaseStepsForbidden) Code() int {
 }
 
 func (o *GetReleaseStepsForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsForbidden %s", 403, payload)
 }
 
 func (o *GetReleaseStepsForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsForbidden %s", 403, payload)
 }
 
 func (o *GetReleaseStepsForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +388,13 @@ func (o *GetReleaseStepsNotFound) Code() int {
 }
 
 func (o *GetReleaseStepsNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsNotFound %s", 404, payload)
 }
 
 func (o *GetReleaseStepsNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsNotFound %s", 404, payload)
 }
 
 func (o *GetReleaseStepsNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +458,13 @@ func (o *GetReleaseStepsInternalServerError) Code() int {
 }
 
 func (o *GetReleaseStepsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsInternalServerError %s", 500, payload)
 }
 
 func (o *GetReleaseStepsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}/steps][%d] getReleaseStepsInternalServerError %s", 500, payload)
 }
 
 func (o *GetReleaseStepsInternalServerError) GetPayload() *models.StderrErrResponse {
