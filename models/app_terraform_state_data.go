@@ -29,7 +29,7 @@ type AppTerraformStateData struct {
 	Lineage string `json:"lineage,omitempty"`
 
 	// outputs
-	Outputs interface{} `json:"outputs,omitempty"`
+	Outputs map[string]interface{} `json:"outputs,omitempty"`
 
 	// resources
 	Resources []*AppTerraformStateResource `json:"resources"`
