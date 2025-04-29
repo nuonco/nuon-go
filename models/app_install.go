@@ -76,6 +76,9 @@ type AppInstall struct {
 	// install stack
 	InstallStack *AppInstallStack `json:"install_stack,omitempty"`
 
+	// links
+	Links map[string]interface{} `json:"links,omitempty"`
+
 	// name
 	Name string `json:"name,omitempty"`
 

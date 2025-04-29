@@ -31,6 +31,9 @@ type AppOrg struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// links
+	Links map[string]interface{} `json:"links,omitempty"`
+
 	// logo url
 	LogoURL string `json:"logo_url,omitempty"`
 

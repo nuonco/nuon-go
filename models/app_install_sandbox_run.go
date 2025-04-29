@@ -43,6 +43,9 @@ type AppInstallSandboxRun struct {
 	// TODO: once we run a backfill we can make this non pointer
 	InstallSandboxID string `json:"install_sandbox_id,omitempty"`
 
+	// install workflow id
+	InstallWorkflowID string `json:"install_workflow_id,omitempty"`
+
 	// log stream
 	LogStream *AppLogStream `json:"log_stream,omitempty"`
 
