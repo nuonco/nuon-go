@@ -41,6 +41,9 @@ type AppApp struct {
 		AppAppInputConfig
 	} `json:"input_config,omitempty"`
 
+	// links
+	Links map[string]interface{} `json:"links,omitempty"`
+
 	// name
 	Name string `json:"name,omitempty"`
 

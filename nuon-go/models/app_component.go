@@ -36,6 +36,9 @@ type AppComponent struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// links
+	Links map[string]interface{} `json:"links,omitempty"`
+
 	// name
 	Name string `json:"name,omitempty"`
 
