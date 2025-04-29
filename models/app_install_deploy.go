@@ -55,6 +55,9 @@ type AppInstallDeploy struct {
 	// Fields that are de-nested at read time using AfterQuery
 	InstallID string `json:"install_id,omitempty"`
 
+	// install workflow id
+	InstallWorkflowID string `json:"install_workflow_id,omitempty"`
+
 	// log stream
 	LogStream *AppLogStream `json:"log_stream,omitempty"`
 

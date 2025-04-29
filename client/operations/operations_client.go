@@ -58,6 +58,8 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	AddUser(params *AddUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddUserCreated, error)
 
+	CancelInstallWorkflow(params *CancelInstallWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CancelInstallWorkflowAccepted, error)
+
 	CancelRunnerJob(params *CancelRunnerJobParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CancelRunnerJobAccepted, error)
 
 	CreateActionWorkflowConfig(params *CreateActionWorkflowConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateActionWorkflowConfigCreated, error)
@@ -427,6 +429,45 @@ func (a *Client) AddUser(params *AddUserParams, authInfo runtime.ClientAuthInfoW
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for AddUser: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CancelInstallWorkflow cancels an ongoing install workflow
+*/
+func (a *Client) CancelInstallWorkflow(params *CancelInstallWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CancelInstallWorkflowAccepted, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCancelInstallWorkflowParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CancelInstallWorkflow",
+		Method:             "POST",
+		PathPattern:        "/v1/install-workflows/{install_workflow_id}/cancel",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CancelInstallWorkflowReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CancelInstallWorkflowAccepted)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CancelInstallWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

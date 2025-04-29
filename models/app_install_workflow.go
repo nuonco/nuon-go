@@ -37,8 +37,20 @@ type AppInstallWorkflow struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// install action workflow runs
+	InstallActionWorkflowRuns []*AppInstallActionWorkflowRun `json:"install_action_workflow_runs"`
+
+	// install deploys
+	InstallDeploys []*AppInstallDeploy `json:"install_deploys"`
+
 	// install id
 	InstallID string `json:"install_id,omitempty"`
+
+	// install sandbox runs
+	InstallSandboxRuns []*AppInstallSandboxRun `json:"install_sandbox_runs"`
+
+	// links
+	Links map[string]interface{} `json:"links,omitempty"`
 
 	// metadata
 	Metadata map[string]string `json:"metadata,omitempty"`
@@ -69,6 +81,18 @@ type AppInstallWorkflow struct {
 func (m *AppInstallWorkflow) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateInstallActionWorkflowRuns(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInstallDeploys(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInstallSandboxRuns(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateStatus(formats); err != nil {
 		res = append(res, err)
 	}
@@ -88,6 +112,84 @@ func (m *AppInstallWorkflow) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppInstallWorkflow) validateInstallActionWorkflowRuns(formats strfmt.Registry) error {
+	if swag.IsZero(m.InstallActionWorkflowRuns) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.InstallActionWorkflowRuns); i++ {
+		if swag.IsZero(m.InstallActionWorkflowRuns[i]) { // not required
+			continue
+		}
+
+		if m.InstallActionWorkflowRuns[i] != nil {
+			if err := m.InstallActionWorkflowRuns[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("install_action_workflow_runs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("install_action_workflow_runs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *AppInstallWorkflow) validateInstallDeploys(formats strfmt.Registry) error {
+	if swag.IsZero(m.InstallDeploys) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.InstallDeploys); i++ {
+		if swag.IsZero(m.InstallDeploys[i]) { // not required
+			continue
+		}
+
+		if m.InstallDeploys[i] != nil {
+			if err := m.InstallDeploys[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("install_deploys" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("install_deploys" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *AppInstallWorkflow) validateInstallSandboxRuns(formats strfmt.Registry) error {
+	if swag.IsZero(m.InstallSandboxRuns) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.InstallSandboxRuns); i++ {
+		if swag.IsZero(m.InstallSandboxRuns[i]) { // not required
+			continue
+		}
+
+		if m.InstallSandboxRuns[i] != nil {
+			if err := m.InstallSandboxRuns[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("install_sandbox_runs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("install_sandbox_runs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -174,6 +276,18 @@ func (m *AppInstallWorkflow) validateType(formats strfmt.Registry) error {
 func (m *AppInstallWorkflow) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateInstallActionWorkflowRuns(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateInstallDeploys(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateInstallSandboxRuns(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateStatus(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -193,6 +307,81 @@ func (m *AppInstallWorkflow) ContextValidate(ctx context.Context, formats strfmt
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppInstallWorkflow) contextValidateInstallActionWorkflowRuns(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.InstallActionWorkflowRuns); i++ {
+
+		if m.InstallActionWorkflowRuns[i] != nil {
+
+			if swag.IsZero(m.InstallActionWorkflowRuns[i]) { // not required
+				return nil
+			}
+
+			if err := m.InstallActionWorkflowRuns[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("install_action_workflow_runs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("install_action_workflow_runs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *AppInstallWorkflow) contextValidateInstallDeploys(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.InstallDeploys); i++ {
+
+		if m.InstallDeploys[i] != nil {
+
+			if swag.IsZero(m.InstallDeploys[i]) { // not required
+				return nil
+			}
+
+			if err := m.InstallDeploys[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("install_deploys" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("install_deploys" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *AppInstallWorkflow) contextValidateInstallSandboxRuns(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.InstallSandboxRuns); i++ {
+
+		if m.InstallSandboxRuns[i] != nil {
+
+			if swag.IsZero(m.InstallSandboxRuns[i]) { // not required
+				return nil
+			}
+
+			if err := m.InstallSandboxRuns[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("install_sandbox_runs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("install_sandbox_runs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
