@@ -79,7 +79,7 @@ type TeardownInstallComponentParams struct {
 
 	   Input
 	*/
-	Req models.ServiceTeardownInstallComponentRequest
+	Req *models.ServiceTeardownInstallComponentRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -157,13 +157,13 @@ func (o *TeardownInstallComponentParams) SetInstallID(installID string) {
 }
 
 // WithReq adds the req to the teardown install component params
-func (o *TeardownInstallComponentParams) WithReq(req models.ServiceTeardownInstallComponentRequest) *TeardownInstallComponentParams {
+func (o *TeardownInstallComponentParams) WithReq(req *models.ServiceTeardownInstallComponentRequest) *TeardownInstallComponentParams {
 	o.SetReq(req)
 	return o
 }
 
 // SetReq adds the req to the teardown install component params
-func (o *TeardownInstallComponentParams) SetReq(req models.ServiceTeardownInstallComponentRequest) {
+func (o *TeardownInstallComponentParams) SetReq(req *models.ServiceTeardownInstallComponentRequest) {
 	o.Req = req
 }
 

@@ -61,6 +61,12 @@ type AppInstallDeploy struct {
 	// log stream
 	LogStream *AppLogStream `json:"log_stream,omitempty"`
 
+	// oci artifact
+	OciArtifact *AppOCIArtifact `json:"oci_artifact,omitempty"`
+
+	// outputs
+	Outputs interface{} `json:"outputs,omitempty"`
+
 	// release id
 	ReleaseID string `json:"release_id,omitempty"`
 
@@ -94,6 +100,10 @@ func (m *AppInstallDeploy) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateLogStream(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOciArtifact(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -188,6 +198,25 @@ func (m *AppInstallDeploy) validateLogStream(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppInstallDeploy) validateOciArtifact(formats strfmt.Registry) error {
+	if swag.IsZero(m.OciArtifact) { // not required
+		return nil
+	}
+
+	if m.OciArtifact != nil {
+		if err := m.OciArtifact.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("oci_artifact")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("oci_artifact")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *AppInstallDeploy) validateRunnerJobs(formats strfmt.Registry) error {
 	if swag.IsZero(m.RunnerJobs) { // not required
 		return nil
@@ -231,6 +260,10 @@ func (m *AppInstallDeploy) ContextValidate(ctx context.Context, formats strfmt.R
 	}
 
 	if err := m.contextValidateLogStream(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateOciArtifact(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -321,6 +354,27 @@ func (m *AppInstallDeploy) contextValidateLogStream(ctx context.Context, formats
 				return ve.ValidateName("log_stream")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("log_stream")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppInstallDeploy) contextValidateOciArtifact(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.OciArtifact != nil {
+
+		if swag.IsZero(m.OciArtifact) { // not required
+			return nil
+		}
+
+		if err := m.OciArtifact.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("oci_artifact")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("oci_artifact")
 			}
 			return err
 		}

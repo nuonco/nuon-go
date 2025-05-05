@@ -41,7 +41,6 @@ func (c *client) GetActionWorkflow(ctx context.Context, actionWorkflowID string)
 		ActionWorkflowID: actionWorkflowID,
 		Context:          ctx,
 	}, c.getOrgIDAuthInfo())
-
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +54,6 @@ func (c *client) GetAppActionWorkflow(ctx context.Context, appID, actionWorkflow
 		ActionWorkflowID: actionWorkflowID,
 		Context:          ctx,
 	}, c.getOrgIDAuthInfo())
-
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +67,6 @@ func (c *client) CreateActionWorkflow(ctx context.Context, appID string, req *mo
 		Req:     req,
 		Context: ctx,
 	}, c.getOrgIDAuthInfo())
-
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +80,6 @@ func (c *client) UpdateActionWorkflow(ctx context.Context, actionWorkflowID stri
 		Req:              req,
 		Context:          ctx,
 	}, c.getOrgIDAuthInfo())
-
 	if err != nil {
 		return nil, err
 	}
@@ -105,7 +101,6 @@ func (c *client) GetActionWorkflowConfigs(ctx context.Context, actionWorkflowID 
 		ActionWorkflowID: actionWorkflowID,
 		Context:          ctx,
 	}, c.getOrgIDAuthInfo())
-
 	if err != nil {
 		return nil, err
 	}
@@ -118,7 +113,6 @@ func (c *client) GetActionWorkflowConfig(ctx context.Context, actionWorkflowConf
 		ActionWorkflowConfigID: actionWorkflowConfigID,
 		Context:                ctx,
 	}, c.getOrgIDAuthInfo())
-
 	if err != nil {
 		return nil, err
 	}
@@ -132,7 +126,6 @@ func (c *client) CreateActionWorkflowConfig(ctx context.Context, actionWorkflowI
 		Req:              req,
 		Context:          ctx,
 	}, c.getOrgIDAuthInfo())
-
 	if err != nil {
 		return nil, err
 	}
@@ -156,7 +149,6 @@ func (c *client) GetInstallActionWorkflowRecentRuns(ctx context.Context, install
 	}
 
 	resp, err := c.genClient.Operations.GetInstallActionWorkflowRecentRuns(params, c.getOrgIDAuthInfo())
-
 	if err != nil {
 		return nil, false, err
 	}
@@ -170,18 +162,21 @@ func (c *client) GetInstallActionWorkflowRecentRuns(ctx context.Context, install
 	return resp.Payload, false, nil
 }
 
-func (c *client) CreateInstallActionWorkflowRun(ctx context.Context, installID string, req *models.ServiceCreateInstallActionWorkflowRunRequest) (*models.AppInstallActionWorkflowRun, error) {
+func (c *client) CreateInstallActionWorkflowRun(ctx context.Context, installID string, req *models.ServiceCreateInstallActionWorkflowRunRequest) error {
 	resp, err := c.genClient.Operations.CreateInstallActionWorkflowRun(&operations.CreateInstallActionWorkflowRunParams{
 		InstallID: installID,
 		Req:       req,
 		Context:   ctx,
 	}, c.getOrgIDAuthInfo())
-
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	return resp.Payload, nil
+	if resp.Payload != "ok" {
+		return statusErr{resp.Payload}
+	}
+
+	return nil
 }
 
 func (c *client) GetInstallActionWorkflowRun(ctx context.Context, installID, runID string) (*models.AppInstallActionWorkflowRun, error) {
@@ -190,7 +185,6 @@ func (c *client) GetInstallActionWorkflowRun(ctx context.Context, installID, run
 		RunID:     runID,
 		Context:   ctx,
 	}, c.getOrgIDAuthInfo())
-
 	if err != nil {
 		return nil, err
 	}
@@ -203,7 +197,6 @@ func (c *client) GetActionWorkflowLatestConfig(ctx context.Context, actionWorkfl
 		ActionWorkflowID: actionWorkflowID,
 		Context:          ctx,
 	}, c.getOrgIDAuthInfo())
-
 	if err != nil {
 		return nil, err
 	}

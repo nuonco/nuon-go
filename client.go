@@ -128,7 +128,7 @@ type Client interface {
 
 	// install components
 	GetInstallComponents(ctx context.Context, installID string, query *models.GetInstallComponentsQuery) ([]*models.AppInstallComponent, bool, error)
-	TeardownInstallComponent(ctx context.Context, installID, componentID string) (*models.AppInstallDeploy, error)
+	TeardownInstallComponent(ctx context.Context, installID, componentID string) error
 	TeardownInstallComponents(ctx context.Context, installID string) error
 	DeployInstallComponents(ctx context.Context, installID string) error
 	GetInstallComponentDeploys(ctx context.Context, installID, componentID string, query *models.GetInstallComponentDeploysQuery) ([]*models.AppInstallDeploy, bool, error)
@@ -194,7 +194,7 @@ type Client interface {
 	GetActionWorkflowConfig(ctx context.Context, actionWorkflowConfigID string) (*models.AppActionWorkflowConfig, error)
 	CreateActionWorkflowConfig(ctx context.Context, actionWorkflowID string, req *models.ServiceCreateActionWorkflowConfigRequest) (*models.AppActionWorkflowConfig, error)
 	GetInstallActionWorkflowRecentRuns(ctx context.Context, installID, actionWorkflowID string, query *models.GetInstallActionWorkflowRecentRunsQuery) (*models.AppInstallActionWorkflow, bool, error)
-	CreateInstallActionWorkflowRun(ctx context.Context, installID string, req *models.ServiceCreateInstallActionWorkflowRunRequest) (*models.AppInstallActionWorkflowRun, error)
+	CreateInstallActionWorkflowRun(ctx context.Context, installID string, req *models.ServiceCreateInstallActionWorkflowRunRequest) error
 	GetInstallActionWorkflowRun(ctx context.Context, installID, runID string) (*models.AppInstallActionWorkflowRun, error)
 	GetActionWorkflowLatestConfig(ctx context.Context, actionWorkflowID string) (*models.AppActionWorkflowConfig, error)
 }

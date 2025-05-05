@@ -32,6 +32,9 @@ type AppInstallWorkflowStep struct {
 	// execution time
 	ExecutionTime int64 `json:"execution_time,omitempty"`
 
+	// execution type
+	ExecutionType AppInstallWorkflowStepExecutionType `json:"execution_type,omitempty"`
+
 	// finished
 	Finished bool `json:"finished,omitempty"`
 
@@ -51,7 +54,10 @@ type AppInstallWorkflowStep struct {
 	InstallWorkflowID string `json:"install_workflow_id,omitempty"`
 
 	// links
-	Links map[string]interface{} `json:"links,omitempty"`
+	Links interface{} `json:"links,omitempty"`
+
+	// metadata
+	Metadata map[string]string `json:"metadata,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
@@ -93,6 +99,10 @@ func (m *AppInstallWorkflowStep) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateExecutionType(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validatePolicyValidation(formats); err != nil {
 		res = append(res, err)
 	}
@@ -110,6 +120,23 @@ func (m *AppInstallWorkflowStep) Validate(formats strfmt.Registry) error {
 func (m *AppInstallWorkflowStep) validateApproval(formats strfmt.Registry) error {
 	if swag.IsZero(m.Approval) { // not required
 		return nil
+	}
+
+	return nil
+}
+
+func (m *AppInstallWorkflowStep) validateExecutionType(formats strfmt.Registry) error {
+	if swag.IsZero(m.ExecutionType) { // not required
+		return nil
+	}
+
+	if err := m.ExecutionType.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("execution_type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("execution_type")
+		}
+		return err
 	}
 
 	return nil
@@ -150,6 +177,10 @@ func (m *AppInstallWorkflowStep) ContextValidate(ctx context.Context, formats st
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateExecutionType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidatePolicyValidation(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -165,6 +196,24 @@ func (m *AppInstallWorkflowStep) ContextValidate(ctx context.Context, formats st
 }
 
 func (m *AppInstallWorkflowStep) contextValidateApproval(ctx context.Context, formats strfmt.Registry) error {
+
+	return nil
+}
+
+func (m *AppInstallWorkflowStep) contextValidateExecutionType(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ExecutionType) { // not required
+		return nil
+	}
+
+	if err := m.ExecutionType.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("execution_type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("execution_type")
+		}
+		return err
+	}
 
 	return nil
 }

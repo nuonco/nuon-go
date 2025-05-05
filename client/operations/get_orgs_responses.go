@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetOrgsOK) Code() int {
 }
 
 func (o *GetOrgsOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsOK  %+v", 200, o.Payload)
 }
 
 func (o *GetOrgsOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsOK  %+v", 200, o.Payload)
 }
 
 func (o *GetOrgsOK) GetPayload() []*models.AppOrg {
@@ -178,13 +175,11 @@ func (o *GetOrgsBadRequest) Code() int {
 }
 
 func (o *GetOrgsBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetOrgsBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetOrgsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -248,13 +243,11 @@ func (o *GetOrgsUnauthorized) Code() int {
 }
 
 func (o *GetOrgsUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetOrgsUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetOrgsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -318,13 +311,11 @@ func (o *GetOrgsForbidden) Code() int {
 }
 
 func (o *GetOrgsForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetOrgsForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetOrgsForbidden) GetPayload() *models.StderrErrResponse {
@@ -388,13 +379,11 @@ func (o *GetOrgsNotFound) Code() int {
 }
 
 func (o *GetOrgsNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetOrgsNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetOrgsNotFound) GetPayload() *models.StderrErrResponse {
@@ -458,13 +447,11 @@ func (o *GetOrgsInternalServerError) Code() int {
 }
 
 func (o *GetOrgsInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetOrgsInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/orgs][%d] getOrgsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetOrgsInternalServerError) GetPayload() *models.StderrErrResponse {
