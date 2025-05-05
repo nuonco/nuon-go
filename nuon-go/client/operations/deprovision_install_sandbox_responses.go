@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *DeprovisionInstallSandboxCreated) Code() int {
 }
 
 func (o *DeprovisionInstallSandboxCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxCreated  %+v", 201, o.Payload)
 }
 
 func (o *DeprovisionInstallSandboxCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxCreated  %+v", 201, o.Payload)
 }
 
 func (o *DeprovisionInstallSandboxCreated) GetPayload() string {
@@ -178,13 +175,11 @@ func (o *DeprovisionInstallSandboxBadRequest) Code() int {
 }
 
 func (o *DeprovisionInstallSandboxBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *DeprovisionInstallSandboxBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *DeprovisionInstallSandboxBadRequest) GetPayload() *models.StderrErrResponse {
@@ -248,13 +243,11 @@ func (o *DeprovisionInstallSandboxUnauthorized) Code() int {
 }
 
 func (o *DeprovisionInstallSandboxUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *DeprovisionInstallSandboxUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *DeprovisionInstallSandboxUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -318,13 +311,11 @@ func (o *DeprovisionInstallSandboxForbidden) Code() int {
 }
 
 func (o *DeprovisionInstallSandboxForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxForbidden  %+v", 403, o.Payload)
 }
 
 func (o *DeprovisionInstallSandboxForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxForbidden  %+v", 403, o.Payload)
 }
 
 func (o *DeprovisionInstallSandboxForbidden) GetPayload() *models.StderrErrResponse {
@@ -388,13 +379,11 @@ func (o *DeprovisionInstallSandboxNotFound) Code() int {
 }
 
 func (o *DeprovisionInstallSandboxNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxNotFound  %+v", 404, o.Payload)
 }
 
 func (o *DeprovisionInstallSandboxNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxNotFound  %+v", 404, o.Payload)
 }
 
 func (o *DeprovisionInstallSandboxNotFound) GetPayload() *models.StderrErrResponse {
@@ -458,13 +447,11 @@ func (o *DeprovisionInstallSandboxInternalServerError) Code() int {
 }
 
 func (o *DeprovisionInstallSandboxInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *DeprovisionInstallSandboxInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/deprovision-sandbox][%d] deprovisionInstallSandboxInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *DeprovisionInstallSandboxInternalServerError) GetPayload() *models.StderrErrResponse {
