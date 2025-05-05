@@ -40,6 +40,9 @@ type AppInstallComponent struct {
 	// install id
 	InstallID string `json:"install_id,omitempty"`
 
+	// links
+	Links interface{} `json:"links,omitempty"`
+
 	// status
 	Status string `json:"status,omitempty"`
 

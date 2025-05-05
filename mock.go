@@ -336,12 +336,11 @@ func (mr *MockClientMockRecorder) CreateInstall(ctx, appID, req interface{}) *go
 }
 
 // CreateInstallActionWorkflowRun mocks base method.
-func (m *MockClient) CreateInstallActionWorkflowRun(ctx context.Context, installID string, req *models.ServiceCreateInstallActionWorkflowRunRequest) (*models.AppInstallActionWorkflowRun, error) {
+func (m *MockClient) CreateInstallActionWorkflowRun(ctx context.Context, installID string, req *models.ServiceCreateInstallActionWorkflowRunRequest) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateInstallActionWorkflowRun", ctx, installID, req)
-	ret0, _ := ret[0].(*models.AppInstallActionWorkflowRun)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret0, _ := ret[0].(error)
+	return ret0
 }
 
 // CreateInstallActionWorkflowRun indicates an expected call of CreateInstallActionWorkflowRun.
@@ -1752,12 +1751,11 @@ func (mr *MockClientMockRecorder) SetOrgID(orgID interface{}) *gomock.Call {
 }
 
 // TeardownInstallComponent mocks base method.
-func (m *MockClient) TeardownInstallComponent(ctx context.Context, installID, componentID string) (*models.AppInstallDeploy, error) {
+func (m *MockClient) TeardownInstallComponent(ctx context.Context, installID, componentID string) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "TeardownInstallComponent", ctx, installID, componentID)
-	ret0, _ := ret[0].(*models.AppInstallDeploy)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret0, _ := ret[0].(error)
+	return ret0
 }
 
 // TeardownInstallComponent indicates an expected call of TeardownInstallComponent.

@@ -45,6 +45,9 @@ const (
 	// AppStatusNotDashAttempted captures enum value "not-attempted"
 	AppStatusNotDashAttempted AppStatus = "not-attempted"
 
+	// AppStatusCancelled captures enum value "cancelled"
+	AppStatusCancelled AppStatus = "cancelled"
+
 	// AppStatusGenerating captures enum value "generating"
 	AppStatusGenerating AppStatus = "generating"
 
@@ -69,7 +72,7 @@ var appStatusEnum []interface{}
 
 func init() {
 	var res []AppStatus
-	if err := json.Unmarshal([]byte(`["error","pending","in-progress","success","not-attempted","generating","awaiting-user-run","provisioning","active","outdated","awaiting-response"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["error","pending","in-progress","success","not-attempted","cancelled","generating","awaiting-user-run","provisioning","active","outdated","awaiting-response"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

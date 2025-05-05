@@ -48,11 +48,17 @@ const (
 	// AppInstallWorkflowTypeDeployComponents captures enum value "deploy_components"
 	AppInstallWorkflowTypeDeployComponents AppInstallWorkflowType = "deploy_components"
 
+	// AppInstallWorkflowTypeTeardownComponent captures enum value "teardown_component"
+	AppInstallWorkflowTypeTeardownComponent AppInstallWorkflowType = "teardown_component"
+
 	// AppInstallWorkflowTypeTeardownComponents captures enum value "teardown_components"
 	AppInstallWorkflowTypeTeardownComponents AppInstallWorkflowType = "teardown_components"
 
 	// AppInstallWorkflowTypeReprovisionSandbox captures enum value "reprovision_sandbox"
 	AppInstallWorkflowTypeReprovisionSandbox AppInstallWorkflowType = "reprovision_sandbox"
+
+	// AppInstallWorkflowTypeActionWorkflowRun captures enum value "action_workflow_run"
+	AppInstallWorkflowTypeActionWorkflowRun AppInstallWorkflowType = "action_workflow_run"
 
 	// AppInstallWorkflowTypeReprovision captures enum value "reprovision"
 	AppInstallWorkflowTypeReprovision AppInstallWorkflowType = "reprovision"
@@ -63,7 +69,7 @@ var appInstallWorkflowTypeEnum []interface{}
 
 func init() {
 	var res []AppInstallWorkflowType
-	if err := json.Unmarshal([]byte(`["provision","deprovision","deprovision_sandbox","manual_deploy","input_update","deploy_components","teardown_components","reprovision_sandbox","reprovision"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["provision","deprovision","deprovision_sandbox","manual_deploy","input_update","deploy_components","teardown_component","teardown_components","reprovision_sandbox","action_workflow_run","reprovision"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
