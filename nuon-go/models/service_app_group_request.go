@@ -26,6 +26,10 @@ type ServiceAppGroupRequest struct {
 	// display name
 	// Required: true
 	DisplayName *string `json:"display_name"`
+
+	// index
+	// Required: true
+	Index *int64 `json:"index"`
 }
 
 // Validate validates this service app group request
@@ -37,6 +41,10 @@ func (m *ServiceAppGroupRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateDisplayName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateIndex(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -58,6 +66,15 @@ func (m *ServiceAppGroupRequest) validateDescription(formats strfmt.Registry) er
 func (m *ServiceAppGroupRequest) validateDisplayName(formats strfmt.Registry) error {
 
 	if err := validate.Required("display_name", "body", m.DisplayName); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ServiceAppGroupRequest) validateIndex(formats strfmt.Registry) error {
+
+	if err := validate.Required("index", "body", m.Index); err != nil {
 		return err
 	}
 

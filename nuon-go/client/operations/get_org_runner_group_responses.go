@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetOrgRunnerGroupOK) Code() int {
 }
 
 func (o *GetOrgRunnerGroupOK) Error() string {
-	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupOK %s", 200, payload)
 }
 
 func (o *GetOrgRunnerGroupOK) String() string {
-	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupOK %s", 200, payload)
 }
 
 func (o *GetOrgRunnerGroupOK) GetPayload() *models.AppRunnerGroup {
@@ -177,11 +180,13 @@ func (o *GetOrgRunnerGroupBadRequest) Code() int {
 }
 
 func (o *GetOrgRunnerGroupBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupBadRequest %s", 400, payload)
 }
 
 func (o *GetOrgRunnerGroupBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupBadRequest %s", 400, payload)
 }
 
 func (o *GetOrgRunnerGroupBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +250,13 @@ func (o *GetOrgRunnerGroupUnauthorized) Code() int {
 }
 
 func (o *GetOrgRunnerGroupUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupUnauthorized %s", 401, payload)
 }
 
 func (o *GetOrgRunnerGroupUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupUnauthorized %s", 401, payload)
 }
 
 func (o *GetOrgRunnerGroupUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +320,13 @@ func (o *GetOrgRunnerGroupForbidden) Code() int {
 }
 
 func (o *GetOrgRunnerGroupForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupForbidden %s", 403, payload)
 }
 
 func (o *GetOrgRunnerGroupForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupForbidden %s", 403, payload)
 }
 
 func (o *GetOrgRunnerGroupForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +390,13 @@ func (o *GetOrgRunnerGroupNotFound) Code() int {
 }
 
 func (o *GetOrgRunnerGroupNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupNotFound %s", 404, payload)
 }
 
 func (o *GetOrgRunnerGroupNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupNotFound %s", 404, payload)
 }
 
 func (o *GetOrgRunnerGroupNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +460,13 @@ func (o *GetOrgRunnerGroupInternalServerError) Code() int {
 }
 
 func (o *GetOrgRunnerGroupInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupInternalServerError %s", 500, payload)
 }
 
 func (o *GetOrgRunnerGroupInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current/runner-group][%d] getOrgRunnerGroupInternalServerError %s", 500, payload)
 }
 
 func (o *GetOrgRunnerGroupInternalServerError) GetPayload() *models.StderrErrResponse {
