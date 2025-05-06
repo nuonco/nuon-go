@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *DeleteAppOK) Code() int {
 }
 
 func (o *DeleteAppOK) Error() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppOK %s", 200, payload)
 }
 
 func (o *DeleteAppOK) String() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppOK %s", 200, payload)
 }
 
 func (o *DeleteAppOK) GetPayload() bool {
@@ -175,11 +178,13 @@ func (o *DeleteAppBadRequest) Code() int {
 }
 
 func (o *DeleteAppBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppBadRequest %s", 400, payload)
 }
 
 func (o *DeleteAppBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppBadRequest %s", 400, payload)
 }
 
 func (o *DeleteAppBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +248,13 @@ func (o *DeleteAppUnauthorized) Code() int {
 }
 
 func (o *DeleteAppUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppUnauthorized %s", 401, payload)
 }
 
 func (o *DeleteAppUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppUnauthorized %s", 401, payload)
 }
 
 func (o *DeleteAppUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +318,13 @@ func (o *DeleteAppForbidden) Code() int {
 }
 
 func (o *DeleteAppForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppForbidden %s", 403, payload)
 }
 
 func (o *DeleteAppForbidden) String() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppForbidden %s", 403, payload)
 }
 
 func (o *DeleteAppForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +388,13 @@ func (o *DeleteAppNotFound) Code() int {
 }
 
 func (o *DeleteAppNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppNotFound %s", 404, payload)
 }
 
 func (o *DeleteAppNotFound) String() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppNotFound %s", 404, payload)
 }
 
 func (o *DeleteAppNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +458,13 @@ func (o *DeleteAppInternalServerError) Code() int {
 }
 
 func (o *DeleteAppInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteAppInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteAppInternalServerError) GetPayload() *models.StderrErrResponse {
