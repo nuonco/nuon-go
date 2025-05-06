@@ -54,7 +54,7 @@ type AppInstallWorkflowStep struct {
 	InstallWorkflowID string `json:"install_workflow_id,omitempty"`
 
 	// links
-	Links interface{} `json:"links,omitempty"`
+	Links map[string]interface{} `json:"links,omitempty"`
 
 	// metadata
 	Metadata map[string]string `json:"metadata,omitempty"`

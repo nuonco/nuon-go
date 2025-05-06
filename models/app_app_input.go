@@ -45,6 +45,12 @@ type AppAppInput struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// idx
+	Idx int64 `json:"idx,omitempty"`
+
+	// internal
+	Internal bool `json:"internal,omitempty"`
+
 	// name
 	Name string `json:"name,omitempty"`
 
@@ -56,6 +62,9 @@ type AppAppInput struct {
 
 	// sensitive
 	Sensitive bool `json:"sensitive,omitempty"`
+
+	// type
+	Type string `json:"type,omitempty"`
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
