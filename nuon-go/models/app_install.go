@@ -77,7 +77,7 @@ type AppInstall struct {
 	InstallStack *AppInstallStack `json:"install_stack,omitempty"`
 
 	// links
-	Links interface{} `json:"links,omitempty"`
+	Links map[string]interface{} `json:"links,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
@@ -90,6 +90,9 @@ type AppInstall struct {
 
 	// runner status description
 	RunnerStatusDescription string `json:"runner_status_description,omitempty"`
+
+	// sandbox
+	Sandbox *AppInstallSandbox `json:"sandbox,omitempty"`
 
 	// sandbox status
 	SandboxStatus string `json:"sandbox_status,omitempty"`
@@ -148,6 +151,10 @@ func (m *AppInstall) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateInstallStack(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSandbox(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -382,6 +389,25 @@ func (m *AppInstall) validateInstallStack(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppInstall) validateSandbox(formats strfmt.Registry) error {
+	if swag.IsZero(m.Sandbox) { // not required
+		return nil
+	}
+
+	if m.Sandbox != nil {
+		if err := m.Sandbox.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("sandbox")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("sandbox")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app install based on the context it is used
 func (m *AppInstall) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -423,6 +449,10 @@ func (m *AppInstall) ContextValidate(ctx context.Context, formats strfmt.Registr
 	}
 
 	if err := m.contextValidateInstallStack(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSandbox(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -654,6 +684,27 @@ func (m *AppInstall) contextValidateInstallStack(ctx context.Context, formats st
 				return ve.ValidateName("install_stack")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("install_stack")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppInstall) contextValidateSandbox(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Sandbox != nil {
+
+		if swag.IsZero(m.Sandbox) { // not required
+			return nil
+		}
+
+		if err := m.Sandbox.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("sandbox")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("sandbox")
 			}
 			return err
 		}

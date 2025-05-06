@@ -34,11 +34,21 @@ type ServiceAppInputRequest struct {
 	// Required: true
 	Group *string `json:"group"`
 
+	// index
+	// Required: true
+	Index *int64 `json:"index"`
+
+	// New, optional fields
+	Internal bool `json:"internal,omitempty"`
+
 	// required
 	Required bool `json:"required,omitempty"`
 
 	// sensitive
 	Sensitive bool `json:"sensitive,omitempty"`
+
+	// type
+	Type string `json:"type,omitempty"`
 }
 
 // Validate validates this service app input request
@@ -54,6 +64,10 @@ func (m *ServiceAppInputRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateGroup(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateIndex(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -84,6 +98,15 @@ func (m *ServiceAppInputRequest) validateDisplayName(formats strfmt.Registry) er
 func (m *ServiceAppInputRequest) validateGroup(formats strfmt.Registry) error {
 
 	if err := validate.Required("group", "body", m.Group); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ServiceAppInputRequest) validateIndex(formats strfmt.Registry) error {
+
+	if err := validate.Required("index", "body", m.Index); err != nil {
 		return err
 	}
 
