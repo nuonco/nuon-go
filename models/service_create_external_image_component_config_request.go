@@ -25,6 +25,9 @@ type ServiceCreateExternalImageComponentConfigRequest struct {
 	// aws ecr image config
 	AwsEcrImageConfig *ServiceAwsECRImageConfigRequest `json:"aws_ecr_image_config,omitempty"`
 
+	// dependencies
+	Dependencies []string `json:"dependencies"`
+
 	// image url
 	// Required: true
 	ImageURL *string `json:"image_url"`

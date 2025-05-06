@@ -40,8 +40,8 @@ type AppAppInputGroup struct {
 	// id
 	ID string `json:"id,omitempty"`
 
-	// idx
-	Idx int64 `json:"idx,omitempty"`
+	// index
+	Index int64 `json:"index,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
