@@ -28,6 +28,9 @@ type ServiceCreateDockerBuildComponentConfigRequest struct {
 	// connected github vcs config
 	ConnectedGithubVcsConfig *ServiceConnectedGithubVCSConfigRequest `json:"connected_github_vcs_config,omitempty"`
 
+	// dependencies
+	Dependencies []string `json:"dependencies"`
+
 	// dockerfile
 	// Required: true
 	Dockerfile *string `json:"dockerfile"`

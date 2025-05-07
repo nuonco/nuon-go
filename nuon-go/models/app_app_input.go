@@ -45,8 +45,8 @@ type AppAppInput struct {
 	// id
 	ID string `json:"id,omitempty"`
 
-	// idx
-	Idx int64 `json:"idx,omitempty"`
+	// index
+	Index int64 `json:"index,omitempty"`
 
 	// internal
 	Internal bool `json:"internal,omitempty"`
