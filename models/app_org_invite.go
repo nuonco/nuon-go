@@ -31,7 +31,7 @@ type AppOrgInvite struct {
 	ID string `json:"id,omitempty"`
 
 	// parent relationship
-	OrgID string `json:"orgID,omitempty"`
+	OrgID string `json:"org_id,omitempty"`
 
 	// role type
 	RoleType AppRoleType `json:"role_type,omitempty"`

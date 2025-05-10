@@ -19,6 +19,9 @@ import (
 // swagger:model service.AppSecretConfig
 type ServiceAppSecretConfig struct {
 
+	// auto generate
+	AutoGenerate bool `json:"auto_generate,omitempty"`
+
 	// description
 	// Required: true
 	Description *string `json:"description"`
@@ -32,6 +35,9 @@ type ServiceAppSecretConfig struct {
 
 	// kubernetes secret namespace
 	KubernetesSecretNamespace string `json:"kubernetes_secret_namespace,omitempty"`
+
+	// kubernetes sync
+	KubernetesSync bool `json:"kubernetes_sync,omitempty"`
 
 	// name
 	// Required: true

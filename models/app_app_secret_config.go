@@ -26,6 +26,9 @@ type AppAppSecretConfig struct {
 	// app secrets config id
 	AppSecretsConfigID string `json:"app_secrets_config_id,omitempty"`
 
+	// auto generate
+	AutoGenerate bool `json:"auto_generate,omitempty"`
+
 	// cloudformation param name
 	CloudformationParamName string `json:"cloudformation_param_name,omitempty"`
 
@@ -50,8 +53,11 @@ type AppAppSecretConfig struct {
 	// kubernetes secret name
 	KubernetesSecretName string `json:"kubernetes_secret_name,omitempty"`
 
-	// for syncing into kubernetes
+	// kubernetes secret namespace
 	KubernetesSecretNamespace string `json:"kubernetes_secret_namespace,omitempty"`
+
+	// for syncing into kubernetes
+	KubernetesSync bool `json:"kubernetes_sync,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
