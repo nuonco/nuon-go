@@ -40,10 +40,10 @@ type AppTerraformWorkspaceState struct {
 	Revision int64 `json:"revision,omitempty"`
 
 	// terraform workspace
-	TerraformWorkspace *AppTerraformWorkspace `json:"terraformWorkspace,omitempty"`
+	TerraformWorkspace *AppTerraformWorkspace `json:"terraform_workspace,omitempty"`
 
-	// terraform workspace ID
-	TerraformWorkspaceID string `json:"terraformWorkspaceID,omitempty"`
+	// terraform workspace id
+	TerraformWorkspaceID string `json:"terraform_workspace_id,omitempty"`
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
@@ -94,9 +94,9 @@ func (m *AppTerraformWorkspaceState) validateTerraformWorkspace(formats strfmt.R
 	if m.TerraformWorkspace != nil {
 		if err := m.TerraformWorkspace.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("terraformWorkspace")
+				return ve.ValidateName("terraform_workspace")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("terraformWorkspace")
+				return ce.ValidateName("terraform_workspace")
 			}
 			return err
 		}
@@ -154,9 +154,9 @@ func (m *AppTerraformWorkspaceState) contextValidateTerraformWorkspace(ctx conte
 
 		if err := m.TerraformWorkspace.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("terraformWorkspace")
+				return ve.ValidateName("terraform_workspace")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("terraformWorkspace")
+				return ce.ValidateName("terraform_workspace")
 			}
 			return err
 		}

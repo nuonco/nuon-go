@@ -152,6 +152,8 @@ type ClientService interface {
 
 	DeprovisionInstallSandbox(params *DeprovisionInstallSandboxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeprovisionInstallSandboxCreated, error)
 
+	ForceShutDownRunner(params *ForceShutDownRunnerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForceShutDownRunnerCreated, error)
+
 	ForgetInstall(params *ForgetInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForgetInstallOK, error)
 
 	GetActionWorkflow(params *GetActionWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionWorkflowOK, error)
@@ -369,6 +371,8 @@ type ClientService interface {
 	GetTerraformWorkspaces(params *GetTerraformWorkspacesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspacesOK, error)
 
 	GetVCSConnection(params *GetVCSConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVCSConnectionOK, error)
+
+	GracefulShutDownRunner(params *GracefulShutDownRunnerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GracefulShutDownRunnerCreated, error)
 
 	LogStreamReadLogs(params *LogStreamReadLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LogStreamReadLogsOK, error)
 
@@ -2301,6 +2305,49 @@ func (a *Client) DeprovisionInstallSandbox(params *DeprovisionInstallSandboxPara
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeprovisionInstallSandbox: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	ForceShutDownRunner forces shut down a runner
+
+	Force shutdown a runner.
+
+This will result in jobs being lost/cancelled if they are in-flight.
+*/
+func (a *Client) ForceShutDownRunner(params *ForceShutDownRunnerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForceShutDownRunnerCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewForceShutDownRunnerParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ForceShutDownRunner",
+		Method:             "POST",
+		PathPattern:        "/v1/runners/{runner_id}/force-shutdown",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ForceShutDownRunnerReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ForceShutDownRunnerCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ForceShutDownRunner: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -6679,6 +6726,49 @@ func (a *Client) GetVCSConnection(params *GetVCSConnectionParams, authInfo runti
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetVCSConnection: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GracefulShutDownRunner shuts down a runner
+
+	Gracefully shut down a runner.
+
+_NOTE_ when a runner is unhealthy, the runner will not be able to pick up this job, so use force shut down instead.
+*/
+func (a *Client) GracefulShutDownRunner(params *GracefulShutDownRunnerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GracefulShutDownRunnerCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGracefulShutDownRunnerParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GracefulShutDownRunner",
+		Method:             "POST",
+		PathPattern:        "/v1/runners/{runner_id}/graceful-shutdown",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GracefulShutDownRunnerReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GracefulShutDownRunnerCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GracefulShutDownRunner: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

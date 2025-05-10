@@ -38,6 +38,9 @@ const (
 
 	// AppInstallWorkflowStepExecutionTypeApproval captures enum value "approval"
 	AppInstallWorkflowStepExecutionTypeApproval AppInstallWorkflowStepExecutionType = "approval"
+
+	// AppInstallWorkflowStepExecutionTypeSkipped captures enum value "skipped"
+	AppInstallWorkflowStepExecutionTypeSkipped AppInstallWorkflowStepExecutionType = "skipped"
 )
 
 // for schema
@@ -45,7 +48,7 @@ var appInstallWorkflowStepExecutionTypeEnum []interface{}
 
 func init() {
 	var res []AppInstallWorkflowStepExecutionType
-	if err := json.Unmarshal([]byte(`["system","user","approval"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["system","user","approval","skipped"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

@@ -12,36 +12,36 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// StateOrgState state org state
+// StateRunnerState state runner state
 //
-// swagger:model state.OrgState
-type StateOrgState struct {
+// swagger:model state.RunnerState
+type StateRunnerState struct {
 
 	// id
 	ID string `json:"id,omitempty"`
 
-	// name
-	Name string `json:"name,omitempty"`
-
 	// populated
 	Populated bool `json:"populated,omitempty"`
+
+	// runner group id
+	RunnerGroupID string `json:"runner_group_id,omitempty"`
 
 	// status
 	Status string `json:"status,omitempty"`
 }
 
-// Validate validates this state org state
-func (m *StateOrgState) Validate(formats strfmt.Registry) error {
+// Validate validates this state runner state
+func (m *StateRunnerState) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this state org state based on context it is used
-func (m *StateOrgState) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this state runner state based on context it is used
+func (m *StateRunnerState) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *StateOrgState) MarshalBinary() ([]byte, error) {
+func (m *StateRunnerState) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -49,8 +49,8 @@ func (m *StateOrgState) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *StateOrgState) UnmarshalBinary(b []byte) error {
-	var res StateOrgState
+func (m *StateRunnerState) UnmarshalBinary(b []byte) error {
+	var res StateRunnerState
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
