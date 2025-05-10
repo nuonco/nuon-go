@@ -14,14 +14,23 @@ import (
 
 // StateAppState state app state
 //
-// swagger:model state.appState
+// swagger:model state.AppState
 type StateAppState struct {
 
 	// id
 	ID string `json:"id,omitempty"`
 
+	// name
+	Name string `json:"name,omitempty"`
+
+	// populated
+	Populated bool `json:"populated,omitempty"`
+
 	// secrets
 	Secrets map[string]string `json:"secrets,omitempty"`
+
+	// status
+	Status string `json:"status,omitempty"`
 }
 
 // Validate validates this state app state
