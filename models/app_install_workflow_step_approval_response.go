@@ -26,8 +26,11 @@ type AppInstallWorkflowStepApprovalResponse struct {
 	// id
 	ID string `json:"id,omitempty"`
 
-	// the step that this approval belongs too
+	// the approval the response belongs to
 	InstallWorkflowStepApprovalID string `json:"install_workflow_step_approval_id,omitempty"`
+
+	// note
+	Note string `json:"note,omitempty"`
 
 	// the response type
 	Type string `json:"type,omitempty"`
