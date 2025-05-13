@@ -24,8 +24,8 @@ type UpdateAppConfigInstallsReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *UpdateAppConfigInstallsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-	case 201:
-		result := NewUpdateAppConfigInstallsCreated()
+	case 200:
+		result := NewUpdateAppConfigInstallsOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -61,74 +61,72 @@ func (o *UpdateAppConfigInstallsReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[PATCH /v1/apps/{app_id}/config/{app_config_id}/update-installs] UpdateAppConfigInstalls", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs] UpdateAppConfigInstalls", response, response.Code())
 	}
 }
 
-// NewUpdateAppConfigInstallsCreated creates a UpdateAppConfigInstallsCreated with default headers values
-func NewUpdateAppConfigInstallsCreated() *UpdateAppConfigInstallsCreated {
-	return &UpdateAppConfigInstallsCreated{}
+// NewUpdateAppConfigInstallsOK creates a UpdateAppConfigInstallsOK with default headers values
+func NewUpdateAppConfigInstallsOK() *UpdateAppConfigInstallsOK {
+	return &UpdateAppConfigInstallsOK{}
 }
 
 /*
-UpdateAppConfigInstallsCreated describes a response with status code 201, with default header values.
+UpdateAppConfigInstallsOK describes a response with status code 200, with default header values.
 
-Created
+OK
 */
-type UpdateAppConfigInstallsCreated struct {
-	Payload *models.AppAppConfig
+type UpdateAppConfigInstallsOK struct {
+	Payload string
 }
 
-// IsSuccess returns true when this update app config installs created response has a 2xx status code
-func (o *UpdateAppConfigInstallsCreated) IsSuccess() bool {
+// IsSuccess returns true when this update app config installs o k response has a 2xx status code
+func (o *UpdateAppConfigInstallsOK) IsSuccess() bool {
 	return true
 }
 
-// IsRedirect returns true when this update app config installs created response has a 3xx status code
-func (o *UpdateAppConfigInstallsCreated) IsRedirect() bool {
+// IsRedirect returns true when this update app config installs o k response has a 3xx status code
+func (o *UpdateAppConfigInstallsOK) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this update app config installs created response has a 4xx status code
-func (o *UpdateAppConfigInstallsCreated) IsClientError() bool {
+// IsClientError returns true when this update app config installs o k response has a 4xx status code
+func (o *UpdateAppConfigInstallsOK) IsClientError() bool {
 	return false
 }
 
-// IsServerError returns true when this update app config installs created response has a 5xx status code
-func (o *UpdateAppConfigInstallsCreated) IsServerError() bool {
+// IsServerError returns true when this update app config installs o k response has a 5xx status code
+func (o *UpdateAppConfigInstallsOK) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this update app config installs created response a status code equal to that given
-func (o *UpdateAppConfigInstallsCreated) IsCode(code int) bool {
-	return code == 201
+// IsCode returns true when this update app config installs o k response a status code equal to that given
+func (o *UpdateAppConfigInstallsOK) IsCode(code int) bool {
+	return code == 200
 }
 
-// Code gets the status code for the update app config installs created response
-func (o *UpdateAppConfigInstallsCreated) Code() int {
-	return 201
+// Code gets the status code for the update app config installs o k response
+func (o *UpdateAppConfigInstallsOK) Code() int {
+	return 200
 }
 
-func (o *UpdateAppConfigInstallsCreated) Error() string {
+func (o *UpdateAppConfigInstallsOK) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsOK %s", 200, payload)
 }
 
-func (o *UpdateAppConfigInstallsCreated) String() string {
+func (o *UpdateAppConfigInstallsOK) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsOK %s", 200, payload)
 }
 
-func (o *UpdateAppConfigInstallsCreated) GetPayload() *models.AppAppConfig {
+func (o *UpdateAppConfigInstallsOK) GetPayload() string {
 	return o.Payload
 }
 
-func (o *UpdateAppConfigInstallsCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	o.Payload = new(models.AppAppConfig)
+func (o *UpdateAppConfigInstallsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
@@ -181,12 +179,12 @@ func (o *UpdateAppConfigInstallsBadRequest) Code() int {
 
 func (o *UpdateAppConfigInstallsBadRequest) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsBadRequest %s", 400, payload)
 }
 
 func (o *UpdateAppConfigInstallsBadRequest) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsBadRequest %s", 400, payload)
 }
 
 func (o *UpdateAppConfigInstallsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -251,12 +249,12 @@ func (o *UpdateAppConfigInstallsUnauthorized) Code() int {
 
 func (o *UpdateAppConfigInstallsUnauthorized) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsUnauthorized %s", 401, payload)
 }
 
 func (o *UpdateAppConfigInstallsUnauthorized) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsUnauthorized %s", 401, payload)
 }
 
 func (o *UpdateAppConfigInstallsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -321,12 +319,12 @@ func (o *UpdateAppConfigInstallsForbidden) Code() int {
 
 func (o *UpdateAppConfigInstallsForbidden) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsForbidden %s", 403, payload)
 }
 
 func (o *UpdateAppConfigInstallsForbidden) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsForbidden %s", 403, payload)
 }
 
 func (o *UpdateAppConfigInstallsForbidden) GetPayload() *models.StderrErrResponse {
@@ -391,12 +389,12 @@ func (o *UpdateAppConfigInstallsNotFound) Code() int {
 
 func (o *UpdateAppConfigInstallsNotFound) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsNotFound %s", 404, payload)
 }
 
 func (o *UpdateAppConfigInstallsNotFound) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsNotFound %s", 404, payload)
 }
 
 func (o *UpdateAppConfigInstallsNotFound) GetPayload() *models.StderrErrResponse {
@@ -461,12 +459,12 @@ func (o *UpdateAppConfigInstallsInternalServerError) Code() int {
 
 func (o *UpdateAppConfigInstallsInternalServerError) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateAppConfigInstallsInternalServerError) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[PATCH /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateAppConfigInstallsInternalServerError) GetPayload() *models.StderrErrResponse {

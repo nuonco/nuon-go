@@ -400,7 +400,7 @@ type ClientService interface {
 
 	UpdateAppConfig(params *UpdateAppConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppConfigCreated, error)
 
-	UpdateAppConfigInstalls(params *UpdateAppConfigInstallsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppConfigInstallsCreated, error)
+	UpdateAppConfigInstalls(params *UpdateAppConfigInstallsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppConfigInstallsOK, error)
 
 	UpdateComponent(params *UpdateComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateComponentOK, error)
 
@@ -7304,14 +7304,14 @@ func (a *Client) UpdateAppConfig(params *UpdateAppConfigParams, authInfo runtime
 /*
 UpdateAppConfigInstalls update app config installs API
 */
-func (a *Client) UpdateAppConfigInstalls(params *UpdateAppConfigInstallsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppConfigInstallsCreated, error) {
+func (a *Client) UpdateAppConfigInstalls(params *UpdateAppConfigInstallsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppConfigInstallsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewUpdateAppConfigInstallsParams()
 	}
 	op := &runtime.ClientOperation{
 		ID:                 "UpdateAppConfigInstalls",
-		Method:             "PATCH",
+		Method:             "POST",
 		PathPattern:        "/v1/apps/{app_id}/config/{app_config_id}/update-installs",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
@@ -7330,7 +7330,7 @@ func (a *Client) UpdateAppConfigInstalls(params *UpdateAppConfigInstallsParams, 
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*UpdateAppConfigInstallsCreated)
+	success, ok := result.(*UpdateAppConfigInstallsOK)
 	if ok {
 		return success, nil
 	}
