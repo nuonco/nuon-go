@@ -33,6 +33,9 @@ type AppInstallWorkflowStepApproval struct {
 	// image approval JSON
 	ImageApprovalJSON string `json:"imageApprovalJSON,omitempty"`
 
+	// install workflow step
+	InstallWorkflowStep *AppInstallWorkflowStep `json:"installWorkflowStep,omitempty"`
+
 	// the step that this approval belongs too
 	InstallWorkflowStepID string `json:"installWorkflowStepID,omitempty"`
 
@@ -45,7 +48,7 @@ type AppInstallWorkflowStepApproval struct {
 	RunnerJob *AppRunnerJob `json:"runnerJob,omitempty"`
 
 	// the runner job where this approval was created
-	RunnerJobID string `json:"runnerJobID,omitempty"`
+	RunnerJobID string `json:"runner_job_id,omitempty"`
 
 	// status
 	Status *AppCompositeStatus `json:"status,omitempty"`
@@ -66,6 +69,10 @@ type AppInstallWorkflowStepApproval struct {
 func (m *AppInstallWorkflowStepApproval) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateInstallWorkflowStep(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateResponse(formats); err != nil {
 		res = append(res, err)
 	}
@@ -85,6 +92,25 @@ func (m *AppInstallWorkflowStepApproval) Validate(formats strfmt.Registry) error
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppInstallWorkflowStepApproval) validateInstallWorkflowStep(formats strfmt.Registry) error {
+	if swag.IsZero(m.InstallWorkflowStep) { // not required
+		return nil
+	}
+
+	if m.InstallWorkflowStep != nil {
+		if err := m.InstallWorkflowStep.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("installWorkflowStep")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("installWorkflowStep")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -146,6 +172,10 @@ func (m *AppInstallWorkflowStepApproval) validateType(formats strfmt.Registry) e
 func (m *AppInstallWorkflowStepApproval) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateInstallWorkflowStep(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateResponse(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -165,6 +195,27 @@ func (m *AppInstallWorkflowStepApproval) ContextValidate(ctx context.Context, fo
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppInstallWorkflowStepApproval) contextValidateInstallWorkflowStep(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.InstallWorkflowStep != nil {
+
+		if swag.IsZero(m.InstallWorkflowStep) { // not required
+			return nil
+		}
+
+		if err := m.InstallWorkflowStep.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("installWorkflowStep")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("installWorkflowStep")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

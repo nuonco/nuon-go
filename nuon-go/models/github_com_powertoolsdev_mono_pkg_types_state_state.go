@@ -58,6 +58,9 @@ type GithubComPowertoolsdevMonoPkgTypesStateState struct {
 
 	// sandbox
 	Sandbox *StateSandboxState `json:"sandbox,omitempty"`
+
+	// secrets
+	Secrets StateSecretsState `json:"secrets,omitempty"`
 }
 
 // Validate validates this github com powertoolsdev mono pkg types state state
@@ -101,6 +104,10 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) Validate(formats strfmt.R
 	}
 
 	if err := m.validateSandbox(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSecrets(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -289,6 +296,25 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) validateSandbox(formats s
 	return nil
 }
 
+func (m *GithubComPowertoolsdevMonoPkgTypesStateState) validateSecrets(formats strfmt.Registry) error {
+	if swag.IsZero(m.Secrets) { // not required
+		return nil
+	}
+
+	if m.Secrets != nil {
+		if err := m.Secrets.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("secrets")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("secrets")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this github com powertoolsdev mono pkg types state state based on the context it is used
 func (m *GithubComPowertoolsdevMonoPkgTypesStateState) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -330,6 +356,10 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) ContextValidate(ctx conte
 	}
 
 	if err := m.contextValidateSandbox(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSecrets(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -528,6 +558,24 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) contextValidateSandbox(ct
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *GithubComPowertoolsdevMonoPkgTypesStateState) contextValidateSecrets(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Secrets) { // not required
+		return nil
+	}
+
+	if err := m.Secrets.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("secrets")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("secrets")
+		}
+		return err
 	}
 
 	return nil
