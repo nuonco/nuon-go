@@ -1823,6 +1823,20 @@ func (mr *MockClientMockRecorder) UpdateAppConfig(ctx, appID, appConfigID, req i
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateAppConfig", reflect.TypeOf((*MockClient)(nil).UpdateAppConfig), ctx, appID, appConfigID, req)
 }
 
+// UpdateAppConfigInstalls mocks base method.
+func (m *MockClient) UpdateAppConfigInstalls(ctx context.Context, appID, appConfigID string, req *models.ServiceUpdateAppConfigInstallsRequest) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateAppConfigInstalls", ctx, appID, appConfigID, req)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// UpdateAppConfigInstalls indicates an expected call of UpdateAppConfigInstalls.
+func (mr *MockClientMockRecorder) UpdateAppConfigInstalls(ctx, appID, appConfigID, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateAppConfigInstalls", reflect.TypeOf((*MockClient)(nil).UpdateAppConfigInstalls), ctx, appID, appConfigID, req)
+}
+
 // UpdateComponent mocks base method.
 func (m *MockClient) UpdateComponent(ctx context.Context, componentID string, req *models.ServiceUpdateComponentRequest) (*models.AppComponent, error) {
 	m.ctrl.T.Helper()

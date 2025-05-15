@@ -108,6 +108,8 @@ type ClientService interface {
 
 	CreateInstallInputs(params *CreateInstallInputsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallInputsCreated, error)
 
+	CreateInstallWorkflowStepApprovalResponse(params *CreateInstallWorkflowStepApprovalResponseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallWorkflowStepApprovalResponseCreated, error)
+
 	CreateInstaller(params *CreateInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallerCreated, error)
 
 	CreateJobComponentConfig(params *CreateJobComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateJobComponentConfigCreated, error)
@@ -179,6 +181,8 @@ type ClientService interface {
 	GetAppComponents(params *GetAppComponentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppComponentsOK, error)
 
 	GetAppConfig(params *GetAppConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppConfigOK, error)
+
+	GetAppConfigGraph(params *GetAppConfigGraphParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppConfigGraphOK, error)
 
 	GetAppConfigTemplate(params *GetAppConfigTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppConfigTemplateCreated, error)
 
@@ -302,6 +306,8 @@ type ClientService interface {
 
 	GetInstallWorkflowStep(params *GetInstallWorkflowStepParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallWorkflowStepOK, error)
 
+	GetInstallWorkflowStepApproval(params *GetInstallWorkflowStepApprovalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallWorkflowStepApprovalOK, error)
+
 	GetInstallWorkflowSteps(params *GetInstallWorkflowStepsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallWorkflowStepsOK, error)
 
 	GetInstallWorkflows(params *GetInstallWorkflowsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallWorkflowsOK, error)
@@ -393,6 +399,8 @@ type ClientService interface {
 	UpdateAppActionWorkflow(params *UpdateAppActionWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppActionWorkflowCreated, error)
 
 	UpdateAppConfig(params *UpdateAppConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppConfigCreated, error)
+
+	UpdateAppConfigInstalls(params *UpdateAppConfigInstallsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppConfigInstallsOK, error)
 
 	UpdateComponent(params *UpdateComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateComponentOK, error)
 
@@ -1434,6 +1442,45 @@ func (a *Client) CreateInstallInputs(params *CreateInstallInputsParams, authInfo
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateInstallInputs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreateInstallWorkflowStepApprovalResponse deploys a build to an install
+*/
+func (a *Client) CreateInstallWorkflowStepApprovalResponse(params *CreateInstallWorkflowStepApprovalResponseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallWorkflowStepApprovalResponseCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateInstallWorkflowStepApprovalResponseParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateInstallWorkflowStepApprovalResponse",
+		Method:             "POST",
+		PathPattern:        "/v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateInstallWorkflowStepApprovalResponseReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateInstallWorkflowStepApprovalResponseCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateInstallWorkflowStepApprovalResponse: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -2869,6 +2916,50 @@ func (a *Client) GetAppConfig(params *GetAppConfigParams, authInfo runtime.Clien
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GetAppConfigGraph gets an app config graph
+
+	Return raw graphviz data as a string that can be used to visualize a graph for an app.
+
+Note, for more complex viewing recommend to copy this output directly into [Graphviz
+viewer](https://dreampuf.github.io/GraphvizOnline).
+*/
+func (a *Client) GetAppConfigGraph(params *GetAppConfigGraphParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppConfigGraphOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAppConfigGraphParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetAppConfigGraph",
+		Method:             "GET",
+		PathPattern:        "/v1/apps/{app_id}/config/{app_config_id}/graph",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAppConfigGraphReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAppConfigGraphOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetAppConfigGraph: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -5331,6 +5422,45 @@ func (a *Client) GetInstallWorkflowStep(params *GetInstallWorkflowStepParams, au
 }
 
 /*
+GetInstallWorkflowStepApproval gets an install workflow step
+*/
+func (a *Client) GetInstallWorkflowStepApproval(params *GetInstallWorkflowStepApprovalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallWorkflowStepApprovalOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetInstallWorkflowStepApprovalParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetInstallWorkflowStepApproval",
+		Method:             "GET",
+		PathPattern:        "/v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetInstallWorkflowStepApprovalReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetInstallWorkflowStepApprovalOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetInstallWorkflowStepApproval: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetInstallWorkflowSteps gets an install workflow
 
 Return all steps for an install workflow.
@@ -7168,6 +7298,45 @@ func (a *Client) UpdateAppConfig(params *UpdateAppConfigParams, authInfo runtime
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateAppConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateAppConfigInstalls update app config installs API
+*/
+func (a *Client) UpdateAppConfigInstalls(params *UpdateAppConfigInstallsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppConfigInstallsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateAppConfigInstallsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateAppConfigInstalls",
+		Method:             "POST",
+		PathPattern:        "/v1/apps/{app_id}/config/{app_config_id}/update-installs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateAppConfigInstallsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateAppConfigInstallsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateAppConfigInstalls: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
