@@ -102,6 +102,7 @@ func (c *client) UpdateAppConfig(ctx context.Context, appID, appConfigID string,
 	return resp.Payload, nil
 }
 
+// UpdateAppConfigInstalls update the installs using the provided app config version.
 func (c *client) UpdateAppConfigInstalls(ctx context.Context, appID, appConfigID string, req *models.ServiceUpdateAppConfigInstallsRequest) error {
 	resp, err := c.genClient.Operations.UpdateAppConfigInstalls(&operations.UpdateAppConfigInstallsParams{
 		AppID:       appID,
