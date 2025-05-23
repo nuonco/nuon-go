@@ -41,6 +41,9 @@ type ServiceCreateDockerBuildComponentConfigRequest struct {
 	// public git vcs config
 	PublicGitVcsConfig *ServicePublicGitVCSConfigRequest `json:"public_git_vcs_config,omitempty"`
 
+	// references
+	References []string `json:"references"`
+
 	// target
 	Target string `json:"target,omitempty"`
 }

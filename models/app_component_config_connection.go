@@ -51,6 +51,9 @@ type AppComponentConfigConnection struct {
 	// job
 	Job *AppJobComponentConfig `json:"job,omitempty"`
 
+	// references
+	References []string `json:"references"`
+
 	// terraform module
 	TerraformModule *AppTerraformModuleComponentConfig `json:"terraform_module,omitempty"`
 

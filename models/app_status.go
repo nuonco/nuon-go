@@ -63,6 +63,9 @@ const (
 	// AppStatusOutdated captures enum value "outdated"
 	AppStatusOutdated AppStatus = "outdated"
 
+	// AppStatusExpired captures enum value "expired"
+	AppStatusExpired AppStatus = "expired"
+
 	// AppStatusAwaitingDashResponse captures enum value "awaiting-response"
 	AppStatusAwaitingDashResponse AppStatus = "awaiting-response"
 )
@@ -72,7 +75,7 @@ var appStatusEnum []interface{}
 
 func init() {
 	var res []AppStatus
-	if err := json.Unmarshal([]byte(`["error","pending","in-progress","success","not-attempted","cancelled","generating","awaiting-user-run","provisioning","active","outdated","awaiting-response"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["error","pending","in-progress","success","not-attempted","cancelled","generating","awaiting-user-run","provisioning","active","outdated","expired","awaiting-response"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

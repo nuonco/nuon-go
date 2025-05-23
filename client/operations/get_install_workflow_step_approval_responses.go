@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetInstallWorkflowStepApprovalOK) Code() int {
 }
 
 func (o *GetInstallWorkflowStepApprovalOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalOK  %+v", 200, o.Payload)
 }
 
 func (o *GetInstallWorkflowStepApprovalOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalOK  %+v", 200, o.Payload)
 }
 
 func (o *GetInstallWorkflowStepApprovalOK) GetPayload() []*models.AppInstallWorkflowStepApproval {
@@ -178,13 +175,11 @@ func (o *GetInstallWorkflowStepApprovalBadRequest) Code() int {
 }
 
 func (o *GetInstallWorkflowStepApprovalBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetInstallWorkflowStepApprovalBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetInstallWorkflowStepApprovalBadRequest) GetPayload() *models.StderrErrResponse {
@@ -248,13 +243,11 @@ func (o *GetInstallWorkflowStepApprovalUnauthorized) Code() int {
 }
 
 func (o *GetInstallWorkflowStepApprovalUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetInstallWorkflowStepApprovalUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetInstallWorkflowStepApprovalUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -318,13 +311,11 @@ func (o *GetInstallWorkflowStepApprovalForbidden) Code() int {
 }
 
 func (o *GetInstallWorkflowStepApprovalForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetInstallWorkflowStepApprovalForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetInstallWorkflowStepApprovalForbidden) GetPayload() *models.StderrErrResponse {
@@ -388,13 +379,11 @@ func (o *GetInstallWorkflowStepApprovalNotFound) Code() int {
 }
 
 func (o *GetInstallWorkflowStepApprovalNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetInstallWorkflowStepApprovalNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetInstallWorkflowStepApprovalNotFound) GetPayload() *models.StderrErrResponse {
@@ -458,13 +447,11 @@ func (o *GetInstallWorkflowStepApprovalInternalServerError) Code() int {
 }
 
 func (o *GetInstallWorkflowStepApprovalInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetInstallWorkflowStepApprovalInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}][%d] getInstallWorkflowStepApprovalInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetInstallWorkflowStepApprovalInternalServerError) GetPayload() *models.StderrErrResponse {

@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetLatestAppBreakGlassConfigOK) Code() int {
 }
 
 func (o *GetLatestAppBreakGlassConfigOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigOK  %+v", 200, o.Payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigOK  %+v", 200, o.Payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigOK) GetPayload() *models.AppAppBreakGlassConfig {
@@ -180,13 +177,11 @@ func (o *GetLatestAppBreakGlassConfigBadRequest) Code() int {
 }
 
 func (o *GetLatestAppBreakGlassConfigBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *GetLatestAppBreakGlassConfigUnauthorized) Code() int {
 }
 
 func (o *GetLatestAppBreakGlassConfigUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *GetLatestAppBreakGlassConfigForbidden) Code() int {
 }
 
 func (o *GetLatestAppBreakGlassConfigForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *GetLatestAppBreakGlassConfigNotFound) Code() int {
 }
 
 func (o *GetLatestAppBreakGlassConfigNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *GetLatestAppBreakGlassConfigInternalServerError) Code() int {
 }
 
 func (o *GetLatestAppBreakGlassConfigInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigInternalServerError) GetPayload() *models.StderrErrResponse {
