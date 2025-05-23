@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetRunnerSettingsOK) Code() int {
 }
 
 func (o *GetRunnerSettingsOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsOK  %+v", 200, o.Payload)
 }
 
 func (o *GetRunnerSettingsOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsOK  %+v", 200, o.Payload)
 }
 
 func (o *GetRunnerSettingsOK) GetPayload() *models.AppRunnerGroupSettings {
@@ -180,13 +177,11 @@ func (o *GetRunnerSettingsBadRequest) Code() int {
 }
 
 func (o *GetRunnerSettingsBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetRunnerSettingsBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetRunnerSettingsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *GetRunnerSettingsUnauthorized) Code() int {
 }
 
 func (o *GetRunnerSettingsUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetRunnerSettingsUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetRunnerSettingsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *GetRunnerSettingsForbidden) Code() int {
 }
 
 func (o *GetRunnerSettingsForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetRunnerSettingsForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetRunnerSettingsForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *GetRunnerSettingsNotFound) Code() int {
 }
 
 func (o *GetRunnerSettingsNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetRunnerSettingsNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetRunnerSettingsNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *GetRunnerSettingsInternalServerError) Code() int {
 }
 
 func (o *GetRunnerSettingsInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetRunnerSettingsInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/settings][%d] getRunnerSettingsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetRunnerSettingsInternalServerError) GetPayload() *models.StderrErrResponse {

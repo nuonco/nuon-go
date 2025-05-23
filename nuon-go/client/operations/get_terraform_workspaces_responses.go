@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetTerraformWorkspacesOK) Code() int {
 }
 
 func (o *GetTerraformWorkspacesOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesOK  %+v", 200, o.Payload)
 }
 
 func (o *GetTerraformWorkspacesOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesOK  %+v", 200, o.Payload)
 }
 
 func (o *GetTerraformWorkspacesOK) GetPayload() []*models.AppTerraformWorkspace {
@@ -178,13 +175,11 @@ func (o *GetTerraformWorkspacesBadRequest) Code() int {
 }
 
 func (o *GetTerraformWorkspacesBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetTerraformWorkspacesBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetTerraformWorkspacesBadRequest) GetPayload() *models.StderrErrResponse {
@@ -248,13 +243,11 @@ func (o *GetTerraformWorkspacesUnauthorized) Code() int {
 }
 
 func (o *GetTerraformWorkspacesUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetTerraformWorkspacesUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetTerraformWorkspacesUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -318,13 +311,11 @@ func (o *GetTerraformWorkspacesForbidden) Code() int {
 }
 
 func (o *GetTerraformWorkspacesForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetTerraformWorkspacesForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetTerraformWorkspacesForbidden) GetPayload() *models.StderrErrResponse {
@@ -388,13 +379,11 @@ func (o *GetTerraformWorkspacesNotFound) Code() int {
 }
 
 func (o *GetTerraformWorkspacesNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetTerraformWorkspacesNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetTerraformWorkspacesNotFound) GetPayload() *models.StderrErrResponse {
@@ -458,13 +447,11 @@ func (o *GetTerraformWorkspacesInternalServerError) Code() int {
 }
 
 func (o *GetTerraformWorkspacesInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetTerraformWorkspacesInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces][%d] getTerraformWorkspacesInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetTerraformWorkspacesInternalServerError) GetPayload() *models.StderrErrResponse {

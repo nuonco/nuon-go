@@ -9,38 +9,12 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new operations API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
-}
-
-// New creates a new operations API client with basic auth credentials.
-// It takes the following parameters:
-// - host: http host (github.com).
-// - basePath: any base path for the API client ("/v1", "/v3").
-// - scheme: http scheme ("http", "https").
-// - user: user for basic authentication header.
-// - password: password for basic authentication header.
-func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
-	transport := httptransport.New(host, basePath, []string{scheme})
-	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
-	return &Client{transport: transport, formats: strfmt.Default}
-}
-
-// New creates a new operations API client with a bearer token for authentication.
-// It takes the following parameters:
-// - host: http host (github.com).
-// - basePath: any base path for the API client ("/v1", "/v3").
-// - scheme: http scheme ("http", "https").
-// - bearerToken: bearer token for Bearer authentication header.
-func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
-	transport := httptransport.New(host, basePath, []string{scheme})
-	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
-	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -51,7 +25,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption may be used to customize the behavior of Client methods.
+// ClientOption is the option for Client methods
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -232,6 +206,8 @@ type ClientService interface {
 
 	GetComponentBuilds(params *GetComponentBuildsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentBuildsOK, error)
 
+	GetComponentConfig(params *GetComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentConfigOK, error)
+
 	GetComponentConfigs(params *GetComponentConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentConfigsOK, error)
 
 	GetComponentDependencies(params *GetComponentDependenciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentDependenciesOK, error)
@@ -273,6 +249,8 @@ type ClientService interface {
 	GetInstallComponentOutputs(params *GetInstallComponentOutputsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallComponentOutputsOK, error)
 
 	GetInstallComponents(params *GetInstallComponentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallComponentsOK, error)
+
+	GetInstallComponentsSummary(params *GetInstallComponentsSummaryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallComponentsSummaryOK, error)
 
 	GetInstallDeploy(params *GetInstallDeployParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallDeployOK, error)
 
@@ -3924,6 +3902,45 @@ func (a *Client) GetComponentBuilds(params *GetComponentBuildsParams, authInfo r
 }
 
 /*
+GetComponentConfig gets all configs for a component
+*/
+func (a *Client) GetComponentConfig(params *GetComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentConfigOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetComponentConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetComponentConfig",
+		Method:             "GET",
+		PathPattern:        "/v1/components/{component_id}/configs/{config_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetComponentConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetComponentConfigOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetComponentConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetComponentConfigs gets all configs for a component
 */
 func (a *Client) GetComponentConfigs(params *GetComponentConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentConfigsOK, error) {
@@ -4777,6 +4794,45 @@ func (a *Client) GetInstallComponents(params *GetInstallComponentsParams, authIn
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallComponents: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetInstallComponentsSummary gets an installs components summary
+*/
+func (a *Client) GetInstallComponentsSummary(params *GetInstallComponentsSummaryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallComponentsSummaryOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetInstallComponentsSummaryParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetInstallComponentsSummary",
+		Method:             "GET",
+		PathPattern:        "/v1/installs/{install_id}/components/summary",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetInstallComponentsSummaryReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetInstallComponentsSummaryOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetInstallComponentsSummary: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
