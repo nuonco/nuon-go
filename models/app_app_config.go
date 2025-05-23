@@ -28,6 +28,9 @@ type AppAppConfig struct {
 	// checksum
 	Checksum string `json:"checksum,omitempty"`
 
+	// component i ds
+	ComponentIDs []string `json:"componentIDs"`
+
 	// component config connections
 	ComponentConfigConnections []*AppComponentConfigConnection `json:"component_config_connections"`
 

@@ -35,6 +35,9 @@ type ServiceCreateJobComponentConfigRequest struct {
 	// Required: true
 	ImageURL *string `json:"image_url"`
 
+	// references
+	References []string `json:"references"`
+
 	// tag
 	// Required: true
 	Tag *string `json:"tag"`

@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetAppStackConfigOK) Code() int {
 }
 
 func (o *GetAppStackConfigOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigOK  %+v", 200, o.Payload)
 }
 
 func (o *GetAppStackConfigOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigOK  %+v", 200, o.Payload)
 }
 
 func (o *GetAppStackConfigOK) GetPayload() *models.AppAppStackConfig {
@@ -180,13 +177,11 @@ func (o *GetAppStackConfigBadRequest) Code() int {
 }
 
 func (o *GetAppStackConfigBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetAppStackConfigBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetAppStackConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *GetAppStackConfigUnauthorized) Code() int {
 }
 
 func (o *GetAppStackConfigUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetAppStackConfigUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetAppStackConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *GetAppStackConfigForbidden) Code() int {
 }
 
 func (o *GetAppStackConfigForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetAppStackConfigForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetAppStackConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *GetAppStackConfigNotFound) Code() int {
 }
 
 func (o *GetAppStackConfigNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetAppStackConfigNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetAppStackConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *GetAppStackConfigInternalServerError) Code() int {
 }
 
 func (o *GetAppStackConfigInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetAppStackConfigInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/stack-configs/{config_id}][%d] getAppStackConfigInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetAppStackConfigInternalServerError) GetPayload() *models.StderrErrResponse {

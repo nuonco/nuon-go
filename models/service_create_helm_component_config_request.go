@@ -40,6 +40,9 @@ type ServiceCreateHelmComponentConfigRequest struct {
 	// public git vcs config
 	PublicGitVcsConfig *ServicePublicGitVCSConfigRequest `json:"public_git_vcs_config,omitempty"`
 
+	// references
+	References []string `json:"references"`
+
 	// storage driver
 	StorageDriver string `json:"storage_driver,omitempty"`
 

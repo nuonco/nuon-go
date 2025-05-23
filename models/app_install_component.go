@@ -31,6 +31,9 @@ type AppInstallComponent struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
+	// helm chart
+	HelmChart *AppHelmChart `json:"helm_chart,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
@@ -41,7 +44,7 @@ type AppInstallComponent struct {
 	InstallID string `json:"install_id,omitempty"`
 
 	// links
-	Links map[string]interface{} `json:"links,omitempty"`
+	Links interface{} `json:"links,omitempty"`
 
 	// status
 	Status string `json:"status,omitempty"`
@@ -61,6 +64,10 @@ func (m *AppInstallComponent) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateComponent(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateHelmChart(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -89,6 +96,25 @@ func (m *AppInstallComponent) validateComponent(formats strfmt.Registry) error {
 				return ve.ValidateName("component")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("component")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppInstallComponent) validateHelmChart(formats strfmt.Registry) error {
+	if swag.IsZero(m.HelmChart) { // not required
+		return nil
+	}
+
+	if m.HelmChart != nil {
+		if err := m.HelmChart.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("helm_chart")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("helm_chart")
 			}
 			return err
 		}
@@ -150,6 +176,10 @@ func (m *AppInstallComponent) ContextValidate(ctx context.Context, formats strfm
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateHelmChart(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateInstallDeploys(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -177,6 +207,27 @@ func (m *AppInstallComponent) contextValidateComponent(ctx context.Context, form
 				return ve.ValidateName("component")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("component")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppInstallComponent) contextValidateHelmChart(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.HelmChart != nil {
+
+		if swag.IsZero(m.HelmChart) { // not required
+			return nil
+		}
+
+		if err := m.HelmChart.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("helm_chart")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("helm_chart")
 			}
 			return err
 		}

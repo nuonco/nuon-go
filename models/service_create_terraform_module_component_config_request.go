@@ -35,6 +35,9 @@ type ServiceCreateTerraformModuleComponentConfigRequest struct {
 	// public git vcs config
 	PublicGitVcsConfig *ServicePublicGitVCSConfigRequest `json:"public_git_vcs_config,omitempty"`
 
+	// references
+	References []string `json:"references"`
+
 	// variables
 	// Required: true
 	Variables map[string]string `json:"variables"`

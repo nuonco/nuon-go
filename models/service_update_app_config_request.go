@@ -18,6 +18,9 @@ import (
 // swagger:model service.UpdateAppConfigRequest
 type ServiceUpdateAppConfigRequest struct {
 
+	// component ids
+	ComponentIds []string `json:"component_ids"`
+
 	// state
 	State string `json:"state,omitempty"`
 
