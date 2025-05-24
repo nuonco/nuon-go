@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetAppConfigGraphOK) Code() int {
 }
 
 func (o *GetAppConfigGraphOK) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphOK %s", 200, payload)
 }
 
 func (o *GetAppConfigGraphOK) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphOK %s", 200, payload)
 }
 
 func (o *GetAppConfigGraphOK) GetPayload() string {
@@ -175,11 +178,13 @@ func (o *GetAppConfigGraphBadRequest) Code() int {
 }
 
 func (o *GetAppConfigGraphBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphBadRequest %s", 400, payload)
 }
 
 func (o *GetAppConfigGraphBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphBadRequest %s", 400, payload)
 }
 
 func (o *GetAppConfigGraphBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +248,13 @@ func (o *GetAppConfigGraphUnauthorized) Code() int {
 }
 
 func (o *GetAppConfigGraphUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphUnauthorized %s", 401, payload)
 }
 
 func (o *GetAppConfigGraphUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphUnauthorized %s", 401, payload)
 }
 
 func (o *GetAppConfigGraphUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +318,13 @@ func (o *GetAppConfigGraphForbidden) Code() int {
 }
 
 func (o *GetAppConfigGraphForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphForbidden %s", 403, payload)
 }
 
 func (o *GetAppConfigGraphForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphForbidden %s", 403, payload)
 }
 
 func (o *GetAppConfigGraphForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +388,13 @@ func (o *GetAppConfigGraphNotFound) Code() int {
 }
 
 func (o *GetAppConfigGraphNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphNotFound %s", 404, payload)
 }
 
 func (o *GetAppConfigGraphNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphNotFound %s", 404, payload)
 }
 
 func (o *GetAppConfigGraphNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +458,13 @@ func (o *GetAppConfigGraphInternalServerError) Code() int {
 }
 
 func (o *GetAppConfigGraphInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphInternalServerError %s", 500, payload)
 }
 
 func (o *GetAppConfigGraphInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphInternalServerError %s", 500, payload)
 }
 
 func (o *GetAppConfigGraphInternalServerError) GetPayload() *models.StderrErrResponse {

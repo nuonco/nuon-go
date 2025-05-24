@@ -28,11 +28,11 @@ type AppAppConfig struct {
 	// checksum
 	Checksum string `json:"checksum,omitempty"`
 
-	// component i ds
-	ComponentIDs []string `json:"componentIDs"`
-
 	// component config connections
 	ComponentConfigConnections []*AppComponentConfigConnection `json:"component_config_connections"`
+
+	// component ids
+	ComponentIds []string `json:"component_ids"`
 
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`

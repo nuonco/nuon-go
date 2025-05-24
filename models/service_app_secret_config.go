@@ -30,6 +30,9 @@ type ServiceAppSecretConfig struct {
 	// Required: true
 	DisplayName *string `json:"display_name"`
 
+	// format
+	Format string `json:"format,omitempty"`
+
 	// kubernetes secret name
 	KubernetesSecretName string `json:"kubernetes_secret_name,omitempty"`
 

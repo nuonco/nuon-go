@@ -28,7 +28,7 @@ type GithubComPowertoolsdevMonoPkgTypesStateState struct {
 	CloudAccount *StateCloudAccount `json:"cloud_account,omitempty"`
 
 	// components
-	Components interface{} `json:"components,omitempty"`
+	Components map[string]interface{} `json:"components,omitempty"`
 
 	// domain
 	Domain *StateDomainState `json:"domain,omitempty"`
