@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetComponentDependenciesOK) Code() int {
 }
 
 func (o *GetComponentDependenciesOK) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesOK %s", 200, payload)
 }
 
 func (o *GetComponentDependenciesOK) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesOK %s", 200, payload)
 }
 
 func (o *GetComponentDependenciesOK) GetPayload() []*models.AppComponent {
@@ -175,11 +178,13 @@ func (o *GetComponentDependenciesBadRequest) Code() int {
 }
 
 func (o *GetComponentDependenciesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesBadRequest %s", 400, payload)
 }
 
 func (o *GetComponentDependenciesBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesBadRequest %s", 400, payload)
 }
 
 func (o *GetComponentDependenciesBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +248,13 @@ func (o *GetComponentDependenciesUnauthorized) Code() int {
 }
 
 func (o *GetComponentDependenciesUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesUnauthorized %s", 401, payload)
 }
 
 func (o *GetComponentDependenciesUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesUnauthorized %s", 401, payload)
 }
 
 func (o *GetComponentDependenciesUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +318,13 @@ func (o *GetComponentDependenciesForbidden) Code() int {
 }
 
 func (o *GetComponentDependenciesForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesForbidden %s", 403, payload)
 }
 
 func (o *GetComponentDependenciesForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesForbidden %s", 403, payload)
 }
 
 func (o *GetComponentDependenciesForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +388,13 @@ func (o *GetComponentDependenciesNotFound) Code() int {
 }
 
 func (o *GetComponentDependenciesNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesNotFound %s", 404, payload)
 }
 
 func (o *GetComponentDependenciesNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesNotFound %s", 404, payload)
 }
 
 func (o *GetComponentDependenciesNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +458,13 @@ func (o *GetComponentDependenciesInternalServerError) Code() int {
 }
 
 func (o *GetComponentDependenciesInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesInternalServerError %s", 500, payload)
 }
 
 func (o *GetComponentDependenciesInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependencies][%d] getComponentDependenciesInternalServerError %s", 500, payload)
 }
 
 func (o *GetComponentDependenciesInternalServerError) GetPayload() *models.StderrErrResponse {
