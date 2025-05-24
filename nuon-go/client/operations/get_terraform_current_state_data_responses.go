@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetTerraformCurrentStateDataOK) Code() int {
 }
 
 func (o *GetTerraformCurrentStateDataOK) Error() string {
-	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataOK %s", 200, payload)
 }
 
 func (o *GetTerraformCurrentStateDataOK) String() string {
-	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataOK %s", 200, payload)
 }
 
 func (o *GetTerraformCurrentStateDataOK) GetPayload() *models.AppTerraformWorkspaceState {
@@ -177,11 +180,13 @@ func (o *GetTerraformCurrentStateDataBadRequest) Code() int {
 }
 
 func (o *GetTerraformCurrentStateDataBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataBadRequest %s", 400, payload)
 }
 
 func (o *GetTerraformCurrentStateDataBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataBadRequest %s", 400, payload)
 }
 
 func (o *GetTerraformCurrentStateDataBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +250,13 @@ func (o *GetTerraformCurrentStateDataUnauthorized) Code() int {
 }
 
 func (o *GetTerraformCurrentStateDataUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataUnauthorized %s", 401, payload)
 }
 
 func (o *GetTerraformCurrentStateDataUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataUnauthorized %s", 401, payload)
 }
 
 func (o *GetTerraformCurrentStateDataUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +320,13 @@ func (o *GetTerraformCurrentStateDataForbidden) Code() int {
 }
 
 func (o *GetTerraformCurrentStateDataForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataForbidden %s", 403, payload)
 }
 
 func (o *GetTerraformCurrentStateDataForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataForbidden %s", 403, payload)
 }
 
 func (o *GetTerraformCurrentStateDataForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +390,13 @@ func (o *GetTerraformCurrentStateDataNotFound) Code() int {
 }
 
 func (o *GetTerraformCurrentStateDataNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataNotFound %s", 404, payload)
 }
 
 func (o *GetTerraformCurrentStateDataNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataNotFound %s", 404, payload)
 }
 
 func (o *GetTerraformCurrentStateDataNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +460,13 @@ func (o *GetTerraformCurrentStateDataInternalServerError) Code() int {
 }
 
 func (o *GetTerraformCurrentStateDataInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataInternalServerError %s", 500, payload)
 }
 
 func (o *GetTerraformCurrentStateDataInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-backend][%d] getTerraformCurrentStateDataInternalServerError %s", 500, payload)
 }
 
 func (o *GetTerraformCurrentStateDataInternalServerError) GetPayload() *models.StderrErrResponse {

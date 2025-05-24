@@ -47,6 +47,9 @@ type AppAppSecretConfig struct {
 	// display name
 	DisplayName string `json:"display_name,omitempty"`
 
+	// format
+	Format string `json:"format,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
