@@ -29,6 +29,9 @@ type ServiceUpdateAppConfigRequest struct {
 
 	// status description
 	StatusDescription string `json:"status_description,omitempty"`
+
+	// update installs
+	UpdateInstalls bool `json:"update_installs,omitempty"`
 }
 
 // Validate validates this service update app config request
