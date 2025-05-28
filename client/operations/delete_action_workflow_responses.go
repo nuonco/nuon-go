@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *DeleteActionWorkflowOK) Code() int {
 }
 
 func (o *DeleteActionWorkflowOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowOK  %+v", 200, o.Payload)
 }
 
 func (o *DeleteActionWorkflowOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowOK  %+v", 200, o.Payload)
 }
 
 func (o *DeleteActionWorkflowOK) GetPayload() bool {
@@ -178,13 +175,11 @@ func (o *DeleteActionWorkflowBadRequest) Code() int {
 }
 
 func (o *DeleteActionWorkflowBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowBadRequest %s", 400, payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *DeleteActionWorkflowBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowBadRequest %s", 400, payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *DeleteActionWorkflowBadRequest) GetPayload() *models.StderrErrResponse {
@@ -248,13 +243,11 @@ func (o *DeleteActionWorkflowUnauthorized) Code() int {
 }
 
 func (o *DeleteActionWorkflowUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *DeleteActionWorkflowUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *DeleteActionWorkflowUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -318,13 +311,11 @@ func (o *DeleteActionWorkflowForbidden) Code() int {
 }
 
 func (o *DeleteActionWorkflowForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowForbidden %s", 403, payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowForbidden  %+v", 403, o.Payload)
 }
 
 func (o *DeleteActionWorkflowForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowForbidden %s", 403, payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowForbidden  %+v", 403, o.Payload)
 }
 
 func (o *DeleteActionWorkflowForbidden) GetPayload() *models.StderrErrResponse {
@@ -388,13 +379,11 @@ func (o *DeleteActionWorkflowNotFound) Code() int {
 }
 
 func (o *DeleteActionWorkflowNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowNotFound %s", 404, payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowNotFound  %+v", 404, o.Payload)
 }
 
 func (o *DeleteActionWorkflowNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowNotFound %s", 404, payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowNotFound  %+v", 404, o.Payload)
 }
 
 func (o *DeleteActionWorkflowNotFound) GetPayload() *models.StderrErrResponse {
@@ -458,13 +447,11 @@ func (o *DeleteActionWorkflowInternalServerError) Code() int {
 }
 
 func (o *DeleteActionWorkflowInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *DeleteActionWorkflowInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *DeleteActionWorkflowInternalServerError) GetPayload() *models.StderrErrResponse {
