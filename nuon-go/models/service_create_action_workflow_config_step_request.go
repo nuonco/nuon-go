@@ -37,6 +37,9 @@ type ServiceCreateActionWorkflowConfigStepRequest struct {
 
 	// public git vcs config
 	PublicGitVcsConfig *ServicePublicGitVCSActionWorkflowConfigRequest `json:"public_git_vcs_config,omitempty"`
+
+	// references
+	References []string `json:"references"`
 }
 
 // Validate validates this service create action workflow config step request

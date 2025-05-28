@@ -62,6 +62,9 @@ type AppActionWorkflowStepConfig struct {
 		AppPublicGitVCSConfig
 	} `json:"public_git_vcs_config,omitempty"`
 
+	// references
+	References []string `json:"references"`
+
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
 }
