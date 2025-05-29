@@ -43,6 +43,9 @@ type AppActionWorkflowConfig struct {
 	// references
 	References []string `json:"references"`
 
+	// refs
+	Refs []*RefsRef `json:"refs"`
+
 	// steps
 	Steps []*AppActionWorkflowStepConfig `json:"steps"`
 
@@ -60,6 +63,10 @@ type AppActionWorkflowConfig struct {
 func (m *AppActionWorkflowConfig) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateRefs(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSteps(formats); err != nil {
 		res = append(res, err)
 	}
@@ -71,6 +78,32 @@ func (m *AppActionWorkflowConfig) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppActionWorkflowConfig) validateRefs(formats strfmt.Registry) error {
+	if swag.IsZero(m.Refs) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Refs); i++ {
+		if swag.IsZero(m.Refs[i]) { // not required
+			continue
+		}
+
+		if m.Refs[i] != nil {
+			if err := m.Refs[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("refs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -130,6 +163,10 @@ func (m *AppActionWorkflowConfig) validateTriggers(formats strfmt.Registry) erro
 func (m *AppActionWorkflowConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateRefs(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateSteps(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -141,6 +178,31 @@ func (m *AppActionWorkflowConfig) ContextValidate(ctx context.Context, formats s
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppActionWorkflowConfig) contextValidateRefs(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Refs); i++ {
+
+		if m.Refs[i] != nil {
+
+			if swag.IsZero(m.Refs[i]) { // not required
+				return nil
+			}
+
+			if err := m.Refs[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("refs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
