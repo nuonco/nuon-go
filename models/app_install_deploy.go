@@ -65,7 +65,7 @@ type AppInstallDeploy struct {
 	OciArtifact *AppOCIArtifact `json:"oci_artifact,omitempty"`
 
 	// outputs
-	Outputs interface{} `json:"outputs,omitempty"`
+	Outputs map[string]interface{} `json:"outputs,omitempty"`
 
 	// release id
 	ReleaseID string `json:"release_id,omitempty"`

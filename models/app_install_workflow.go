@@ -50,7 +50,7 @@ type AppInstallWorkflow struct {
 	InstallSandboxRuns []*AppInstallSandboxRun `json:"install_sandbox_runs"`
 
 	// links
-	Links interface{} `json:"links,omitempty"`
+	Links map[string]interface{} `json:"links,omitempty"`
 
 	// metadata
 	Metadata map[string]string `json:"metadata,omitempty"`

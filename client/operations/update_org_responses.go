@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *UpdateOrgOK) Code() int {
 }
 
 func (o *UpdateOrgOK) Error() string {
-	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgOK %s", 200, payload)
 }
 
 func (o *UpdateOrgOK) String() string {
-	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgOK %s", 200, payload)
 }
 
 func (o *UpdateOrgOK) GetPayload() *models.AppOrg {
@@ -177,11 +180,13 @@ func (o *UpdateOrgBadRequest) Code() int {
 }
 
 func (o *UpdateOrgBadRequest) Error() string {
-	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgBadRequest %s", 400, payload)
 }
 
 func (o *UpdateOrgBadRequest) String() string {
-	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgBadRequest %s", 400, payload)
 }
 
 func (o *UpdateOrgBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +250,13 @@ func (o *UpdateOrgUnauthorized) Code() int {
 }
 
 func (o *UpdateOrgUnauthorized) Error() string {
-	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgUnauthorized %s", 401, payload)
 }
 
 func (o *UpdateOrgUnauthorized) String() string {
-	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgUnauthorized %s", 401, payload)
 }
 
 func (o *UpdateOrgUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +320,13 @@ func (o *UpdateOrgForbidden) Code() int {
 }
 
 func (o *UpdateOrgForbidden) Error() string {
-	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgForbidden %s", 403, payload)
 }
 
 func (o *UpdateOrgForbidden) String() string {
-	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgForbidden %s", 403, payload)
 }
 
 func (o *UpdateOrgForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +390,13 @@ func (o *UpdateOrgNotFound) Code() int {
 }
 
 func (o *UpdateOrgNotFound) Error() string {
-	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgNotFound %s", 404, payload)
 }
 
 func (o *UpdateOrgNotFound) String() string {
-	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgNotFound %s", 404, payload)
 }
 
 func (o *UpdateOrgNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +460,13 @@ func (o *UpdateOrgInternalServerError) Code() int {
 }
 
 func (o *UpdateOrgInternalServerError) Error() string {
-	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateOrgInternalServerError) String() string {
-	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/orgs/current][%d] updateOrgInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateOrgInternalServerError) GetPayload() *models.StderrErrResponse {

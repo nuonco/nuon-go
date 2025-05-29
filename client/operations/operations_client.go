@@ -9,12 +9,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new operations API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new operations API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new operations API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -25,7 +51,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -350,7 +376,13 @@ type ClientService interface {
 
 	GetTerraformWorkspaceStateByID(params *GetTerraformWorkspaceStateByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceStateByIDOK, error)
 
+	GetTerraformWorkspaceStateJSONResources(params *GetTerraformWorkspaceStateJSONResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceStateJSONResourcesOK, error)
+
 	GetTerraformWorkspaceStateResources(params *GetTerraformWorkspaceStateResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceStateResourcesOK, error)
+
+	GetTerraformWorkspaceStatesJSON(params *GetTerraformWorkspaceStatesJSONParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceStatesJSONOK, error)
+
+	GetTerraformWorkspaceStatesJSONByID(params *GetTerraformWorkspaceStatesJSONByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceStatesJSONByIDOK, error)
 
 	GetTerraformWorkspaces(params *GetTerraformWorkspacesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspacesOK, error)
 
@@ -2182,7 +2214,7 @@ func (a *Client) DeleteTerraformWorkspace(params *DeleteTerraformWorkspaceParams
 	op := &runtime.ClientOperation{
 		ID:                 "DeleteTerraformWorkspace",
 		Method:             "DELETE",
-		PathPattern:        "/v1/terraform-workspace",
+		PathPattern:        "/v1/terraform-workspace/{workspace_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -6731,7 +6763,7 @@ func (a *Client) GetTerraformWorkspace(params *GetTerraformWorkspaceParams, auth
 	op := &runtime.ClientOperation{
 		ID:                 "GetTerraformWorkspace",
 		Method:             "GET",
-		PathPattern:        "/v1/terraform-workspace",
+		PathPattern:        "/v1/terraform-workspace/{workspace_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -6799,6 +6831,45 @@ func (a *Client) GetTerraformWorkspaceStateByID(params *GetTerraformWorkspaceSta
 }
 
 /*
+GetTerraformWorkspaceStateJSONResources gets terraform state resources this output is similar to terraform state list
+*/
+func (a *Client) GetTerraformWorkspaceStateJSONResources(params *GetTerraformWorkspaceStateJSONResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceStateJSONResourcesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetTerraformWorkspaceStateJSONResourcesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetTerraformWorkspaceStateJSONResources",
+		Method:             "GET",
+		PathPattern:        "/v1/runners/terraform-workspace/{workspace_id}/state-json/{state_id}/resources",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetTerraformWorkspaceStateJSONResourcesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetTerraformWorkspaceStateJSONResourcesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetTerraformWorkspaceStateJSONResources: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetTerraformWorkspaceStateResources gets terraform state resources
 */
 func (a *Client) GetTerraformWorkspaceStateResources(params *GetTerraformWorkspaceStateResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceStateResourcesOK, error) {
@@ -6834,6 +6905,84 @@ func (a *Client) GetTerraformWorkspaceStateResources(params *GetTerraformWorkspa
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetTerraformWorkspaceStateResources: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetTerraformWorkspaceStatesJSON gets terraform states json
+*/
+func (a *Client) GetTerraformWorkspaceStatesJSON(params *GetTerraformWorkspaceStatesJSONParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceStatesJSONOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetTerraformWorkspaceStatesJSONParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetTerraformWorkspaceStatesJSON",
+		Method:             "GET",
+		PathPattern:        "/v1/runners/terraform-workspace/{workspace_id}/state-json",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetTerraformWorkspaceStatesJSONReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetTerraformWorkspaceStatesJSONOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetTerraformWorkspaceStatesJSON: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetTerraformWorkspaceStatesJSONByID gets terraform state json by id this output is same as terraform show json
+*/
+func (a *Client) GetTerraformWorkspaceStatesJSONByID(params *GetTerraformWorkspaceStatesJSONByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceStatesJSONByIDOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetTerraformWorkspaceStatesJSONByIDParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetTerraformWorkspaceStatesJSONByID",
+		Method:             "GET",
+		PathPattern:        "/v1/runners/terraform-workspace/{workspace_id}/state-json/{state_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetTerraformWorkspaceStatesJSONByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetTerraformWorkspaceStatesJSONByIDOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetTerraformWorkspaceStatesJSONByID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

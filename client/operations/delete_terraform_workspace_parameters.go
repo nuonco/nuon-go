@@ -60,6 +60,13 @@ DeleteTerraformWorkspaceParams contains all the parameters to send to the API en
 	Typically these are written to a http.Request.
 */
 type DeleteTerraformWorkspaceParams struct {
+
+	/* WorkspaceID.
+
+	   workspace ID
+	*/
+	WorkspaceID string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -113,6 +120,17 @@ func (o *DeleteTerraformWorkspaceParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithWorkspaceID adds the workspaceID to the delete terraform workspace params
+func (o *DeleteTerraformWorkspaceParams) WithWorkspaceID(workspaceID string) *DeleteTerraformWorkspaceParams {
+	o.SetWorkspaceID(workspaceID)
+	return o
+}
+
+// SetWorkspaceID adds the workspaceId to the delete terraform workspace params
+func (o *DeleteTerraformWorkspaceParams) SetWorkspaceID(workspaceID string) {
+	o.WorkspaceID = workspaceID
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *DeleteTerraformWorkspaceParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -120,6 +138,11 @@ func (o *DeleteTerraformWorkspaceParams) WriteToRequest(r runtime.ClientRequest,
 		return err
 	}
 	var res []error
+
+	// path param workspace_id
+	if err := r.SetPathParam("workspace_id", o.WorkspaceID); err != nil {
+		return err
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

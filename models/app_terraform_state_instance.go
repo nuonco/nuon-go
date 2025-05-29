@@ -18,7 +18,7 @@ import (
 type AppTerraformStateInstance struct {
 
 	// attributes
-	Attributes interface{} `json:"attributes,omitempty"`
+	Attributes map[string]interface{} `json:"attributes,omitempty"`
 
 	// schema version
 	SchemaVersion int64 `json:"schema_version,omitempty"`
