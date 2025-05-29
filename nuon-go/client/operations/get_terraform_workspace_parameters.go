@@ -60,6 +60,13 @@ GetTerraformWorkspaceParams contains all the parameters to send to the API endpo
 	Typically these are written to a http.Request.
 */
 type GetTerraformWorkspaceParams struct {
+
+	/* WorkspaceID.
+
+	   workspace ID
+	*/
+	WorkspaceID string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -113,6 +120,17 @@ func (o *GetTerraformWorkspaceParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithWorkspaceID adds the workspaceID to the get terraform workspace params
+func (o *GetTerraformWorkspaceParams) WithWorkspaceID(workspaceID string) *GetTerraformWorkspaceParams {
+	o.SetWorkspaceID(workspaceID)
+	return o
+}
+
+// SetWorkspaceID adds the workspaceId to the get terraform workspace params
+func (o *GetTerraformWorkspaceParams) SetWorkspaceID(workspaceID string) {
+	o.WorkspaceID = workspaceID
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *GetTerraformWorkspaceParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -120,6 +138,11 @@ func (o *GetTerraformWorkspaceParams) WriteToRequest(r runtime.ClientRequest, re
 		return err
 	}
 	var res []error
+
+	// path param workspace_id
+	if err := r.SetPathParam("workspace_id", o.WorkspaceID); err != nil {
+		return err
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
