@@ -24,6 +24,12 @@ type ServiceCreateActionWorkflowConfigRequest struct {
 	// Required: true
 	AppConfigID *string `json:"app_config_id"`
 
+	// dependencies
+	Dependencies []string `json:"dependencies"`
+
+	// references
+	References []string `json:"references"`
+
 	// steps
 	// Required: true
 	Steps []*ServiceCreateActionWorkflowConfigStepRequest `json:"steps"`

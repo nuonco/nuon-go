@@ -19,6 +19,9 @@ import (
 // swagger:model app.AppConfig
 type AppAppConfig struct {
 
+	// action workflow configs
+	ActionWorkflowConfigs []*AppActionWorkflowConfig `json:"action_workflow_configs"`
+
 	// app id
 	AppID string `json:"app_id,omitempty"`
 
@@ -90,6 +93,10 @@ type AppAppConfig struct {
 func (m *AppAppConfig) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateActionWorkflowConfigs(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateBreakGlass(formats); err != nil {
 		res = append(res, err)
 	}
@@ -133,6 +140,32 @@ func (m *AppAppConfig) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppAppConfig) validateActionWorkflowConfigs(formats strfmt.Registry) error {
+	if swag.IsZero(m.ActionWorkflowConfigs) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.ActionWorkflowConfigs); i++ {
+		if swag.IsZero(m.ActionWorkflowConfigs[i]) { // not required
+			continue
+		}
+
+		if m.ActionWorkflowConfigs[i] != nil {
+			if err := m.ActionWorkflowConfigs[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("action_workflow_configs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("action_workflow_configs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -335,6 +368,10 @@ func (m *AppAppConfig) validateStatus(formats strfmt.Registry) error {
 func (m *AppAppConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateActionWorkflowConfigs(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateBreakGlass(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -378,6 +415,31 @@ func (m *AppAppConfig) ContextValidate(ctx context.Context, formats strfmt.Regis
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppAppConfig) contextValidateActionWorkflowConfigs(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.ActionWorkflowConfigs); i++ {
+
+		if m.ActionWorkflowConfigs[i] != nil {
+
+			if swag.IsZero(m.ActionWorkflowConfigs[i]) { // not required
+				return nil
+			}
+
+			if err := m.ActionWorkflowConfigs[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("action_workflow_configs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("action_workflow_configs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

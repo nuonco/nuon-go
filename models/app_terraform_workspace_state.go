@@ -27,9 +27,6 @@ type AppTerraformWorkspaceState struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
-	// data
-	Data *AppTerraformStateData `json:"data,omitempty"`
-
 	// id
 	ID string `json:"id,omitempty"`
 
@@ -38,6 +35,9 @@ type AppTerraformWorkspaceState struct {
 
 	// revision
 	Revision int64 `json:"revision,omitempty"`
+
+	// runner job id
+	RunnerJobID string `json:"runner_job_id,omitempty"`
 
 	// terraform workspace
 	TerraformWorkspace *AppTerraformWorkspace `json:"terraform_workspace,omitempty"`
@@ -53,10 +53,6 @@ type AppTerraformWorkspaceState struct {
 func (m *AppTerraformWorkspaceState) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateData(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateTerraformWorkspace(formats); err != nil {
 		res = append(res, err)
 	}
@@ -64,25 +60,6 @@ func (m *AppTerraformWorkspaceState) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *AppTerraformWorkspaceState) validateData(formats strfmt.Registry) error {
-	if swag.IsZero(m.Data) { // not required
-		return nil
-	}
-
-	if m.Data != nil {
-		if err := m.Data.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("data")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("data")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -109,10 +86,6 @@ func (m *AppTerraformWorkspaceState) validateTerraformWorkspace(formats strfmt.R
 func (m *AppTerraformWorkspaceState) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateData(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateTerraformWorkspace(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -120,27 +93,6 @@ func (m *AppTerraformWorkspaceState) ContextValidate(ctx context.Context, format
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *AppTerraformWorkspaceState) contextValidateData(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Data != nil {
-
-		if swag.IsZero(m.Data) { // not required
-			return nil
-		}
-
-		if err := m.Data.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("data")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("data")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 

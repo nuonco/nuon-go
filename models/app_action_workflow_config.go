@@ -28,6 +28,9 @@ type AppActionWorkflowConfig struct {
 	// app id
 	AppID string `json:"app_id,omitempty"`
 
+	// component dependency ids
+	ComponentDependencyIds []string `json:"component_dependency_ids"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
@@ -36,6 +39,9 @@ type AppActionWorkflowConfig struct {
 
 	// id
 	ID string `json:"id,omitempty"`
+
+	// references
+	References []string `json:"references"`
 
 	// steps
 	Steps []*AppActionWorkflowStepConfig `json:"steps"`
