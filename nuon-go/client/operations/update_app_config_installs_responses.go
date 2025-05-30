@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *UpdateAppConfigInstallsOK) Code() int {
 }
 
 func (o *UpdateAppConfigInstallsOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsOK %s", 200, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsOK  %+v", 200, o.Payload)
 }
 
 func (o *UpdateAppConfigInstallsOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsOK %s", 200, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsOK  %+v", 200, o.Payload)
 }
 
 func (o *UpdateAppConfigInstallsOK) GetPayload() string {
@@ -178,13 +175,11 @@ func (o *UpdateAppConfigInstallsBadRequest) Code() int {
 }
 
 func (o *UpdateAppConfigInstallsBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *UpdateAppConfigInstallsBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *UpdateAppConfigInstallsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -248,13 +243,11 @@ func (o *UpdateAppConfigInstallsUnauthorized) Code() int {
 }
 
 func (o *UpdateAppConfigInstallsUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *UpdateAppConfigInstallsUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *UpdateAppConfigInstallsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -318,13 +311,11 @@ func (o *UpdateAppConfigInstallsForbidden) Code() int {
 }
 
 func (o *UpdateAppConfigInstallsForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *UpdateAppConfigInstallsForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *UpdateAppConfigInstallsForbidden) GetPayload() *models.StderrErrResponse {
@@ -388,13 +379,11 @@ func (o *UpdateAppConfigInstallsNotFound) Code() int {
 }
 
 func (o *UpdateAppConfigInstallsNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *UpdateAppConfigInstallsNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *UpdateAppConfigInstallsNotFound) GetPayload() *models.StderrErrResponse {
@@ -458,13 +447,11 @@ func (o *UpdateAppConfigInstallsInternalServerError) Code() int {
 }
 
 func (o *UpdateAppConfigInstallsInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *UpdateAppConfigInstallsInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/config/{app_config_id}/update-installs][%d] updateAppConfigInstallsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *UpdateAppConfigInstallsInternalServerError) GetPayload() *models.StderrErrResponse {
