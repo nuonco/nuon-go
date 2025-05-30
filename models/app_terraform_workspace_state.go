@@ -36,6 +36,9 @@ type AppTerraformWorkspaceState struct {
 	// revision
 	Revision int64 `json:"revision,omitempty"`
 
+	// runner job
+	RunnerJob *AppRunnerJob `json:"runner_job,omitempty"`
+
 	// runner job id
 	RunnerJobID string `json:"runner_job_id,omitempty"`
 
@@ -53,6 +56,10 @@ type AppTerraformWorkspaceState struct {
 func (m *AppTerraformWorkspaceState) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateRunnerJob(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateTerraformWorkspace(formats); err != nil {
 		res = append(res, err)
 	}
@@ -60,6 +67,25 @@ func (m *AppTerraformWorkspaceState) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppTerraformWorkspaceState) validateRunnerJob(formats strfmt.Registry) error {
+	if swag.IsZero(m.RunnerJob) { // not required
+		return nil
+	}
+
+	if m.RunnerJob != nil {
+		if err := m.RunnerJob.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("runner_job")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("runner_job")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -86,6 +112,10 @@ func (m *AppTerraformWorkspaceState) validateTerraformWorkspace(formats strfmt.R
 func (m *AppTerraformWorkspaceState) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateRunnerJob(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateTerraformWorkspace(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -93,6 +123,27 @@ func (m *AppTerraformWorkspaceState) ContextValidate(ctx context.Context, format
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppTerraformWorkspaceState) contextValidateRunnerJob(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.RunnerJob != nil {
+
+		if swag.IsZero(m.RunnerJob) { // not required
+			return nil
+		}
+
+		if err := m.RunnerJob.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("runner_job")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("runner_job")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

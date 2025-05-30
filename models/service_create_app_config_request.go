@@ -17,6 +17,9 @@ import (
 // swagger:model service.CreateAppConfigRequest
 type ServiceCreateAppConfigRequest struct {
 
+	// cli version
+	CliVersion string `json:"cli_version,omitempty"`
+
 	// not required Readme
 	Readme string `json:"readme,omitempty"`
 }
