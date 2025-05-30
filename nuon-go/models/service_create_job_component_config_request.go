@@ -25,6 +25,9 @@ type ServiceCreateJobComponentConfigRequest struct {
 	// args
 	Args []string `json:"args"`
 
+	// checksum
+	Checksum string `json:"checksum,omitempty"`
+
 	// cmd
 	Cmd []string `json:"cmd"`
 

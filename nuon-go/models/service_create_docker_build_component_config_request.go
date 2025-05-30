@@ -25,6 +25,9 @@ type ServiceCreateDockerBuildComponentConfigRequest struct {
 	// build args
 	BuildArgs []string `json:"build_args"`
 
+	// checksum
+	Checksum string `json:"checksum,omitempty"`
+
 	// connected github vcs config
 	ConnectedGithubVcsConfig *ServiceConnectedGithubVCSConfigRequest `json:"connected_github_vcs_config,omitempty"`
 
