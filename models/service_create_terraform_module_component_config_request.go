@@ -22,6 +22,9 @@ type ServiceCreateTerraformModuleComponentConfigRequest struct {
 	// app config id
 	AppConfigID string `json:"app_config_id,omitempty"`
 
+	// checksum
+	Checksum string `json:"checksum,omitempty"`
+
 	// connected github vcs config
 	ConnectedGithubVcsConfig *ServiceConnectedGithubVCSConfigRequest `json:"connected_github_vcs_config,omitempty"`
 

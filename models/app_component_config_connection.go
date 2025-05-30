@@ -25,6 +25,9 @@ type AppComponentConfigConnection struct {
 	// app config version
 	AppConfigVersion int64 `json:"app_config_version,omitempty"`
 
+	// checksum
+	Checksum string `json:"checksum,omitempty"`
+
 	// component dependency ids
 	ComponentDependencyIds []string `json:"component_dependency_ids"`
 
