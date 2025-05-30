@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *GetAppSandboxConfigsOK) Code() int {
 }
 
 func (o *GetAppSandboxConfigsOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsOK  %+v", 200, o.Payload)
 }
 
 func (o *GetAppSandboxConfigsOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsOK %s", 200, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsOK  %+v", 200, o.Payload)
 }
 
 func (o *GetAppSandboxConfigsOK) GetPayload() []*models.AppAppSandboxConfig {
@@ -178,13 +175,11 @@ func (o *GetAppSandboxConfigsBadRequest) Code() int {
 }
 
 func (o *GetAppSandboxConfigsBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetAppSandboxConfigsBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetAppSandboxConfigsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -248,13 +243,11 @@ func (o *GetAppSandboxConfigsUnauthorized) Code() int {
 }
 
 func (o *GetAppSandboxConfigsUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetAppSandboxConfigsUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetAppSandboxConfigsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -318,13 +311,11 @@ func (o *GetAppSandboxConfigsForbidden) Code() int {
 }
 
 func (o *GetAppSandboxConfigsForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetAppSandboxConfigsForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetAppSandboxConfigsForbidden) GetPayload() *models.StderrErrResponse {
@@ -388,13 +379,11 @@ func (o *GetAppSandboxConfigsNotFound) Code() int {
 }
 
 func (o *GetAppSandboxConfigsNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetAppSandboxConfigsNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsNotFound %s", 404, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetAppSandboxConfigsNotFound) GetPayload() *models.StderrErrResponse {
@@ -458,13 +447,11 @@ func (o *GetAppSandboxConfigsInternalServerError) Code() int {
 }
 
 func (o *GetAppSandboxConfigsInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetAppSandboxConfigsInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/sandbox-configs][%d] getAppSandboxConfigsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetAppSandboxConfigsInternalServerError) GetPayload() *models.StderrErrResponse {

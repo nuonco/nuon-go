@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *ForceShutDownRunnerCreated) Code() int {
 }
 
 func (o *ForceShutDownRunnerCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerCreated  %+v", 201, o.Payload)
 }
 
 func (o *ForceShutDownRunnerCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerCreated  %+v", 201, o.Payload)
 }
 
 func (o *ForceShutDownRunnerCreated) GetPayload() bool {
@@ -178,13 +175,11 @@ func (o *ForceShutDownRunnerBadRequest) Code() int {
 }
 
 func (o *ForceShutDownRunnerBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *ForceShutDownRunnerBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *ForceShutDownRunnerBadRequest) GetPayload() *models.StderrErrResponse {
@@ -248,13 +243,11 @@ func (o *ForceShutDownRunnerUnauthorized) Code() int {
 }
 
 func (o *ForceShutDownRunnerUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *ForceShutDownRunnerUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *ForceShutDownRunnerUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -318,13 +311,11 @@ func (o *ForceShutDownRunnerForbidden) Code() int {
 }
 
 func (o *ForceShutDownRunnerForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerForbidden  %+v", 403, o.Payload)
 }
 
 func (o *ForceShutDownRunnerForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerForbidden  %+v", 403, o.Payload)
 }
 
 func (o *ForceShutDownRunnerForbidden) GetPayload() *models.StderrErrResponse {
@@ -388,13 +379,11 @@ func (o *ForceShutDownRunnerNotFound) Code() int {
 }
 
 func (o *ForceShutDownRunnerNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerNotFound  %+v", 404, o.Payload)
 }
 
 func (o *ForceShutDownRunnerNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerNotFound  %+v", 404, o.Payload)
 }
 
 func (o *ForceShutDownRunnerNotFound) GetPayload() *models.StderrErrResponse {
@@ -458,13 +447,11 @@ func (o *ForceShutDownRunnerInternalServerError) Code() int {
 }
 
 func (o *ForceShutDownRunnerInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *ForceShutDownRunnerInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *ForceShutDownRunnerInternalServerError) GetPayload() *models.StderrErrResponse {

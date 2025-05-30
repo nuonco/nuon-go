@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -110,13 +109,11 @@ func (o *CreateInstallWorkflowStepApprovalResponseCreated) Code() int {
 }
 
 func (o *CreateInstallWorkflowStepApprovalResponseCreated) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateInstallWorkflowStepApprovalResponseCreated) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseCreated %s", 201, payload)
+	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateInstallWorkflowStepApprovalResponseCreated) GetPayload() *models.AppInstallWorkflowStepApprovalResponse {
@@ -180,13 +177,11 @@ func (o *CreateInstallWorkflowStepApprovalResponseBadRequest) Code() int {
 }
 
 func (o *CreateInstallWorkflowStepApprovalResponseBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateInstallWorkflowStepApprovalResponseBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateInstallWorkflowStepApprovalResponseBadRequest) GetPayload() *models.StderrErrResponse {
@@ -250,13 +245,11 @@ func (o *CreateInstallWorkflowStepApprovalResponseUnauthorized) Code() int {
 }
 
 func (o *CreateInstallWorkflowStepApprovalResponseUnauthorized) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateInstallWorkflowStepApprovalResponseUnauthorized) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseUnauthorized %s", 401, payload)
+	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateInstallWorkflowStepApprovalResponseUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -320,13 +313,11 @@ func (o *CreateInstallWorkflowStepApprovalResponseForbidden) Code() int {
 }
 
 func (o *CreateInstallWorkflowStepApprovalResponseForbidden) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateInstallWorkflowStepApprovalResponseForbidden) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateInstallWorkflowStepApprovalResponseForbidden) GetPayload() *models.StderrErrResponse {
@@ -390,13 +381,11 @@ func (o *CreateInstallWorkflowStepApprovalResponseNotFound) Code() int {
 }
 
 func (o *CreateInstallWorkflowStepApprovalResponseNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateInstallWorkflowStepApprovalResponseNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateInstallWorkflowStepApprovalResponseNotFound) GetPayload() *models.StderrErrResponse {
@@ -460,13 +449,11 @@ func (o *CreateInstallWorkflowStepApprovalResponseInternalServerError) Code() in
 }
 
 func (o *CreateInstallWorkflowStepApprovalResponseInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateInstallWorkflowStepApprovalResponseInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateInstallWorkflowStepApprovalResponseInternalServerError) GetPayload() *models.StderrErrResponse {

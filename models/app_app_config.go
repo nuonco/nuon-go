@@ -31,6 +31,9 @@ type AppAppConfig struct {
 	// checksum
 	Checksum string `json:"checksum,omitempty"`
 
+	// cli version
+	CliVersion string `json:"cli_version,omitempty"`
+
 	// component config connections
 	ComponentConfigConnections []*AppComponentConfigConnection `json:"component_config_connections"`
 

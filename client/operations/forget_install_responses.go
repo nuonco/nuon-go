@@ -6,7 +6,6 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 
@@ -98,13 +97,11 @@ func (o *ForgetInstallOK) Code() int {
 }
 
 func (o *ForgetInstallOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallOK %s", 200, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallOK  %+v", 200, o.Payload)
 }
 
 func (o *ForgetInstallOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallOK %s", 200, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallOK  %+v", 200, o.Payload)
 }
 
 func (o *ForgetInstallOK) GetPayload() bool {
@@ -166,13 +163,11 @@ func (o *ForgetInstallBadRequest) Code() int {
 }
 
 func (o *ForgetInstallBadRequest) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *ForgetInstallBadRequest) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *ForgetInstallBadRequest) GetPayload() *models.StderrErrResponse {
@@ -236,13 +231,11 @@ func (o *ForgetInstallNotFound) Code() int {
 }
 
 func (o *ForgetInstallNotFound) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallNotFound  %+v", 404, o.Payload)
 }
 
 func (o *ForgetInstallNotFound) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallNotFound  %+v", 404, o.Payload)
 }
 
 func (o *ForgetInstallNotFound) GetPayload() *models.StderrErrResponse {
@@ -306,13 +299,11 @@ func (o *ForgetInstallInternalServerError) Code() int {
 }
 
 func (o *ForgetInstallInternalServerError) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *ForgetInstallInternalServerError) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *ForgetInstallInternalServerError) GetPayload() *models.StderrErrResponse {
