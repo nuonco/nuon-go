@@ -67,6 +67,12 @@ type LockTerraformWorkspaceParams struct {
 	*/
 	Body interface{}
 
+	/* JobID.
+
+	   job ID
+	*/
+	JobID *string
+
 	/* WorkspaceID.
 
 	   workspace ID
@@ -137,6 +143,17 @@ func (o *LockTerraformWorkspaceParams) SetBody(body interface{}) {
 	o.Body = body
 }
 
+// WithJobID adds the jobID to the lock terraform workspace params
+func (o *LockTerraformWorkspaceParams) WithJobID(jobID *string) *LockTerraformWorkspaceParams {
+	o.SetJobID(jobID)
+	return o
+}
+
+// SetJobID adds the jobId to the lock terraform workspace params
+func (o *LockTerraformWorkspaceParams) SetJobID(jobID *string) {
+	o.JobID = jobID
+}
+
 // WithWorkspaceID adds the workspaceID to the lock terraform workspace params
 func (o *LockTerraformWorkspaceParams) WithWorkspaceID(workspaceID string) *LockTerraformWorkspaceParams {
 	o.SetWorkspaceID(workspaceID)
@@ -158,6 +175,23 @@ func (o *LockTerraformWorkspaceParams) WriteToRequest(r runtime.ClientRequest, r
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err
+		}
+	}
+
+	if o.JobID != nil {
+
+		// query param job_id
+		var qrJobID string
+
+		if o.JobID != nil {
+			qrJobID = *o.JobID
+		}
+		qJobID := qrJobID
+		if qJobID != "" {
+
+			if err := r.SetQueryParam("job_id", qJobID); err != nil {
+				return err
+			}
 		}
 	}
 

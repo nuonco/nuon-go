@@ -28,6 +28,9 @@ type ServiceCreateHelmComponentConfigRequest struct {
 	// Min Length: 5
 	ChartName *string `json:"chart_name"`
 
+	// checksum
+	Checksum string `json:"checksum,omitempty"`
+
 	// connected github vcs config
 	ConnectedGithubVcsConfig *ServiceConnectedGithubVCSConfigRequest `json:"connected_github_vcs_config,omitempty"`
 
