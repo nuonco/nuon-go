@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GracefulShutDownRunnerCreated) Code() int {
 }
 
 func (o *GracefulShutDownRunnerCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerCreated %s", 201, payload)
 }
 
 func (o *GracefulShutDownRunnerCreated) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerCreated %s", 201, payload)
 }
 
 func (o *GracefulShutDownRunnerCreated) GetPayload() bool {
@@ -175,11 +178,13 @@ func (o *GracefulShutDownRunnerBadRequest) Code() int {
 }
 
 func (o *GracefulShutDownRunnerBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerBadRequest %s", 400, payload)
 }
 
 func (o *GracefulShutDownRunnerBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerBadRequest %s", 400, payload)
 }
 
 func (o *GracefulShutDownRunnerBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +248,13 @@ func (o *GracefulShutDownRunnerUnauthorized) Code() int {
 }
 
 func (o *GracefulShutDownRunnerUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerUnauthorized %s", 401, payload)
 }
 
 func (o *GracefulShutDownRunnerUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerUnauthorized %s", 401, payload)
 }
 
 func (o *GracefulShutDownRunnerUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +318,13 @@ func (o *GracefulShutDownRunnerForbidden) Code() int {
 }
 
 func (o *GracefulShutDownRunnerForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerForbidden %s", 403, payload)
 }
 
 func (o *GracefulShutDownRunnerForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerForbidden %s", 403, payload)
 }
 
 func (o *GracefulShutDownRunnerForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +388,13 @@ func (o *GracefulShutDownRunnerNotFound) Code() int {
 }
 
 func (o *GracefulShutDownRunnerNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerNotFound %s", 404, payload)
 }
 
 func (o *GracefulShutDownRunnerNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerNotFound %s", 404, payload)
 }
 
 func (o *GracefulShutDownRunnerNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +458,13 @@ func (o *GracefulShutDownRunnerInternalServerError) Code() int {
 }
 
 func (o *GracefulShutDownRunnerInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerInternalServerError %s", 500, payload)
 }
 
 func (o *GracefulShutDownRunnerInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/graceful-shutdown][%d] gracefulShutDownRunnerInternalServerError %s", 500, payload)
 }
 
 func (o *GracefulShutDownRunnerInternalServerError) GetPayload() *models.StderrErrResponse {

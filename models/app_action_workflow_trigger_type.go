@@ -36,29 +36,71 @@ const (
 	// AppActionWorkflowTriggerTypeCron captures enum value "cron"
 	AppActionWorkflowTriggerTypeCron AppActionWorkflowTriggerType = "cron"
 
-	// AppActionWorkflowTriggerTypePreDashSandboxDashRun captures enum value "pre-sandbox-run"
-	AppActionWorkflowTriggerTypePreDashSandboxDashRun AppActionWorkflowTriggerType = "pre-sandbox-run"
+	// AppActionWorkflowTriggerTypePreDashDeployDashComponent captures enum value "pre-deploy-component"
+	AppActionWorkflowTriggerTypePreDashDeployDashComponent AppActionWorkflowTriggerType = "pre-deploy-component"
 
-	// AppActionWorkflowTriggerTypePostDashSandboxDashRun captures enum value "post-sandbox-run"
-	AppActionWorkflowTriggerTypePostDashSandboxDashRun AppActionWorkflowTriggerType = "post-sandbox-run"
+	// AppActionWorkflowTriggerTypePostDashDeployDashComponent captures enum value "post-deploy-component"
+	AppActionWorkflowTriggerTypePostDashDeployDashComponent AppActionWorkflowTriggerType = "post-deploy-component"
 
-	// AppActionWorkflowTriggerTypePreDashComponentDashDeploy captures enum value "pre-component-deploy"
-	AppActionWorkflowTriggerTypePreDashComponentDashDeploy AppActionWorkflowTriggerType = "pre-component-deploy"
+	// AppActionWorkflowTriggerTypePreDashTeardownDashComponent captures enum value "pre-teardown-component"
+	AppActionWorkflowTriggerTypePreDashTeardownDashComponent AppActionWorkflowTriggerType = "pre-teardown-component"
 
-	// AppActionWorkflowTriggerTypePostDashComponentDashDeploy captures enum value "post-component-deploy"
-	AppActionWorkflowTriggerTypePostDashComponentDashDeploy AppActionWorkflowTriggerType = "post-component-deploy"
+	// AppActionWorkflowTriggerTypePostDashTeardownDashComponent captures enum value "post-teardown-component"
+	AppActionWorkflowTriggerTypePostDashTeardownDashComponent AppActionWorkflowTriggerType = "post-teardown-component"
 
-	// AppActionWorkflowTriggerTypePreDashComponentDashDelete captures enum value "pre-component-delete"
-	AppActionWorkflowTriggerTypePreDashComponentDashDelete AppActionWorkflowTriggerType = "pre-component-delete"
+	// AppActionWorkflowTriggerTypePreDashSecretsDashSync captures enum value "pre-secrets-sync"
+	AppActionWorkflowTriggerTypePreDashSecretsDashSync AppActionWorkflowTriggerType = "pre-secrets-sync"
 
-	// AppActionWorkflowTriggerTypePostDashComponentDashDelete captures enum value "post-component-delete"
-	AppActionWorkflowTriggerTypePostDashComponentDashDelete AppActionWorkflowTriggerType = "post-component-delete"
+	// AppActionWorkflowTriggerTypePostDashSecretsDashSync captures enum value "post-secrets-sync"
+	AppActionWorkflowTriggerTypePostDashSecretsDashSync AppActionWorkflowTriggerType = "post-secrets-sync"
 
-	// AppActionWorkflowTriggerTypePreDashDeploy captures enum value "pre-deploy"
-	AppActionWorkflowTriggerTypePreDashDeploy AppActionWorkflowTriggerType = "pre-deploy"
+	// AppActionWorkflowTriggerTypePreDashProvision captures enum value "pre-provision"
+	AppActionWorkflowTriggerTypePreDashProvision AppActionWorkflowTriggerType = "pre-provision"
 
-	// AppActionWorkflowTriggerTypePostDashDeploy captures enum value "post-deploy"
-	AppActionWorkflowTriggerTypePostDashDeploy AppActionWorkflowTriggerType = "post-deploy"
+	// AppActionWorkflowTriggerTypePostDashProvision captures enum value "post-provision"
+	AppActionWorkflowTriggerTypePostDashProvision AppActionWorkflowTriggerType = "post-provision"
+
+	// AppActionWorkflowTriggerTypePreDashReprovision captures enum value "pre-reprovision"
+	AppActionWorkflowTriggerTypePreDashReprovision AppActionWorkflowTriggerType = "pre-reprovision"
+
+	// AppActionWorkflowTriggerTypePostDashReprovision captures enum value "post-reprovision"
+	AppActionWorkflowTriggerTypePostDashReprovision AppActionWorkflowTriggerType = "post-reprovision"
+
+	// AppActionWorkflowTriggerTypePreDashDeprovision captures enum value "pre-deprovision"
+	AppActionWorkflowTriggerTypePreDashDeprovision AppActionWorkflowTriggerType = "pre-deprovision"
+
+	// AppActionWorkflowTriggerTypePostDashDeprovision captures enum value "post-deprovision"
+	AppActionWorkflowTriggerTypePostDashDeprovision AppActionWorkflowTriggerType = "post-deprovision"
+
+	// AppActionWorkflowTriggerTypePreDashDeployDashAllDashComponents captures enum value "pre-deploy-all-components"
+	AppActionWorkflowTriggerTypePreDashDeployDashAllDashComponents AppActionWorkflowTriggerType = "pre-deploy-all-components"
+
+	// AppActionWorkflowTriggerTypePostDashDeployDashAllDashComponents captures enum value "post-deploy-all-components"
+	AppActionWorkflowTriggerTypePostDashDeployDashAllDashComponents AppActionWorkflowTriggerType = "post-deploy-all-components"
+
+	// AppActionWorkflowTriggerTypePreDashTeardownDashAllDashComponents captures enum value "pre-teardown-all-components"
+	AppActionWorkflowTriggerTypePreDashTeardownDashAllDashComponents AppActionWorkflowTriggerType = "pre-teardown-all-components"
+
+	// AppActionWorkflowTriggerTypePostDashTeardownDashAllDashComponents captures enum value "post-teardown-all-components"
+	AppActionWorkflowTriggerTypePostDashTeardownDashAllDashComponents AppActionWorkflowTriggerType = "post-teardown-all-components"
+
+	// AppActionWorkflowTriggerTypePreDashDeprovisionDashSandbox captures enum value "pre-deprovision-sandbox"
+	AppActionWorkflowTriggerTypePreDashDeprovisionDashSandbox AppActionWorkflowTriggerType = "pre-deprovision-sandbox"
+
+	// AppActionWorkflowTriggerTypePostDashDeprovisionDashSandbox captures enum value "post-deprovision-sandbox"
+	AppActionWorkflowTriggerTypePostDashDeprovisionDashSandbox AppActionWorkflowTriggerType = "post-deprovision-sandbox"
+
+	// AppActionWorkflowTriggerTypePreDashReprovisionDashSandbox captures enum value "pre-reprovision-sandbox"
+	AppActionWorkflowTriggerTypePreDashReprovisionDashSandbox AppActionWorkflowTriggerType = "pre-reprovision-sandbox"
+
+	// AppActionWorkflowTriggerTypePostDashReprovisionDashSandbox captures enum value "post-reprovision-sandbox"
+	AppActionWorkflowTriggerTypePostDashReprovisionDashSandbox AppActionWorkflowTriggerType = "post-reprovision-sandbox"
+
+	// AppActionWorkflowTriggerTypePreDashUpdateDashInputs captures enum value "pre-update-inputs"
+	AppActionWorkflowTriggerTypePreDashUpdateDashInputs AppActionWorkflowTriggerType = "pre-update-inputs"
+
+	// AppActionWorkflowTriggerTypePostDashUpdateDashInputs captures enum value "post-update-inputs"
+	AppActionWorkflowTriggerTypePostDashUpdateDashInputs AppActionWorkflowTriggerType = "post-update-inputs"
 )
 
 // for schema
@@ -66,7 +108,7 @@ var appActionWorkflowTriggerTypeEnum []interface{}
 
 func init() {
 	var res []AppActionWorkflowTriggerType
-	if err := json.Unmarshal([]byte(`["manual","cron","pre-sandbox-run","post-sandbox-run","pre-component-deploy","post-component-deploy","pre-component-delete","post-component-delete","pre-deploy","post-deploy"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["manual","cron","pre-deploy-component","post-deploy-component","pre-teardown-component","post-teardown-component","pre-secrets-sync","post-secrets-sync","pre-provision","post-provision","pre-reprovision","post-reprovision","pre-deprovision","post-deprovision","pre-deploy-all-components","post-deploy-all-components","pre-teardown-all-components","post-teardown-all-components","pre-deprovision-sandbox","post-deprovision-sandbox","pre-reprovision-sandbox","post-reprovision-sandbox","pre-update-inputs","post-update-inputs"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

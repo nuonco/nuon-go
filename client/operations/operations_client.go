@@ -9,12 +9,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new operations API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new operations API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new operations API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -25,8 +51,32 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
+
+// This client is generated with a few options you might find useful for your swagger spec.
+//
+// Feel free to add you own set of options.
+
+// WithContentType allows the client to force the Content-Type header
+// to negotiate a specific Consumer from the server.
+//
+// You may use this option to set arbitrary extensions to your MIME media type.
+func WithContentType(mime string) ClientOption {
+	return func(r *runtime.ClientOperation) {
+		r.ConsumesMediaTypes = []string{mime}
+	}
+}
+
+// WithContentTypeApplicationJSON sets the Content-Type header to "application/json".
+func WithContentTypeApplicationJSON(r *runtime.ClientOperation) {
+	r.ConsumesMediaTypes = []string{"application/json"}
+}
+
+// WithContentTypeApplicationZip sets the Content-Type header to "application/zip".
+func WithContentTypeApplicationZip(r *runtime.ClientOperation) {
+	r.ConsumesMediaTypes = []string{"application/zip"}
+}
 
 // ClientService is the interface for Client methods
 type ClientService interface {
@@ -41,6 +91,8 @@ type ClientService interface {
 	CreateApp(params *CreateAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppCreated, error)
 
 	CreateAppActionWorkflow(params *CreateAppActionWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppActionWorkflowCreated, error)
+
+	CreateAppBranch(params *CreateAppBranchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppBranchCreated, error)
 
 	CreateAppBreakGlassConfig(params *CreateAppBreakGlassConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppBreakGlassConfigCreated, error)
 
@@ -98,6 +150,8 @@ type ClientService interface {
 
 	CreateVCSConnection(params *CreateVCSConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateVCSConnectionCreated, error)
 
+	CreateVCSConnectionBranch(params *CreateVCSConnectionBranchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateVCSConnectionBranchCreated, error)
+
 	CreateVCSConnectionCallback(params *CreateVCSConnectionCallbackParams, opts ...ClientOption) (*CreateVCSConnectionCallbackCreated, error)
 
 	CreateWaitlist(params *CreateWaitlistParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWaitlistOK, error)
@@ -142,11 +196,17 @@ type ClientService interface {
 
 	GetActionWorkflows(params *GetActionWorkflowsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionWorkflowsOK, error)
 
+	GetAllVCSBranches(params *GetAllVCSBranchesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllVCSBranchesOK, error)
+
 	GetAllVCSConnectedRepos(params *GetAllVCSConnectedReposParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllVCSConnectedReposOK, error)
 
 	GetApp(params *GetAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppOK, error)
 
 	GetAppActionWorkflow(params *GetAppActionWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppActionWorkflowOK, error)
+
+	GetAppBranchAppConfigs(params *GetAppBranchAppConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppBranchAppConfigsOK, error)
+
+	GetAppBranches(params *GetAppBranchesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppBranchesOK, error)
 
 	GetAppBreakGlassConfig(params *GetAppBreakGlassConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppBreakGlassConfigOK, error)
 
@@ -161,6 +221,8 @@ type ClientService interface {
 	GetAppConfigTemplate(params *GetAppConfigTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppConfigTemplateCreated, error)
 
 	GetAppConfigs(params *GetAppConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppConfigsOK, error)
+
+	GetAppFlows(params *GetAppFlowsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppFlowsOK, error)
 
 	GetAppInputConfig(params *GetAppInputConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppInputConfigOK, error)
 
@@ -212,6 +274,8 @@ type ClientService interface {
 
 	GetComponentDependencies(params *GetComponentDependenciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentDependenciesOK, error)
 
+	GetComponentDependents(params *GetComponentDependentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentDependentsOK, error)
+
 	GetComponentLatestBuild(params *GetComponentLatestBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentLatestBuildOK, error)
 
 	GetComponentLatestConfig(params *GetComponentLatestConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentLatestConfigOK, error)
@@ -223,6 +287,8 @@ type ClientService interface {
 	GetCurrentInstallInputs(params *GetCurrentInstallInputsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCurrentInstallInputsOK, error)
 
 	GetCurrentUser(params *GetCurrentUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCurrentUserOK, error)
+
+	GetFlow(params *GetFlowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetFlowOK, error)
 
 	GetInstall(params *GetInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallOK, error)
 
@@ -326,6 +392,8 @@ type ClientService interface {
 
 	GetRunner(params *GetRunnerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerOK, error)
 
+	GetRunnerConnectStatus(params *GetRunnerConnectStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerConnectStatusOK, error)
+
 	GetRunnerJob(params *GetRunnerJobParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobOK, error)
 
 	GetRunnerJobExecution(params *GetRunnerJobExecutionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobExecutionOK, error)
@@ -366,6 +434,8 @@ type ClientService interface {
 
 	GracefulShutDownRunner(params *GracefulShutDownRunnerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GracefulShutDownRunnerCreated, error)
 
+	HandleWebhook(params *HandleWebhookParams, opts ...ClientOption) (*HandleWebhookCreated, error)
+
 	LockTerraformWorkspace(params *LockTerraformWorkspaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LockTerraformWorkspaceOK, error)
 
 	LogStreamReadLogs(params *LogStreamReadLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LogStreamReadLogsOK, error)
@@ -388,9 +458,13 @@ type ClientService interface {
 
 	UpdateAppActionWorkflow(params *UpdateAppActionWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppActionWorkflowCreated, error)
 
+	UpdateAppBranch(params *UpdateAppBranchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppBranchOK, error)
+
 	UpdateAppConfig(params *UpdateAppConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppConfigCreated, error)
 
 	UpdateAppConfigInstalls(params *UpdateAppConfigInstallsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppConfigInstallsOK, error)
+
+	UpdateAppConfigSyncRunPayload(params *UpdateAppConfigSyncRunPayloadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppConfigSyncRunPayloadCreated, error)
 
 	UpdateComponent(params *UpdateComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateComponentOK, error)
 
@@ -403,6 +477,8 @@ type ClientService interface {
 	UpdateOrg(params *UpdateOrgParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateOrgOK, error)
 
 	UpdateTerraformState(params *UpdateTerraformStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTerraformStateOK, error)
+
+	UpdateVCSConnectionBranch(params *UpdateVCSConnectionBranchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVCSConnectionBranchCreated, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -640,6 +716,45 @@ func (a *Client) CreateAppActionWorkflow(params *CreateAppActionWorkflowParams, 
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppActionWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreateAppBranch create app branch API
+*/
+func (a *Client) CreateAppBranch(params *CreateAppBranchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppBranchCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateAppBranchParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateAppBranch",
+		Method:             "POST",
+		PathPattern:        "/v1/apps/{app_id}/branches",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateAppBranchReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateAppBranchCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateAppBranch: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -1320,6 +1435,8 @@ func (a *Client) CreateInstall(params *CreateInstallParams, authInfo runtime.Cli
 
 /*
 CreateInstallActionWorkflowRun creates an action workflow run for an install
+
+AppWorkflowConfigId param has been deprecated and is no longer being consumed, the api uses currently install id to lookup related appworkflowconfigId
 */
 func (a *Client) CreateInstallActionWorkflowRun(params *CreateInstallActionWorkflowRunParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallActionWorkflowRunCreated, error) {
 	// TODO: Validate the params before sending
@@ -1750,6 +1867,45 @@ func (a *Client) CreateVCSConnection(params *CreateVCSConnectionParams, authInfo
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateVCSConnection: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreateVCSConnectionBranch creates a vcs connection branch for github
+*/
+func (a *Client) CreateVCSConnectionBranch(params *CreateVCSConnectionBranchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateVCSConnectionBranchCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateVCSConnectionBranchParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateVCSConnectionBranch",
+		Method:             "POST",
+		PathPattern:        "/v1/vcs/connections/{connection_id}/branches",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateVCSConnectionBranchReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateVCSConnectionBranchCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateVCSConnectionBranch: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -2629,6 +2785,45 @@ func (a *Client) GetActionWorkflows(params *GetActionWorkflowsParams, authInfo r
 }
 
 /*
+GetAllVCSBranches gets all vcs branches
+*/
+func (a *Client) GetAllVCSBranches(params *GetAllVCSBranchesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllVCSBranchesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAllVCSBranchesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetAllVCSBranches",
+		Method:             "GET",
+		PathPattern:        "/v1/vcs/branches",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAllVCSBranchesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAllVCSBranchesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetAllVCSBranches: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetAllVCSConnectedRepos gets all vcs connected repos for an org
 */
 func (a *Client) GetAllVCSConnectedRepos(params *GetAllVCSConnectedReposParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllVCSConnectedReposOK, error) {
@@ -2744,6 +2939,84 @@ func (a *Client) GetAppActionWorkflow(params *GetAppActionWorkflowParams, authIn
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppActionWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAppBranchAppConfigs gets app branch app configs
+*/
+func (a *Client) GetAppBranchAppConfigs(params *GetAppBranchAppConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppBranchAppConfigsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAppBranchAppConfigsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetAppBranchAppConfigs",
+		Method:             "GET",
+		PathPattern:        "/v1/apps/{app_id}/branches/{app_branch_id}/configs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAppBranchAppConfigsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAppBranchAppConfigsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetAppBranchAppConfigs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAppBranches gets app branches
+*/
+func (a *Client) GetAppBranches(params *GetAppBranchesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppBranchesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAppBranchesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetAppBranches",
+		Method:             "GET",
+		PathPattern:        "/v1/apps/{app_id}/branches",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAppBranchesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAppBranchesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetAppBranches: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -3032,6 +3305,47 @@ func (a *Client) GetAppConfigs(params *GetAppConfigsParams, authInfo runtime.Cli
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppConfigs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAppFlows gets flows for an app
+
+Return flows for an app.
+*/
+func (a *Client) GetAppFlows(params *GetAppFlowsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppFlowsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAppFlowsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetAppFlows",
+		Method:             "GET",
+		PathPattern:        "/v1/apps/{app_id}/flows",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAppFlowsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAppFlowsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetAppFlows: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -4031,6 +4345,45 @@ func (a *Client) GetComponentDependencies(params *GetComponentDependenciesParams
 }
 
 /*
+GetComponentDependents gets a component s children
+*/
+func (a *Client) GetComponentDependents(params *GetComponentDependentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentDependentsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetComponentDependentsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetComponentDependents",
+		Method:             "GET",
+		PathPattern:        "/v1/components/{component_id}/dependents",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetComponentDependentsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetComponentDependentsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetComponentDependents: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetComponentLatestBuild gets latest build for a component
 */
 func (a *Client) GetComponentLatestBuild(params *GetComponentLatestBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentLatestBuildOK, error) {
@@ -4160,9 +4513,10 @@ func (a *Client) GetComponentReleases(params *GetComponentReleasesParams, authIn
 description = "description"
 ```
 
-You can pass in a valid source argument to render within a specific source file:
+You can pass in a valid source argument to render within a specific config file:
 
 - input
+- input-group
 - installer
 - sandbox
 - runner
@@ -4171,9 +4525,6 @@ You can pass in a valid source argument to render within a specific source file:
 - helm
 - terraform
 - job
-
-By default, the config expects that you are using multiple files and sources. If you are _not_, then pass the
-`?flat=true` param.
 */
 func (a *Client) GetConfigSchema(params *GetConfigSchemaParams, opts ...ClientOption) (*GetConfigSchemaOK, error) {
 	// TODO: Validate the params before sending
@@ -4285,6 +4636,47 @@ func (a *Client) GetCurrentUser(params *GetCurrentUserParams, authInfo runtime.C
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetCurrentUser: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetFlow gets a flow
+
+Return a flow.
+*/
+func (a *Client) GetFlow(params *GetFlowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetFlowOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetFlowParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetFlow",
+		Method:             "GET",
+		PathPattern:        "/v1/flows/{flow_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetFlowReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetFlowOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetFlow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -6331,6 +6723,53 @@ func (a *Client) GetRunner(params *GetRunnerParams, authInfo runtime.ClientAuthI
 }
 
 /*
+	GetRunnerConnectStatus gets a runner connection satus based on heartbeat
+
+	# get runner connect status
+
+The connected status is based on runner heartbeat:
+
+if no heart beat found — false
+if heart beat > 15 seconds ago — false, hb timestamp
+if the heart beat < 15 seconds ago — true
+*/
+func (a *Client) GetRunnerConnectStatus(params *GetRunnerConnectStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerConnectStatusOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetRunnerConnectStatusParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetRunnerConnectStatus",
+		Method:             "GET",
+		PathPattern:        "/v1/runners/{runner_id}/connected",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetRunnerConnectStatusReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetRunnerConnectStatusOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetRunnerConnectStatus: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetRunnerJob gets runner job
 
 Return a runner job.
@@ -7127,6 +7566,44 @@ func (a *Client) GracefulShutDownRunner(params *GracefulShutDownRunnerParams, au
 }
 
 /*
+HandleWebhook handles webhook from github
+*/
+func (a *Client) HandleWebhook(params *HandleWebhookParams, opts ...ClientOption) (*HandleWebhookCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewHandleWebhookParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "HandleWebhook",
+		Method:             "POST",
+		PathPattern:        "/v1/vcs/handle-webhook",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &HandleWebhookReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*HandleWebhookCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for HandleWebhook: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 LockTerraformWorkspace locks terraform state
 */
 func (a *Client) LockTerraformWorkspace(params *LockTerraformWorkspaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LockTerraformWorkspaceOK, error) {
@@ -7565,6 +8042,45 @@ func (a *Client) UpdateAppActionWorkflow(params *UpdateAppActionWorkflowParams, 
 }
 
 /*
+UpdateAppBranch update app branch API
+*/
+func (a *Client) UpdateAppBranch(params *UpdateAppBranchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppBranchOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateAppBranchParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateAppBranch",
+		Method:             "POST",
+		PathPattern:        "/v1/apps/{app_id}/branches/{app_branch_id}/update",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateAppBranchReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateAppBranchOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateAppBranch: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 UpdateAppConfig Update an app config, setting status and state.
 */
 func (a *Client) UpdateAppConfig(params *UpdateAppConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppConfigCreated, error) {
@@ -7639,6 +8155,47 @@ func (a *Client) UpdateAppConfigInstalls(params *UpdateAppConfigInstallsParams, 
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateAppConfigInstalls: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateAppConfigSyncRunPayload provides a zip base64 encoded payload containing a complete toml app config
+
+Provide a zip, base64 encoded payload containing a complete TOML app config.
+*/
+func (a *Client) UpdateAppConfigSyncRunPayload(params *UpdateAppConfigSyncRunPayloadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppConfigSyncRunPayloadCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateAppConfigSyncRunPayloadParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateAppConfigSyncRunPayload",
+		Method:             "PUT",
+		PathPattern:        "/v1/apps/{app_id}/config-sync-run/{app_config_sync_run_id}/payload",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/zip"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateAppConfigSyncRunPayloadReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateAppConfigSyncRunPayloadCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateAppConfigSyncRunPayload: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -7873,6 +8430,45 @@ func (a *Client) UpdateTerraformState(params *UpdateTerraformStateParams, authIn
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateTerraformState: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateVCSConnectionBranch updates a vcs connection branch for github
+*/
+func (a *Client) UpdateVCSConnectionBranch(params *UpdateVCSConnectionBranchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVCSConnectionBranchCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateVCSConnectionBranchParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateVCSConnectionBranch",
+		Method:             "PATCH",
+		PathPattern:        "/v1/vcs/connections/{connection_id}/branches/{connection_branch_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateVCSConnectionBranchReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateVCSConnectionBranchCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateVCSConnectionBranch: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

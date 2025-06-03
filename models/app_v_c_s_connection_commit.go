@@ -23,9 +23,6 @@ type AppVCSConnectionCommit struct {
 	// author name
 	AuthorName string `json:"author_name,omitempty"`
 
-	// component config connection id
-	ComponentConfigConnectionID string `json:"component_config_connection_id,omitempty"`
-
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
@@ -43,6 +40,15 @@ type AppVCSConnectionCommit struct {
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
+
+	// vcs connection branch id
+	VcsConnectionBranchID string `json:"vcs_connection_branch_id,omitempty"`
+
+	// vcs connection id
+	VcsConnectionID string `json:"vcs_connection_id,omitempty"`
+
+	// vcs connection repo id
+	VcsConnectionRepoID string `json:"vcs_connection_repo_id,omitempty"`
 }
 
 // Validate validates this app v c s connection commit
