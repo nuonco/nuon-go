@@ -50,13 +50,19 @@ type AppInstallWorkflow struct {
 	InstallSandboxRuns []*AppInstallSandboxRun `json:"install_sandbox_runs"`
 
 	// links
-	Links map[string]interface{} `json:"links,omitempty"`
+	Links interface{} `json:"links,omitempty"`
 
 	// metadata
 	Metadata map[string]string `json:"metadata,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
+
+	// owner id
+	OwnerID string `json:"owner_id,omitempty"`
+
+	// owner type
+	OwnerType string `json:"owner_type,omitempty"`
 
 	// started at
 	StartedAt string `json:"started_at,omitempty"`

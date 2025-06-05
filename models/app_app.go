@@ -21,6 +21,12 @@ type AppApp struct {
 	// cloud platform
 	CloudPlatform string `json:"cloud_platform,omitempty"`
 
+	// config directory
+	ConfigDirectory string `json:"config_directory,omitempty"`
+
+	// config repo
+	ConfigRepo string `json:"config_repo,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
@@ -42,7 +48,7 @@ type AppApp struct {
 	} `json:"input_config,omitempty"`
 
 	// links
-	Links map[string]interface{} `json:"links,omitempty"`
+	Links interface{} `json:"links,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
