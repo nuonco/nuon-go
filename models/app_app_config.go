@@ -22,6 +22,12 @@ type AppAppConfig struct {
 	// action workflow configs
 	ActionWorkflowConfigs []*AppActionWorkflowConfig `json:"action_workflow_configs"`
 
+	// app branch
+	AppBranch *AppAppBranch `json:"app_branch,omitempty"`
+
+	// app branch id
+	AppBranchID string `json:"app_branch_id,omitempty"`
+
 	// app id
 	AppID string `json:"app_id,omitempty"`
 
@@ -88,6 +94,9 @@ type AppAppConfig struct {
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
 
+	// vcs connection commit
+	VcsConnectionCommit *AppVCSConnectionCommit `json:"vcs_connection_commit,omitempty"`
+
 	// fields that are filled in via after query or views
 	Version int64 `json:"version,omitempty"`
 }
@@ -97,6 +106,10 @@ func (m *AppAppConfig) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateActionWorkflowConfigs(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAppBranch(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -140,6 +153,10 @@ func (m *AppAppConfig) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateVcsConnectionCommit(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -167,6 +184,25 @@ func (m *AppAppConfig) validateActionWorkflowConfigs(formats strfmt.Registry) er
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *AppAppConfig) validateAppBranch(formats strfmt.Registry) error {
+	if swag.IsZero(m.AppBranch) { // not required
+		return nil
+	}
+
+	if m.AppBranch != nil {
+		if err := m.AppBranch.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("app_branch")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("app_branch")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -367,11 +403,34 @@ func (m *AppAppConfig) validateStatus(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppAppConfig) validateVcsConnectionCommit(formats strfmt.Registry) error {
+	if swag.IsZero(m.VcsConnectionCommit) { // not required
+		return nil
+	}
+
+	if m.VcsConnectionCommit != nil {
+		if err := m.VcsConnectionCommit.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("vcs_connection_commit")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("vcs_connection_commit")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app app config based on the context it is used
 func (m *AppAppConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateActionWorkflowConfigs(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateAppBranch(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -415,6 +474,10 @@ func (m *AppAppConfig) ContextValidate(ctx context.Context, formats strfmt.Regis
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateVcsConnectionCommit(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -441,6 +504,27 @@ func (m *AppAppConfig) contextValidateActionWorkflowConfigs(ctx context.Context,
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *AppAppConfig) contextValidateAppBranch(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AppBranch != nil {
+
+		if swag.IsZero(m.AppBranch) { // not required
+			return nil
+		}
+
+		if err := m.AppBranch.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("app_branch")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("app_branch")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -652,6 +736,27 @@ func (m *AppAppConfig) contextValidateStatus(ctx context.Context, formats strfmt
 			return ce.ValidateName("status")
 		}
 		return err
+	}
+
+	return nil
+}
+
+func (m *AppAppConfig) contextValidateVcsConnectionCommit(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.VcsConnectionCommit != nil {
+
+		if swag.IsZero(m.VcsConnectionCommit) { // not required
+			return nil
+		}
+
+		if err := m.VcsConnectionCommit.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("vcs_connection_commit")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("vcs_connection_commit")
+			}
+			return err
+		}
 	}
 
 	return nil

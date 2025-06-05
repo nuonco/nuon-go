@@ -17,6 +17,12 @@ import (
 // swagger:model service.UpdateAppRequest
 type ServiceUpdateAppRequest struct {
 
+	// config directory
+	ConfigDirectory string `json:"config_directory,omitempty"`
+
+	// config repo
+	ConfigRepo string `json:"config_repo,omitempty"`
+
 	// description
 	Description string `json:"description,omitempty"`
 
