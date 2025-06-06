@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetAppInputConfigsOK) Code() int {
 }
 
 func (o *GetAppInputConfigsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsOK %s", 200, payload)
 }
 
 func (o *GetAppInputConfigsOK) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsOK %s", 200, payload)
 }
 
 func (o *GetAppInputConfigsOK) GetPayload() []*models.AppAppInputConfig {
@@ -175,11 +178,13 @@ func (o *GetAppInputConfigsBadRequest) Code() int {
 }
 
 func (o *GetAppInputConfigsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsBadRequest %s", 400, payload)
 }
 
 func (o *GetAppInputConfigsBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsBadRequest %s", 400, payload)
 }
 
 func (o *GetAppInputConfigsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +248,13 @@ func (o *GetAppInputConfigsUnauthorized) Code() int {
 }
 
 func (o *GetAppInputConfigsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsUnauthorized %s", 401, payload)
 }
 
 func (o *GetAppInputConfigsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsUnauthorized %s", 401, payload)
 }
 
 func (o *GetAppInputConfigsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +318,13 @@ func (o *GetAppInputConfigsForbidden) Code() int {
 }
 
 func (o *GetAppInputConfigsForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsForbidden %s", 403, payload)
 }
 
 func (o *GetAppInputConfigsForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsForbidden %s", 403, payload)
 }
 
 func (o *GetAppInputConfigsForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +388,13 @@ func (o *GetAppInputConfigsNotFound) Code() int {
 }
 
 func (o *GetAppInputConfigsNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsNotFound %s", 404, payload)
 }
 
 func (o *GetAppInputConfigsNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsNotFound %s", 404, payload)
 }
 
 func (o *GetAppInputConfigsNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +458,13 @@ func (o *GetAppInputConfigsInternalServerError) Code() int {
 }
 
 func (o *GetAppInputConfigsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsInternalServerError %s", 500, payload)
 }
 
 func (o *GetAppInputConfigsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/input-configs][%d] getAppInputConfigsInternalServerError %s", 500, payload)
 }
 
 func (o *GetAppInputConfigsInternalServerError) GetPayload() *models.StderrErrResponse {

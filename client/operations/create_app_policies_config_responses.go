@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *CreateAppPoliciesConfigCreated) Code() int {
 }
 
 func (o *CreateAppPoliciesConfigCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigCreated %s", 201, payload)
 }
 
 func (o *CreateAppPoliciesConfigCreated) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigCreated %s", 201, payload)
 }
 
 func (o *CreateAppPoliciesConfigCreated) GetPayload() *models.AppAppPoliciesConfig {
@@ -177,11 +180,13 @@ func (o *CreateAppPoliciesConfigBadRequest) Code() int {
 }
 
 func (o *CreateAppPoliciesConfigBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppPoliciesConfigBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppPoliciesConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +250,13 @@ func (o *CreateAppPoliciesConfigUnauthorized) Code() int {
 }
 
 func (o *CreateAppPoliciesConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppPoliciesConfigUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppPoliciesConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +320,13 @@ func (o *CreateAppPoliciesConfigForbidden) Code() int {
 }
 
 func (o *CreateAppPoliciesConfigForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateAppPoliciesConfigForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateAppPoliciesConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +390,13 @@ func (o *CreateAppPoliciesConfigNotFound) Code() int {
 }
 
 func (o *CreateAppPoliciesConfigNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateAppPoliciesConfigNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateAppPoliciesConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +460,13 @@ func (o *CreateAppPoliciesConfigInternalServerError) Code() int {
 }
 
 func (o *CreateAppPoliciesConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppPoliciesConfigInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/policies-configs][%d] createAppPoliciesConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppPoliciesConfigInternalServerError) GetPayload() *models.StderrErrResponse {

@@ -62,6 +62,12 @@ type AppInstallWorkflowStep struct {
 	// name
 	Name string `json:"name,omitempty"`
 
+	// owner id
+	OwnerID string `json:"owner_id,omitempty"`
+
+	// owner type
+	OwnerType string `json:"owner_type,omitempty"`
+
 	// policy validation
 	PolicyValidation *AppInstallWorkflowStepPolicyValidation `json:"policy_validation,omitempty"`
 

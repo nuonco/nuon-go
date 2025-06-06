@@ -61,17 +61,11 @@ GetConfigSchemaParams contains all the parameters to send to the API endpoint
 */
 type GetConfigSchemaParams struct {
 
-	/* Flat.
-
-	   return a flat schema for the full app
-	*/
-	Flat *string
-
-	/* Source.
+	/* Type.
 
 	   return a schema for a source file
 	*/
-	Source *string
+	Type *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -126,26 +120,15 @@ func (o *GetConfigSchemaParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithFlat adds the flat to the get config schema params
-func (o *GetConfigSchemaParams) WithFlat(flat *string) *GetConfigSchemaParams {
-	o.SetFlat(flat)
+// WithType adds the typeVar to the get config schema params
+func (o *GetConfigSchemaParams) WithType(typeVar *string) *GetConfigSchemaParams {
+	o.SetType(typeVar)
 	return o
 }
 
-// SetFlat adds the flat to the get config schema params
-func (o *GetConfigSchemaParams) SetFlat(flat *string) {
-	o.Flat = flat
-}
-
-// WithSource adds the source to the get config schema params
-func (o *GetConfigSchemaParams) WithSource(source *string) *GetConfigSchemaParams {
-	o.SetSource(source)
-	return o
-}
-
-// SetSource adds the source to the get config schema params
-func (o *GetConfigSchemaParams) SetSource(source *string) {
-	o.Source = source
+// SetType adds the type to the get config schema params
+func (o *GetConfigSchemaParams) SetType(typeVar *string) {
+	o.Type = typeVar
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -156,35 +139,18 @@ func (o *GetConfigSchemaParams) WriteToRequest(r runtime.ClientRequest, reg strf
 	}
 	var res []error
 
-	if o.Flat != nil {
+	if o.Type != nil {
 
-		// query param flat
-		var qrFlat string
+		// query param type
+		var qrType string
 
-		if o.Flat != nil {
-			qrFlat = *o.Flat
+		if o.Type != nil {
+			qrType = *o.Type
 		}
-		qFlat := qrFlat
-		if qFlat != "" {
+		qType := qrType
+		if qType != "" {
 
-			if err := r.SetQueryParam("flat", qFlat); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.Source != nil {
-
-		// query param source
-		var qrSource string
-
-		if o.Source != nil {
-			qrSource = *o.Source
-		}
-		qSource := qrSource
-		if qSource != "" {
-
-			if err := r.SetQueryParam("source", qSource); err != nil {
+			if err := r.SetQueryParam("type", qType); err != nil {
 				return err
 			}
 		}

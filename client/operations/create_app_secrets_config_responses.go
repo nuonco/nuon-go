@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *CreateAppSecretsConfigCreated) Code() int {
 }
 
 func (o *CreateAppSecretsConfigCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigCreated %s", 201, payload)
 }
 
 func (o *CreateAppSecretsConfigCreated) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigCreated %s", 201, payload)
 }
 
 func (o *CreateAppSecretsConfigCreated) GetPayload() *models.AppAppSecretsConfig {
@@ -177,11 +180,13 @@ func (o *CreateAppSecretsConfigBadRequest) Code() int {
 }
 
 func (o *CreateAppSecretsConfigBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppSecretsConfigBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppSecretsConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +250,13 @@ func (o *CreateAppSecretsConfigUnauthorized) Code() int {
 }
 
 func (o *CreateAppSecretsConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppSecretsConfigUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppSecretsConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +320,13 @@ func (o *CreateAppSecretsConfigForbidden) Code() int {
 }
 
 func (o *CreateAppSecretsConfigForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateAppSecretsConfigForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateAppSecretsConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +390,13 @@ func (o *CreateAppSecretsConfigNotFound) Code() int {
 }
 
 func (o *CreateAppSecretsConfigNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateAppSecretsConfigNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateAppSecretsConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +460,13 @@ func (o *CreateAppSecretsConfigInternalServerError) Code() int {
 }
 
 func (o *CreateAppSecretsConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppSecretsConfigInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets-configs][%d] createAppSecretsConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppSecretsConfigInternalServerError) GetPayload() *models.StderrErrResponse {

@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetOrgVCSConnectionsOK) Code() int {
 }
 
 func (o *GetOrgVCSConnectionsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsOK %s", 200, payload)
 }
 
 func (o *GetOrgVCSConnectionsOK) String() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsOK %s", 200, payload)
 }
 
 func (o *GetOrgVCSConnectionsOK) GetPayload() []*models.AppVCSConnection {
@@ -175,11 +178,13 @@ func (o *GetOrgVCSConnectionsBadRequest) Code() int {
 }
 
 func (o *GetOrgVCSConnectionsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsBadRequest %s", 400, payload)
 }
 
 func (o *GetOrgVCSConnectionsBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsBadRequest %s", 400, payload)
 }
 
 func (o *GetOrgVCSConnectionsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +248,13 @@ func (o *GetOrgVCSConnectionsUnauthorized) Code() int {
 }
 
 func (o *GetOrgVCSConnectionsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsUnauthorized %s", 401, payload)
 }
 
 func (o *GetOrgVCSConnectionsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsUnauthorized %s", 401, payload)
 }
 
 func (o *GetOrgVCSConnectionsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +318,13 @@ func (o *GetOrgVCSConnectionsForbidden) Code() int {
 }
 
 func (o *GetOrgVCSConnectionsForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsForbidden %s", 403, payload)
 }
 
 func (o *GetOrgVCSConnectionsForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsForbidden %s", 403, payload)
 }
 
 func (o *GetOrgVCSConnectionsForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +388,13 @@ func (o *GetOrgVCSConnectionsNotFound) Code() int {
 }
 
 func (o *GetOrgVCSConnectionsNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsNotFound %s", 404, payload)
 }
 
 func (o *GetOrgVCSConnectionsNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsNotFound %s", 404, payload)
 }
 
 func (o *GetOrgVCSConnectionsNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +458,13 @@ func (o *GetOrgVCSConnectionsInternalServerError) Code() int {
 }
 
 func (o *GetOrgVCSConnectionsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsInternalServerError %s", 500, payload)
 }
 
 func (o *GetOrgVCSConnectionsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsInternalServerError %s", 500, payload)
 }
 
 func (o *GetOrgVCSConnectionsInternalServerError) GetPayload() *models.StderrErrResponse {

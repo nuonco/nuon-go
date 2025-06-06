@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetOrgComponentsOK) Code() int {
 }
 
 func (o *GetOrgComponentsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsOK %s", 200, payload)
 }
 
 func (o *GetOrgComponentsOK) String() string {
-	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsOK %s", 200, payload)
 }
 
 func (o *GetOrgComponentsOK) GetPayload() []*models.AppComponent {
@@ -175,11 +178,13 @@ func (o *GetOrgComponentsBadRequest) Code() int {
 }
 
 func (o *GetOrgComponentsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsBadRequest %s", 400, payload)
 }
 
 func (o *GetOrgComponentsBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsBadRequest %s", 400, payload)
 }
 
 func (o *GetOrgComponentsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +248,13 @@ func (o *GetOrgComponentsUnauthorized) Code() int {
 }
 
 func (o *GetOrgComponentsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsUnauthorized %s", 401, payload)
 }
 
 func (o *GetOrgComponentsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsUnauthorized %s", 401, payload)
 }
 
 func (o *GetOrgComponentsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +318,13 @@ func (o *GetOrgComponentsForbidden) Code() int {
 }
 
 func (o *GetOrgComponentsForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsForbidden %s", 403, payload)
 }
 
 func (o *GetOrgComponentsForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsForbidden %s", 403, payload)
 }
 
 func (o *GetOrgComponentsForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +388,13 @@ func (o *GetOrgComponentsNotFound) Code() int {
 }
 
 func (o *GetOrgComponentsNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsNotFound %s", 404, payload)
 }
 
 func (o *GetOrgComponentsNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsNotFound %s", 404, payload)
 }
 
 func (o *GetOrgComponentsNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +458,13 @@ func (o *GetOrgComponentsInternalServerError) Code() int {
 }
 
 func (o *GetOrgComponentsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsInternalServerError %s", 500, payload)
 }
 
 func (o *GetOrgComponentsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components][%d] getOrgComponentsInternalServerError %s", 500, payload)
 }
 
 func (o *GetOrgComponentsInternalServerError) GetPayload() *models.StderrErrResponse {

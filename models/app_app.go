@@ -21,6 +21,12 @@ type AppApp struct {
 	// cloud platform
 	CloudPlatform string `json:"cloud_platform,omitempty"`
 
+	// config directory
+	ConfigDirectory string `json:"config_directory,omitempty"`
+
+	// config repo
+	ConfigRepo string `json:"config_repo,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 

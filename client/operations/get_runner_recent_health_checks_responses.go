@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetRunnerRecentHealthChecksOK) Code() int {
 }
 
 func (o *GetRunnerRecentHealthChecksOK) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksOK %s", 200, payload)
 }
 
 func (o *GetRunnerRecentHealthChecksOK) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksOK %s", 200, payload)
 }
 
 func (o *GetRunnerRecentHealthChecksOK) GetPayload() []*models.AppRunnerHealthCheck {
@@ -175,11 +178,13 @@ func (o *GetRunnerRecentHealthChecksBadRequest) Code() int {
 }
 
 func (o *GetRunnerRecentHealthChecksBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksBadRequest %s", 400, payload)
 }
 
 func (o *GetRunnerRecentHealthChecksBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksBadRequest %s", 400, payload)
 }
 
 func (o *GetRunnerRecentHealthChecksBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +248,13 @@ func (o *GetRunnerRecentHealthChecksUnauthorized) Code() int {
 }
 
 func (o *GetRunnerRecentHealthChecksUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksUnauthorized %s", 401, payload)
 }
 
 func (o *GetRunnerRecentHealthChecksUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksUnauthorized %s", 401, payload)
 }
 
 func (o *GetRunnerRecentHealthChecksUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +318,13 @@ func (o *GetRunnerRecentHealthChecksForbidden) Code() int {
 }
 
 func (o *GetRunnerRecentHealthChecksForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksForbidden %s", 403, payload)
 }
 
 func (o *GetRunnerRecentHealthChecksForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksForbidden %s", 403, payload)
 }
 
 func (o *GetRunnerRecentHealthChecksForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +388,13 @@ func (o *GetRunnerRecentHealthChecksNotFound) Code() int {
 }
 
 func (o *GetRunnerRecentHealthChecksNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksNotFound %s", 404, payload)
 }
 
 func (o *GetRunnerRecentHealthChecksNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksNotFound %s", 404, payload)
 }
 
 func (o *GetRunnerRecentHealthChecksNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +458,13 @@ func (o *GetRunnerRecentHealthChecksInternalServerError) Code() int {
 }
 
 func (o *GetRunnerRecentHealthChecksInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksInternalServerError %s", 500, payload)
 }
 
 func (o *GetRunnerRecentHealthChecksInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/recent-health-checks][%d] getRunnerRecentHealthChecksInternalServerError %s", 500, payload)
 }
 
 func (o *GetRunnerRecentHealthChecksInternalServerError) GetPayload() *models.StderrErrResponse {

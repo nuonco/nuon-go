@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetConfigSchemaOK) Code() int {
 }
 
 func (o *GetConfigSchemaOK) Error() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaOK %s", 200, payload)
 }
 
 func (o *GetConfigSchemaOK) String() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaOK %s", 200, payload)
 }
 
 func (o *GetConfigSchemaOK) GetPayload() interface{} {
@@ -175,11 +178,13 @@ func (o *GetConfigSchemaBadRequest) Code() int {
 }
 
 func (o *GetConfigSchemaBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaBadRequest %s", 400, payload)
 }
 
 func (o *GetConfigSchemaBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaBadRequest %s", 400, payload)
 }
 
 func (o *GetConfigSchemaBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +248,13 @@ func (o *GetConfigSchemaUnauthorized) Code() int {
 }
 
 func (o *GetConfigSchemaUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaUnauthorized %s", 401, payload)
 }
 
 func (o *GetConfigSchemaUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaUnauthorized %s", 401, payload)
 }
 
 func (o *GetConfigSchemaUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +318,13 @@ func (o *GetConfigSchemaForbidden) Code() int {
 }
 
 func (o *GetConfigSchemaForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaForbidden %s", 403, payload)
 }
 
 func (o *GetConfigSchemaForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaForbidden %s", 403, payload)
 }
 
 func (o *GetConfigSchemaForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +388,13 @@ func (o *GetConfigSchemaNotFound) Code() int {
 }
 
 func (o *GetConfigSchemaNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaNotFound %s", 404, payload)
 }
 
 func (o *GetConfigSchemaNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaNotFound %s", 404, payload)
 }
 
 func (o *GetConfigSchemaNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +458,13 @@ func (o *GetConfigSchemaInternalServerError) Code() int {
 }
 
 func (o *GetConfigSchemaInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaInternalServerError %s", 500, payload)
 }
 
 func (o *GetConfigSchemaInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaInternalServerError %s", 500, payload)
 }
 
 func (o *GetConfigSchemaInternalServerError) GetPayload() *models.StderrErrResponse {

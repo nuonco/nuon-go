@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetRunnerLatestHeartBeatOK) Code() int {
 }
 
 func (o *GetRunnerLatestHeartBeatOK) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatOK %s", 200, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatOK) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatOK %s", 200, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatOK) GetPayload() *models.AppRunnerHeartBeat {
@@ -177,11 +180,13 @@ func (o *GetRunnerLatestHeartBeatBadRequest) Code() int {
 }
 
 func (o *GetRunnerLatestHeartBeatBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatBadRequest %s", 400, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatBadRequest %s", 400, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +250,13 @@ func (o *GetRunnerLatestHeartBeatUnauthorized) Code() int {
 }
 
 func (o *GetRunnerLatestHeartBeatUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatUnauthorized %s", 401, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatUnauthorized %s", 401, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +320,13 @@ func (o *GetRunnerLatestHeartBeatForbidden) Code() int {
 }
 
 func (o *GetRunnerLatestHeartBeatForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatForbidden %s", 403, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatForbidden %s", 403, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +390,13 @@ func (o *GetRunnerLatestHeartBeatNotFound) Code() int {
 }
 
 func (o *GetRunnerLatestHeartBeatNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatNotFound %s", 404, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatNotFound %s", 404, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +460,13 @@ func (o *GetRunnerLatestHeartBeatInternalServerError) Code() int {
 }
 
 func (o *GetRunnerLatestHeartBeatInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatInternalServerError %s", 500, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatInternalServerError %s", 500, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatInternalServerError) GetPayload() *models.StderrErrResponse {

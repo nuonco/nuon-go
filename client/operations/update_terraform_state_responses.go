@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *UpdateTerraformStateOK) Code() int {
 }
 
 func (o *UpdateTerraformStateOK) Error() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateOK %s", 200, payload)
 }
 
 func (o *UpdateTerraformStateOK) String() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateOK %s", 200, payload)
 }
 
 func (o *UpdateTerraformStateOK) GetPayload() *models.AppTerraformWorkspaceState {
@@ -177,11 +180,13 @@ func (o *UpdateTerraformStateBadRequest) Code() int {
 }
 
 func (o *UpdateTerraformStateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateBadRequest %s", 400, payload)
 }
 
 func (o *UpdateTerraformStateBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateBadRequest %s", 400, payload)
 }
 
 func (o *UpdateTerraformStateBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +250,13 @@ func (o *UpdateTerraformStateUnauthorized) Code() int {
 }
 
 func (o *UpdateTerraformStateUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateUnauthorized %s", 401, payload)
 }
 
 func (o *UpdateTerraformStateUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateUnauthorized %s", 401, payload)
 }
 
 func (o *UpdateTerraformStateUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +320,13 @@ func (o *UpdateTerraformStateForbidden) Code() int {
 }
 
 func (o *UpdateTerraformStateForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateForbidden %s", 403, payload)
 }
 
 func (o *UpdateTerraformStateForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateForbidden %s", 403, payload)
 }
 
 func (o *UpdateTerraformStateForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +390,13 @@ func (o *UpdateTerraformStateNotFound) Code() int {
 }
 
 func (o *UpdateTerraformStateNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateNotFound %s", 404, payload)
 }
 
 func (o *UpdateTerraformStateNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateNotFound %s", 404, payload)
 }
 
 func (o *UpdateTerraformStateNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +460,13 @@ func (o *UpdateTerraformStateInternalServerError) Code() int {
 }
 
 func (o *UpdateTerraformStateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateTerraformStateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateTerraformStateInternalServerError) GetPayload() *models.StderrErrResponse {

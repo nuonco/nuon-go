@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetAppLatestConfigOK) Code() int {
 }
 
 func (o *GetAppLatestConfigOK) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigOK %s", 200, payload)
 }
 
 func (o *GetAppLatestConfigOK) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigOK %s", 200, payload)
 }
 
 func (o *GetAppLatestConfigOK) GetPayload() *models.AppAppConfig {
@@ -177,11 +180,13 @@ func (o *GetAppLatestConfigBadRequest) Code() int {
 }
 
 func (o *GetAppLatestConfigBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigBadRequest %s", 400, payload)
 }
 
 func (o *GetAppLatestConfigBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigBadRequest %s", 400, payload)
 }
 
 func (o *GetAppLatestConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +250,13 @@ func (o *GetAppLatestConfigUnauthorized) Code() int {
 }
 
 func (o *GetAppLatestConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigUnauthorized %s", 401, payload)
 }
 
 func (o *GetAppLatestConfigUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigUnauthorized %s", 401, payload)
 }
 
 func (o *GetAppLatestConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +320,13 @@ func (o *GetAppLatestConfigForbidden) Code() int {
 }
 
 func (o *GetAppLatestConfigForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigForbidden %s", 403, payload)
 }
 
 func (o *GetAppLatestConfigForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigForbidden %s", 403, payload)
 }
 
 func (o *GetAppLatestConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +390,13 @@ func (o *GetAppLatestConfigNotFound) Code() int {
 }
 
 func (o *GetAppLatestConfigNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigNotFound %s", 404, payload)
 }
 
 func (o *GetAppLatestConfigNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigNotFound %s", 404, payload)
 }
 
 func (o *GetAppLatestConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +460,13 @@ func (o *GetAppLatestConfigInternalServerError) Code() int {
 }
 
 func (o *GetAppLatestConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigInternalServerError %s", 500, payload)
 }
 
 func (o *GetAppLatestConfigInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-config][%d] getAppLatestConfigInternalServerError %s", 500, payload)
 }
 
 func (o *GetAppLatestConfigInternalServerError) GetPayload() *models.StderrErrResponse {

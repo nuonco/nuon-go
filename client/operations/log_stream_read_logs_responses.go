@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *LogStreamReadLogsOK) Code() int {
 }
 
 func (o *LogStreamReadLogsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsOK %s", 200, payload)
 }
 
 func (o *LogStreamReadLogsOK) String() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsOK %s", 200, payload)
 }
 
 func (o *LogStreamReadLogsOK) GetPayload() []*models.AppOtelLogRecord {
@@ -175,11 +178,13 @@ func (o *LogStreamReadLogsBadRequest) Code() int {
 }
 
 func (o *LogStreamReadLogsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsBadRequest %s", 400, payload)
 }
 
 func (o *LogStreamReadLogsBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsBadRequest %s", 400, payload)
 }
 
 func (o *LogStreamReadLogsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +248,13 @@ func (o *LogStreamReadLogsUnauthorized) Code() int {
 }
 
 func (o *LogStreamReadLogsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsUnauthorized %s", 401, payload)
 }
 
 func (o *LogStreamReadLogsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsUnauthorized %s", 401, payload)
 }
 
 func (o *LogStreamReadLogsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +318,13 @@ func (o *LogStreamReadLogsForbidden) Code() int {
 }
 
 func (o *LogStreamReadLogsForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsForbidden %s", 403, payload)
 }
 
 func (o *LogStreamReadLogsForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsForbidden %s", 403, payload)
 }
 
 func (o *LogStreamReadLogsForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +388,13 @@ func (o *LogStreamReadLogsNotFound) Code() int {
 }
 
 func (o *LogStreamReadLogsNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsNotFound %s", 404, payload)
 }
 
 func (o *LogStreamReadLogsNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsNotFound %s", 404, payload)
 }
 
 func (o *LogStreamReadLogsNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +458,13 @@ func (o *LogStreamReadLogsInternalServerError) Code() int {
 }
 
 func (o *LogStreamReadLogsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsInternalServerError %s", 500, payload)
 }
 
 func (o *LogStreamReadLogsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsInternalServerError %s", 500, payload)
 }
 
 func (o *LogStreamReadLogsInternalServerError) GetPayload() *models.StderrErrResponse {

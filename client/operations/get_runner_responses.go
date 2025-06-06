@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetRunnerOK) Code() int {
 }
 
 func (o *GetRunnerOK) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerOK %s", 200, payload)
 }
 
 func (o *GetRunnerOK) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerOK %s", 200, payload)
 }
 
 func (o *GetRunnerOK) GetPayload() *models.AppRunner {
@@ -177,11 +180,13 @@ func (o *GetRunnerBadRequest) Code() int {
 }
 
 func (o *GetRunnerBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerBadRequest %s", 400, payload)
 }
 
 func (o *GetRunnerBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerBadRequest %s", 400, payload)
 }
 
 func (o *GetRunnerBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +250,13 @@ func (o *GetRunnerUnauthorized) Code() int {
 }
 
 func (o *GetRunnerUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerUnauthorized %s", 401, payload)
 }
 
 func (o *GetRunnerUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerUnauthorized %s", 401, payload)
 }
 
 func (o *GetRunnerUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +320,13 @@ func (o *GetRunnerForbidden) Code() int {
 }
 
 func (o *GetRunnerForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerForbidden %s", 403, payload)
 }
 
 func (o *GetRunnerForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerForbidden %s", 403, payload)
 }
 
 func (o *GetRunnerForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +390,13 @@ func (o *GetRunnerNotFound) Code() int {
 }
 
 func (o *GetRunnerNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerNotFound %s", 404, payload)
 }
 
 func (o *GetRunnerNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerNotFound %s", 404, payload)
 }
 
 func (o *GetRunnerNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +460,13 @@ func (o *GetRunnerInternalServerError) Code() int {
 }
 
 func (o *GetRunnerInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerInternalServerError %s", 500, payload)
 }
 
 func (o *GetRunnerInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}][%d] getRunnerInternalServerError %s", 500, payload)
 }
 
 func (o *GetRunnerInternalServerError) GetPayload() *models.StderrErrResponse {

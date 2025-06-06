@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *CreateVCSConnectionCreated) Code() int {
 }
 
 func (o *CreateVCSConnectionCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionCreated %s", 201, payload)
 }
 
 func (o *CreateVCSConnectionCreated) String() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionCreated %s", 201, payload)
 }
 
 func (o *CreateVCSConnectionCreated) GetPayload() *models.AppVCSConnection {
@@ -177,11 +180,13 @@ func (o *CreateVCSConnectionBadRequest) Code() int {
 }
 
 func (o *CreateVCSConnectionBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionBadRequest %s", 400, payload)
 }
 
 func (o *CreateVCSConnectionBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionBadRequest %s", 400, payload)
 }
 
 func (o *CreateVCSConnectionBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +250,13 @@ func (o *CreateVCSConnectionUnauthorized) Code() int {
 }
 
 func (o *CreateVCSConnectionUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionUnauthorized %s", 401, payload)
 }
 
 func (o *CreateVCSConnectionUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionUnauthorized %s", 401, payload)
 }
 
 func (o *CreateVCSConnectionUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +320,13 @@ func (o *CreateVCSConnectionForbidden) Code() int {
 }
 
 func (o *CreateVCSConnectionForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionForbidden %s", 403, payload)
 }
 
 func (o *CreateVCSConnectionForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionForbidden %s", 403, payload)
 }
 
 func (o *CreateVCSConnectionForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +390,13 @@ func (o *CreateVCSConnectionNotFound) Code() int {
 }
 
 func (o *CreateVCSConnectionNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionNotFound %s", 404, payload)
 }
 
 func (o *CreateVCSConnectionNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionNotFound %s", 404, payload)
 }
 
 func (o *CreateVCSConnectionNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +460,13 @@ func (o *CreateVCSConnectionInternalServerError) Code() int {
 }
 
 func (o *CreateVCSConnectionInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionInternalServerError %s", 500, payload)
 }
 
 func (o *CreateVCSConnectionInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionInternalServerError %s", 500, payload)
 }
 
 func (o *CreateVCSConnectionInternalServerError) GetPayload() *models.StderrErrResponse {

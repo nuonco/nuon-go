@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetComponentReleasesOK) Code() int {
 }
 
 func (o *GetComponentReleasesOK) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesOK %s", 200, payload)
 }
 
 func (o *GetComponentReleasesOK) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesOK %s", 200, payload)
 }
 
 func (o *GetComponentReleasesOK) GetPayload() []*models.AppComponentRelease {
@@ -175,11 +178,13 @@ func (o *GetComponentReleasesBadRequest) Code() int {
 }
 
 func (o *GetComponentReleasesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesBadRequest %s", 400, payload)
 }
 
 func (o *GetComponentReleasesBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesBadRequest %s", 400, payload)
 }
 
 func (o *GetComponentReleasesBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +248,13 @@ func (o *GetComponentReleasesUnauthorized) Code() int {
 }
 
 func (o *GetComponentReleasesUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesUnauthorized %s", 401, payload)
 }
 
 func (o *GetComponentReleasesUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesUnauthorized %s", 401, payload)
 }
 
 func (o *GetComponentReleasesUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +318,13 @@ func (o *GetComponentReleasesForbidden) Code() int {
 }
 
 func (o *GetComponentReleasesForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesForbidden %s", 403, payload)
 }
 
 func (o *GetComponentReleasesForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesForbidden %s", 403, payload)
 }
 
 func (o *GetComponentReleasesForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +388,13 @@ func (o *GetComponentReleasesNotFound) Code() int {
 }
 
 func (o *GetComponentReleasesNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesNotFound %s", 404, payload)
 }
 
 func (o *GetComponentReleasesNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesNotFound %s", 404, payload)
 }
 
 func (o *GetComponentReleasesNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +458,13 @@ func (o *GetComponentReleasesInternalServerError) Code() int {
 }
 
 func (o *GetComponentReleasesInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesInternalServerError %s", 500, payload)
 }
 
 func (o *GetComponentReleasesInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/releases][%d] getComponentReleasesInternalServerError %s", 500, payload)
 }
 
 func (o *GetComponentReleasesInternalServerError) GetPayload() *models.StderrErrResponse {

@@ -108,6 +108,9 @@ type AppInstall struct {
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
+
+	// workflows
+	Workflows []*AppInstallWorkflow `json:"workflows"`
 }
 
 // Validate validates this app install
@@ -155,6 +158,10 @@ func (m *AppInstall) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSandbox(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateWorkflows(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -408,6 +415,32 @@ func (m *AppInstall) validateSandbox(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppInstall) validateWorkflows(formats strfmt.Registry) error {
+	if swag.IsZero(m.Workflows) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Workflows); i++ {
+		if swag.IsZero(m.Workflows[i]) { // not required
+			continue
+		}
+
+		if m.Workflows[i] != nil {
+			if err := m.Workflows[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("workflows" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("workflows" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app install based on the context it is used
 func (m *AppInstall) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -453,6 +486,10 @@ func (m *AppInstall) ContextValidate(ctx context.Context, formats strfmt.Registr
 	}
 
 	if err := m.contextValidateSandbox(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateWorkflows(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -708,6 +745,31 @@ func (m *AppInstall) contextValidateSandbox(ctx context.Context, formats strfmt.
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *AppInstall) contextValidateWorkflows(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Workflows); i++ {
+
+		if m.Workflows[i] != nil {
+
+			if swag.IsZero(m.Workflows[i]) { // not required
+				return nil
+			}
+
+			if err := m.Workflows[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("workflows" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("workflows" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

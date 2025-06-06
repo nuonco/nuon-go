@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetInstallActionWorkflowOK) Code() int {
 }
 
 func (o *GetInstallActionWorkflowOK) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowOK %s", 200, payload)
 }
 
 func (o *GetInstallActionWorkflowOK) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowOK %s", 200, payload)
 }
 
 func (o *GetInstallActionWorkflowOK) GetPayload() *models.AppInstallActionWorkflow {
@@ -177,11 +180,13 @@ func (o *GetInstallActionWorkflowBadRequest) Code() int {
 }
 
 func (o *GetInstallActionWorkflowBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowBadRequest %s", 400, payload)
 }
 
 func (o *GetInstallActionWorkflowBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowBadRequest %s", 400, payload)
 }
 
 func (o *GetInstallActionWorkflowBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +250,13 @@ func (o *GetInstallActionWorkflowUnauthorized) Code() int {
 }
 
 func (o *GetInstallActionWorkflowUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowUnauthorized %s", 401, payload)
 }
 
 func (o *GetInstallActionWorkflowUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowUnauthorized %s", 401, payload)
 }
 
 func (o *GetInstallActionWorkflowUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +320,13 @@ func (o *GetInstallActionWorkflowForbidden) Code() int {
 }
 
 func (o *GetInstallActionWorkflowForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowForbidden %s", 403, payload)
 }
 
 func (o *GetInstallActionWorkflowForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowForbidden %s", 403, payload)
 }
 
 func (o *GetInstallActionWorkflowForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +390,13 @@ func (o *GetInstallActionWorkflowNotFound) Code() int {
 }
 
 func (o *GetInstallActionWorkflowNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowNotFound %s", 404, payload)
 }
 
 func (o *GetInstallActionWorkflowNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowNotFound %s", 404, payload)
 }
 
 func (o *GetInstallActionWorkflowNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +460,13 @@ func (o *GetInstallActionWorkflowInternalServerError) Code() int {
 }
 
 func (o *GetInstallActionWorkflowInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowInternalServerError %s", 500, payload)
 }
 
 func (o *GetInstallActionWorkflowInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/action-workflows/{action_workflow_id}][%d] getInstallActionWorkflowInternalServerError %s", 500, payload)
 }
 
 func (o *GetInstallActionWorkflowInternalServerError) GetPayload() *models.StderrErrResponse {

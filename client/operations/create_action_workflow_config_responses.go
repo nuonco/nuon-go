@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *CreateActionWorkflowConfigCreated) Code() int {
 }
 
 func (o *CreateActionWorkflowConfigCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigCreated %s", 201, payload)
 }
 
 func (o *CreateActionWorkflowConfigCreated) String() string {
-	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigCreated %s", 201, payload)
 }
 
 func (o *CreateActionWorkflowConfigCreated) GetPayload() *models.AppActionWorkflowConfig {
@@ -177,11 +180,13 @@ func (o *CreateActionWorkflowConfigBadRequest) Code() int {
 }
 
 func (o *CreateActionWorkflowConfigBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateActionWorkflowConfigBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateActionWorkflowConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +250,13 @@ func (o *CreateActionWorkflowConfigUnauthorized) Code() int {
 }
 
 func (o *CreateActionWorkflowConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateActionWorkflowConfigUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateActionWorkflowConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +320,13 @@ func (o *CreateActionWorkflowConfigForbidden) Code() int {
 }
 
 func (o *CreateActionWorkflowConfigForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateActionWorkflowConfigForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateActionWorkflowConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +390,13 @@ func (o *CreateActionWorkflowConfigNotFound) Code() int {
 }
 
 func (o *CreateActionWorkflowConfigNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateActionWorkflowConfigNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateActionWorkflowConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +460,13 @@ func (o *CreateActionWorkflowConfigInternalServerError) Code() int {
 }
 
 func (o *CreateActionWorkflowConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateActionWorkflowConfigInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/action-workflows/{action_workflow_id}/configs][%d] createActionWorkflowConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateActionWorkflowConfigInternalServerError) GetPayload() *models.StderrErrResponse {

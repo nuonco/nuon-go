@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetRunnerJobsOK) Code() int {
 }
 
 func (o *GetRunnerJobsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsOK %s", 200, payload)
 }
 
 func (o *GetRunnerJobsOK) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsOK %s", 200, payload)
 }
 
 func (o *GetRunnerJobsOK) GetPayload() []*models.AppRunnerJob {
@@ -175,11 +178,13 @@ func (o *GetRunnerJobsBadRequest) Code() int {
 }
 
 func (o *GetRunnerJobsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsBadRequest %s", 400, payload)
 }
 
 func (o *GetRunnerJobsBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsBadRequest %s", 400, payload)
 }
 
 func (o *GetRunnerJobsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +248,13 @@ func (o *GetRunnerJobsUnauthorized) Code() int {
 }
 
 func (o *GetRunnerJobsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsUnauthorized %s", 401, payload)
 }
 
 func (o *GetRunnerJobsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsUnauthorized %s", 401, payload)
 }
 
 func (o *GetRunnerJobsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +318,13 @@ func (o *GetRunnerJobsForbidden) Code() int {
 }
 
 func (o *GetRunnerJobsForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsForbidden %s", 403, payload)
 }
 
 func (o *GetRunnerJobsForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsForbidden %s", 403, payload)
 }
 
 func (o *GetRunnerJobsForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +388,13 @@ func (o *GetRunnerJobsNotFound) Code() int {
 }
 
 func (o *GetRunnerJobsNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsNotFound %s", 404, payload)
 }
 
 func (o *GetRunnerJobsNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsNotFound %s", 404, payload)
 }
 
 func (o *GetRunnerJobsNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +458,13 @@ func (o *GetRunnerJobsInternalServerError) Code() int {
 }
 
 func (o *GetRunnerJobsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsInternalServerError %s", 500, payload)
 }
 
 func (o *GetRunnerJobsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/jobs][%d] getRunnerJobsInternalServerError %s", 500, payload)
 }
 
 func (o *GetRunnerJobsInternalServerError) GetPayload() *models.StderrErrResponse {

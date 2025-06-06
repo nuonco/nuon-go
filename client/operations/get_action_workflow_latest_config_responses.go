@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetActionWorkflowLatestConfigOK) Code() int {
 }
 
 func (o *GetActionWorkflowLatestConfigOK) Error() string {
-	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigOK %s", 200, payload)
 }
 
 func (o *GetActionWorkflowLatestConfigOK) String() string {
-	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigOK %s", 200, payload)
 }
 
 func (o *GetActionWorkflowLatestConfigOK) GetPayload() *models.AppActionWorkflowConfig {
@@ -177,11 +180,13 @@ func (o *GetActionWorkflowLatestConfigBadRequest) Code() int {
 }
 
 func (o *GetActionWorkflowLatestConfigBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigBadRequest %s", 400, payload)
 }
 
 func (o *GetActionWorkflowLatestConfigBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigBadRequest %s", 400, payload)
 }
 
 func (o *GetActionWorkflowLatestConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +250,13 @@ func (o *GetActionWorkflowLatestConfigUnauthorized) Code() int {
 }
 
 func (o *GetActionWorkflowLatestConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigUnauthorized %s", 401, payload)
 }
 
 func (o *GetActionWorkflowLatestConfigUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigUnauthorized %s", 401, payload)
 }
 
 func (o *GetActionWorkflowLatestConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +320,13 @@ func (o *GetActionWorkflowLatestConfigForbidden) Code() int {
 }
 
 func (o *GetActionWorkflowLatestConfigForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigForbidden %s", 403, payload)
 }
 
 func (o *GetActionWorkflowLatestConfigForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigForbidden %s", 403, payload)
 }
 
 func (o *GetActionWorkflowLatestConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +390,13 @@ func (o *GetActionWorkflowLatestConfigNotFound) Code() int {
 }
 
 func (o *GetActionWorkflowLatestConfigNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigNotFound %s", 404, payload)
 }
 
 func (o *GetActionWorkflowLatestConfigNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigNotFound %s", 404, payload)
 }
 
 func (o *GetActionWorkflowLatestConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +460,13 @@ func (o *GetActionWorkflowLatestConfigInternalServerError) Code() int {
 }
 
 func (o *GetActionWorkflowLatestConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigInternalServerError %s", 500, payload)
 }
 
 func (o *GetActionWorkflowLatestConfigInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/action-workflows/{action_workflow_id}/latest-config][%d] getActionWorkflowLatestConfigInternalServerError %s", 500, payload)
 }
 
 func (o *GetActionWorkflowLatestConfigInternalServerError) GetPayload() *models.StderrErrResponse {

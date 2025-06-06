@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetInstallDeployPlanOK) Code() int {
 }
 
 func (o *GetInstallDeployPlanOK) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanOK %s", 200, payload)
 }
 
 func (o *GetInstallDeployPlanOK) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanOK %s", 200, payload)
 }
 
 func (o *GetInstallDeployPlanOK) GetPayload() *models.Planv1Plan {
@@ -177,11 +180,13 @@ func (o *GetInstallDeployPlanBadRequest) Code() int {
 }
 
 func (o *GetInstallDeployPlanBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanBadRequest %s", 400, payload)
 }
 
 func (o *GetInstallDeployPlanBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanBadRequest %s", 400, payload)
 }
 
 func (o *GetInstallDeployPlanBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +250,13 @@ func (o *GetInstallDeployPlanUnauthorized) Code() int {
 }
 
 func (o *GetInstallDeployPlanUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanUnauthorized %s", 401, payload)
 }
 
 func (o *GetInstallDeployPlanUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanUnauthorized %s", 401, payload)
 }
 
 func (o *GetInstallDeployPlanUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +320,13 @@ func (o *GetInstallDeployPlanForbidden) Code() int {
 }
 
 func (o *GetInstallDeployPlanForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanForbidden %s", 403, payload)
 }
 
 func (o *GetInstallDeployPlanForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanForbidden %s", 403, payload)
 }
 
 func (o *GetInstallDeployPlanForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +390,13 @@ func (o *GetInstallDeployPlanNotFound) Code() int {
 }
 
 func (o *GetInstallDeployPlanNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanNotFound %s", 404, payload)
 }
 
 func (o *GetInstallDeployPlanNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanNotFound %s", 404, payload)
 }
 
 func (o *GetInstallDeployPlanNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +460,13 @@ func (o *GetInstallDeployPlanInternalServerError) Code() int {
 }
 
 func (o *GetInstallDeployPlanInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanInternalServerError %s", 500, payload)
 }
 
 func (o *GetInstallDeployPlanInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/deploys/{deploy_id}/plan][%d] getInstallDeployPlanInternalServerError %s", 500, payload)
 }
 
 func (o *GetInstallDeployPlanInternalServerError) GetPayload() *models.StderrErrResponse {

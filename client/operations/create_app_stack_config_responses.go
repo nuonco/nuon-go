@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *CreateAppStackConfigCreated) Code() int {
 }
 
 func (o *CreateAppStackConfigCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigCreated %s", 201, payload)
 }
 
 func (o *CreateAppStackConfigCreated) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigCreated %s", 201, payload)
 }
 
 func (o *CreateAppStackConfigCreated) GetPayload() *models.AppAppStackConfig {
@@ -177,11 +180,13 @@ func (o *CreateAppStackConfigBadRequest) Code() int {
 }
 
 func (o *CreateAppStackConfigBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppStackConfigBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppStackConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +250,13 @@ func (o *CreateAppStackConfigUnauthorized) Code() int {
 }
 
 func (o *CreateAppStackConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppStackConfigUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppStackConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +320,13 @@ func (o *CreateAppStackConfigForbidden) Code() int {
 }
 
 func (o *CreateAppStackConfigForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateAppStackConfigForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateAppStackConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +390,13 @@ func (o *CreateAppStackConfigNotFound) Code() int {
 }
 
 func (o *CreateAppStackConfigNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateAppStackConfigNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateAppStackConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +460,13 @@ func (o *CreateAppStackConfigInternalServerError) Code() int {
 }
 
 func (o *CreateAppStackConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppStackConfigInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/stack-configs][%d] createAppStackConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppStackConfigInternalServerError) GetPayload() *models.StderrErrResponse {

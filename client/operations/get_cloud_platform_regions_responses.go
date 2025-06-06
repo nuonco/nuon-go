@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetCloudPlatformRegionsOK) Code() int {
 }
 
 func (o *GetCloudPlatformRegionsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsOK %s", 200, payload)
 }
 
 func (o *GetCloudPlatformRegionsOK) String() string {
-	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsOK %s", 200, payload)
 }
 
 func (o *GetCloudPlatformRegionsOK) GetPayload() []*models.AppCloudPlatformRegion {
@@ -175,11 +178,13 @@ func (o *GetCloudPlatformRegionsBadRequest) Code() int {
 }
 
 func (o *GetCloudPlatformRegionsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsBadRequest %s", 400, payload)
 }
 
 func (o *GetCloudPlatformRegionsBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsBadRequest %s", 400, payload)
 }
 
 func (o *GetCloudPlatformRegionsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +248,13 @@ func (o *GetCloudPlatformRegionsUnauthorized) Code() int {
 }
 
 func (o *GetCloudPlatformRegionsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsUnauthorized %s", 401, payload)
 }
 
 func (o *GetCloudPlatformRegionsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsUnauthorized %s", 401, payload)
 }
 
 func (o *GetCloudPlatformRegionsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +318,13 @@ func (o *GetCloudPlatformRegionsForbidden) Code() int {
 }
 
 func (o *GetCloudPlatformRegionsForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsForbidden %s", 403, payload)
 }
 
 func (o *GetCloudPlatformRegionsForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsForbidden %s", 403, payload)
 }
 
 func (o *GetCloudPlatformRegionsForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +388,13 @@ func (o *GetCloudPlatformRegionsNotFound) Code() int {
 }
 
 func (o *GetCloudPlatformRegionsNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsNotFound %s", 404, payload)
 }
 
 func (o *GetCloudPlatformRegionsNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsNotFound %s", 404, payload)
 }
 
 func (o *GetCloudPlatformRegionsNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +458,13 @@ func (o *GetCloudPlatformRegionsInternalServerError) Code() int {
 }
 
 func (o *GetCloudPlatformRegionsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsInternalServerError %s", 500, payload)
 }
 
 func (o *GetCloudPlatformRegionsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/cloud-platform/{cloud_platform}/regions][%d] getCloudPlatformRegionsInternalServerError %s", 500, payload)
 }
 
 func (o *GetCloudPlatformRegionsInternalServerError) GetPayload() *models.StderrErrResponse {
