@@ -66,8 +66,20 @@ const (
 	// AppStatusExpired captures enum value "expired"
 	AppStatusExpired AppStatus = "expired"
 
-	// AppStatusAwaitingDashResponse captures enum value "awaiting-response"
-	AppStatusAwaitingDashResponse AppStatus = "awaiting-response"
+	// AppStatusApproved captures enum value "approved"
+	AppStatusApproved AppStatus = "approved"
+
+	// AppStatusApprovalDashAwaiting captures enum value "approval-awaiting"
+	AppStatusApprovalDashAwaiting AppStatus = "approval-awaiting"
+
+	// AppStatusApprovalDashExpired captures enum value "approval-expired"
+	AppStatusApprovalDashExpired AppStatus = "approval-expired"
+
+	// AppStatusApprovalDashDenied captures enum value "approval-denied"
+	AppStatusApprovalDashDenied AppStatus = "approval-denied"
+
+	// AppStatusAwaitingDashApproval captures enum value "awaiting-approval"
+	AppStatusAwaitingDashApproval AppStatus = "awaiting-approval"
 )
 
 // for schema
@@ -75,7 +87,7 @@ var appStatusEnum []interface{}
 
 func init() {
 	var res []AppStatus
-	if err := json.Unmarshal([]byte(`["error","pending","in-progress","success","not-attempted","cancelled","generating","awaiting-user-run","provisioning","active","outdated","expired","awaiting-response"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["error","pending","in-progress","success","not-attempted","cancelled","generating","awaiting-user-run","provisioning","active","outdated","expired","approved","approval-awaiting","approval-expired","approval-denied","awaiting-approval"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

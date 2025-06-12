@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -21,16 +22,69 @@ type ServiceCreateInstallWorkflowStepApprovalResponseRequest struct {
 	Note string `json:"note,omitempty"`
 
 	// response type
-	ResponseType string `json:"response_type,omitempty"`
+	ResponseType AppInstallWorkflowStepResponseType `json:"response_type,omitempty"`
 }
 
 // Validate validates this service create install workflow step approval response request
 func (m *ServiceCreateInstallWorkflowStepApprovalResponseRequest) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateResponseType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this service create install workflow step approval response request based on context it is used
+func (m *ServiceCreateInstallWorkflowStepApprovalResponseRequest) validateResponseType(formats strfmt.Registry) error {
+	if swag.IsZero(m.ResponseType) { // not required
+		return nil
+	}
+
+	if err := m.ResponseType.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("response_type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("response_type")
+		}
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this service create install workflow step approval response request based on the context it is used
 func (m *ServiceCreateInstallWorkflowStepApprovalResponseRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateResponseType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ServiceCreateInstallWorkflowStepApprovalResponseRequest) contextValidateResponseType(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ResponseType) { // not required
+		return nil
+	}
+
+	if err := m.ResponseType.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("response_type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("response_type")
+		}
+		return err
+	}
+
 	return nil
 }
 

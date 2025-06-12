@@ -33,6 +33,9 @@ type AppHelmComponentConfig struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
+	// helm config json
+	HelmConfigJSON *AppHelmConfig `json:"helm_config_json,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
@@ -44,6 +47,9 @@ type AppHelmComponentConfig struct {
 
 	// storage driver
 	StorageDriver string `json:"storage_driver,omitempty"`
+
+	// Newer config fields that we don't need a column for
+	TakeOwnership bool `json:"take_ownership,omitempty"`
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
@@ -60,6 +66,10 @@ func (m *AppHelmComponentConfig) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateConnectedGithubVcsConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateHelmConfigJSON(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -84,6 +94,25 @@ func (m *AppHelmComponentConfig) validateConnectedGithubVcsConfig(formats strfmt
 				return ve.ValidateName("connected_github_vcs_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("connected_github_vcs_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppHelmComponentConfig) validateHelmConfigJSON(formats strfmt.Registry) error {
+	if swag.IsZero(m.HelmConfigJSON) { // not required
+		return nil
+	}
+
+	if m.HelmConfigJSON != nil {
+		if err := m.HelmConfigJSON.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("helm_config_json")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("helm_config_json")
 			}
 			return err
 		}
@@ -119,6 +148,10 @@ func (m *AppHelmComponentConfig) ContextValidate(ctx context.Context, formats st
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateHelmConfigJSON(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidatePublicGitVcsConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -142,6 +175,27 @@ func (m *AppHelmComponentConfig) contextValidateConnectedGithubVcsConfig(ctx con
 				return ve.ValidateName("connected_github_vcs_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("connected_github_vcs_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppHelmComponentConfig) contextValidateHelmConfigJSON(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.HelmConfigJSON != nil {
+
+		if swag.IsZero(m.HelmConfigJSON) { // not required
+			return nil
+		}
+
+		if err := m.HelmConfigJSON.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("helm_config_json")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("helm_config_json")
 			}
 			return err
 		}

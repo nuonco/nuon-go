@@ -78,6 +78,8 @@ type ClientService interface {
 
 	CreateInstallActionWorkflowRun(params *CreateInstallActionWorkflowRunParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallActionWorkflowRunCreated, error)
 
+	CreateInstallConfig(params *CreateInstallConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallConfigCreated, error)
+
 	CreateInstallDeploy(params *CreateInstallDeployParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallDeployCreated, error)
 
 	CreateInstallInputs(params *CreateInstallInputsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallInputsCreated, error)
@@ -212,6 +214,8 @@ type ClientService interface {
 
 	GetComponentDependencies(params *GetComponentDependenciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentDependenciesOK, error)
 
+	GetComponentDependents(params *GetComponentDependentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentDependentsOK, error)
+
 	GetComponentLatestBuild(params *GetComponentLatestBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentLatestBuildOK, error)
 
 	GetComponentLatestConfig(params *GetComponentLatestConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentLatestConfigOK, error)
@@ -326,6 +330,8 @@ type ClientService interface {
 
 	GetRunner(params *GetRunnerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerOK, error)
 
+	GetRunnerConnectStatus(params *GetRunnerConnectStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerConnectStatusOK, error)
+
 	GetRunnerJob(params *GetRunnerJobParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobOK, error)
 
 	GetRunnerJobExecution(params *GetRunnerJobExecutionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobExecutionOK, error)
@@ -396,7 +402,11 @@ type ClientService interface {
 
 	UpdateInstall(params *UpdateInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallOK, error)
 
+	UpdateInstallConfig(params *UpdateInstallConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallConfigCreated, error)
+
 	UpdateInstallInputs(params *UpdateInstallInputsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallInputsOK, error)
+
+	UpdateInstallWorkflow(params *UpdateInstallWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallWorkflowOK, error)
 
 	UpdateInstaller(params *UpdateInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallerCreated, error)
 
@@ -1320,6 +1330,8 @@ func (a *Client) CreateInstall(params *CreateInstallParams, authInfo runtime.Cli
 
 /*
 CreateInstallActionWorkflowRun creates an action workflow run for an install
+
+AppWorkflowConfigId param has been deprecated and is no longer being consumed, the api uses currently install id to lookup related appworkflowconfigId
 */
 func (a *Client) CreateInstallActionWorkflowRun(params *CreateInstallActionWorkflowRunParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallActionWorkflowRunCreated, error) {
 	// TODO: Validate the params before sending
@@ -1354,6 +1366,45 @@ func (a *Client) CreateInstallActionWorkflowRun(params *CreateInstallActionWorkf
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateInstallActionWorkflowRun: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreateInstallConfig creates an install config
+*/
+func (a *Client) CreateInstallConfig(params *CreateInstallConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallConfigCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateInstallConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateInstallConfig",
+		Method:             "POST",
+		PathPattern:        "/v1/installs/{install_id}/configs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateInstallConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateInstallConfigCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateInstallConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -4031,6 +4082,45 @@ func (a *Client) GetComponentDependencies(params *GetComponentDependenciesParams
 }
 
 /*
+GetComponentDependents gets a component s children
+*/
+func (a *Client) GetComponentDependents(params *GetComponentDependentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentDependentsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetComponentDependentsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetComponentDependents",
+		Method:             "GET",
+		PathPattern:        "/v1/components/{component_id}/dependents",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetComponentDependentsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetComponentDependentsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetComponentDependents: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetComponentLatestBuild gets latest build for a component
 */
 func (a *Client) GetComponentLatestBuild(params *GetComponentLatestBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentLatestBuildOK, error) {
@@ -4160,9 +4250,10 @@ func (a *Client) GetComponentReleases(params *GetComponentReleasesParams, authIn
 description = "description"
 ```
 
-You can pass in a valid source argument to render within a specific source file:
+You can pass in a valid source argument to render within a specific config file:
 
 - input
+- input-group
 - installer
 - sandbox
 - runner
@@ -4171,9 +4262,6 @@ You can pass in a valid source argument to render within a specific source file:
 - helm
 - terraform
 - job
-
-By default, the config expects that you are using multiple files and sources. If you are _not_, then pass the
-`?flat=true` param.
 */
 func (a *Client) GetConfigSchema(params *GetConfigSchemaParams, opts ...ClientOption) (*GetConfigSchemaOK, error) {
 	// TODO: Validate the params before sending
@@ -6331,6 +6419,53 @@ func (a *Client) GetRunner(params *GetRunnerParams, authInfo runtime.ClientAuthI
 }
 
 /*
+	GetRunnerConnectStatus gets a runner connection satus based on heartbeat
+
+	# get runner connect status
+
+The connected status is based on runner heartbeat:
+
+if no heart beat found — false
+if heart beat > 15 seconds ago — false, hb timestamp
+if the heart beat < 15 seconds ago — true
+*/
+func (a *Client) GetRunnerConnectStatus(params *GetRunnerConnectStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerConnectStatusOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetRunnerConnectStatusParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetRunnerConnectStatus",
+		Method:             "GET",
+		PathPattern:        "/v1/runners/{runner_id}/connected",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetRunnerConnectStatusReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetRunnerConnectStatusOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetRunnerConnectStatus: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetRunnerJob gets runner job
 
 Return a runner job.
@@ -7721,6 +7856,45 @@ func (a *Client) UpdateInstall(params *UpdateInstallParams, authInfo runtime.Cli
 }
 
 /*
+UpdateInstallConfig creates an install config
+*/
+func (a *Client) UpdateInstallConfig(params *UpdateInstallConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallConfigCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateInstallConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateInstallConfig",
+		Method:             "PATCH",
+		PathPattern:        "/v1/installs/{install_id}/configs/{config_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateInstallConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateInstallConfigCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateInstallConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 UpdateInstallInputs updates install input config for app
 */
 func (a *Client) UpdateInstallInputs(params *UpdateInstallInputsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallInputsOK, error) {
@@ -7756,6 +7930,45 @@ func (a *Client) UpdateInstallInputs(params *UpdateInstallInputsParams, authInfo
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateInstallInputs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateInstallWorkflow updates an install workflow
+*/
+func (a *Client) UpdateInstallWorkflow(params *UpdateInstallWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallWorkflowOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateInstallWorkflowParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateInstallWorkflow",
+		Method:             "PATCH",
+		PathPattern:        "/v1/install-workflows/{install_workflow_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateInstallWorkflowReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateInstallWorkflowOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateInstallWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
