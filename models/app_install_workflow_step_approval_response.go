@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -33,7 +34,9 @@ type AppInstallWorkflowStepApprovalResponse struct {
 	Note string `json:"note,omitempty"`
 
 	// the response type
-	Type string `json:"type,omitempty"`
+	Type struct {
+		AppInstallWorkflowStepResponseType
+	} `json:"type,omitempty"`
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
@@ -41,11 +44,42 @@ type AppInstallWorkflowStepApprovalResponse struct {
 
 // Validate validates this app install workflow step approval response
 func (m *AppInstallWorkflowStepApprovalResponse) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this app install workflow step approval response based on context it is used
+func (m *AppInstallWorkflowStepApprovalResponse) validateType(formats strfmt.Registry) error {
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
+
+	return nil
+}
+
+// ContextValidate validate this app install workflow step approval response based on the context it is used
 func (m *AppInstallWorkflowStepApprovalResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *AppInstallWorkflowStepApprovalResponse) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
+
 	return nil
 }
 

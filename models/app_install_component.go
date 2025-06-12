@@ -44,13 +44,16 @@ type AppInstallComponent struct {
 	InstallID string `json:"install_id,omitempty"`
 
 	// links
-	Links map[string]interface{} `json:"links,omitempty"`
+	Links interface{} `json:"links,omitempty"`
 
 	// status
 	Status string `json:"status,omitempty"`
 
 	// status description
 	StatusDescription string `json:"status_description,omitempty"`
+
+	// status v2
+	StatusV2 *AppCompositeStatus `json:"status_v2,omitempty"`
 
 	// terraform workspace
 	TerraformWorkspace *AppTerraformWorkspace `json:"terraform_workspace,omitempty"`
@@ -72,6 +75,10 @@ func (m *AppInstallComponent) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateInstallDeploys(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStatusV2(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -149,6 +156,25 @@ func (m *AppInstallComponent) validateInstallDeploys(formats strfmt.Registry) er
 	return nil
 }
 
+func (m *AppInstallComponent) validateStatusV2(formats strfmt.Registry) error {
+	if swag.IsZero(m.StatusV2) { // not required
+		return nil
+	}
+
+	if m.StatusV2 != nil {
+		if err := m.StatusV2.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("status_v2")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("status_v2")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *AppInstallComponent) validateTerraformWorkspace(formats strfmt.Registry) error {
 	if swag.IsZero(m.TerraformWorkspace) { // not required
 		return nil
@@ -181,6 +207,10 @@ func (m *AppInstallComponent) ContextValidate(ctx context.Context, formats strfm
 	}
 
 	if err := m.contextValidateInstallDeploys(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateStatusV2(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -256,6 +286,27 @@ func (m *AppInstallComponent) contextValidateInstallDeploys(ctx context.Context,
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *AppInstallComponent) contextValidateStatusV2(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.StatusV2 != nil {
+
+		if swag.IsZero(m.StatusV2) { // not required
+			return nil
+		}
+
+		if err := m.StatusV2.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("status_v2")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("status_v2")
+			}
+			return err
+		}
 	}
 
 	return nil

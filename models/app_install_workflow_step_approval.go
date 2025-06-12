@@ -18,26 +18,29 @@ import (
 // swagger:model app.InstallWorkflowStepApproval
 type AppInstallWorkflowStepApproval struct {
 
+	// contents
+	Contents string `json:"contents,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
-	// helm plan JSON
-	HelmPlanJSON string `json:"helmPlanJSON,omitempty"`
-
 	// id
 	ID string `json:"id,omitempty"`
-
-	// image approval JSON
-	ImageApprovalJSON string `json:"imageApprovalJSON,omitempty"`
 
 	// install workflow step
 	InstallWorkflowStep *AppInstallWorkflowStep `json:"installWorkflowStep,omitempty"`
 
 	// the step that this approval belongs too
 	InstallWorkflowStepID string `json:"installWorkflowStepID,omitempty"`
+
+	// owner id
+	OwnerID string `json:"owner_id,omitempty"`
+
+	// owner type
+	OwnerType string `json:"owner_type,omitempty"`
 
 	// the response object must be created by the user in the UI or CLI
 	Response struct {
@@ -50,16 +53,8 @@ type AppInstallWorkflowStepApproval struct {
 	// the runner job where this approval was created
 	RunnerJobID string `json:"runner_job_id,omitempty"`
 
-	// status
-	Status *AppCompositeStatus `json:"status,omitempty"`
-
-	// terraform plan JSON
-	TerraformPlanJSON string `json:"terraformPlanJSON,omitempty"`
-
-	// the plan and which type it is here
-	Type struct {
-		AppInstallWorkflowStepApprovalType
-	} `json:"type,omitempty"`
+	// type
+	Type AppInstallWorkflowStepApprovalType `json:"type,omitempty"`
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
@@ -78,10 +73,6 @@ func (m *AppInstallWorkflowStepApproval) Validate(formats strfmt.Registry) error
 	}
 
 	if err := m.validateRunnerJob(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateStatus(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -141,28 +132,18 @@ func (m *AppInstallWorkflowStepApproval) validateRunnerJob(formats strfmt.Regist
 	return nil
 }
 
-func (m *AppInstallWorkflowStepApproval) validateStatus(formats strfmt.Registry) error {
-	if swag.IsZero(m.Status) { // not required
-		return nil
-	}
-
-	if m.Status != nil {
-		if err := m.Status.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("status")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("status")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *AppInstallWorkflowStepApproval) validateType(formats strfmt.Registry) error {
 	if swag.IsZero(m.Type) { // not required
 		return nil
+	}
+
+	if err := m.Type.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("type")
+		}
+		return err
 	}
 
 	return nil
@@ -181,10 +162,6 @@ func (m *AppInstallWorkflowStepApproval) ContextValidate(ctx context.Context, fo
 	}
 
 	if err := m.contextValidateRunnerJob(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateStatus(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -245,28 +222,20 @@ func (m *AppInstallWorkflowStepApproval) contextValidateRunnerJob(ctx context.Co
 	return nil
 }
 
-func (m *AppInstallWorkflowStepApproval) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
+func (m *AppInstallWorkflowStepApproval) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.Status != nil {
-
-		if swag.IsZero(m.Status) { // not required
-			return nil
-		}
-
-		if err := m.Status.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("status")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("status")
-			}
-			return err
-		}
+	if swag.IsZero(m.Type) { // not required
+		return nil
 	}
 
-	return nil
-}
-
-func (m *AppInstallWorkflowStepApproval) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
+	if err := m.Type.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("type")
+		}
+		return err
+	}
 
 	return nil
 }

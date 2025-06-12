@@ -19,6 +19,9 @@ import (
 // swagger:model app.InstallWorkflow
 type AppInstallWorkflow struct {
 
+	// approval option
+	ApprovalOption AppInstallApprovalOption `json:"approval_option,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
@@ -50,13 +53,19 @@ type AppInstallWorkflow struct {
 	InstallSandboxRuns []*AppInstallSandboxRun `json:"install_sandbox_runs"`
 
 	// links
-	Links map[string]interface{} `json:"links,omitempty"`
+	Links interface{} `json:"links,omitempty"`
 
 	// metadata
 	Metadata map[string]string `json:"metadata,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
+
+	// owner id
+	OwnerID string `json:"owner_id,omitempty"`
+
+	// owner type
+	OwnerType string `json:"owner_type,omitempty"`
 
 	// started at
 	StartedAt string `json:"started_at,omitempty"`
@@ -80,6 +89,10 @@ type AppInstallWorkflow struct {
 // Validate validates this app install workflow
 func (m *AppInstallWorkflow) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateApprovalOption(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateInstallActionWorkflowRuns(formats); err != nil {
 		res = append(res, err)
@@ -112,6 +125,23 @@ func (m *AppInstallWorkflow) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppInstallWorkflow) validateApprovalOption(formats strfmt.Registry) error {
+	if swag.IsZero(m.ApprovalOption) { // not required
+		return nil
+	}
+
+	if err := m.ApprovalOption.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("approval_option")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("approval_option")
+		}
+		return err
+	}
+
 	return nil
 }
 
@@ -276,6 +306,10 @@ func (m *AppInstallWorkflow) validateType(formats strfmt.Registry) error {
 func (m *AppInstallWorkflow) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateApprovalOption(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateInstallActionWorkflowRuns(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -307,6 +341,24 @@ func (m *AppInstallWorkflow) ContextValidate(ctx context.Context, formats strfmt
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppInstallWorkflow) contextValidateApprovalOption(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ApprovalOption) { // not required
+		return nil
+	}
+
+	if err := m.ApprovalOption.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("approval_option")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("approval_option")
+		}
+		return err
+	}
+
 	return nil
 }
 

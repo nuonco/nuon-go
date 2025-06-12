@@ -70,6 +70,9 @@ type AppInstallActionWorkflowRun struct {
 	// status description
 	StatusDescription string `json:"status_description,omitempty"`
 
+	// status v2
+	StatusV2 *AppCompositeStatus `json:"status_v2,omitempty"`
+
 	// steps
 	Steps []*AppInstallActionWorkflowRunStep `json:"steps"`
 
@@ -107,6 +110,10 @@ func (m *AppInstallActionWorkflowRun) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateRunnerJob(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStatusV2(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -219,6 +226,25 @@ func (m *AppInstallActionWorkflowRun) validateRunnerJob(formats strfmt.Registry)
 	return nil
 }
 
+func (m *AppInstallActionWorkflowRun) validateStatusV2(formats strfmt.Registry) error {
+	if swag.IsZero(m.StatusV2) { // not required
+		return nil
+	}
+
+	if m.StatusV2 != nil {
+		if err := m.StatusV2.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("status_v2")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("status_v2")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *AppInstallActionWorkflowRun) validateSteps(formats strfmt.Registry) error {
 	if swag.IsZero(m.Steps) { // not required
 		return nil
@@ -283,6 +309,10 @@ func (m *AppInstallActionWorkflowRun) ContextValidate(ctx context.Context, forma
 	}
 
 	if err := m.contextValidateRunnerJob(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateStatusV2(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -397,6 +427,27 @@ func (m *AppInstallActionWorkflowRun) contextValidateRunnerJob(ctx context.Conte
 				return ve.ValidateName("runner_job")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("runner_job")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppInstallActionWorkflowRun) contextValidateStatusV2(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.StatusV2 != nil {
+
+		if swag.IsZero(m.StatusV2) { // not required
+			return nil
+		}
+
+		if err := m.StatusV2.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("status_v2")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("status_v2")
 			}
 			return err
 		}

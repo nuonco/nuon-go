@@ -34,6 +34,9 @@ type AppComponentConfigConnection struct {
 	// component id
 	ComponentID string `json:"component_id,omitempty"`
 
+	// component name
+	ComponentName string `json:"component_name,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
