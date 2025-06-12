@@ -40,6 +40,9 @@ type AppInstallSandbox struct {
 	// status description
 	StatusDescription string `json:"status_description,omitempty"`
 
+	// status v2
+	StatusV2 *AppCompositeStatus `json:"status_v2,omitempty"`
+
 	// terraform workspace
 	TerraformWorkspace *AppTerraformWorkspace `json:"terraform_workspace,omitempty"`
 
@@ -52,6 +55,10 @@ func (m *AppInstallSandbox) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateInstallSandboxRuns(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStatusV2(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -91,6 +98,25 @@ func (m *AppInstallSandbox) validateInstallSandboxRuns(formats strfmt.Registry) 
 	return nil
 }
 
+func (m *AppInstallSandbox) validateStatusV2(formats strfmt.Registry) error {
+	if swag.IsZero(m.StatusV2) { // not required
+		return nil
+	}
+
+	if m.StatusV2 != nil {
+		if err := m.StatusV2.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("status_v2")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("status_v2")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *AppInstallSandbox) validateTerraformWorkspace(formats strfmt.Registry) error {
 	if swag.IsZero(m.TerraformWorkspace) { // not required
 		return nil
@@ -115,6 +141,10 @@ func (m *AppInstallSandbox) ContextValidate(ctx context.Context, formats strfmt.
 	var res []error
 
 	if err := m.contextValidateInstallSandboxRuns(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateStatusV2(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -148,6 +178,27 @@ func (m *AppInstallSandbox) contextValidateInstallSandboxRuns(ctx context.Contex
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *AppInstallSandbox) contextValidateStatusV2(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.StatusV2 != nil {
+
+		if swag.IsZero(m.StatusV2) { // not required
+			return nil
+		}
+
+		if err := m.StatusV2.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("status_v2")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("status_v2")
+			}
+			return err
+		}
 	}
 
 	return nil

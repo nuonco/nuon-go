@@ -30,17 +30,14 @@ func (m AppInstallDeployType) Pointer() *AppInstallDeployType {
 
 const (
 
-	// AppInstallDeployTypeRelease captures enum value "release"
-	AppInstallDeployTypeRelease AppInstallDeployType = "release"
+	// AppInstallDeployTypeSyncDashImage captures enum value "sync-image"
+	AppInstallDeployTypeSyncDashImage AppInstallDeployType = "sync-image"
 
-	// AppInstallDeployTypeInstall captures enum value "install"
-	AppInstallDeployTypeInstall AppInstallDeployType = "install"
+	// AppInstallDeployTypeApply captures enum value "apply"
+	AppInstallDeployTypeApply AppInstallDeployType = "apply"
 
 	// AppInstallDeployTypeTeardown captures enum value "teardown"
 	AppInstallDeployTypeTeardown AppInstallDeployType = "teardown"
-
-	// AppInstallDeployTypePlanDashOnly captures enum value "plan-only"
-	AppInstallDeployTypePlanDashOnly AppInstallDeployType = "plan-only"
 )
 
 // for schema
@@ -48,7 +45,7 @@ var appInstallDeployTypeEnum []interface{}
 
 func init() {
 	var res []AppInstallDeployType
-	if err := json.Unmarshal([]byte(`["release","install","teardown","plan-only"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["sync-image","apply","teardown"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

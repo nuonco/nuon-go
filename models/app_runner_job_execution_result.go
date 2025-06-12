@@ -17,6 +17,9 @@ import (
 // swagger:model app.RunnerJobExecutionResult
 type AppRunnerJobExecutionResult struct {
 
+	// contents
+	Contents string `json:"contents,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 

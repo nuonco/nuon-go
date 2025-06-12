@@ -49,6 +49,9 @@ type ServiceCreateHelmComponentConfigRequest struct {
 	// storage driver
 	StorageDriver string `json:"storage_driver,omitempty"`
 
+	// take ownership
+	TakeOwnership bool `json:"take_ownership,omitempty"`
+
 	// values
 	// Required: true
 	Values map[string]string `json:"values"`

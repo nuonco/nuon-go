@@ -65,7 +65,7 @@ type AppInstallDeploy struct {
 	OciArtifact *AppOCIArtifact `json:"oci_artifact,omitempty"`
 
 	// outputs
-	Outputs map[string]interface{} `json:"outputs,omitempty"`
+	Outputs interface{} `json:"outputs,omitempty"`
 
 	// release id
 	ReleaseID string `json:"release_id,omitempty"`
@@ -78,6 +78,9 @@ type AppInstallDeploy struct {
 
 	// status description
 	StatusDescription string `json:"status_description,omitempty"`
+
+	// status v2
+	StatusV2 *AppCompositeStatus `json:"status_v2,omitempty"`
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
@@ -108,6 +111,10 @@ func (m *AppInstallDeploy) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateRunnerJobs(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStatusV2(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -243,6 +250,25 @@ func (m *AppInstallDeploy) validateRunnerJobs(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppInstallDeploy) validateStatusV2(formats strfmt.Registry) error {
+	if swag.IsZero(m.StatusV2) { // not required
+		return nil
+	}
+
+	if m.StatusV2 != nil {
+		if err := m.StatusV2.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("status_v2")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("status_v2")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app install deploy based on the context it is used
 func (m *AppInstallDeploy) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -268,6 +294,10 @@ func (m *AppInstallDeploy) ContextValidate(ctx context.Context, formats strfmt.R
 	}
 
 	if err := m.contextValidateRunnerJobs(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateStatusV2(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -403,6 +433,27 @@ func (m *AppInstallDeploy) contextValidateRunnerJobs(ctx context.Context, format
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *AppInstallDeploy) contextValidateStatusV2(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.StatusV2 != nil {
+
+		if swag.IsZero(m.StatusV2) { // not required
+			return nil
+		}
+
+		if err := m.StatusV2.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("status_v2")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("status_v2")
+			}
+			return err
+		}
 	}
 
 	return nil

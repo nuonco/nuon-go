@@ -54,13 +54,19 @@ type AppInstallWorkflowStep struct {
 	InstallWorkflowID string `json:"install_workflow_id,omitempty"`
 
 	// links
-	Links map[string]interface{} `json:"links,omitempty"`
+	Links interface{} `json:"links,omitempty"`
 
 	// metadata
 	Metadata map[string]string `json:"metadata,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
+
+	// owner id
+	OwnerID string `json:"owner_id,omitempty"`
+
+	// owner type
+	OwnerType string `json:"owner_type,omitempty"`
 
 	// policy validation
 	PolicyValidation *AppInstallWorkflowStepPolicyValidation `json:"policy_validation,omitempty"`

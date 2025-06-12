@@ -42,7 +42,7 @@ type AppApp struct {
 	} `json:"input_config,omitempty"`
 
 	// links
-	Links map[string]interface{} `json:"links,omitempty"`
+	Links interface{} `json:"links,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`

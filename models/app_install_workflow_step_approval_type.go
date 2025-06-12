@@ -33,14 +33,14 @@ const (
 	// AppInstallWorkflowStepApprovalTypeNoop captures enum value "noop"
 	AppInstallWorkflowStepApprovalTypeNoop AppInstallWorkflowStepApprovalType = "noop"
 
+	// AppInstallWorkflowStepApprovalTypeApproveDashAll captures enum value "approve-all"
+	AppInstallWorkflowStepApprovalTypeApproveDashAll AppInstallWorkflowStepApprovalType = "approve-all"
+
 	// AppInstallWorkflowStepApprovalTypeTerraformPlan captures enum value "terraform_plan"
 	AppInstallWorkflowStepApprovalTypeTerraformPlan AppInstallWorkflowStepApprovalType = "terraform_plan"
 
 	// AppInstallWorkflowStepApprovalTypeHelmApproval captures enum value "helm_approval"
 	AppInstallWorkflowStepApprovalTypeHelmApproval AppInstallWorkflowStepApprovalType = "helm_approval"
-
-	// AppInstallWorkflowStepApprovalTypeImageApproval captures enum value "image_approval"
-	AppInstallWorkflowStepApprovalTypeImageApproval AppInstallWorkflowStepApprovalType = "image_approval"
 )
 
 // for schema
@@ -48,7 +48,7 @@ var appInstallWorkflowStepApprovalTypeEnum []interface{}
 
 func init() {
 	var res []AppInstallWorkflowStepApprovalType
-	if err := json.Unmarshal([]byte(`["noop","terraform_plan","helm_approval","image_approval"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["noop","approve-all","terraform_plan","helm_approval"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
