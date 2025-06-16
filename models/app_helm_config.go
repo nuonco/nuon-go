@@ -8,7 +8,6 @@ package models
 import (
 	"context"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -22,16 +21,16 @@ type AppHelmConfig struct {
 	ChartName string `json:"chart_name,omitempty"`
 
 	// namespace
-	Namespace *GenericsNullString `json:"namespace,omitempty"`
+	Namespace string `json:"namespace,omitempty"`
 
 	// storage driver
-	StorageDriver *GenericsNullString `json:"storage_driver,omitempty"`
+	StorageDriver string `json:"storage_driver,omitempty"`
 
 	// Newer fields that we don't need to store as columns in the database
 	TakeOwnership bool `json:"take_ownership,omitempty"`
 
 	// values
-	Values PgtypeHstore `json:"values,omitempty"`
+	Values map[string]string `json:"values,omitempty"`
 
 	// values files
 	ValuesFiles []string `json:"values_files"`
@@ -39,162 +38,11 @@ type AppHelmConfig struct {
 
 // Validate validates this app helm config
 func (m *AppHelmConfig) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateNamespace(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateStorageDriver(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateValues(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
 	return nil
 }
 
-func (m *AppHelmConfig) validateNamespace(formats strfmt.Registry) error {
-	if swag.IsZero(m.Namespace) { // not required
-		return nil
-	}
-
-	if m.Namespace != nil {
-		if err := m.Namespace.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("namespace")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("namespace")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *AppHelmConfig) validateStorageDriver(formats strfmt.Registry) error {
-	if swag.IsZero(m.StorageDriver) { // not required
-		return nil
-	}
-
-	if m.StorageDriver != nil {
-		if err := m.StorageDriver.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("storage_driver")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("storage_driver")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *AppHelmConfig) validateValues(formats strfmt.Registry) error {
-	if swag.IsZero(m.Values) { // not required
-		return nil
-	}
-
-	if m.Values != nil {
-		if err := m.Values.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("values")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("values")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this app helm config based on the context it is used
+// ContextValidate validates this app helm config based on context it is used
 func (m *AppHelmConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateNamespace(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateStorageDriver(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateValues(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *AppHelmConfig) contextValidateNamespace(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Namespace != nil {
-
-		if swag.IsZero(m.Namespace) { // not required
-			return nil
-		}
-
-		if err := m.Namespace.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("namespace")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("namespace")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *AppHelmConfig) contextValidateStorageDriver(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.StorageDriver != nil {
-
-		if swag.IsZero(m.StorageDriver) { // not required
-			return nil
-		}
-
-		if err := m.StorageDriver.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("storage_driver")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("storage_driver")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *AppHelmConfig) contextValidateValues(ctx context.Context, formats strfmt.Registry) error {
-
-	if swag.IsZero(m.Values) { // not required
-		return nil
-	}
-
-	if err := m.Values.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("values")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("values")
-		}
-		return err
-	}
-
 	return nil
 }
 
