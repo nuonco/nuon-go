@@ -73,7 +73,7 @@ type ReprovisionInstallSandboxParams struct {
 
 	   Input
 	*/
-	Req models.ServiceReprovisionInstallSandboxRequest
+	Req *models.ServiceReprovisionInstallSandboxRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -140,13 +140,13 @@ func (o *ReprovisionInstallSandboxParams) SetInstallID(installID string) {
 }
 
 // WithReq adds the req to the reprovision install sandbox params
-func (o *ReprovisionInstallSandboxParams) WithReq(req models.ServiceReprovisionInstallSandboxRequest) *ReprovisionInstallSandboxParams {
+func (o *ReprovisionInstallSandboxParams) WithReq(req *models.ServiceReprovisionInstallSandboxRequest) *ReprovisionInstallSandboxParams {
 	o.SetReq(req)
 	return o
 }
 
 // SetReq adds the req to the reprovision install sandbox params
-func (o *ReprovisionInstallSandboxParams) SetReq(req models.ServiceReprovisionInstallSandboxRequest) {
+func (o *ReprovisionInstallSandboxParams) SetReq(req *models.ServiceReprovisionInstallSandboxRequest) {
 	o.Req = req
 }
 
