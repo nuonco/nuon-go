@@ -52,7 +52,7 @@ type AppActionWorkflowConfig struct {
 	// timeout
 	Timeout int64 `json:"timeout,omitempty"`
 
-	// triggers
+	// INFO: if adding new associations here, ensure they are added to the batch delete activity
 	Triggers []*AppActionWorkflowTriggerConfig `json:"triggers"`
 
 	// updated at

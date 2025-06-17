@@ -38,6 +38,12 @@ const (
 
 	// AppInstallWorkflowStepResponseTypeSkip captures enum value "skip"
 	AppInstallWorkflowStepResponseTypeSkip AppInstallWorkflowStepResponseType = "skip"
+
+	// AppInstallWorkflowStepResponseTypeRetry captures enum value "retry"
+	AppInstallWorkflowStepResponseTypeRetry AppInstallWorkflowStepResponseType = "retry"
+
+	// AppInstallWorkflowStepResponseTypeAutoDashApprove captures enum value "auto-approve"
+	AppInstallWorkflowStepResponseTypeAutoDashApprove AppInstallWorkflowStepResponseType = "auto-approve"
 )
 
 // for schema
@@ -45,7 +51,7 @@ var appInstallWorkflowStepResponseTypeEnum []interface{}
 
 func init() {
 	var res []AppInstallWorkflowStepResponseType
-	if err := json.Unmarshal([]byte(`["deny","approve","skip"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["deny","approve","skip","retry","auto-approve"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
