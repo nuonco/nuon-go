@@ -48,6 +48,9 @@ const (
 	// AppStatusCancelled captures enum value "cancelled"
 	AppStatusCancelled AppStatus = "cancelled"
 
+	// AppStatusDiscarded captures enum value "discarded"
+	AppStatusDiscarded AppStatus = "discarded"
+
 	// AppStatusGenerating captures enum value "generating"
 	AppStatusGenerating AppStatus = "generating"
 
@@ -69,17 +72,20 @@ const (
 	// AppStatusApproved captures enum value "approved"
 	AppStatusApproved AppStatus = "approved"
 
-	// AppStatusApprovalDashAwaiting captures enum value "approval-awaiting"
-	AppStatusApprovalDashAwaiting AppStatus = "approval-awaiting"
-
 	// AppStatusApprovalDashExpired captures enum value "approval-expired"
 	AppStatusApprovalDashExpired AppStatus = "approval-expired"
 
 	// AppStatusApprovalDashDenied captures enum value "approval-denied"
 	AppStatusApprovalDashDenied AppStatus = "approval-denied"
 
-	// AppStatusAwaitingDashApproval captures enum value "awaiting-approval"
-	AppStatusAwaitingDashApproval AppStatus = "awaiting-approval"
+	// AppStatusApprovalDashRetry captures enum value "approval-retry"
+	AppStatusApprovalDashRetry AppStatus = "approval-retry"
+
+	// AppStatusNoop captures enum value "noop"
+	AppStatusNoop AppStatus = "noop"
+
+	// AppStatusApprovalDashAwaiting captures enum value "approval-awaiting"
+	AppStatusApprovalDashAwaiting AppStatus = "approval-awaiting"
 )
 
 // for schema
@@ -87,7 +93,7 @@ var appStatusEnum []interface{}
 
 func init() {
 	var res []AppStatus
-	if err := json.Unmarshal([]byte(`["error","pending","in-progress","success","not-attempted","cancelled","generating","awaiting-user-run","provisioning","active","outdated","expired","approved","approval-awaiting","approval-expired","approval-denied","awaiting-approval"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["error","pending","in-progress","success","not-attempted","cancelled","discarded","generating","awaiting-user-run","provisioning","active","outdated","expired","approved","approval-expired","approval-denied","approval-retry","noop","approval-awaiting"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
