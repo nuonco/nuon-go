@@ -114,10 +114,6 @@ type ClientService interface {
 
 	DeleteInstall(params *DeleteInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteInstallOK, error)
 
-	DeleteInstallComponent(params *DeleteInstallComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteInstallComponentOK, error)
-
-	DeleteInstallComponents(params *DeleteInstallComponentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteInstallComponentsOK, error)
-
 	DeleteInstaller(params *DeleteInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteInstallerOK, error)
 
 	DeleteOrg(params *DeleteOrgParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOrgOK, error)
@@ -2075,84 +2071,6 @@ func (a *Client) DeleteInstall(params *DeleteInstallParams, authInfo runtime.Cli
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeleteInstall: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-DeleteInstallComponent deletes an install component
-*/
-func (a *Client) DeleteInstallComponent(params *DeleteInstallComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteInstallComponentOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDeleteInstallComponentParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "DeleteInstallComponent",
-		Method:             "DELETE",
-		PathPattern:        "/v1/installs/{install_id}/components/{component_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &DeleteInstallComponentReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*DeleteInstallComponentOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for DeleteInstallComponent: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-DeleteInstallComponents deletes an install component
-*/
-func (a *Client) DeleteInstallComponents(params *DeleteInstallComponentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteInstallComponentsOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDeleteInstallComponentsParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "DeleteInstallComponents",
-		Method:             "DELETE",
-		PathPattern:        "/v1/installs/{install_id}/components",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &DeleteInstallComponentsReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*DeleteInstallComponentsOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for DeleteInstallComponents: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
