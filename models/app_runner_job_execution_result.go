@@ -20,6 +20,9 @@ type AppRunnerJobExecutionResult struct {
 	// contents
 	Contents string `json:"contents,omitempty"`
 
+	// contents display
+	ContentsDisplay string `json:"contents_display,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
