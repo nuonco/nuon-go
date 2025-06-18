@@ -559,36 +559,6 @@ func (mr *MockClientMockRecorder) DeleteInstall(ctx, installID interface{}) *gom
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteInstall", reflect.TypeOf((*MockClient)(nil).DeleteInstall), ctx, installID)
 }
 
-// DeleteInstallComponent mocks base method.
-func (m *MockClient) DeleteInstallComponent(ctx context.Context, installID, componentID string, force bool) (bool, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "DeleteInstallComponent", ctx, installID, componentID, force)
-	ret0, _ := ret[0].(bool)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// DeleteInstallComponent indicates an expected call of DeleteInstallComponent.
-func (mr *MockClientMockRecorder) DeleteInstallComponent(ctx, installID, componentID, force interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteInstallComponent", reflect.TypeOf((*MockClient)(nil).DeleteInstallComponent), ctx, installID, componentID, force)
-}
-
-// DeleteInstallComponents mocks base method.
-func (m *MockClient) DeleteInstallComponents(ctx context.Context, installID string, force bool) (bool, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "DeleteInstallComponents", ctx, installID, force)
-	ret0, _ := ret[0].(bool)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// DeleteInstallComponents indicates an expected call of DeleteInstallComponents.
-func (mr *MockClientMockRecorder) DeleteInstallComponents(ctx, installID, force interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteInstallComponents", reflect.TypeOf((*MockClient)(nil).DeleteInstallComponents), ctx, installID, force)
-}
-
 // DeleteInstaller mocks base method.
 func (m *MockClient) DeleteInstaller(ctx context.Context, installerID string) (bool, error) {
 	m.ctrl.T.Helper()
