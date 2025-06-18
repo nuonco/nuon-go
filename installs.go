@@ -116,10 +116,6 @@ func (c *client) ReprovisionInstall(ctx context.Context, installID string) error
 	resp, err := c.genClient.Operations.ReprovisionInstall(&operations.ReprovisionInstallParams{
 		InstallID: installID,
 		Context:   ctx,
-		// TODO(jm): make this configurable
-		Req: &models.ServiceReprovisionInstallRequest{
-			"abort",
-		},
 	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return err
@@ -138,7 +134,7 @@ func (c *client) DeprovisionInstall(ctx context.Context, installID string) error
 		Context:   ctx,
 		// TODO(jm): make this configurable
 		Req: &models.ServiceDeprovisionInstallRequest{
-			"abort",
+			ErrorBehavior: "abort",
 		},
 	}, c.getOrgIDAuthInfo())
 	if err != nil {

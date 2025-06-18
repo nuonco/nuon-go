@@ -118,7 +118,7 @@ func (c *client) TeardownInstallComponents(ctx context.Context, installID string
 		Context:   ctx,
 		// TODO(jm): make this configurable
 		Req: &models.ServiceTeardownInstallComponentsRequest{
-			"abort",
+			ErrorBehavior: "abort",
 		},
 	}, c.getOrgIDAuthInfo())
 	if err != nil {
@@ -132,40 +132,10 @@ func (c *client) TeardownInstallComponents(ctx context.Context, installID string
 	return nil
 }
 
-func (c *client) DeleteInstallComponent(ctx context.Context, installID, componentID string, force bool) (bool, error) {
-	resp, err := c.genClient.Operations.DeleteInstallComponent(&operations.DeleteInstallComponentParams{
-		InstallID:   installID,
-		ComponentID: componentID,
-		Force:       &force,
-		Context:     ctx,
-	}, c.getOrgIDAuthInfo())
-	if err != nil {
-		return false, err
-	}
-
-	return resp.Payload, nil
-}
-
-func (c *client) DeleteInstallComponents(ctx context.Context, installID string, force bool) (bool, error) {
-	resp, err := c.genClient.Operations.DeleteInstallComponents(&operations.DeleteInstallComponentsParams{
-		InstallID: installID,
-		Force:     &force,
-		Context:   ctx,
-	}, c.getOrgIDAuthInfo())
-	if err != nil {
-		return false, err
-	}
-
-	return resp.Payload, nil
-}
-
 func (c *client) DeployInstallComponents(ctx context.Context, installID string) error {
 	resp, err := c.genClient.Operations.DeployInstallComponents(&operations.DeployInstallComponentsParams{
 		InstallID: installID,
 		Context:   ctx,
-		Req: &models.ServiceDeployInstallComponentsRequest{
-			"abort",
-		},
 	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return err
