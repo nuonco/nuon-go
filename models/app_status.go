@@ -51,6 +51,12 @@ const (
 	// AppStatusDiscarded captures enum value "discarded"
 	AppStatusDiscarded AppStatus = "discarded"
 
+	// AppStatusPlanning captures enum value "planning"
+	AppStatusPlanning AppStatus = "planning"
+
+	// AppStatusApplying captures enum value "applying"
+	AppStatusApplying AppStatus = "applying"
+
 	// AppStatusGenerating captures enum value "generating"
 	AppStatusGenerating AppStatus = "generating"
 
@@ -93,7 +99,7 @@ var appStatusEnum []interface{}
 
 func init() {
 	var res []AppStatus
-	if err := json.Unmarshal([]byte(`["error","pending","in-progress","success","not-attempted","cancelled","discarded","generating","awaiting-user-run","provisioning","active","outdated","expired","approved","approval-expired","approval-denied","approval-retry","noop","approval-awaiting"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["error","pending","in-progress","success","not-attempted","cancelled","discarded","planning","applying","generating","awaiting-user-run","provisioning","active","outdated","expired","approved","approval-expired","approval-denied","approval-retry","noop","approval-awaiting"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
