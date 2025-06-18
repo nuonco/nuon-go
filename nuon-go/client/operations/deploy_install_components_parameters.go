@@ -73,7 +73,7 @@ type DeployInstallComponentsParams struct {
 
 	   Input
 	*/
-	Req *models.ServiceDeployInstallComponentsRequest
+	Req models.ServiceDeployInstallComponentsRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -140,13 +140,13 @@ func (o *DeployInstallComponentsParams) SetInstallID(installID string) {
 }
 
 // WithReq adds the req to the deploy install components params
-func (o *DeployInstallComponentsParams) WithReq(req *models.ServiceDeployInstallComponentsRequest) *DeployInstallComponentsParams {
+func (o *DeployInstallComponentsParams) WithReq(req models.ServiceDeployInstallComponentsRequest) *DeployInstallComponentsParams {
 	o.SetReq(req)
 	return o
 }
 
 // SetReq adds the req to the deploy install components params
-func (o *DeployInstallComponentsParams) SetReq(req *models.ServiceDeployInstallComponentsRequest) {
+func (o *DeployInstallComponentsParams) SetReq(req models.ServiceDeployInstallComponentsRequest) {
 	o.Req = req
 }
 
