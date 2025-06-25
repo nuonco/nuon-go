@@ -92,6 +92,9 @@ func (c *client) DeleteActionWorkflow(ctx context.Context, actionWorkflowID stri
 		ActionWorkflowID: actionWorkflowID,
 		Context:          ctx,
 	}, c.getOrgIDAuthInfo())
+	if err != nil {
+		return false, err
+	}
 
 	return resp.Payload, err
 }
