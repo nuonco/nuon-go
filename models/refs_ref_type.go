@@ -42,6 +42,9 @@ const (
 	// RefsRefTypeInputs captures enum value "inputs"
 	RefsRefTypeInputs RefsRefType = "inputs"
 
+	// RefsRefTypeInstallInputs captures enum value "install_inputs"
+	RefsRefTypeInstallInputs RefsRefType = "install_inputs"
+
 	// RefsRefTypeSecrets captures enum value "secrets"
 	RefsRefTypeSecrets RefsRefType = "secrets"
 
@@ -54,7 +57,7 @@ var refsRefTypeEnum []interface{}
 
 func init() {
 	var res []RefsRefType
-	if err := json.Unmarshal([]byte(`["sandbox","install_stack","component","inputs","secrets","actions"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["sandbox","install_stack","component","inputs","install_inputs","secrets","actions"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

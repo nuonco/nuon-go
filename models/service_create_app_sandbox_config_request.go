@@ -22,9 +22,6 @@ type ServiceCreateAppSandboxConfigRequest struct {
 	// app config id
 	AppConfigID string `json:"app_config_id,omitempty"`
 
-	// aws delegation iam role arn
-	AwsDelegationIamRoleArn string `json:"aws_delegation_iam_role_arn,omitempty"`
-
 	// connected github vcs config
 	ConnectedGithubVcsConfig *ServiceConnectedGithubVCSSandboxConfigRequest `json:"connected_github_vcs_config,omitempty"`
 
