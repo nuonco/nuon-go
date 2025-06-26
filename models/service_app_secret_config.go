@@ -22,6 +22,9 @@ type ServiceAppSecretConfig struct {
 	// auto generate
 	AutoGenerate bool `json:"auto_generate,omitempty"`
 
+	// default
+	Default string `json:"default,omitempty"`
+
 	// description
 	// Required: true
 	Description *string `json:"description"`
