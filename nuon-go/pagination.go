@@ -14,10 +14,9 @@ func handlePagination[T any](items []T, offset, limit int64) ([]T, bool) {
 	limit--
 
 	if len(items) > int(limit) {
+		items = items[:len(items)-1]
 		hasMore = true
 	}
-
-	items = items[:len(items)-1]
 
 	return items, hasMore
 }
