@@ -692,7 +692,7 @@ func (mr *MockClientMockRecorder) GetActionWorkflowLatestConfig(ctx, actionWorkf
 }
 
 // GetActionWorkflows mocks base method.
-func (m *MockClient) GetActionWorkflows(ctx context.Context, appID string, query *models.GetActionWorkflowsQuery) ([]*models.AppActionWorkflow, bool, error) {
+func (m *MockClient) GetActionWorkflows(ctx context.Context, appID string, query *models.GetPaginatedQuery) ([]*models.AppActionWorkflow, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetActionWorkflows", ctx, appID, query)
 	ret0, _ := ret[0].([]*models.AppActionWorkflow)
@@ -724,7 +724,7 @@ func (mr *MockClientMockRecorder) GetAllComponents(ctx, query interface{}) *gomo
 }
 
 // GetAllInstalls mocks base method.
-func (m *MockClient) GetAllInstalls(ctx context.Context, query *models.GetAllInstallsQuery) ([]*models.AppInstall, bool, error) {
+func (m *MockClient) GetAllInstalls(ctx context.Context, query *models.GetPaginatedQuery) ([]*models.AppInstall, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAllInstalls", ctx, query)
 	ret0, _ := ret[0].([]*models.AppInstall)
@@ -740,7 +740,7 @@ func (mr *MockClientMockRecorder) GetAllInstalls(ctx, query interface{}) *gomock
 }
 
 // GetAllVCSConnectedRepos mocks base method.
-func (m *MockClient) GetAllVCSConnectedRepos(ctx context.Context, query *models.GetAllVCSConnectedReposQuery) ([]*models.ServiceRepository, bool, error) {
+func (m *MockClient) GetAllVCSConnectedRepos(ctx context.Context, query *models.GetPaginatedQuery) ([]*models.ServiceRepository, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAllVCSConnectedRepos", ctx, query)
 	ret0, _ := ret[0].([]*models.ServiceRepository)
@@ -862,7 +862,7 @@ func (mr *MockClientMockRecorder) GetAppConfigTemplate(ctx, appID, typ interface
 }
 
 // GetAppConfigs mocks base method.
-func (m *MockClient) GetAppConfigs(ctx context.Context, appID string, query *models.GetAppConfigsQuery) ([]*models.AppAppConfig, bool, error) {
+func (m *MockClient) GetAppConfigs(ctx context.Context, appID string, query *models.GetPaginatedQuery) ([]*models.AppAppConfig, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAppConfigs", ctx, appID, query)
 	ret0, _ := ret[0].([]*models.AppAppConfig)
@@ -878,7 +878,7 @@ func (mr *MockClientMockRecorder) GetAppConfigs(ctx, appID, query interface{}) *
 }
 
 // GetAppInputConfigs mocks base method.
-func (m *MockClient) GetAppInputConfigs(ctx context.Context, appID string, query *models.GetAppInputConfigsQuery) ([]*models.AppAppInputConfig, bool, error) {
+func (m *MockClient) GetAppInputConfigs(ctx context.Context, appID string, query *models.GetPaginatedQuery) ([]*models.AppAppInputConfig, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAppInputConfigs", ctx, appID, query)
 	ret0, _ := ret[0].([]*models.AppAppInputConfig)
@@ -909,7 +909,7 @@ func (mr *MockClientMockRecorder) GetAppInputLatestConfig(ctx, appID interface{}
 }
 
 // GetAppInstalls mocks base method.
-func (m *MockClient) GetAppInstalls(ctx context.Context, appID string, query *models.GetAppInstallsQuery) ([]*models.AppInstall, bool, error) {
+func (m *MockClient) GetAppInstalls(ctx context.Context, appID string, query *models.GetPaginatedQuery) ([]*models.AppInstall, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAppInstalls", ctx, appID, query)
 	ret0, _ := ret[0].([]*models.AppInstall)
@@ -970,7 +970,7 @@ func (mr *MockClientMockRecorder) GetAppPoliciesConfig(ctx, appID, appSecretConf
 }
 
 // GetAppReleases mocks base method.
-func (m *MockClient) GetAppReleases(ctx context.Context, appID string, query *models.GetAppReleasesQuery) ([]*models.AppComponentRelease, bool, error) {
+func (m *MockClient) GetAppReleases(ctx context.Context, appID string, query *models.GetPaginatedQuery) ([]*models.AppComponentRelease, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAppReleases", ctx, appID, query)
 	ret0, _ := ret[0].([]*models.AppComponentRelease)
@@ -986,7 +986,7 @@ func (mr *MockClientMockRecorder) GetAppReleases(ctx, appID, query interface{}) 
 }
 
 // GetAppRunnerConfigs mocks base method.
-func (m *MockClient) GetAppRunnerConfigs(ctx context.Context, appID string, query *models.GetAppRunnerConfigsQuery) ([]*models.AppAppRunnerConfig, bool, error) {
+func (m *MockClient) GetAppRunnerConfigs(ctx context.Context, appID string, query *models.GetPaginatedQuery) ([]*models.AppAppRunnerConfig, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAppRunnerConfigs", ctx, appID, query)
 	ret0, _ := ret[0].([]*models.AppAppRunnerConfig)
@@ -1017,7 +1017,7 @@ func (mr *MockClientMockRecorder) GetAppRunnerLatestConfig(ctx, appID interface{
 }
 
 // GetAppSandboxConfigs mocks base method.
-func (m *MockClient) GetAppSandboxConfigs(ctx context.Context, appID string, query *models.GetAppSandboxConfigsQuery) ([]*models.AppAppSandboxConfig, bool, error) {
+func (m *MockClient) GetAppSandboxConfigs(ctx context.Context, appID string, query *models.GetPaginatedQuery) ([]*models.AppAppSandboxConfig, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAppSandboxConfigs", ctx, appID, query)
 	ret0, _ := ret[0].([]*models.AppAppSandboxConfig)
@@ -1048,7 +1048,7 @@ func (mr *MockClientMockRecorder) GetAppSandboxLatestConfig(ctx, appID interface
 }
 
 // GetAppSecrets mocks base method.
-func (m *MockClient) GetAppSecrets(ctx context.Context, appID string, query *models.GetAppSecretsQuery) ([]*models.AppAppSecret, bool, error) {
+func (m *MockClient) GetAppSecrets(ctx context.Context, appID string, query *models.GetPaginatedQuery) ([]*models.AppAppSecret, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAppSecrets", ctx, appID, query)
 	ret0, _ := ret[0].([]*models.AppAppSecret)
@@ -1094,7 +1094,7 @@ func (mr *MockClientMockRecorder) GetAppStackConfig(ctx, appID, appStackConfigID
 }
 
 // GetApps mocks base method.
-func (m *MockClient) GetApps(ctx context.Context, query *models.GetAppsQuery) ([]*models.AppApp, bool, error) {
+func (m *MockClient) GetApps(ctx context.Context, query *models.GetPaginatedQuery) ([]*models.AppApp, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetApps", ctx, query)
 	ret0, _ := ret[0].([]*models.AppApp)
@@ -1185,7 +1185,7 @@ func (mr *MockClientMockRecorder) GetComponentBuild(ctx, componentID, buildID in
 }
 
 // GetComponentBuilds mocks base method.
-func (m *MockClient) GetComponentBuilds(ctx context.Context, componentID, appID string, query *models.GetComponentBuildsQuery) ([]*models.AppComponentBuild, bool, error) {
+func (m *MockClient) GetComponentBuilds(ctx context.Context, componentID, appID string, query *models.GetPaginatedQuery) ([]*models.AppComponentBuild, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetComponentBuilds", ctx, componentID, appID, query)
 	ret0, _ := ret[0].([]*models.AppComponentBuild)
@@ -1247,7 +1247,7 @@ func (mr *MockClientMockRecorder) GetComponentLatestConfig(ctx, componentID inte
 }
 
 // GetComponentReleases mocks base method.
-func (m *MockClient) GetComponentReleases(ctx context.Context, componentID string, query *models.GetComponentReleasesQuery) ([]*models.AppComponentRelease, bool, error) {
+func (m *MockClient) GetComponentReleases(ctx context.Context, componentID string, query *models.GetPaginatedQuery) ([]*models.AppComponentRelease, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetComponentReleases", ctx, componentID, query)
 	ret0, _ := ret[0].([]*models.AppComponentRelease)
@@ -1293,7 +1293,7 @@ func (mr *MockClientMockRecorder) GetInstall(ctx, installID interface{}) *gomock
 }
 
 // GetInstallActionWorkflowRecentRuns mocks base method.
-func (m *MockClient) GetInstallActionWorkflowRecentRuns(ctx context.Context, installID, actionWorkflowID string, query *models.GetInstallActionWorkflowRecentRunsQuery) (*models.AppInstallActionWorkflow, bool, error) {
+func (m *MockClient) GetInstallActionWorkflowRecentRuns(ctx context.Context, installID, actionWorkflowID string, query *models.GetPaginatedQuery) (*models.AppInstallActionWorkflow, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetInstallActionWorkflowRecentRuns", ctx, installID, actionWorkflowID, query)
 	ret0, _ := ret[0].(*models.AppInstallActionWorkflow)
@@ -1324,7 +1324,7 @@ func (mr *MockClientMockRecorder) GetInstallActionWorkflowRun(ctx, installID, ru
 }
 
 // GetInstallComponentDeploys mocks base method.
-func (m *MockClient) GetInstallComponentDeploys(ctx context.Context, installID, componentID string, query *models.GetInstallComponentDeploysQuery) ([]*models.AppInstallDeploy, bool, error) {
+func (m *MockClient) GetInstallComponentDeploys(ctx context.Context, installID, componentID string, query *models.GetPaginatedQuery) ([]*models.AppInstallDeploy, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetInstallComponentDeploys", ctx, installID, componentID, query)
 	ret0, _ := ret[0].([]*models.AppInstallDeploy)
@@ -1355,7 +1355,7 @@ func (mr *MockClientMockRecorder) GetInstallComponentLatestDeploy(ctx, installID
 }
 
 // GetInstallComponents mocks base method.
-func (m *MockClient) GetInstallComponents(ctx context.Context, installID string, query *models.GetInstallComponentsQuery) ([]*models.AppInstallComponent, bool, error) {
+func (m *MockClient) GetInstallComponents(ctx context.Context, installID string, query *models.GetPaginatedQuery) ([]*models.AppInstallComponent, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetInstallComponents", ctx, installID, query)
 	ret0, _ := ret[0].([]*models.AppInstallComponent)
@@ -1401,7 +1401,7 @@ func (mr *MockClientMockRecorder) GetInstallDeploy(ctx, installID, deployID inte
 }
 
 // GetInstallDeploys mocks base method.
-func (m *MockClient) GetInstallDeploys(ctx context.Context, installID string, query *models.GetInstallDeploysQuery) ([]*models.AppInstallDeploy, bool, error) {
+func (m *MockClient) GetInstallDeploys(ctx context.Context, installID string, query *models.GetPaginatedQuery) ([]*models.AppInstallDeploy, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetInstallDeploys", ctx, installID, query)
 	ret0, _ := ret[0].([]*models.AppInstallDeploy)
@@ -1417,7 +1417,7 @@ func (mr *MockClientMockRecorder) GetInstallDeploys(ctx, installID, query interf
 }
 
 // GetInstallInputs mocks base method.
-func (m *MockClient) GetInstallInputs(ctx context.Context, installID string, query *models.GetInstallInputsQuery) ([]*models.AppInstallInputs, bool, error) {
+func (m *MockClient) GetInstallInputs(ctx context.Context, installID string, query *models.GetPaginatedQuery) ([]*models.AppInstallInputs, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetInstallInputs", ctx, installID, query)
 	ret0, _ := ret[0].([]*models.AppInstallInputs)
@@ -1448,7 +1448,7 @@ func (mr *MockClientMockRecorder) GetInstallLatestDeploy(ctx, installID interfac
 }
 
 // GetInstallSandboxRuns mocks base method.
-func (m *MockClient) GetInstallSandboxRuns(ctx context.Context, installID string, query *models.GetInstallSandboxRunsQuery) ([]*models.AppInstallSandboxRun, bool, error) {
+func (m *MockClient) GetInstallSandboxRuns(ctx context.Context, installID string, query *models.GetPaginatedQuery) ([]*models.AppInstallSandboxRun, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetInstallSandboxRuns", ctx, installID, query)
 	ret0, _ := ret[0].([]*models.AppInstallSandboxRun)
@@ -1495,7 +1495,7 @@ func (mr *MockClientMockRecorder) GetInstaller(ctx, installerID interface{}) *go
 }
 
 // GetInstallers mocks base method.
-func (m *MockClient) GetInstallers(ctx context.Context, query *models.GetInstallersQuery) ([]*models.AppInstaller, bool, error) {
+func (m *MockClient) GetInstallers(ctx context.Context, query *models.GetPaginatedQuery) ([]*models.AppInstaller, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetInstallers", ctx, query)
 	ret0, _ := ret[0].([]*models.AppInstaller)
@@ -1586,7 +1586,7 @@ func (mr *MockClientMockRecorder) GetOrg(ctx interface{}) *gomock.Call {
 }
 
 // GetOrgInvites mocks base method.
-func (m *MockClient) GetOrgInvites(ctx context.Context, query *models.GetOrgInvitesQuery) ([]*models.AppOrgInvite, bool, error) {
+func (m *MockClient) GetOrgInvites(ctx context.Context, query *models.GetPaginatedQuery) ([]*models.AppOrgInvite, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetOrgInvites", ctx, query)
 	ret0, _ := ret[0].([]*models.AppOrgInvite)
@@ -1602,7 +1602,7 @@ func (mr *MockClientMockRecorder) GetOrgInvites(ctx, query interface{}) *gomock.
 }
 
 // GetOrgs mocks base method.
-func (m *MockClient) GetOrgs(ctx context.Context, query *models.GetOrgsQuery) ([]*models.AppOrg, bool, error) {
+func (m *MockClient) GetOrgs(ctx context.Context, query *models.GetPaginatedQuery) ([]*models.AppOrg, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetOrgs", ctx, query)
 	ret0, _ := ret[0].([]*models.AppOrg)
@@ -1633,7 +1633,7 @@ func (mr *MockClientMockRecorder) GetRelease(ctx, releaseID interface{}) *gomock
 }
 
 // GetReleaseSteps mocks base method.
-func (m *MockClient) GetReleaseSteps(ctx context.Context, releaseID string, query *models.GetReleaseStepsQuery) ([]*models.AppComponentReleaseStep, bool, error) {
+func (m *MockClient) GetReleaseSteps(ctx context.Context, releaseID string, query *models.GetPaginatedQuery) ([]*models.AppComponentReleaseStep, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetReleaseSteps", ctx, releaseID, query)
 	ret0, _ := ret[0].([]*models.AppComponentReleaseStep)
@@ -1664,7 +1664,7 @@ func (mr *MockClientMockRecorder) GetVCSConnection(ctx, connID interface{}) *gom
 }
 
 // GetVCSConnections mocks base method.
-func (m *MockClient) GetVCSConnections(ctx context.Context, query *models.GetVCSConnectionsQuery) ([]*models.AppVCSConnection, bool, error) {
+func (m *MockClient) GetVCSConnections(ctx context.Context, query *models.GetPaginatedQuery) ([]*models.AppVCSConnection, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetVCSConnections", ctx, query)
 	ret0, _ := ret[0].([]*models.AppVCSConnection)
