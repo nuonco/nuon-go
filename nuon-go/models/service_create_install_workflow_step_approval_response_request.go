@@ -22,7 +22,7 @@ type ServiceCreateInstallWorkflowStepApprovalResponseRequest struct {
 	Note string `json:"note,omitempty"`
 
 	// response type
-	ResponseType AppInstallWorkflowStepResponseType `json:"response_type,omitempty"`
+	ResponseType AppWorkflowStepResponseType `json:"response_type,omitempty"`
 }
 
 // Validate validates this service create install workflow step approval response request

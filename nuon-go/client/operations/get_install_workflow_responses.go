@@ -75,7 +75,7 @@ GetInstallWorkflowOK describes a response with status code 200, with default hea
 OK
 */
 type GetInstallWorkflowOK struct {
-	Payload *models.AppInstallWorkflow
+	Payload *models.AppWorkflow
 }
 
 // IsSuccess returns true when this get install workflow o k response has a 2xx status code
@@ -116,13 +116,13 @@ func (o *GetInstallWorkflowOK) String() string {
 	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}][%d] getInstallWorkflowOK  %+v", 200, o.Payload)
 }
 
-func (o *GetInstallWorkflowOK) GetPayload() *models.AppInstallWorkflow {
+func (o *GetInstallWorkflowOK) GetPayload() *models.AppWorkflow {
 	return o.Payload
 }
 
 func (o *GetInstallWorkflowOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.AppInstallWorkflow)
+	o.Payload = new(models.AppWorkflow)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -48,6 +48,9 @@ const (
 	// AppRunnerJobTypeNoopDashBuild captures enum value "noop-build"
 	AppRunnerJobTypeNoopDashBuild AppRunnerJobType = "noop-build"
 
+	// AppRunnerJobTypeAppDashConfigDashSync captures enum value "app-config-sync"
+	AppRunnerJobTypeAppDashConfigDashSync AppRunnerJobType = "app-config-sync"
+
 	// AppRunnerJobTypeOciDashSync captures enum value "oci-sync"
 	AppRunnerJobTypeOciDashSync AppRunnerJobType = "oci-sync"
 
@@ -102,7 +105,7 @@ var appRunnerJobTypeEnum []interface{}
 
 func init() {
 	var res []AppRunnerJobType
-	if err := json.Unmarshal([]byte(`["health-check","docker-build","container-image-build","terraform-module-build","helm-chart-build","noop-build","oci-sync","noop-sync","terraform-deploy","helm-chart-deploy","job-deploy","noop-deploy","shut-down","update-version","noop","sandbox-terraform","sandbox-terraform-plan","sandbox-sync-secrets","runner-helm","runner-terraform","runner-local","actions-workflow"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["health-check","docker-build","container-image-build","terraform-module-build","helm-chart-build","noop-build","app-config-sync","oci-sync","noop-sync","terraform-deploy","helm-chart-deploy","job-deploy","noop-deploy","shut-down","update-version","noop","sandbox-terraform","sandbox-terraform-plan","sandbox-sync-secrets","runner-helm","runner-terraform","runner-local","actions-workflow"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

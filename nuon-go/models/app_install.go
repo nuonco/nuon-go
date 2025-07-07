@@ -113,7 +113,7 @@ type AppInstall struct {
 	UpdatedAt string `json:"updated_at,omitempty"`
 
 	// workflows
-	Workflows []*AppInstallWorkflow `json:"workflows"`
+	Workflows []*AppWorkflow `json:"workflows"`
 }
 
 // Validate validates this app install
