@@ -7,7 +7,7 @@ import (
 	"github.com/nuonco/nuon-go/models"
 )
 
-func (c *client) GetInstallWorkflows(ctx context.Context, installID string, query *models.GetInstallWorkflowsQuery) ([]*models.AppInstallWorkflow, bool, error) {
+func (c *client) GetInstallWorkflows(ctx context.Context, installID string, query *models.GetInstallWorkflowsQuery) ([]*models.AppWorkflow, bool, error) {
 	params := &operations.GetInstallWorkflowsParams{
 		InstallID: installID,
 		Context:   ctx,
