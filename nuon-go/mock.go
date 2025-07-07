@@ -1464,7 +1464,7 @@ func (mr *MockClientMockRecorder) GetInstallSandboxRuns(ctx, installID, query in
 }
 
 // GetInstallWorkflows mocks base method.
-func (m *MockClient) GetInstallWorkflows(ctx context.Context, installID string, query *models.GetInstallWorkflowsQuery) ([]*models.AppWorkflow, bool, error) {
+func (m *MockClient) GetInstallWorkflows(ctx context.Context, installID string, query *models.GetPaginatedQuery) ([]*models.AppWorkflow, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetInstallWorkflows", ctx, installID, query)
 	ret0, _ := ret[0].([]*models.AppWorkflow)
