@@ -167,3 +167,9 @@ type GetInstallWorkflowsQuery struct {
 	Limit             int
 	PaginationEnabled bool
 }
+
+type GetPaginatedQuery struct {
+	Offset            int
+	Limit             int
+	PaginationEnabled bool
+}

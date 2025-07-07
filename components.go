@@ -9,10 +9,12 @@ import (
 )
 
 // components
-func (c *client) GetAllComponents(ctx context.Context, query *models.GetAllComponentsQuery) ([]*models.AppComponent, bool, error) {
+func (c *client) GetAllComponents(ctx context.Context, query *models.GetPaginatedQuery) ([]*models.AppComponent, bool, error) {
 	params := &operations.GetOrgComponentsParams{
 		Context: ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)
@@ -35,11 +37,13 @@ func (c *client) GetAllComponents(ctx context.Context, query *models.GetAllCompo
 	return resp.Payload, false, nil
 }
 
-func (c *client) GetAppComponents(ctx context.Context, appID string, query *models.GetAppComponentsQuery) ([]*models.AppComponent, bool, error) {
+func (c *client) GetAppComponents(ctx context.Context, appID string, query *models.GetPaginatedQuery) ([]*models.AppComponent, bool, error) {
 	params := &operations.GetAppComponentsParams{
 		AppID:   appID,
 		Context: ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)
@@ -191,11 +195,13 @@ func (c *client) CreateJobComponentConfig(ctx context.Context, componentID strin
 	return resp.Payload, nil
 }
 
-func (c *client) GetComponentConfigs(ctx context.Context, componentID string, query *models.GetComponentConfigsQuery) ([]*models.AppComponentConfigConnection, bool, error) {
+func (c *client) GetComponentConfigs(ctx context.Context, componentID string, query *models.GetPaginatedQuery) ([]*models.AppComponentConfigConnection, bool, error) {
 	params := &operations.GetComponentConfigsParams{
 		ComponentID: componentID,
 		Context:     ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)
