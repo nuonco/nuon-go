@@ -19,10 +19,12 @@ func (c *client) RenderInstaller(ctx context.Context, id string) (*models.Servic
 	return resp.Payload, nil
 }
 
-func (c *client) GetInstallers(ctx context.Context, query *models.GetInstallersQuery) ([]*models.AppInstaller, bool, error) {
+func (c *client) GetInstallers(ctx context.Context, query *models.GetPaginatedQuery) ([]*models.AppInstaller, bool, error) {
 	params := &operations.GetInstallersParams{
 		Context: ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)

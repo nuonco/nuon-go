@@ -32,10 +32,12 @@ func (c *client) CreateVCSConnectionCallback(ctx context.Context, req *models.Se
 	return resp.Payload, nil
 }
 
-func (c *client) GetVCSConnections(ctx context.Context, query *models.GetVCSConnectionsQuery) ([]*models.AppVCSConnection, bool, error) {
+func (c *client) GetVCSConnections(ctx context.Context, query *models.GetPaginatedQuery) ([]*models.AppVCSConnection, bool, error) {
 	params := &operations.GetOrgVCSConnectionsParams{
 		Context: ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)
@@ -70,10 +72,12 @@ func (c *client) GetVCSConnection(ctx context.Context, connID string) (*models.A
 	return resp.Payload, nil
 }
 
-func (c *client) GetAllVCSConnectedRepos(ctx context.Context, query *models.GetAllVCSConnectedReposQuery) ([]*models.ServiceRepository, bool, error) {
+func (c *client) GetAllVCSConnectedRepos(ctx context.Context, query *models.GetPaginatedQuery) ([]*models.ServiceRepository, bool, error) {
 	params := &operations.GetAllVCSConnectedReposParams{
 		Context: ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)

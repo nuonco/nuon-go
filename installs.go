@@ -22,11 +22,13 @@ func (c *client) CreateInstall(ctx context.Context, appID string, req *models.Se
 	return resp.Payload, nil
 }
 
-func (c *client) GetAppInstalls(ctx context.Context, appID string, query *models.GetAppInstallsQuery) ([]*models.AppInstall, bool, error) {
+func (c *client) GetAppInstalls(ctx context.Context, appID string, query *models.GetPaginatedQuery) ([]*models.AppInstall, bool, error) {
 	params := &operations.GetAppInstallsParams{
 		AppID:   appID,
 		Context: ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)
@@ -49,10 +51,12 @@ func (c *client) GetAppInstalls(ctx context.Context, appID string, query *models
 	return resp.Payload, false, nil
 }
 
-func (c *client) GetAllInstalls(ctx context.Context, query *models.GetAllInstallsQuery) ([]*models.AppInstall, bool, error) {
+func (c *client) GetAllInstalls(ctx context.Context, query *models.GetPaginatedQuery) ([]*models.AppInstall, bool, error) {
 	params := &operations.GetOrgInstallsParams{
 		Context: ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)

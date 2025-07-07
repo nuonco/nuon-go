@@ -7,11 +7,13 @@ import (
 	"github.com/nuonco/nuon-go/models"
 )
 
-func (c *client) GetAppSecrets(ctx context.Context, appID string, query *models.GetAppSecretsQuery) ([]*models.AppAppSecret, bool, error) {
+func (c *client) GetAppSecrets(ctx context.Context, appID string, query *models.GetPaginatedQuery) ([]*models.AppAppSecret, bool, error) {
 	params := &operations.GetAppSecretsParams{
 		AppID:   appID,
 		Context: ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)

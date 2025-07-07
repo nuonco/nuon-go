@@ -20,11 +20,13 @@ func (c *client) GetRelease(ctx context.Context, releaseID string) (*models.AppC
 	return resp.Payload, nil
 }
 
-func (c *client) GetReleaseSteps(ctx context.Context, releaseID string, query *models.GetReleaseStepsQuery) ([]*models.AppComponentReleaseStep, bool, error) {
+func (c *client) GetReleaseSteps(ctx context.Context, releaseID string, query *models.GetPaginatedQuery) ([]*models.AppComponentReleaseStep, bool, error) {
 	params := &operations.GetReleaseStepsParams{
 		ReleaseID: releaseID,
 		Context:   ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)
@@ -47,11 +49,13 @@ func (c *client) GetReleaseSteps(ctx context.Context, releaseID string, query *m
 	return resp.Payload, false, nil
 }
 
-func (c *client) GetAppReleases(ctx context.Context, appID string, query *models.GetAppReleasesQuery) ([]*models.AppComponentRelease, bool, error) {
+func (c *client) GetAppReleases(ctx context.Context, appID string, query *models.GetPaginatedQuery) ([]*models.AppComponentRelease, bool, error) {
 	params := &operations.GetAppReleasesParams{
 		AppID:   appID,
 		Context: ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)
@@ -74,11 +78,13 @@ func (c *client) GetAppReleases(ctx context.Context, appID string, query *models
 	return resp.Payload, false, nil
 }
 
-func (c *client) GetComponentReleases(ctx context.Context, componentID string, query *models.GetComponentReleasesQuery) ([]*models.AppComponentRelease, bool, error) {
+func (c *client) GetComponentReleases(ctx context.Context, componentID string, query *models.GetPaginatedQuery) ([]*models.AppComponentRelease, bool, error) {
 	params := &operations.GetComponentReleasesParams{
 		ComponentID: componentID,
 		Context:     ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)

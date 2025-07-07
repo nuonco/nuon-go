@@ -32,12 +32,13 @@ func (c *client) GetAppInputLatestConfig(ctx context.Context, appID string) (*mo
 	return resp.Payload, nil
 }
 
-
-func (c *client) GetAppInputConfigs(ctx context.Context, appID string, query *models.GetAppInputConfigsQuery) ([]*models.AppAppInputConfig, bool, error) {
+func (c *client) GetAppInputConfigs(ctx context.Context, appID string, query *models.GetPaginatedQuery) ([]*models.AppAppInputConfig, bool, error) {
 	params := &operations.GetAppInputConfigsParams{
 		AppID:   appID,
 		Context: ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)

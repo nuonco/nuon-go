@@ -7,10 +7,12 @@ import (
 	"github.com/nuonco/nuon-go/models"
 )
 
-func (c *client) GetOrgInvites(ctx context.Context, query *models.GetOrgInvitesQuery) ([]*models.AppOrgInvite, bool, error) {
+func (c *client) GetOrgInvites(ctx context.Context, query *models.GetPaginatedQuery) ([]*models.AppOrgInvite, bool, error) {
 	params := &operations.GetOrgInvitesParams{
 		Context: ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)
