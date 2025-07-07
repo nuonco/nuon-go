@@ -708,7 +708,7 @@ func (mr *MockClientMockRecorder) GetActionWorkflows(ctx, appID, query interface
 }
 
 // GetAllComponents mocks base method.
-func (m *MockClient) GetAllComponents(ctx context.Context, query *models.GetAllComponentsQuery) ([]*models.AppComponent, bool, error) {
+func (m *MockClient) GetAllComponents(ctx context.Context, query *models.GetPaginatedQuery) ([]*models.AppComponent, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAllComponents", ctx, query)
 	ret0, _ := ret[0].([]*models.AppComponent)
@@ -816,7 +816,7 @@ func (mr *MockClientMockRecorder) GetAppComponent(ctx, appID, componentNameOrID 
 }
 
 // GetAppComponents mocks base method.
-func (m *MockClient) GetAppComponents(ctx context.Context, appID string, query *models.GetAppComponentsQuery) ([]*models.AppComponent, bool, error) {
+func (m *MockClient) GetAppComponents(ctx context.Context, appID string, query *models.GetPaginatedQuery) ([]*models.AppComponent, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAppComponents", ctx, appID, query)
 	ret0, _ := ret[0].([]*models.AppComponent)
@@ -1201,7 +1201,7 @@ func (mr *MockClientMockRecorder) GetComponentBuilds(ctx, componentID, appID, qu
 }
 
 // GetComponentConfigs mocks base method.
-func (m *MockClient) GetComponentConfigs(ctx context.Context, componentID string, query *models.GetComponentConfigsQuery) ([]*models.AppComponentConfigConnection, bool, error) {
+func (m *MockClient) GetComponentConfigs(ctx context.Context, componentID string, query *models.GetPaginatedQuery) ([]*models.AppComponentConfigConnection, bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetComponentConfigs", ctx, componentID, query)
 	ret0, _ := ret[0].([]*models.AppComponentConfigConnection)

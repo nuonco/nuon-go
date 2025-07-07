@@ -19,7 +19,10 @@ import (
 // swagger:model app.ComponentBuild
 type AppComponentBuild struct {
 
-	// component config connection id
+	// checksum of our intermediate component config
+	Checksum string `json:"checksum,omitempty"`
+
+	// DEPRECATED: will retain the field to connect against the last component config connection that set this build
 	ComponentConfigConnectionID string `json:"component_config_connection_id,omitempty"`
 
 	// component config version

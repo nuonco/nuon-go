@@ -75,7 +75,7 @@ GetInstallWorkflowStepsOK describes a response with status code 200, with defaul
 OK
 */
 type GetInstallWorkflowStepsOK struct {
-	Payload []*models.AppInstallWorkflowStep
+	Payload []*models.AppWorkflowStep
 }
 
 // IsSuccess returns true when this get install workflow steps o k response has a 2xx status code
@@ -116,7 +116,7 @@ func (o *GetInstallWorkflowStepsOK) String() string {
 	return fmt.Sprintf("[GET /v1/install-workflows/{install_workflow_id}/steps][%d] getInstallWorkflowStepsOK  %+v", 200, o.Payload)
 }
 
-func (o *GetInstallWorkflowStepsOK) GetPayload() []*models.AppInstallWorkflowStep {
+func (o *GetInstallWorkflowStepsOK) GetPayload() []*models.AppWorkflowStep {
 	return o.Payload
 }
 
