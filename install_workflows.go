@@ -7,11 +7,13 @@ import (
 	"github.com/nuonco/nuon-go/models"
 )
 
-func (c *client) GetInstallWorkflows(ctx context.Context, installID string, query *models.GetInstallWorkflowsQuery) ([]*models.AppWorkflow, bool, error) {
+func (c *client) GetInstallWorkflows(ctx context.Context, installID string, query *models.GetPaginatedQuery) ([]*models.AppWorkflow, bool, error) {
 	params := &operations.GetInstallWorkflowsParams{
 		InstallID: installID,
 		Context:   ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)
