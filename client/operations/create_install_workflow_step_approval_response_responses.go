@@ -75,7 +75,7 @@ CreateInstallWorkflowStepApprovalResponseCreated describes a response with statu
 Created
 */
 type CreateInstallWorkflowStepApprovalResponseCreated struct {
-	Payload *models.AppInstallWorkflowStepApprovalResponse
+	Payload *models.AppWorkflowStepApprovalResponse
 }
 
 // IsSuccess returns true when this create install workflow step approval response created response has a 2xx status code
@@ -116,13 +116,13 @@ func (o *CreateInstallWorkflowStepApprovalResponseCreated) String() string {
 	return fmt.Sprintf("[POST /v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response][%d] createInstallWorkflowStepApprovalResponseCreated  %+v", 201, o.Payload)
 }
 
-func (o *CreateInstallWorkflowStepApprovalResponseCreated) GetPayload() *models.AppInstallWorkflowStepApprovalResponse {
+func (o *CreateInstallWorkflowStepApprovalResponseCreated) GetPayload() *models.AppWorkflowStepApprovalResponse {
 	return o.Payload
 }
 
 func (o *CreateInstallWorkflowStepApprovalResponseCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.AppInstallWorkflowStepApprovalResponse)
+	o.Payload = new(models.AppWorkflowStepApprovalResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

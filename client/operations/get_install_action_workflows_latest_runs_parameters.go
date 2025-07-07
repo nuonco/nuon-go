@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewGetInstallActionWorkflowsLatestRunsParams creates a new GetInstallActionWorkflowsLatestRunsParams object,
@@ -67,6 +68,26 @@ type GetInstallActionWorkflowsLatestRunsParams struct {
 	*/
 	InstallID string
 
+	/* Limit.
+
+	   limit of results to return
+
+	   Default: 10
+	*/
+	Limit *int64
+
+	/* Offset.
+
+	   offset of results to return
+	*/
+	Offset *int64
+
+	/* XNuonPaginationEnabled.
+
+	   Enable pagination
+	*/
+	XNuonPaginationEnabled *bool
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -84,7 +105,21 @@ func (o *GetInstallActionWorkflowsLatestRunsParams) WithDefaults() *GetInstallAc
 //
 // All values with no default are reset to their zero value.
 func (o *GetInstallActionWorkflowsLatestRunsParams) SetDefaults() {
-	// no default values defined for this parameter
+	var (
+		limitDefault = int64(10)
+
+		offsetDefault = int64(0)
+	)
+
+	val := GetInstallActionWorkflowsLatestRunsParams{
+		Limit:  &limitDefault,
+		Offset: &offsetDefault,
+	}
+
+	val.timeout = o.timeout
+	val.Context = o.Context
+	val.HTTPClient = o.HTTPClient
+	*o = val
 }
 
 // WithTimeout adds the timeout to the get install action workflows latest runs params
@@ -131,6 +166,39 @@ func (o *GetInstallActionWorkflowsLatestRunsParams) SetInstallID(installID strin
 	o.InstallID = installID
 }
 
+// WithLimit adds the limit to the get install action workflows latest runs params
+func (o *GetInstallActionWorkflowsLatestRunsParams) WithLimit(limit *int64) *GetInstallActionWorkflowsLatestRunsParams {
+	o.SetLimit(limit)
+	return o
+}
+
+// SetLimit adds the limit to the get install action workflows latest runs params
+func (o *GetInstallActionWorkflowsLatestRunsParams) SetLimit(limit *int64) {
+	o.Limit = limit
+}
+
+// WithOffset adds the offset to the get install action workflows latest runs params
+func (o *GetInstallActionWorkflowsLatestRunsParams) WithOffset(offset *int64) *GetInstallActionWorkflowsLatestRunsParams {
+	o.SetOffset(offset)
+	return o
+}
+
+// SetOffset adds the offset to the get install action workflows latest runs params
+func (o *GetInstallActionWorkflowsLatestRunsParams) SetOffset(offset *int64) {
+	o.Offset = offset
+}
+
+// WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get install action workflows latest runs params
+func (o *GetInstallActionWorkflowsLatestRunsParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetInstallActionWorkflowsLatestRunsParams {
+	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
+	return o
+}
+
+// SetXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get install action workflows latest runs params
+func (o *GetInstallActionWorkflowsLatestRunsParams) SetXNuonPaginationEnabled(xNuonPaginationEnabled *bool) {
+	o.XNuonPaginationEnabled = xNuonPaginationEnabled
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *GetInstallActionWorkflowsLatestRunsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -142,6 +210,48 @@ func (o *GetInstallActionWorkflowsLatestRunsParams) WriteToRequest(r runtime.Cli
 	// path param install_id
 	if err := r.SetPathParam("install_id", o.InstallID); err != nil {
 		return err
+	}
+
+	if o.Limit != nil {
+
+		// query param limit
+		var qrLimit int64
+
+		if o.Limit != nil {
+			qrLimit = *o.Limit
+		}
+		qLimit := swag.FormatInt64(qrLimit)
+		if qLimit != "" {
+
+			if err := r.SetQueryParam("limit", qLimit); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Offset != nil {
+
+		// query param offset
+		var qrOffset int64
+
+		if o.Offset != nil {
+			qrOffset = *o.Offset
+		}
+		qOffset := swag.FormatInt64(qrOffset)
+		if qOffset != "" {
+
+			if err := r.SetQueryParam("offset", qOffset); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.XNuonPaginationEnabled != nil {
+
+		// header param x-nuon-pagination-enabled
+		if err := r.SetHeaderParam("x-nuon-pagination-enabled", swag.FormatBool(*o.XNuonPaginationEnabled)); err != nil {
+			return err
+		}
 	}
 
 	if len(res) > 0 {
