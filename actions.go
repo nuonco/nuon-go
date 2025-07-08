@@ -7,11 +7,13 @@ import (
 	"github.com/nuonco/nuon-go/models"
 )
 
-func (c *client) GetActionWorkflows(ctx context.Context, appID string, query *models.GetActionWorkflowsQuery) ([]*models.AppActionWorkflow, bool, error) {
+func (c *client) GetActionWorkflows(ctx context.Context, appID string, query *models.GetPaginatedQuery) ([]*models.AppActionWorkflow, bool, error) {
 	params := &operations.GetActionWorkflowsParams{
 		AppID:   appID,
 		Context: ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		paginationEnabled := true
@@ -136,12 +138,14 @@ func (c *client) CreateActionWorkflowConfig(ctx context.Context, actionWorkflowI
 	return resp.Payload, nil
 }
 
-func (c *client) GetInstallActionWorkflowRecentRuns(ctx context.Context, installID, actionWorkflowID string, query *models.GetInstallActionWorkflowRecentRunsQuery) (*models.AppInstallActionWorkflow, bool, error) {
+func (c *client) GetInstallActionWorkflowRecentRuns(ctx context.Context, installID, actionWorkflowID string, query *models.GetPaginatedQuery) (*models.AppInstallActionWorkflow, bool, error) {
 	params := &operations.GetInstallActionWorkflowRecentRunsParams{
 		InstallID:        installID,
 		ActionWorkflowID: actionWorkflowID,
 		Context:          ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)

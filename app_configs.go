@@ -58,11 +58,13 @@ func (c *client) GetAppLatestConfig(ctx context.Context, appID string) (*models.
 	return resp.Payload, nil
 }
 
-func (c *client) GetAppConfigs(ctx context.Context, appID string, query *models.GetAppConfigsQuery) ([]*models.AppAppConfig, bool, error) {
+func (c *client) GetAppConfigs(ctx context.Context, appID string, query *models.GetPaginatedQuery) ([]*models.AppAppConfig, bool, error) {
 	params := &operations.GetAppConfigsParams{
 		AppID:   appID,
 		Context: ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)

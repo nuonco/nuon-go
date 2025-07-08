@@ -13,11 +13,13 @@ type getinstallcomponentsquery struct {
 }
 
 // install components
-func (c *client) GetInstallComponents(ctx context.Context, installID string, query *models.GetInstallComponentsQuery) ([]*models.AppInstallComponent, bool, error) {
+func (c *client) GetInstallComponents(ctx context.Context, installID string, query *models.GetPaginatedQuery) ([]*models.AppInstallComponent, bool, error) {
 	params := &operations.GetInstallComponentsParams{
 		InstallID: installID,
 		Context:   ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		paginationEnabled := true
@@ -41,12 +43,14 @@ func (c *client) GetInstallComponents(ctx context.Context, installID string, que
 	return resp.Payload, false, nil
 }
 
-func (c *client) GetInstallComponentDeploys(ctx context.Context, installID string, componentID string, query *models.GetInstallComponentDeploysQuery) ([]*models.AppInstallDeploy, bool, error) {
+func (c *client) GetInstallComponentDeploys(ctx context.Context, installID string, componentID string, query *models.GetPaginatedQuery) ([]*models.AppInstallDeploy, bool, error) {
 	params := &operations.GetInstallComponentDeploysParams{
 		InstallID:   installID,
 		ComponentID: componentID,
 		Context:     ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)

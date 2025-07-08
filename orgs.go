@@ -18,10 +18,12 @@ func (c *client) GetOrg(ctx context.Context) (*models.AppOrg, error) {
 	return resp.Payload, nil
 }
 
-func (c *client) GetOrgs(ctx context.Context, query *models.GetOrgsQuery) ([]*models.AppOrg, bool, error) {
+func (c *client) GetOrgs(ctx context.Context, query *models.GetPaginatedQuery) ([]*models.AppOrg, bool, error) {
 	params := &operations.GetOrgsParams{
 		Context: ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)

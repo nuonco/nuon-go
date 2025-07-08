@@ -7,11 +7,13 @@ import (
 	"github.com/nuonco/nuon-go/models"
 )
 
-func (c *client) GetInstallSandboxRuns(ctx context.Context, installID string, query *models.GetInstallSandboxRunsQuery) ([]*models.AppInstallSandboxRun, bool, error) {
+func (c *client) GetInstallSandboxRuns(ctx context.Context, installID string, query *models.GetPaginatedQuery) ([]*models.AppInstallSandboxRun, bool, error) {
 	params := &operations.GetInstallSandboxRunsParams{
 		InstallID: installID,
 		Context:   ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)

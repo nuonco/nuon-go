@@ -19,11 +19,13 @@ func (c *client) GetInstallCurrentInputs(ctx context.Context, installID string) 
 	return resp.Payload, nil
 }
 
-func (c *client) GetInstallInputs(ctx context.Context, appID string, query *models.GetInstallInputsQuery) ([]*models.AppInstallInputs, bool, error) {
+func (c *client) GetInstallInputs(ctx context.Context, appID string, query *models.GetPaginatedQuery) ([]*models.AppInstallInputs, bool, error) {
 	params := &operations.GetInstallInputsParams{
 		InstallID: appID,
 		Context:   ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)
