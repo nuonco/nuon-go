@@ -8,11 +8,13 @@ import (
 )
 
 // install deploys
-func (c *client) GetInstallDeploys(ctx context.Context, installID string, query *models.GetInstallDeploysQuery) ([]*models.AppInstallDeploy, bool, error) {
+func (c *client) GetInstallDeploys(ctx context.Context, installID string, query *models.GetPaginatedQuery) ([]*models.AppInstallDeploy, bool, error) {
 	params := &operations.GetInstallDeploysParams{
 		InstallID: installID,
 		Context:   ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)

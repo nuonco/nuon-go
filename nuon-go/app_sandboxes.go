@@ -32,11 +32,13 @@ func (c *client) GetAppSandboxLatestConfig(ctx context.Context, appID string) (*
 	return resp.Payload, nil
 }
 
-func (c *client) GetAppSandboxConfigs(ctx context.Context, appID string, query *models.GetAppSandboxConfigsQuery) ([]*models.AppAppSandboxConfig, bool, error) {
+func (c *client) GetAppSandboxConfigs(ctx context.Context, appID string, query *models.GetPaginatedQuery) ([]*models.AppAppSandboxConfig, bool, error) {
 	params := &operations.GetAppSandboxConfigsParams{
 		AppID:   appID,
 		Context: ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)
@@ -58,5 +60,4 @@ func (c *client) GetAppSandboxConfigs(ctx context.Context, appID string, query *
 	}
 
 	return resp.Payload, false, nil
-
 }

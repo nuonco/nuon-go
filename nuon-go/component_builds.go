@@ -22,12 +22,14 @@ func (c *client) CreateComponentBuild(ctx context.Context, componentID string, r
 	return resp.Payload, nil
 }
 
-func (c *client) GetComponentBuilds(ctx context.Context, componentID, appID string, query *models.GetComponentBuildsQuery) ([]*models.AppComponentBuild, bool, error) {
+func (c *client) GetComponentBuilds(ctx context.Context, componentID, appID string, query *models.GetPaginatedQuery) ([]*models.AppComponentBuild, bool, error) {
 	params := &operations.GetComponentBuildsParams{
 		ComponentID: &componentID,
 		AppID:       &appID,
 		Context:     ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)

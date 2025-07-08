@@ -20,10 +20,12 @@ func (c *client) GetApp(ctx context.Context, appID string) (*models.AppApp, erro
 	return resp.Payload, nil
 }
 
-func (c *client) GetApps(ctx context.Context, query *models.GetAppsQuery) ([]*models.AppApp, bool, error) {
+func (c *client) GetApps(ctx context.Context, query *models.GetPaginatedQuery) ([]*models.AppApp, bool, error) {
 	params := &operations.GetAppsParams{
 		Context: ctx,
 	}
+
+	query = handlePaginationQuery(query)
 
 	if query != nil {
 		offset := int64(query.Offset)
