@@ -1679,6 +1679,22 @@ func (mr *MockClientMockRecorder) GetVCSConnections(ctx, query interface{}) *gom
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVCSConnections", reflect.TypeOf((*MockClient)(nil).GetVCSConnections), ctx, query)
 }
 
+// GetWorkflows mocks base method.
+func (m *MockClient) GetWorkflows(ctx context.Context, installID string, query *models.GetPaginatedQuery) ([]*models.AppWorkflow, bool, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetWorkflows", ctx, installID, query)
+	ret0, _ := ret[0].([]*models.AppWorkflow)
+	ret1, _ := ret[1].(bool)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetWorkflows indicates an expected call of GetWorkflows.
+func (mr *MockClientMockRecorder) GetWorkflows(ctx, installID, query interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetWorkflows", reflect.TypeOf((*MockClient)(nil).GetWorkflows), ctx, installID, query)
+}
+
 // RenderInstaller mocks base method.
 func (m *MockClient) RenderInstaller(ctx context.Context, installerID string) (*models.ServiceRenderedInstaller, error) {
 	m.ctrl.T.Helper()

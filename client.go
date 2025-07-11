@@ -146,6 +146,7 @@ type Client interface {
 	UpdateInstallInputs(ctx context.Context, installID string, req *models.ServiceUpdateInstallInputsRequest) (*models.AppInstallInputs, error)
 
 	// install workflows
+	// TODO: Rename this to GetWorkflows. The url hasn't actually changed but the swagger docs have.
 	GetInstallWorkflows(ctx context.Context, installID string, query *models.GetPaginatedQuery) ([]*models.AppWorkflow, bool, error)
 
 	// components
