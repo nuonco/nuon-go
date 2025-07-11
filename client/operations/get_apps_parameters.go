@@ -82,6 +82,12 @@ type GetAppsParams struct {
 	*/
 	Page *int64
 
+	/* Q.
+
+	   search query to filter apps by name
+	*/
+	Q *string
+
 	/* XNuonPaginationEnabled.
 
 	   Enable pagination
@@ -191,6 +197,17 @@ func (o *GetAppsParams) SetPage(page *int64) {
 	o.Page = page
 }
 
+// WithQ adds the q to the get apps params
+func (o *GetAppsParams) WithQ(q *string) *GetAppsParams {
+	o.SetQ(q)
+	return o
+}
+
+// SetQ adds the q to the get apps params
+func (o *GetAppsParams) SetQ(q *string) {
+	o.Q = q
+}
+
 // WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get apps params
 func (o *GetAppsParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetAppsParams {
 	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
@@ -256,6 +273,23 @@ func (o *GetAppsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regis
 		if qPage != "" {
 
 			if err := r.SetQueryParam("page", qPage); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Q != nil {
+
+		// query param q
+		var qrQ string
+
+		if o.Q != nil {
+			qrQ = *o.Q
+		}
+		qQ := qrQ
+		if qQ != "" {
+
+			if err := r.SetQueryParam("q", qQ); err != nil {
 				return err
 			}
 		}

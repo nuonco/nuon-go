@@ -88,6 +88,12 @@ type GetActionWorkflowsParams struct {
 	*/
 	Page *int64
 
+	/* Q.
+
+	   search query to filter action workflows by name
+	*/
+	Q *string
+
 	/* XNuonPaginationEnabled.
 
 	   Enable pagination
@@ -208,6 +214,17 @@ func (o *GetActionWorkflowsParams) SetPage(page *int64) {
 	o.Page = page
 }
 
+// WithQ adds the q to the get action workflows params
+func (o *GetActionWorkflowsParams) WithQ(q *string) *GetActionWorkflowsParams {
+	o.SetQ(q)
+	return o
+}
+
+// SetQ adds the q to the get action workflows params
+func (o *GetActionWorkflowsParams) SetQ(q *string) {
+	o.Q = q
+}
+
 // WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get action workflows params
 func (o *GetActionWorkflowsParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetActionWorkflowsParams {
 	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
@@ -278,6 +295,23 @@ func (o *GetActionWorkflowsParams) WriteToRequest(r runtime.ClientRequest, reg s
 		if qPage != "" {
 
 			if err := r.SetQueryParam("page", qPage); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Q != nil {
+
+		// query param q
+		var qrQ string
+
+		if o.Q != nil {
+			qrQ = *o.Q
+		}
+		qQ := qrQ
+		if qQ != "" {
+
+			if err := r.SetQueryParam("q", qQ); err != nil {
 				return err
 			}
 		}

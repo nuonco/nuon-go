@@ -82,6 +82,12 @@ type GetOrgInstallsParams struct {
 	*/
 	Page *int64
 
+	/* Q.
+
+	   search query to filter installs by name
+	*/
+	Q *string
+
 	/* XNuonPaginationEnabled.
 
 	   Enable pagination
@@ -191,6 +197,17 @@ func (o *GetOrgInstallsParams) SetPage(page *int64) {
 	o.Page = page
 }
 
+// WithQ adds the q to the get org installs params
+func (o *GetOrgInstallsParams) WithQ(q *string) *GetOrgInstallsParams {
+	o.SetQ(q)
+	return o
+}
+
+// SetQ adds the q to the get org installs params
+func (o *GetOrgInstallsParams) SetQ(q *string) {
+	o.Q = q
+}
+
 // WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get org installs params
 func (o *GetOrgInstallsParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetOrgInstallsParams {
 	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
@@ -256,6 +273,23 @@ func (o *GetOrgInstallsParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		if qPage != "" {
 
 			if err := r.SetQueryParam("page", qPage); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Q != nil {
+
+		// query param q
+		var qrQ string
+
+		if o.Q != nil {
+			qrQ = *o.Q
+		}
+		qQ := qrQ
+		if qQ != "" {
+
+			if err := r.SetQueryParam("q", qQ); err != nil {
 				return err
 			}
 		}
