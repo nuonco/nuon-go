@@ -73,7 +73,7 @@ type UpdateInstallWorkflowParams struct {
 
 	   Input
 	*/
-	Req *models.ServiceUpdateInstallWorkflowRequest
+	Req *models.ServiceUpdateWorkflowRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -140,13 +140,13 @@ func (o *UpdateInstallWorkflowParams) SetInstallWorkflowID(installWorkflowID str
 }
 
 // WithReq adds the req to the update install workflow params
-func (o *UpdateInstallWorkflowParams) WithReq(req *models.ServiceUpdateInstallWorkflowRequest) *UpdateInstallWorkflowParams {
+func (o *UpdateInstallWorkflowParams) WithReq(req *models.ServiceUpdateWorkflowRequest) *UpdateInstallWorkflowParams {
 	o.SetReq(req)
 	return o
 }
 
 // SetReq adds the req to the update install workflow params
-func (o *UpdateInstallWorkflowParams) SetReq(req *models.ServiceUpdateInstallWorkflowRequest) {
+func (o *UpdateInstallWorkflowParams) SetReq(req *models.ServiceUpdateWorkflowRequest) {
 	o.Req = req
 }
 
