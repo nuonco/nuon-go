@@ -195,6 +195,19 @@ func (c *client) CreateJobComponentConfig(ctx context.Context, componentID strin
 	return resp.Payload, nil
 }
 
+func (c *client) CreateKubernetesComponentConfig(ctx context.Context, componentID string, req *models.ServiceCreateKubernetesManifestComponentConfigRequest) (*models.AppKubernetesManifestComponentConfig, error) {
+	resp, err := c.genClient.Operations.CreateKubernetesManifestComponentConfig(&operations.CreateKubernetesManifestComponentConfigParams{
+		ComponentID: componentID,
+		Req:         req,
+		Context:     ctx,
+	}, nil)
+	if err != nil {
+		return nil, fmt.Errorf("unable to create kubernete manifest component config: %w", err)
+	}
+
+	return resp.Payload, nil
+}
+
 func (c *client) GetComponentConfigs(ctx context.Context, componentID string, query *models.GetPaginatedQuery) ([]*models.AppComponentConfigConnection, bool, error) {
 	params := &operations.GetComponentConfigsParams{
 		ComponentID: componentID,

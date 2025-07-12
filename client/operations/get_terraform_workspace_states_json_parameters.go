@@ -76,6 +76,12 @@ type GetTerraformWorkspaceStatesJSONParams struct {
 	*/
 	Offset *int64
 
+	/* Page.
+
+	   page number of results to return
+	*/
+	Page *int64
+
 	/* WorkspaceID.
 
 	   workspace ID
@@ -109,11 +115,14 @@ func (o *GetTerraformWorkspaceStatesJSONParams) SetDefaults() {
 		limitDefault = int64(10)
 
 		offsetDefault = int64(0)
+
+		pageDefault = int64(0)
 	)
 
 	val := GetTerraformWorkspaceStatesJSONParams{
 		Limit:  &limitDefault,
 		Offset: &offsetDefault,
+		Page:   &pageDefault,
 	}
 
 	val.timeout = o.timeout
@@ -177,6 +186,17 @@ func (o *GetTerraformWorkspaceStatesJSONParams) SetOffset(offset *int64) {
 	o.Offset = offset
 }
 
+// WithPage adds the page to the get terraform workspace states JSON params
+func (o *GetTerraformWorkspaceStatesJSONParams) WithPage(page *int64) *GetTerraformWorkspaceStatesJSONParams {
+	o.SetPage(page)
+	return o
+}
+
+// SetPage adds the page to the get terraform workspace states JSON params
+func (o *GetTerraformWorkspaceStatesJSONParams) SetPage(page *int64) {
+	o.Page = page
+}
+
 // WithWorkspaceID adds the workspaceID to the get terraform workspace states JSON params
 func (o *GetTerraformWorkspaceStatesJSONParams) WithWorkspaceID(workspaceID string) *GetTerraformWorkspaceStatesJSONParams {
 	o.SetWorkspaceID(workspaceID)
@@ -236,6 +256,23 @@ func (o *GetTerraformWorkspaceStatesJSONParams) WriteToRequest(r runtime.ClientR
 		if qOffset != "" {
 
 			if err := r.SetQueryParam("offset", qOffset); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Page != nil {
+
+		// query param page
+		var qrPage int64
+
+		if o.Page != nil {
+			qrPage = *o.Page
+		}
+		qPage := swag.FormatInt64(qrPage)
+		if qPage != "" {
+
+			if err := r.SetQueryParam("page", qPage); err != nil {
 				return err
 			}
 		}

@@ -82,6 +82,18 @@ type GetActionWorkflowsParams struct {
 	*/
 	Offset *int64
 
+	/* Page.
+
+	   page number of results to return
+	*/
+	Page *int64
+
+	/* Q.
+
+	   search query to filter action workflows by name
+	*/
+	Q *string
+
 	/* XNuonPaginationEnabled.
 
 	   Enable pagination
@@ -109,11 +121,14 @@ func (o *GetActionWorkflowsParams) SetDefaults() {
 		limitDefault = int64(10)
 
 		offsetDefault = int64(0)
+
+		pageDefault = int64(0)
 	)
 
 	val := GetActionWorkflowsParams{
 		Limit:  &limitDefault,
 		Offset: &offsetDefault,
+		Page:   &pageDefault,
 	}
 
 	val.timeout = o.timeout
@@ -188,6 +203,28 @@ func (o *GetActionWorkflowsParams) SetOffset(offset *int64) {
 	o.Offset = offset
 }
 
+// WithPage adds the page to the get action workflows params
+func (o *GetActionWorkflowsParams) WithPage(page *int64) *GetActionWorkflowsParams {
+	o.SetPage(page)
+	return o
+}
+
+// SetPage adds the page to the get action workflows params
+func (o *GetActionWorkflowsParams) SetPage(page *int64) {
+	o.Page = page
+}
+
+// WithQ adds the q to the get action workflows params
+func (o *GetActionWorkflowsParams) WithQ(q *string) *GetActionWorkflowsParams {
+	o.SetQ(q)
+	return o
+}
+
+// SetQ adds the q to the get action workflows params
+func (o *GetActionWorkflowsParams) SetQ(q *string) {
+	o.Q = q
+}
+
 // WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get action workflows params
 func (o *GetActionWorkflowsParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetActionWorkflowsParams {
 	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
@@ -241,6 +278,40 @@ func (o *GetActionWorkflowsParams) WriteToRequest(r runtime.ClientRequest, reg s
 		if qOffset != "" {
 
 			if err := r.SetQueryParam("offset", qOffset); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Page != nil {
+
+		// query param page
+		var qrPage int64
+
+		if o.Page != nil {
+			qrPage = *o.Page
+		}
+		qPage := swag.FormatInt64(qrPage)
+		if qPage != "" {
+
+			if err := r.SetQueryParam("page", qPage); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Q != nil {
+
+		// query param q
+		var qrQ string
+
+		if o.Q != nil {
+			qrQ = *o.Q
+		}
+		qQ := qrQ
+		if qQ != "" {
+
+			if err := r.SetQueryParam("q", qQ); err != nil {
 				return err
 			}
 		}
