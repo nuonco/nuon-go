@@ -92,6 +92,8 @@ type ClientService interface {
 
 	CreateJobComponentConfig(params *CreateJobComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateJobComponentConfigCreated, error)
 
+	CreateKubernetesManifestComponentConfig(params *CreateKubernetesManifestComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateKubernetesManifestComponentConfigCreated, error)
+
 	CreateOrg(params *CreateOrgParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOrgCreated, error)
 
 	CreateOrgInvite(params *CreateOrgInviteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOrgInviteCreated, error)
@@ -288,6 +290,8 @@ type ClientService interface {
 
 	GetInstallStackByInstallID(params *GetInstallStackByInstallIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallStackByInstallIDOK, error)
 
+	GetInstallStackRuns(params *GetInstallStackRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallStackRunsOK, error)
+
 	GetInstallState(params *GetInstallStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallStateOK, error)
 
 	GetInstallWorkflow(params *GetInstallWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallWorkflowOK, error)
@@ -395,6 +399,8 @@ type ClientService interface {
 	ReprovisionInstallSandbox(params *ReprovisionInstallSandboxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReprovisionInstallSandboxCreated, error)
 
 	RetryWorkflow(params *RetryWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RetryWorkflowCreated, error)
+
+	SyncSecrets(params *SyncSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncSecretsCreated, error)
 
 	TeardownInstallComponent(params *TeardownInstallComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeardownInstallComponentCreated, error)
 
@@ -1655,6 +1661,45 @@ func (a *Client) CreateJobComponentConfig(params *CreateJobComponentConfigParams
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateJobComponentConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreateKubernetesManifestComponentConfig creates a kubernetes manifest component config
+*/
+func (a *Client) CreateKubernetesManifestComponentConfig(params *CreateKubernetesManifestComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateKubernetesManifestComponentConfigCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateKubernetesManifestComponentConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateKubernetesManifestComponentConfig",
+		Method:             "POST",
+		PathPattern:        "/v1/components/{component_id}/configs/kubernetes-manifest",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateKubernetesManifestComponentConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateKubernetesManifestComponentConfigCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateKubernetesManifestComponentConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -5590,6 +5635,47 @@ func (a *Client) GetInstallStackByInstallID(params *GetInstallStackByInstallIDPa
 }
 
 /*
+GetInstallStackRuns gets an install s stack runs
+
+get install stack runs
+*/
+func (a *Client) GetInstallStackRuns(params *GetInstallStackRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallStackRunsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetInstallStackRunsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetInstallStackRuns",
+		Method:             "GET",
+		PathPattern:        "/v1/installs/{install_id}/stack-runs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetInstallStackRunsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetInstallStackRunsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetInstallStackRuns: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetInstallState gets the current state of an install
 */
 func (a *Client) GetInstallState(params *GetInstallStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallStateOK, error) {
@@ -6156,7 +6242,7 @@ func (a *Client) GetOrg(params *GetOrgParams, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
-GetOrgAcounts gets an org
+GetOrgAcounts gets user accounts for current org
 */
 func (a *Client) GetOrgAcounts(params *GetOrgAcountsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrgAcountsOK, error) {
 	// TODO: Validate the params before sending
@@ -7751,6 +7837,47 @@ func (a *Client) RetryWorkflow(params *RetryWorkflowParams, authInfo runtime.Cli
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for RetryWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+SyncSecrets syncs secrets install
+
+Execute the sync secrets workflow.
+*/
+func (a *Client) SyncSecrets(params *SyncSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncSecretsCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSyncSecretsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "SyncSecrets",
+		Method:             "POST",
+		PathPattern:        "/v1/installs/{install_id}/sync-secrets",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &SyncSecretsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SyncSecretsCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for SyncSecrets: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

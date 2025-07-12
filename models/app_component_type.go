@@ -45,6 +45,9 @@ const (
 	// AppComponentTypeJob captures enum value "job"
 	AppComponentTypeJob AppComponentType = "job"
 
+	// AppComponentTypeKubernetesManifest captures enum value "kubernetes_manifest"
+	AppComponentTypeKubernetesManifest AppComponentType = "kubernetes_manifest"
+
 	// AppComponentTypeUnknown captures enum value "unknown"
 	AppComponentTypeUnknown AppComponentType = "unknown"
 )
@@ -54,7 +57,7 @@ var appComponentTypeEnum []interface{}
 
 func init() {
 	var res []AppComponentType
-	if err := json.Unmarshal([]byte(`["terraform_module","helm_chart","docker_build","external_image","job","unknown"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["terraform_module","helm_chart","docker_build","external_image","job","kubernetes_manifest","unknown"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

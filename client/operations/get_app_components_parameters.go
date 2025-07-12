@@ -82,6 +82,24 @@ type GetAppComponentsParams struct {
 	*/
 	Offset *int64
 
+	/* Page.
+
+	   page number of results to return
+	*/
+	Page *int64
+
+	/* Q.
+
+	   search query to filter components by name
+	*/
+	Q *string
+
+	/* Types.
+
+	   comma-separated list of component types to filter by (e.g., terraform_module, helm_chart)
+	*/
+	Types *string
+
 	/* XNuonPaginationEnabled.
 
 	   Enable pagination
@@ -109,11 +127,14 @@ func (o *GetAppComponentsParams) SetDefaults() {
 		limitDefault = int64(10)
 
 		offsetDefault = int64(0)
+
+		pageDefault = int64(0)
 	)
 
 	val := GetAppComponentsParams{
 		Limit:  &limitDefault,
 		Offset: &offsetDefault,
+		Page:   &pageDefault,
 	}
 
 	val.timeout = o.timeout
@@ -188,6 +209,39 @@ func (o *GetAppComponentsParams) SetOffset(offset *int64) {
 	o.Offset = offset
 }
 
+// WithPage adds the page to the get app components params
+func (o *GetAppComponentsParams) WithPage(page *int64) *GetAppComponentsParams {
+	o.SetPage(page)
+	return o
+}
+
+// SetPage adds the page to the get app components params
+func (o *GetAppComponentsParams) SetPage(page *int64) {
+	o.Page = page
+}
+
+// WithQ adds the q to the get app components params
+func (o *GetAppComponentsParams) WithQ(q *string) *GetAppComponentsParams {
+	o.SetQ(q)
+	return o
+}
+
+// SetQ adds the q to the get app components params
+func (o *GetAppComponentsParams) SetQ(q *string) {
+	o.Q = q
+}
+
+// WithTypes adds the types to the get app components params
+func (o *GetAppComponentsParams) WithTypes(types *string) *GetAppComponentsParams {
+	o.SetTypes(types)
+	return o
+}
+
+// SetTypes adds the types to the get app components params
+func (o *GetAppComponentsParams) SetTypes(types *string) {
+	o.Types = types
+}
+
 // WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get app components params
 func (o *GetAppComponentsParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetAppComponentsParams {
 	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
@@ -241,6 +295,57 @@ func (o *GetAppComponentsParams) WriteToRequest(r runtime.ClientRequest, reg str
 		if qOffset != "" {
 
 			if err := r.SetQueryParam("offset", qOffset); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Page != nil {
+
+		// query param page
+		var qrPage int64
+
+		if o.Page != nil {
+			qrPage = *o.Page
+		}
+		qPage := swag.FormatInt64(qrPage)
+		if qPage != "" {
+
+			if err := r.SetQueryParam("page", qPage); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Q != nil {
+
+		// query param q
+		var qrQ string
+
+		if o.Q != nil {
+			qrQ = *o.Q
+		}
+		qQ := qrQ
+		if qQ != "" {
+
+			if err := r.SetQueryParam("q", qQ); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Types != nil {
+
+		// query param types
+		var qrTypes string
+
+		if o.Types != nil {
+			qrTypes = *o.Types
+		}
+		qTypes := qrTypes
+		if qTypes != "" {
+
+			if err := r.SetQueryParam("types", qTypes); err != nil {
 				return err
 			}
 		}

@@ -73,7 +73,7 @@ type ReprovisionInstallParams struct {
 
 	   Input
 	*/
-	Req models.ServiceReprovisionInstallRequest
+	Req *models.ServiceReprovisionInstallRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -140,13 +140,13 @@ func (o *ReprovisionInstallParams) SetInstallID(installID string) {
 }
 
 // WithReq adds the req to the reprovision install params
-func (o *ReprovisionInstallParams) WithReq(req models.ServiceReprovisionInstallRequest) *ReprovisionInstallParams {
+func (o *ReprovisionInstallParams) WithReq(req *models.ServiceReprovisionInstallRequest) *ReprovisionInstallParams {
 	o.SetReq(req)
 	return o
 }
 
 // SetReq adds the req to the reprovision install params
-func (o *ReprovisionInstallParams) SetReq(req models.ServiceReprovisionInstallRequest) {
+func (o *ReprovisionInstallParams) SetReq(req *models.ServiceReprovisionInstallRequest) {
 	o.Req = req
 }
 

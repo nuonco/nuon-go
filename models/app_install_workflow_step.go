@@ -71,6 +71,12 @@ type AppInstallWorkflowStep struct {
 	// policy validation
 	PolicyValidation *AppInstallWorkflowStepPolicyValidation `json:"policy_validation,omitempty"`
 
+	// retried
+	Retried bool `json:"retried,omitempty"`
+
+	// retryable
+	Retryable bool `json:"retryable,omitempty"`
+
 	// started at
 	StartedAt string `json:"started_at,omitempty"`
 
