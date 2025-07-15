@@ -85,7 +85,7 @@ type CreateInstallWorkflowStepApprovalResponseParams struct {
 
 	   Input
 	*/
-	Req *models.ServiceCreateInstallWorkflowStepApprovalResponseRequest
+	Req *models.ServiceCreateWorkflowStepApprovalResponseRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -174,13 +174,13 @@ func (o *CreateInstallWorkflowStepApprovalResponseParams) SetInstallWorkflowStep
 }
 
 // WithReq adds the req to the create install workflow step approval response params
-func (o *CreateInstallWorkflowStepApprovalResponseParams) WithReq(req *models.ServiceCreateInstallWorkflowStepApprovalResponseRequest) *CreateInstallWorkflowStepApprovalResponseParams {
+func (o *CreateInstallWorkflowStepApprovalResponseParams) WithReq(req *models.ServiceCreateWorkflowStepApprovalResponseRequest) *CreateInstallWorkflowStepApprovalResponseParams {
 	o.SetReq(req)
 	return o
 }
 
 // SetReq adds the req to the create install workflow step approval response params
-func (o *CreateInstallWorkflowStepApprovalResponseParams) SetReq(req *models.ServiceCreateInstallWorkflowStepApprovalResponseRequest) {
+func (o *CreateInstallWorkflowStepApprovalResponseParams) SetReq(req *models.ServiceCreateWorkflowStepApprovalResponseRequest) {
 	o.Req = req
 }
 

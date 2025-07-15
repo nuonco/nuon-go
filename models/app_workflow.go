@@ -67,6 +67,9 @@ type AppWorkflow struct {
 	// owner type
 	OwnerType string `json:"owner_type,omitempty"`
 
+	// plan only
+	PlanOnly bool `json:"plan_only,omitempty"`
+
 	// started at
 	StartedAt string `json:"started_at,omitempty"`
 

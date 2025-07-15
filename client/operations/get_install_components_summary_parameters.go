@@ -82,6 +82,24 @@ type GetInstallComponentsSummaryParams struct {
 	*/
 	Offset *int64
 
+	/* Page.
+
+	   page number of results to return
+	*/
+	Page *int64
+
+	/* Q.
+
+	   search query for component name
+	*/
+	Q *string
+
+	/* Types.
+
+	   component types to filter by
+	*/
+	Types *string
+
 	/* XNuonPaginationEnabled.
 
 	   Enable pagination
@@ -109,11 +127,14 @@ func (o *GetInstallComponentsSummaryParams) SetDefaults() {
 		limitDefault = int64(10)
 
 		offsetDefault = int64(0)
+
+		pageDefault = int64(0)
 	)
 
 	val := GetInstallComponentsSummaryParams{
 		Limit:  &limitDefault,
 		Offset: &offsetDefault,
+		Page:   &pageDefault,
 	}
 
 	val.timeout = o.timeout
@@ -188,6 +209,39 @@ func (o *GetInstallComponentsSummaryParams) SetOffset(offset *int64) {
 	o.Offset = offset
 }
 
+// WithPage adds the page to the get install components summary params
+func (o *GetInstallComponentsSummaryParams) WithPage(page *int64) *GetInstallComponentsSummaryParams {
+	o.SetPage(page)
+	return o
+}
+
+// SetPage adds the page to the get install components summary params
+func (o *GetInstallComponentsSummaryParams) SetPage(page *int64) {
+	o.Page = page
+}
+
+// WithQ adds the q to the get install components summary params
+func (o *GetInstallComponentsSummaryParams) WithQ(q *string) *GetInstallComponentsSummaryParams {
+	o.SetQ(q)
+	return o
+}
+
+// SetQ adds the q to the get install components summary params
+func (o *GetInstallComponentsSummaryParams) SetQ(q *string) {
+	o.Q = q
+}
+
+// WithTypes adds the types to the get install components summary params
+func (o *GetInstallComponentsSummaryParams) WithTypes(types *string) *GetInstallComponentsSummaryParams {
+	o.SetTypes(types)
+	return o
+}
+
+// SetTypes adds the types to the get install components summary params
+func (o *GetInstallComponentsSummaryParams) SetTypes(types *string) {
+	o.Types = types
+}
+
 // WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get install components summary params
 func (o *GetInstallComponentsSummaryParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetInstallComponentsSummaryParams {
 	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
@@ -241,6 +295,57 @@ func (o *GetInstallComponentsSummaryParams) WriteToRequest(r runtime.ClientReque
 		if qOffset != "" {
 
 			if err := r.SetQueryParam("offset", qOffset); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Page != nil {
+
+		// query param page
+		var qrPage int64
+
+		if o.Page != nil {
+			qrPage = *o.Page
+		}
+		qPage := swag.FormatInt64(qrPage)
+		if qPage != "" {
+
+			if err := r.SetQueryParam("page", qPage); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Q != nil {
+
+		// query param q
+		var qrQ string
+
+		if o.Q != nil {
+			qrQ = *o.Q
+		}
+		qQ := qrQ
+		if qQ != "" {
+
+			if err := r.SetQueryParam("q", qQ); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Types != nil {
+
+		// query param types
+		var qrTypes string
+
+		if o.Types != nil {
+			qrTypes = *o.Types
+		}
+		qTypes := qrTypes
+		if qTypes != "" {
+
+			if err := r.SetQueryParam("types", qTypes); err != nil {
 				return err
 			}
 		}
