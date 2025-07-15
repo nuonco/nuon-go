@@ -76,6 +76,12 @@ type GetOrgComponentsParams struct {
 	*/
 	Offset *int64
 
+	/* Page.
+
+	   page number of results to return
+	*/
+	Page *int64
+
 	/* XNuonPaginationEnabled.
 
 	   Enable pagination
@@ -103,11 +109,14 @@ func (o *GetOrgComponentsParams) SetDefaults() {
 		limitDefault = int64(10)
 
 		offsetDefault = int64(0)
+
+		pageDefault = int64(0)
 	)
 
 	val := GetOrgComponentsParams{
 		Limit:  &limitDefault,
 		Offset: &offsetDefault,
+		Page:   &pageDefault,
 	}
 
 	val.timeout = o.timeout
@@ -171,6 +180,17 @@ func (o *GetOrgComponentsParams) SetOffset(offset *int64) {
 	o.Offset = offset
 }
 
+// WithPage adds the page to the get org components params
+func (o *GetOrgComponentsParams) WithPage(page *int64) *GetOrgComponentsParams {
+	o.SetPage(page)
+	return o
+}
+
+// SetPage adds the page to the get org components params
+func (o *GetOrgComponentsParams) SetPage(page *int64) {
+	o.Page = page
+}
+
 // WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get org components params
 func (o *GetOrgComponentsParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetOrgComponentsParams {
 	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
@@ -219,6 +239,23 @@ func (o *GetOrgComponentsParams) WriteToRequest(r runtime.ClientRequest, reg str
 		if qOffset != "" {
 
 			if err := r.SetQueryParam("offset", qOffset); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Page != nil {
+
+		// query param page
+		var qrPage int64
+
+		if o.Page != nil {
+			qrPage = *o.Page
+		}
+		qPage := swag.FormatInt64(qrPage)
+		if qPage != "" {
+
+			if err := r.SetQueryParam("page", qPage); err != nil {
 				return err
 			}
 		}

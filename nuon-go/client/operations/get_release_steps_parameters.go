@@ -76,6 +76,12 @@ type GetReleaseStepsParams struct {
 	*/
 	Offset *int64
 
+	/* Page.
+
+	   page number of results to return
+	*/
+	Page *int64
+
 	/* ReleaseID.
 
 	   release ID
@@ -109,11 +115,14 @@ func (o *GetReleaseStepsParams) SetDefaults() {
 		limitDefault = int64(10)
 
 		offsetDefault = int64(0)
+
+		pageDefault = int64(0)
 	)
 
 	val := GetReleaseStepsParams{
 		Limit:  &limitDefault,
 		Offset: &offsetDefault,
+		Page:   &pageDefault,
 	}
 
 	val.timeout = o.timeout
@@ -177,6 +186,17 @@ func (o *GetReleaseStepsParams) SetOffset(offset *int64) {
 	o.Offset = offset
 }
 
+// WithPage adds the page to the get release steps params
+func (o *GetReleaseStepsParams) WithPage(page *int64) *GetReleaseStepsParams {
+	o.SetPage(page)
+	return o
+}
+
+// SetPage adds the page to the get release steps params
+func (o *GetReleaseStepsParams) SetPage(page *int64) {
+	o.Page = page
+}
+
 // WithReleaseID adds the releaseID to the get release steps params
 func (o *GetReleaseStepsParams) WithReleaseID(releaseID string) *GetReleaseStepsParams {
 	o.SetReleaseID(releaseID)
@@ -236,6 +256,23 @@ func (o *GetReleaseStepsParams) WriteToRequest(r runtime.ClientRequest, reg strf
 		if qOffset != "" {
 
 			if err := r.SetQueryParam("offset", qOffset); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Page != nil {
+
+		// query param page
+		var qrPage int64
+
+		if o.Page != nil {
+			qrPage = *o.Page
+		}
+		qPage := swag.FormatInt64(qrPage)
+		if qPage != "" {
+
+			if err := r.SetQueryParam("page", qPage); err != nil {
 				return err
 			}
 		}

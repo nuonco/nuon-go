@@ -76,6 +76,12 @@ type GetTerraformStatesParams struct {
 	*/
 	Offset *int64
 
+	/* Page.
+
+	   page number of results to return
+	*/
+	Page *int64
+
 	/* WorkspaceID.
 
 	   workspace ID
@@ -109,11 +115,14 @@ func (o *GetTerraformStatesParams) SetDefaults() {
 		limitDefault = int64(10)
 
 		offsetDefault = int64(0)
+
+		pageDefault = int64(0)
 	)
 
 	val := GetTerraformStatesParams{
 		Limit:  &limitDefault,
 		Offset: &offsetDefault,
+		Page:   &pageDefault,
 	}
 
 	val.timeout = o.timeout
@@ -177,6 +186,17 @@ func (o *GetTerraformStatesParams) SetOffset(offset *int64) {
 	o.Offset = offset
 }
 
+// WithPage adds the page to the get terraform states params
+func (o *GetTerraformStatesParams) WithPage(page *int64) *GetTerraformStatesParams {
+	o.SetPage(page)
+	return o
+}
+
+// SetPage adds the page to the get terraform states params
+func (o *GetTerraformStatesParams) SetPage(page *int64) {
+	o.Page = page
+}
+
 // WithWorkspaceID adds the workspaceID to the get terraform states params
 func (o *GetTerraformStatesParams) WithWorkspaceID(workspaceID string) *GetTerraformStatesParams {
 	o.SetWorkspaceID(workspaceID)
@@ -236,6 +256,23 @@ func (o *GetTerraformStatesParams) WriteToRequest(r runtime.ClientRequest, reg s
 		if qOffset != "" {
 
 			if err := r.SetQueryParam("offset", qOffset); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Page != nil {
+
+		// query param page
+		var qrPage int64
+
+		if o.Page != nil {
+			qrPage = *o.Page
+		}
+		qPage := swag.FormatInt64(qrPage)
+		if qPage != "" {
+
+			if err := r.SetQueryParam("page", qPage); err != nil {
 				return err
 			}
 		}

@@ -22,6 +22,9 @@ type ServiceCreateInstallDeployRequest struct {
 
 	// deploy dependents
 	DeployDependents bool `json:"deploy_dependents,omitempty"`
+
+	// plan only
+	PlanOnly bool `json:"plan_only,omitempty"`
 }
 
 // Validate validates this service create install deploy request
