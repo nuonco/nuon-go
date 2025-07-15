@@ -76,12 +76,6 @@ type GetOrgAcountsParams struct {
 	*/
 	Offset *int64
 
-	/* Page.
-
-	   page number of results to return
-	*/
-	Page *int64
-
 	/* XNuonPaginationEnabled.
 
 	   Enable pagination
@@ -109,14 +103,11 @@ func (o *GetOrgAcountsParams) SetDefaults() {
 		limitDefault = int64(10)
 
 		offsetDefault = int64(0)
-
-		pageDefault = int64(0)
 	)
 
 	val := GetOrgAcountsParams{
 		Limit:  &limitDefault,
 		Offset: &offsetDefault,
-		Page:   &pageDefault,
 	}
 
 	val.timeout = o.timeout
@@ -180,17 +171,6 @@ func (o *GetOrgAcountsParams) SetOffset(offset *int64) {
 	o.Offset = offset
 }
 
-// WithPage adds the page to the get org acounts params
-func (o *GetOrgAcountsParams) WithPage(page *int64) *GetOrgAcountsParams {
-	o.SetPage(page)
-	return o
-}
-
-// SetPage adds the page to the get org acounts params
-func (o *GetOrgAcountsParams) SetPage(page *int64) {
-	o.Page = page
-}
-
 // WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get org acounts params
 func (o *GetOrgAcountsParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetOrgAcountsParams {
 	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
@@ -239,23 +219,6 @@ func (o *GetOrgAcountsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		if qOffset != "" {
 
 			if err := r.SetQueryParam("offset", qOffset); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.Page != nil {
-
-		// query param page
-		var qrPage int64
-
-		if o.Page != nil {
-			qrPage = *o.Page
-		}
-		qPage := swag.FormatInt64(qrPage)
-		if qPage != "" {
-
-			if err := r.SetQueryParam("page", qPage); err != nil {
 				return err
 			}
 		}

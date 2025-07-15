@@ -76,12 +76,6 @@ type GetRunnerRecentHealthChecksParams struct {
 	*/
 	Offset *int64
 
-	/* Page.
-
-	   page number of results to return
-	*/
-	Page *int64
-
 	/* RunnerID.
 
 	   runner ID
@@ -124,15 +118,12 @@ func (o *GetRunnerRecentHealthChecksParams) SetDefaults() {
 
 		offsetDefault = int64(0)
 
-		pageDefault = int64(0)
-
 		windowDefault = string("1h")
 	)
 
 	val := GetRunnerRecentHealthChecksParams{
 		Limit:  &limitDefault,
 		Offset: &offsetDefault,
-		Page:   &pageDefault,
 		Window: &windowDefault,
 	}
 
@@ -195,17 +186,6 @@ func (o *GetRunnerRecentHealthChecksParams) WithOffset(offset *int64) *GetRunner
 // SetOffset adds the offset to the get runner recent health checks params
 func (o *GetRunnerRecentHealthChecksParams) SetOffset(offset *int64) {
 	o.Offset = offset
-}
-
-// WithPage adds the page to the get runner recent health checks params
-func (o *GetRunnerRecentHealthChecksParams) WithPage(page *int64) *GetRunnerRecentHealthChecksParams {
-	o.SetPage(page)
-	return o
-}
-
-// SetPage adds the page to the get runner recent health checks params
-func (o *GetRunnerRecentHealthChecksParams) SetPage(page *int64) {
-	o.Page = page
 }
 
 // WithRunnerID adds the runnerID to the get runner recent health checks params
@@ -278,23 +258,6 @@ func (o *GetRunnerRecentHealthChecksParams) WriteToRequest(r runtime.ClientReque
 		if qOffset != "" {
 
 			if err := r.SetQueryParam("offset", qOffset); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.Page != nil {
-
-		// query param page
-		var qrPage int64
-
-		if o.Page != nil {
-			qrPage = *o.Page
-		}
-		qPage := swag.FormatInt64(qrPage)
-		if qPage != "" {
-
-			if err := r.SetQueryParam("page", qPage); err != nil {
 				return err
 			}
 		}

@@ -19,9 +19,6 @@ type ServiceDeprovisionInstallRequest struct {
 
 	// error behavior
 	ErrorBehavior string `json:"error_behavior,omitempty"`
-
-	// plan only
-	PlanOnly bool `json:"plan_only,omitempty"`
 }
 
 // Validate validates this service deprovision install request

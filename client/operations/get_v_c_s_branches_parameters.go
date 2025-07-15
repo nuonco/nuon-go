@@ -76,12 +76,6 @@ type GetVCSBranchesParams struct {
 	*/
 	Offset *int64
 
-	/* Page.
-
-	   page number of results to return
-	*/
-	Page *int64
-
 	/* XNuonPaginationEnabled.
 
 	   Enable pagination
@@ -109,14 +103,11 @@ func (o *GetVCSBranchesParams) SetDefaults() {
 		limitDefault = int64(10)
 
 		offsetDefault = int64(0)
-
-		pageDefault = int64(0)
 	)
 
 	val := GetVCSBranchesParams{
 		Limit:  &limitDefault,
 		Offset: &offsetDefault,
-		Page:   &pageDefault,
 	}
 
 	val.timeout = o.timeout
@@ -180,17 +171,6 @@ func (o *GetVCSBranchesParams) SetOffset(offset *int64) {
 	o.Offset = offset
 }
 
-// WithPage adds the page to the get v c s branches params
-func (o *GetVCSBranchesParams) WithPage(page *int64) *GetVCSBranchesParams {
-	o.SetPage(page)
-	return o
-}
-
-// SetPage adds the page to the get v c s branches params
-func (o *GetVCSBranchesParams) SetPage(page *int64) {
-	o.Page = page
-}
-
 // WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get v c s branches params
 func (o *GetVCSBranchesParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetVCSBranchesParams {
 	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
@@ -239,23 +219,6 @@ func (o *GetVCSBranchesParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		if qOffset != "" {
 
 			if err := r.SetQueryParam("offset", qOffset); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.Page != nil {
-
-		// query param page
-		var qrPage int64
-
-		if o.Page != nil {
-			qrPage = *o.Page
-		}
-		qPage := swag.FormatInt64(qrPage)
-		if qPage != "" {
-
-			if err := r.SetQueryParam("page", qPage); err != nil {
 				return err
 			}
 		}

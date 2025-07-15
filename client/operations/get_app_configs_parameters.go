@@ -82,12 +82,6 @@ type GetAppConfigsParams struct {
 	*/
 	Offset *int64
 
-	/* Page.
-
-	   page number of results to return
-	*/
-	Page *int64
-
 	/* XNuonPaginationEnabled.
 
 	   Enable pagination
@@ -115,14 +109,11 @@ func (o *GetAppConfigsParams) SetDefaults() {
 		limitDefault = int64(10)
 
 		offsetDefault = int64(0)
-
-		pageDefault = int64(0)
 	)
 
 	val := GetAppConfigsParams{
 		Limit:  &limitDefault,
 		Offset: &offsetDefault,
-		Page:   &pageDefault,
 	}
 
 	val.timeout = o.timeout
@@ -197,17 +188,6 @@ func (o *GetAppConfigsParams) SetOffset(offset *int64) {
 	o.Offset = offset
 }
 
-// WithPage adds the page to the get app configs params
-func (o *GetAppConfigsParams) WithPage(page *int64) *GetAppConfigsParams {
-	o.SetPage(page)
-	return o
-}
-
-// SetPage adds the page to the get app configs params
-func (o *GetAppConfigsParams) SetPage(page *int64) {
-	o.Page = page
-}
-
 // WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get app configs params
 func (o *GetAppConfigsParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetAppConfigsParams {
 	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
@@ -261,23 +241,6 @@ func (o *GetAppConfigsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		if qOffset != "" {
 
 			if err := r.SetQueryParam("offset", qOffset); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.Page != nil {
-
-		// query param page
-		var qrPage int64
-
-		if o.Page != nil {
-			qrPage = *o.Page
-		}
-		qPage := swag.FormatInt64(qrPage)
-		if qPage != "" {
-
-			if err := r.SetQueryParam("page", qPage); err != nil {
 				return err
 			}
 		}

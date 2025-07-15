@@ -82,24 +82,6 @@ type GetInstallActionWorkflowsLatestRunsParams struct {
 	*/
 	Offset *int64
 
-	/* Page.
-
-	   page number of results to return
-	*/
-	Page *int64
-
-	/* Q.
-
-	   search query for action workflow name
-	*/
-	Q *string
-
-	/* TriggerTypes.
-
-	   filter by action workflow trigger by types
-	*/
-	TriggerTypes *string
-
 	/* XNuonPaginationEnabled.
 
 	   Enable pagination
@@ -127,14 +109,11 @@ func (o *GetInstallActionWorkflowsLatestRunsParams) SetDefaults() {
 		limitDefault = int64(10)
 
 		offsetDefault = int64(0)
-
-		pageDefault = int64(0)
 	)
 
 	val := GetInstallActionWorkflowsLatestRunsParams{
 		Limit:  &limitDefault,
 		Offset: &offsetDefault,
-		Page:   &pageDefault,
 	}
 
 	val.timeout = o.timeout
@@ -209,39 +188,6 @@ func (o *GetInstallActionWorkflowsLatestRunsParams) SetOffset(offset *int64) {
 	o.Offset = offset
 }
 
-// WithPage adds the page to the get install action workflows latest runs params
-func (o *GetInstallActionWorkflowsLatestRunsParams) WithPage(page *int64) *GetInstallActionWorkflowsLatestRunsParams {
-	o.SetPage(page)
-	return o
-}
-
-// SetPage adds the page to the get install action workflows latest runs params
-func (o *GetInstallActionWorkflowsLatestRunsParams) SetPage(page *int64) {
-	o.Page = page
-}
-
-// WithQ adds the q to the get install action workflows latest runs params
-func (o *GetInstallActionWorkflowsLatestRunsParams) WithQ(q *string) *GetInstallActionWorkflowsLatestRunsParams {
-	o.SetQ(q)
-	return o
-}
-
-// SetQ adds the q to the get install action workflows latest runs params
-func (o *GetInstallActionWorkflowsLatestRunsParams) SetQ(q *string) {
-	o.Q = q
-}
-
-// WithTriggerTypes adds the triggerTypes to the get install action workflows latest runs params
-func (o *GetInstallActionWorkflowsLatestRunsParams) WithTriggerTypes(triggerTypes *string) *GetInstallActionWorkflowsLatestRunsParams {
-	o.SetTriggerTypes(triggerTypes)
-	return o
-}
-
-// SetTriggerTypes adds the triggerTypes to the get install action workflows latest runs params
-func (o *GetInstallActionWorkflowsLatestRunsParams) SetTriggerTypes(triggerTypes *string) {
-	o.TriggerTypes = triggerTypes
-}
-
 // WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get install action workflows latest runs params
 func (o *GetInstallActionWorkflowsLatestRunsParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetInstallActionWorkflowsLatestRunsParams {
 	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
@@ -295,57 +241,6 @@ func (o *GetInstallActionWorkflowsLatestRunsParams) WriteToRequest(r runtime.Cli
 		if qOffset != "" {
 
 			if err := r.SetQueryParam("offset", qOffset); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.Page != nil {
-
-		// query param page
-		var qrPage int64
-
-		if o.Page != nil {
-			qrPage = *o.Page
-		}
-		qPage := swag.FormatInt64(qrPage)
-		if qPage != "" {
-
-			if err := r.SetQueryParam("page", qPage); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.Q != nil {
-
-		// query param q
-		var qrQ string
-
-		if o.Q != nil {
-			qrQ = *o.Q
-		}
-		qQ := qrQ
-		if qQ != "" {
-
-			if err := r.SetQueryParam("q", qQ); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.TriggerTypes != nil {
-
-		// query param trigger_types
-		var qrTriggerTypes string
-
-		if o.TriggerTypes != nil {
-			qrTriggerTypes = *o.TriggerTypes
-		}
-		qTriggerTypes := qrTriggerTypes
-		if qTriggerTypes != "" {
-
-			if err := r.SetQueryParam("trigger_types", qTriggerTypes); err != nil {
 				return err
 			}
 		}

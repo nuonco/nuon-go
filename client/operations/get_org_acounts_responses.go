@@ -75,7 +75,7 @@ GetOrgAcountsOK describes a response with status code 200, with default header v
 OK
 */
 type GetOrgAcountsOK struct {
-	Payload *models.AppAccount
+	Payload *models.AppOrg
 }
 
 // IsSuccess returns true when this get org acounts o k response has a 2xx status code
@@ -116,13 +116,13 @@ func (o *GetOrgAcountsOK) String() string {
 	return fmt.Sprintf("[GET /v1/orgs/current/accounts][%d] getOrgAcountsOK  %+v", 200, o.Payload)
 }
 
-func (o *GetOrgAcountsOK) GetPayload() *models.AppAccount {
+func (o *GetOrgAcountsOK) GetPayload() *models.AppOrg {
 	return o.Payload
 }
 
 func (o *GetOrgAcountsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.AppAccount)
+	o.Payload = new(models.AppOrg)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

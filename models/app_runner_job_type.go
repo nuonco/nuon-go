@@ -78,18 +78,6 @@ const (
 	// AppRunnerJobTypeNoop captures enum value "noop"
 	AppRunnerJobTypeNoop AppRunnerJobType = "noop"
 
-	// AppRunnerJobTypeMngDashVMDashShutDashDown captures enum value "mng-vm-shut-down"
-	AppRunnerJobTypeMngDashVMDashShutDashDown AppRunnerJobType = "mng-vm-shut-down"
-
-	// AppRunnerJobTypeMngDashShutDashDown captures enum value "mng-shut-down"
-	AppRunnerJobTypeMngDashShutDashDown AppRunnerJobType = "mng-shut-down"
-
-	// AppRunnerJobTypeMngDashRunnerDashUpdateDashVersion captures enum value "mng-runner-update-version"
-	AppRunnerJobTypeMngDashRunnerDashUpdateDashVersion AppRunnerJobType = "mng-runner-update-version"
-
-	// AppRunnerJobTypeMngDashRunnerDashRestart captures enum value "mng-runner-restart"
-	AppRunnerJobTypeMngDashRunnerDashRestart AppRunnerJobType = "mng-runner-restart"
-
 	// AppRunnerJobTypeSandboxDashTerraform captures enum value "sandbox-terraform"
 	AppRunnerJobTypeSandboxDashTerraform AppRunnerJobType = "sandbox-terraform"
 
@@ -117,7 +105,7 @@ var appRunnerJobTypeEnum []interface{}
 
 func init() {
 	var res []AppRunnerJobType
-	if err := json.Unmarshal([]byte(`["health-check","docker-build","container-image-build","terraform-module-build","helm-chart-build","noop-build","app-config-sync","oci-sync","noop-sync","terraform-deploy","helm-chart-deploy","job-deploy","noop-deploy","shut-down","update-version","noop","mng-vm-shut-down","mng-shut-down","mng-runner-update-version","mng-runner-restart","sandbox-terraform","sandbox-terraform-plan","sandbox-sync-secrets","runner-helm","runner-terraform","runner-local","actions-workflow"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["health-check","docker-build","container-image-build","terraform-module-build","helm-chart-build","noop-build","app-config-sync","oci-sync","noop-sync","terraform-deploy","helm-chart-deploy","job-deploy","noop-deploy","shut-down","update-version","noop","sandbox-terraform","sandbox-terraform-plan","sandbox-sync-secrets","runner-helm","runner-terraform","runner-local","actions-workflow"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

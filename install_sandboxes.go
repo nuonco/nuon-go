@@ -42,8 +42,7 @@ func (c *client) DeprovisionInstallSandbox(ctx context.Context, installID string
 		Context:   ctx,
 		// TODO: make this configurable
 		Req: &models.ServiceDeprovisionInstallSandboxRequest{
-			ErrorBehavior: "abort",
-			PlanOnly:      false,
+			"abort",
 		},
 	}, c.getOrgIDAuthInfo())
 	if err != nil {

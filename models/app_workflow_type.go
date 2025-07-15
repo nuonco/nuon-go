@@ -60,9 +60,6 @@ const (
 	// AppWorkflowTypeActionWorkflowRun captures enum value "action_workflow_run"
 	AppWorkflowTypeActionWorkflowRun AppWorkflowType = "action_workflow_run"
 
-	// AppWorkflowTypeSyncSecrets captures enum value "sync_secrets"
-	AppWorkflowTypeSyncSecrets AppWorkflowType = "sync_secrets"
-
 	// AppWorkflowTypeReprovision captures enum value "reprovision"
 	AppWorkflowTypeReprovision AppWorkflowType = "reprovision"
 )
@@ -72,7 +69,7 @@ var appWorkflowTypeEnum []interface{}
 
 func init() {
 	var res []AppWorkflowType
-	if err := json.Unmarshal([]byte(`["provision","deprovision","deprovision_sandbox","manual_deploy","input_update","deploy_components","teardown_component","teardown_components","reprovision_sandbox","action_workflow_run","sync_secrets","reprovision"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["provision","deprovision","deprovision_sandbox","manual_deploy","input_update","deploy_components","teardown_component","teardown_components","reprovision_sandbox","action_workflow_run","reprovision"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
