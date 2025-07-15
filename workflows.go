@@ -7,8 +7,8 @@ import (
 	"github.com/nuonco/nuon-go/models"
 )
 
-func (c *client) GetInstallWorkflows(ctx context.Context, installID string, query *models.GetPaginatedQuery) ([]*models.AppWorkflow, bool, error) {
-	params := &operations.GetInstallWorkflowsParams{
+func (c *client) GetWorkflows(ctx context.Context, installID string, query *models.GetPaginatedQuery) ([]*models.AppWorkflow, bool, error) {
+	params := &operations.GetWorkflowsParams{
 		InstallID: installID,
 		Context:   ctx,
 	}
@@ -23,7 +23,7 @@ func (c *client) GetInstallWorkflows(ctx context.Context, installID string, quer
 		params.XNuonPaginationEnabled = &query.PaginationEnabled
 	}
 
-	resp, err := c.genClient.Operations.GetInstallWorkflows(params, c.getOrgIDAuthInfo())
+	resp, err := c.genClient.Operations.GetWorkflows(params, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, false, err
 	}
