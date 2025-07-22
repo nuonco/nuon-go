@@ -47,9 +47,6 @@ type AppWorkflowStep struct {
 	// idx
 	Idx int64 `json:"idx,omitempty"`
 
-	// install id
-	InstallID string `json:"install_id,omitempty"`
-
 	// install workflow id
 	InstallWorkflowID string `json:"install_workflow_id,omitempty"`
 

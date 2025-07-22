@@ -46,9 +46,6 @@ type AppWorkflow struct {
 	// install deploys
 	InstallDeploys []*AppInstallDeploy `json:"install_deploys"`
 
-	// install id
-	InstallID string `json:"install_id,omitempty"`
-
 	// install sandbox runs
 	InstallSandboxRuns []*AppInstallSandboxRun `json:"install_sandbox_runs"`
 

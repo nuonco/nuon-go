@@ -8,7 +8,6 @@ package models
 import (
 	"context"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -42,129 +41,17 @@ type AppVCSConnectionCommit struct {
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
 
-	// vcs connection branch id
-	VcsConnectionBranchID *GenericsNullString `json:"vcs_connection_branch_id,omitempty"`
-
 	// vcs connection id
 	VcsConnectionID string `json:"vcs_connection_id,omitempty"`
-
-	// vcs connection repo id
-	VcsConnectionRepoID *GenericsNullString `json:"vcs_connection_repo_id,omitempty"`
 }
 
 // Validate validates this app v c s connection commit
 func (m *AppVCSConnectionCommit) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateVcsConnectionBranchID(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateVcsConnectionRepoID(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
 	return nil
 }
 
-func (m *AppVCSConnectionCommit) validateVcsConnectionBranchID(formats strfmt.Registry) error {
-	if swag.IsZero(m.VcsConnectionBranchID) { // not required
-		return nil
-	}
-
-	if m.VcsConnectionBranchID != nil {
-		if err := m.VcsConnectionBranchID.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("vcs_connection_branch_id")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("vcs_connection_branch_id")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *AppVCSConnectionCommit) validateVcsConnectionRepoID(formats strfmt.Registry) error {
-	if swag.IsZero(m.VcsConnectionRepoID) { // not required
-		return nil
-	}
-
-	if m.VcsConnectionRepoID != nil {
-		if err := m.VcsConnectionRepoID.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("vcs_connection_repo_id")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("vcs_connection_repo_id")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this app v c s connection commit based on the context it is used
+// ContextValidate validates this app v c s connection commit based on context it is used
 func (m *AppVCSConnectionCommit) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateVcsConnectionBranchID(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateVcsConnectionRepoID(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *AppVCSConnectionCommit) contextValidateVcsConnectionBranchID(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.VcsConnectionBranchID != nil {
-
-		if swag.IsZero(m.VcsConnectionBranchID) { // not required
-			return nil
-		}
-
-		if err := m.VcsConnectionBranchID.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("vcs_connection_branch_id")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("vcs_connection_branch_id")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *AppVCSConnectionCommit) contextValidateVcsConnectionRepoID(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.VcsConnectionRepoID != nil {
-
-		if swag.IsZero(m.VcsConnectionRepoID) { // not required
-			return nil
-		}
-
-		if err := m.VcsConnectionRepoID.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("vcs_connection_repo_id")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("vcs_connection_repo_id")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
