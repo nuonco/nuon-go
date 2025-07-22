@@ -21,6 +21,9 @@ type AppInstallStackOutputs struct {
 	// aws
 	Aws *AppAWSStackOutputs `json:"aws,omitempty"`
 
+	// azure
+	Azure *AppAzureStackOutputs `json:"azure,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
@@ -54,6 +57,10 @@ func (m *AppInstallStackOutputs) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateAzure(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -79,11 +86,34 @@ func (m *AppInstallStackOutputs) validateAws(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppInstallStackOutputs) validateAzure(formats strfmt.Registry) error {
+	if swag.IsZero(m.Azure) { // not required
+		return nil
+	}
+
+	if m.Azure != nil {
+		if err := m.Azure.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("azure")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("azure")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app install stack outputs based on the context it is used
 func (m *AppInstallStackOutputs) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateAws(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateAzure(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -106,6 +136,27 @@ func (m *AppInstallStackOutputs) contextValidateAws(ctx context.Context, formats
 				return ve.ValidateName("aws")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("aws")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppInstallStackOutputs) contextValidateAzure(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Azure != nil {
+
+		if swag.IsZero(m.Azure) { // not required
+			return nil
+		}
+
+		if err := m.Azure.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("azure")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("azure")
 			}
 			return err
 		}
