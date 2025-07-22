@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -36,18 +37,15 @@ type AppAppBranch struct {
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
 
-	// vcs connection branch
-	VcsConnectionBranch *AppVCSConnectionBranch `json:"vcs_connection_branch,omitempty"`
-
-	// vcs connection branch id
-	VcsConnectionBranchID string `json:"vcs_connection_branch_id,omitempty"`
+	// workflows
+	Workflows []*AppWorkflow `json:"workflows"`
 }
 
 // Validate validates this app app branch
 func (m *AppAppBranch) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateVcsConnectionBranch(formats); err != nil {
+	if err := m.validateWorkflows(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -57,20 +55,27 @@ func (m *AppAppBranch) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *AppAppBranch) validateVcsConnectionBranch(formats strfmt.Registry) error {
-	if swag.IsZero(m.VcsConnectionBranch) { // not required
+func (m *AppAppBranch) validateWorkflows(formats strfmt.Registry) error {
+	if swag.IsZero(m.Workflows) { // not required
 		return nil
 	}
 
-	if m.VcsConnectionBranch != nil {
-		if err := m.VcsConnectionBranch.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("vcs_connection_branch")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("vcs_connection_branch")
-			}
-			return err
+	for i := 0; i < len(m.Workflows); i++ {
+		if swag.IsZero(m.Workflows[i]) { // not required
+			continue
 		}
+
+		if m.Workflows[i] != nil {
+			if err := m.Workflows[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("workflows" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("workflows" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -80,7 +85,7 @@ func (m *AppAppBranch) validateVcsConnectionBranch(formats strfmt.Registry) erro
 func (m *AppAppBranch) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateVcsConnectionBranch(ctx, formats); err != nil {
+	if err := m.contextValidateWorkflows(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -90,22 +95,26 @@ func (m *AppAppBranch) ContextValidate(ctx context.Context, formats strfmt.Regis
 	return nil
 }
 
-func (m *AppAppBranch) contextValidateVcsConnectionBranch(ctx context.Context, formats strfmt.Registry) error {
+func (m *AppAppBranch) contextValidateWorkflows(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.VcsConnectionBranch != nil {
+	for i := 0; i < len(m.Workflows); i++ {
 
-		if swag.IsZero(m.VcsConnectionBranch) { // not required
-			return nil
-		}
+		if m.Workflows[i] != nil {
 
-		if err := m.VcsConnectionBranch.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("vcs_connection_branch")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("vcs_connection_branch")
+			if swag.IsZero(m.Workflows[i]) { // not required
+				return nil
 			}
-			return err
+
+			if err := m.Workflows[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("workflows" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("workflows" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
 		}
+
 	}
 
 	return nil
