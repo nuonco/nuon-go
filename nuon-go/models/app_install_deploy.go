@@ -25,9 +25,6 @@ type AppInstallDeploy struct {
 	// build id
 	BuildID string `json:"build_id,omitempty"`
 
-	// component build
-	ComponentBuild *AppComponentBuild `json:"component_build,omitempty"`
-
 	// component config version
 	ComponentConfigVersion int64 `json:"component_config_version,omitempty"`
 
@@ -97,10 +94,6 @@ func (m *AppInstallDeploy) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateComponentBuild(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateCreatedBy(formats); err != nil {
 		res = append(res, err)
 	}
@@ -152,25 +145,6 @@ func (m *AppInstallDeploy) validateActionWorkflowRuns(formats strfmt.Registry) e
 			}
 		}
 
-	}
-
-	return nil
-}
-
-func (m *AppInstallDeploy) validateComponentBuild(formats strfmt.Registry) error {
-	if swag.IsZero(m.ComponentBuild) { // not required
-		return nil
-	}
-
-	if m.ComponentBuild != nil {
-		if err := m.ComponentBuild.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("component_build")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("component_build")
-			}
-			return err
-		}
 	}
 
 	return nil
@@ -303,10 +277,6 @@ func (m *AppInstallDeploy) ContextValidate(ctx context.Context, formats strfmt.R
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateComponentBuild(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -357,27 +327,6 @@ func (m *AppInstallDeploy) contextValidateActionWorkflowRuns(ctx context.Context
 			}
 		}
 
-	}
-
-	return nil
-}
-
-func (m *AppInstallDeploy) contextValidateComponentBuild(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.ComponentBuild != nil {
-
-		if swag.IsZero(m.ComponentBuild) { // not required
-			return nil
-		}
-
-		if err := m.ComponentBuild.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("component_build")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("component_build")
-			}
-			return err
-		}
 	}
 
 	return nil

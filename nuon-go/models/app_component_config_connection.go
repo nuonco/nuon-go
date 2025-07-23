@@ -58,9 +58,6 @@ type AppComponentConfigConnection struct {
 	// job
 	Job *AppJobComponentConfig `json:"job,omitempty"`
 
-	// kubernetes manifest
-	KubernetesManifest *AppKubernetesManifestComponentConfig `json:"kubernetes_manifest,omitempty"`
-
 	// references
 	References []string `json:"references"`
 
@@ -97,10 +94,6 @@ func (m *AppComponentConfigConnection) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateJob(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateKubernetesManifest(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -198,25 +191,6 @@ func (m *AppComponentConfigConnection) validateJob(formats strfmt.Registry) erro
 	return nil
 }
 
-func (m *AppComponentConfigConnection) validateKubernetesManifest(formats strfmt.Registry) error {
-	if swag.IsZero(m.KubernetesManifest) { // not required
-		return nil
-	}
-
-	if m.KubernetesManifest != nil {
-		if err := m.KubernetesManifest.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("kubernetes_manifest")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("kubernetes_manifest")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *AppComponentConfigConnection) validateRefs(formats strfmt.Registry) error {
 	if swag.IsZero(m.Refs) { // not required
 		return nil
@@ -296,10 +270,6 @@ func (m *AppComponentConfigConnection) ContextValidate(ctx context.Context, form
 	}
 
 	if err := m.contextValidateJob(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateKubernetesManifest(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -397,27 +367,6 @@ func (m *AppComponentConfigConnection) contextValidateJob(ctx context.Context, f
 				return ve.ValidateName("job")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("job")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *AppComponentConfigConnection) contextValidateKubernetesManifest(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.KubernetesManifest != nil {
-
-		if swag.IsZero(m.KubernetesManifest) { // not required
-			return nil
-		}
-
-		if err := m.KubernetesManifest.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("kubernetes_manifest")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("kubernetes_manifest")
 			}
 			return err
 		}
