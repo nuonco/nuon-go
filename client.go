@@ -166,6 +166,7 @@ type Client interface {
 	CreateJobComponentConfig(ctx context.Context, componentID string, req *models.ServiceCreateJobComponentConfigRequest) (*models.AppJobComponentConfig, error)
 	GetComponentConfigs(ctx context.Context, componentID string, query *models.GetPaginatedQuery) ([]*models.AppComponentConfigConnection, bool, error)
 	GetComponentLatestConfig(ctx context.Context, componentID string) (*models.AppComponentConfigConnection, error)
+	CreateKubernetesComponentConfig(ctx context.Context, componentID string, req *models.ServiceCreateKubernetesManifestComponentConfigRequest) (*models.AppKubernetesManifestComponentConfig, error)
 
 	// builds
 	CreateComponentBuild(ctx context.Context, componentID string, req *models.ServiceCreateComponentBuildRequest) (*models.AppComponentBuild, error)

@@ -22,6 +22,9 @@ type AppComponentBuild struct {
 	// checksum of our intermediate component config
 	Checksum string `json:"checksum,omitempty"`
 
+	// component config connection
+	ComponentConfigConnection *AppComponentConfigConnection `json:"component_config_connection,omitempty"`
+
 	// DEPRECATED: will retain the field to connect against the last component config connection that set this build
 	ComponentConfigConnectionID string `json:"component_config_connection_id,omitempty"`
 
@@ -83,6 +86,10 @@ type AppComponentBuild struct {
 func (m *AppComponentBuild) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateComponentConfigConnection(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCreatedBy(formats); err != nil {
 		res = append(res, err)
 	}
@@ -114,6 +121,25 @@ func (m *AppComponentBuild) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppComponentBuild) validateComponentConfigConnection(formats strfmt.Registry) error {
+	if swag.IsZero(m.ComponentConfigConnection) { // not required
+		return nil
+	}
+
+	if m.ComponentConfigConnection != nil {
+		if err := m.ComponentConfigConnection.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("component_config_connection")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("component_config_connection")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -257,6 +283,10 @@ func (m *AppComponentBuild) validateVcsConnectionCommit(formats strfmt.Registry)
 func (m *AppComponentBuild) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateComponentConfigConnection(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateCreatedBy(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -288,6 +318,27 @@ func (m *AppComponentBuild) ContextValidate(ctx context.Context, formats strfmt.
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppComponentBuild) contextValidateComponentConfigConnection(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ComponentConfigConnection != nil {
+
+		if swag.IsZero(m.ComponentConfigConnection) { // not required
+			return nil
+		}
+
+		if err := m.ComponentConfigConnection.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("component_config_connection")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("component_config_connection")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

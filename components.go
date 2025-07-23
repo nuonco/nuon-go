@@ -143,6 +143,19 @@ func (c *client) CreateTerraformModuleComponentConfig(ctx context.Context, compo
 	return resp.Payload, nil
 }
 
+func (c *client) CreateKubernetesComponentConfig(ctx context.Context, componentID string, req *models.ServiceCreateKubernetesManifestComponentConfigRequest) (*models.AppKubernetesManifestComponentConfig, error) {
+	resp, err := c.genClient.Operations.CreateKubernetesManifestComponentConfig(&operations.CreateKubernetesManifestComponentConfigParams{
+		ComponentID: componentID,
+		Req:         req,
+		Context:     ctx,
+	}, nil)
+	if err != nil {
+		return nil, fmt.Errorf("unable to create kubernete manifest component config: %w", err)
+	}
+
+	return resp.Payload, nil
+}
+
 func (c *client) CreateHelmComponentConfig(ctx context.Context, componentID string, req *models.ServiceCreateHelmComponentConfigRequest) (*models.AppHelmComponentConfig, error) {
 	resp, err := c.genClient.Operations.CreateHelmComponentConfig(&operations.CreateHelmComponentConfigParams{
 		ComponentID: componentID,
