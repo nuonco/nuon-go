@@ -8,7 +8,6 @@ package models
 import (
 	"context"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -79,9 +78,7 @@ type AppRunnerGroupSettings struct {
 	OtelCollectorConfig string `json:"otel_collector_config,omitempty"`
 
 	// platform variable for use in the runner
-	Platform struct {
-		AppCloudPlatform
-	} `json:"platform,omitempty"`
+	Platform string `json:"platform,omitempty"`
 
 	// runner api url
 	RunnerAPIURL string `json:"runner_api_url,omitempty"`
@@ -98,42 +95,11 @@ type AppRunnerGroupSettings struct {
 
 // Validate validates this app runner group settings
 func (m *AppRunnerGroupSettings) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validatePlatform(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
 	return nil
 }
 
-func (m *AppRunnerGroupSettings) validatePlatform(formats strfmt.Registry) error {
-	if swag.IsZero(m.Platform) { // not required
-		return nil
-	}
-
-	return nil
-}
-
-// ContextValidate validate this app runner group settings based on the context it is used
+// ContextValidate validates this app runner group settings based on context it is used
 func (m *AppRunnerGroupSettings) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidatePlatform(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *AppRunnerGroupSettings) contextValidatePlatform(ctx context.Context, formats strfmt.Registry) error {
-
 	return nil
 }
 
