@@ -409,6 +409,21 @@ func (mr *MockClientMockRecorder) CreateJobComponentConfig(ctx, componentID, req
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateJobComponentConfig", reflect.TypeOf((*MockClient)(nil).CreateJobComponentConfig), ctx, componentID, req)
 }
 
+// CreateKubernetesComponentConfig mocks base method.
+func (m *MockClient) CreateKubernetesComponentConfig(ctx context.Context, componentID string, req *models.ServiceCreateKubernetesManifestComponentConfigRequest) (*models.AppKubernetesManifestComponentConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateKubernetesComponentConfig", ctx, componentID, req)
+	ret0, _ := ret[0].(*models.AppKubernetesManifestComponentConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateKubernetesComponentConfig indicates an expected call of CreateKubernetesComponentConfig.
+func (mr *MockClientMockRecorder) CreateKubernetesComponentConfig(ctx, componentID, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateKubernetesComponentConfig", reflect.TypeOf((*MockClient)(nil).CreateKubernetesComponentConfig), ctx, componentID, req)
+}
+
 // CreateOrg mocks base method.
 func (m *MockClient) CreateOrg(ctx context.Context, req *models.ServiceCreateOrgRequest) (*models.AppOrg, error) {
 	m.ctrl.T.Helper()
