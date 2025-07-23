@@ -1,6 +1,6 @@
 module github.com/nuonco/nuon-go
 
-go 1.21
+go 1.24.4
 
 require (
 	github.com/go-openapi/errors v0.20.4
