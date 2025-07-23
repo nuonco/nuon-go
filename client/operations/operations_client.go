@@ -104,8 +104,6 @@ type ClientService interface {
 
 	CreateVCSConnection(params *CreateVCSConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateVCSConnectionCreated, error)
 
-	CreateVCSConnectionBranch(params *CreateVCSConnectionBranchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateVCSConnectionBranchCreated, error)
-
 	CreateVCSConnectionCallback(params *CreateVCSConnectionCallbackParams, opts ...ClientOption) (*CreateVCSConnectionCallbackCreated, error)
 
 	CreateWaitlist(params *CreateWaitlistParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWaitlistOK, error)
@@ -147,8 +145,6 @@ type ClientService interface {
 	GetActionWorkflowLatestConfig(params *GetActionWorkflowLatestConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionWorkflowLatestConfigOK, error)
 
 	GetActionWorkflows(params *GetActionWorkflowsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionWorkflowsOK, error)
-
-	GetAllVCSConnectedRepos(params *GetAllVCSConnectedReposParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllVCSConnectedReposOK, error)
 
 	GetApp(params *GetAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppOK, error)
 
@@ -344,8 +340,6 @@ type ClientService interface {
 
 	GetRunnerJob(params *GetRunnerJobParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobOK, error)
 
-	GetRunnerJobExecution(params *GetRunnerJobExecutionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobExecutionOK, error)
-
 	GetRunnerJobExecutions(params *GetRunnerJobExecutionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobExecutionsOK, error)
 
 	GetRunnerJobPlan(params *GetRunnerJobPlanParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobPlanOK, error)
@@ -378,8 +372,6 @@ type ClientService interface {
 
 	GetTerraformWorkspaces(params *GetTerraformWorkspacesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspacesOK, error)
 
-	GetVCSBranches(params *GetVCSBranchesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVCSBranchesOK, error)
-
 	GetVCSConnection(params *GetVCSConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVCSConnectionOK, error)
 
 	GetWorkflow(params *GetWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowOK, error)
@@ -398,6 +390,8 @@ type ClientService interface {
 
 	LogStreamReadLogs(params *LogStreamReadLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LogStreamReadLogsOK, error)
 
+	MngVMShutDown(params *MngVMShutDownParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*MngVMShutDownCreated, error)
+
 	PhoneHome(params *PhoneHomeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PhoneHomeCreated, error)
 
 	RemoveUser(params *RemoveUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RemoveUserCreated, error)
@@ -409,6 +403,8 @@ type ClientService interface {
 	ReprovisionInstallSandbox(params *ReprovisionInstallSandboxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReprovisionInstallSandboxCreated, error)
 
 	RetryWorkflow(params *RetryWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RetryWorkflowCreated, error)
+
+	ShutDownRunnerMng(params *ShutDownRunnerMngParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ShutDownRunnerMngCreated, error)
 
 	SyncSecrets(params *SyncSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncSecretsCreated, error)
 
@@ -443,8 +439,6 @@ type ClientService interface {
 	UpdateRunnerSettings(params *UpdateRunnerSettingsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateRunnerSettingsOK, error)
 
 	UpdateTerraformState(params *UpdateTerraformStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTerraformStateOK, error)
-
-	UpdateVCSConnectionBranch(params *UpdateVCSConnectionBranchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVCSConnectionBranchCreated, error)
 
 	UpdateWorkflow(params *UpdateWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateWorkflowOK, error)
 
@@ -1917,45 +1911,6 @@ func (a *Client) CreateVCSConnection(params *CreateVCSConnectionParams, authInfo
 }
 
 /*
-CreateVCSConnectionBranch creates a vcs connection branch for github
-*/
-func (a *Client) CreateVCSConnectionBranch(params *CreateVCSConnectionBranchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateVCSConnectionBranchCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewCreateVCSConnectionBranchParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "CreateVCSConnectionBranch",
-		Method:             "POST",
-		PathPattern:        "/v1/vcs/connections/{connection_id}/branches",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &CreateVCSConnectionBranchReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*CreateVCSConnectionBranchCreated)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for CreateVCSConnectionBranch: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 CreateVCSConnectionCallback publics connection to create a vcs connection via a callback
 */
 func (a *Client) CreateVCSConnectionCallback(params *CreateVCSConnectionCallbackParams, opts ...ClientOption) (*CreateVCSConnectionCallbackCreated, error) {
@@ -2788,45 +2743,6 @@ func (a *Client) GetActionWorkflows(params *GetActionWorkflowsParams, authInfo r
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetActionWorkflows: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetAllVCSConnectedRepos gets all vcs connected repos for an org
-*/
-func (a *Client) GetAllVCSConnectedRepos(params *GetAllVCSConnectedReposParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllVCSConnectedReposOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetAllVCSConnectedReposParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetAllVCSConnectedRepos",
-		Method:             "GET",
-		PathPattern:        "/v1/vcs/connected-repos",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetAllVCSConnectedReposReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetAllVCSConnectedReposOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetAllVCSConnectedRepos: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -6736,47 +6652,6 @@ func (a *Client) GetRunnerJob(params *GetRunnerJobParams, authInfo runtime.Clien
 }
 
 /*
-GetRunnerJobExecution gets runner job execution
-
-Return a runner job execution.
-*/
-func (a *Client) GetRunnerJobExecution(params *GetRunnerJobExecutionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobExecutionOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetRunnerJobExecutionParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetRunnerJobExecution",
-		Method:             "GET",
-		PathPattern:        "/v1/runner-jobs/{runner_job_id}/executions/{runner_job_execution_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetRunnerJobExecutionReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetRunnerJobExecutionOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetRunnerJobExecution: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 GetRunnerJobExecutions gets runner job executions
 
 Return executions for a runner job.
@@ -7409,45 +7284,6 @@ func (a *Client) GetTerraformWorkspaces(params *GetTerraformWorkspacesParams, au
 }
 
 /*
-GetVCSBranches gets all vcs branches
-*/
-func (a *Client) GetVCSBranches(params *GetVCSBranchesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVCSBranchesOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetVCSBranchesParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetVCSBranches",
-		Method:             "GET",
-		PathPattern:        "/v1/vcs/branches",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetVCSBranchesReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetVCSBranchesOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetVCSBranches: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 GetVCSConnection returns a vcs connection for an org
 */
 func (a *Client) GetVCSConnection(params *GetVCSConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVCSConnectionOK, error) {
@@ -7813,6 +7649,45 @@ func (a *Client) LogStreamReadLogs(params *LogStreamReadLogsParams, authInfo run
 }
 
 /*
+MngVMShutDown shuts down an install runner VM
+*/
+func (a *Client) MngVMShutDown(params *MngVMShutDownParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*MngVMShutDownCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewMngVMShutDownParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "MngVMShutDown",
+		Method:             "POST",
+		PathPattern:        "/v1/runners/{runner_id}/mng/shutdown-vm",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &MngVMShutDownReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*MngVMShutDownCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for MngVMShutDown: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 PhoneHome phones home for an install
 
 A public endpoint for phoning home from a runner AWS cloudformation stack upon successfully processing it.
@@ -8050,6 +7925,45 @@ func (a *Client) RetryWorkflow(params *RetryWorkflowParams, authInfo runtime.Cli
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for RetryWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+ShutDownRunnerMng shuts down an install runner management process
+*/
+func (a *Client) ShutDownRunnerMng(params *ShutDownRunnerMngParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ShutDownRunnerMngCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewShutDownRunnerMngParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ShutDownRunnerMng",
+		Method:             "POST",
+		PathPattern:        "/v1/runners/{runner_id}/mng/shutdown",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ShutDownRunnerMngReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ShutDownRunnerMngCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ShutDownRunnerMng: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -8717,45 +8631,6 @@ func (a *Client) UpdateTerraformState(params *UpdateTerraformStateParams, authIn
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateTerraformState: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-UpdateVCSConnectionBranch updates a vcs connection branch for github
-*/
-func (a *Client) UpdateVCSConnectionBranch(params *UpdateVCSConnectionBranchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVCSConnectionBranchCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewUpdateVCSConnectionBranchParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "UpdateVCSConnectionBranch",
-		Method:             "PATCH",
-		PathPattern:        "/v1/vcs/connections/{connection_id}/branches/{connection_branch_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &UpdateVCSConnectionBranchReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*UpdateVCSConnectionBranchCreated)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for UpdateVCSConnectionBranch: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

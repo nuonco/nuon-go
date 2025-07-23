@@ -108,7 +108,6 @@ type Client interface {
 	CreateVCSConnectionCallback(ctx context.Context, req *models.ServiceCreateConnectionCallbackRequest) (*models.AppVCSConnection, error)
 	GetVCSConnections(ctx context.Context, query *models.GetPaginatedQuery) ([]*models.AppVCSConnection, bool, error)
 	GetVCSConnection(ctx context.Context, connID string) (*models.AppVCSConnection, error)
-	GetAllVCSConnectedRepos(ctx context.Context, query *models.GetPaginatedQuery) ([]*models.ServiceRepository, bool, error)
 
 	// installs
 	CreateInstall(ctx context.Context, appID string, req *models.ServiceCreateInstallRequest) (*models.AppInstall, error)

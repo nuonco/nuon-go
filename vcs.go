@@ -71,31 +71,3 @@ func (c *client) GetVCSConnection(ctx context.Context, connID string) (*models.A
 
 	return resp.Payload, nil
 }
-
-func (c *client) GetAllVCSConnectedRepos(ctx context.Context, query *models.GetPaginatedQuery) ([]*models.ServiceRepository, bool, error) {
-	params := &operations.GetAllVCSConnectedReposParams{
-		Context: ctx,
-	}
-
-	query = handlePaginationQuery(query)
-
-	if query != nil {
-		offset := int64(query.Offset)
-		limit := int64(query.Limit)
-		params.Offset = &offset
-		params.Limit = &limit
-		params.XNuonPaginationEnabled = &query.PaginationEnabled
-	}
-
-	resp, err := c.genClient.Operations.GetAllVCSConnectedRepos(params, c.getOrgIDAuthInfo())
-	if err != nil {
-		return nil, false, err
-	}
-
-	if query != nil {
-		items, hasMore := handlePagination(resp.Payload, int64(query.Offset), int64(query.Limit))
-		return items, hasMore, nil
-	}
-
-	return resp.Payload, false, nil
-}
