@@ -39,6 +39,9 @@ const (
 	// AppWorkflowStepApprovalTypeTerraformPlan captures enum value "terraform_plan"
 	AppWorkflowStepApprovalTypeTerraformPlan AppWorkflowStepApprovalType = "terraform_plan"
 
+	// AppWorkflowStepApprovalTypeKubernetesManifestApproval captures enum value "kubernetes_manifest_approval"
+	AppWorkflowStepApprovalTypeKubernetesManifestApproval AppWorkflowStepApprovalType = "kubernetes_manifest_approval"
+
 	// AppWorkflowStepApprovalTypeHelmApproval captures enum value "helm_approval"
 	AppWorkflowStepApprovalTypeHelmApproval AppWorkflowStepApprovalType = "helm_approval"
 )
@@ -48,7 +51,7 @@ var appWorkflowStepApprovalTypeEnum []interface{}
 
 func init() {
 	var res []AppWorkflowStepApprovalType
-	if err := json.Unmarshal([]byte(`["noop","approve-all","terraform_plan","helm_approval"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["noop","approve-all","terraform_plan","kubernetes_manifest_approval","helm_approval"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
