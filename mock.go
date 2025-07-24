@@ -754,22 +754,6 @@ func (mr *MockClientMockRecorder) GetAllInstalls(ctx, query interface{}) *gomock
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAllInstalls", reflect.TypeOf((*MockClient)(nil).GetAllInstalls), ctx, query)
 }
 
-// GetAllVCSConnectedRepos mocks base method.
-func (m *MockClient) GetAllVCSConnectedRepos(ctx context.Context, query *models.GetPaginatedQuery) ([]*models.ServiceRepository, bool, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetAllVCSConnectedRepos", ctx, query)
-	ret0, _ := ret[0].([]*models.ServiceRepository)
-	ret1, _ := ret[1].(bool)
-	ret2, _ := ret[2].(error)
-	return ret0, ret1, ret2
-}
-
-// GetAllVCSConnectedRepos indicates an expected call of GetAllVCSConnectedRepos.
-func (mr *MockClientMockRecorder) GetAllVCSConnectedRepos(ctx, query interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAllVCSConnectedRepos", reflect.TypeOf((*MockClient)(nil).GetAllVCSConnectedRepos), ctx, query)
-}
-
 // GetApp mocks base method.
 func (m *MockClient) GetApp(ctx context.Context, appID string) (*models.AppApp, error) {
 	m.ctrl.T.Helper()
