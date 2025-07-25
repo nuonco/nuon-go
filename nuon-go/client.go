@@ -120,6 +120,10 @@ type Client interface {
 	ReprovisionInstall(ctx context.Context, installID string) error
 	DeprovisionInstall(ctx context.Context, installID string) error
 
+	// install config
+	CreateInstallConfig(ctx context.Context, installID string, req *models.ServiceCreateInstallConfigRequest) (*models.AppInstallConfig, error)
+	UpdateInstallConfig(ctx context.Context, installID, configID string, req *models.ServiceUpdateInstallConfigRequest) (*models.AppInstallConfig, error)
+
 	// install deploys
 	GetInstallDeploys(ctx context.Context, installID string, query *models.GetPaginatedQuery) ([]*models.AppInstallDeploy, bool, error)
 	CreateInstallDeploy(ctx context.Context, installID string, req *models.ServiceCreateInstallDeployRequest) (*models.AppInstallDeploy, error)
