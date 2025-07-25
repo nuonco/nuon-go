@@ -74,3 +74,5 @@ You can also change the open api spec to generate against, by setting the `API_U
 ```bash
 $ NUON_API_URL=http://localhost:8081 go generate ./...
 ```
+
+
