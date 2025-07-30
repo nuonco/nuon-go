@@ -62,6 +62,9 @@ type AppApp struct {
 	// runner config
 	RunnerConfig *AppAppRunnerConfig `json:"runner_config,omitempty"`
 
+	// runner type
+	RunnerType string `json:"runner_type,omitempty"`
+
 	// sandbox config
 	SandboxConfig *AppAppSandboxConfig `json:"sandbox_config,omitempty"`
 

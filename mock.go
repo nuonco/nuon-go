@@ -349,6 +349,21 @@ func (mr *MockClientMockRecorder) CreateInstallActionWorkflowRun(ctx, installID,
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateInstallActionWorkflowRun", reflect.TypeOf((*MockClient)(nil).CreateInstallActionWorkflowRun), ctx, installID, req)
 }
 
+// CreateInstallConfig mocks base method.
+func (m *MockClient) CreateInstallConfig(ctx context.Context, installID string, req *models.ServiceCreateInstallConfigRequest) (*models.AppInstallConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateInstallConfig", ctx, installID, req)
+	ret0, _ := ret[0].(*models.AppInstallConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateInstallConfig indicates an expected call of CreateInstallConfig.
+func (mr *MockClientMockRecorder) CreateInstallConfig(ctx, installID, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateInstallConfig", reflect.TypeOf((*MockClient)(nil).CreateInstallConfig), ctx, installID, req)
+}
+
 // CreateInstallDeploy mocks base method.
 func (m *MockClient) CreateInstallDeploy(ctx context.Context, installID string, req *models.ServiceCreateInstallDeployRequest) (*models.AppInstallDeploy, error) {
 	m.ctrl.T.Helper()
@@ -1834,6 +1849,21 @@ func (m *MockClient) UpdateInstall(ctx context.Context, installID string, req *m
 func (mr *MockClientMockRecorder) UpdateInstall(ctx, installID, req interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateInstall", reflect.TypeOf((*MockClient)(nil).UpdateInstall), ctx, installID, req)
+}
+
+// UpdateInstallConfig mocks base method.
+func (m *MockClient) UpdateInstallConfig(ctx context.Context, installID, configID string, req *models.ServiceUpdateInstallConfigRequest) (*models.AppInstallConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateInstallConfig", ctx, installID, configID, req)
+	ret0, _ := ret[0].(*models.AppInstallConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateInstallConfig indicates an expected call of UpdateInstallConfig.
+func (mr *MockClientMockRecorder) UpdateInstallConfig(ctx, installID, configID, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateInstallConfig", reflect.TypeOf((*MockClient)(nil).UpdateInstallConfig), ctx, installID, configID, req)
 }
 
 // UpdateInstallInputs mocks base method.

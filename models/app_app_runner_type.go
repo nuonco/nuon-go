@@ -30,6 +30,9 @@ func (m AppAppRunnerType) Pointer() *AppAppRunnerType {
 
 const (
 
+	// AppAppRunnerTypeUnknown captures enum value "unknown"
+	AppAppRunnerTypeUnknown AppAppRunnerType = "unknown"
+
 	// AppAppRunnerTypeAwsDashEcs captures enum value "aws-ecs"
 	AppAppRunnerTypeAwsDashEcs AppAppRunnerType = "aws-ecs"
 
@@ -57,7 +60,7 @@ var appAppRunnerTypeEnum []interface{}
 
 func init() {
 	var res []AppAppRunnerType
-	if err := json.Unmarshal([]byte(`["aws-ecs","aws-eks","azure-aks","azure-acs","local","aws","azure"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["unknown","aws-ecs","aws-eks","azure-aks","azure-acs","local","aws","azure"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

@@ -18,9 +18,6 @@ import (
 // swagger:model app.WorkflowStepApproval
 type AppWorkflowStepApproval struct {
 
-	// contents
-	Contents string `json:"contents,omitempty"`
-
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
