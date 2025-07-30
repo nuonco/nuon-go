@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // ServiceCreateAppBranchRequest service create app branch request
@@ -17,12 +19,53 @@ import (
 // swagger:model service.CreateAppBranchRequest
 type ServiceCreateAppBranchRequest struct {
 
-	// vcs connection branch id
-	VcsConnectionBranchID string `json:"vcs_connection_branch_id,omitempty"`
+	// connected github vcs config id
+	// Required: true
+	ConnectedGithubVcsConfigID *string `json:"connected_github_vcs_config_id"`
+
+	// name
+	// Required: true
+	// Min Length: 1
+	Name *string `json:"name"`
 }
 
 // Validate validates this service create app branch request
 func (m *ServiceCreateAppBranchRequest) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateConnectedGithubVcsConfigID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ServiceCreateAppBranchRequest) validateConnectedGithubVcsConfigID(formats strfmt.Registry) error {
+
+	if err := validate.Required("connected_github_vcs_config_id", "body", m.ConnectedGithubVcsConfigID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ServiceCreateAppBranchRequest) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	if err := validate.MinLength("name", "body", *m.Name, 1); err != nil {
+		return err
+	}
+
 	return nil
 }
 

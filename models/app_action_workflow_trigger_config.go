@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -25,6 +26,9 @@ type AppActionWorkflowTriggerConfig struct {
 
 	// app id
 	AppID string `json:"app_id,omitempty"`
+
+	// component
+	Component *AppComponent `json:"component,omitempty"`
 
 	// component id
 	ComponentID string `json:"component_id,omitempty"`
@@ -50,11 +54,69 @@ type AppActionWorkflowTriggerConfig struct {
 
 // Validate validates this app action workflow trigger config
 func (m *AppActionWorkflowTriggerConfig) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateComponent(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this app action workflow trigger config based on context it is used
+func (m *AppActionWorkflowTriggerConfig) validateComponent(formats strfmt.Registry) error {
+	if swag.IsZero(m.Component) { // not required
+		return nil
+	}
+
+	if m.Component != nil {
+		if err := m.Component.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("component")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("component")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this app action workflow trigger config based on the context it is used
 func (m *AppActionWorkflowTriggerConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateComponent(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *AppActionWorkflowTriggerConfig) contextValidateComponent(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Component != nil {
+
+		if swag.IsZero(m.Component) { // not required
+			return nil
+		}
+
+		if err := m.Component.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("component")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("component")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

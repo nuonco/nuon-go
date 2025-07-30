@@ -77,6 +77,9 @@ type AppWorkflowStep struct {
 	// retryable
 	Retryable bool `json:"retryable,omitempty"`
 
+	// skippable
+	Skippable bool `json:"skippable,omitempty"`
+
 	// started at
 	StartedAt string `json:"started_at,omitempty"`
 

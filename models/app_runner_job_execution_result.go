@@ -23,6 +23,12 @@ type AppRunnerJobExecutionResult struct {
 	// contents display
 	ContentsDisplay string `json:"contents_display,omitempty"`
 
+	// contents display gzip
+	ContentsDisplayGzip string `json:"contents_display_gzip,omitempty"`
+
+	// columns for storage of gzipped contents and plans
+	ContentsGzip string `json:"contents_gzip,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 

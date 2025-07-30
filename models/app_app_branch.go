@@ -22,6 +22,9 @@ type AppAppBranch struct {
 	// app id
 	AppID string `json:"app_id,omitempty"`
 
+	// connected github vcs config id
+	ConnectedGithubVcsConfigID string `json:"connected_github_vcs_config_id,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
@@ -30,6 +33,9 @@ type AppAppBranch struct {
 
 	// id
 	ID string `json:"id,omitempty"`
+
+	// name
+	Name string `json:"name,omitempty"`
 
 	// org id
 	OrgID string `json:"org_id,omitempty"`

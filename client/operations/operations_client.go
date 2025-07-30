@@ -266,8 +266,6 @@ type ClientService interface {
 
 	GetInstallDeploy(params *GetInstallDeployParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallDeployOK, error)
 
-	GetInstallDeployPlan(params *GetInstallDeployPlanParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallDeployPlanOK, error)
-
 	GetInstallDeploys(params *GetInstallDeploysParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallDeploysOK, error)
 
 	GetInstallEvent(params *GetInstallEventParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallEventOK, error)
@@ -381,6 +379,8 @@ type ClientService interface {
 	GetWorkflowStep(params *GetWorkflowStepParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowStepOK, error)
 
 	GetWorkflowStepApproval(params *GetWorkflowStepApprovalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowStepApprovalOK, error)
+
+	GetWorkflowStepApprovalContents(params *GetWorkflowStepApprovalContentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowStepApprovalContentsOK, error)
 
 	GetWorkflowSteps(params *GetWorkflowStepsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowStepsOK, error)
 
@@ -5162,45 +5162,6 @@ func (a *Client) GetInstallDeploy(params *GetInstallDeployParams, authInfo runti
 }
 
 /*
-GetInstallDeployPlan gets install deploy plan
-*/
-func (a *Client) GetInstallDeployPlan(params *GetInstallDeployPlanParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallDeployPlanOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetInstallDeployPlanParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetInstallDeployPlan",
-		Method:             "GET",
-		PathPattern:        "/v1/installs/{install_id}/deploys/{deploy_id}/plan",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetInstallDeployPlanReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetInstallDeployPlanOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetInstallDeployPlan: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 GetInstallDeploys gets all deploys to an install
 */
 func (a *Client) GetInstallDeploys(params *GetInstallDeploysParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallDeploysOK, error) {
@@ -7481,6 +7442,47 @@ func (a *Client) GetWorkflowStepApproval(params *GetWorkflowStepApprovalParams, 
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetWorkflowStepApproval: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetWorkflowStepApprovalContents gets a workflow step approval contents
+
+Return the contents of a json plan for an approval (compressed).
+*/
+func (a *Client) GetWorkflowStepApprovalContents(params *GetWorkflowStepApprovalContentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowStepApprovalContentsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetWorkflowStepApprovalContentsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetWorkflowStepApprovalContents",
+		Method:             "GET",
+		PathPattern:        "/v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/contents",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetWorkflowStepApprovalContentsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetWorkflowStepApprovalContentsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetWorkflowStepApprovalContents: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

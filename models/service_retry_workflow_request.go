@@ -18,7 +18,7 @@ import (
 type ServiceRetryWorkflowRequest struct {
 
 	// Retry indicates whether to retry the current step or not
-	Retry bool `json:"retry,omitempty"`
+	Operation string `json:"operation,omitempty"`
 
 	// StepID is the ID of the step to start the retry from
 	StepID string `json:"step_id,omitempty"`

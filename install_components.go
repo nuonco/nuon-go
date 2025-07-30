@@ -86,19 +86,6 @@ func (c *client) GetInstallComponentLatestDeploy(ctx context.Context, installID 
 	return resp.Payload, nil
 }
 
-func (c *client) GetInstallDeployPlan(ctx context.Context, installID string, deployID string) (*models.Planv1Plan, error) {
-	resp, err := c.genClient.Operations.GetInstallDeployPlan(&operations.GetInstallDeployPlanParams{
-		Context:   ctx,
-		InstallID: installID,
-		DeployID:  deployID,
-	}, c.getOrgIDAuthInfo())
-	if err != nil {
-		return nil, err
-	}
-
-	return resp.Payload, nil
-}
-
 func (c *client) TeardownInstallComponent(ctx context.Context, installID, componentID string) error {
 	resp, err := c.genClient.Operations.TeardownInstallComponent(&operations.TeardownInstallComponentParams{
 		InstallID:   installID,

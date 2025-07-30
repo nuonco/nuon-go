@@ -37,6 +37,9 @@ type AppInstall struct {
 	// azure account
 	AzureAccount *AppAzureAccount `json:"azure_account,omitempty"`
 
+	// cloud platform
+	CloudPlatform string `json:"cloud_platform,omitempty"`
+
 	// component statuses
 	ComponentStatuses map[string]string `json:"component_statuses,omitempty"`
 
@@ -93,6 +96,9 @@ type AppInstall struct {
 
 	// runner status description
 	RunnerStatusDescription string `json:"runner_status_description,omitempty"`
+
+	// runner type
+	RunnerType string `json:"runner_type,omitempty"`
 
 	// sandbox
 	Sandbox *AppInstallSandbox `json:"sandbox,omitempty"`
