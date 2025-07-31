@@ -19,7 +19,7 @@ import (
 type ServiceUpdateInstallConfigRequest struct {
 
 	// approval option
-	ApprovalOption AppInstallApprovalOption `json:"approvalOption,omitempty"`
+	ApprovalOption AppInstallApprovalOption `json:"approval_option,omitempty"`
 }
 
 // Validate validates this service update install config request
@@ -43,9 +43,9 @@ func (m *ServiceUpdateInstallConfigRequest) validateApprovalOption(formats strfm
 
 	if err := m.ApprovalOption.Validate(formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("approvalOption")
+			return ve.ValidateName("approval_option")
 		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("approvalOption")
+			return ce.ValidateName("approval_option")
 		}
 		return err
 	}
@@ -75,9 +75,9 @@ func (m *ServiceUpdateInstallConfigRequest) contextValidateApprovalOption(ctx co
 
 	if err := m.ApprovalOption.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("approvalOption")
+			return ve.ValidateName("approval_option")
 		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("approvalOption")
+			return ce.ValidateName("approval_option")
 		}
 		return err
 	}
