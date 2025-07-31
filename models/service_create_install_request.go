@@ -28,6 +28,9 @@ type ServiceCreateInstallRequest struct {
 	// inputs
 	Inputs map[string]string `json:"inputs,omitempty"`
 
+	// install config
+	InstallConfig *HelpersCreateInstallConfigParams `json:"install_config,omitempty"`
+
 	// name
 	// Required: true
 	Name *string `json:"name"`
@@ -42,6 +45,10 @@ func (m *ServiceCreateInstallRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateAzureAccount(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInstallConfig(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -93,6 +100,25 @@ func (m *ServiceCreateInstallRequest) validateAzureAccount(formats strfmt.Regist
 	return nil
 }
 
+func (m *ServiceCreateInstallRequest) validateInstallConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.InstallConfig) { // not required
+		return nil
+	}
+
+	if m.InstallConfig != nil {
+		if err := m.InstallConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("install_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("install_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *ServiceCreateInstallRequest) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
@@ -111,6 +137,10 @@ func (m *ServiceCreateInstallRequest) ContextValidate(ctx context.Context, forma
 	}
 
 	if err := m.contextValidateAzureAccount(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateInstallConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -154,6 +184,27 @@ func (m *ServiceCreateInstallRequest) contextValidateAzureAccount(ctx context.Co
 				return ve.ValidateName("azure_account")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("azure_account")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ServiceCreateInstallRequest) contextValidateInstallConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.InstallConfig != nil {
+
+		if swag.IsZero(m.InstallConfig) { // not required
+			return nil
+		}
+
+		if err := m.InstallConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("install_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("install_config")
 			}
 			return err
 		}

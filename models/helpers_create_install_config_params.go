@@ -13,17 +13,17 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ServiceCreateInstallConfigRequest service create install config request
+// HelpersCreateInstallConfigParams helpers create install config params
 //
-// swagger:model service.CreateInstallConfigRequest
-type ServiceCreateInstallConfigRequest struct {
+// swagger:model helpers.CreateInstallConfigParams
+type HelpersCreateInstallConfigParams struct {
 
 	// approval option
 	ApprovalOption AppInstallApprovalOption `json:"approval_option,omitempty"`
 }
 
-// Validate validates this service create install config request
-func (m *ServiceCreateInstallConfigRequest) Validate(formats strfmt.Registry) error {
+// Validate validates this helpers create install config params
+func (m *HelpersCreateInstallConfigParams) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateApprovalOption(formats); err != nil {
@@ -36,7 +36,7 @@ func (m *ServiceCreateInstallConfigRequest) Validate(formats strfmt.Registry) er
 	return nil
 }
 
-func (m *ServiceCreateInstallConfigRequest) validateApprovalOption(formats strfmt.Registry) error {
+func (m *HelpersCreateInstallConfigParams) validateApprovalOption(formats strfmt.Registry) error {
 	if swag.IsZero(m.ApprovalOption) { // not required
 		return nil
 	}
@@ -53,8 +53,8 @@ func (m *ServiceCreateInstallConfigRequest) validateApprovalOption(formats strfm
 	return nil
 }
 
-// ContextValidate validate this service create install config request based on the context it is used
-func (m *ServiceCreateInstallConfigRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this helpers create install config params based on the context it is used
+func (m *HelpersCreateInstallConfigParams) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateApprovalOption(ctx, formats); err != nil {
@@ -67,7 +67,7 @@ func (m *ServiceCreateInstallConfigRequest) ContextValidate(ctx context.Context,
 	return nil
 }
 
-func (m *ServiceCreateInstallConfigRequest) contextValidateApprovalOption(ctx context.Context, formats strfmt.Registry) error {
+func (m *HelpersCreateInstallConfigParams) contextValidateApprovalOption(ctx context.Context, formats strfmt.Registry) error {
 
 	if swag.IsZero(m.ApprovalOption) { // not required
 		return nil
@@ -86,7 +86,7 @@ func (m *ServiceCreateInstallConfigRequest) contextValidateApprovalOption(ctx co
 }
 
 // MarshalBinary interface implementation
-func (m *ServiceCreateInstallConfigRequest) MarshalBinary() ([]byte, error) {
+func (m *HelpersCreateInstallConfigParams) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -94,8 +94,8 @@ func (m *ServiceCreateInstallConfigRequest) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *ServiceCreateInstallConfigRequest) UnmarshalBinary(b []byte) error {
-	var res ServiceCreateInstallConfigRequest
+func (m *HelpersCreateInstallConfigParams) UnmarshalBinary(b []byte) error {
+	var res HelpersCreateInstallConfigParams
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
