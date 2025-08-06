@@ -75,7 +75,7 @@ GetWorkflowStepOK describes a response with status code 200, with default header
 OK
 */
 type GetWorkflowStepOK struct {
-	Payload []*models.AppWorkflowStep
+	Payload *models.AppWorkflowStep
 }
 
 // IsSuccess returns true when this get workflow step o k response has a 2xx status code
@@ -116,14 +116,16 @@ func (o *GetWorkflowStepOK) String() string {
 	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}][%d] getWorkflowStepOK  %+v", 200, o.Payload)
 }
 
-func (o *GetWorkflowStepOK) GetPayload() []*models.AppWorkflowStep {
+func (o *GetWorkflowStepOK) GetPayload() *models.AppWorkflowStep {
 	return o.Payload
 }
 
 func (o *GetWorkflowStepOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	o.Payload = new(models.AppWorkflowStep)
+
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

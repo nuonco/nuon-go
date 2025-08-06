@@ -44,13 +44,19 @@ type AppWorkflowStep struct {
 	// finished at
 	FinishedAt string `json:"finished_at,omitempty"`
 
+	// to group steps which belong to same logical group, eg, plan/apply
+	GroupIdx int64 `json:"group_idx,omitempty"`
+
+	// counter for every retry attempted on a group
+	GroupRetryIdx int64 `json:"group_retry_idx,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
 	// idx
 	Idx int64 `json:"idx,omitempty"`
 
-	// install workflow id
+	// DEPRECATED: this is the install workflow ID, which is now the workflow ID.
 	InstallWorkflowID string `json:"install_workflow_id,omitempty"`
 
 	// links
@@ -104,6 +110,9 @@ type AppWorkflowStep struct {
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
+
+	// Fields that are de-nested at read time using AfterQuery
+	WorkflowID string `json:"workflow_id,omitempty"`
 }
 
 // Validate validates this app workflow step

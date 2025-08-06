@@ -28,6 +28,9 @@ type ServiceCreateAppRunnerConfigRequest struct {
 	// helm driver
 	HelmDriver AppAppRunnerConfigHelmDriverType `json:"helm_driver,omitempty"`
 
+	// init script url
+	InitScriptURL string `json:"init_script_url,omitempty"`
+
 	// type
 	// Required: true
 	Type *AppAppRunnerType `json:"type"`

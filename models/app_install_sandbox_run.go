@@ -69,6 +69,12 @@ type AppInstallSandboxRun struct {
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
+
+	// workflow
+	Workflow *AppWorkflow `json:"workflow,omitempty"`
+
+	// Fields that are de-nested at read time using AfterQuery
+	WorkflowID string `json:"workflow_id,omitempty"`
 }
 
 // Validate validates this app install sandbox run
@@ -100,6 +106,10 @@ func (m *AppInstallSandboxRun) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateStatusV2(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateWorkflow(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -254,6 +264,25 @@ func (m *AppInstallSandboxRun) validateStatusV2(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppInstallSandboxRun) validateWorkflow(formats strfmt.Registry) error {
+	if swag.IsZero(m.Workflow) { // not required
+		return nil
+	}
+
+	if m.Workflow != nil {
+		if err := m.Workflow.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("workflow")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("workflow")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app install sandbox run based on the context it is used
 func (m *AppInstallSandboxRun) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -283,6 +312,10 @@ func (m *AppInstallSandboxRun) ContextValidate(ctx context.Context, formats strf
 	}
 
 	if err := m.contextValidateStatusV2(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateWorkflow(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -436,6 +469,27 @@ func (m *AppInstallSandboxRun) contextValidateStatusV2(ctx context.Context, form
 				return ve.ValidateName("status_v2")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("status_v2")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppInstallSandboxRun) contextValidateWorkflow(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Workflow != nil {
+
+		if swag.IsZero(m.Workflow) { // not required
+			return nil
+		}
+
+		if err := m.Workflow.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("workflow")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("workflow")
 			}
 			return err
 		}

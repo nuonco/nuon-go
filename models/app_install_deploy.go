@@ -58,7 +58,7 @@ type AppInstallDeploy struct {
 	// Fields that are de-nested at read time using AfterQuery
 	InstallID string `json:"install_id,omitempty"`
 
-	// install workflow id
+	// DEPRECATED: use WorkflowID
 	InstallWorkflowID string `json:"install_workflow_id,omitempty"`
 
 	// log stream
@@ -87,6 +87,12 @@ type AppInstallDeploy struct {
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
+
+	// workflow
+	Workflow *AppWorkflow `json:"workflow,omitempty"`
+
+	// workflow id
+	WorkflowID string `json:"workflow_id,omitempty"`
 }
 
 // Validate validates this app install deploy
@@ -122,6 +128,10 @@ func (m *AppInstallDeploy) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateStatusV2(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateWorkflow(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -295,6 +305,25 @@ func (m *AppInstallDeploy) validateStatusV2(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppInstallDeploy) validateWorkflow(formats strfmt.Registry) error {
+	if swag.IsZero(m.Workflow) { // not required
+		return nil
+	}
+
+	if m.Workflow != nil {
+		if err := m.Workflow.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("workflow")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("workflow")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app install deploy based on the context it is used
 func (m *AppInstallDeploy) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -328,6 +357,10 @@ func (m *AppInstallDeploy) ContextValidate(ctx context.Context, formats strfmt.R
 	}
 
 	if err := m.contextValidateStatusV2(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateWorkflow(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -502,6 +535,27 @@ func (m *AppInstallDeploy) contextValidateStatusV2(ctx context.Context, formats 
 				return ve.ValidateName("status_v2")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("status_v2")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AppInstallDeploy) contextValidateWorkflow(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Workflow != nil {
+
+		if swag.IsZero(m.Workflow) { // not required
+			return nil
+		}
+
+		if err := m.Workflow.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("workflow")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("workflow")
 			}
 			return err
 		}

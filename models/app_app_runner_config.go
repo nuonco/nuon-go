@@ -45,6 +45,9 @@ type AppAppRunnerConfig struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// takes a URL to a bash script ⤵  which will be `curl | bash`-ed on the VM. usually via user-data or equivalent.
+	InitScript string `json:"init_script,omitempty"`
+
 	// org id
 	OrgID string `json:"org_id,omitempty"`
 
