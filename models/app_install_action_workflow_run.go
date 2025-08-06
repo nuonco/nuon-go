@@ -34,7 +34,7 @@ type AppInstallActionWorkflowRun struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
-	// execution time
+	// after query
 	ExecutionTime int64 `json:"execution_time,omitempty"`
 
 	// id
@@ -87,6 +87,12 @@ type AppInstallActionWorkflowRun struct {
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
+
+	// workflow
+	Workflow *AppWorkflow `json:"workflow,omitempty"`
+
+	// workflow id
+	WorkflowID string `json:"workflow_id,omitempty"`
 }
 
 // Validate validates this app install action workflow run
@@ -122,6 +128,10 @@ func (m *AppInstallActionWorkflowRun) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateTriggerType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateWorkflow(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -288,6 +298,25 @@ func (m *AppInstallActionWorkflowRun) validateTriggerType(formats strfmt.Registr
 	return nil
 }
 
+func (m *AppInstallActionWorkflowRun) validateWorkflow(formats strfmt.Registry) error {
+	if swag.IsZero(m.Workflow) { // not required
+		return nil
+	}
+
+	if m.Workflow != nil {
+		if err := m.Workflow.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("workflow")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("workflow")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app install action workflow run based on the context it is used
 func (m *AppInstallActionWorkflowRun) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -321,6 +350,10 @@ func (m *AppInstallActionWorkflowRun) ContextValidate(ctx context.Context, forma
 	}
 
 	if err := m.contextValidateTriggerType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateWorkflow(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -494,6 +527,27 @@ func (m *AppInstallActionWorkflowRun) contextValidateTriggerType(ctx context.Con
 			return ce.ValidateName("trigger_type")
 		}
 		return err
+	}
+
+	return nil
+}
+
+func (m *AppInstallActionWorkflowRun) contextValidateWorkflow(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Workflow != nil {
+
+		if swag.IsZero(m.Workflow) { // not required
+			return nil
+		}
+
+		if err := m.Workflow.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("workflow")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("workflow")
+			}
+			return err
+		}
 	}
 
 	return nil

@@ -404,6 +404,8 @@ type ClientService interface {
 
 	ReprovisionInstallSandbox(params *ReprovisionInstallSandboxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReprovisionInstallSandboxCreated, error)
 
+	RetryOwnerWorkflowByID(params *RetryOwnerWorkflowByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RetryOwnerWorkflowByIDCreated, error)
+
 	RetryWorkflow(params *RetryWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RetryWorkflowCreated, error)
 
 	ShutDownRunnerMng(params *ShutDownRunnerMngParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ShutDownRunnerMngCreated, error)
@@ -7929,6 +7931,45 @@ func (a *Client) ReprovisionInstallSandbox(params *ReprovisionInstallSandboxPara
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for ReprovisionInstallSandbox: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+RetryOwnerWorkflowByID reruns the workflow steps starting from input step id can be used to retry a failed step
+*/
+func (a *Client) RetryOwnerWorkflowByID(params *RetryOwnerWorkflowByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RetryOwnerWorkflowByIDCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewRetryOwnerWorkflowByIDParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "RetryOwnerWorkflowByID",
+		Method:             "POST",
+		PathPattern:        "/v1/workflows/{workflow_id}/retry",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &RetryOwnerWorkflowByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*RetryOwnerWorkflowByIDCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for RetryOwnerWorkflowByID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

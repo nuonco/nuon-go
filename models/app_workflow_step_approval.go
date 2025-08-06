@@ -55,6 +55,12 @@ type AppWorkflowStepApproval struct {
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
+
+	// workflow step
+	WorkflowStep *AppWorkflowStep `json:"workflow_step,omitempty"`
+
+	// afterquery
+	WorkflowStepID string `json:"workflow_step_id,omitempty"`
 }
 
 // Validate validates this app workflow step approval
@@ -74,6 +80,10 @@ func (m *AppWorkflowStepApproval) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateWorkflowStep(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -146,6 +156,25 @@ func (m *AppWorkflowStepApproval) validateType(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppWorkflowStepApproval) validateWorkflowStep(formats strfmt.Registry) error {
+	if swag.IsZero(m.WorkflowStep) { // not required
+		return nil
+	}
+
+	if m.WorkflowStep != nil {
+		if err := m.WorkflowStep.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("workflow_step")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("workflow_step")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app workflow step approval based on the context it is used
 func (m *AppWorkflowStepApproval) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -163,6 +192,10 @@ func (m *AppWorkflowStepApproval) ContextValidate(ctx context.Context, formats s
 	}
 
 	if err := m.contextValidateType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateWorkflowStep(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -232,6 +265,27 @@ func (m *AppWorkflowStepApproval) contextValidateType(ctx context.Context, forma
 			return ce.ValidateName("type")
 		}
 		return err
+	}
+
+	return nil
+}
+
+func (m *AppWorkflowStepApproval) contextValidateWorkflowStep(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.WorkflowStep != nil {
+
+		if swag.IsZero(m.WorkflowStep) { // not required
+			return nil
+		}
+
+		if err := m.WorkflowStep.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("workflow_step")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("workflow_step")
+			}
+			return err
+		}
 	}
 
 	return nil
