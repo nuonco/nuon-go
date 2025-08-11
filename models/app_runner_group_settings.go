@@ -23,6 +23,9 @@ type AppRunnerGroupSettings struct {
 	// aws runner specifics runner-v2
 	AwsInstanceType string `json:"aws_instance_type,omitempty"`
 
+	// Default: 7 days
+	AwsMaxInstanceLifetime int64 `json:"aws_max_instance_lifetime,omitempty"`
+
 	// aws tags
 	AwsTags map[string]string `json:"aws_tags,omitempty"`
 

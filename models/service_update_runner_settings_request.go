@@ -8,14 +8,21 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // ServiceUpdateRunnerSettingsRequest service update runner settings request
 //
 // swagger:model service.UpdateRunnerSettingsRequest
 type ServiceUpdateRunnerSettingsRequest struct {
+
+	// aws max instance lifetime
+	// Maximum: 3.1536e+07
+	// Minimum: 86400
+	AwsMaxInstanceLifetime int64 `json:"aws_max_instance_lifetime,omitempty"`
 
 	// container image tag
 	ContainerImageTag string `json:"container_image_tag,omitempty"`
@@ -35,6 +42,31 @@ type ServiceUpdateRunnerSettingsRequest struct {
 
 // Validate validates this service update runner settings request
 func (m *ServiceUpdateRunnerSettingsRequest) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateAwsMaxInstanceLifetime(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ServiceUpdateRunnerSettingsRequest) validateAwsMaxInstanceLifetime(formats strfmt.Registry) error {
+	if swag.IsZero(m.AwsMaxInstanceLifetime) { // not required
+		return nil
+	}
+
+	if err := validate.MinimumInt("aws_max_instance_lifetime", "body", m.AwsMaxInstanceLifetime, 86400, false); err != nil {
+		return err
+	}
+
+	if err := validate.MaximumInt("aws_max_instance_lifetime", "body", m.AwsMaxInstanceLifetime, 3.1536e+07, false); err != nil {
+		return err
+	}
+
 	return nil
 }
 
