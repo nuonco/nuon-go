@@ -17,6 +17,12 @@ import (
 // swagger:model app.AzureStackOutputs
 type AppAzureStackOutputs struct {
 
+	// key vault id
+	KeyVaultID string `json:"key_vault_id,omitempty"`
+
+	// key vault name
+	KeyVaultName string `json:"key_vault_name,omitempty"`
+
 	// network id
 	NetworkID string `json:"network_id,omitempty"`
 
