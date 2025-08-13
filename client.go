@@ -117,6 +117,7 @@ type Client interface {
 	GetInstall(ctx context.Context, installID string) (*models.AppInstall, error)
 	UpdateInstall(ctx context.Context, installID string, req *models.ServiceUpdateInstallRequest) (*models.AppInstall, error)
 	DeleteInstall(ctx context.Context, installID string) (bool, error)
+	ForgetInstall(ctx context.Context, installID string) (bool, error)
 	ReprovisionInstall(ctx context.Context, installID string) error
 	DeprovisionInstall(ctx context.Context, installID string) error
 

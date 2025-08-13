@@ -116,6 +116,18 @@ func (c *client) DeleteInstall(ctx context.Context, installID string) (bool, err
 	return resp.IsSuccess(), nil
 }
 
+func (c *client) ForgetInstall(ctx context.Context, installID string) (bool, error) {
+	resp, err := c.genClient.Operations.ForgetInstall(&operations.ForgetInstallParams{
+		InstallID: installID,
+		Context:   ctx,
+	}, c.getOrgIDAuthInfo())
+	if err != nil {
+		return false, err
+	}
+
+	return resp.IsSuccess(), nil
+}
+
 func (c *client) ReprovisionInstall(ctx context.Context, installID string) error {
 	resp, err := c.genClient.Operations.ReprovisionInstall(&operations.ReprovisionInstallParams{
 		InstallID: installID,
