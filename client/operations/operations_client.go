@@ -5768,7 +5768,7 @@ func (a *Client) GetInstallWorkflowStep(params *GetInstallWorkflowStepParams, au
 }
 
 /*
-GetInstallWorkflowStepApproval gets an install workflow step
+GetInstallWorkflowStepApproval gets an install workflow step approval
 */
 func (a *Client) GetInstallWorkflowStepApproval(params *GetInstallWorkflowStepApprovalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallWorkflowStepApprovalOK, error) {
 	// TODO: Validate the params before sending
@@ -7409,7 +7409,7 @@ func (a *Client) GetWorkflowStep(params *GetWorkflowStepParams, authInfo runtime
 }
 
 /*
-GetWorkflowStepApproval gets an workflow step
+GetWorkflowStepApproval gets an workflow step approval
 */
 func (a *Client) GetWorkflowStepApproval(params *GetWorkflowStepApprovalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowStepApprovalOK, error) {
 	// TODO: Validate the params before sending
