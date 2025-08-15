@@ -135,7 +135,7 @@ type Client interface {
 	GetInstallComponents(ctx context.Context, installID string, query *models.GetPaginatedQuery) ([]*models.AppInstallComponent, bool, error)
 	TeardownInstallComponent(ctx context.Context, installID, componentID string) error
 	TeardownInstallComponents(ctx context.Context, installID string) error
-	DeployInstallComponents(ctx context.Context, installID string) error
+	DeployInstallComponents(ctx context.Context, installID string, planOnly bool) error
 	GetInstallComponentDeploys(ctx context.Context, installID, componentID string, query *models.GetPaginatedQuery) ([]*models.AppInstallDeploy, bool, error)
 	GetInstallComponentLatestDeploy(ctx context.Context, installID, componentID string) (*models.AppInstallDeploy, error)
 

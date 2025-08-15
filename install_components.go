@@ -123,10 +123,13 @@ func (c *client) TeardownInstallComponents(ctx context.Context, installID string
 	return nil
 }
 
-func (c *client) DeployInstallComponents(ctx context.Context, installID string) error {
+func (c *client) DeployInstallComponents(ctx context.Context, installID string, planOnly bool) error {
 	resp, err := c.genClient.Operations.DeployInstallComponents(&operations.DeployInstallComponentsParams{
 		InstallID: installID,
 		Context:   ctx,
+		Req: &models.ServiceDeployInstallComponentsRequest{
+			PlanOnly: planOnly,
+		},
 	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return err
