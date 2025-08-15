@@ -127,6 +127,9 @@ func (c *client) DeployInstallComponents(ctx context.Context, installID string) 
 	resp, err := c.genClient.Operations.DeployInstallComponents(&operations.DeployInstallComponentsParams{
 		InstallID: installID,
 		Context:   ctx,
+		Req: &models.ServiceDeployInstallComponentsRequest{
+			PlanOnly: false,
+		},
 	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return err
