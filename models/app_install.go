@@ -82,6 +82,9 @@ type AppInstall struct {
 	// install stack
 	InstallStack *AppInstallStack `json:"install_stack,omitempty"`
 
+	// install states
+	InstallStates []*AppInstallState `json:"install_states"`
+
 	// links
 	Links interface{} `json:"links,omitempty"`
 
@@ -167,6 +170,10 @@ func (m *AppInstall) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateInstallStack(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInstallStates(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -428,6 +435,32 @@ func (m *AppInstall) validateInstallStack(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppInstall) validateInstallStates(formats strfmt.Registry) error {
+	if swag.IsZero(m.InstallStates) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.InstallStates); i++ {
+		if swag.IsZero(m.InstallStates[i]) { // not required
+			continue
+		}
+
+		if m.InstallStates[i] != nil {
+			if err := m.InstallStates[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("install_states" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("install_states" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *AppInstall) validateSandbox(formats strfmt.Registry) error {
 	if swag.IsZero(m.Sandbox) { // not required
 		return nil
@@ -518,6 +551,10 @@ func (m *AppInstall) ContextValidate(ctx context.Context, formats strfmt.Registr
 	}
 
 	if err := m.contextValidateInstallStack(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateInstallStates(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -781,6 +818,31 @@ func (m *AppInstall) contextValidateInstallStack(ctx context.Context, formats st
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *AppInstall) contextValidateInstallStates(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.InstallStates); i++ {
+
+		if m.InstallStates[i] != nil {
+
+			if swag.IsZero(m.InstallStates[i]) { // not required
+				return nil
+			}
+
+			if err := m.InstallStates[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("install_states" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("install_states" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
