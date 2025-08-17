@@ -1,6 +1,6 @@
 # nuon-go
 
-An interface for working with our API from go.
+An interface for working with our API from go programs.
 
 ## Overview
 
