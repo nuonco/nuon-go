@@ -17,6 +17,9 @@ import (
 // swagger:model app.InstallState
 type AppInstallState struct {
 
+	// archived
+	Archived bool `json:"archived,omitempty"`
+
 	// contents
 	Contents string `json:"contents,omitempty"`
 
