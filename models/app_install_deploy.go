@@ -70,6 +70,9 @@ type AppInstallDeploy struct {
 	// outputs
 	Outputs interface{} `json:"outputs,omitempty"`
 
+	// plan only
+	PlanOnly bool `json:"plan_only,omitempty"`
+
 	// release id
 	ReleaseID string `json:"release_id,omitempty"`
 

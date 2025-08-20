@@ -31,6 +31,9 @@ type ServiceCreateInstallRequest struct {
 	// install config
 	InstallConfig *HelpersCreateInstallConfigParams `json:"install_config,omitempty"`
 
+	// metadata
+	Metadata *HelpersInstallMetadata `json:"metadata,omitempty"`
+
 	// name
 	// Required: true
 	Name *string `json:"name"`
@@ -49,6 +52,10 @@ func (m *ServiceCreateInstallRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateInstallConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMetadata(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -119,6 +126,25 @@ func (m *ServiceCreateInstallRequest) validateInstallConfig(formats strfmt.Regis
 	return nil
 }
 
+func (m *ServiceCreateInstallRequest) validateMetadata(formats strfmt.Registry) error {
+	if swag.IsZero(m.Metadata) { // not required
+		return nil
+	}
+
+	if m.Metadata != nil {
+		if err := m.Metadata.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("metadata")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metadata")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *ServiceCreateInstallRequest) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
@@ -141,6 +167,10 @@ func (m *ServiceCreateInstallRequest) ContextValidate(ctx context.Context, forma
 	}
 
 	if err := m.contextValidateInstallConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateMetadata(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -205,6 +235,27 @@ func (m *ServiceCreateInstallRequest) contextValidateInstallConfig(ctx context.C
 				return ve.ValidateName("install_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("install_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ServiceCreateInstallRequest) contextValidateMetadata(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Metadata != nil {
+
+		if swag.IsZero(m.Metadata) { // not required
+			return nil
+		}
+
+		if err := m.Metadata.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("metadata")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metadata")
 			}
 			return err
 		}
