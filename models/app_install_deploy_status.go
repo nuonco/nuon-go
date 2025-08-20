@@ -66,6 +66,15 @@ const (
 	// AppInstallDeployStatusPendingDashApproval captures enum value "pending-approval"
 	AppInstallDeployStatusPendingDashApproval AppInstallDeployStatus = "pending-approval"
 
+	// AppInstallDeployStatusDriftDashDetected captures enum value "drift-detected"
+	AppInstallDeployStatusDriftDashDetected AppInstallDeployStatus = "drift-detected"
+
+	// AppInstallDeployStatusAutoDashSkipped captures enum value "auto-skipped"
+	AppInstallDeployStatusAutoDashSkipped AppInstallDeployStatus = "auto-skipped"
+
+	// AppInstallDeployStatusNoDashDrift captures enum value "no-drift"
+	AppInstallDeployStatusNoDashDrift AppInstallDeployStatus = "no-drift"
+
 	// AppInstallDeployStatusApprovalDashDenied captures enum value "approval-denied"
 	AppInstallDeployStatusApprovalDashDenied AppInstallDeployStatus = "approval-denied"
 )
@@ -75,7 +84,7 @@ var appInstallDeployStatusEnum []interface{}
 
 func init() {
 	var res []AppInstallDeployStatus
-	if err := json.Unmarshal([]byte(`["active","inactive","error","noop","planning","syncing","executing","cancelled","unknown","pending","queued","pending-approval","approval-denied"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["active","inactive","error","noop","planning","syncing","executing","cancelled","unknown","pending","queued","pending-approval","drift-detected","auto-skipped","no-drift","approval-denied"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

@@ -41,6 +41,9 @@ const (
 
 	// AppWorkflowStepExecutionTypeSkipped captures enum value "skipped"
 	AppWorkflowStepExecutionTypeSkipped AppWorkflowStepExecutionType = "skipped"
+
+	// AppWorkflowStepExecutionTypeHidden captures enum value "hidden"
+	AppWorkflowStepExecutionTypeHidden AppWorkflowStepExecutionType = "hidden"
 )
 
 // for schema
@@ -48,7 +51,7 @@ var appWorkflowStepExecutionTypeEnum []interface{}
 
 func init() {
 	var res []AppWorkflowStepExecutionType
-	if err := json.Unmarshal([]byte(`["system","user","approval","skipped"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["system","user","approval","skipped","hidden"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

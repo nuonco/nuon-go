@@ -88,6 +88,9 @@ type AppInstall struct {
 	// links
 	Links interface{} `json:"links,omitempty"`
 
+	// metadata
+	Metadata map[string]string `json:"metadata,omitempty"`
+
 	// name
 	Name string `json:"name,omitempty"`
 
