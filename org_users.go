@@ -19,7 +19,6 @@ func (c *client) GetOrgInvites(ctx context.Context, query *models.GetPaginatedQu
 		limit := int64(query.Limit)
 		params.Offset = &offset
 		params.Limit = &limit
-		params.XNuonPaginationEnabled = &query.PaginationEnabled
 	}
 
 	resp, err := c.genClient.Operations.GetOrgInvites(params, c.getOrgIDAuthInfo())

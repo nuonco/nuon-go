@@ -30,7 +30,6 @@ func (c *client) GetOrgs(ctx context.Context, query *models.GetPaginatedQuery) (
 		limit := int64(query.Limit)
 		params.Offset = &offset
 		params.Limit = &limit
-		params.XNuonPaginationEnabled = &query.PaginationEnabled
 	}
 
 	resp, err := c.genClient.Operations.GetOrgs(params, c.getApiKeyAuthInfo())

@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -35,6 +36,9 @@ type AppInstallState struct {
 	// install id
 	InstallID string `json:"install_id,omitempty"`
 
+	// stale at
+	StaleAt *GenericsNullTime `json:"stale_at,omitempty"`
+
 	// triggered by id
 	TriggeredByID string `json:"triggered_by_id,omitempty"`
 
@@ -50,11 +54,69 @@ type AppInstallState struct {
 
 // Validate validates this app install state
 func (m *AppInstallState) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateStaleAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this app install state based on context it is used
+func (m *AppInstallState) validateStaleAt(formats strfmt.Registry) error {
+	if swag.IsZero(m.StaleAt) { // not required
+		return nil
+	}
+
+	if m.StaleAt != nil {
+		if err := m.StaleAt.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("stale_at")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("stale_at")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this app install state based on the context it is used
 func (m *AppInstallState) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateStaleAt(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *AppInstallState) contextValidateStaleAt(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.StaleAt != nil {
+
+		if swag.IsZero(m.StaleAt) { // not required
+			return nil
+		}
+
+		if err := m.StaleAt.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("stale_at")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("stale_at")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

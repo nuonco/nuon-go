@@ -31,7 +31,6 @@ func (c *client) GetInstallers(ctx context.Context, query *models.GetPaginatedQu
 		limit := int64(query.Limit)
 		params.Offset = &offset
 		params.Limit = &limit
-		params.XNuonPaginationEnabled = &query.PaginationEnabled
 	}
 
 	resp, err := c.genClient.Operations.GetInstallers(params, c.getOrgIDAuthInfo())

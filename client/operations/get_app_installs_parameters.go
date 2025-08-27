@@ -94,12 +94,6 @@ type GetAppInstallsParams struct {
 	*/
 	Q *string
 
-	/* XNuonPaginationEnabled.
-
-	   Enable pagination
-	*/
-	XNuonPaginationEnabled *bool
-
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -225,17 +219,6 @@ func (o *GetAppInstallsParams) SetQ(q *string) {
 	o.Q = q
 }
 
-// WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get app installs params
-func (o *GetAppInstallsParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetAppInstallsParams {
-	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
-	return o
-}
-
-// SetXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get app installs params
-func (o *GetAppInstallsParams) SetXNuonPaginationEnabled(xNuonPaginationEnabled *bool) {
-	o.XNuonPaginationEnabled = xNuonPaginationEnabled
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *GetAppInstallsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -314,14 +297,6 @@ func (o *GetAppInstallsParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 			if err := r.SetQueryParam("q", qQ); err != nil {
 				return err
 			}
-		}
-	}
-
-	if o.XNuonPaginationEnabled != nil {
-
-		// header param x-nuon-pagination-enabled
-		if err := r.SetHeaderParam("x-nuon-pagination-enabled", swag.FormatBool(*o.XNuonPaginationEnabled)); err != nil {
-			return err
 		}
 	}
 

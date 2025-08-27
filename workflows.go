@@ -20,7 +20,6 @@ func (c *client) GetWorkflows(ctx context.Context, installID string, query *mode
 		limit := int64(query.Limit)
 		params.Offset = &offset
 		params.Limit = &limit
-		params.XNuonPaginationEnabled = &query.PaginationEnabled
 	}
 
 	resp, err := c.genClient.Operations.GetWorkflows(params, c.getOrgIDAuthInfo())

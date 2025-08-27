@@ -46,7 +46,6 @@ func (c *client) GetAppSandboxConfigs(ctx context.Context, appID string, query *
 
 		params.Offset = &offset
 		params.Limit = &limit
-		params.XNuonPaginationEnabled = &query.PaginationEnabled
 	}
 
 	resp, err := c.genClient.Operations.GetAppSandboxConfigs(params, c.getOrgIDAuthInfo())

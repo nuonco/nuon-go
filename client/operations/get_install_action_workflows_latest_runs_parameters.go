@@ -100,12 +100,6 @@ type GetInstallActionWorkflowsLatestRunsParams struct {
 	*/
 	TriggerTypes *string
 
-	/* XNuonPaginationEnabled.
-
-	   Enable pagination
-	*/
-	XNuonPaginationEnabled *bool
-
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -242,17 +236,6 @@ func (o *GetInstallActionWorkflowsLatestRunsParams) SetTriggerTypes(triggerTypes
 	o.TriggerTypes = triggerTypes
 }
 
-// WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get install action workflows latest runs params
-func (o *GetInstallActionWorkflowsLatestRunsParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetInstallActionWorkflowsLatestRunsParams {
-	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
-	return o
-}
-
-// SetXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get install action workflows latest runs params
-func (o *GetInstallActionWorkflowsLatestRunsParams) SetXNuonPaginationEnabled(xNuonPaginationEnabled *bool) {
-	o.XNuonPaginationEnabled = xNuonPaginationEnabled
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *GetInstallActionWorkflowsLatestRunsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -348,14 +331,6 @@ func (o *GetInstallActionWorkflowsLatestRunsParams) WriteToRequest(r runtime.Cli
 			if err := r.SetQueryParam("trigger_types", qTriggerTypes); err != nil {
 				return err
 			}
-		}
-	}
-
-	if o.XNuonPaginationEnabled != nil {
-
-		// header param x-nuon-pagination-enabled
-		if err := r.SetHeaderParam("x-nuon-pagination-enabled", swag.FormatBool(*o.XNuonPaginationEnabled)); err != nil {
-			return err
 		}
 	}
 

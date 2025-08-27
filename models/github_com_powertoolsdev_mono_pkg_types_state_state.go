@@ -61,6 +61,9 @@ type GithubComPowertoolsdevMonoPkgTypesStateState struct {
 
 	// secrets
 	Secrets StateSecretsState `json:"secrets,omitempty"`
+
+	// loaded from the database but not part of the state itself
+	StaleAt string `json:"stale_at,omitempty"`
 }
 
 // Validate validates this github com powertoolsdev mono pkg types state state

@@ -21,7 +21,6 @@ func (c *client) GetAllComponents(ctx context.Context, query *models.GetPaginate
 		limit := int64(query.Limit)
 		params.Offset = &offset
 		params.Limit = &limit
-		params.XNuonPaginationEnabled = &query.PaginationEnabled
 	}
 
 	resp, err := c.genClient.Operations.GetOrgComponents(params, c.getOrgIDAuthInfo())
@@ -50,7 +49,6 @@ func (c *client) GetAppComponents(ctx context.Context, appID string, query *mode
 		limit := int64(query.Limit)
 		params.Offset = &offset
 		params.Limit = &limit
-		params.XNuonPaginationEnabled = &query.PaginationEnabled
 	}
 
 	resp, err := c.genClient.Operations.GetAppComponents(params, c.getOrgIDAuthInfo())
@@ -221,7 +219,6 @@ func (c *client) GetComponentConfigs(ctx context.Context, componentID string, qu
 		limit := int64(query.Limit)
 		params.Offset = &offset
 		params.Limit = &limit
-		params.XNuonPaginationEnabled = &query.PaginationEnabled
 	}
 
 	resp, err := c.genClient.Operations.GetComponentConfigs(params, c.getOrgIDAuthInfo())

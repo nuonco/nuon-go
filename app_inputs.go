@@ -45,7 +45,6 @@ func (c *client) GetAppInputConfigs(ctx context.Context, appID string, query *mo
 		limit := int64(query.Limit)
 		params.Offset = &offset
 		params.Limit = &limit
-		params.XNuonPaginationEnabled = &query.PaginationEnabled
 	}
 
 	resp, err := c.genClient.Operations.GetAppInputConfigs(params, c.getOrgIDAuthInfo())

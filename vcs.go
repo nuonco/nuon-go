@@ -44,7 +44,6 @@ func (c *client) GetVCSConnections(ctx context.Context, query *models.GetPaginat
 		limit := int64(query.Limit)
 		params.Offset = &offset
 		params.Limit = &limit
-		params.XNuonPaginationEnabled = &query.PaginationEnabled
 	}
 
 	resp, err := c.genClient.Operations.GetOrgVCSConnections(params, c.getOrgIDAuthInfo())

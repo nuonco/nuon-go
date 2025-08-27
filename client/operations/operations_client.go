@@ -292,6 +292,8 @@ type ClientService interface {
 
 	GetInstallState(params *GetInstallStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallStateOK, error)
 
+	GetInstallStateHistory(params *GetInstallStateHistoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallStateHistoryOK, error)
+
 	GetInstallWorkflow(params *GetInstallWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallWorkflowOK, error)
 
 	GetInstallWorkflowStep(params *GetInstallWorkflowStepParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallWorkflowStepOK, error)
@@ -5684,6 +5686,45 @@ func (a *Client) GetInstallState(params *GetInstallStateParams, authInfo runtime
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallState: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetInstallStateHistory gets install state history
+*/
+func (a *Client) GetInstallStateHistory(params *GetInstallStateHistoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallStateHistoryOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetInstallStateHistoryParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetInstallStateHistory",
+		Method:             "GET",
+		PathPattern:        "/v1/installs/{install_id}/state-history",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetInstallStateHistoryReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetInstallStateHistoryOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetInstallStateHistory: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

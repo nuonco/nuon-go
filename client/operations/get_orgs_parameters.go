@@ -82,11 +82,11 @@ type GetOrgsParams struct {
 	*/
 	Page *int64
 
-	/* XNuonPaginationEnabled.
+	/* Q.
 
-	   Enable pagination
+	   search query
 	*/
-	XNuonPaginationEnabled *bool
+	Q *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -191,15 +191,15 @@ func (o *GetOrgsParams) SetPage(page *int64) {
 	o.Page = page
 }
 
-// WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get orgs params
-func (o *GetOrgsParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetOrgsParams {
-	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
+// WithQ adds the q to the get orgs params
+func (o *GetOrgsParams) WithQ(q *string) *GetOrgsParams {
+	o.SetQ(q)
 	return o
 }
 
-// SetXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get orgs params
-func (o *GetOrgsParams) SetXNuonPaginationEnabled(xNuonPaginationEnabled *bool) {
-	o.XNuonPaginationEnabled = xNuonPaginationEnabled
+// SetQ adds the q to the get orgs params
+func (o *GetOrgsParams) SetQ(q *string) {
+	o.Q = q
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -261,11 +261,20 @@ func (o *GetOrgsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regis
 		}
 	}
 
-	if o.XNuonPaginationEnabled != nil {
+	if o.Q != nil {
 
-		// header param x-nuon-pagination-enabled
-		if err := r.SetHeaderParam("x-nuon-pagination-enabled", swag.FormatBool(*o.XNuonPaginationEnabled)); err != nil {
-			return err
+		// query param q
+		var qrQ string
+
+		if o.Q != nil {
+			qrQ = *o.Q
+		}
+		qQ := qrQ
+		if qQ != "" {
+
+			if err := r.SetQueryParam("q", qQ); err != nil {
+				return err
+			}
 		}
 	}
 

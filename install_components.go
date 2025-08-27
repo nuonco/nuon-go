@@ -22,10 +22,8 @@ func (c *client) GetInstallComponents(ctx context.Context, installID string, que
 	query = handlePaginationQuery(query)
 
 	if query != nil {
-		paginationEnabled := true
 		offset := int64(query.Offset)
 		limit := int64(query.Limit)
-		params.XNuonPaginationEnabled = &paginationEnabled
 		params.Offset = &offset
 		params.Limit = &limit
 	}
@@ -55,7 +53,6 @@ func (c *client) GetInstallComponentDeploys(ctx context.Context, installID strin
 	if query != nil {
 		offset := int64(query.Offset)
 		limit := int64(query.Limit)
-		params.XNuonPaginationEnabled = &query.PaginationEnabled
 		params.Offset = &offset
 		params.Limit = &limit
 	}
