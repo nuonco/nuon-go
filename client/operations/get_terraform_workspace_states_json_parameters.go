@@ -88,12 +88,6 @@ type GetTerraformWorkspaceStatesJSONParams struct {
 	*/
 	WorkspaceID string
 
-	/* XNuonPaginationEnabled.
-
-	   Enable pagination
-	*/
-	XNuonPaginationEnabled *bool
-
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -208,17 +202,6 @@ func (o *GetTerraformWorkspaceStatesJSONParams) SetWorkspaceID(workspaceID strin
 	o.WorkspaceID = workspaceID
 }
 
-// WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get terraform workspace states JSON params
-func (o *GetTerraformWorkspaceStatesJSONParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetTerraformWorkspaceStatesJSONParams {
-	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
-	return o
-}
-
-// SetXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get terraform workspace states JSON params
-func (o *GetTerraformWorkspaceStatesJSONParams) SetXNuonPaginationEnabled(xNuonPaginationEnabled *bool) {
-	o.XNuonPaginationEnabled = xNuonPaginationEnabled
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *GetTerraformWorkspaceStatesJSONParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -281,14 +264,6 @@ func (o *GetTerraformWorkspaceStatesJSONParams) WriteToRequest(r runtime.ClientR
 	// path param workspace_id
 	if err := r.SetPathParam("workspace_id", o.WorkspaceID); err != nil {
 		return err
-	}
-
-	if o.XNuonPaginationEnabled != nil {
-
-		// header param x-nuon-pagination-enabled
-		if err := r.SetHeaderParam("x-nuon-pagination-enabled", swag.FormatBool(*o.XNuonPaginationEnabled)); err != nil {
-			return err
-		}
 	}
 
 	if len(res) > 0 {

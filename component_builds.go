@@ -36,7 +36,6 @@ func (c *client) GetComponentBuilds(ctx context.Context, componentID, appID stri
 		limit := int64(query.Limit)
 		params.Offset = &offset
 		params.Limit = &limit
-		params.XNuonPaginationEnabled = &query.PaginationEnabled
 	}
 
 	resp, err := c.genClient.Operations.GetComponentBuilds(params, c.getOrgIDAuthInfo())

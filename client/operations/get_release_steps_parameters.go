@@ -88,12 +88,6 @@ type GetReleaseStepsParams struct {
 	*/
 	ReleaseID string
 
-	/* XNuonPaginationEnabled.
-
-	   Enable pagination
-	*/
-	XNuonPaginationEnabled *bool
-
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -208,17 +202,6 @@ func (o *GetReleaseStepsParams) SetReleaseID(releaseID string) {
 	o.ReleaseID = releaseID
 }
 
-// WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get release steps params
-func (o *GetReleaseStepsParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetReleaseStepsParams {
-	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
-	return o
-}
-
-// SetXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get release steps params
-func (o *GetReleaseStepsParams) SetXNuonPaginationEnabled(xNuonPaginationEnabled *bool) {
-	o.XNuonPaginationEnabled = xNuonPaginationEnabled
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *GetReleaseStepsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -281,14 +264,6 @@ func (o *GetReleaseStepsParams) WriteToRequest(r runtime.ClientRequest, reg strf
 	// path param release_id
 	if err := r.SetPathParam("release_id", o.ReleaseID); err != nil {
 		return err
-	}
-
-	if o.XNuonPaginationEnabled != nil {
-
-		// header param x-nuon-pagination-enabled
-		if err := r.SetHeaderParam("x-nuon-pagination-enabled", swag.FormatBool(*o.XNuonPaginationEnabled)); err != nil {
-			return err
-		}
 	}
 
 	if len(res) > 0 {

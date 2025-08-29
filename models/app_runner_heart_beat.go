@@ -29,6 +29,9 @@ type AppRunnerHeartBeat struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// process
+	Process string `json:"process,omitempty"`
+
 	// runner id
 	RunnerID string `json:"runner_id,omitempty"`
 

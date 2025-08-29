@@ -30,6 +30,9 @@ type AppRunnerHealthCheck struct {
 	// minute bucket
 	MinuteBucket string `json:"minute_bucket,omitempty"`
 
+	// process
+	Process string `json:"process,omitempty"`
+
 	// runner id
 	RunnerID string `json:"runner_id,omitempty"`
 

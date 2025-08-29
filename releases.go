@@ -33,7 +33,6 @@ func (c *client) GetReleaseSteps(ctx context.Context, releaseID string, query *m
 		limit := int64(query.Limit)
 		params.Offset = &offset
 		params.Limit = &limit
-		params.XNuonPaginationEnabled = &query.PaginationEnabled
 	}
 
 	resp, err := c.genClient.Operations.GetReleaseSteps(params, c.getOrgIDAuthInfo())
@@ -62,7 +61,6 @@ func (c *client) GetAppReleases(ctx context.Context, appID string, query *models
 		limit := int64(query.Limit)
 		params.Offset = &offset
 		params.Limit = &limit
-		params.XNuonPaginationEnabled = &query.PaginationEnabled
 	}
 
 	resp, err := c.genClient.Operations.GetAppReleases(params, c.getOrgIDAuthInfo())
@@ -91,7 +89,6 @@ func (c *client) GetComponentReleases(ctx context.Context, componentID string, q
 		limit := int64(query.Limit)
 		params.Offset = &offset
 		params.Limit = &limit
-		params.XNuonPaginationEnabled = &query.PaginationEnabled
 	}
 
 	resp, err := c.genClient.Operations.GetComponentReleases(params, c.getOrgIDAuthInfo())

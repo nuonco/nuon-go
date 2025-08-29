@@ -71,7 +71,6 @@ func (c *client) GetAppConfigs(ctx context.Context, appID string, query *models.
 		limit := int64(query.Limit)
 		params.Offset = &offset
 		params.Limit = &limit
-		params.XNuonPaginationEnabled = &query.PaginationEnabled
 	}
 
 	resp, err := c.genClient.Operations.GetAppConfigs(&operations.GetAppConfigsParams{

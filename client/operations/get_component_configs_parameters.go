@@ -88,12 +88,6 @@ type GetComponentConfigsParams struct {
 	*/
 	Page *int64
 
-	/* XNuonPaginationEnabled.
-
-	   Enable pagination
-	*/
-	XNuonPaginationEnabled *bool
-
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -208,17 +202,6 @@ func (o *GetComponentConfigsParams) SetPage(page *int64) {
 	o.Page = page
 }
 
-// WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get component configs params
-func (o *GetComponentConfigsParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetComponentConfigsParams {
-	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
-	return o
-}
-
-// SetXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get component configs params
-func (o *GetComponentConfigsParams) SetXNuonPaginationEnabled(xNuonPaginationEnabled *bool) {
-	o.XNuonPaginationEnabled = xNuonPaginationEnabled
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *GetComponentConfigsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -280,14 +263,6 @@ func (o *GetComponentConfigsParams) WriteToRequest(r runtime.ClientRequest, reg 
 			if err := r.SetQueryParam("page", qPage); err != nil {
 				return err
 			}
-		}
-	}
-
-	if o.XNuonPaginationEnabled != nil {
-
-		// header param x-nuon-pagination-enabled
-		if err := r.SetHeaderParam("x-nuon-pagination-enabled", swag.FormatBool(*o.XNuonPaginationEnabled)); err != nil {
-			return err
 		}
 	}
 

@@ -16,12 +16,10 @@ func (c *client) GetActionWorkflows(ctx context.Context, appID string, query *mo
 	query = handlePaginationQuery(query)
 
 	if query != nil {
-		paginationEnabled := true
 		offset := int64(query.Offset)
 		limit := int64(query.Limit)
 		params.Offset = &offset
 		params.Limit = &limit
-		params.XNuonPaginationEnabled = &paginationEnabled
 	}
 
 	resp, err := c.genClient.Operations.GetActionWorkflows(params, c.getOrgIDAuthInfo())
@@ -150,7 +148,6 @@ func (c *client) GetInstallActionWorkflowRecentRuns(ctx context.Context, install
 	if query != nil {
 		offset := int64(query.Offset)
 		limit := int64(query.Limit)
-		params.XNuonPaginationEnabled = &query.PaginationEnabled
 		params.Offset = &offset
 		params.Limit = &limit
 	}

@@ -62,6 +62,18 @@ GetWorkflowsParams contains all the parameters to send to the API endpoint
 */
 type GetWorkflowsParams struct {
 
+	/* CreatedAtGte.
+
+	   filter workflows created after timestamp (RFC3339 format)
+	*/
+	CreatedAtGte *string
+
+	/* CreatedAtLte.
+
+	   filter workflows created before timestamp (RFC3339 format)
+	*/
+	CreatedAtLte *string
+
 	/* InstallID.
 
 	   install ID
@@ -88,11 +100,19 @@ type GetWorkflowsParams struct {
 	*/
 	Page *int64
 
-	/* XNuonPaginationEnabled.
+	/* Planonly.
 
-	   Enable pagination
+	   exclude plan only workflows when set to false
+
+	   Default: true
 	*/
-	XNuonPaginationEnabled *bool
+	Planonly *bool
+
+	/* Type.
+
+	   filter by workflow type
+	*/
+	Type *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -117,12 +137,15 @@ func (o *GetWorkflowsParams) SetDefaults() {
 		offsetDefault = int64(0)
 
 		pageDefault = int64(0)
+
+		planonlyDefault = bool(true)
 	)
 
 	val := GetWorkflowsParams{
-		Limit:  &limitDefault,
-		Offset: &offsetDefault,
-		Page:   &pageDefault,
+		Limit:    &limitDefault,
+		Offset:   &offsetDefault,
+		Page:     &pageDefault,
+		Planonly: &planonlyDefault,
 	}
 
 	val.timeout = o.timeout
@@ -162,6 +185,28 @@ func (o *GetWorkflowsParams) WithHTTPClient(client *http.Client) *GetWorkflowsPa
 // SetHTTPClient adds the HTTPClient to the get workflows params
 func (o *GetWorkflowsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
+}
+
+// WithCreatedAtGte adds the createdAtGte to the get workflows params
+func (o *GetWorkflowsParams) WithCreatedAtGte(createdAtGte *string) *GetWorkflowsParams {
+	o.SetCreatedAtGte(createdAtGte)
+	return o
+}
+
+// SetCreatedAtGte adds the createdAtGte to the get workflows params
+func (o *GetWorkflowsParams) SetCreatedAtGte(createdAtGte *string) {
+	o.CreatedAtGte = createdAtGte
+}
+
+// WithCreatedAtLte adds the createdAtLte to the get workflows params
+func (o *GetWorkflowsParams) WithCreatedAtLte(createdAtLte *string) *GetWorkflowsParams {
+	o.SetCreatedAtLte(createdAtLte)
+	return o
+}
+
+// SetCreatedAtLte adds the createdAtLte to the get workflows params
+func (o *GetWorkflowsParams) SetCreatedAtLte(createdAtLte *string) {
+	o.CreatedAtLte = createdAtLte
 }
 
 // WithInstallID adds the installID to the get workflows params
@@ -208,15 +253,26 @@ func (o *GetWorkflowsParams) SetPage(page *int64) {
 	o.Page = page
 }
 
-// WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get workflows params
-func (o *GetWorkflowsParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetWorkflowsParams {
-	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
+// WithPlanonly adds the planonly to the get workflows params
+func (o *GetWorkflowsParams) WithPlanonly(planonly *bool) *GetWorkflowsParams {
+	o.SetPlanonly(planonly)
 	return o
 }
 
-// SetXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get workflows params
-func (o *GetWorkflowsParams) SetXNuonPaginationEnabled(xNuonPaginationEnabled *bool) {
-	o.XNuonPaginationEnabled = xNuonPaginationEnabled
+// SetPlanonly adds the planonly to the get workflows params
+func (o *GetWorkflowsParams) SetPlanonly(planonly *bool) {
+	o.Planonly = planonly
+}
+
+// WithType adds the typeVar to the get workflows params
+func (o *GetWorkflowsParams) WithType(typeVar *string) *GetWorkflowsParams {
+	o.SetType(typeVar)
+	return o
+}
+
+// SetType adds the type to the get workflows params
+func (o *GetWorkflowsParams) SetType(typeVar *string) {
+	o.Type = typeVar
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -226,6 +282,40 @@ func (o *GetWorkflowsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		return err
 	}
 	var res []error
+
+	if o.CreatedAtGte != nil {
+
+		// query param created_at_gte
+		var qrCreatedAtGte string
+
+		if o.CreatedAtGte != nil {
+			qrCreatedAtGte = *o.CreatedAtGte
+		}
+		qCreatedAtGte := qrCreatedAtGte
+		if qCreatedAtGte != "" {
+
+			if err := r.SetQueryParam("created_at_gte", qCreatedAtGte); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.CreatedAtLte != nil {
+
+		// query param created_at_lte
+		var qrCreatedAtLte string
+
+		if o.CreatedAtLte != nil {
+			qrCreatedAtLte = *o.CreatedAtLte
+		}
+		qCreatedAtLte := qrCreatedAtLte
+		if qCreatedAtLte != "" {
+
+			if err := r.SetQueryParam("created_at_lte", qCreatedAtLte); err != nil {
+				return err
+			}
+		}
+	}
 
 	// path param install_id
 	if err := r.SetPathParam("install_id", o.InstallID); err != nil {
@@ -283,11 +373,37 @@ func (o *GetWorkflowsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		}
 	}
 
-	if o.XNuonPaginationEnabled != nil {
+	if o.Planonly != nil {
 
-		// header param x-nuon-pagination-enabled
-		if err := r.SetHeaderParam("x-nuon-pagination-enabled", swag.FormatBool(*o.XNuonPaginationEnabled)); err != nil {
-			return err
+		// query param planonly
+		var qrPlanonly bool
+
+		if o.Planonly != nil {
+			qrPlanonly = *o.Planonly
+		}
+		qPlanonly := swag.FormatBool(qrPlanonly)
+		if qPlanonly != "" {
+
+			if err := r.SetQueryParam("planonly", qPlanonly); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Type != nil {
+
+		// query param type
+		var qrType string
+
+		if o.Type != nil {
+			qrType = *o.Type
+		}
+		qType := qrType
+		if qType != "" {
+
+			if err := r.SetQueryParam("type", qType); err != nil {
+				return err
+			}
 		}
 	}
 

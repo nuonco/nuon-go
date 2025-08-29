@@ -20,7 +20,6 @@ func (c *client) GetInstallSandboxRuns(ctx context.Context, installID string, qu
 		limit := int64(query.Limit)
 		params.Offset = &offset
 		params.Limit = &limit
-		params.XNuonPaginationEnabled = &query.PaginationEnabled
 	}
 
 	resp, err := c.genClient.Operations.GetInstallSandboxRuns(params, c.getOrgIDAuthInfo())

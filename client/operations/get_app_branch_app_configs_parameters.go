@@ -94,12 +94,6 @@ type GetAppBranchAppConfigsParams struct {
 	*/
 	Page *int64
 
-	/* XNuonPaginationEnabled.
-
-	   Enable pagination
-	*/
-	XNuonPaginationEnabled *bool
-
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -225,17 +219,6 @@ func (o *GetAppBranchAppConfigsParams) SetPage(page *int64) {
 	o.Page = page
 }
 
-// WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get app branch app configs params
-func (o *GetAppBranchAppConfigsParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetAppBranchAppConfigsParams {
-	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
-	return o
-}
-
-// SetXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get app branch app configs params
-func (o *GetAppBranchAppConfigsParams) SetXNuonPaginationEnabled(xNuonPaginationEnabled *bool) {
-	o.XNuonPaginationEnabled = xNuonPaginationEnabled
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *GetAppBranchAppConfigsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -302,14 +285,6 @@ func (o *GetAppBranchAppConfigsParams) WriteToRequest(r runtime.ClientRequest, r
 			if err := r.SetQueryParam("page", qPage); err != nil {
 				return err
 			}
-		}
-	}
-
-	if o.XNuonPaginationEnabled != nil {
-
-		// header param x-nuon-pagination-enabled
-		if err := r.SetHeaderParam("x-nuon-pagination-enabled", swag.FormatBool(*o.XNuonPaginationEnabled)); err != nil {
-			return err
 		}
 	}
 

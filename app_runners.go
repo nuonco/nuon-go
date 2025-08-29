@@ -45,7 +45,6 @@ func (c *client) GetAppRunnerConfigs(ctx context.Context, appID string, query *m
 		limit := int64(query.Limit)
 		params.Offset = &offset
 		params.Limit = &limit
-		params.XNuonPaginationEnabled = &query.PaginationEnabled
 	}
 
 	resp, err := c.genClient.Operations.GetAppRunnerConfigs(params, c.getOrgIDAuthInfo())
