@@ -25,6 +25,12 @@ type AppVCSConnection struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
+	// github account id
+	GithubAccountID string `json:"github_account_id,omitempty"`
+
+	// github account name
+	GithubAccountName string `json:"github_account_name,omitempty"`
+
 	// github install id
 	GithubInstallID string `json:"github_install_id,omitempty"`
 
