@@ -46,6 +46,9 @@ type AppComponentConfigConnection struct {
 	// docker build
 	DockerBuild *AppDockerBuildComponentConfig `json:"docker_build,omitempty"`
 
+	// drift schedule
+	DriftSchedule string `json:"drift_schedule,omitempty"`
+
 	// external image
 	ExternalImage *AppExternalImageComponentConfig `json:"external_image,omitempty"`
 

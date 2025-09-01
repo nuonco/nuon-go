@@ -26,6 +26,9 @@ type ServiceCreateKubernetesManifestComponentConfigRequest struct {
 	// dependencies
 	Dependencies []string `json:"dependencies"`
 
+	// drift schedule
+	DriftSchedule string `json:"drift_schedule,omitempty"`
+
 	// manifest
 	Manifest string `json:"manifest,omitempty"`
 

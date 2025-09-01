@@ -31,6 +31,9 @@ type ServiceCreateTerraformModuleComponentConfigRequest struct {
 	// dependencies
 	Dependencies []string `json:"dependencies"`
 
+	// drift schedule
+	DriftSchedule string `json:"drift_schedule,omitempty"`
+
 	// env vars
 	// Required: true
 	EnvVars map[string]string `json:"env_vars"`
