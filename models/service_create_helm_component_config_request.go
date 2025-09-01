@@ -37,6 +37,9 @@ type ServiceCreateHelmComponentConfigRequest struct {
 	// dependencies
 	Dependencies []string `json:"dependencies"`
 
+	// drift schedule
+	DriftSchedule string `json:"drift_schedule,omitempty"`
+
 	// namespace
 	Namespace string `json:"namespace,omitempty"`
 
