@@ -39,6 +39,9 @@ type AppAppSandboxConfig struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
+	// drift schedule
+	DriftSchedule string `json:"drift_schedule,omitempty"`
+
 	// env vars
 	EnvVars map[string]string `json:"env_vars,omitempty"`
 
