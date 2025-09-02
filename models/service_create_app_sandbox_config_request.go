@@ -25,6 +25,9 @@ type ServiceCreateAppSandboxConfigRequest struct {
 	// connected github vcs config
 	ConnectedGithubVcsConfig *ServiceConnectedGithubVCSSandboxConfigRequest `json:"connected_github_vcs_config,omitempty"`
 
+	// drift schedule
+	DriftSchedule string `json:"drift_schedule,omitempty"`
+
 	// env vars
 	// Required: true
 	EnvVars map[string]string `json:"env_vars"`
