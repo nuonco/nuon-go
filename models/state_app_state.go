@@ -20,14 +20,14 @@ type StateAppState struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// inputs
+	Inputs map[string]string `json:"inputs,omitempty"`
+
 	// name
 	Name string `json:"name,omitempty"`
 
 	// populated
 	Populated bool `json:"populated,omitempty"`
-
-	// secrets
-	Secrets map[string]string `json:"secrets,omitempty"`
 
 	// status
 	Status string `json:"status,omitempty"`

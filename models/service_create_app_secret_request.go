@@ -23,6 +23,9 @@ type ServiceCreateAppSecretRequest struct {
 	// Required: true
 	Name *string `json:"name"`
 
+	// sensitive
+	Sensitive bool `json:"sensitive,omitempty"`
+
 	// value
 	// Required: true
 	Value *string `json:"value"`

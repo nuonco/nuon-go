@@ -38,8 +38,14 @@ type AppAppSecret struct {
 	// org id
 	OrgID string `json:"org_id,omitempty"`
 
+	// sensitive
+	Sensitive bool `json:"sensitive,omitempty"`
+
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
+
+	// value
+	Value string `json:"value,omitempty"`
 }
 
 // Validate validates this app app secret
