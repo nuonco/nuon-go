@@ -70,3 +70,15 @@ func (c *client) GetVCSConnection(ctx context.Context, connID string) (*models.A
 
 	return resp.Payload, nil
 }
+
+func (c *client) DeleteVCSConnection(ctx context.Context, connID string) error {
+	_, err := c.genClient.Operations.DeleteVCSConnection(&operations.DeleteVCSConnectionParams{
+		ConnectionID: connID,
+		Context:      ctx,
+	}, c.getOrgIDAuthInfo())
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
