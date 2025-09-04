@@ -61,9 +61,11 @@ app, err := apiClient.GetApp(ctx, appID)
 
 ## Contributing
 
-Please submit a PR, and if you would like help, contact us on our [community slack](https://join.slack.com/t/nuoncommunity/shared_invite/zt-1q323vw9z-C8ztRP~HfWjZx6AXi50VRA).
+Please submit a PR, and if you would like help, contact us on our
+[community slack](https://join.slack.com/t/nuoncommunity/shared_invite/zt-1q323vw9z-C8ztRP~HfWjZx6AXi50VRA).
 
-Since this library relies on generating client code from our graphql api, please run to ensure your generated client code is up to date.
+Since this library relies on generating client code from our graphql api, please run to ensure your generated client
+code is up to date.
 
 ```bash
 $ go generate ./...
