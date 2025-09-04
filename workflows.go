@@ -34,3 +34,15 @@ func (c *client) GetWorkflows(ctx context.Context, installID string, query *mode
 
 	return resp.Payload, false, nil
 }
+
+func (c *client) GetWorkflow(ctx context.Context, workflowID string) (*models.AppWorkflow, error) {
+	resp, err := c.genClient.Operations.GetWorkflow(&operations.GetWorkflowParams{
+		WorkflowID: workflowID,
+		Context:    ctx,
+	}, c.getOrgIDAuthInfo())
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}
