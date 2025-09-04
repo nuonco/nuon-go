@@ -321,12 +321,13 @@ func (mr *MockClientMockRecorder) CreateHelmComponentConfig(ctx, componentID, re
 }
 
 // CreateInstall mocks base method.
-func (m *MockClient) CreateInstall(ctx context.Context, appID string, req *models.ServiceCreateInstallRequest) (*models.AppInstall, error) {
+func (m *MockClient) CreateInstall(ctx context.Context, appID string, req *models.ServiceCreateInstallRequest) (*models.AppInstall, string, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateInstall", ctx, appID, req)
 	ret0, _ := ret[0].(*models.AppInstall)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(string)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // CreateInstall indicates an expected call of CreateInstall.
