@@ -8,7 +8,6 @@ package models
 import (
 	"context"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -34,9 +33,7 @@ type AppWorkflowStepApprovalResponse struct {
 	Note string `json:"note,omitempty"`
 
 	// the response type
-	Type struct {
-		AppWorkflowStepResponseType
-	} `json:"type,omitempty"`
+	Type string `json:"type,omitempty"`
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
@@ -44,42 +41,11 @@ type AppWorkflowStepApprovalResponse struct {
 
 // Validate validates this app workflow step approval response
 func (m *AppWorkflowStepApprovalResponse) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateType(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
 	return nil
 }
 
-func (m *AppWorkflowStepApprovalResponse) validateType(formats strfmt.Registry) error {
-	if swag.IsZero(m.Type) { // not required
-		return nil
-	}
-
-	return nil
-}
-
-// ContextValidate validate this app workflow step approval response based on the context it is used
+// ContextValidate validates this app workflow step approval response based on context it is used
 func (m *AppWorkflowStepApprovalResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateType(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *AppWorkflowStepApprovalResponse) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
-
 	return nil
 }
 

@@ -1693,6 +1693,21 @@ func (mr *MockClientMockRecorder) GetVCSConnections(ctx, query interface{}) *gom
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVCSConnections", reflect.TypeOf((*MockClient)(nil).GetVCSConnections), ctx, query)
 }
 
+// GetWorkflow mocks base method.
+func (m *MockClient) GetWorkflow(ctx context.Context, workflowID string) (*models.AppWorkflow, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetWorkflow", ctx, workflowID)
+	ret0, _ := ret[0].(*models.AppWorkflow)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetWorkflow indicates an expected call of GetWorkflow.
+func (mr *MockClientMockRecorder) GetWorkflow(ctx, workflowID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetWorkflow", reflect.TypeOf((*MockClient)(nil).GetWorkflow), ctx, workflowID)
+}
+
 // GetWorkflows mocks base method.
 func (m *MockClient) GetWorkflows(ctx context.Context, installID string, query *models.GetPaginatedQuery) ([]*models.AppWorkflow, bool, error) {
 	m.ctrl.T.Helper()
@@ -1883,12 +1898,13 @@ func (mr *MockClientMockRecorder) UpdateInstallConfig(ctx, installID, configID, 
 }
 
 // UpdateInstallInputs mocks base method.
-func (m *MockClient) UpdateInstallInputs(ctx context.Context, installID string, req *models.ServiceUpdateInstallInputsRequest) (*models.AppInstallInputs, error) {
+func (m *MockClient) UpdateInstallInputs(ctx context.Context, installID string, req *models.ServiceUpdateInstallInputsRequest) (*models.AppInstallInputs, string, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateInstallInputs", ctx, installID, req)
 	ret0, _ := ret[0].(*models.AppInstallInputs)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret1, _ := ret[1].(string)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // UpdateInstallInputs indicates an expected call of UpdateInstallInputs.
