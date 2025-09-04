@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/go-openapi/runtime"
 	"github.com/nuonco/nuon-go/client/operations"
 	"github.com/nuonco/nuon-go/models"
 )
@@ -13,31 +12,15 @@ const (
 	HeaderInstallWorkflowID = "X-Nuon-Install-Workflow-ID"
 )
 
-type responseHeaderReader struct {
-	resp       runtime.ClientResponse
-	downstream runtime.ClientResponseReader
-}
-
-func (r *responseHeaderReader) ReadResponse(cRes runtime.ClientResponse, con runtime.Consumer) (interface{}, error) {
-	r.resp = cRes
-	return r.downstream.ReadResponse(cRes, con)
-}
-
-func (r *responseHeaderReader) GetHeader(key string) string {
-	return r.resp.GetHeader(key)
-}
-
 // installs
 func (c *client) CreateInstall(ctx context.Context, appID string, req *models.ServiceCreateInstallRequest) (*models.AppInstall, string, error) {
-	hr := &responseHeaderReader{
-		downstream: &operations.CreateInstallReader{},
-	}
+	hr := newResponseHeaderReader(&operations.CreateInstallReader{})
 
 	resp, err := c.genClient.Operations.CreateInstall(&operations.CreateInstallParams{
 		AppID:   appID,
 		Req:     req,
 		Context: ctx,
-	}, c.getOrgIDAuthInfo(), func(co *runtime.ClientOperation) { co.Reader = hr })
+	}, c.getOrgIDAuthInfo(), hr.ClientOption())
 	if err != nil {
 		return nil, "", err
 	}
