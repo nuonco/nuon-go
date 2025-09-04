@@ -620,6 +620,20 @@ func (mr *MockClientMockRecorder) DeleteOrg(ctx interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteOrg", reflect.TypeOf((*MockClient)(nil).DeleteOrg), ctx)
 }
 
+// DeleteVCSConnection mocks base method.
+func (m *MockClient) DeleteVCSConnection(ctx context.Context, connID string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteVCSConnection", ctx, connID)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteVCSConnection indicates an expected call of DeleteVCSConnection.
+func (mr *MockClientMockRecorder) DeleteVCSConnection(ctx, connID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteVCSConnection", reflect.TypeOf((*MockClient)(nil).DeleteVCSConnection), ctx, connID)
+}
+
 // DeployInstallComponents mocks base method.
 func (m *MockClient) DeployInstallComponents(ctx context.Context, installID string, planOnly bool) error {
 	m.ctrl.T.Helper()
