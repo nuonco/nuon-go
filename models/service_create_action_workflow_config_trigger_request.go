@@ -25,6 +25,9 @@ type ServiceCreateActionWorkflowConfigTriggerRequest struct {
 	// cron schedule
 	CronSchedule string `json:"cron_schedule,omitempty"`
 
+	// index
+	Index int64 `json:"index,omitempty"`
+
 	// type
 	// Required: true
 	Type *AppActionWorkflowTriggerType `json:"type"`

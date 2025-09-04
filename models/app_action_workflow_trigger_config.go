@@ -45,6 +45,9 @@ type AppActionWorkflowTriggerConfig struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// index
+	Index int64 `json:"index,omitempty"`
+
 	// type
 	Type string `json:"type,omitempty"`
 
