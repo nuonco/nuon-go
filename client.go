@@ -154,6 +154,10 @@ type Client interface {
 	GetWorkflows(ctx context.Context, installID string, query *models.GetPaginatedQuery) ([]*models.AppWorkflow, bool, error)
 	GetWorkflow(ctx context.Context, workflowID string) (*models.AppWorkflow, error)
 
+	// log stream/logs
+	GetLogStream(ctx context.Context, logStreamID string) (*models.AppLogStream, error)
+	LogStreamReadLogs(ctx context.Context, logStreamId string, offset string) ([]*models.AppOtelLogRecord, error)
+
 	// components
 	GetAllComponents(ctx context.Context, query *models.GetPaginatedQuery) ([]*models.AppComponent, bool, error)
 	GetAppComponents(ctx context.Context, appID string, query *models.GetPaginatedQuery) ([]*models.AppComponent, bool, error)
