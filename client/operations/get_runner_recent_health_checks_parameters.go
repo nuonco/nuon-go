@@ -76,12 +76,6 @@ type GetRunnerRecentHealthChecksParams struct {
 	*/
 	Offset *int64
 
-	/* Page.
-
-	   page number of results to return
-	*/
-	Page *int64
-
 	/* RunnerID.
 
 	   runner ID
@@ -95,6 +89,12 @@ type GetRunnerRecentHealthChecksParams struct {
 	   Default: "1h"
 	*/
 	Window *string
+
+	/* XNuonPaginationEnabled.
+
+	   Enable pagination
+	*/
+	XNuonPaginationEnabled *bool
 
 	timeout    time.Duration
 	Context    context.Context
@@ -118,15 +118,12 @@ func (o *GetRunnerRecentHealthChecksParams) SetDefaults() {
 
 		offsetDefault = int64(0)
 
-		pageDefault = int64(0)
-
 		windowDefault = string("1h")
 	)
 
 	val := GetRunnerRecentHealthChecksParams{
 		Limit:  &limitDefault,
 		Offset: &offsetDefault,
-		Page:   &pageDefault,
 		Window: &windowDefault,
 	}
 
@@ -191,17 +188,6 @@ func (o *GetRunnerRecentHealthChecksParams) SetOffset(offset *int64) {
 	o.Offset = offset
 }
 
-// WithPage adds the page to the get runner recent health checks params
-func (o *GetRunnerRecentHealthChecksParams) WithPage(page *int64) *GetRunnerRecentHealthChecksParams {
-	o.SetPage(page)
-	return o
-}
-
-// SetPage adds the page to the get runner recent health checks params
-func (o *GetRunnerRecentHealthChecksParams) SetPage(page *int64) {
-	o.Page = page
-}
-
 // WithRunnerID adds the runnerID to the get runner recent health checks params
 func (o *GetRunnerRecentHealthChecksParams) WithRunnerID(runnerID string) *GetRunnerRecentHealthChecksParams {
 	o.SetRunnerID(runnerID)
@@ -222,6 +208,17 @@ func (o *GetRunnerRecentHealthChecksParams) WithWindow(window *string) *GetRunne
 // SetWindow adds the window to the get runner recent health checks params
 func (o *GetRunnerRecentHealthChecksParams) SetWindow(window *string) {
 	o.Window = window
+}
+
+// WithXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get runner recent health checks params
+func (o *GetRunnerRecentHealthChecksParams) WithXNuonPaginationEnabled(xNuonPaginationEnabled *bool) *GetRunnerRecentHealthChecksParams {
+	o.SetXNuonPaginationEnabled(xNuonPaginationEnabled)
+	return o
+}
+
+// SetXNuonPaginationEnabled adds the xNuonPaginationEnabled to the get runner recent health checks params
+func (o *GetRunnerRecentHealthChecksParams) SetXNuonPaginationEnabled(xNuonPaginationEnabled *bool) {
+	o.XNuonPaginationEnabled = xNuonPaginationEnabled
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -266,23 +263,6 @@ func (o *GetRunnerRecentHealthChecksParams) WriteToRequest(r runtime.ClientReque
 		}
 	}
 
-	if o.Page != nil {
-
-		// query param page
-		var qrPage int64
-
-		if o.Page != nil {
-			qrPage = *o.Page
-		}
-		qPage := swag.FormatInt64(qrPage)
-		if qPage != "" {
-
-			if err := r.SetQueryParam("page", qPage); err != nil {
-				return err
-			}
-		}
-	}
-
 	// path param runner_id
 	if err := r.SetPathParam("runner_id", o.RunnerID); err != nil {
 		return err
@@ -302,6 +282,14 @@ func (o *GetRunnerRecentHealthChecksParams) WriteToRequest(r runtime.ClientReque
 			if err := r.SetQueryParam("window", qWindow); err != nil {
 				return err
 			}
+		}
+	}
+
+	if o.XNuonPaginationEnabled != nil {
+
+		// header param x-nuon-pagination-enabled
+		if err := r.SetHeaderParam("x-nuon-pagination-enabled", swag.FormatBool(*o.XNuonPaginationEnabled)); err != nil {
+			return err
 		}
 	}
 
