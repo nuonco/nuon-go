@@ -7,6 +7,7 @@ package operations
 
 import (
 	"fmt"
+	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -140,6 +141,8 @@ type ClientService interface {
 
 	ForgetInstall(params *ForgetInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForgetInstallOK, error)
 
+	GenerateCLIInstallConfig(params *GenerateCLIInstallConfigParams, authInfo runtime.ClientAuthInfoWriter, writer io.Writer, opts ...ClientOption) (*GenerateCLIInstallConfigOK, error)
+
 	GetActionWorkflow(params *GetActionWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionWorkflowOK, error)
 
 	GetActionWorkflowConfig(params *GetActionWorkflowConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionWorkflowConfigOK, error)
@@ -236,6 +239,8 @@ type ClientService interface {
 
 	GetCurrentUser(params *GetCurrentUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCurrentUserOK, error)
 
+	GetDriftedObjects(params *GetDriftedObjectsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDriftedObjectsOK, error)
+
 	GetInstall(params *GetInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallOK, error)
 
 	GetInstallActionWorkflow(params *GetInstallActionWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowOK, error)
@@ -315,6 +320,8 @@ type ClientService interface {
 	GetLatestAppPoliciesConfig(params *GetLatestAppPoliciesConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLatestAppPoliciesConfigOK, error)
 
 	GetLatestAppSecretsConfig(params *GetLatestAppSecretsConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLatestAppSecretsConfigOK, error)
+
+	GetLatestRunnerHeartBeat(params *GetLatestRunnerHeartBeatParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLatestRunnerHeartBeatOK, error)
 
 	GetLogStream(params *GetLogStreamParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLogStreamOK, error)
 
@@ -2638,6 +2645,45 @@ func (a *Client) ForgetInstall(params *ForgetInstallParams, authInfo runtime.Cli
 }
 
 /*
+GenerateCLIInstallConfig generates an install config to be used with c l i
+*/
+func (a *Client) GenerateCLIInstallConfig(params *GenerateCLIInstallConfigParams, authInfo runtime.ClientAuthInfoWriter, writer io.Writer, opts ...ClientOption) (*GenerateCLIInstallConfigOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGenerateCLIInstallConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GenerateCLIInstallConfig",
+		Method:             "GET",
+		PathPattern:        "/v1/installs/{install_id}/generate-cli-install-config",
+		ProducesMediaTypes: []string{"application/toml"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GenerateCLIInstallConfigReader{formats: a.formats, writer: writer},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GenerateCLIInstallConfigOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GenerateCLIInstallConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetActionWorkflow gets an app action workflow
 */
 func (a *Client) GetActionWorkflow(params *GetActionWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionWorkflowOK, error) {
@@ -4571,6 +4617,45 @@ func (a *Client) GetCurrentUser(params *GetCurrentUserParams, authInfo runtime.C
 }
 
 /*
+GetDriftedObjects gets drifted objects for an install
+*/
+func (a *Client) GetDriftedObjects(params *GetDriftedObjectsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDriftedObjectsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetDriftedObjectsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetDriftedObjects",
+		Method:             "GET",
+		PathPattern:        "/v1/installs/{install_id}/drifted-objects",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetDriftedObjectsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetDriftedObjectsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetDriftedObjects: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 	GetInstall gets an install
 
 	Forget an install that has been deleted outside of nuon.
@@ -6172,6 +6257,45 @@ func (a *Client) GetLatestAppSecretsConfig(params *GetLatestAppSecretsConfigPara
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetLatestAppSecretsConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetLatestRunnerHeartBeat gets a runner
+*/
+func (a *Client) GetLatestRunnerHeartBeat(params *GetLatestRunnerHeartBeatParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLatestRunnerHeartBeatOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetLatestRunnerHeartBeatParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetLatestRunnerHeartBeat",
+		Method:             "GET",
+		PathPattern:        "/v1/runners/{runner_id}/heart-beats/latest",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetLatestRunnerHeartBeatReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetLatestRunnerHeartBeatOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetLatestRunnerHeartBeat: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

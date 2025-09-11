@@ -1,6 +1,7 @@
 package nuon
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 
@@ -168,4 +169,16 @@ func (c *client) DeprovisionInstall(ctx context.Context, installID string) error
 	}
 
 	return nil
+}
+
+func (c *client) GenerateCLIInstallConfig(ctx context.Context, installID string) ([]byte, error) {
+	var buf bytes.Buffer
+	if _, err := c.genClient.Operations.GenerateCLIInstallConfig(&operations.GenerateCLIInstallConfigParams{
+		InstallID: installID,
+		Context:   ctx,
+	}, c.getOrgIDAuthInfo(), &buf); err != nil {
+		return nil, err
+	}
+
+	return buf.Bytes(), nil
 }

@@ -1598,6 +1598,21 @@ func (mr *MockClientMockRecorder) GetLatestAppSecretsConfig(ctx, appID interface
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLatestAppSecretsConfig", reflect.TypeOf((*MockClient)(nil).GetLatestAppSecretsConfig), ctx, appID)
 }
 
+// GetLogStream mocks base method.
+func (m *MockClient) GetLogStream(ctx context.Context, logStreamID string) (*models.AppLogStream, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetLogStream", ctx, logStreamID)
+	ret0, _ := ret[0].(*models.AppLogStream)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetLogStream indicates an expected call of GetLogStream.
+func (mr *MockClientMockRecorder) GetLogStream(ctx, logStreamID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLogStream", reflect.TypeOf((*MockClient)(nil).GetLogStream), ctx, logStreamID)
+}
+
 // GetOrg mocks base method.
 func (m *MockClient) GetOrg(ctx context.Context) (*models.AppOrg, error) {
 	m.ctrl.T.Helper()
@@ -1736,6 +1751,21 @@ func (m *MockClient) GetWorkflows(ctx context.Context, installID string, query *
 func (mr *MockClientMockRecorder) GetWorkflows(ctx, installID, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetWorkflows", reflect.TypeOf((*MockClient)(nil).GetWorkflows), ctx, installID, query)
+}
+
+// LogStreamReadLogs mocks base method.
+func (m *MockClient) LogStreamReadLogs(ctx context.Context, logStreamId, offset string) ([]*models.AppOtelLogRecord, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "LogStreamReadLogs", ctx, logStreamId, offset)
+	ret0, _ := ret[0].([]*models.AppOtelLogRecord)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// LogStreamReadLogs indicates an expected call of LogStreamReadLogs.
+func (mr *MockClientMockRecorder) LogStreamReadLogs(ctx, logStreamId, offset interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LogStreamReadLogs", reflect.TypeOf((*MockClient)(nil).LogStreamReadLogs), ctx, logStreamId, offset)
 }
 
 // RenderInstaller mocks base method.
