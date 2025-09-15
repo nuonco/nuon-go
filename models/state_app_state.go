@@ -26,11 +26,11 @@ type StateAppState struct {
 	// populated
 	Populated bool `json:"populated,omitempty"`
 
-	// secrets
-	Secrets map[string]string `json:"secrets,omitempty"`
-
 	// status
 	Status string `json:"status,omitempty"`
+
+	// variables
+	Variables map[string]string `json:"variables,omitempty"`
 }
 
 // Validate validates this state app state
