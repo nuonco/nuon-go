@@ -691,6 +691,21 @@ func (mr *MockClientMockRecorder) ForgetInstall(ctx, installID interface{}) *gom
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ForgetInstall", reflect.TypeOf((*MockClient)(nil).ForgetInstall), ctx, installID)
 }
 
+// GenerateCLIInstallConfig mocks base method.
+func (m *MockClient) GenerateCLIInstallConfig(ctx context.Context, installID string) ([]byte, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GenerateCLIInstallConfig", ctx, installID)
+	ret0, _ := ret[0].([]byte)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GenerateCLIInstallConfig indicates an expected call of GenerateCLIInstallConfig.
+func (mr *MockClientMockRecorder) GenerateCLIInstallConfig(ctx, installID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GenerateCLIInstallConfig", reflect.TypeOf((*MockClient)(nil).GenerateCLIInstallConfig), ctx, installID)
+}
+
 // GetActionWorkflow mocks base method.
 func (m *MockClient) GetActionWorkflow(ctx context.Context, actionWorkflowID string) (*models.AppActionWorkflow, error) {
 	m.ctrl.T.Helper()
