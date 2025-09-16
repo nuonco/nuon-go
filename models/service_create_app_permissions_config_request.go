@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -22,6 +23,9 @@ type ServiceCreateAppPermissionsConfigRequest struct {
 	// app config id
 	// Required: true
 	AppConfigID *string `json:"app_config_id"`
+
+	// break glass roles
+	BreakGlassRoles []*ServiceAppAWSIAMRoleConfig `json:"break_glass_roles"`
 
 	// deprovision role
 	// Required: true
@@ -41,6 +45,10 @@ func (m *ServiceCreateAppPermissionsConfigRequest) Validate(formats strfmt.Regis
 	var res []error
 
 	if err := m.validateAppConfigID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBreakGlassRoles(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -66,6 +74,32 @@ func (m *ServiceCreateAppPermissionsConfigRequest) validateAppConfigID(formats s
 
 	if err := validate.Required("app_config_id", "body", m.AppConfigID); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *ServiceCreateAppPermissionsConfigRequest) validateBreakGlassRoles(formats strfmt.Registry) error {
+	if swag.IsZero(m.BreakGlassRoles) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.BreakGlassRoles); i++ {
+		if swag.IsZero(m.BreakGlassRoles[i]) { // not required
+			continue
+		}
+
+		if m.BreakGlassRoles[i] != nil {
+			if err := m.BreakGlassRoles[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("break_glass_roles" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("break_glass_roles" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -135,6 +169,10 @@ func (m *ServiceCreateAppPermissionsConfigRequest) validateProvisionRole(formats
 func (m *ServiceCreateAppPermissionsConfigRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateBreakGlassRoles(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateDeprovisionRole(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -150,6 +188,31 @@ func (m *ServiceCreateAppPermissionsConfigRequest) ContextValidate(ctx context.C
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ServiceCreateAppPermissionsConfigRequest) contextValidateBreakGlassRoles(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.BreakGlassRoles); i++ {
+
+		if m.BreakGlassRoles[i] != nil {
+
+			if swag.IsZero(m.BreakGlassRoles[i]) { // not required
+				return nil
+			}
+
+			if err := m.BreakGlassRoles[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("break_glass_roles" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("break_glass_roles" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
