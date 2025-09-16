@@ -2656,7 +2656,7 @@ func (a *Client) GenerateCLIInstallConfig(params *GenerateCLIInstallConfigParams
 		ID:                 "GenerateCLIInstallConfig",
 		Method:             "GET",
 		PathPattern:        "/v1/installs/{install_id}/generate-cli-install-config",
-		ProducesMediaTypes: []string{"application/toml"},
+		ProducesMediaTypes: []string{"application/octet-stream"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,

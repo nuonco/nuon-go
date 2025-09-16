@@ -31,6 +31,9 @@ type AppInstallComponent struct {
 	// created by id
 	CreatedByID string `json:"created_by_id,omitempty"`
 
+	// drifted objects
+	DriftedObjects []*AppDriftedObject `json:"drifted_objects"`
+
 	// helm chart
 	HelmChart *AppHelmChart `json:"helm_chart,omitempty"`
 
@@ -70,6 +73,10 @@ func (m *AppInstallComponent) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateDriftedObjects(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateHelmChart(formats); err != nil {
 		res = append(res, err)
 	}
@@ -106,6 +113,32 @@ func (m *AppInstallComponent) validateComponent(formats strfmt.Registry) error {
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *AppInstallComponent) validateDriftedObjects(formats strfmt.Registry) error {
+	if swag.IsZero(m.DriftedObjects) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.DriftedObjects); i++ {
+		if swag.IsZero(m.DriftedObjects[i]) { // not required
+			continue
+		}
+
+		if m.DriftedObjects[i] != nil {
+			if err := m.DriftedObjects[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("drifted_objects" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("drifted_objects" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -202,6 +235,10 @@ func (m *AppInstallComponent) ContextValidate(ctx context.Context, formats strfm
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateDriftedObjects(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateHelmChart(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -240,6 +277,31 @@ func (m *AppInstallComponent) contextValidateComponent(ctx context.Context, form
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *AppInstallComponent) contextValidateDriftedObjects(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.DriftedObjects); i++ {
+
+		if m.DriftedObjects[i] != nil {
+
+			if swag.IsZero(m.DriftedObjects[i]) { // not required
+				return nil
+			}
+
+			if err := m.DriftedObjects[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("drifted_objects" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("drifted_objects" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
