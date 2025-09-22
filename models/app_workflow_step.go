@@ -18,10 +18,8 @@ import (
 // swagger:model app.WorkflowStep
 type AppWorkflowStep struct {
 
-	// the step approval is built into each step at the runner level.
-	Approval struct {
-		AppWorkflowStepApproval
-	} `json:"approval,omitempty"`
+	// approval
+	Approval *AppWorkflowStepApproval `json:"approval,omitempty"`
 
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
@@ -90,9 +88,7 @@ type AppWorkflowStep struct {
 	StartedAt string `json:"started_at,omitempty"`
 
 	// status
-	Status struct {
-		AppCompositeStatus
-	} `json:"status,omitempty"`
+	Status *AppCompositeStatus `json:"status,omitempty"`
 
 	// the following fields are set _once_ a step is in flight, and are orchestrated via the step's signal.
 	//
@@ -148,6 +144,17 @@ func (m *AppWorkflowStep) Validate(formats strfmt.Registry) error {
 func (m *AppWorkflowStep) validateApproval(formats strfmt.Registry) error {
 	if swag.IsZero(m.Approval) { // not required
 		return nil
+	}
+
+	if m.Approval != nil {
+		if err := m.Approval.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("approval")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("approval")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -213,6 +220,17 @@ func (m *AppWorkflowStep) validateStatus(formats strfmt.Registry) error {
 		return nil
 	}
 
+	if m.Status != nil {
+		if err := m.Status.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("status")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("status")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -247,6 +265,22 @@ func (m *AppWorkflowStep) ContextValidate(ctx context.Context, formats strfmt.Re
 }
 
 func (m *AppWorkflowStep) contextValidateApproval(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Approval != nil {
+
+		if swag.IsZero(m.Approval) { // not required
+			return nil
+		}
+
+		if err := m.Approval.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("approval")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("approval")
+			}
+			return err
+		}
+	}
 
 	return nil
 }
@@ -312,6 +346,22 @@ func (m *AppWorkflowStep) contextValidatePolicyValidation(ctx context.Context, f
 }
 
 func (m *AppWorkflowStep) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Status != nil {
+
+		if swag.IsZero(m.Status) { // not required
+			return nil
+		}
+
+		if err := m.Status.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("status")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("status")
+			}
+			return err
+		}
+	}
 
 	return nil
 }
