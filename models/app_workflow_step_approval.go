@@ -39,10 +39,8 @@ type AppWorkflowStepApproval struct {
 	// owner type
 	OwnerType string `json:"owner_type,omitempty"`
 
-	// the response object must be created by the user in the UI or CLI
-	Response struct {
-		AppWorkflowStepApprovalResponse
-	} `json:"response,omitempty"`
+	// response
+	Response *AppWorkflowStepApprovalResponse `json:"response,omitempty"`
 
 	// runner job
 	RunnerJob *AppRunnerJob `json:"runnerJob,omitempty"`
@@ -115,6 +113,17 @@ func (m *AppWorkflowStepApproval) validateInstallWorkflowStep(formats strfmt.Reg
 func (m *AppWorkflowStepApproval) validateResponse(formats strfmt.Registry) error {
 	if swag.IsZero(m.Response) { // not required
 		return nil
+	}
+
+	if m.Response != nil {
+		if err := m.Response.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("response")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("response")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -227,6 +236,22 @@ func (m *AppWorkflowStepApproval) contextValidateInstallWorkflowStep(ctx context
 }
 
 func (m *AppWorkflowStepApproval) contextValidateResponse(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Response != nil {
+
+		if swag.IsZero(m.Response) { // not required
+			return nil
+		}
+
+		if err := m.Response.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("response")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("response")
+			}
+			return err
+		}
+	}
 
 	return nil
 }
