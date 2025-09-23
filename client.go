@@ -156,6 +156,7 @@ type Client interface {
 	// workflows
 	GetWorkflows(ctx context.Context, installID string, query *models.GetPaginatedQuery) ([]*models.AppWorkflow, bool, error)
 	GetWorkflow(ctx context.Context, workflowID string) (*models.AppWorkflow, error)
+	CreateWorkflowStepApprovalResponse(cxt context.Context, workflowID string, workflowStepID string, approvalID string, req *models.ServiceCreateWorkflowStepApprovalResponseRequest) (*models.AppWorkflowStepApprovalResponse, error)
 
 	// log stream/logs
 	GetLogStream(ctx context.Context, logStreamID string) (*models.AppLogStream, error)
