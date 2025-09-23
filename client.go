@@ -160,6 +160,9 @@ type Client interface {
 	CancelWorkflow(ctx context.Context, workflowID string) (*operations.CancelWorkflowAccepted, error)
 	CreateWorkflowStepApprovalResponse(cxt context.Context, workflowID string, workflowStepID string, approvalID string, req *models.ServiceCreateWorkflowStepApprovalResponseRequest) (*models.AppWorkflowStepApprovalResponse, error)
 
+	// install stacks
+	GetInstallStack(ctx context.Context, installID string) (*models.AppInstallStack, error)
+
 	// log stream/logs
 	GetLogStream(ctx context.Context, logStreamID string) (*models.AppLogStream, error)
 	LogStreamReadLogs(ctx context.Context, logStreamId string, offset string) ([]*models.AppOtelLogRecord, error)
