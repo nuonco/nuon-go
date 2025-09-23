@@ -10,6 +10,7 @@ import (
 	"github.com/go-playground/validator/v10"
 
 	genclient "github.com/nuonco/nuon-go/client"
+	"github.com/nuonco/nuon-go/client/operations"
 	"github.com/nuonco/nuon-go/models"
 )
 
@@ -156,6 +157,7 @@ type Client interface {
 	// workflows
 	GetWorkflows(ctx context.Context, installID string, query *models.GetPaginatedQuery) ([]*models.AppWorkflow, bool, error)
 	GetWorkflow(ctx context.Context, workflowID string) (*models.AppWorkflow, error)
+	CancelWorkflow(ctx context.Context, workflowID string) (*operations.CancelWorkflowAccepted, error)
 	CreateWorkflowStepApprovalResponse(cxt context.Context, workflowID string, workflowStepID string, approvalID string, req *models.ServiceCreateWorkflowStepApprovalResponseRequest) (*models.AppWorkflowStepApprovalResponse, error)
 
 	// log stream/logs
