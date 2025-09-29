@@ -28,8 +28,8 @@ type AppAppPermissionsConfig struct {
 	// aws iam roles
 	AwsIamRoles []*AppAppAWSIAMRoleConfig `json:"aws_iam_roles"`
 
-	// break glass aws iam roles
-	BreakGlassAwsIamRoles []*AppAppAWSIAMRoleConfig `json:"break_glass_aws_iam_roles"`
+	// break glass aws iam role
+	BreakGlassAwsIamRole *AppAppAWSIAMRoleConfig `json:"break_glass_aws_iam_role,omitempty"`
 
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
@@ -66,7 +66,7 @@ func (m *AppAppPermissionsConfig) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateBreakGlassAwsIamRoles(formats); err != nil {
+	if err := m.validateBreakGlassAwsIamRole(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -114,27 +114,20 @@ func (m *AppAppPermissionsConfig) validateAwsIamRoles(formats strfmt.Registry) e
 	return nil
 }
 
-func (m *AppAppPermissionsConfig) validateBreakGlassAwsIamRoles(formats strfmt.Registry) error {
-	if swag.IsZero(m.BreakGlassAwsIamRoles) { // not required
+func (m *AppAppPermissionsConfig) validateBreakGlassAwsIamRole(formats strfmt.Registry) error {
+	if swag.IsZero(m.BreakGlassAwsIamRole) { // not required
 		return nil
 	}
 
-	for i := 0; i < len(m.BreakGlassAwsIamRoles); i++ {
-		if swag.IsZero(m.BreakGlassAwsIamRoles[i]) { // not required
-			continue
-		}
-
-		if m.BreakGlassAwsIamRoles[i] != nil {
-			if err := m.BreakGlassAwsIamRoles[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("break_glass_aws_iam_roles" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("break_glass_aws_iam_roles" + "." + strconv.Itoa(i))
-				}
-				return err
+	if m.BreakGlassAwsIamRole != nil {
+		if err := m.BreakGlassAwsIamRole.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("break_glass_aws_iam_role")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("break_glass_aws_iam_role")
 			}
+			return err
 		}
-
 	}
 
 	return nil
@@ -194,7 +187,7 @@ func (m *AppAppPermissionsConfig) ContextValidate(ctx context.Context, formats s
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateBreakGlassAwsIamRoles(ctx, formats); err != nil {
+	if err := m.contextValidateBreakGlassAwsIamRole(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -241,26 +234,22 @@ func (m *AppAppPermissionsConfig) contextValidateAwsIamRoles(ctx context.Context
 	return nil
 }
 
-func (m *AppAppPermissionsConfig) contextValidateBreakGlassAwsIamRoles(ctx context.Context, formats strfmt.Registry) error {
+func (m *AppAppPermissionsConfig) contextValidateBreakGlassAwsIamRole(ctx context.Context, formats strfmt.Registry) error {
 
-	for i := 0; i < len(m.BreakGlassAwsIamRoles); i++ {
+	if m.BreakGlassAwsIamRole != nil {
 
-		if m.BreakGlassAwsIamRoles[i] != nil {
-
-			if swag.IsZero(m.BreakGlassAwsIamRoles[i]) { // not required
-				return nil
-			}
-
-			if err := m.BreakGlassAwsIamRoles[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("break_glass_aws_iam_roles" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("break_glass_aws_iam_roles" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
+		if swag.IsZero(m.BreakGlassAwsIamRole) { // not required
+			return nil
 		}
 
+		if err := m.BreakGlassAwsIamRole.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("break_glass_aws_iam_role")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("break_glass_aws_iam_role")
+			}
+			return err
+		}
 	}
 
 	return nil

@@ -43,6 +43,9 @@ type AppRunner struct {
 	// org id
 	OrgID string `json:"org_id,omitempty"`
 
+	// runner group
+	RunnerGroup *AppRunnerGroup `json:"runner_group,omitempty"`
+
 	// runner group id
 	RunnerGroupID string `json:"runner_group_id,omitempty"`
 
@@ -68,6 +71,10 @@ func (m *AppRunner) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateOperations(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRunnerGroup(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -133,6 +140,25 @@ func (m *AppRunner) validateOperations(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppRunner) validateRunnerGroup(formats strfmt.Registry) error {
+	if swag.IsZero(m.RunnerGroup) { // not required
+		return nil
+	}
+
+	if m.RunnerGroup != nil {
+		if err := m.RunnerGroup.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("runner_group")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("runner_group")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *AppRunner) validateRunnerJob(formats strfmt.Registry) error {
 	if swag.IsZero(m.RunnerJob) { // not required
 		return nil
@@ -161,6 +187,10 @@ func (m *AppRunner) ContextValidate(ctx context.Context, formats strfmt.Registry
 	}
 
 	if err := m.contextValidateOperations(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRunnerGroup(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -219,6 +249,27 @@ func (m *AppRunner) contextValidateOperations(ctx context.Context, formats strfm
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *AppRunner) contextValidateRunnerGroup(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.RunnerGroup != nil {
+
+		if swag.IsZero(m.RunnerGroup) { // not required
+			return nil
+		}
+
+		if err := m.RunnerGroup.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("runner_group")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("runner_group")
+			}
+			return err
+		}
 	}
 
 	return nil

@@ -45,6 +45,9 @@ type AppAccount struct {
 
 	// updated at
 	UpdatedAt string `json:"updated_at,omitempty"`
+
+	// user journeys
+	UserJourneys []*AppUserJourney `json:"user_journeys"`
 }
 
 // Validate validates this app account
@@ -60,6 +63,10 @@ func (m *AppAccount) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateRoles(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUserJourneys(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -131,6 +138,32 @@ func (m *AppAccount) validateRoles(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *AppAccount) validateUserJourneys(formats strfmt.Registry) error {
+	if swag.IsZero(m.UserJourneys) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.UserJourneys); i++ {
+		if swag.IsZero(m.UserJourneys[i]) { // not required
+			continue
+		}
+
+		if m.UserJourneys[i] != nil {
+			if err := m.UserJourneys[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("user_journeys" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("user_journeys" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app account based on the context it is used
 func (m *AppAccount) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -144,6 +177,10 @@ func (m *AppAccount) ContextValidate(ctx context.Context, formats strfmt.Registr
 	}
 
 	if err := m.contextValidateRoles(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateUserJourneys(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -204,6 +241,31 @@ func (m *AppAccount) contextValidateRoles(ctx context.Context, formats strfmt.Re
 					return ve.ValidateName("roles" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("roles" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *AppAccount) contextValidateUserJourneys(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.UserJourneys); i++ {
+
+		if m.UserJourneys[i] != nil {
+
+			if swag.IsZero(m.UserJourneys[i]) { // not required
+				return nil
+			}
+
+			if err := m.UserJourneys[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("user_journeys" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("user_journeys" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
