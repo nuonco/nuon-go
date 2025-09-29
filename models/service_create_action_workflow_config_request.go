@@ -24,9 +24,6 @@ type ServiceCreateActionWorkflowConfigRequest struct {
 	// Required: true
 	AppConfigID *string `json:"app_config_id"`
 
-	// break glass role
-	BreakGlassRole string `json:"break_glass_role,omitempty"`
-
 	// dependencies
 	Dependencies []string `json:"dependencies"`
 

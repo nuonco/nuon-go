@@ -28,9 +28,6 @@ type AppActionWorkflowConfig struct {
 	// app id
 	AppID string `json:"app_id,omitempty"`
 
-	// break glass role
-	BreakGlassRole *GenericsNullString `json:"break_glass_role,omitempty"`
-
 	// component dependency ids
 	ComponentDependencyIds []string `json:"component_dependency_ids"`
 
@@ -66,10 +63,6 @@ type AppActionWorkflowConfig struct {
 func (m *AppActionWorkflowConfig) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateBreakGlassRole(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateRefs(formats); err != nil {
 		res = append(res, err)
 	}
@@ -85,25 +78,6 @@ func (m *AppActionWorkflowConfig) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *AppActionWorkflowConfig) validateBreakGlassRole(formats strfmt.Registry) error {
-	if swag.IsZero(m.BreakGlassRole) { // not required
-		return nil
-	}
-
-	if m.BreakGlassRole != nil {
-		if err := m.BreakGlassRole.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("break_glass_role")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("break_glass_role")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -189,10 +163,6 @@ func (m *AppActionWorkflowConfig) validateTriggers(formats strfmt.Registry) erro
 func (m *AppActionWorkflowConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateBreakGlassRole(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateRefs(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -208,27 +178,6 @@ func (m *AppActionWorkflowConfig) ContextValidate(ctx context.Context, formats s
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *AppActionWorkflowConfig) contextValidateBreakGlassRole(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.BreakGlassRole != nil {
-
-		if swag.IsZero(m.BreakGlassRole) { // not required
-			return nil
-		}
-
-		if err := m.BreakGlassRole.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("break_glass_role")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("break_glass_role")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
