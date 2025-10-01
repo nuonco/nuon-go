@@ -11,7 +11,7 @@ func (c *client) GetWorkflowStepApprovalContents(
 	workflowID string,
 	workflowStepID string,
 	workflowApprovalID string,
-) ([]int64, error) {
+) (interface{}, error) {
 	resp, err := c.genClient.Operations.GetWorkflowStepApprovalContents(&operations.GetWorkflowStepApprovalContentsParams{
 		WorkflowID:     workflowID,
 		WorkflowStepID: workflowStepID,
