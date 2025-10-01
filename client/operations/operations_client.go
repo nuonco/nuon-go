@@ -754,7 +754,7 @@ func (a *Client) CreateApp(params *CreateAppParams, authInfo runtime.ClientAuthI
 }
 
 /*
-CreateAppActionWorkflow creates an app
+CreateAppActionWorkflow creates an app action workflow
 */
 func (a *Client) CreateAppActionWorkflow(params *CreateAppActionWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppActionWorkflowCreated, error) {
 	// TODO: Validate the params before sending
@@ -1666,6 +1666,8 @@ func (a *Client) CreateInstallInputs(params *CreateInstallInputsParams, authInfo
 
 /*
 CreateInstallWorkflowStepApprovalResponse deploys a build to an install
+
+Create a response for an approval for an action workflow step.
 */
 func (a *Client) CreateInstallWorkflowStepApprovalResponse(params *CreateInstallWorkflowStepApprovalResponseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallWorkflowStepApprovalResponseCreated, error) {
 	// TODO: Validate the params before sending
@@ -2140,7 +2142,9 @@ func (a *Client) CreateWaitlist(params *CreateWaitlistParams, authInfo runtime.C
 }
 
 /*
-CreateWorkflowStepApprovalResponse creates an approval for a workflow step
+CreateWorkflowStepApprovalResponse creates an approval response for a workflow step
+
+Create a response for an approval for an action workflow step.
 */
 func (a *Client) CreateWorkflowStepApprovalResponse(params *CreateWorkflowStepApprovalResponseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkflowStepApprovalResponseCreated, error) {
 	// TODO: Validate the params before sending
@@ -2179,7 +2183,7 @@ func (a *Client) CreateWorkflowStepApprovalResponse(params *CreateWorkflowStepAp
 }
 
 /*
-DeleteActionWorkflow deletes an app
+DeleteActionWorkflow deletes an action workflow
 */
 func (a *Client) DeleteActionWorkflow(params *DeleteActionWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteActionWorkflowOK, error) {
 	// TODO: Validate the params before sending
@@ -2780,7 +2784,7 @@ func (a *Client) GenerateCLIInstallConfig(params *GenerateCLIInstallConfigParams
 }
 
 /*
-GetActionWorkflow gets an app action workflow
+GetActionWorkflow gets an app action workflow by action workflow id
 */
 func (a *Client) GetActionWorkflow(params *GetActionWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionWorkflowOK, error) {
 	// TODO: Validate the params before sending
@@ -4301,7 +4305,7 @@ func (a *Client) GetComponentBuilds(params *GetComponentBuildsParams, authInfo r
 }
 
 /*
-GetComponentConfig gets all configs for a component
+GetComponentConfig gets a config for a component
 */
 func (a *Client) GetComponentConfig(params *GetComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentConfigOK, error) {
 	// TODO: Validate the params before sending
@@ -5593,7 +5597,7 @@ func (a *Client) GetInstallInputs(params *GetInstallInputsParams, authInfo runti
 }
 
 /*
-GetInstallLatestDeploy gets an install deploy
+GetInstallLatestDeploy gets an install s latest deploy
 */
 func (a *Client) GetInstallLatestDeploy(params *GetInstallLatestDeployParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallLatestDeployOK, error) {
 	// TODO: Validate the params before sending
@@ -6113,7 +6117,7 @@ func (a *Client) GetInstallWorkflowStepApproval(params *GetInstallWorkflowStepAp
 }
 
 /*
-GetInstallWorkflowSteps gets an install workflow step
+GetInstallWorkflowSteps gets all of the steps for a given install workflow
 
 Return all steps for a workflow.
 */
@@ -6234,7 +6238,7 @@ func (a *Client) GetInstallers(params *GetInstallersParams, authInfo runtime.Cli
 }
 
 /*
-GetLatestAppBreakGlassConfig gets latest app input config
+GetLatestAppBreakGlassConfig gets latest app break glass config
 
 Get the latest break glass config for an app.
 */
@@ -6833,7 +6837,7 @@ func (a *Client) GetRelease(params *GetReleaseParams, authInfo runtime.ClientAut
 }
 
 /*
-GetReleaseSteps gets a release
+GetReleaseSteps gets a release s steps
 */
 func (a *Client) GetReleaseSteps(params *GetReleaseStepsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetReleaseStepsOK, error) {
 	// TODO: Validate the params before sending
@@ -6872,7 +6876,7 @@ func (a *Client) GetReleaseSteps(params *GetReleaseStepsParams, authInfo runtime
 }
 
 /*
-GetRunner gets a runner
+GetRunner gets a runner by id
 
 Return a runner.
 */
@@ -7001,7 +7005,7 @@ func (a *Client) GetRunnerJob(params *GetRunnerJobParams, authInfo runtime.Clien
 }
 
 /*
-GetRunnerJobCompositePlan gets runner job plan
+GetRunnerJobCompositePlan gets runner job composite plan
 
 Return a plan for a runner job.
 */
@@ -7165,7 +7169,7 @@ func (a *Client) GetRunnerJobs(params *GetRunnerJobsParams, authInfo runtime.Cli
 }
 
 /*
-GetRunnerLatestHeartBeat gets a runner
+GetRunnerLatestHeartBeat gets the latest heartbeats for a runner
 */
 func (a *Client) GetRunnerLatestHeartBeat(params *GetRunnerLatestHeartBeatParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerLatestHeartBeatOK, error) {
 	// TODO: Validate the params before sending
@@ -7916,7 +7920,7 @@ func (a *Client) GetWorkflowStepApprovalContents(params *GetWorkflowStepApproval
 }
 
 /*
-GetWorkflowSteps gets a workflow step
+GetWorkflowSteps gets all of the steps for a given workflow
 
 Return all steps for a workflow.
 */
@@ -8914,7 +8918,7 @@ func (a *Client) UpdateInstall(params *UpdateInstallParams, authInfo runtime.Cli
 }
 
 /*
-UpdateInstallConfig creates an install config
+UpdateInstallConfig updates an install config
 */
 func (a *Client) UpdateInstallConfig(params *UpdateInstallConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallConfigCreated, error) {
 	// TODO: Validate the params before sending
@@ -9109,7 +9113,7 @@ func (a *Client) UpdateOrg(params *UpdateOrgParams, authInfo runtime.ClientAuthI
 }
 
 /*
-UpdateRunnerMng shuts down an install runner management process
+UpdateRunnerMng updates an install runner via the mng process
 */
 func (a *Client) UpdateRunnerMng(params *UpdateRunnerMngParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateRunnerMngCreated, error) {
 	// TODO: Validate the params before sending
@@ -9148,7 +9152,7 @@ func (a *Client) UpdateRunnerMng(params *UpdateRunnerMngParams, authInfo runtime
 }
 
 /*
-UpdateRunnerSettings updates a runner job execution
+UpdateRunnerSettings updates a runner s settings via its runner settings group
 */
 func (a *Client) UpdateRunnerSettings(params *UpdateRunnerSettingsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateRunnerSettingsOK, error) {
 	// TODO: Validate the params before sending
