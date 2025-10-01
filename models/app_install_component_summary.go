@@ -43,6 +43,9 @@ type AppInstallComponentSummary struct {
 	// deploy status description
 	DeployStatusDescription string `json:"deploy_status_description,omitempty"`
 
+	// drifted status
+	DriftedStatus bool `json:"drifted_status,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 }

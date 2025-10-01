@@ -9,6 +9,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
+	operations "github.com/nuonco/nuon-go/client/operations"
 	models "github.com/nuonco/nuon-go/models"
 )
 
@@ -33,6 +34,21 @@ func NewMockClient(ctrl *gomock.Controller) *MockClient {
 // EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockClient) EXPECT() *MockClientMockRecorder {
 	return m.recorder
+}
+
+// CancelWorkflow mocks base method.
+func (m *MockClient) CancelWorkflow(ctx context.Context, workflowID string) (*operations.CancelWorkflowAccepted, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CancelWorkflow", ctx, workflowID)
+	ret0, _ := ret[0].(*operations.CancelWorkflowAccepted)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CancelWorkflow indicates an expected call of CancelWorkflow.
+func (mr *MockClientMockRecorder) CancelWorkflow(ctx, workflowID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CancelWorkflow", reflect.TypeOf((*MockClient)(nil).CancelWorkflow), ctx, workflowID)
 }
 
 // CreateActionWorkflow mocks base method.
@@ -513,6 +529,21 @@ func (m *MockClient) CreateVCSConnectionCallback(ctx context.Context, req *model
 func (mr *MockClientMockRecorder) CreateVCSConnectionCallback(ctx, req interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateVCSConnectionCallback", reflect.TypeOf((*MockClient)(nil).CreateVCSConnectionCallback), ctx, req)
+}
+
+// CreateWorkflowStepApprovalResponse mocks base method.
+func (m *MockClient) CreateWorkflowStepApprovalResponse(cxt context.Context, workflowID, workflowStepID, approvalID string, req *models.ServiceCreateWorkflowStepApprovalResponseRequest) (*models.AppWorkflowStepApprovalResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateWorkflowStepApprovalResponse", cxt, workflowID, workflowStepID, approvalID, req)
+	ret0, _ := ret[0].(*models.AppWorkflowStepApprovalResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateWorkflowStepApprovalResponse indicates an expected call of CreateWorkflowStepApprovalResponse.
+func (mr *MockClientMockRecorder) CreateWorkflowStepApprovalResponse(cxt, workflowID, workflowStepID, approvalID, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateWorkflowStepApprovalResponse", reflect.TypeOf((*MockClient)(nil).CreateWorkflowStepApprovalResponse), cxt, workflowID, workflowStepID, approvalID, req)
 }
 
 // DeleteActionWorkflow mocks base method.
@@ -1522,6 +1553,21 @@ func (mr *MockClientMockRecorder) GetInstallSandboxRuns(ctx, installID, query in
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallSandboxRuns", reflect.TypeOf((*MockClient)(nil).GetInstallSandboxRuns), ctx, installID, query)
 }
 
+// GetInstallStack mocks base method.
+func (m *MockClient) GetInstallStack(ctx context.Context, installID string) (*models.AppInstallStack, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetInstallStack", ctx, installID)
+	ret0, _ := ret[0].(*models.AppInstallStack)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetInstallStack indicates an expected call of GetInstallStack.
+func (mr *MockClientMockRecorder) GetInstallStack(ctx, installID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInstallStack", reflect.TypeOf((*MockClient)(nil).GetInstallStack), ctx, installID)
+}
+
 // GetInstaller mocks base method.
 func (m *MockClient) GetInstaller(ctx context.Context, installerID string) (*models.AppInstaller, error) {
 	m.ctrl.T.Helper()
@@ -2000,4 +2046,19 @@ func (m *MockClient) UpdateOrg(ctx context.Context, req *models.ServiceUpdateOrg
 func (mr *MockClientMockRecorder) UpdateOrg(ctx, req interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateOrg", reflect.TypeOf((*MockClient)(nil).UpdateOrg), ctx, req)
+}
+
+// UpdateWorkflow mocks base method.
+func (m *MockClient) UpdateWorkflow(ctx context.Context, workflowID string, req *models.ServiceUpdateWorkflowRequest) (*models.AppWorkflow, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateWorkflow", ctx, workflowID, req)
+	ret0, _ := ret[0].(*models.AppWorkflow)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateWorkflow indicates an expected call of UpdateWorkflow.
+func (mr *MockClientMockRecorder) UpdateWorkflow(ctx, workflowID, req interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateWorkflow", reflect.TypeOf((*MockClient)(nil).UpdateWorkflow), ctx, workflowID, req)
 }
