@@ -75,7 +75,12 @@ GetWorkflowStepApprovalContentsOK describes a response with status code 200, wit
 OK
 */
 type GetWorkflowStepApprovalContentsOK struct {
-	Payload []int64
+
+	/* gzip
+	 */
+	ContentEncoding string
+
+	Payload interface{}
 }
 
 // IsSuccess returns true when this get workflow step approval contents o k response has a 2xx status code
@@ -116,11 +121,18 @@ func (o *GetWorkflowStepApprovalContentsOK) String() string {
 	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsOK  %+v", 200, o.Payload)
 }
 
-func (o *GetWorkflowStepApprovalContentsOK) GetPayload() []int64 {
+func (o *GetWorkflowStepApprovalContentsOK) GetPayload() interface{} {
 	return o.Payload
 }
 
 func (o *GetWorkflowStepApprovalContentsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	// hydrates response header Content-Encoding
+	hdrContentEncoding := response.GetHeader("Content-Encoding")
+
+	if hdrContentEncoding != "" {
+		o.ContentEncoding = hdrContentEncoding
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {

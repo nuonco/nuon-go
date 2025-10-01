@@ -1798,6 +1798,21 @@ func (mr *MockClientMockRecorder) GetWorkflow(ctx, workflowID interface{}) *gomo
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetWorkflow", reflect.TypeOf((*MockClient)(nil).GetWorkflow), ctx, workflowID)
 }
 
+// GetWorkflowStepApprovalContents mocks base method.
+func (m *MockClient) GetWorkflowStepApprovalContents(ctx context.Context, workflowID, workflowStepID, workflowApprovalID string) (map[string]any, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetWorkflowStepApprovalContents", ctx, workflowID, workflowStepID, workflowApprovalID)
+	ret0, _ := ret[0].(map[string]any)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetWorkflowStepApprovalContents indicates an expected call of GetWorkflowStepApprovalContents.
+func (mr *MockClientMockRecorder) GetWorkflowStepApprovalContents(ctx, workflowID, workflowStepID, workflowApprovalID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetWorkflowStepApprovalContents", reflect.TypeOf((*MockClient)(nil).GetWorkflowStepApprovalContents), ctx, workflowID, workflowStepID, workflowApprovalID)
+}
+
 // GetWorkflows mocks base method.
 func (m *MockClient) GetWorkflows(ctx context.Context, installID string, query *models.GetPaginatedQuery) ([]*models.AppWorkflow, bool, error) {
 	m.ctrl.T.Helper()
