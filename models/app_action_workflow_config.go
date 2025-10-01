@@ -28,6 +28,9 @@ type AppActionWorkflowConfig struct {
 	// app id
 	AppID string `json:"app_id,omitempty"`
 
+	// break glass role
+	BreakGlassRole string `json:"break_glass_role,omitempty"`
+
 	// component dependency ids
 	ComponentDependencyIds []string `json:"component_dependency_ids"`
 
