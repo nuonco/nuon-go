@@ -58,3 +58,16 @@ func (c *client) CancelWorkflow(ctx context.Context, workflowID string) (*operat
 
 	return resp, nil
 }
+
+func (c *client) UpdateWorkflow(ctx context.Context, workflowID string, req *models.ServiceUpdateWorkflowRequest) (*models.AppWorkflow, error) {
+	resp, err := c.genClient.Operations.UpdateWorkflow(&operations.UpdateWorkflowParams{
+		WorkflowID: workflowID,
+		Req:        req,
+		Context:    ctx,
+	}, c.getOrgIDAuthInfo())
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}
