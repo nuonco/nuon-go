@@ -39,6 +39,8 @@ type ClientService interface {
 
 	CancelWorkflow(params *CancelWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CancelWorkflowAccepted, error)
 
+	CompleteUserJourney(params *CompleteUserJourneyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CompleteUserJourneyOK, error)
+
 	CreateActionWorkflowConfig(params *CreateActionWorkflowConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateActionWorkflowConfigCreated, error)
 
 	CreateApp(params *CreateAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppCreated, error)
@@ -104,6 +106,8 @@ type ClientService interface {
 	CreateTerraformModuleComponentConfig(params *CreateTerraformModuleComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTerraformModuleComponentConfigCreated, error)
 
 	CreateTerraformWorkspace(params *CreateTerraformWorkspaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTerraformWorkspaceCreated, error)
+
+	CreateUserJourney(params *CreateUserJourneyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateUserJourneyCreated, error)
 
 	CreateVCSConnection(params *CreateVCSConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateVCSConnectionCreated, error)
 
@@ -235,6 +239,8 @@ type ClientService interface {
 
 	GetConfigSchema(params *GetConfigSchemaParams, opts ...ClientOption) (*GetConfigSchemaOK, error)
 
+	GetCurrentAccount(params *GetCurrentAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCurrentAccountOK, error)
+
 	GetCurrentInstallInputs(params *GetCurrentInstallInputsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCurrentInstallInputsOK, error)
 
 	GetCurrentUser(params *GetCurrentUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCurrentUserOK, error)
@@ -351,6 +357,8 @@ type ClientService interface {
 
 	GetRunnerJob(params *GetRunnerJobParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobOK, error)
 
+	GetRunnerJobCompositePlan(params *GetRunnerJobCompositePlanParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobCompositePlanOK, error)
+
 	GetRunnerJobExecutions(params *GetRunnerJobExecutionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobExecutionsOK, error)
 
 	GetRunnerJobPlan(params *GetRunnerJobPlanParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobPlanOK, error)
@@ -383,6 +391,8 @@ type ClientService interface {
 
 	GetTerraformWorkspaces(params *GetTerraformWorkspacesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspacesOK, error)
 
+	GetUserJourneys(params *GetUserJourneysParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserJourneysOK, error)
+
 	GetVCSConnection(params *GetVCSConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVCSConnectionOK, error)
 
 	GetWorkflow(params *GetWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowOK, error)
@@ -414,6 +424,8 @@ type ClientService interface {
 	ReprovisionInstall(params *ReprovisionInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReprovisionInstallCreated, error)
 
 	ReprovisionInstallSandbox(params *ReprovisionInstallSandboxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReprovisionInstallSandboxCreated, error)
+
+	ResetUserJourney(params *ResetUserJourneyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResetUserJourneyOK, error)
 
 	RetryOwnerWorkflowByID(params *RetryOwnerWorkflowByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RetryOwnerWorkflowByIDCreated, error)
 
@@ -456,6 +468,8 @@ type ClientService interface {
 	UpdateRunnerSettings(params *UpdateRunnerSettingsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateRunnerSettingsOK, error)
 
 	UpdateTerraformState(params *UpdateTerraformStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTerraformStateOK, error)
+
+	UpdateUserJourneyStep(params *UpdateUserJourneyStepParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateUserJourneyStepOK, error)
 
 	UpdateWorkflow(params *UpdateWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateWorkflowOK, error)
 
@@ -621,6 +635,47 @@ func (a *Client) CancelWorkflow(params *CancelWorkflowParams, authInfo runtime.C
 }
 
 /*
+CompleteUserJourney completes all steps in a specific user journey
+
+Mark all remaining steps in the specified user journey as complete
+*/
+func (a *Client) CompleteUserJourney(params *CompleteUserJourneyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CompleteUserJourneyOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCompleteUserJourneyParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CompleteUserJourney",
+		Method:             "POST",
+		PathPattern:        "/v1/account/user-journeys/{journey_name}/complete",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CompleteUserJourneyReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CompleteUserJourneyOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CompleteUserJourney: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 CreateActionWorkflowConfig creates action workflow config
 */
 func (a *Client) CreateActionWorkflowConfig(params *CreateActionWorkflowConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateActionWorkflowConfigCreated, error) {
@@ -699,7 +754,7 @@ func (a *Client) CreateApp(params *CreateAppParams, authInfo runtime.ClientAuthI
 }
 
 /*
-CreateAppActionWorkflow creates an app
+CreateAppActionWorkflow creates an app action workflow
 */
 func (a *Client) CreateAppActionWorkflow(params *CreateAppActionWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppActionWorkflowCreated, error) {
 	// TODO: Validate the params before sending
@@ -1611,6 +1666,8 @@ func (a *Client) CreateInstallInputs(params *CreateInstallInputsParams, authInfo
 
 /*
 CreateInstallWorkflowStepApprovalResponse deploys a build to an install
+
+Create a response for an approval for an action workflow step.
 */
 func (a *Client) CreateInstallWorkflowStepApprovalResponse(params *CreateInstallWorkflowStepApprovalResponseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallWorkflowStepApprovalResponseCreated, error) {
 	// TODO: Validate the params before sending
@@ -1928,6 +1985,47 @@ func (a *Client) CreateTerraformWorkspace(params *CreateTerraformWorkspaceParams
 }
 
 /*
+CreateUserJourney creates a new user journey for account
+
+Add a new user journey with steps to track user progress
+*/
+func (a *Client) CreateUserJourney(params *CreateUserJourneyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateUserJourneyCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateUserJourneyParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateUserJourney",
+		Method:             "POST",
+		PathPattern:        "/v1/account/user-journeys",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateUserJourneyReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateUserJourneyCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateUserJourney: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 CreateVCSConnection creates a vcs connection for github
 */
 func (a *Client) CreateVCSConnection(params *CreateVCSConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateVCSConnectionCreated, error) {
@@ -2044,7 +2142,9 @@ func (a *Client) CreateWaitlist(params *CreateWaitlistParams, authInfo runtime.C
 }
 
 /*
-CreateWorkflowStepApprovalResponse deploys a build to an install
+CreateWorkflowStepApprovalResponse creates an approval response for a workflow step
+
+Create a response for an approval for an action workflow step.
 */
 func (a *Client) CreateWorkflowStepApprovalResponse(params *CreateWorkflowStepApprovalResponseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkflowStepApprovalResponseCreated, error) {
 	// TODO: Validate the params before sending
@@ -2083,7 +2183,7 @@ func (a *Client) CreateWorkflowStepApprovalResponse(params *CreateWorkflowStepAp
 }
 
 /*
-DeleteActionWorkflow deletes an app
+DeleteActionWorkflow deletes an action workflow
 */
 func (a *Client) DeleteActionWorkflow(params *DeleteActionWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteActionWorkflowOK, error) {
 	// TODO: Validate the params before sending
@@ -2684,7 +2784,7 @@ func (a *Client) GenerateCLIInstallConfig(params *GenerateCLIInstallConfigParams
 }
 
 /*
-GetActionWorkflow gets an app action workflow
+GetActionWorkflow gets an app action workflow by action workflow id
 */
 func (a *Client) GetActionWorkflow(params *GetActionWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionWorkflowOK, error) {
 	// TODO: Validate the params before sending
@@ -4205,7 +4305,7 @@ func (a *Client) GetComponentBuilds(params *GetComponentBuildsParams, authInfo r
 }
 
 /*
-GetComponentConfig gets all configs for a component
+GetComponentConfig gets a config for a component
 */
 func (a *Client) GetComponentConfig(params *GetComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentConfigOK, error) {
 	// TODO: Validate the params before sending
@@ -4535,6 +4635,47 @@ func (a *Client) GetConfigSchema(params *GetConfigSchemaParams, opts ...ClientOp
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetConfigSchema: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetCurrentAccount gets current account
+
+Get the current account with user journeys and other data
+*/
+func (a *Client) GetCurrentAccount(params *GetCurrentAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCurrentAccountOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetCurrentAccountParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetCurrentAccount",
+		Method:             "GET",
+		PathPattern:        "/v1/account",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetCurrentAccountReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetCurrentAccountOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetCurrentAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -5456,7 +5597,7 @@ func (a *Client) GetInstallInputs(params *GetInstallInputsParams, authInfo runti
 }
 
 /*
-GetInstallLatestDeploy gets an install deploy
+GetInstallLatestDeploy gets an install s latest deploy
 */
 func (a *Client) GetInstallLatestDeploy(params *GetInstallLatestDeployParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallLatestDeployOK, error) {
 	// TODO: Validate the params before sending
@@ -5976,7 +6117,7 @@ func (a *Client) GetInstallWorkflowStepApproval(params *GetInstallWorkflowStepAp
 }
 
 /*
-GetInstallWorkflowSteps gets an install workflow step
+GetInstallWorkflowSteps gets all of the steps for a given install workflow
 
 Return all steps for a workflow.
 */
@@ -6097,7 +6238,7 @@ func (a *Client) GetInstallers(params *GetInstallersParams, authInfo runtime.Cli
 }
 
 /*
-GetLatestAppBreakGlassConfig gets latest app input config
+GetLatestAppBreakGlassConfig gets latest app break glass config
 
 Get the latest break glass config for an app.
 */
@@ -6696,7 +6837,7 @@ func (a *Client) GetRelease(params *GetReleaseParams, authInfo runtime.ClientAut
 }
 
 /*
-GetReleaseSteps gets a release
+GetReleaseSteps gets a release s steps
 */
 func (a *Client) GetReleaseSteps(params *GetReleaseStepsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetReleaseStepsOK, error) {
 	// TODO: Validate the params before sending
@@ -6735,7 +6876,7 @@ func (a *Client) GetReleaseSteps(params *GetReleaseStepsParams, authInfo runtime
 }
 
 /*
-GetRunner gets a runner
+GetRunner gets a runner by id
 
 Return a runner.
 */
@@ -6864,6 +7005,47 @@ func (a *Client) GetRunnerJob(params *GetRunnerJobParams, authInfo runtime.Clien
 }
 
 /*
+GetRunnerJobCompositePlan gets runner job composite plan
+
+Return a plan for a runner job.
+*/
+func (a *Client) GetRunnerJobCompositePlan(params *GetRunnerJobCompositePlanParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobCompositePlanOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetRunnerJobCompositePlanParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetRunnerJobCompositePlan",
+		Method:             "GET",
+		PathPattern:        "/v1/runner-jobs/{runner_job_id}/composite-plan",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetRunnerJobCompositePlanReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetRunnerJobCompositePlanOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetRunnerJobCompositePlan: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetRunnerJobExecutions gets runner job executions
 
 Return executions for a runner job.
@@ -6987,7 +7169,7 @@ func (a *Client) GetRunnerJobs(params *GetRunnerJobsParams, authInfo runtime.Cli
 }
 
 /*
-GetRunnerLatestHeartBeat gets a runner
+GetRunnerLatestHeartBeat gets the latest heartbeats for a runner
 */
 func (a *Client) GetRunnerLatestHeartBeat(params *GetRunnerLatestHeartBeatParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerLatestHeartBeatOK, error) {
 	// TODO: Validate the params before sending
@@ -7496,6 +7678,47 @@ func (a *Client) GetTerraformWorkspaces(params *GetTerraformWorkspacesParams, au
 }
 
 /*
+GetUserJourneys gets user journeys
+
+Get all user journeys for the current user account
+*/
+func (a *Client) GetUserJourneys(params *GetUserJourneysParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserJourneysOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetUserJourneysParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetUserJourneys",
+		Method:             "GET",
+		PathPattern:        "/v1/account/user-journeys",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetUserJourneysReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetUserJourneysOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetUserJourneys: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetVCSConnection returns a vcs connection for an org
 */
 func (a *Client) GetVCSConnection(params *GetVCSConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVCSConnectionOK, error) {
@@ -7697,7 +7920,7 @@ func (a *Client) GetWorkflowStepApprovalContents(params *GetWorkflowStepApproval
 }
 
 /*
-GetWorkflowSteps gets a workflow step
+GetWorkflowSteps gets all of the steps for a given workflow
 
 Return all steps for a workflow.
 */
@@ -8139,6 +8362,47 @@ func (a *Client) ReprovisionInstallSandbox(params *ReprovisionInstallSandboxPara
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for ReprovisionInstallSandbox: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+ResetUserJourney resets user journey steps
+
+Reset all steps in a specified user journey by setting their completion status to false
+*/
+func (a *Client) ResetUserJourney(params *ResetUserJourneyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResetUserJourneyOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewResetUserJourneyParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ResetUserJourney",
+		Method:             "POST",
+		PathPattern:        "/v1/account/user-journeys/{journey_name}/reset",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ResetUserJourneyReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ResetUserJourneyOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ResetUserJourney: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -8654,7 +8918,7 @@ func (a *Client) UpdateInstall(params *UpdateInstallParams, authInfo runtime.Cli
 }
 
 /*
-UpdateInstallConfig creates an install config
+UpdateInstallConfig updates an install config
 */
 func (a *Client) UpdateInstallConfig(params *UpdateInstallConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallConfigCreated, error) {
 	// TODO: Validate the params before sending
@@ -8849,7 +9113,7 @@ func (a *Client) UpdateOrg(params *UpdateOrgParams, authInfo runtime.ClientAuthI
 }
 
 /*
-UpdateRunnerMng shuts down an install runner management process
+UpdateRunnerMng updates an install runner via the mng process
 */
 func (a *Client) UpdateRunnerMng(params *UpdateRunnerMngParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateRunnerMngCreated, error) {
 	// TODO: Validate the params before sending
@@ -8888,7 +9152,7 @@ func (a *Client) UpdateRunnerMng(params *UpdateRunnerMngParams, authInfo runtime
 }
 
 /*
-UpdateRunnerSettings updates a runner job execution
+UpdateRunnerSettings updates a runner s settings via its runner settings group
 */
 func (a *Client) UpdateRunnerSettings(params *UpdateRunnerSettingsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateRunnerSettingsOK, error) {
 	// TODO: Validate the params before sending
@@ -8962,6 +9226,47 @@ func (a *Client) UpdateTerraformState(params *UpdateTerraformStateParams, authIn
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateTerraformState: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateUserJourneyStep updates user journey step completion status
+
+Mark a user journey step as complete or incomplete
+*/
+func (a *Client) UpdateUserJourneyStep(params *UpdateUserJourneyStepParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateUserJourneyStepOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateUserJourneyStepParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateUserJourneyStep",
+		Method:             "PATCH",
+		PathPattern:        "/v1/account/user-journeys/{journey_name}/steps/{step_name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateUserJourneyStepReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateUserJourneyStepOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateUserJourneyStep: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
