@@ -20,6 +20,9 @@ type AppAWSStackOutputs struct {
 	// account id
 	AccountID string `json:"account_id,omitempty"`
 
+	// break glass roles
+	BreakGlassRoles map[string]string `json:"break_glass_roles,omitempty"`
+
 	// deprovision iam role arn
 	DeprovisionIamRoleArn string `json:"deprovision_iam_role_arn,omitempty"`
 
