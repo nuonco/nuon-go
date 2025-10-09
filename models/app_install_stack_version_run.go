@@ -26,6 +26,9 @@ type AppInstallStackVersionRun struct {
 	// data
 	Data map[string]string `json:"data,omitempty"`
 
+	// data contents
+	DataContents interface{} `json:"data_contents,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 

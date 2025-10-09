@@ -62,6 +62,12 @@ GetOrgComponentsParams contains all the parameters to send to the API endpoint
 */
 type GetOrgComponentsParams struct {
 
+	/* ComponentIds.
+
+	   comma-separated list of component IDs to filter by
+	*/
+	ComponentIds *string
+
 	/* Limit.
 
 	   limit of results to return
@@ -152,6 +158,17 @@ func (o *GetOrgComponentsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithComponentIds adds the componentIds to the get org components params
+func (o *GetOrgComponentsParams) WithComponentIds(componentIds *string) *GetOrgComponentsParams {
+	o.SetComponentIds(componentIds)
+	return o
+}
+
+// SetComponentIds adds the componentIds to the get org components params
+func (o *GetOrgComponentsParams) SetComponentIds(componentIds *string) {
+	o.ComponentIds = componentIds
+}
+
 // WithLimit adds the limit to the get org components params
 func (o *GetOrgComponentsParams) WithLimit(limit *int64) *GetOrgComponentsParams {
 	o.SetLimit(limit)
@@ -192,6 +209,23 @@ func (o *GetOrgComponentsParams) WriteToRequest(r runtime.ClientRequest, reg str
 		return err
 	}
 	var res []error
+
+	if o.ComponentIds != nil {
+
+		// query param component_ids
+		var qrComponentIds string
+
+		if o.ComponentIds != nil {
+			qrComponentIds = *o.ComponentIds
+		}
+		qComponentIds := qrComponentIds
+		if qComponentIds != "" {
+
+			if err := r.SetQueryParam("component_ids", qComponentIds); err != nil {
+				return err
+			}
+		}
+	}
 
 	if o.Limit != nil {
 

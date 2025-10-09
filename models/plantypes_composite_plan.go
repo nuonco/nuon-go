@@ -18,27 +18,30 @@ import (
 // swagger:model plantypes.CompositePlan
 type PlantypesCompositePlan struct {
 
-	// action plan
-	ActionPlan *PlantypesActionWorkflowRunPlan `json:"actionPlan,omitempty"`
+	// action workflow run plan
+	ActionWorkflowRunPlan *PlantypesActionWorkflowRunPlan `json:"action_workflow_run_plan,omitempty"`
 
 	// build plan
-	BuildPlan *PlantypesBuildPlan `json:"buildPlan,omitempty"`
+	BuildPlan *PlantypesBuildPlan `json:"build_plan,omitempty"`
 
 	// deploy plan
-	DeployPlan *PlantypesDeployPlan `json:"deployPlan,omitempty"`
+	DeployPlan *PlantypesDeployPlan `json:"deploy_plan,omitempty"`
 
-	// sandbox plan
-	SandboxPlan *PlantypesSandboxRunPlan `json:"sandboxPlan,omitempty"`
+	// sandbox run plan
+	SandboxRunPlan *PlantypesSandboxRunPlan `json:"sandbox_run_plan,omitempty"`
 
-	// sync plan
-	SyncPlan *PlantypesSyncOCIPlan `json:"syncPlan,omitempty"`
+	// sync oci plan
+	SyncOciPlan *PlantypesSyncOCIPlan `json:"sync_oci_plan,omitempty"`
+
+	// sync secrets plan
+	SyncSecretsPlan *PlantypesSyncSecretsPlan `json:"sync_secrets_plan,omitempty"`
 }
 
 // Validate validates this plantypes composite plan
 func (m *PlantypesCompositePlan) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateActionPlan(formats); err != nil {
+	if err := m.validateActionWorkflowRunPlan(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -50,11 +53,15 @@ func (m *PlantypesCompositePlan) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateSandboxPlan(formats); err != nil {
+	if err := m.validateSandboxRunPlan(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateSyncPlan(formats); err != nil {
+	if err := m.validateSyncOciPlan(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSyncSecretsPlan(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -64,17 +71,17 @@ func (m *PlantypesCompositePlan) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *PlantypesCompositePlan) validateActionPlan(formats strfmt.Registry) error {
-	if swag.IsZero(m.ActionPlan) { // not required
+func (m *PlantypesCompositePlan) validateActionWorkflowRunPlan(formats strfmt.Registry) error {
+	if swag.IsZero(m.ActionWorkflowRunPlan) { // not required
 		return nil
 	}
 
-	if m.ActionPlan != nil {
-		if err := m.ActionPlan.Validate(formats); err != nil {
+	if m.ActionWorkflowRunPlan != nil {
+		if err := m.ActionWorkflowRunPlan.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("actionPlan")
+				return ve.ValidateName("action_workflow_run_plan")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("actionPlan")
+				return ce.ValidateName("action_workflow_run_plan")
 			}
 			return err
 		}
@@ -91,9 +98,9 @@ func (m *PlantypesCompositePlan) validateBuildPlan(formats strfmt.Registry) erro
 	if m.BuildPlan != nil {
 		if err := m.BuildPlan.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("buildPlan")
+				return ve.ValidateName("build_plan")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("buildPlan")
+				return ce.ValidateName("build_plan")
 			}
 			return err
 		}
@@ -110,9 +117,9 @@ func (m *PlantypesCompositePlan) validateDeployPlan(formats strfmt.Registry) err
 	if m.DeployPlan != nil {
 		if err := m.DeployPlan.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("deployPlan")
+				return ve.ValidateName("deploy_plan")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("deployPlan")
+				return ce.ValidateName("deploy_plan")
 			}
 			return err
 		}
@@ -121,17 +128,17 @@ func (m *PlantypesCompositePlan) validateDeployPlan(formats strfmt.Registry) err
 	return nil
 }
 
-func (m *PlantypesCompositePlan) validateSandboxPlan(formats strfmt.Registry) error {
-	if swag.IsZero(m.SandboxPlan) { // not required
+func (m *PlantypesCompositePlan) validateSandboxRunPlan(formats strfmt.Registry) error {
+	if swag.IsZero(m.SandboxRunPlan) { // not required
 		return nil
 	}
 
-	if m.SandboxPlan != nil {
-		if err := m.SandboxPlan.Validate(formats); err != nil {
+	if m.SandboxRunPlan != nil {
+		if err := m.SandboxRunPlan.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("sandboxPlan")
+				return ve.ValidateName("sandbox_run_plan")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("sandboxPlan")
+				return ce.ValidateName("sandbox_run_plan")
 			}
 			return err
 		}
@@ -140,17 +147,36 @@ func (m *PlantypesCompositePlan) validateSandboxPlan(formats strfmt.Registry) er
 	return nil
 }
 
-func (m *PlantypesCompositePlan) validateSyncPlan(formats strfmt.Registry) error {
-	if swag.IsZero(m.SyncPlan) { // not required
+func (m *PlantypesCompositePlan) validateSyncOciPlan(formats strfmt.Registry) error {
+	if swag.IsZero(m.SyncOciPlan) { // not required
 		return nil
 	}
 
-	if m.SyncPlan != nil {
-		if err := m.SyncPlan.Validate(formats); err != nil {
+	if m.SyncOciPlan != nil {
+		if err := m.SyncOciPlan.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("syncPlan")
+				return ve.ValidateName("sync_oci_plan")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("syncPlan")
+				return ce.ValidateName("sync_oci_plan")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PlantypesCompositePlan) validateSyncSecretsPlan(formats strfmt.Registry) error {
+	if swag.IsZero(m.SyncSecretsPlan) { // not required
+		return nil
+	}
+
+	if m.SyncSecretsPlan != nil {
+		if err := m.SyncSecretsPlan.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("sync_secrets_plan")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("sync_secrets_plan")
 			}
 			return err
 		}
@@ -163,7 +189,7 @@ func (m *PlantypesCompositePlan) validateSyncPlan(formats strfmt.Registry) error
 func (m *PlantypesCompositePlan) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateActionPlan(ctx, formats); err != nil {
+	if err := m.contextValidateActionWorkflowRunPlan(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -175,11 +201,15 @@ func (m *PlantypesCompositePlan) ContextValidate(ctx context.Context, formats st
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateSandboxPlan(ctx, formats); err != nil {
+	if err := m.contextValidateSandboxRunPlan(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateSyncPlan(ctx, formats); err != nil {
+	if err := m.contextValidateSyncOciPlan(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSyncSecretsPlan(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -189,19 +219,19 @@ func (m *PlantypesCompositePlan) ContextValidate(ctx context.Context, formats st
 	return nil
 }
 
-func (m *PlantypesCompositePlan) contextValidateActionPlan(ctx context.Context, formats strfmt.Registry) error {
+func (m *PlantypesCompositePlan) contextValidateActionWorkflowRunPlan(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.ActionPlan != nil {
+	if m.ActionWorkflowRunPlan != nil {
 
-		if swag.IsZero(m.ActionPlan) { // not required
+		if swag.IsZero(m.ActionWorkflowRunPlan) { // not required
 			return nil
 		}
 
-		if err := m.ActionPlan.ContextValidate(ctx, formats); err != nil {
+		if err := m.ActionWorkflowRunPlan.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("actionPlan")
+				return ve.ValidateName("action_workflow_run_plan")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("actionPlan")
+				return ce.ValidateName("action_workflow_run_plan")
 			}
 			return err
 		}
@@ -220,9 +250,9 @@ func (m *PlantypesCompositePlan) contextValidateBuildPlan(ctx context.Context, f
 
 		if err := m.BuildPlan.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("buildPlan")
+				return ve.ValidateName("build_plan")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("buildPlan")
+				return ce.ValidateName("build_plan")
 			}
 			return err
 		}
@@ -241,9 +271,9 @@ func (m *PlantypesCompositePlan) contextValidateDeployPlan(ctx context.Context, 
 
 		if err := m.DeployPlan.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("deployPlan")
+				return ve.ValidateName("deploy_plan")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("deployPlan")
+				return ce.ValidateName("deploy_plan")
 			}
 			return err
 		}
@@ -252,19 +282,19 @@ func (m *PlantypesCompositePlan) contextValidateDeployPlan(ctx context.Context, 
 	return nil
 }
 
-func (m *PlantypesCompositePlan) contextValidateSandboxPlan(ctx context.Context, formats strfmt.Registry) error {
+func (m *PlantypesCompositePlan) contextValidateSandboxRunPlan(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.SandboxPlan != nil {
+	if m.SandboxRunPlan != nil {
 
-		if swag.IsZero(m.SandboxPlan) { // not required
+		if swag.IsZero(m.SandboxRunPlan) { // not required
 			return nil
 		}
 
-		if err := m.SandboxPlan.ContextValidate(ctx, formats); err != nil {
+		if err := m.SandboxRunPlan.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("sandboxPlan")
+				return ve.ValidateName("sandbox_run_plan")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("sandboxPlan")
+				return ce.ValidateName("sandbox_run_plan")
 			}
 			return err
 		}
@@ -273,19 +303,40 @@ func (m *PlantypesCompositePlan) contextValidateSandboxPlan(ctx context.Context,
 	return nil
 }
 
-func (m *PlantypesCompositePlan) contextValidateSyncPlan(ctx context.Context, formats strfmt.Registry) error {
+func (m *PlantypesCompositePlan) contextValidateSyncOciPlan(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.SyncPlan != nil {
+	if m.SyncOciPlan != nil {
 
-		if swag.IsZero(m.SyncPlan) { // not required
+		if swag.IsZero(m.SyncOciPlan) { // not required
 			return nil
 		}
 
-		if err := m.SyncPlan.ContextValidate(ctx, formats); err != nil {
+		if err := m.SyncOciPlan.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("syncPlan")
+				return ve.ValidateName("sync_oci_plan")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("syncPlan")
+				return ce.ValidateName("sync_oci_plan")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PlantypesCompositePlan) contextValidateSyncSecretsPlan(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SyncSecretsPlan != nil {
+
+		if swag.IsZero(m.SyncSecretsPlan) { // not required
+			return nil
+		}
+
+		if err := m.SyncSecretsPlan.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("sync_secrets_plan")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("sync_secrets_plan")
 			}
 			return err
 		}

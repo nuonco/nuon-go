@@ -287,9 +287,6 @@ func (m *ServiceCreateInstallRequest) UnmarshalBinary(b []byte) error {
 // swagger:model ServiceCreateInstallRequestAwsAccount
 type ServiceCreateInstallRequestAwsAccount struct {
 
-	// iam role arn
-	IamRoleArn string `json:"iam_role_arn,omitempty"`
-
 	// region
 	Region string `json:"region,omitempty"`
 }
@@ -329,18 +326,6 @@ type ServiceCreateInstallRequestAzureAccount struct {
 
 	// location
 	Location string `json:"location,omitempty"`
-
-	// service principal app id
-	ServicePrincipalAppID string `json:"service_principal_app_id,omitempty"`
-
-	// service principal password
-	ServicePrincipalPassword string `json:"service_principal_password,omitempty"`
-
-	// subscription id
-	SubscriptionID string `json:"subscription_id,omitempty"`
-
-	// subscription tenant id
-	SubscriptionTenantID string `json:"subscription_tenant_id,omitempty"`
 }
 
 // Validate validates this service create install request azure account
