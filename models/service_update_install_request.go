@@ -18,6 +18,9 @@ import (
 // swagger:model service.UpdateInstallRequest
 type ServiceUpdateInstallRequest struct {
 
+	// install config
+	InstallConfig *ServicePatchInstallConfigParams `json:"install_config,omitempty"`
+
 	// metadata
 	Metadata *HelpersInstallMetadata `json:"metadata,omitempty"`
 
@@ -29,6 +32,10 @@ type ServiceUpdateInstallRequest struct {
 func (m *ServiceUpdateInstallRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateInstallConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateMetadata(formats); err != nil {
 		res = append(res, err)
 	}
@@ -36,6 +43,25 @@ func (m *ServiceUpdateInstallRequest) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ServiceUpdateInstallRequest) validateInstallConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.InstallConfig) { // not required
+		return nil
+	}
+
+	if m.InstallConfig != nil {
+		if err := m.InstallConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("install_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("install_config")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -62,6 +88,10 @@ func (m *ServiceUpdateInstallRequest) validateMetadata(formats strfmt.Registry) 
 func (m *ServiceUpdateInstallRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateInstallConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateMetadata(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -69,6 +99,27 @@ func (m *ServiceUpdateInstallRequest) ContextValidate(ctx context.Context, forma
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ServiceUpdateInstallRequest) contextValidateInstallConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.InstallConfig != nil {
+
+		if swag.IsZero(m.InstallConfig) { // not required
+			return nil
+		}
+
+		if err := m.InstallConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("install_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("install_config")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

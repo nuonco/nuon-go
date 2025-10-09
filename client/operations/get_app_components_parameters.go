@@ -68,6 +68,12 @@ type GetAppComponentsParams struct {
 	*/
 	AppID string
 
+	/* ComponentIds.
+
+	   comma-separated list of component IDs to filter by
+	*/
+	ComponentIds *string
+
 	/* Limit.
 
 	   limit of results to return
@@ -181,6 +187,17 @@ func (o *GetAppComponentsParams) SetAppID(appID string) {
 	o.AppID = appID
 }
 
+// WithComponentIds adds the componentIds to the get app components params
+func (o *GetAppComponentsParams) WithComponentIds(componentIds *string) *GetAppComponentsParams {
+	o.SetComponentIds(componentIds)
+	return o
+}
+
+// SetComponentIds adds the componentIds to the get app components params
+func (o *GetAppComponentsParams) SetComponentIds(componentIds *string) {
+	o.ComponentIds = componentIds
+}
+
 // WithLimit adds the limit to the get app components params
 func (o *GetAppComponentsParams) WithLimit(limit *int64) *GetAppComponentsParams {
 	o.SetLimit(limit)
@@ -247,6 +264,23 @@ func (o *GetAppComponentsParams) WriteToRequest(r runtime.ClientRequest, reg str
 	// path param app_id
 	if err := r.SetPathParam("app_id", o.AppID); err != nil {
 		return err
+	}
+
+	if o.ComponentIds != nil {
+
+		// query param component_ids
+		var qrComponentIds string
+
+		if o.ComponentIds != nil {
+			qrComponentIds = *o.ComponentIds
+		}
+		qComponentIds := qrComponentIds
+		if qComponentIds != "" {
+
+			if err := r.SetQueryParam("component_ids", qComponentIds); err != nil {
+				return err
+			}
+		}
 	}
 
 	if o.Limit != nil {

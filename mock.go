@@ -1799,10 +1799,10 @@ func (mr *MockClientMockRecorder) GetWorkflow(ctx, workflowID interface{}) *gomo
 }
 
 // GetWorkflowStepApprovalContents mocks base method.
-func (m *MockClient) GetWorkflowStepApprovalContents(ctx context.Context, workflowID, workflowStepID, workflowApprovalID string) (map[string]any, error) {
+func (m *MockClient) GetWorkflowStepApprovalContents(ctx context.Context, workflowID, workflowStepID, workflowApprovalID string) (interface{}, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetWorkflowStepApprovalContents", ctx, workflowID, workflowStepID, workflowApprovalID)
-	ret0, _ := ret[0].(map[string]any)
+	ret0, _ := ret[0].(interface{})
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
