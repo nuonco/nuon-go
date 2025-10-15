@@ -36,8 +36,11 @@ const (
 	// AppWorkflowStepResponseTypeApprove captures enum value "approve"
 	AppWorkflowStepResponseTypeApprove AppWorkflowStepResponseType = "approve"
 
-	// AppWorkflowStepResponseTypeSkip captures enum value "skip"
-	AppWorkflowStepResponseTypeSkip AppWorkflowStepResponseType = "skip"
+	// AppWorkflowStepResponseTypeDenyDashSkipDashCurrent captures enum value "deny-skip-current"
+	AppWorkflowStepResponseTypeDenyDashSkipDashCurrent AppWorkflowStepResponseType = "deny-skip-current"
+
+	// AppWorkflowStepResponseTypeDenyDashSkipDashCurrentDashAndDashDependents captures enum value "deny-skip-current-and-dependents"
+	AppWorkflowStepResponseTypeDenyDashSkipDashCurrentDashAndDashDependents AppWorkflowStepResponseType = "deny-skip-current-and-dependents"
 
 	// AppWorkflowStepResponseTypeRetry captures enum value "retry"
 	AppWorkflowStepResponseTypeRetry AppWorkflowStepResponseType = "retry"
@@ -51,7 +54,7 @@ var appWorkflowStepResponseTypeEnum []interface{}
 
 func init() {
 	var res []AppWorkflowStepResponseType
-	if err := json.Unmarshal([]byte(`["deny","approve","skip","retry","auto-approve"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["deny","approve","deny-skip-current","deny-skip-current-and-dependents","retry","auto-approve"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

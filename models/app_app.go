@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -17,6 +18,9 @@ import (
 //
 // swagger:model app.App
 type AppApp struct {
+
+	// app configs
+	AppConfigs []*AppAppConfig `json:"app_configs"`
 
 	// cloud platform
 	CloudPlatform string `json:"cloud_platform,omitempty"`
@@ -82,6 +86,10 @@ type AppApp struct {
 func (m *AppApp) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAppConfigs(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateInputConfig(formats); err != nil {
 		res = append(res, err)
 	}
@@ -101,6 +109,32 @@ func (m *AppApp) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppApp) validateAppConfigs(formats strfmt.Registry) error {
+	if swag.IsZero(m.AppConfigs) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.AppConfigs); i++ {
+		if swag.IsZero(m.AppConfigs[i]) { // not required
+			continue
+		}
+
+		if m.AppConfigs[i] != nil {
+			if err := m.AppConfigs[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("app_configs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("app_configs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -173,6 +207,10 @@ func (m *AppApp) validateSandboxConfig(formats strfmt.Registry) error {
 func (m *AppApp) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateAppConfigs(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateInputConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -192,6 +230,31 @@ func (m *AppApp) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AppApp) contextValidateAppConfigs(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.AppConfigs); i++ {
+
+		if m.AppConfigs[i] != nil {
+
+			if swag.IsZero(m.AppConfigs[i]) { // not required
+				return nil
+			}
+
+			if err := m.AppConfigs[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("app_configs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("app_configs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
