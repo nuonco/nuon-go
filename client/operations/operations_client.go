@@ -93,8 +93,6 @@ type ClientService interface {
 
 	CreateInstallInputs(params *CreateInstallInputsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallInputsCreated, error)
 
-	CreateInstallWorkflowStepApprovalResponse(params *CreateInstallWorkflowStepApprovalResponseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallWorkflowStepApprovalResponseCreated, error)
-
 	CreateInstaller(params *CreateInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallerCreated, error)
 
 	CreateJobComponentConfig(params *CreateJobComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateJobComponentConfigCreated, error)
@@ -1702,47 +1700,6 @@ func (a *Client) CreateInstallInputs(params *CreateInstallInputsParams, authInfo
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateInstallInputs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-CreateInstallWorkflowStepApprovalResponse deploys a build to an install
-
-Create a response for an approval for an action workflow step.
-*/
-func (a *Client) CreateInstallWorkflowStepApprovalResponse(params *CreateInstallWorkflowStepApprovalResponseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallWorkflowStepApprovalResponseCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewCreateInstallWorkflowStepApprovalResponseParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "CreateInstallWorkflowStepApprovalResponse",
-		Method:             "POST",
-		PathPattern:        "/v1/install-workflows/{install_workflow_id}/steps/{install_workflow_step_id}/approvals/{approval_id}/response",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &CreateInstallWorkflowStepApprovalResponseReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*CreateInstallWorkflowStepApprovalResponseCreated)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for CreateInstallWorkflowStepApprovalResponse: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

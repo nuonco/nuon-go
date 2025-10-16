@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -54,6 +55,12 @@ type AppAppSandboxConfig struct {
 	// public git vcs config
 	PublicGitVcsConfig *AppPublicGitVCSConfig `json:"public_git_vcs_config,omitempty"`
 
+	// references
+	References []string `json:"references"`
+
+	// refs
+	Refs []*RefsRef `json:"refs"`
+
 	// terraform version
 	TerraformVersion string `json:"terraform_version,omitempty"`
 
@@ -76,6 +83,10 @@ func (m *AppAppSandboxConfig) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validatePublicGitVcsConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRefs(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -123,6 +134,32 @@ func (m *AppAppSandboxConfig) validatePublicGitVcsConfig(formats strfmt.Registry
 	return nil
 }
 
+func (m *AppAppSandboxConfig) validateRefs(formats strfmt.Registry) error {
+	if swag.IsZero(m.Refs) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Refs); i++ {
+		if swag.IsZero(m.Refs[i]) { // not required
+			continue
+		}
+
+		if m.Refs[i] != nil {
+			if err := m.Refs[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("refs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // ContextValidate validate this app app sandbox config based on the context it is used
 func (m *AppAppSandboxConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -132,6 +169,10 @@ func (m *AppAppSandboxConfig) ContextValidate(ctx context.Context, formats strfm
 	}
 
 	if err := m.contextValidatePublicGitVcsConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRefs(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -178,6 +219,31 @@ func (m *AppAppSandboxConfig) contextValidatePublicGitVcsConfig(ctx context.Cont
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *AppAppSandboxConfig) contextValidateRefs(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Refs); i++ {
+
+		if m.Refs[i] != nil {
+
+			if swag.IsZero(m.Refs[i]) { // not required
+				return nil
+			}
+
+			if err := m.Refs[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("refs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

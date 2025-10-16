@@ -35,6 +35,9 @@ type ServiceCreateAppSandboxConfigRequest struct {
 	// public git vcs config
 	PublicGitVcsConfig *ServicePublicGitVCSSandboxConfigRequest `json:"public_git_vcs_config,omitempty"`
 
+	// references
+	References []string `json:"references"`
+
 	// terraform version
 	// Required: true
 	TerraformVersion *string `json:"terraform_version"`
