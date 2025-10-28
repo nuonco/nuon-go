@@ -60,7 +60,7 @@ func (o *DeleteTerraformWorkspaceReader) ReadResponse(response runtime.ClientRes
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[DELETE /v1/terraform-workspace/{workspace_id}] DeleteTerraformWorkspace", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /v1/terraform-workspaces/{workspace_id}] DeleteTerraformWorkspace", response, response.Code())
 	}
 }
 
@@ -109,11 +109,11 @@ func (o *DeleteTerraformWorkspaceOK) Code() int {
 }
 
 func (o *DeleteTerraformWorkspaceOK) Error() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspace/{workspace_id}][%d] deleteTerraformWorkspaceOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceOK  %+v", 200, o.Payload)
 }
 
 func (o *DeleteTerraformWorkspaceOK) String() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspace/{workspace_id}][%d] deleteTerraformWorkspaceOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceOK  %+v", 200, o.Payload)
 }
 
 func (o *DeleteTerraformWorkspaceOK) GetPayload() []*models.AppTerraformWorkspace {
@@ -175,11 +175,11 @@ func (o *DeleteTerraformWorkspaceBadRequest) Code() int {
 }
 
 func (o *DeleteTerraformWorkspaceBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspace/{workspace_id}][%d] deleteTerraformWorkspaceBadRequest  %+v", 400, o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *DeleteTerraformWorkspaceBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspace/{workspace_id}][%d] deleteTerraformWorkspaceBadRequest  %+v", 400, o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *DeleteTerraformWorkspaceBadRequest) GetPayload() *models.StderrErrResponse {
@@ -243,11 +243,11 @@ func (o *DeleteTerraformWorkspaceUnauthorized) Code() int {
 }
 
 func (o *DeleteTerraformWorkspaceUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspace/{workspace_id}][%d] deleteTerraformWorkspaceUnauthorized  %+v", 401, o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *DeleteTerraformWorkspaceUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspace/{workspace_id}][%d] deleteTerraformWorkspaceUnauthorized  %+v", 401, o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *DeleteTerraformWorkspaceUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -311,11 +311,11 @@ func (o *DeleteTerraformWorkspaceForbidden) Code() int {
 }
 
 func (o *DeleteTerraformWorkspaceForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspace/{workspace_id}][%d] deleteTerraformWorkspaceForbidden  %+v", 403, o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceForbidden  %+v", 403, o.Payload)
 }
 
 func (o *DeleteTerraformWorkspaceForbidden) String() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspace/{workspace_id}][%d] deleteTerraformWorkspaceForbidden  %+v", 403, o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceForbidden  %+v", 403, o.Payload)
 }
 
 func (o *DeleteTerraformWorkspaceForbidden) GetPayload() *models.StderrErrResponse {
@@ -379,11 +379,11 @@ func (o *DeleteTerraformWorkspaceNotFound) Code() int {
 }
 
 func (o *DeleteTerraformWorkspaceNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspace/{workspace_id}][%d] deleteTerraformWorkspaceNotFound  %+v", 404, o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceNotFound  %+v", 404, o.Payload)
 }
 
 func (o *DeleteTerraformWorkspaceNotFound) String() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspace/{workspace_id}][%d] deleteTerraformWorkspaceNotFound  %+v", 404, o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceNotFound  %+v", 404, o.Payload)
 }
 
 func (o *DeleteTerraformWorkspaceNotFound) GetPayload() *models.StderrErrResponse {
@@ -447,11 +447,11 @@ func (o *DeleteTerraformWorkspaceInternalServerError) Code() int {
 }
 
 func (o *DeleteTerraformWorkspaceInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspace/{workspace_id}][%d] deleteTerraformWorkspaceInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *DeleteTerraformWorkspaceInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspace/{workspace_id}][%d] deleteTerraformWorkspaceInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *DeleteTerraformWorkspaceInternalServerError) GetPayload() *models.StderrErrResponse {

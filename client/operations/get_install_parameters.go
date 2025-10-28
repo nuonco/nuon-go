@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewGetInstallParams creates a new GetInstallParams object,
@@ -61,6 +62,12 @@ GetInstallParams contains all the parameters to send to the API endpoint
 */
 type GetInstallParams struct {
 
+	/* IncludeDriftedObjects.
+
+	   whether to include drifted objects
+	*/
+	IncludeDriftedObjects *bool
+
 	/* InstallID.
 
 	   install ID
@@ -84,7 +91,18 @@ func (o *GetInstallParams) WithDefaults() *GetInstallParams {
 //
 // All values with no default are reset to their zero value.
 func (o *GetInstallParams) SetDefaults() {
-	// no default values defined for this parameter
+	var (
+		includeDriftedObjectsDefault = bool(false)
+	)
+
+	val := GetInstallParams{
+		IncludeDriftedObjects: &includeDriftedObjectsDefault,
+	}
+
+	val.timeout = o.timeout
+	val.Context = o.Context
+	val.HTTPClient = o.HTTPClient
+	*o = val
 }
 
 // WithTimeout adds the timeout to the get install params
@@ -120,6 +138,17 @@ func (o *GetInstallParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithIncludeDriftedObjects adds the includeDriftedObjects to the get install params
+func (o *GetInstallParams) WithIncludeDriftedObjects(includeDriftedObjects *bool) *GetInstallParams {
+	o.SetIncludeDriftedObjects(includeDriftedObjects)
+	return o
+}
+
+// SetIncludeDriftedObjects adds the includeDriftedObjects to the get install params
+func (o *GetInstallParams) SetIncludeDriftedObjects(includeDriftedObjects *bool) {
+	o.IncludeDriftedObjects = includeDriftedObjects
+}
+
 // WithInstallID adds the installID to the get install params
 func (o *GetInstallParams) WithInstallID(installID string) *GetInstallParams {
 	o.SetInstallID(installID)
@@ -138,6 +167,23 @@ func (o *GetInstallParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Re
 		return err
 	}
 	var res []error
+
+	if o.IncludeDriftedObjects != nil {
+
+		// query param include_drifted_objects
+		var qrIncludeDriftedObjects bool
+
+		if o.IncludeDriftedObjects != nil {
+			qrIncludeDriftedObjects = *o.IncludeDriftedObjects
+		}
+		qIncludeDriftedObjects := swag.FormatBool(qrIncludeDriftedObjects)
+		if qIncludeDriftedObjects != "" {
+
+			if err := r.SetQueryParam("include_drifted_objects", qIncludeDriftedObjects); err != nil {
+				return err
+			}
+		}
+	}
 
 	// path param install_id
 	if err := r.SetPathParam("install_id", o.InstallID); err != nil {
