@@ -13,7 +13,7 @@ func (c *client) CreateWorkflowStepApprovalResponse(
 	workflowStepID string,
 	workflowApprovalID string,
 	req *models.ServiceCreateWorkflowStepApprovalResponseRequest,
-) (*models.AppWorkflowStepApprovalResponse, error) {
+) (*models.ServiceCreateWorkflowStepApprovalResponseResponse, error) {
 	resp, err := c.genClient.Operations.CreateWorkflowStepApprovalResponse(&operations.CreateWorkflowStepApprovalResponseParams{
 		WorkflowID:     workflowID,
 		WorkflowStepID: workflowStepID,
