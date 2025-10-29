@@ -21,6 +21,12 @@ type AppAppInput struct {
 	// app input id
 	AppInputID string `json:"app_input_id,omitempty"`
 
+	// CloudFormation configuration (computed fields, not stored in DB)
+	CloudformationStackName string `json:"cloudformation_stack_name,omitempty"`
+
+	// cloudformation stack parameter name
+	CloudformationStackParameterName string `json:"cloudformation_stack_parameter_name,omitempty"`
+
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
@@ -62,6 +68,9 @@ type AppAppInput struct {
 
 	// sensitive
 	Sensitive bool `json:"sensitive,omitempty"`
+
+	// source
+	Source string `json:"source,omitempty"`
 
 	// type
 	Type string `json:"type,omitempty"`

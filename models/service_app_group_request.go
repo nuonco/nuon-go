@@ -27,9 +27,6 @@ type ServiceAppGroupRequest struct {
 	// Required: true
 	DisplayName *string `json:"display_name"`
 
-	// maybe collapsed is a better term ?
-	Hidden bool `json:"hidden,omitempty"`
-
 	// index
 	// Required: true
 	Index *int64 `json:"index"`

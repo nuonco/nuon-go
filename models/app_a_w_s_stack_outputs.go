@@ -20,6 +20,9 @@ type AppAWSStackOutputs struct {
 	// account id
 	AccountID string `json:"account_id,omitempty"`
 
+	// rename with install_inputs
+	AppInputs map[string]string `json:"app_inputs,omitempty"`
+
 	// break glass role arns
 	BreakGlassRoleArns map[string]string `json:"break_glass_role_arns,omitempty"`
 
