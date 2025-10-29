@@ -37,6 +37,9 @@ type AppAppInputGroup struct {
 	// display name
 	DisplayName string `json:"display_name,omitempty"`
 
+	// hidden
+	Hidden bool `json:"hidden,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
