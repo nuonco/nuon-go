@@ -30,11 +30,11 @@ func (m AppAppInputSource) Pointer() *AppAppInputSource {
 
 const (
 
-	// AppAppInputSourceUser captures enum value "user"
-	AppAppInputSourceUser AppAppInputSource = "user"
+	// AppAppInputSourceVendor captures enum value "vendor"
+	AppAppInputSourceVendor AppAppInputSource = "vendor"
 
-	// AppAppInputSourceInstallStack captures enum value "install_stack"
-	AppAppInputSourceInstallStack AppAppInputSource = "install_stack"
+	// AppAppInputSourceCustomer captures enum value "customer"
+	AppAppInputSourceCustomer AppAppInputSource = "customer"
 )
 
 // for schema
@@ -42,7 +42,7 @@ var appAppInputSourceEnum []interface{}
 
 func init() {
 	var res []AppAppInputSource
-	if err := json.Unmarshal([]byte(`["user","install_stack"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["vendor","customer"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

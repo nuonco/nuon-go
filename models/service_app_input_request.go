@@ -47,6 +47,9 @@ type ServiceAppInputRequest struct {
 	// sensitive
 	Sensitive bool `json:"sensitive,omitempty"`
 
+	// source
+	Source AppAppInputSource `json:"source,omitempty"`
+
 	// type
 	Type string `json:"type,omitempty"`
 }
@@ -68,6 +71,10 @@ func (m *ServiceAppInputRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateIndex(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSource(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -113,8 +120,52 @@ func (m *ServiceAppInputRequest) validateIndex(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this service app input request based on context it is used
+func (m *ServiceAppInputRequest) validateSource(formats strfmt.Registry) error {
+	if swag.IsZero(m.Source) { // not required
+		return nil
+	}
+
+	if err := m.Source.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("source")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("source")
+		}
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this service app input request based on the context it is used
 func (m *ServiceAppInputRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateSource(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ServiceAppInputRequest) contextValidateSource(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Source) { // not required
+		return nil
+	}
+
+	if err := m.Source.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("source")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("source")
+		}
+		return err
+	}
+
 	return nil
 }
 

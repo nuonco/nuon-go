@@ -532,10 +532,10 @@ func (mr *MockClientMockRecorder) CreateVCSConnectionCallback(ctx, req interface
 }
 
 // CreateWorkflowStepApprovalResponse mocks base method.
-func (m *MockClient) CreateWorkflowStepApprovalResponse(cxt context.Context, workflowID, workflowStepID, approvalID string, req *models.ServiceCreateWorkflowStepApprovalResponseRequest) (*models.AppWorkflowStepApprovalResponse, error) {
+func (m *MockClient) CreateWorkflowStepApprovalResponse(cxt context.Context, workflowID, workflowStepID, approvalID string, req *models.ServiceCreateWorkflowStepApprovalResponseRequest) (*models.ServiceCreateWorkflowStepApprovalResponseResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateWorkflowStepApprovalResponse", cxt, workflowID, workflowStepID, approvalID, req)
-	ret0, _ := ret[0].(*models.AppWorkflowStepApprovalResponse)
+	ret0, _ := ret[0].(*models.ServiceCreateWorkflowStepApprovalResponseResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
