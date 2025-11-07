@@ -40,6 +40,9 @@ type ServiceCreateHelmComponentConfigRequest struct {
 	// drift schedule
 	DriftSchedule string `json:"drift_schedule,omitempty"`
 
+	// helm repo config
+	HelmRepoConfig *ServiceHelmRepoConfigRequest `json:"helm_repo_config,omitempty"`
+
 	// namespace
 	Namespace string `json:"namespace,omitempty"`
 
@@ -72,6 +75,10 @@ func (m *ServiceCreateHelmComponentConfigRequest) Validate(formats strfmt.Regist
 	}
 
 	if err := m.validateConnectedGithubVcsConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateHelmRepoConfig(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -125,6 +132,25 @@ func (m *ServiceCreateHelmComponentConfigRequest) validateConnectedGithubVcsConf
 	return nil
 }
 
+func (m *ServiceCreateHelmComponentConfigRequest) validateHelmRepoConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.HelmRepoConfig) { // not required
+		return nil
+	}
+
+	if m.HelmRepoConfig != nil {
+		if err := m.HelmRepoConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("helm_repo_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("helm_repo_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *ServiceCreateHelmComponentConfigRequest) validatePublicGitVcsConfig(formats strfmt.Registry) error {
 	if swag.IsZero(m.PublicGitVcsConfig) { // not required
 		return nil
@@ -161,6 +187,10 @@ func (m *ServiceCreateHelmComponentConfigRequest) ContextValidate(ctx context.Co
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateHelmRepoConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidatePublicGitVcsConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -184,6 +214,27 @@ func (m *ServiceCreateHelmComponentConfigRequest) contextValidateConnectedGithub
 				return ve.ValidateName("connected_github_vcs_config")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("connected_github_vcs_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ServiceCreateHelmComponentConfigRequest) contextValidateHelmRepoConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.HelmRepoConfig != nil {
+
+		if swag.IsZero(m.HelmRepoConfig) { // not required
+			return nil
+		}
+
+		if err := m.HelmRepoConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("helm_repo_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("helm_repo_config")
 			}
 			return err
 		}

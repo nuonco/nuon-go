@@ -60,7 +60,7 @@ func (o *CreateWorkflowStepApprovalResponseReader) ReadResponse(response runtime
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/response] CreateWorkflowStepApprovalResponse", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response] CreateWorkflowStepApprovalResponse", response, response.Code())
 	}
 }
 
@@ -109,11 +109,11 @@ func (o *CreateWorkflowStepApprovalResponseCreated) Code() int {
 }
 
 func (o *CreateWorkflowStepApprovalResponseCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseCreated  %+v", 201, o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseCreated) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseCreated  %+v", 201, o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseCreated  %+v", 201, o.Payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseCreated) GetPayload() *models.ServiceCreateWorkflowStepApprovalResponseResponse {
@@ -177,11 +177,11 @@ func (o *CreateWorkflowStepApprovalResponseBadRequest) Code() int {
 }
 
 func (o *CreateWorkflowStepApprovalResponseBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseBadRequest  %+v", 400, o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseBadRequest  %+v", 400, o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +245,11 @@ func (o *CreateWorkflowStepApprovalResponseUnauthorized) Code() int {
 }
 
 func (o *CreateWorkflowStepApprovalResponseUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseUnauthorized  %+v", 401, o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseUnauthorized  %+v", 401, o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +313,11 @@ func (o *CreateWorkflowStepApprovalResponseForbidden) Code() int {
 }
 
 func (o *CreateWorkflowStepApprovalResponseForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseForbidden  %+v", 403, o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseForbidden  %+v", 403, o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseForbidden  %+v", 403, o.Payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +381,11 @@ func (o *CreateWorkflowStepApprovalResponseNotFound) Code() int {
 }
 
 func (o *CreateWorkflowStepApprovalResponseNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseNotFound  %+v", 404, o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseNotFound  %+v", 404, o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseNotFound  %+v", 404, o.Payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +449,11 @@ func (o *CreateWorkflowStepApprovalResponseInternalServerError) Code() int {
 }
 
 func (o *CreateWorkflowStepApprovalResponseInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseInternalServerError) GetPayload() *models.StderrErrResponse {

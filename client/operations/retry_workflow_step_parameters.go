@@ -67,7 +67,7 @@ type RetryWorkflowStepParams struct {
 
 	   Input
 	*/
-	Req *models.ServiceRetryWorkflowStepResponse
+	Req *models.ServiceRetryWorkflowStepRequest
 
 	/* StepID.
 
@@ -135,13 +135,13 @@ func (o *RetryWorkflowStepParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithReq adds the req to the retry workflow step params
-func (o *RetryWorkflowStepParams) WithReq(req *models.ServiceRetryWorkflowStepResponse) *RetryWorkflowStepParams {
+func (o *RetryWorkflowStepParams) WithReq(req *models.ServiceRetryWorkflowStepRequest) *RetryWorkflowStepParams {
 	o.SetReq(req)
 	return o
 }
 
 // SetReq adds the req to the retry workflow step params
-func (o *RetryWorkflowStepParams) SetReq(req *models.ServiceRetryWorkflowStepResponse) {
+func (o *RetryWorkflowStepParams) SetReq(req *models.ServiceRetryWorkflowStepRequest) {
 	o.Req = req
 }
 

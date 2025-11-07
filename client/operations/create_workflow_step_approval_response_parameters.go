@@ -75,17 +75,17 @@ type CreateWorkflowStepApprovalResponseParams struct {
 	*/
 	Req *models.ServiceCreateWorkflowStepApprovalResponseRequest
 
+	/* StepID.
+
+	   step id
+	*/
+	StepID string
+
 	/* WorkflowID.
 
 	   workflow id
 	*/
 	WorkflowID string
-
-	/* WorkflowStepID.
-
-	   step id
-	*/
-	WorkflowStepID string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -162,6 +162,17 @@ func (o *CreateWorkflowStepApprovalResponseParams) SetReq(req *models.ServiceCre
 	o.Req = req
 }
 
+// WithStepID adds the stepID to the create workflow step approval response params
+func (o *CreateWorkflowStepApprovalResponseParams) WithStepID(stepID string) *CreateWorkflowStepApprovalResponseParams {
+	o.SetStepID(stepID)
+	return o
+}
+
+// SetStepID adds the stepId to the create workflow step approval response params
+func (o *CreateWorkflowStepApprovalResponseParams) SetStepID(stepID string) {
+	o.StepID = stepID
+}
+
 // WithWorkflowID adds the workflowID to the create workflow step approval response params
 func (o *CreateWorkflowStepApprovalResponseParams) WithWorkflowID(workflowID string) *CreateWorkflowStepApprovalResponseParams {
 	o.SetWorkflowID(workflowID)
@@ -171,17 +182,6 @@ func (o *CreateWorkflowStepApprovalResponseParams) WithWorkflowID(workflowID str
 // SetWorkflowID adds the workflowId to the create workflow step approval response params
 func (o *CreateWorkflowStepApprovalResponseParams) SetWorkflowID(workflowID string) {
 	o.WorkflowID = workflowID
-}
-
-// WithWorkflowStepID adds the workflowStepID to the create workflow step approval response params
-func (o *CreateWorkflowStepApprovalResponseParams) WithWorkflowStepID(workflowStepID string) *CreateWorkflowStepApprovalResponseParams {
-	o.SetWorkflowStepID(workflowStepID)
-	return o
-}
-
-// SetWorkflowStepID adds the workflowStepId to the create workflow step approval response params
-func (o *CreateWorkflowStepApprovalResponseParams) SetWorkflowStepID(workflowStepID string) {
-	o.WorkflowStepID = workflowStepID
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -202,13 +202,13 @@ func (o *CreateWorkflowStepApprovalResponseParams) WriteToRequest(r runtime.Clie
 		}
 	}
 
-	// path param workflow_id
-	if err := r.SetPathParam("workflow_id", o.WorkflowID); err != nil {
+	// path param step_id
+	if err := r.SetPathParam("step_id", o.StepID); err != nil {
 		return err
 	}
 
-	// path param workflow_step_id
-	if err := r.SetPathParam("workflow_step_id", o.WorkflowStepID); err != nil {
+	// path param workflow_id
+	if err := r.SetPathParam("workflow_id", o.WorkflowID); err != nil {
 		return err
 	}
 

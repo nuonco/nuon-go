@@ -67,17 +67,17 @@ type GetWorkflowStepApprovalContentsParams struct {
 	*/
 	ApprovalID string
 
+	/* StepID.
+
+	   step id
+	*/
+	StepID string
+
 	/* WorkflowID.
 
 	   workflow id
 	*/
 	WorkflowID string
-
-	/* WorkflowStepID.
-
-	   step id
-	*/
-	WorkflowStepID string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -143,6 +143,17 @@ func (o *GetWorkflowStepApprovalContentsParams) SetApprovalID(approvalID string)
 	o.ApprovalID = approvalID
 }
 
+// WithStepID adds the stepID to the get workflow step approval contents params
+func (o *GetWorkflowStepApprovalContentsParams) WithStepID(stepID string) *GetWorkflowStepApprovalContentsParams {
+	o.SetStepID(stepID)
+	return o
+}
+
+// SetStepID adds the stepId to the get workflow step approval contents params
+func (o *GetWorkflowStepApprovalContentsParams) SetStepID(stepID string) {
+	o.StepID = stepID
+}
+
 // WithWorkflowID adds the workflowID to the get workflow step approval contents params
 func (o *GetWorkflowStepApprovalContentsParams) WithWorkflowID(workflowID string) *GetWorkflowStepApprovalContentsParams {
 	o.SetWorkflowID(workflowID)
@@ -152,17 +163,6 @@ func (o *GetWorkflowStepApprovalContentsParams) WithWorkflowID(workflowID string
 // SetWorkflowID adds the workflowId to the get workflow step approval contents params
 func (o *GetWorkflowStepApprovalContentsParams) SetWorkflowID(workflowID string) {
 	o.WorkflowID = workflowID
-}
-
-// WithWorkflowStepID adds the workflowStepID to the get workflow step approval contents params
-func (o *GetWorkflowStepApprovalContentsParams) WithWorkflowStepID(workflowStepID string) *GetWorkflowStepApprovalContentsParams {
-	o.SetWorkflowStepID(workflowStepID)
-	return o
-}
-
-// SetWorkflowStepID adds the workflowStepId to the get workflow step approval contents params
-func (o *GetWorkflowStepApprovalContentsParams) SetWorkflowStepID(workflowStepID string) {
-	o.WorkflowStepID = workflowStepID
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -178,13 +178,13 @@ func (o *GetWorkflowStepApprovalContentsParams) WriteToRequest(r runtime.ClientR
 		return err
 	}
 
-	// path param workflow_id
-	if err := r.SetPathParam("workflow_id", o.WorkflowID); err != nil {
+	// path param step_id
+	if err := r.SetPathParam("step_id", o.StepID); err != nil {
 		return err
 	}
 
-	// path param workflow_step_id
-	if err := r.SetPathParam("workflow_step_id", o.WorkflowStepID); err != nil {
+	// path param workflow_id
+	if err := r.SetPathParam("workflow_id", o.WorkflowID); err != nil {
 		return err
 	}
 
