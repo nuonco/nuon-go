@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -19,6 +20,9 @@ type AppHelmConfig struct {
 
 	// chart name
 	ChartName string `json:"chart_name,omitempty"`
+
+	// helm repo config
+	HelmRepoConfig *AppHelmRepoConfig `json:"helm_repo_config,omitempty"`
 
 	// namespace
 	Namespace string `json:"namespace,omitempty"`
@@ -38,11 +42,69 @@ type AppHelmConfig struct {
 
 // Validate validates this app helm config
 func (m *AppHelmConfig) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateHelmRepoConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this app helm config based on context it is used
+func (m *AppHelmConfig) validateHelmRepoConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.HelmRepoConfig) { // not required
+		return nil
+	}
+
+	if m.HelmRepoConfig != nil {
+		if err := m.HelmRepoConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("helm_repo_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("helm_repo_config")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this app helm config based on the context it is used
 func (m *AppHelmConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateHelmRepoConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *AppHelmConfig) contextValidateHelmRepoConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.HelmRepoConfig != nil {
+
+		if swag.IsZero(m.HelmRepoConfig) { // not required
+			return nil
+		}
+
+		if err := m.HelmRepoConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("helm_repo_config")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("helm_repo_config")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

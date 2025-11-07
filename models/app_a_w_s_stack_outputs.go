@@ -20,14 +20,14 @@ type AppAWSStackOutputs struct {
 	// account id
 	AccountID string `json:"account_id,omitempty"`
 
-	// rename with install_inputs
-	AppInputs map[string]string `json:"app_inputs,omitempty"`
-
 	// break glass role arns
 	BreakGlassRoleArns map[string]string `json:"break_glass_role_arns,omitempty"`
 
 	// deprovision iam role arn
 	DeprovisionIamRoleArn string `json:"deprovision_iam_role_arn,omitempty"`
+
+	// install inputs
+	InstallInputs map[string]string `json:"install_inputs,omitempty"`
 
 	// maintenance iam role arn
 	MaintenanceIamRoleArn string `json:"maintenance_iam_role_arn,omitempty"`

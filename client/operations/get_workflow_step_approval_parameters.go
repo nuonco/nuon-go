@@ -67,17 +67,17 @@ type GetWorkflowStepApprovalParams struct {
 	*/
 	ApprovalID string
 
+	/* StepID.
+
+	   step id
+	*/
+	StepID string
+
 	/* WorkflowID.
 
 	   workflow id
 	*/
 	WorkflowID string
-
-	/* WorkflowStepID.
-
-	   step id
-	*/
-	WorkflowStepID string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -143,6 +143,17 @@ func (o *GetWorkflowStepApprovalParams) SetApprovalID(approvalID string) {
 	o.ApprovalID = approvalID
 }
 
+// WithStepID adds the stepID to the get workflow step approval params
+func (o *GetWorkflowStepApprovalParams) WithStepID(stepID string) *GetWorkflowStepApprovalParams {
+	o.SetStepID(stepID)
+	return o
+}
+
+// SetStepID adds the stepId to the get workflow step approval params
+func (o *GetWorkflowStepApprovalParams) SetStepID(stepID string) {
+	o.StepID = stepID
+}
+
 // WithWorkflowID adds the workflowID to the get workflow step approval params
 func (o *GetWorkflowStepApprovalParams) WithWorkflowID(workflowID string) *GetWorkflowStepApprovalParams {
 	o.SetWorkflowID(workflowID)
@@ -152,17 +163,6 @@ func (o *GetWorkflowStepApprovalParams) WithWorkflowID(workflowID string) *GetWo
 // SetWorkflowID adds the workflowId to the get workflow step approval params
 func (o *GetWorkflowStepApprovalParams) SetWorkflowID(workflowID string) {
 	o.WorkflowID = workflowID
-}
-
-// WithWorkflowStepID adds the workflowStepID to the get workflow step approval params
-func (o *GetWorkflowStepApprovalParams) WithWorkflowStepID(workflowStepID string) *GetWorkflowStepApprovalParams {
-	o.SetWorkflowStepID(workflowStepID)
-	return o
-}
-
-// SetWorkflowStepID adds the workflowStepId to the get workflow step approval params
-func (o *GetWorkflowStepApprovalParams) SetWorkflowStepID(workflowStepID string) {
-	o.WorkflowStepID = workflowStepID
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -178,13 +178,13 @@ func (o *GetWorkflowStepApprovalParams) WriteToRequest(r runtime.ClientRequest, 
 		return err
 	}
 
-	// path param workflow_id
-	if err := r.SetPathParam("workflow_id", o.WorkflowID); err != nil {
+	// path param step_id
+	if err := r.SetPathParam("step_id", o.StepID); err != nil {
 		return err
 	}
 
-	// path param workflow_step_id
-	if err := r.SetPathParam("workflow_step_id", o.WorkflowStepID); err != nil {
+	// path param workflow_id
+	if err := r.SetPathParam("workflow_id", o.WorkflowID); err != nil {
 		return err
 	}
 

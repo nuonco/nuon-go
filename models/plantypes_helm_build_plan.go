@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -17,17 +18,78 @@ import (
 // swagger:model plantypes.HelmBuildPlan
 type PlantypesHelmBuildPlan struct {
 
+	// helm repo config
+	HelmRepoConfig *ConfigHelmRepoConfig `json:"helmRepoConfig,omitempty"`
+
 	// labels
 	Labels map[string]string `json:"labels,omitempty"`
 }
 
 // Validate validates this plantypes helm build plan
 func (m *PlantypesHelmBuildPlan) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateHelmRepoConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this plantypes helm build plan based on context it is used
+func (m *PlantypesHelmBuildPlan) validateHelmRepoConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.HelmRepoConfig) { // not required
+		return nil
+	}
+
+	if m.HelmRepoConfig != nil {
+		if err := m.HelmRepoConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("helmRepoConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("helmRepoConfig")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this plantypes helm build plan based on the context it is used
 func (m *PlantypesHelmBuildPlan) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateHelmRepoConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *PlantypesHelmBuildPlan) contextValidateHelmRepoConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.HelmRepoConfig != nil {
+
+		if swag.IsZero(m.HelmRepoConfig) { // not required
+			return nil
+		}
+
+		if err := m.HelmRepoConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("helmRepoConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("helmRepoConfig")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

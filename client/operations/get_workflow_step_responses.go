@@ -60,7 +60,7 @@ func (o *GetWorkflowStepReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}] GetWorkflowStep", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /v1/workflows/{workflow_id}/steps/{step_id}] GetWorkflowStep", response, response.Code())
 	}
 }
 
@@ -109,11 +109,11 @@ func (o *GetWorkflowStepOK) Code() int {
 }
 
 func (o *GetWorkflowStepOK) Error() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}][%d] getWorkflowStepOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}][%d] getWorkflowStepOK  %+v", 200, o.Payload)
 }
 
 func (o *GetWorkflowStepOK) String() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}][%d] getWorkflowStepOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}][%d] getWorkflowStepOK  %+v", 200, o.Payload)
 }
 
 func (o *GetWorkflowStepOK) GetPayload() *models.AppWorkflowStep {
@@ -177,11 +177,11 @@ func (o *GetWorkflowStepBadRequest) Code() int {
 }
 
 func (o *GetWorkflowStepBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}][%d] getWorkflowStepBadRequest  %+v", 400, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}][%d] getWorkflowStepBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetWorkflowStepBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}][%d] getWorkflowStepBadRequest  %+v", 400, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}][%d] getWorkflowStepBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetWorkflowStepBadRequest) GetPayload() *models.StderrErrResponse {
@@ -245,11 +245,11 @@ func (o *GetWorkflowStepUnauthorized) Code() int {
 }
 
 func (o *GetWorkflowStepUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}][%d] getWorkflowStepUnauthorized  %+v", 401, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}][%d] getWorkflowStepUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetWorkflowStepUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}][%d] getWorkflowStepUnauthorized  %+v", 401, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}][%d] getWorkflowStepUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetWorkflowStepUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -313,11 +313,11 @@ func (o *GetWorkflowStepForbidden) Code() int {
 }
 
 func (o *GetWorkflowStepForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}][%d] getWorkflowStepForbidden  %+v", 403, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}][%d] getWorkflowStepForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetWorkflowStepForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}][%d] getWorkflowStepForbidden  %+v", 403, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}][%d] getWorkflowStepForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetWorkflowStepForbidden) GetPayload() *models.StderrErrResponse {
@@ -381,11 +381,11 @@ func (o *GetWorkflowStepNotFound) Code() int {
 }
 
 func (o *GetWorkflowStepNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}][%d] getWorkflowStepNotFound  %+v", 404, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}][%d] getWorkflowStepNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetWorkflowStepNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}][%d] getWorkflowStepNotFound  %+v", 404, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}][%d] getWorkflowStepNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetWorkflowStepNotFound) GetPayload() *models.StderrErrResponse {
@@ -449,11 +449,11 @@ func (o *GetWorkflowStepInternalServerError) Code() int {
 }
 
 func (o *GetWorkflowStepInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}][%d] getWorkflowStepInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}][%d] getWorkflowStepInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetWorkflowStepInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}][%d] getWorkflowStepInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}][%d] getWorkflowStepInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetWorkflowStepInternalServerError) GetPayload() *models.StderrErrResponse {

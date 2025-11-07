@@ -60,7 +60,7 @@ func (o *GetWorkflowStepApprovalContentsReader) ReadResponse(response runtime.Cl
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/contents] GetWorkflowStepApprovalContents", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/contents] GetWorkflowStepApprovalContents", response, response.Code())
 	}
 }
 
@@ -114,11 +114,11 @@ func (o *GetWorkflowStepApprovalContentsOK) Code() int {
 }
 
 func (o *GetWorkflowStepApprovalContentsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsOK  %+v", 200, o.Payload)
 }
 
 func (o *GetWorkflowStepApprovalContentsOK) String() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsOK  %+v", 200, o.Payload)
 }
 
 func (o *GetWorkflowStepApprovalContentsOK) GetPayload() interface{} {
@@ -187,11 +187,11 @@ func (o *GetWorkflowStepApprovalContentsBadRequest) Code() int {
 }
 
 func (o *GetWorkflowStepApprovalContentsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsBadRequest  %+v", 400, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetWorkflowStepApprovalContentsBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsBadRequest  %+v", 400, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsBadRequest  %+v", 400, o.Payload)
 }
 
 func (o *GetWorkflowStepApprovalContentsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -255,11 +255,11 @@ func (o *GetWorkflowStepApprovalContentsUnauthorized) Code() int {
 }
 
 func (o *GetWorkflowStepApprovalContentsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsUnauthorized  %+v", 401, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetWorkflowStepApprovalContentsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsUnauthorized  %+v", 401, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsUnauthorized  %+v", 401, o.Payload)
 }
 
 func (o *GetWorkflowStepApprovalContentsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -323,11 +323,11 @@ func (o *GetWorkflowStepApprovalContentsForbidden) Code() int {
 }
 
 func (o *GetWorkflowStepApprovalContentsForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsForbidden  %+v", 403, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetWorkflowStepApprovalContentsForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsForbidden  %+v", 403, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsForbidden  %+v", 403, o.Payload)
 }
 
 func (o *GetWorkflowStepApprovalContentsForbidden) GetPayload() *models.StderrErrResponse {
@@ -391,11 +391,11 @@ func (o *GetWorkflowStepApprovalContentsNotFound) Code() int {
 }
 
 func (o *GetWorkflowStepApprovalContentsNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsNotFound  %+v", 404, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetWorkflowStepApprovalContentsNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsNotFound  %+v", 404, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsNotFound  %+v", 404, o.Payload)
 }
 
 func (o *GetWorkflowStepApprovalContentsNotFound) GetPayload() *models.StderrErrResponse {
@@ -459,11 +459,11 @@ func (o *GetWorkflowStepApprovalContentsInternalServerError) Code() int {
 }
 
 func (o *GetWorkflowStepApprovalContentsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetWorkflowStepApprovalContentsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{workflow_step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[GET /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/contents][%d] getWorkflowStepApprovalContentsInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetWorkflowStepApprovalContentsInternalServerError) GetPayload() *models.StderrErrResponse {
