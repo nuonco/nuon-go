@@ -32,6 +32,19 @@ func (c *client) GetAppInputLatestConfig(ctx context.Context, appID string) (*mo
 	return resp.Payload, nil
 }
 
+func (c *client) GetAppInputConfig(ctx context.Context, appID, appInputConfigID string) (*models.AppAppInputConfig, error) {
+	resp, err := c.genClient.Operations.GetAppInputConfig(&operations.GetAppInputConfigParams{
+		AppID:         appID,
+		InputConfigID: appInputConfigID,
+		Context:       ctx,
+	}, c.getOrgIDAuthInfo())
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}
+
 func (c *client) GetAppInputConfigs(ctx context.Context, appID string, query *models.GetPaginatedQuery) ([]*models.AppAppInputConfig, bool, error) {
 	params := &operations.GetAppInputConfigsParams{
 		AppID:   appID,
