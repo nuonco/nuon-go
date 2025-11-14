@@ -59,3 +59,15 @@ func (c *client) GetAppRunnerConfigs(ctx context.Context, appID string, query *m
 
 	return resp.Payload, false, nil
 }
+
+func (c *client) GetRunner(ctx context.Context, runnerID string) (*models.AppRunner, error) {
+	resp, err := c.genClient.Operations.GetRunner(&operations.GetRunnerParams{
+		RunnerID: runnerID,
+		Context:  ctx,
+	}, c.getOrgIDAuthInfo())
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Payload, nil
+}
