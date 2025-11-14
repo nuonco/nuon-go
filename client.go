@@ -47,6 +47,7 @@ type Client interface {
 	CreateAppRunnerConfig(ctx context.Context, appID string, req *models.ServiceCreateAppRunnerConfigRequest) (*models.AppAppRunnerConfig, error)
 	GetAppRunnerLatestConfig(ctx context.Context, appID string) (*models.AppAppRunnerConfig, error)
 	GetAppRunnerConfigs(ctx context.Context, appID string, query *models.GetPaginatedQuery) ([]*models.AppAppRunnerConfig, bool, error)
+	GetLatestRunnerHeartBeat(ctx context.Context, runnerID string) (models.ServiceLatestRunnerHeartBeats, error)
 
 	// app config methods
 	GetAppConfigTemplate(ctx context.Context, appID string, typ models.ServiceAppConfigTemplateType) (*models.ServiceAppConfigTemplate, error)
