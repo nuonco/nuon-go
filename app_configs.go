@@ -20,11 +20,12 @@ func (c *client) GetAppConfigTemplate(ctx context.Context, appID string, typ mod
 	return resp.Payload, nil
 }
 
-func (c *client) GetAppConfig(ctx context.Context, appID, appConfigID string) (*models.AppAppConfig, error) {
+func (c *client) GetAppConfig(ctx context.Context, appID, appConfigID string, recurse *bool) (*models.AppAppConfig, error) {
 	resp, err := c.genClient.Operations.GetAppConfig(&operations.GetAppConfigParams{
 		AppID:       appID,
 		AppConfigID: appConfigID,
 		Context:     ctx,
+		Recurse:     recurse,
 	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return nil, err
