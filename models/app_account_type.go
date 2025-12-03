@@ -44,7 +44,7 @@ const (
 )
 
 // for schema
-var appAccountTypeEnum []interface{}
+var appAccountTypeEnum []any
 
 func init() {
 	var res []AppAccountType

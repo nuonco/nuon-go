@@ -38,7 +38,7 @@ const (
 )
 
 // for schema
-var appInstallApprovalOptionEnum []interface{}
+var appInstallApprovalOptionEnum []any
 
 func init() {
 	var res []AppInstallApprovalOption

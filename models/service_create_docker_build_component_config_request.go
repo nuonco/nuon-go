@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -80,11 +81,15 @@ func (m *ServiceCreateDockerBuildComponentConfigRequest) validateConnectedGithub
 
 	if m.ConnectedGithubVcsConfig != nil {
 		if err := m.ConnectedGithubVcsConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("connected_github_vcs_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("connected_github_vcs_config")
 			}
+
 			return err
 		}
 	}
@@ -108,11 +113,15 @@ func (m *ServiceCreateDockerBuildComponentConfigRequest) validatePublicGitVcsCon
 
 	if m.PublicGitVcsConfig != nil {
 		if err := m.PublicGitVcsConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("public_git_vcs_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("public_git_vcs_config")
 			}
+
 			return err
 		}
 	}
@@ -147,11 +156,15 @@ func (m *ServiceCreateDockerBuildComponentConfigRequest) contextValidateConnecte
 		}
 
 		if err := m.ConnectedGithubVcsConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("connected_github_vcs_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("connected_github_vcs_config")
 			}
+
 			return err
 		}
 	}
@@ -168,11 +181,15 @@ func (m *ServiceCreateDockerBuildComponentConfigRequest) contextValidatePublicGi
 		}
 
 		if err := m.PublicGitVcsConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("public_git_vcs_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("public_git_vcs_config")
 			}
+
 			return err
 		}
 	}

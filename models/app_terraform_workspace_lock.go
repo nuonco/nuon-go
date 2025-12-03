@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -29,6 +30,9 @@ type AppTerraformWorkspaceLock struct {
 
 	// lock
 	Lock *AppTerraformLock `json:"lock,omitempty"`
+
+	// org id
+	OrgID string `json:"org_id,omitempty"`
 
 	// runner job
 	RunnerJob *AppRunnerJob `json:"runner_job,omitempty"`
@@ -68,11 +72,15 @@ func (m *AppTerraformWorkspaceLock) validateLock(formats strfmt.Registry) error 
 
 	if m.Lock != nil {
 		if err := m.Lock.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("lock")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("lock")
 			}
+
 			return err
 		}
 	}
@@ -87,11 +95,15 @@ func (m *AppTerraformWorkspaceLock) validateRunnerJob(formats strfmt.Registry) e
 
 	if m.RunnerJob != nil {
 		if err := m.RunnerJob.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("runner_job")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("runner_job")
 			}
+
 			return err
 		}
 	}
@@ -126,11 +138,15 @@ func (m *AppTerraformWorkspaceLock) contextValidateLock(ctx context.Context, for
 		}
 
 		if err := m.Lock.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("lock")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("lock")
 			}
+
 			return err
 		}
 	}
@@ -147,11 +163,15 @@ func (m *AppTerraformWorkspaceLock) contextValidateRunnerJob(ctx context.Context
 		}
 
 		if err := m.RunnerJob.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("runner_job")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("runner_job")
 			}
+
 			return err
 		}
 	}

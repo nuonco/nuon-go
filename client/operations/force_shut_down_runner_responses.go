@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type ForceShutDownRunnerReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *ForceShutDownRunnerReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *ForceShutDownRunnerReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewForceShutDownRunnerCreated()
@@ -109,11 +111,13 @@ func (o *ForceShutDownRunnerCreated) Code() int {
 }
 
 func (o *ForceShutDownRunnerCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerCreated %s", 201, payload)
 }
 
 func (o *ForceShutDownRunnerCreated) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerCreated %s", 201, payload)
 }
 
 func (o *ForceShutDownRunnerCreated) GetPayload() bool {
@@ -123,7 +127,7 @@ func (o *ForceShutDownRunnerCreated) GetPayload() bool {
 func (o *ForceShutDownRunnerCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *ForceShutDownRunnerBadRequest) Code() int {
 }
 
 func (o *ForceShutDownRunnerBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerBadRequest %s", 400, payload)
 }
 
 func (o *ForceShutDownRunnerBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerBadRequest %s", 400, payload)
 }
 
 func (o *ForceShutDownRunnerBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *ForceShutDownRunnerBadRequest) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *ForceShutDownRunnerUnauthorized) Code() int {
 }
 
 func (o *ForceShutDownRunnerUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerUnauthorized %s", 401, payload)
 }
 
 func (o *ForceShutDownRunnerUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerUnauthorized %s", 401, payload)
 }
 
 func (o *ForceShutDownRunnerUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *ForceShutDownRunnerUnauthorized) readResponse(response runtime.ClientRe
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *ForceShutDownRunnerForbidden) Code() int {
 }
 
 func (o *ForceShutDownRunnerForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerForbidden %s", 403, payload)
 }
 
 func (o *ForceShutDownRunnerForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerForbidden %s", 403, payload)
 }
 
 func (o *ForceShutDownRunnerForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *ForceShutDownRunnerForbidden) readResponse(response runtime.ClientRespo
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *ForceShutDownRunnerNotFound) Code() int {
 }
 
 func (o *ForceShutDownRunnerNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerNotFound %s", 404, payload)
 }
 
 func (o *ForceShutDownRunnerNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerNotFound %s", 404, payload)
 }
 
 func (o *ForceShutDownRunnerNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *ForceShutDownRunnerNotFound) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *ForceShutDownRunnerInternalServerError) Code() int {
 }
 
 func (o *ForceShutDownRunnerInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerInternalServerError %s", 500, payload)
 }
 
 func (o *ForceShutDownRunnerInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/force-shutdown][%d] forceShutDownRunnerInternalServerError %s", 500, payload)
 }
 
 func (o *ForceShutDownRunnerInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *ForceShutDownRunnerInternalServerError) readResponse(response runtime.C
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

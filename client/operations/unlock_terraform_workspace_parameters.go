@@ -65,7 +65,7 @@ type UnlockTerraformWorkspaceParams struct {
 
 	   terraform workspace unlock
 	*/
-	Body interface{}
+	Body any
 
 	/* WorkspaceID.
 
@@ -127,13 +127,13 @@ func (o *UnlockTerraformWorkspaceParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the unlock terraform workspace params
-func (o *UnlockTerraformWorkspaceParams) WithBody(body interface{}) *UnlockTerraformWorkspaceParams {
+func (o *UnlockTerraformWorkspaceParams) WithBody(body any) *UnlockTerraformWorkspaceParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the unlock terraform workspace params
-func (o *UnlockTerraformWorkspaceParams) SetBody(body interface{}) {
+func (o *UnlockTerraformWorkspaceParams) SetBody(body any) {
 	o.Body = body
 }
 

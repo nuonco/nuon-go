@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -62,11 +63,15 @@ func (m *GithubComPowertoolsdevMonoPkgAwsCredentialsConfig) validateAssumeRole(f
 
 	if m.AssumeRole != nil {
 		if err := m.AssumeRole.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("assume_role")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("assume_role")
 			}
+
 			return err
 		}
 	}
@@ -81,11 +86,15 @@ func (m *GithubComPowertoolsdevMonoPkgAwsCredentialsConfig) validateStatic(forma
 
 	if m.Static != nil {
 		if err := m.Static.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("static")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("static")
 			}
+
 			return err
 		}
 	}
@@ -120,11 +129,15 @@ func (m *GithubComPowertoolsdevMonoPkgAwsCredentialsConfig) contextValidateAssum
 		}
 
 		if err := m.AssumeRole.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("assume_role")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("assume_role")
 			}
+
 			return err
 		}
 	}
@@ -141,11 +154,15 @@ func (m *GithubComPowertoolsdevMonoPkgAwsCredentialsConfig) contextValidateStati
 		}
 
 		if err := m.Static.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("static")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("static")
 			}
+
 			return err
 		}
 	}

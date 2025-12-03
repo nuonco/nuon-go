@@ -47,7 +47,7 @@ const (
 )
 
 // for schema
-var appInstallActionWorkflowRunStepStatusEnum []interface{}
+var appInstallActionWorkflowRunStepStatusEnum []any
 
 func init() {
 	var res []AppInstallActionWorkflowRunStepStatus

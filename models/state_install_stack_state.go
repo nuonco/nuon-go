@@ -21,7 +21,7 @@ type StateInstallStackState struct {
 	Checksum string `json:"checksum,omitempty"`
 
 	// outputs
-	Outputs interface{} `json:"outputs,omitempty"`
+	Outputs any `json:"outputs,omitempty"`
 
 	// populated
 	Populated bool `json:"populated,omitempty"`

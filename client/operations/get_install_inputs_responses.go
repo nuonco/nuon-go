@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetInstallInputsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetInstallInputsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetInstallInputsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetInstallInputsOK()
@@ -109,11 +111,13 @@ func (o *GetInstallInputsOK) Code() int {
 }
 
 func (o *GetInstallInputsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsOK %s", 200, payload)
 }
 
 func (o *GetInstallInputsOK) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsOK %s", 200, payload)
 }
 
 func (o *GetInstallInputsOK) GetPayload() []*models.AppInstallInputs {
@@ -123,7 +127,7 @@ func (o *GetInstallInputsOK) GetPayload() []*models.AppInstallInputs {
 func (o *GetInstallInputsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *GetInstallInputsBadRequest) Code() int {
 }
 
 func (o *GetInstallInputsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsBadRequest %s", 400, payload)
 }
 
 func (o *GetInstallInputsBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsBadRequest %s", 400, payload)
 }
 
 func (o *GetInstallInputsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *GetInstallInputsBadRequest) readResponse(response runtime.ClientRespons
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *GetInstallInputsUnauthorized) Code() int {
 }
 
 func (o *GetInstallInputsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsUnauthorized %s", 401, payload)
 }
 
 func (o *GetInstallInputsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsUnauthorized %s", 401, payload)
 }
 
 func (o *GetInstallInputsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *GetInstallInputsUnauthorized) readResponse(response runtime.ClientRespo
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *GetInstallInputsForbidden) Code() int {
 }
 
 func (o *GetInstallInputsForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsForbidden %s", 403, payload)
 }
 
 func (o *GetInstallInputsForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsForbidden %s", 403, payload)
 }
 
 func (o *GetInstallInputsForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *GetInstallInputsForbidden) readResponse(response runtime.ClientResponse
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *GetInstallInputsNotFound) Code() int {
 }
 
 func (o *GetInstallInputsNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsNotFound %s", 404, payload)
 }
 
 func (o *GetInstallInputsNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsNotFound %s", 404, payload)
 }
 
 func (o *GetInstallInputsNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *GetInstallInputsNotFound) readResponse(response runtime.ClientResponse,
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *GetInstallInputsInternalServerError) Code() int {
 }
 
 func (o *GetInstallInputsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsInternalServerError %s", 500, payload)
 }
 
 func (o *GetInstallInputsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/inputs][%d] getInstallInputsInternalServerError %s", 500, payload)
 }
 
 func (o *GetInstallInputsInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *GetInstallInputsInternalServerError) readResponse(response runtime.Clie
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

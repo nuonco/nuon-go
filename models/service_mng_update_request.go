@@ -8,4 +8,4 @@ package models
 // ServiceMngUpdateRequest service mng update request
 //
 // swagger:model service.MngUpdateRequest
-type ServiceMngUpdateRequest interface{}
+type ServiceMngUpdateRequest any

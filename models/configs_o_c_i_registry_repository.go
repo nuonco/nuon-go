@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -76,11 +77,15 @@ func (m *ConfigsOCIRegistryRepository) validateAcrauth(formats strfmt.Registry) 
 
 	if m.Acrauth != nil {
 		if err := m.Acrauth.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("acrauth")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("acrauth")
 			}
+
 			return err
 		}
 	}
@@ -95,11 +100,15 @@ func (m *ConfigsOCIRegistryRepository) validateEcrauth(formats strfmt.Registry) 
 
 	if m.Ecrauth != nil {
 		if err := m.Ecrauth.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("ecrauth")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("ecrauth")
 			}
+
 			return err
 		}
 	}
@@ -114,11 +123,15 @@ func (m *ConfigsOCIRegistryRepository) validateOciauth(formats strfmt.Registry) 
 
 	if m.Ociauth != nil {
 		if err := m.Ociauth.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("ociauth")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("ociauth")
 			}
+
 			return err
 		}
 	}
@@ -132,11 +145,15 @@ func (m *ConfigsOCIRegistryRepository) validateRegistryType(formats strfmt.Regis
 	}
 
 	if err := m.RegistryType.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("registryType")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("registryType")
 		}
+
 		return err
 	}
 
@@ -178,11 +195,15 @@ func (m *ConfigsOCIRegistryRepository) contextValidateAcrauth(ctx context.Contex
 		}
 
 		if err := m.Acrauth.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("acrauth")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("acrauth")
 			}
+
 			return err
 		}
 	}
@@ -199,11 +220,15 @@ func (m *ConfigsOCIRegistryRepository) contextValidateEcrauth(ctx context.Contex
 		}
 
 		if err := m.Ecrauth.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("ecrauth")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("ecrauth")
 			}
+
 			return err
 		}
 	}
@@ -220,11 +245,15 @@ func (m *ConfigsOCIRegistryRepository) contextValidateOciauth(ctx context.Contex
 		}
 
 		if err := m.Ociauth.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("ociauth")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("ociauth")
 			}
+
 			return err
 		}
 	}
@@ -239,11 +268,15 @@ func (m *ConfigsOCIRegistryRepository) contextValidateRegistryType(ctx context.C
 	}
 
 	if err := m.RegistryType.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("registryType")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("registryType")
 		}
+
 		return err
 	}
 

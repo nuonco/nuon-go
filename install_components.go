@@ -105,9 +105,7 @@ func (c *client) TeardownInstallComponents(ctx context.Context, installID string
 		InstallID: installID,
 		Context:   ctx,
 		// TODO(jm): make this configurable
-		Req: &models.ServiceTeardownInstallComponentsRequest{
-			ErrorBehavior: "abort",
-		},
+		Req: &models.ServiceTeardownInstallComponentsRequest{},
 	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return err

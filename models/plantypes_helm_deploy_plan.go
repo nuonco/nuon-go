@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -73,11 +74,15 @@ func (m *PlantypesHelmDeployPlan) validateClusterInfo(formats strfmt.Registry) e
 
 	if m.ClusterInfo != nil {
 		if err := m.ClusterInfo.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cluster_info")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cluster_info")
 			}
+
 			return err
 		}
 	}
@@ -97,11 +102,15 @@ func (m *PlantypesHelmDeployPlan) validateValues(formats strfmt.Registry) error 
 
 		if m.Values[i] != nil {
 			if err := m.Values[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("values" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("values" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -138,11 +147,15 @@ func (m *PlantypesHelmDeployPlan) contextValidateClusterInfo(ctx context.Context
 		}
 
 		if err := m.ClusterInfo.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cluster_info")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cluster_info")
 			}
+
 			return err
 		}
 	}
@@ -161,11 +174,15 @@ func (m *PlantypesHelmDeployPlan) contextValidateValues(ctx context.Context, for
 			}
 
 			if err := m.Values[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("values" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("values" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

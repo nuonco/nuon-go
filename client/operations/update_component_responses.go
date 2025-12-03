@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type UpdateComponentReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *UpdateComponentReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *UpdateComponentReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewUpdateComponentOK()
@@ -109,11 +111,13 @@ func (o *UpdateComponentOK) Code() int {
 }
 
 func (o *UpdateComponentOK) Error() string {
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentOK %s", 200, payload)
 }
 
 func (o *UpdateComponentOK) String() string {
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentOK %s", 200, payload)
 }
 
 func (o *UpdateComponentOK) GetPayload() *models.AppComponent {
@@ -125,7 +129,7 @@ func (o *UpdateComponentOK) readResponse(response runtime.ClientResponse, consum
 	o.Payload = new(models.AppComponent)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *UpdateComponentBadRequest) Code() int {
 }
 
 func (o *UpdateComponentBadRequest) Error() string {
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentBadRequest %s", 400, payload)
 }
 
 func (o *UpdateComponentBadRequest) String() string {
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentBadRequest %s", 400, payload)
 }
 
 func (o *UpdateComponentBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *UpdateComponentBadRequest) readResponse(response runtime.ClientResponse
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *UpdateComponentUnauthorized) Code() int {
 }
 
 func (o *UpdateComponentUnauthorized) Error() string {
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentUnauthorized %s", 401, payload)
 }
 
 func (o *UpdateComponentUnauthorized) String() string {
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentUnauthorized %s", 401, payload)
 }
 
 func (o *UpdateComponentUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *UpdateComponentUnauthorized) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *UpdateComponentForbidden) Code() int {
 }
 
 func (o *UpdateComponentForbidden) Error() string {
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentForbidden %s", 403, payload)
 }
 
 func (o *UpdateComponentForbidden) String() string {
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentForbidden %s", 403, payload)
 }
 
 func (o *UpdateComponentForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *UpdateComponentForbidden) readResponse(response runtime.ClientResponse,
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *UpdateComponentNotFound) Code() int {
 }
 
 func (o *UpdateComponentNotFound) Error() string {
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentNotFound %s", 404, payload)
 }
 
 func (o *UpdateComponentNotFound) String() string {
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentNotFound %s", 404, payload)
 }
 
 func (o *UpdateComponentNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *UpdateComponentNotFound) readResponse(response runtime.ClientResponse, 
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *UpdateComponentInternalServerError) Code() int {
 }
 
 func (o *UpdateComponentInternalServerError) Error() string {
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateComponentInternalServerError) String() string {
-	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/components/{component_id}][%d] updateComponentInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateComponentInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *UpdateComponentInternalServerError) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetAppBranchAppConfigsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetAppBranchAppConfigsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetAppBranchAppConfigsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetAppBranchAppConfigsOK()
@@ -109,11 +111,13 @@ func (o *GetAppBranchAppConfigsOK) Code() int {
 }
 
 func (o *GetAppBranchAppConfigsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsOK %s", 200, payload)
 }
 
 func (o *GetAppBranchAppConfigsOK) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsOK %s", 200, payload)
 }
 
 func (o *GetAppBranchAppConfigsOK) GetPayload() []*models.AppAppConfig {
@@ -123,7 +127,7 @@ func (o *GetAppBranchAppConfigsOK) GetPayload() []*models.AppAppConfig {
 func (o *GetAppBranchAppConfigsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *GetAppBranchAppConfigsBadRequest) Code() int {
 }
 
 func (o *GetAppBranchAppConfigsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsBadRequest %s", 400, payload)
 }
 
 func (o *GetAppBranchAppConfigsBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsBadRequest %s", 400, payload)
 }
 
 func (o *GetAppBranchAppConfigsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *GetAppBranchAppConfigsBadRequest) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *GetAppBranchAppConfigsUnauthorized) Code() int {
 }
 
 func (o *GetAppBranchAppConfigsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsUnauthorized %s", 401, payload)
 }
 
 func (o *GetAppBranchAppConfigsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsUnauthorized %s", 401, payload)
 }
 
 func (o *GetAppBranchAppConfigsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *GetAppBranchAppConfigsUnauthorized) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *GetAppBranchAppConfigsForbidden) Code() int {
 }
 
 func (o *GetAppBranchAppConfigsForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsForbidden %s", 403, payload)
 }
 
 func (o *GetAppBranchAppConfigsForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsForbidden %s", 403, payload)
 }
 
 func (o *GetAppBranchAppConfigsForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *GetAppBranchAppConfigsForbidden) readResponse(response runtime.ClientRe
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *GetAppBranchAppConfigsNotFound) Code() int {
 }
 
 func (o *GetAppBranchAppConfigsNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsNotFound %s", 404, payload)
 }
 
 func (o *GetAppBranchAppConfigsNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsNotFound %s", 404, payload)
 }
 
 func (o *GetAppBranchAppConfigsNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *GetAppBranchAppConfigsNotFound) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *GetAppBranchAppConfigsInternalServerError) Code() int {
 }
 
 func (o *GetAppBranchAppConfigsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsInternalServerError %s", 500, payload)
 }
 
 func (o *GetAppBranchAppConfigsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/branches/{app_branch_id}/configs][%d] getAppBranchAppConfigsInternalServerError %s", 500, payload)
 }
 
 func (o *GetAppBranchAppConfigsInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *GetAppBranchAppConfigsInternalServerError) readResponse(response runtim
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

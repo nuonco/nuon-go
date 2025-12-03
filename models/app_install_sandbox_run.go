@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -50,7 +51,7 @@ type AppInstallSandboxRun struct {
 	LogStream *AppLogStream `json:"log_stream,omitempty"`
 
 	// outputs
-	Outputs interface{} `json:"outputs,omitempty"`
+	Outputs map[string]any `json:"outputs,omitempty"`
 
 	// run type
 	RunType AppSandboxRunType `json:"run_type,omitempty"`
@@ -131,11 +132,15 @@ func (m *AppInstallSandboxRun) validateActionWorkflowRuns(formats strfmt.Registr
 
 		if m.ActionWorkflowRuns[i] != nil {
 			if err := m.ActionWorkflowRuns[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("action_workflow_runs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("action_workflow_runs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -152,11 +157,15 @@ func (m *AppInstallSandboxRun) validateAppSandboxConfig(formats strfmt.Registry)
 
 	if m.AppSandboxConfig != nil {
 		if err := m.AppSandboxConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("app_sandbox_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("app_sandbox_config")
 			}
+
 			return err
 		}
 	}
@@ -171,11 +180,15 @@ func (m *AppInstallSandboxRun) validateCreatedBy(formats strfmt.Registry) error 
 
 	if m.CreatedBy != nil {
 		if err := m.CreatedBy.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("created_by")
 			}
+
 			return err
 		}
 	}
@@ -190,11 +203,15 @@ func (m *AppInstallSandboxRun) validateLogStream(formats strfmt.Registry) error 
 
 	if m.LogStream != nil {
 		if err := m.LogStream.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("log_stream")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("log_stream")
 			}
+
 			return err
 		}
 	}
@@ -208,11 +225,15 @@ func (m *AppInstallSandboxRun) validateRunType(formats strfmt.Registry) error {
 	}
 
 	if err := m.RunType.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("run_type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("run_type")
 		}
+
 		return err
 	}
 
@@ -231,11 +252,15 @@ func (m *AppInstallSandboxRun) validateRunnerJobs(formats strfmt.Registry) error
 
 		if m.RunnerJobs[i] != nil {
 			if err := m.RunnerJobs[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("runner_jobs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("runner_jobs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -252,11 +277,15 @@ func (m *AppInstallSandboxRun) validateStatusV2(formats strfmt.Registry) error {
 
 	if m.StatusV2 != nil {
 		if err := m.StatusV2.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("status_v2")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("status_v2")
 			}
+
 			return err
 		}
 	}
@@ -271,11 +300,15 @@ func (m *AppInstallSandboxRun) validateWorkflow(formats strfmt.Registry) error {
 
 	if m.Workflow != nil {
 		if err := m.Workflow.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("workflow")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("workflow")
 			}
+
 			return err
 		}
 	}
@@ -336,11 +369,15 @@ func (m *AppInstallSandboxRun) contextValidateActionWorkflowRuns(ctx context.Con
 			}
 
 			if err := m.ActionWorkflowRuns[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("action_workflow_runs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("action_workflow_runs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -359,11 +396,15 @@ func (m *AppInstallSandboxRun) contextValidateAppSandboxConfig(ctx context.Conte
 		}
 
 		if err := m.AppSandboxConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("app_sandbox_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("app_sandbox_config")
 			}
+
 			return err
 		}
 	}
@@ -380,11 +421,15 @@ func (m *AppInstallSandboxRun) contextValidateCreatedBy(ctx context.Context, for
 		}
 
 		if err := m.CreatedBy.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("created_by")
 			}
+
 			return err
 		}
 	}
@@ -401,11 +446,15 @@ func (m *AppInstallSandboxRun) contextValidateLogStream(ctx context.Context, for
 		}
 
 		if err := m.LogStream.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("log_stream")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("log_stream")
 			}
+
 			return err
 		}
 	}
@@ -420,11 +469,15 @@ func (m *AppInstallSandboxRun) contextValidateRunType(ctx context.Context, forma
 	}
 
 	if err := m.RunType.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("run_type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("run_type")
 		}
+
 		return err
 	}
 
@@ -442,11 +495,15 @@ func (m *AppInstallSandboxRun) contextValidateRunnerJobs(ctx context.Context, fo
 			}
 
 			if err := m.RunnerJobs[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("runner_jobs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("runner_jobs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -465,11 +522,15 @@ func (m *AppInstallSandboxRun) contextValidateStatusV2(ctx context.Context, form
 		}
 
 		if err := m.StatusV2.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("status_v2")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("status_v2")
 			}
+
 			return err
 		}
 	}
@@ -486,11 +547,15 @@ func (m *AppInstallSandboxRun) contextValidateWorkflow(ctx context.Context, form
 		}
 
 		if err := m.Workflow.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("workflow")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("workflow")
 			}
+
 			return err
 		}
 	}

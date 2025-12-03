@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetRunnerJobCompositePlanReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetRunnerJobCompositePlanReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetRunnerJobCompositePlanReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetRunnerJobCompositePlanOK()
@@ -109,11 +111,13 @@ func (o *GetRunnerJobCompositePlanOK) Code() int {
 }
 
 func (o *GetRunnerJobCompositePlanOK) Error() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanOK %s", 200, payload)
 }
 
 func (o *GetRunnerJobCompositePlanOK) String() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanOK %s", 200, payload)
 }
 
 func (o *GetRunnerJobCompositePlanOK) GetPayload() *models.PlantypesCompositePlan {
@@ -125,7 +129,7 @@ func (o *GetRunnerJobCompositePlanOK) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.PlantypesCompositePlan)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *GetRunnerJobCompositePlanBadRequest) Code() int {
 }
 
 func (o *GetRunnerJobCompositePlanBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanBadRequest %s", 400, payload)
 }
 
 func (o *GetRunnerJobCompositePlanBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanBadRequest %s", 400, payload)
 }
 
 func (o *GetRunnerJobCompositePlanBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *GetRunnerJobCompositePlanBadRequest) readResponse(response runtime.Clie
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *GetRunnerJobCompositePlanUnauthorized) Code() int {
 }
 
 func (o *GetRunnerJobCompositePlanUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanUnauthorized %s", 401, payload)
 }
 
 func (o *GetRunnerJobCompositePlanUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanUnauthorized %s", 401, payload)
 }
 
 func (o *GetRunnerJobCompositePlanUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *GetRunnerJobCompositePlanUnauthorized) readResponse(response runtime.Cl
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *GetRunnerJobCompositePlanForbidden) Code() int {
 }
 
 func (o *GetRunnerJobCompositePlanForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanForbidden %s", 403, payload)
 }
 
 func (o *GetRunnerJobCompositePlanForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanForbidden %s", 403, payload)
 }
 
 func (o *GetRunnerJobCompositePlanForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *GetRunnerJobCompositePlanForbidden) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *GetRunnerJobCompositePlanNotFound) Code() int {
 }
 
 func (o *GetRunnerJobCompositePlanNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanNotFound %s", 404, payload)
 }
 
 func (o *GetRunnerJobCompositePlanNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanNotFound %s", 404, payload)
 }
 
 func (o *GetRunnerJobCompositePlanNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *GetRunnerJobCompositePlanNotFound) readResponse(response runtime.Client
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *GetRunnerJobCompositePlanInternalServerError) Code() int {
 }
 
 func (o *GetRunnerJobCompositePlanInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanInternalServerError %s", 500, payload)
 }
 
 func (o *GetRunnerJobCompositePlanInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/composite-plan][%d] getRunnerJobCompositePlanInternalServerError %s", 500, payload)
 }
 
 func (o *GetRunnerJobCompositePlanInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *GetRunnerJobCompositePlanInternalServerError) readResponse(response run
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

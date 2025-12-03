@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type DeleteActionWorkflowReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DeleteActionWorkflowReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DeleteActionWorkflowReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDeleteActionWorkflowOK()
@@ -109,11 +111,13 @@ func (o *DeleteActionWorkflowOK) Code() int {
 }
 
 func (o *DeleteActionWorkflowOK) Error() string {
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowOK %s", 200, payload)
 }
 
 func (o *DeleteActionWorkflowOK) String() string {
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowOK %s", 200, payload)
 }
 
 func (o *DeleteActionWorkflowOK) GetPayload() bool {
@@ -123,7 +127,7 @@ func (o *DeleteActionWorkflowOK) GetPayload() bool {
 func (o *DeleteActionWorkflowOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *DeleteActionWorkflowBadRequest) Code() int {
 }
 
 func (o *DeleteActionWorkflowBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowBadRequest %s", 400, payload)
 }
 
 func (o *DeleteActionWorkflowBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowBadRequest %s", 400, payload)
 }
 
 func (o *DeleteActionWorkflowBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *DeleteActionWorkflowBadRequest) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *DeleteActionWorkflowUnauthorized) Code() int {
 }
 
 func (o *DeleteActionWorkflowUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowUnauthorized %s", 401, payload)
 }
 
 func (o *DeleteActionWorkflowUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowUnauthorized %s", 401, payload)
 }
 
 func (o *DeleteActionWorkflowUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *DeleteActionWorkflowUnauthorized) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *DeleteActionWorkflowForbidden) Code() int {
 }
 
 func (o *DeleteActionWorkflowForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowForbidden %s", 403, payload)
 }
 
 func (o *DeleteActionWorkflowForbidden) String() string {
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowForbidden %s", 403, payload)
 }
 
 func (o *DeleteActionWorkflowForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *DeleteActionWorkflowForbidden) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *DeleteActionWorkflowNotFound) Code() int {
 }
 
 func (o *DeleteActionWorkflowNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowNotFound %s", 404, payload)
 }
 
 func (o *DeleteActionWorkflowNotFound) String() string {
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowNotFound %s", 404, payload)
 }
 
 func (o *DeleteActionWorkflowNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *DeleteActionWorkflowNotFound) readResponse(response runtime.ClientRespo
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *DeleteActionWorkflowInternalServerError) Code() int {
 }
 
 func (o *DeleteActionWorkflowInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteActionWorkflowInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/action-workflows/{action_workflow_id}][%d] deleteActionWorkflowInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteActionWorkflowInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *DeleteActionWorkflowInternalServerError) readResponse(response runtime.
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

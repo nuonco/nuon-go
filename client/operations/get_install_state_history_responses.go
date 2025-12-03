@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetInstallStateHistoryReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetInstallStateHistoryReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetInstallStateHistoryReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetInstallStateHistoryOK()
@@ -109,11 +111,13 @@ func (o *GetInstallStateHistoryOK) Code() int {
 }
 
 func (o *GetInstallStateHistoryOK) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryOK %s", 200, payload)
 }
 
 func (o *GetInstallStateHistoryOK) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryOK %s", 200, payload)
 }
 
 func (o *GetInstallStateHistoryOK) GetPayload() []*models.AppInstallState {
@@ -123,7 +127,7 @@ func (o *GetInstallStateHistoryOK) GetPayload() []*models.AppInstallState {
 func (o *GetInstallStateHistoryOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *GetInstallStateHistoryBadRequest) Code() int {
 }
 
 func (o *GetInstallStateHistoryBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryBadRequest %s", 400, payload)
 }
 
 func (o *GetInstallStateHistoryBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryBadRequest %s", 400, payload)
 }
 
 func (o *GetInstallStateHistoryBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *GetInstallStateHistoryBadRequest) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *GetInstallStateHistoryUnauthorized) Code() int {
 }
 
 func (o *GetInstallStateHistoryUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryUnauthorized %s", 401, payload)
 }
 
 func (o *GetInstallStateHistoryUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryUnauthorized %s", 401, payload)
 }
 
 func (o *GetInstallStateHistoryUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *GetInstallStateHistoryUnauthorized) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *GetInstallStateHistoryForbidden) Code() int {
 }
 
 func (o *GetInstallStateHistoryForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryForbidden %s", 403, payload)
 }
 
 func (o *GetInstallStateHistoryForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryForbidden %s", 403, payload)
 }
 
 func (o *GetInstallStateHistoryForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *GetInstallStateHistoryForbidden) readResponse(response runtime.ClientRe
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *GetInstallStateHistoryNotFound) Code() int {
 }
 
 func (o *GetInstallStateHistoryNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryNotFound %s", 404, payload)
 }
 
 func (o *GetInstallStateHistoryNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryNotFound %s", 404, payload)
 }
 
 func (o *GetInstallStateHistoryNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *GetInstallStateHistoryNotFound) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *GetInstallStateHistoryInternalServerError) Code() int {
 }
 
 func (o *GetInstallStateHistoryInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryInternalServerError %s", 500, payload)
 }
 
 func (o *GetInstallStateHistoryInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/state-history][%d] getInstallStateHistoryInternalServerError %s", 500, payload)
 }
 
 func (o *GetInstallStateHistoryInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *GetInstallStateHistoryInternalServerError) readResponse(response runtim
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

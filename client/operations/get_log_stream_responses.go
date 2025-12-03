@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetLogStreamReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetLogStreamReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetLogStreamReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetLogStreamOK()
@@ -109,11 +111,13 @@ func (o *GetLogStreamOK) Code() int {
 }
 
 func (o *GetLogStreamOK) Error() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamOK %s", 200, payload)
 }
 
 func (o *GetLogStreamOK) String() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamOK %s", 200, payload)
 }
 
 func (o *GetLogStreamOK) GetPayload() *models.AppLogStream {
@@ -125,7 +129,7 @@ func (o *GetLogStreamOK) readResponse(response runtime.ClientResponse, consumer 
 	o.Payload = new(models.AppLogStream)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *GetLogStreamBadRequest) Code() int {
 }
 
 func (o *GetLogStreamBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamBadRequest %s", 400, payload)
 }
 
 func (o *GetLogStreamBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamBadRequest %s", 400, payload)
 }
 
 func (o *GetLogStreamBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *GetLogStreamBadRequest) readResponse(response runtime.ClientResponse, c
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *GetLogStreamUnauthorized) Code() int {
 }
 
 func (o *GetLogStreamUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamUnauthorized %s", 401, payload)
 }
 
 func (o *GetLogStreamUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamUnauthorized %s", 401, payload)
 }
 
 func (o *GetLogStreamUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *GetLogStreamUnauthorized) readResponse(response runtime.ClientResponse,
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *GetLogStreamForbidden) Code() int {
 }
 
 func (o *GetLogStreamForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamForbidden %s", 403, payload)
 }
 
 func (o *GetLogStreamForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamForbidden %s", 403, payload)
 }
 
 func (o *GetLogStreamForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *GetLogStreamForbidden) readResponse(response runtime.ClientResponse, co
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *GetLogStreamNotFound) Code() int {
 }
 
 func (o *GetLogStreamNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamNotFound %s", 404, payload)
 }
 
 func (o *GetLogStreamNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamNotFound %s", 404, payload)
 }
 
 func (o *GetLogStreamNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *GetLogStreamNotFound) readResponse(response runtime.ClientResponse, con
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *GetLogStreamInternalServerError) Code() int {
 }
 
 func (o *GetLogStreamInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamInternalServerError %s", 500, payload)
 }
 
 func (o *GetLogStreamInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}][%d] getLogStreamInternalServerError %s", 500, payload)
 }
 
 func (o *GetLogStreamInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *GetLogStreamInternalServerError) readResponse(response runtime.ClientRe
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

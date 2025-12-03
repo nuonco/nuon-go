@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetComponentConfigsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetComponentConfigsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetComponentConfigsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetComponentConfigsOK()
@@ -109,11 +111,13 @@ func (o *GetComponentConfigsOK) Code() int {
 }
 
 func (o *GetComponentConfigsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsOK %s", 200, payload)
 }
 
 func (o *GetComponentConfigsOK) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsOK %s", 200, payload)
 }
 
 func (o *GetComponentConfigsOK) GetPayload() []*models.AppComponentConfigConnection {
@@ -123,7 +127,7 @@ func (o *GetComponentConfigsOK) GetPayload() []*models.AppComponentConfigConnect
 func (o *GetComponentConfigsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *GetComponentConfigsBadRequest) Code() int {
 }
 
 func (o *GetComponentConfigsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsBadRequest %s", 400, payload)
 }
 
 func (o *GetComponentConfigsBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsBadRequest %s", 400, payload)
 }
 
 func (o *GetComponentConfigsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *GetComponentConfigsBadRequest) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *GetComponentConfigsUnauthorized) Code() int {
 }
 
 func (o *GetComponentConfigsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsUnauthorized %s", 401, payload)
 }
 
 func (o *GetComponentConfigsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsUnauthorized %s", 401, payload)
 }
 
 func (o *GetComponentConfigsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *GetComponentConfigsUnauthorized) readResponse(response runtime.ClientRe
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *GetComponentConfigsForbidden) Code() int {
 }
 
 func (o *GetComponentConfigsForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsForbidden %s", 403, payload)
 }
 
 func (o *GetComponentConfigsForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsForbidden %s", 403, payload)
 }
 
 func (o *GetComponentConfigsForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *GetComponentConfigsForbidden) readResponse(response runtime.ClientRespo
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *GetComponentConfigsNotFound) Code() int {
 }
 
 func (o *GetComponentConfigsNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsNotFound %s", 404, payload)
 }
 
 func (o *GetComponentConfigsNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsNotFound %s", 404, payload)
 }
 
 func (o *GetComponentConfigsNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *GetComponentConfigsNotFound) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *GetComponentConfigsInternalServerError) Code() int {
 }
 
 func (o *GetComponentConfigsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsInternalServerError %s", 500, payload)
 }
 
 func (o *GetComponentConfigsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/configs][%d] getComponentConfigsInternalServerError %s", 500, payload)
 }
 
 func (o *GetComponentConfigsInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *GetComponentConfigsInternalServerError) readResponse(response runtime.C
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

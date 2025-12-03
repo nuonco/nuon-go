@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetBuildReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetBuildReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetBuildReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetBuildOK()
@@ -109,11 +111,13 @@ func (o *GetBuildOK) Code() int {
 }
 
 func (o *GetBuildOK) Error() string {
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildOK %s", 200, payload)
 }
 
 func (o *GetBuildOK) String() string {
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildOK %s", 200, payload)
 }
 
 func (o *GetBuildOK) GetPayload() *models.AppComponentBuild {
@@ -125,7 +129,7 @@ func (o *GetBuildOK) readResponse(response runtime.ClientResponse, consumer runt
 	o.Payload = new(models.AppComponentBuild)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *GetBuildBadRequest) Code() int {
 }
 
 func (o *GetBuildBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildBadRequest %s", 400, payload)
 }
 
 func (o *GetBuildBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildBadRequest %s", 400, payload)
 }
 
 func (o *GetBuildBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *GetBuildBadRequest) readResponse(response runtime.ClientResponse, consu
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *GetBuildUnauthorized) Code() int {
 }
 
 func (o *GetBuildUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildUnauthorized %s", 401, payload)
 }
 
 func (o *GetBuildUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildUnauthorized %s", 401, payload)
 }
 
 func (o *GetBuildUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *GetBuildUnauthorized) readResponse(response runtime.ClientResponse, con
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *GetBuildForbidden) Code() int {
 }
 
 func (o *GetBuildForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildForbidden %s", 403, payload)
 }
 
 func (o *GetBuildForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildForbidden %s", 403, payload)
 }
 
 func (o *GetBuildForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *GetBuildForbidden) readResponse(response runtime.ClientResponse, consum
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *GetBuildNotFound) Code() int {
 }
 
 func (o *GetBuildNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildNotFound %s", 404, payload)
 }
 
 func (o *GetBuildNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildNotFound %s", 404, payload)
 }
 
 func (o *GetBuildNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *GetBuildNotFound) readResponse(response runtime.ClientResponse, consume
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *GetBuildInternalServerError) Code() int {
 }
 
 func (o *GetBuildInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildInternalServerError %s", 500, payload)
 }
 
 func (o *GetBuildInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/builds/{build_id}][%d] getBuildInternalServerError %s", 500, payload)
 }
 
 func (o *GetBuildInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *GetBuildInternalServerError) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

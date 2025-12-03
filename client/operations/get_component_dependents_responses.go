@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetComponentDependentsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetComponentDependentsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetComponentDependentsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetComponentDependentsOK()
@@ -109,11 +111,13 @@ func (o *GetComponentDependentsOK) Code() int {
 }
 
 func (o *GetComponentDependentsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsOK %s", 200, payload)
 }
 
 func (o *GetComponentDependentsOK) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsOK %s", 200, payload)
 }
 
 func (o *GetComponentDependentsOK) GetPayload() *models.ServiceComponentChildren {
@@ -125,7 +129,7 @@ func (o *GetComponentDependentsOK) readResponse(response runtime.ClientResponse,
 	o.Payload = new(models.ServiceComponentChildren)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *GetComponentDependentsBadRequest) Code() int {
 }
 
 func (o *GetComponentDependentsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsBadRequest %s", 400, payload)
 }
 
 func (o *GetComponentDependentsBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsBadRequest %s", 400, payload)
 }
 
 func (o *GetComponentDependentsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *GetComponentDependentsBadRequest) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *GetComponentDependentsUnauthorized) Code() int {
 }
 
 func (o *GetComponentDependentsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsUnauthorized %s", 401, payload)
 }
 
 func (o *GetComponentDependentsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsUnauthorized %s", 401, payload)
 }
 
 func (o *GetComponentDependentsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *GetComponentDependentsUnauthorized) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *GetComponentDependentsForbidden) Code() int {
 }
 
 func (o *GetComponentDependentsForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsForbidden %s", 403, payload)
 }
 
 func (o *GetComponentDependentsForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsForbidden %s", 403, payload)
 }
 
 func (o *GetComponentDependentsForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *GetComponentDependentsForbidden) readResponse(response runtime.ClientRe
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *GetComponentDependentsNotFound) Code() int {
 }
 
 func (o *GetComponentDependentsNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsNotFound %s", 404, payload)
 }
 
 func (o *GetComponentDependentsNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsNotFound %s", 404, payload)
 }
 
 func (o *GetComponentDependentsNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *GetComponentDependentsNotFound) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *GetComponentDependentsInternalServerError) Code() int {
 }
 
 func (o *GetComponentDependentsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsInternalServerError %s", 500, payload)
 }
 
 func (o *GetComponentDependentsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/components/{component_id}/dependents][%d] getComponentDependentsInternalServerError %s", 500, payload)
 }
 
 func (o *GetComponentDependentsInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *GetComponentDependentsInternalServerError) readResponse(response runtim
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

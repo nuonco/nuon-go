@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -93,11 +94,15 @@ func (m *ServiceCreateInstallV2Request) validateAwsAccount(formats strfmt.Regist
 
 	if m.AwsAccount != nil {
 		if err := m.AwsAccount.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("aws_account")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("aws_account")
 			}
+
 			return err
 		}
 	}
@@ -112,11 +117,15 @@ func (m *ServiceCreateInstallV2Request) validateAzureAccount(formats strfmt.Regi
 
 	if m.AzureAccount != nil {
 		if err := m.AzureAccount.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("azure_account")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("azure_account")
 			}
+
 			return err
 		}
 	}
@@ -131,11 +140,15 @@ func (m *ServiceCreateInstallV2Request) validateInstallConfig(formats strfmt.Reg
 
 	if m.InstallConfig != nil {
 		if err := m.InstallConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("install_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("install_config")
 			}
+
 			return err
 		}
 	}
@@ -150,11 +163,15 @@ func (m *ServiceCreateInstallV2Request) validateMetadata(formats strfmt.Registry
 
 	if m.Metadata != nil {
 		if err := m.Metadata.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("metadata")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("metadata")
 			}
+
 			return err
 		}
 	}
@@ -206,11 +223,15 @@ func (m *ServiceCreateInstallV2Request) contextValidateAwsAccount(ctx context.Co
 		}
 
 		if err := m.AwsAccount.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("aws_account")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("aws_account")
 			}
+
 			return err
 		}
 	}
@@ -227,11 +248,15 @@ func (m *ServiceCreateInstallV2Request) contextValidateAzureAccount(ctx context.
 		}
 
 		if err := m.AzureAccount.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("azure_account")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("azure_account")
 			}
+
 			return err
 		}
 	}
@@ -248,11 +273,15 @@ func (m *ServiceCreateInstallV2Request) contextValidateInstallConfig(ctx context
 		}
 
 		if err := m.InstallConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("install_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("install_config")
 			}
+
 			return err
 		}
 	}
@@ -269,11 +298,15 @@ func (m *ServiceCreateInstallV2Request) contextValidateMetadata(ctx context.Cont
 		}
 
 		if err := m.Metadata.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("metadata")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("metadata")
 			}
+
 			return err
 		}
 	}

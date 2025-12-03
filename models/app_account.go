@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -82,11 +83,15 @@ func (m *AppAccount) validateAccountType(formats strfmt.Registry) error {
 	}
 
 	if err := m.AccountType.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("account_type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("account_type")
 		}
+
 		return err
 	}
 
@@ -100,11 +105,15 @@ func (m *AppAccount) validatePermissions(formats strfmt.Registry) error {
 
 	if m.Permissions != nil {
 		if err := m.Permissions.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("permissions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("permissions")
 			}
+
 			return err
 		}
 	}
@@ -124,11 +133,15 @@ func (m *AppAccount) validateRoles(formats strfmt.Registry) error {
 
 		if m.Roles[i] != nil {
 			if err := m.Roles[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("roles" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("roles" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -150,11 +163,15 @@ func (m *AppAccount) validateUserJourneys(formats strfmt.Registry) error {
 
 		if m.UserJourneys[i] != nil {
 			if err := m.UserJourneys[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("user_journeys" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("user_journeys" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -197,11 +214,15 @@ func (m *AppAccount) contextValidateAccountType(ctx context.Context, formats str
 	}
 
 	if err := m.AccountType.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("account_type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("account_type")
 		}
+
 		return err
 	}
 
@@ -215,11 +236,15 @@ func (m *AppAccount) contextValidatePermissions(ctx context.Context, formats str
 	}
 
 	if err := m.Permissions.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("permissions")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("permissions")
 		}
+
 		return err
 	}
 
@@ -237,11 +262,15 @@ func (m *AppAccount) contextValidateRoles(ctx context.Context, formats strfmt.Re
 			}
 
 			if err := m.Roles[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("roles" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("roles" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -262,11 +291,15 @@ func (m *AppAccount) contextValidateUserJourneys(ctx context.Context, formats st
 			}
 
 			if err := m.UserJourneys[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("user_journeys" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("user_journeys" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

@@ -18,13 +18,13 @@ import (
 type AppTerraformStateInstance struct {
 
 	// attributes
-	Attributes interface{} `json:"attributes,omitempty"`
+	Attributes map[string]any `json:"attributes,omitempty"`
 
 	// schema version
 	SchemaVersion int64 `json:"schema_version,omitempty"`
 
 	// sensitive attributes
-	SensitiveAttributes []interface{} `json:"sensitive_attributes"`
+	SensitiveAttributes []any `json:"sensitive_attributes"`
 }
 
 // Validate validates this app terraform state instance

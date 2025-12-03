@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type CreateActionConfigReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateActionConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateActionConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateActionConfigCreated()
@@ -109,11 +111,13 @@ func (o *CreateActionConfigCreated) Code() int {
 }
 
 func (o *CreateActionConfigCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigCreated %s", 201, payload)
 }
 
 func (o *CreateActionConfigCreated) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigCreated %s", 201, payload)
 }
 
 func (o *CreateActionConfigCreated) GetPayload() *models.AppActionWorkflowConfig {
@@ -125,7 +129,7 @@ func (o *CreateActionConfigCreated) readResponse(response runtime.ClientResponse
 	o.Payload = new(models.AppActionWorkflowConfig)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *CreateActionConfigBadRequest) Code() int {
 }
 
 func (o *CreateActionConfigBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateActionConfigBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateActionConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *CreateActionConfigBadRequest) readResponse(response runtime.ClientRespo
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *CreateActionConfigUnauthorized) Code() int {
 }
 
 func (o *CreateActionConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateActionConfigUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateActionConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *CreateActionConfigUnauthorized) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *CreateActionConfigForbidden) Code() int {
 }
 
 func (o *CreateActionConfigForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateActionConfigForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateActionConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *CreateActionConfigForbidden) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *CreateActionConfigNotFound) Code() int {
 }
 
 func (o *CreateActionConfigNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateActionConfigNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateActionConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *CreateActionConfigNotFound) readResponse(response runtime.ClientRespons
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *CreateActionConfigInternalServerError) Code() int {
 }
 
 func (o *CreateActionConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateActionConfigInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/actions/{action_id}/configs][%d] createActionConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateActionConfigInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *CreateActionConfigInternalServerError) readResponse(response runtime.Cl
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

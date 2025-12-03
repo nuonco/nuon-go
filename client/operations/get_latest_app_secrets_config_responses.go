@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetLatestAppSecretsConfigReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetLatestAppSecretsConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetLatestAppSecretsConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetLatestAppSecretsConfigOK()
@@ -109,11 +111,13 @@ func (o *GetLatestAppSecretsConfigOK) Code() int {
 }
 
 func (o *GetLatestAppSecretsConfigOK) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigOK %s", 200, payload)
 }
 
 func (o *GetLatestAppSecretsConfigOK) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigOK %s", 200, payload)
 }
 
 func (o *GetLatestAppSecretsConfigOK) GetPayload() *models.AppAppSecretsConfig {
@@ -125,7 +129,7 @@ func (o *GetLatestAppSecretsConfigOK) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.AppAppSecretsConfig)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *GetLatestAppSecretsConfigBadRequest) Code() int {
 }
 
 func (o *GetLatestAppSecretsConfigBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigBadRequest %s", 400, payload)
 }
 
 func (o *GetLatestAppSecretsConfigBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigBadRequest %s", 400, payload)
 }
 
 func (o *GetLatestAppSecretsConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *GetLatestAppSecretsConfigBadRequest) readResponse(response runtime.Clie
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *GetLatestAppSecretsConfigUnauthorized) Code() int {
 }
 
 func (o *GetLatestAppSecretsConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigUnauthorized %s", 401, payload)
 }
 
 func (o *GetLatestAppSecretsConfigUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigUnauthorized %s", 401, payload)
 }
 
 func (o *GetLatestAppSecretsConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *GetLatestAppSecretsConfigUnauthorized) readResponse(response runtime.Cl
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *GetLatestAppSecretsConfigForbidden) Code() int {
 }
 
 func (o *GetLatestAppSecretsConfigForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigForbidden %s", 403, payload)
 }
 
 func (o *GetLatestAppSecretsConfigForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigForbidden %s", 403, payload)
 }
 
 func (o *GetLatestAppSecretsConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *GetLatestAppSecretsConfigForbidden) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *GetLatestAppSecretsConfigNotFound) Code() int {
 }
 
 func (o *GetLatestAppSecretsConfigNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigNotFound %s", 404, payload)
 }
 
 func (o *GetLatestAppSecretsConfigNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigNotFound %s", 404, payload)
 }
 
 func (o *GetLatestAppSecretsConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *GetLatestAppSecretsConfigNotFound) readResponse(response runtime.Client
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *GetLatestAppSecretsConfigInternalServerError) Code() int {
 }
 
 func (o *GetLatestAppSecretsConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigInternalServerError %s", 500, payload)
 }
 
 func (o *GetLatestAppSecretsConfigInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-secrets-config][%d] getLatestAppSecretsConfigInternalServerError %s", 500, payload)
 }
 
 func (o *GetLatestAppSecretsConfigInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *GetLatestAppSecretsConfigInternalServerError) readResponse(response run
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

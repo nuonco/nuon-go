@@ -41,7 +41,7 @@ const (
 )
 
 // for schema
-var appCloudPlatformEnum []interface{}
+var appCloudPlatformEnum []any
 
 func init() {
 	var res []AppCloudPlatform

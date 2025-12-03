@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetTerraformWorkspaceStatesJSONByIDV2Reader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetTerraformWorkspaceStatesJSONByIDV2Reader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetTerraformWorkspaceStatesJSONByIDV2Reader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetTerraformWorkspaceStatesJSONByIDV2OK()
@@ -75,7 +77,7 @@ GetTerraformWorkspaceStatesJSONByIDV2OK describes a response with status code 20
 OK
 */
 type GetTerraformWorkspaceStatesJSONByIDV2OK struct {
-	Payload interface{}
+	Payload any
 }
 
 // IsSuccess returns true when this get terraform workspace states Json by Id v2 o k response has a 2xx status code
@@ -109,21 +111,23 @@ func (o *GetTerraformWorkspaceStatesJSONByIDV2OK) Code() int {
 }
 
 func (o *GetTerraformWorkspaceStatesJSONByIDV2OK) Error() string {
-	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2OK %s", 200, payload)
 }
 
 func (o *GetTerraformWorkspaceStatesJSONByIDV2OK) String() string {
-	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2OK %s", 200, payload)
 }
 
-func (o *GetTerraformWorkspaceStatesJSONByIDV2OK) GetPayload() interface{} {
+func (o *GetTerraformWorkspaceStatesJSONByIDV2OK) GetPayload() any {
 	return o.Payload
 }
 
 func (o *GetTerraformWorkspaceStatesJSONByIDV2OK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *GetTerraformWorkspaceStatesJSONByIDV2BadRequest) Code() int {
 }
 
 func (o *GetTerraformWorkspaceStatesJSONByIDV2BadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2BadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2BadRequest %s", 400, payload)
 }
 
 func (o *GetTerraformWorkspaceStatesJSONByIDV2BadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2BadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2BadRequest %s", 400, payload)
 }
 
 func (o *GetTerraformWorkspaceStatesJSONByIDV2BadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *GetTerraformWorkspaceStatesJSONByIDV2BadRequest) readResponse(response 
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *GetTerraformWorkspaceStatesJSONByIDV2Unauthorized) Code() int {
 }
 
 func (o *GetTerraformWorkspaceStatesJSONByIDV2Unauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2Unauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2Unauthorized %s", 401, payload)
 }
 
 func (o *GetTerraformWorkspaceStatesJSONByIDV2Unauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2Unauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2Unauthorized %s", 401, payload)
 }
 
 func (o *GetTerraformWorkspaceStatesJSONByIDV2Unauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *GetTerraformWorkspaceStatesJSONByIDV2Unauthorized) readResponse(respons
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *GetTerraformWorkspaceStatesJSONByIDV2Forbidden) Code() int {
 }
 
 func (o *GetTerraformWorkspaceStatesJSONByIDV2Forbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2Forbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2Forbidden %s", 403, payload)
 }
 
 func (o *GetTerraformWorkspaceStatesJSONByIDV2Forbidden) String() string {
-	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2Forbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2Forbidden %s", 403, payload)
 }
 
 func (o *GetTerraformWorkspaceStatesJSONByIDV2Forbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *GetTerraformWorkspaceStatesJSONByIDV2Forbidden) readResponse(response r
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *GetTerraformWorkspaceStatesJSONByIDV2NotFound) Code() int {
 }
 
 func (o *GetTerraformWorkspaceStatesJSONByIDV2NotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2NotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2NotFound %s", 404, payload)
 }
 
 func (o *GetTerraformWorkspaceStatesJSONByIDV2NotFound) String() string {
-	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2NotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2NotFound %s", 404, payload)
 }
 
 func (o *GetTerraformWorkspaceStatesJSONByIDV2NotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *GetTerraformWorkspaceStatesJSONByIDV2NotFound) readResponse(response ru
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *GetTerraformWorkspaceStatesJSONByIDV2InternalServerError) Code() int {
 }
 
 func (o *GetTerraformWorkspaceStatesJSONByIDV2InternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2InternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2InternalServerError %s", 500, payload)
 }
 
 func (o *GetTerraformWorkspaceStatesJSONByIDV2InternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2InternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/terraform-workspaces/{workspace_id}/state-json/{state_id}][%d] getTerraformWorkspaceStatesJsonByIdV2InternalServerError %s", 500, payload)
 }
 
 func (o *GetTerraformWorkspaceStatesJSONByIDV2InternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *GetTerraformWorkspaceStatesJSONByIDV2InternalServerError) readResponse(
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

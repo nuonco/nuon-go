@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type DeleteAppReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DeleteAppReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DeleteAppReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDeleteAppOK()
@@ -109,11 +111,13 @@ func (o *DeleteAppOK) Code() int {
 }
 
 func (o *DeleteAppOK) Error() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppOK %s", 200, payload)
 }
 
 func (o *DeleteAppOK) String() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppOK %s", 200, payload)
 }
 
 func (o *DeleteAppOK) GetPayload() bool {
@@ -123,7 +127,7 @@ func (o *DeleteAppOK) GetPayload() bool {
 func (o *DeleteAppOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *DeleteAppBadRequest) Code() int {
 }
 
 func (o *DeleteAppBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppBadRequest %s", 400, payload)
 }
 
 func (o *DeleteAppBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppBadRequest %s", 400, payload)
 }
 
 func (o *DeleteAppBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *DeleteAppBadRequest) readResponse(response runtime.ClientResponse, cons
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *DeleteAppUnauthorized) Code() int {
 }
 
 func (o *DeleteAppUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppUnauthorized %s", 401, payload)
 }
 
 func (o *DeleteAppUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppUnauthorized %s", 401, payload)
 }
 
 func (o *DeleteAppUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *DeleteAppUnauthorized) readResponse(response runtime.ClientResponse, co
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *DeleteAppForbidden) Code() int {
 }
 
 func (o *DeleteAppForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppForbidden %s", 403, payload)
 }
 
 func (o *DeleteAppForbidden) String() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppForbidden %s", 403, payload)
 }
 
 func (o *DeleteAppForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *DeleteAppForbidden) readResponse(response runtime.ClientResponse, consu
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *DeleteAppNotFound) Code() int {
 }
 
 func (o *DeleteAppNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppNotFound %s", 404, payload)
 }
 
 func (o *DeleteAppNotFound) String() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppNotFound %s", 404, payload)
 }
 
 func (o *DeleteAppNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *DeleteAppNotFound) readResponse(response runtime.ClientResponse, consum
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *DeleteAppInternalServerError) Code() int {
 }
 
 func (o *DeleteAppInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteAppInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}][%d] deleteAppInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteAppInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *DeleteAppInternalServerError) readResponse(response runtime.ClientRespo
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

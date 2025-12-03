@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type RetryWorkflowReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *RetryWorkflowReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *RetryWorkflowReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewRetryWorkflowCreated()
@@ -109,11 +111,13 @@ func (o *RetryWorkflowCreated) Code() int {
 }
 
 func (o *RetryWorkflowCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowCreated %s", 201, payload)
 }
 
 func (o *RetryWorkflowCreated) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowCreated %s", 201, payload)
 }
 
 func (o *RetryWorkflowCreated) GetPayload() *models.ServiceRetryWorkflowResponse {
@@ -125,7 +129,7 @@ func (o *RetryWorkflowCreated) readResponse(response runtime.ClientResponse, con
 	o.Payload = new(models.ServiceRetryWorkflowResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *RetryWorkflowBadRequest) Code() int {
 }
 
 func (o *RetryWorkflowBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowBadRequest %s", 400, payload)
 }
 
 func (o *RetryWorkflowBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowBadRequest %s", 400, payload)
 }
 
 func (o *RetryWorkflowBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *RetryWorkflowBadRequest) readResponse(response runtime.ClientResponse, 
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *RetryWorkflowUnauthorized) Code() int {
 }
 
 func (o *RetryWorkflowUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowUnauthorized %s", 401, payload)
 }
 
 func (o *RetryWorkflowUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowUnauthorized %s", 401, payload)
 }
 
 func (o *RetryWorkflowUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *RetryWorkflowUnauthorized) readResponse(response runtime.ClientResponse
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *RetryWorkflowForbidden) Code() int {
 }
 
 func (o *RetryWorkflowForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowForbidden %s", 403, payload)
 }
 
 func (o *RetryWorkflowForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowForbidden %s", 403, payload)
 }
 
 func (o *RetryWorkflowForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *RetryWorkflowForbidden) readResponse(response runtime.ClientResponse, c
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *RetryWorkflowNotFound) Code() int {
 }
 
 func (o *RetryWorkflowNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowNotFound %s", 404, payload)
 }
 
 func (o *RetryWorkflowNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowNotFound %s", 404, payload)
 }
 
 func (o *RetryWorkflowNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *RetryWorkflowNotFound) readResponse(response runtime.ClientResponse, co
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *RetryWorkflowInternalServerError) Code() int {
 }
 
 func (o *RetryWorkflowInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowInternalServerError %s", 500, payload)
 }
 
 func (o *RetryWorkflowInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/retry-workflow][%d] retryWorkflowInternalServerError %s", 500, payload)
 }
 
 func (o *RetryWorkflowInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *RetryWorkflowInternalServerError) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

@@ -53,7 +53,7 @@ const (
 )
 
 // for schema
-var appComponentTypeEnum []interface{}
+var appComponentTypeEnum []any
 
 func init() {
 	var res []AppComponentType

@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetOrgReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetOrgReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetOrgReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetOrgOK()
@@ -109,11 +111,13 @@ func (o *GetOrgOK) Code() int {
 }
 
 func (o *GetOrgOK) Error() string {
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgOK %s", 200, payload)
 }
 
 func (o *GetOrgOK) String() string {
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgOK %s", 200, payload)
 }
 
 func (o *GetOrgOK) GetPayload() *models.AppOrg {
@@ -125,7 +129,7 @@ func (o *GetOrgOK) readResponse(response runtime.ClientResponse, consumer runtim
 	o.Payload = new(models.AppOrg)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *GetOrgBadRequest) Code() int {
 }
 
 func (o *GetOrgBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgBadRequest %s", 400, payload)
 }
 
 func (o *GetOrgBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgBadRequest %s", 400, payload)
 }
 
 func (o *GetOrgBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *GetOrgBadRequest) readResponse(response runtime.ClientResponse, consume
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *GetOrgUnauthorized) Code() int {
 }
 
 func (o *GetOrgUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgUnauthorized %s", 401, payload)
 }
 
 func (o *GetOrgUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgUnauthorized %s", 401, payload)
 }
 
 func (o *GetOrgUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *GetOrgUnauthorized) readResponse(response runtime.ClientResponse, consu
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *GetOrgForbidden) Code() int {
 }
 
 func (o *GetOrgForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgForbidden %s", 403, payload)
 }
 
 func (o *GetOrgForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgForbidden %s", 403, payload)
 }
 
 func (o *GetOrgForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *GetOrgForbidden) readResponse(response runtime.ClientResponse, consumer
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *GetOrgNotFound) Code() int {
 }
 
 func (o *GetOrgNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgNotFound %s", 404, payload)
 }
 
 func (o *GetOrgNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgNotFound %s", 404, payload)
 }
 
 func (o *GetOrgNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *GetOrgNotFound) readResponse(response runtime.ClientResponse, consumer 
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *GetOrgInternalServerError) Code() int {
 }
 
 func (o *GetOrgInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgInternalServerError %s", 500, payload)
 }
 
 func (o *GetOrgInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/orgs/current][%d] getOrgInternalServerError %s", 500, payload)
 }
 
 func (o *GetOrgInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *GetOrgInternalServerError) readResponse(response runtime.ClientResponse
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

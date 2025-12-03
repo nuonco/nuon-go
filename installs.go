@@ -156,9 +156,7 @@ func (c *client) DeprovisionInstall(ctx context.Context, installID string) error
 		InstallID: installID,
 		Context:   ctx,
 		// TODO(jm): make this configurable
-		Req: &models.ServiceDeprovisionInstallRequest{
-			ErrorBehavior: "abort",
-		},
+		Req: &models.ServiceDeprovisionInstallRequest{},
 	}, c.getOrgIDAuthInfo())
 	if err != nil {
 		return err

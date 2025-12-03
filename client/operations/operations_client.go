@@ -10,12 +10,38 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new operations API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new operations API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new operations API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -26,8 +52,37 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
+
+// This client is generated with a few options you might find useful for your swagger spec.
+//
+// Feel free to add you own set of options.
+
+// WithAccept allows the client to force the Accept header
+// to negotiate a specific Producer from the server.
+//
+// You may use this option to set arbitrary extensions to your MIME media type.
+func WithAccept(mime string) ClientOption {
+	return func(r *runtime.ClientOperation) {
+		r.ProducesMediaTypes = []string{mime}
+	}
+}
+
+// WithAcceptApplicationJSON sets the Accept header to "application/json".
+func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
+	r.ProducesMediaTypes = []string{"application/json"}
+}
+
+// WithAcceptApplicationOctetStream sets the Accept header to "application/octet-stream".
+func WithAcceptApplicationOctetStream(r *runtime.ClientOperation) {
+	r.ProducesMediaTypes = []string{"application/octet-stream"}
+}
+
+// WithAcceptTextCsv sets the Accept header to "text/csv".
+func WithAcceptTextCsv(r *runtime.ClientOperation) {
+	r.ProducesMediaTypes = []string{"text/csv"}
+}
 
 // ClientService is the interface for Client methods
 type ClientService interface {
@@ -65,9 +120,13 @@ type ClientService interface {
 
 	CreateAppDockerBuildComponentConfig(params *CreateAppDockerBuildComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppDockerBuildComponentConfigCreated, error)
 
+	CreateAppExternalImageComponentConfig(params *CreateAppExternalImageComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppExternalImageComponentConfigCreated, error)
+
 	CreateAppHelmComponentConfig(params *CreateAppHelmComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppHelmComponentConfigCreated, error)
 
 	CreateAppInputConfig(params *CreateAppInputConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppInputConfigCreated, error)
+
+	CreateAppJobComponentConfig(params *CreateAppJobComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppJobComponentConfigCreated, error)
 
 	CreateAppKubernetesManifestComponentConfig(params *CreateAppKubernetesManifestComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppKubernetesManifestComponentConfigCreated, error)
 
@@ -119,8 +178,6 @@ type ClientService interface {
 
 	CreateInstallV2(params *CreateInstallV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallV2Created, error)
 
-	CreateInstaller(params *CreateInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallerCreated, error)
-
 	CreateJobComponentConfig(params *CreateJobComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateJobComponentConfigCreated, error)
 
 	CreateKubernetesManifestComponentConfig(params *CreateKubernetesManifestComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateKubernetesManifestComponentConfigCreated, error)
@@ -161,8 +218,6 @@ type ClientService interface {
 
 	DeleteInstall(params *DeleteInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteInstallOK, error)
 
-	DeleteInstaller(params *DeleteInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteInstallerOK, error)
-
 	DeleteOrg(params *DeleteOrgParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOrgOK, error)
 
 	DeleteTerraformWorkspace(params *DeleteTerraformWorkspaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTerraformWorkspaceOK, error)
@@ -180,6 +235,8 @@ type ClientService interface {
 	ForgetInstall(params *ForgetInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForgetInstallOK, error)
 
 	GenerateCLIInstallConfig(params *GenerateCLIInstallConfigParams, authInfo runtime.ClientAuthInfoWriter, writer io.Writer, opts ...ClientOption) (*GenerateCLIInstallConfigOK, error)
+
+	GenerateTerraformInstallerConfig(params *GenerateTerraformInstallerConfigParams, authInfo runtime.ClientAuthInfoWriter, writer io.Writer, opts ...ClientOption) (*GenerateTerraformInstallerConfigOK, error)
 
 	GetActionLatestConfig(params *GetActionLatestConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionLatestConfigOK, error)
 
@@ -202,6 +259,8 @@ type ClientService interface {
 	GetAppActionConfigs(params *GetAppActionConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppActionConfigsOK, error)
 
 	GetAppActionWorkflow(params *GetAppActionWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppActionWorkflowOK, error)
+
+	GetAppActions(params *GetAppActionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppActionsOK, error)
 
 	GetAppBranchAppConfigs(params *GetAppBranchAppConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppBranchAppConfigsOK, error)
 
@@ -355,8 +414,6 @@ type ClientService interface {
 
 	GetInstallComponentsDeploys(params *GetInstallComponentsDeploysParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallComponentsDeploysOK, error)
 
-	GetInstallComponentsSummary(params *GetInstallComponentsSummaryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallComponentsSummaryOK, error)
-
 	GetInstallDeploy(params *GetInstallDeployParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallDeployOK, error)
 
 	GetInstallDeploys(params *GetInstallDeploysParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallDeploysOK, error)
@@ -397,10 +454,6 @@ type ClientService interface {
 
 	GetInstallWorkflowSteps(params *GetInstallWorkflowStepsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallWorkflowStepsOK, error)
 
-	GetInstaller(params *GetInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallerOK, error)
-
-	GetInstallers(params *GetInstallersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallersOK, error)
-
 	GetLatestAppBreakGlassConfig(params *GetLatestAppBreakGlassConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLatestAppBreakGlassConfigOK, error)
 
 	GetLatestAppPermissionsConfig(params *GetLatestAppPermissionsConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLatestAppPermissionsConfigOK, error)
@@ -433,7 +486,7 @@ type ClientService interface {
 
 	GetReleaseSteps(params *GetReleaseStepsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetReleaseStepsOK, error)
 
-	GetRunner(params *GetRunnerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerOK, error)
+	GetRunnerCardDetails(params *GetRunnerCardDetailsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerCardDetailsOK, error)
 
 	GetRunnerConnectStatus(params *GetRunnerConnectStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerConnectStatusOK, error)
 
@@ -515,8 +568,6 @@ type ClientService interface {
 
 	RemoveUser(params *RemoveUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RemoveUserCreated, error)
 
-	RenderInstaller(params *RenderInstallerParams, opts ...ClientOption) (*RenderInstallerOK, error)
-
 	ReprovisionInstall(params *ReprovisionInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReprovisionInstallCreated, error)
 
 	ReprovisionInstallSandbox(params *ReprovisionInstallSandboxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReprovisionInstallSandboxCreated, error)
@@ -551,6 +602,10 @@ type ClientService interface {
 
 	UpdateAppConfigInstalls(params *UpdateAppConfigInstallsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppConfigInstallsOK, error)
 
+	UpdateAppConfigInstallsV2(params *UpdateAppConfigInstallsV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppConfigInstallsV2OK, error)
+
+	UpdateAppConflgV2(params *UpdateAppConflgV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppConflgV2Created, error)
+
 	UpdateComponent(params *UpdateComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateComponentOK, error)
 
 	UpdateInstall(params *UpdateInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallOK, error)
@@ -560,8 +615,6 @@ type ClientService interface {
 	UpdateInstallInputs(params *UpdateInstallInputsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallInputsOK, error)
 
 	UpdateInstallWorkflow(params *UpdateInstallWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallWorkflowOK, error)
-
-	UpdateInstaller(params *UpdateInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallerCreated, error)
 
 	UpdateOrg(params *UpdateOrgParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateOrgOK, error)
 
@@ -582,7 +635,7 @@ type ClientService interface {
 AddUser adds a user to the current org
 */
 func (a *Client) AddUser(params *AddUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddUserCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewAddUserParams()
 	}
@@ -602,17 +655,22 @@ func (a *Client) AddUser(params *AddUserParams, authInfo runtime.ClientAuthInfoW
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*AddUserCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for AddUser: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -621,7 +679,7 @@ func (a *Client) AddUser(params *AddUserParams, authInfo runtime.ClientAuthInfoW
 BuildAllComponents creates component build
 */
 func (a *Client) BuildAllComponents(params *BuildAllComponentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BuildAllComponentsCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewBuildAllComponentsParams()
 	}
@@ -641,17 +699,22 @@ func (a *Client) BuildAllComponents(params *BuildAllComponentsParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*BuildAllComponentsCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for BuildAllComponents: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -660,7 +723,7 @@ func (a *Client) BuildAllComponents(params *BuildAllComponentsParams, authInfo r
 CancelInstallWorkflow cancels an ongoing install workflow
 */
 func (a *Client) CancelInstallWorkflow(params *CancelInstallWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CancelInstallWorkflowAccepted, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCancelInstallWorkflowParams()
 	}
@@ -680,17 +743,22 @@ func (a *Client) CancelInstallWorkflow(params *CancelInstallWorkflowParams, auth
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CancelInstallWorkflowAccepted)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CancelInstallWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -701,7 +769,7 @@ CancelRunnerJob cancels runner job
 Cancel a runner job.
 */
 func (a *Client) CancelRunnerJob(params *CancelRunnerJobParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CancelRunnerJobAccepted, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCancelRunnerJobParams()
 	}
@@ -721,17 +789,22 @@ func (a *Client) CancelRunnerJob(params *CancelRunnerJobParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CancelRunnerJobAccepted)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CancelRunnerJob: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -740,7 +813,7 @@ func (a *Client) CancelRunnerJob(params *CancelRunnerJobParams, authInfo runtime
 CancelWorkflow cancels an ongoing workflow
 */
 func (a *Client) CancelWorkflow(params *CancelWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CancelWorkflowAccepted, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCancelWorkflowParams()
 	}
@@ -760,17 +833,22 @@ func (a *Client) CancelWorkflow(params *CancelWorkflowParams, authInfo runtime.C
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CancelWorkflowAccepted)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CancelWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -781,7 +859,7 @@ CompleteUserJourney completes all steps in a specific user journey
 Mark all remaining steps in the specified user journey as complete
 */
 func (a *Client) CompleteUserJourney(params *CompleteUserJourneyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CompleteUserJourneyOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCompleteUserJourneyParams()
 	}
@@ -801,17 +879,22 @@ func (a *Client) CompleteUserJourney(params *CompleteUserJourneyParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CompleteUserJourneyOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CompleteUserJourney: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -820,7 +903,7 @@ func (a *Client) CompleteUserJourney(params *CompleteUserJourneyParams, authInfo
 CreateActionConfig creates action config
 */
 func (a *Client) CreateActionConfig(params *CreateActionConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateActionConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateActionConfigParams()
 	}
@@ -840,17 +923,22 @@ func (a *Client) CreateActionConfig(params *CreateActionConfigParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateActionConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateActionConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -859,7 +947,7 @@ func (a *Client) CreateActionConfig(params *CreateActionConfigParams, authInfo r
 CreateActionWorkflowConfig creates action workflow config
 */
 func (a *Client) CreateActionWorkflowConfig(params *CreateActionWorkflowConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateActionWorkflowConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateActionWorkflowConfigParams()
 	}
@@ -879,17 +967,22 @@ func (a *Client) CreateActionWorkflowConfig(params *CreateActionWorkflowConfigPa
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateActionWorkflowConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateActionWorkflowConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -898,7 +991,7 @@ func (a *Client) CreateActionWorkflowConfig(params *CreateActionWorkflowConfigPa
 CreateApp creates an app
 */
 func (a *Client) CreateApp(params *CreateAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateAppParams()
 	}
@@ -918,17 +1011,22 @@ func (a *Client) CreateApp(params *CreateAppParams, authInfo runtime.ClientAuthI
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateAppCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateApp: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -937,7 +1035,7 @@ func (a *Client) CreateApp(params *CreateAppParams, authInfo runtime.ClientAuthI
 CreateAppAction creates an app action
 */
 func (a *Client) CreateAppAction(params *CreateAppActionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppActionCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateAppActionParams()
 	}
@@ -957,17 +1055,22 @@ func (a *Client) CreateAppAction(params *CreateAppActionParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateAppActionCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppAction: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -976,7 +1079,7 @@ func (a *Client) CreateAppAction(params *CreateAppActionParams, authInfo runtime
 CreateAppActionWorkflow creates an app action workflow
 */
 func (a *Client) CreateAppActionWorkflow(params *CreateAppActionWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppActionWorkflowCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateAppActionWorkflowParams()
 	}
@@ -996,17 +1099,22 @@ func (a *Client) CreateAppActionWorkflow(params *CreateAppActionWorkflowParams, 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateAppActionWorkflowCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppActionWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -1015,7 +1123,7 @@ func (a *Client) CreateAppActionWorkflow(params *CreateAppActionWorkflowParams, 
 CreateAppBranch Cancel a runner job.
 */
 func (a *Client) CreateAppBranch(params *CreateAppBranchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppBranchCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateAppBranchParams()
 	}
@@ -1035,17 +1143,22 @@ func (a *Client) CreateAppBranch(params *CreateAppBranchParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateAppBranchCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppBranch: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -1054,7 +1167,7 @@ func (a *Client) CreateAppBranch(params *CreateAppBranchParams, authInfo runtime
 CreateAppBreakGlassConfig Create a break glass config for an app.
 */
 func (a *Client) CreateAppBreakGlassConfig(params *CreateAppBreakGlassConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppBreakGlassConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateAppBreakGlassConfigParams()
 	}
@@ -1074,17 +1187,22 @@ func (a *Client) CreateAppBreakGlassConfig(params *CreateAppBreakGlassConfigPara
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateAppBreakGlassConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppBreakGlassConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -1093,7 +1211,7 @@ func (a *Client) CreateAppBreakGlassConfig(params *CreateAppBreakGlassConfigPara
 CreateAppComponentBuild creates component build
 */
 func (a *Client) CreateAppComponentBuild(params *CreateAppComponentBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppComponentBuildCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateAppComponentBuildParams()
 	}
@@ -1113,17 +1231,22 @@ func (a *Client) CreateAppComponentBuild(params *CreateAppComponentBuildParams, 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateAppComponentBuildCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppComponentBuild: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -1134,7 +1257,7 @@ func (a *Client) CreateAppComponentBuild(params *CreateAppComponentBuildParams, 
 The API will automatically configure the app according to the config file in the background.
 */
 func (a *Client) CreateAppConfig(params *CreateAppConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateAppConfigParams()
 	}
@@ -1154,17 +1277,22 @@ func (a *Client) CreateAppConfig(params *CreateAppConfigParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateAppConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -1175,7 +1303,7 @@ func (a *Client) CreateAppConfig(params *CreateAppConfigParams, authInfo runtime
 The API will automatically configure the app according to the config file in the background.
 */
 func (a *Client) CreateAppConfigV2(params *CreateAppConfigV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppConfigV2Created, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateAppConfigV2Params()
 	}
@@ -1195,17 +1323,22 @@ func (a *Client) CreateAppConfigV2(params *CreateAppConfigV2Params, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateAppConfigV2Created)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppConfigV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -1214,7 +1347,7 @@ func (a *Client) CreateAppConfigV2(params *CreateAppConfigV2Params, authInfo run
 CreateAppDockerBuildComponentConfig creates a docker build component config
 */
 func (a *Client) CreateAppDockerBuildComponentConfig(params *CreateAppDockerBuildComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppDockerBuildComponentConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateAppDockerBuildComponentConfigParams()
 	}
@@ -1234,18 +1367,67 @@ func (a *Client) CreateAppDockerBuildComponentConfig(params *CreateAppDockerBuil
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateAppDockerBuildComponentConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppDockerBuildComponentConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreateAppExternalImageComponentConfig creates an external image component config
+*/
+func (a *Client) CreateAppExternalImageComponentConfig(params *CreateAppExternalImageComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppExternalImageComponentConfigCreated, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewCreateAppExternalImageComponentConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateAppExternalImageComponentConfig",
+		Method:             "POST",
+		PathPattern:        "/v1/apps/{app_id}/components/{component_id}/configs/external-image",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateAppExternalImageComponentConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*CreateAppExternalImageComponentConfigCreated)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateAppExternalImageComponentConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -1255,7 +1437,7 @@ CreateAppHelmComponentConfig creates a helm component config
 Create a helm component config.
 */
 func (a *Client) CreateAppHelmComponentConfig(params *CreateAppHelmComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppHelmComponentConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateAppHelmComponentConfigParams()
 	}
@@ -1275,17 +1457,22 @@ func (a *Client) CreateAppHelmComponentConfig(params *CreateAppHelmComponentConf
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateAppHelmComponentConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppHelmComponentConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -1296,7 +1483,7 @@ func (a *Client) CreateAppHelmComponentConfig(params *CreateAppHelmComponentConf
 expose configuration knobs in your application.
 */
 func (a *Client) CreateAppInputConfig(params *CreateAppInputConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppInputConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateAppInputConfigParams()
 	}
@@ -1316,18 +1503,67 @@ func (a *Client) CreateAppInputConfig(params *CreateAppInputConfigParams, authIn
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateAppInputConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppInputConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreateAppJobComponentConfig creates a job component config
+*/
+func (a *Client) CreateAppJobComponentConfig(params *CreateAppJobComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppJobComponentConfigCreated, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewCreateAppJobComponentConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateAppJobComponentConfig",
+		Method:             "POST",
+		PathPattern:        "/v1/apps/{app_id}/components/{component_id}/configs/job",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateAppJobComponentConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*CreateAppJobComponentConfigCreated)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateAppJobComponentConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -1335,7 +1571,7 @@ func (a *Client) CreateAppInputConfig(params *CreateAppInputConfigParams, authIn
 CreateAppKubernetesManifestComponentConfig creates a kubernetes manifest component config
 */
 func (a *Client) CreateAppKubernetesManifestComponentConfig(params *CreateAppKubernetesManifestComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppKubernetesManifestComponentConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateAppKubernetesManifestComponentConfigParams()
 	}
@@ -1355,17 +1591,22 @@ func (a *Client) CreateAppKubernetesManifestComponentConfig(params *CreateAppKub
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateAppKubernetesManifestComponentConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppKubernetesManifestComponentConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -1374,7 +1615,7 @@ func (a *Client) CreateAppKubernetesManifestComponentConfig(params *CreateAppKub
 CreateAppPermissionsConfig Create app permissions config.
 */
 func (a *Client) CreateAppPermissionsConfig(params *CreateAppPermissionsConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppPermissionsConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateAppPermissionsConfigParams()
 	}
@@ -1394,17 +1635,22 @@ func (a *Client) CreateAppPermissionsConfig(params *CreateAppPermissionsConfigPa
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateAppPermissionsConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppPermissionsConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -1413,7 +1659,7 @@ func (a *Client) CreateAppPermissionsConfig(params *CreateAppPermissionsConfigPa
 CreateAppPoliciesConfig Create app policies config.
 */
 func (a *Client) CreateAppPoliciesConfig(params *CreateAppPoliciesConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppPoliciesConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateAppPoliciesConfigParams()
 	}
@@ -1433,17 +1679,22 @@ func (a *Client) CreateAppPoliciesConfig(params *CreateAppPoliciesConfigParams, 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateAppPoliciesConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppPoliciesConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -1452,7 +1703,7 @@ func (a *Client) CreateAppPoliciesConfig(params *CreateAppPoliciesConfigParams, 
 CreateAppRunnerConfig creates an app runner config
 */
 func (a *Client) CreateAppRunnerConfig(params *CreateAppRunnerConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppRunnerConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateAppRunnerConfigParams()
 	}
@@ -1472,17 +1723,22 @@ func (a *Client) CreateAppRunnerConfig(params *CreateAppRunnerConfigParams, auth
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateAppRunnerConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppRunnerConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -1491,7 +1747,7 @@ func (a *Client) CreateAppRunnerConfig(params *CreateAppRunnerConfigParams, auth
 CreateAppSandboxConfig creates an app sandbox config
 */
 func (a *Client) CreateAppSandboxConfig(params *CreateAppSandboxConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppSandboxConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateAppSandboxConfigParams()
 	}
@@ -1511,17 +1767,22 @@ func (a *Client) CreateAppSandboxConfig(params *CreateAppSandboxConfigParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateAppSandboxConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppSandboxConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -1530,7 +1791,7 @@ func (a *Client) CreateAppSandboxConfig(params *CreateAppSandboxConfigParams, au
 CreateAppSandboxConfigV2 creates an app sandbox config
 */
 func (a *Client) CreateAppSandboxConfigV2(params *CreateAppSandboxConfigV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppSandboxConfigV2Created, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateAppSandboxConfigV2Params()
 	}
@@ -1550,17 +1811,22 @@ func (a *Client) CreateAppSandboxConfigV2(params *CreateAppSandboxConfigV2Params
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateAppSandboxConfigV2Created)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppSandboxConfigV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -1573,7 +1839,7 @@ func (a *Client) CreateAppSandboxConfigV2(params *CreateAppSandboxConfigV2Params
 **NOTE** secrets can only be written, or deleted, not read.
 */
 func (a *Client) CreateAppSecret(params *CreateAppSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppSecretCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateAppSecretParams()
 	}
@@ -1593,17 +1859,22 @@ func (a *Client) CreateAppSecret(params *CreateAppSecretParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateAppSecretCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppSecret: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -1616,7 +1887,7 @@ func (a *Client) CreateAppSecret(params *CreateAppSecretParams, authInfo runtime
 **NOTE** secrets can only be written, or deleted, not read.
 */
 func (a *Client) CreateAppSecretV2(params *CreateAppSecretV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppSecretV2Created, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateAppSecretV2Params()
 	}
@@ -1636,17 +1907,22 @@ func (a *Client) CreateAppSecretV2(params *CreateAppSecretV2Params, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateAppSecretV2Created)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppSecretV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -1655,7 +1931,7 @@ func (a *Client) CreateAppSecretV2(params *CreateAppSecretV2Params, authInfo run
 CreateAppSecretsConfig Create an app secrets config.
 */
 func (a *Client) CreateAppSecretsConfig(params *CreateAppSecretsConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppSecretsConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateAppSecretsConfigParams()
 	}
@@ -1675,17 +1951,22 @@ func (a *Client) CreateAppSecretsConfig(params *CreateAppSecretsConfigParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateAppSecretsConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppSecretsConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -1696,7 +1977,7 @@ CreateAppStackConfig creates an app stack config
 Create a cloudformation stack config
 */
 func (a *Client) CreateAppStackConfig(params *CreateAppStackConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppStackConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateAppStackConfigParams()
 	}
@@ -1716,17 +1997,22 @@ func (a *Client) CreateAppStackConfig(params *CreateAppStackConfigParams, authIn
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateAppStackConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppStackConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -1737,7 +2023,7 @@ CreateAppTerraformModuleComponentConfig creates a terraform component config
 Create a terraform component config.
 */
 func (a *Client) CreateAppTerraformModuleComponentConfig(params *CreateAppTerraformModuleComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAppTerraformModuleComponentConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateAppTerraformModuleComponentConfigParams()
 	}
@@ -1757,17 +2043,22 @@ func (a *Client) CreateAppTerraformModuleComponentConfig(params *CreateAppTerraf
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateAppTerraformModuleComponentConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateAppTerraformModuleComponentConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -1776,7 +2067,7 @@ func (a *Client) CreateAppTerraformModuleComponentConfig(params *CreateAppTerraf
 CreateComponent creates a component
 */
 func (a *Client) CreateComponent(params *CreateComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateComponentCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateComponentParams()
 	}
@@ -1796,17 +2087,22 @@ func (a *Client) CreateComponent(params *CreateComponentParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateComponentCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateComponent: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -1815,7 +2111,7 @@ func (a *Client) CreateComponent(params *CreateComponentParams, authInfo runtime
 CreateComponentBuild creates component build
 */
 func (a *Client) CreateComponentBuild(params *CreateComponentBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateComponentBuildCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateComponentBuildParams()
 	}
@@ -1835,17 +2131,22 @@ func (a *Client) CreateComponentBuild(params *CreateComponentBuildParams, authIn
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateComponentBuildCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateComponentBuild: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -1854,7 +2155,7 @@ func (a *Client) CreateComponentBuild(params *CreateComponentBuildParams, authIn
 CreateComponentRelease creates a release
 */
 func (a *Client) CreateComponentRelease(params *CreateComponentReleaseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateComponentReleaseCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateComponentReleaseParams()
 	}
@@ -1874,17 +2175,22 @@ func (a *Client) CreateComponentRelease(params *CreateComponentReleaseParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateComponentReleaseCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateComponentRelease: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -1893,7 +2199,7 @@ func (a *Client) CreateComponentRelease(params *CreateComponentReleaseParams, au
 CreateDockerBuildComponentConfig creates a docker build component config
 */
 func (a *Client) CreateDockerBuildComponentConfig(params *CreateDockerBuildComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateDockerBuildComponentConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateDockerBuildComponentConfigParams()
 	}
@@ -1913,17 +2219,22 @@ func (a *Client) CreateDockerBuildComponentConfig(params *CreateDockerBuildCompo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateDockerBuildComponentConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateDockerBuildComponentConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -1932,7 +2243,7 @@ func (a *Client) CreateDockerBuildComponentConfig(params *CreateDockerBuildCompo
 CreateExternalImageComponentConfig creates an external image component config
 */
 func (a *Client) CreateExternalImageComponentConfig(params *CreateExternalImageComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateExternalImageComponentConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateExternalImageComponentConfigParams()
 	}
@@ -1952,17 +2263,22 @@ func (a *Client) CreateExternalImageComponentConfig(params *CreateExternalImageC
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateExternalImageComponentConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateExternalImageComponentConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -1973,7 +2289,7 @@ CreateHelmComponentConfig creates a helm component config
 Create a helm component config.
 */
 func (a *Client) CreateHelmComponentConfig(params *CreateHelmComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateHelmComponentConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateHelmComponentConfigParams()
 	}
@@ -1993,17 +2309,22 @@ func (a *Client) CreateHelmComponentConfig(params *CreateHelmComponentConfigPara
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateHelmComponentConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateHelmComponentConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -2012,7 +2333,7 @@ func (a *Client) CreateHelmComponentConfig(params *CreateHelmComponentConfigPara
 CreateInstall creates an app install
 */
 func (a *Client) CreateInstall(params *CreateInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateInstallParams()
 	}
@@ -2032,28 +2353,31 @@ func (a *Client) CreateInstall(params *CreateInstallParams, authInfo runtime.Cli
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateInstallCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateInstall: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-CreateInstallActionRun creates an action workflow run for an install
-
-AppWorkflowConfigId param has been deprecated and is no longer being consumed, the api uses currently install id to lookup related appworkflowconfigId
+CreateInstallActionRun creates an action run for an install
 */
 func (a *Client) CreateInstallActionRun(params *CreateInstallActionRunParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallActionRunCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateInstallActionRunParams()
 	}
@@ -2073,17 +2397,22 @@ func (a *Client) CreateInstallActionRun(params *CreateInstallActionRunParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateInstallActionRunCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateInstallActionRun: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -2094,7 +2423,7 @@ CreateInstallActionWorkflowRun creates an action workflow run for an install
 AppWorkflowConfigId param has been deprecated and is no longer being consumed, the api uses currently install id to lookup related appworkflowconfigId
 */
 func (a *Client) CreateInstallActionWorkflowRun(params *CreateInstallActionWorkflowRunParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallActionWorkflowRunCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateInstallActionWorkflowRunParams()
 	}
@@ -2114,17 +2443,22 @@ func (a *Client) CreateInstallActionWorkflowRun(params *CreateInstallActionWorkf
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateInstallActionWorkflowRunCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateInstallActionWorkflowRun: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -2133,7 +2467,7 @@ func (a *Client) CreateInstallActionWorkflowRun(params *CreateInstallActionWorkf
 CreateInstallComponentDeploy deploys a build to an install
 */
 func (a *Client) CreateInstallComponentDeploy(params *CreateInstallComponentDeployParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallComponentDeployCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateInstallComponentDeployParams()
 	}
@@ -2153,17 +2487,22 @@ func (a *Client) CreateInstallComponentDeploy(params *CreateInstallComponentDepl
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateInstallComponentDeployCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateInstallComponentDeploy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -2172,7 +2511,7 @@ func (a *Client) CreateInstallComponentDeploy(params *CreateInstallComponentDepl
 CreateInstallConfig creates an install config
 */
 func (a *Client) CreateInstallConfig(params *CreateInstallConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateInstallConfigParams()
 	}
@@ -2192,17 +2531,22 @@ func (a *Client) CreateInstallConfig(params *CreateInstallConfigParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateInstallConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateInstallConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -2211,7 +2555,7 @@ func (a *Client) CreateInstallConfig(params *CreateInstallConfigParams, authInfo
 CreateInstallDeploy deploys a build to an install
 */
 func (a *Client) CreateInstallDeploy(params *CreateInstallDeployParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallDeployCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateInstallDeployParams()
 	}
@@ -2231,17 +2575,22 @@ func (a *Client) CreateInstallDeploy(params *CreateInstallDeployParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateInstallDeployCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateInstallDeploy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -2250,7 +2599,7 @@ func (a *Client) CreateInstallDeploy(params *CreateInstallDeployParams, authInfo
 CreateInstallInputs creates install inputs
 */
 func (a *Client) CreateInstallInputs(params *CreateInstallInputsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallInputsCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateInstallInputsParams()
 	}
@@ -2270,17 +2619,22 @@ func (a *Client) CreateInstallInputs(params *CreateInstallInputsParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateInstallInputsCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateInstallInputs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -2289,7 +2643,7 @@ func (a *Client) CreateInstallInputs(params *CreateInstallInputsParams, authInfo
 CreateInstallV2 creates an app install
 */
 func (a *Client) CreateInstallV2(params *CreateInstallV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallV2Created, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateInstallV2Params()
 	}
@@ -2309,57 +2663,23 @@ func (a *Client) CreateInstallV2(params *CreateInstallV2Params, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateInstallV2Created)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateInstallV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-CreateInstaller creates an installer
-*/
-func (a *Client) CreateInstaller(params *CreateInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateInstallerCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewCreateInstallerParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "CreateInstaller",
-		Method:             "POST",
-		PathPattern:        "/v1/installers",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &CreateInstallerReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*CreateInstallerCreated)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for CreateInstaller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -2367,7 +2687,7 @@ func (a *Client) CreateInstaller(params *CreateInstallerParams, authInfo runtime
 CreateJobComponentConfig creates a job component config
 */
 func (a *Client) CreateJobComponentConfig(params *CreateJobComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateJobComponentConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateJobComponentConfigParams()
 	}
@@ -2387,17 +2707,22 @@ func (a *Client) CreateJobComponentConfig(params *CreateJobComponentConfigParams
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateJobComponentConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateJobComponentConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -2406,7 +2731,7 @@ func (a *Client) CreateJobComponentConfig(params *CreateJobComponentConfigParams
 CreateKubernetesManifestComponentConfig creates a kubernetes manifest component config
 */
 func (a *Client) CreateKubernetesManifestComponentConfig(params *CreateKubernetesManifestComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateKubernetesManifestComponentConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateKubernetesManifestComponentConfigParams()
 	}
@@ -2426,17 +2751,22 @@ func (a *Client) CreateKubernetesManifestComponentConfig(params *CreateKubernete
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateKubernetesManifestComponentConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateKubernetesManifestComponentConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -2445,7 +2775,7 @@ func (a *Client) CreateKubernetesManifestComponentConfig(params *CreateKubernete
 CreateOrg creates a new org
 */
 func (a *Client) CreateOrg(params *CreateOrgParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOrgCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateOrgParams()
 	}
@@ -2465,17 +2795,22 @@ func (a *Client) CreateOrg(params *CreateOrgParams, authInfo runtime.ClientAuthI
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateOrgCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateOrg: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -2488,7 +2823,7 @@ func (a *Client) CreateOrg(params *CreateOrgParams, authInfo runtime.ClientAuthI
 This user will receive an email, and when they next log into the application will be added to the org.
 */
 func (a *Client) CreateOrgInvite(params *CreateOrgInviteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOrgInviteCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateOrgInviteParams()
 	}
@@ -2508,17 +2843,22 @@ func (a *Client) CreateOrgInvite(params *CreateOrgInviteParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateOrgInviteCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateOrgInvite: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -2529,7 +2869,7 @@ CreateTerraformModuleComponentConfig creates a terraform component config
 Create a terraform component config.
 */
 func (a *Client) CreateTerraformModuleComponentConfig(params *CreateTerraformModuleComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTerraformModuleComponentConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateTerraformModuleComponentConfigParams()
 	}
@@ -2549,17 +2889,22 @@ func (a *Client) CreateTerraformModuleComponentConfig(params *CreateTerraformMod
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateTerraformModuleComponentConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateTerraformModuleComponentConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -2568,7 +2913,7 @@ func (a *Client) CreateTerraformModuleComponentConfig(params *CreateTerraformMod
 CreateTerraformWorkspace creates terraform workspace
 */
 func (a *Client) CreateTerraformWorkspace(params *CreateTerraformWorkspaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTerraformWorkspaceCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateTerraformWorkspaceParams()
 	}
@@ -2588,17 +2933,22 @@ func (a *Client) CreateTerraformWorkspace(params *CreateTerraformWorkspaceParams
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateTerraformWorkspaceCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateTerraformWorkspace: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -2607,7 +2957,7 @@ func (a *Client) CreateTerraformWorkspace(params *CreateTerraformWorkspaceParams
 CreateTerraformWorkspaceV2 creates terraform workspace
 */
 func (a *Client) CreateTerraformWorkspaceV2(params *CreateTerraformWorkspaceV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTerraformWorkspaceV2Created, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateTerraformWorkspaceV2Params()
 	}
@@ -2627,17 +2977,22 @@ func (a *Client) CreateTerraformWorkspaceV2(params *CreateTerraformWorkspaceV2Pa
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateTerraformWorkspaceV2Created)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateTerraformWorkspaceV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -2648,7 +3003,7 @@ CreateUserJourney creates a new user journey for account
 Add a new user journey with steps to track user progress
 */
 func (a *Client) CreateUserJourney(params *CreateUserJourneyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateUserJourneyCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateUserJourneyParams()
 	}
@@ -2668,17 +3023,22 @@ func (a *Client) CreateUserJourney(params *CreateUserJourneyParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateUserJourneyCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateUserJourney: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -2687,7 +3047,7 @@ func (a *Client) CreateUserJourney(params *CreateUserJourneyParams, authInfo run
 CreateVCSConnection creates a vcs connection for github
 */
 func (a *Client) CreateVCSConnection(params *CreateVCSConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateVCSConnectionCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateVCSConnectionParams()
 	}
@@ -2707,17 +3067,22 @@ func (a *Client) CreateVCSConnection(params *CreateVCSConnectionParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateVCSConnectionCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateVCSConnection: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -2726,7 +3091,7 @@ func (a *Client) CreateVCSConnection(params *CreateVCSConnectionParams, authInfo
 CreateVCSConnectionCallback publics connection to create a vcs connection via a callback
 */
 func (a *Client) CreateVCSConnectionCallback(params *CreateVCSConnectionCallbackParams, opts ...ClientOption) (*CreateVCSConnectionCallbackCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateVCSConnectionCallbackParams()
 	}
@@ -2745,17 +3110,22 @@ func (a *Client) CreateVCSConnectionCallback(params *CreateVCSConnectionCallback
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateVCSConnectionCallbackCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateVCSConnectionCallback: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -2764,7 +3134,7 @@ func (a *Client) CreateVCSConnectionCallback(params *CreateVCSConnectionCallback
 CreateWaitlist allows user to be added to an org waitlist
 */
 func (a *Client) CreateWaitlist(params *CreateWaitlistParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWaitlistOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateWaitlistParams()
 	}
@@ -2784,17 +3154,22 @@ func (a *Client) CreateWaitlist(params *CreateWaitlistParams, authInfo runtime.C
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateWaitlistOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateWaitlist: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -2805,7 +3180,7 @@ CreateWorkflowStepApprovalResponse creates an approval response for a workflow s
 Create a response for an approval for an action workflow step.
 */
 func (a *Client) CreateWorkflowStepApprovalResponse(params *CreateWorkflowStepApprovalResponseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkflowStepApprovalResponseCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateWorkflowStepApprovalResponseParams()
 	}
@@ -2825,17 +3200,22 @@ func (a *Client) CreateWorkflowStepApprovalResponse(params *CreateWorkflowStepAp
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateWorkflowStepApprovalResponseCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateWorkflowStepApprovalResponse: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -2844,7 +3224,7 @@ func (a *Client) CreateWorkflowStepApprovalResponse(params *CreateWorkflowStepAp
 DeleteAction deletes an action
 */
 func (a *Client) DeleteAction(params *DeleteActionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteActionOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteActionParams()
 	}
@@ -2864,17 +3244,22 @@ func (a *Client) DeleteAction(params *DeleteActionParams, authInfo runtime.Clien
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteActionOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeleteAction: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -2883,7 +3268,7 @@ func (a *Client) DeleteAction(params *DeleteActionParams, authInfo runtime.Clien
 DeleteActionWorkflow deletes an action workflow
 */
 func (a *Client) DeleteActionWorkflow(params *DeleteActionWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteActionWorkflowOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteActionWorkflowParams()
 	}
@@ -2903,17 +3288,22 @@ func (a *Client) DeleteActionWorkflow(params *DeleteActionWorkflowParams, authIn
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteActionWorkflowOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeleteActionWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -2922,7 +3312,7 @@ func (a *Client) DeleteActionWorkflow(params *DeleteActionWorkflowParams, authIn
 DeleteApp deletes an app
 */
 func (a *Client) DeleteApp(params *DeleteAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAppOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteAppParams()
 	}
@@ -2942,17 +3332,22 @@ func (a *Client) DeleteApp(params *DeleteAppParams, authInfo runtime.ClientAuthI
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteAppOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeleteApp: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -2961,7 +3356,7 @@ func (a *Client) DeleteApp(params *DeleteAppParams, authInfo runtime.ClientAuthI
 DeleteAppComponent deletes a component
 */
 func (a *Client) DeleteAppComponent(params *DeleteAppComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAppComponentOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteAppComponentParams()
 	}
@@ -2981,17 +3376,22 @@ func (a *Client) DeleteAppComponent(params *DeleteAppComponentParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteAppComponentOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeleteAppComponent: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -3002,7 +3402,7 @@ DeleteAppSecret deletes an app secret
 Delete an app secret.
 */
 func (a *Client) DeleteAppSecret(params *DeleteAppSecretParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAppSecretOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteAppSecretParams()
 	}
@@ -3022,17 +3422,22 @@ func (a *Client) DeleteAppSecret(params *DeleteAppSecretParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteAppSecretOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeleteAppSecret: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -3043,7 +3448,7 @@ DeleteAppSecretV2 deletes an app secret
 Delete an app secret.
 */
 func (a *Client) DeleteAppSecretV2(params *DeleteAppSecretV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAppSecretV2OK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteAppSecretV2Params()
 	}
@@ -3063,17 +3468,22 @@ func (a *Client) DeleteAppSecretV2(params *DeleteAppSecretV2Params, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteAppSecretV2OK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeleteAppSecretV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -3082,7 +3492,7 @@ func (a *Client) DeleteAppSecretV2(params *DeleteAppSecretV2Params, authInfo run
 DeleteComponent deletes a component
 */
 func (a *Client) DeleteComponent(params *DeleteComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteComponentOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteComponentParams()
 	}
@@ -3102,17 +3512,22 @@ func (a *Client) DeleteComponent(params *DeleteComponentParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteComponentOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeleteComponent: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -3121,7 +3536,7 @@ func (a *Client) DeleteComponent(params *DeleteComponentParams, authInfo runtime
 DeleteInstall deletes an install
 */
 func (a *Client) DeleteInstall(params *DeleteInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteInstallOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteInstallParams()
 	}
@@ -3141,57 +3556,23 @@ func (a *Client) DeleteInstall(params *DeleteInstallParams, authInfo runtime.Cli
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteInstallOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeleteInstall: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-DeleteInstaller deletes an installer
-*/
-func (a *Client) DeleteInstaller(params *DeleteInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteInstallerOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDeleteInstallerParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "DeleteInstaller",
-		Method:             "DELETE",
-		PathPattern:        "/v1/installers/{installer_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &DeleteInstallerReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*DeleteInstallerOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for DeleteInstaller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -3199,7 +3580,7 @@ func (a *Client) DeleteInstaller(params *DeleteInstallerParams, authInfo runtime
 DeleteOrg deletes an org
 */
 func (a *Client) DeleteOrg(params *DeleteOrgParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOrgOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteOrgParams()
 	}
@@ -3219,17 +3600,22 @@ func (a *Client) DeleteOrg(params *DeleteOrgParams, authInfo runtime.ClientAuthI
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteOrgOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeleteOrg: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -3238,7 +3624,7 @@ func (a *Client) DeleteOrg(params *DeleteOrgParams, authInfo runtime.ClientAuthI
 DeleteTerraformWorkspace deletes terraform workspace
 */
 func (a *Client) DeleteTerraformWorkspace(params *DeleteTerraformWorkspaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTerraformWorkspaceOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteTerraformWorkspaceParams()
 	}
@@ -3258,17 +3644,22 @@ func (a *Client) DeleteTerraformWorkspace(params *DeleteTerraformWorkspaceParams
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteTerraformWorkspaceOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeleteTerraformWorkspace: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -3277,7 +3668,7 @@ func (a *Client) DeleteTerraformWorkspace(params *DeleteTerraformWorkspaceParams
 DeleteVCSConnection deletes a v c s connection
 */
 func (a *Client) DeleteVCSConnection(params *DeleteVCSConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteVCSConnectionNoContent, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteVCSConnectionParams()
 	}
@@ -3297,17 +3688,22 @@ func (a *Client) DeleteVCSConnection(params *DeleteVCSConnectionParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteVCSConnectionNoContent)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeleteVCSConnection: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -3320,7 +3716,7 @@ func (a *Client) DeleteVCSConnection(params *DeleteVCSConnectionParams, authInfo
 This walks the graph order of the install's app, and will trigger a deploy for each on the specified install.
 */
 func (a *Client) DeployInstallComponents(params *DeployInstallComponentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeployInstallComponentsCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeployInstallComponentsParams()
 	}
@@ -3340,17 +3736,22 @@ func (a *Client) DeployInstallComponents(params *DeployInstallComponentsParams, 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeployInstallComponentsCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeployInstallComponents: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -3361,7 +3762,7 @@ DeprovisionInstall deprovisions an install
 Deprovision an install sandbox.
 */
 func (a *Client) DeprovisionInstall(params *DeprovisionInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeprovisionInstallCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeprovisionInstallParams()
 	}
@@ -3381,17 +3782,22 @@ func (a *Client) DeprovisionInstall(params *DeprovisionInstallParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeprovisionInstallCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeprovisionInstall: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -3400,7 +3806,7 @@ func (a *Client) DeprovisionInstall(params *DeprovisionInstallParams, authInfo r
 DeprovisionInstallSandbox deprovisions an install
 */
 func (a *Client) DeprovisionInstallSandbox(params *DeprovisionInstallSandboxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeprovisionInstallSandboxCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeprovisionInstallSandboxParams()
 	}
@@ -3420,17 +3826,22 @@ func (a *Client) DeprovisionInstallSandbox(params *DeprovisionInstallSandboxPara
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeprovisionInstallSandboxCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeprovisionInstallSandbox: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -3443,7 +3854,7 @@ func (a *Client) DeprovisionInstallSandbox(params *DeprovisionInstallSandboxPara
 This will result in jobs being lost/cancelled if they are in-flight.
 */
 func (a *Client) ForceShutDownRunner(params *ForceShutDownRunnerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForceShutDownRunnerCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewForceShutDownRunnerParams()
 	}
@@ -3463,17 +3874,22 @@ func (a *Client) ForceShutDownRunner(params *ForceShutDownRunnerParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ForceShutDownRunnerCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for ForceShutDownRunner: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -3486,7 +3902,7 @@ func (a *Client) ForceShutDownRunner(params *ForceShutDownRunnerParams, authInfo
 This should only be used in cases where an install was broken in an unordinary way and needs to be manually deleted so the parent resources can be deleted.
 */
 func (a *Client) ForgetInstall(params *ForgetInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForgetInstallOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewForgetInstallParams()
 	}
@@ -3506,17 +3922,22 @@ func (a *Client) ForgetInstall(params *ForgetInstallParams, authInfo runtime.Cli
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ForgetInstallOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for ForgetInstall: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -3525,7 +3946,7 @@ func (a *Client) ForgetInstall(params *ForgetInstallParams, authInfo runtime.Cli
 GenerateCLIInstallConfig generates an install config to be used with c l i
 */
 func (a *Client) GenerateCLIInstallConfig(params *GenerateCLIInstallConfigParams, authInfo runtime.ClientAuthInfoWriter, writer io.Writer, opts ...ClientOption) (*GenerateCLIInstallConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGenerateCLIInstallConfigParams()
 	}
@@ -3545,18 +3966,67 @@ func (a *Client) GenerateCLIInstallConfig(params *GenerateCLIInstallConfigParams
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GenerateCLIInstallConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GenerateCLIInstallConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GenerateTerraformInstallerConfig generates a terraform installer config
+*/
+func (a *Client) GenerateTerraformInstallerConfig(params *GenerateTerraformInstallerConfigParams, authInfo runtime.ClientAuthInfoWriter, writer io.Writer, opts ...ClientOption) (*GenerateTerraformInstallerConfigOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewGenerateTerraformInstallerConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GenerateTerraformInstallerConfig",
+		Method:             "GET",
+		PathPattern:        "/v1/installs/{install_id}/generate-terraform-installer-config",
+		ProducesMediaTypes: []string{"application/octet-stream"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GenerateTerraformInstallerConfigReader{formats: a.formats, writer: writer},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*GenerateTerraformInstallerConfigOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GenerateTerraformInstallerConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -3566,7 +4036,7 @@ GetActionLatestConfig gets an app action workflow s latest config
 Return the latest config for an action workflow.
 */
 func (a *Client) GetActionLatestConfig(params *GetActionLatestConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionLatestConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetActionLatestConfigParams()
 	}
@@ -3586,17 +4056,22 @@ func (a *Client) GetActionLatestConfig(params *GetActionLatestConfigParams, auth
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetActionLatestConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetActionLatestConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -3605,7 +4080,7 @@ func (a *Client) GetActionLatestConfig(params *GetActionLatestConfigParams, auth
 GetActionWorkflow gets an app action workflow by action workflow id
 */
 func (a *Client) GetActionWorkflow(params *GetActionWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionWorkflowOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetActionWorkflowParams()
 	}
@@ -3625,17 +4100,22 @@ func (a *Client) GetActionWorkflow(params *GetActionWorkflowParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetActionWorkflowOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetActionWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -3644,7 +4124,7 @@ func (a *Client) GetActionWorkflow(params *GetActionWorkflowParams, authInfo run
 GetActionWorkflowConfig gets an app action workflow config
 */
 func (a *Client) GetActionWorkflowConfig(params *GetActionWorkflowConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionWorkflowConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetActionWorkflowConfigParams()
 	}
@@ -3664,17 +4144,22 @@ func (a *Client) GetActionWorkflowConfig(params *GetActionWorkflowConfigParams, 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetActionWorkflowConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetActionWorkflowConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -3683,7 +4168,7 @@ func (a *Client) GetActionWorkflowConfig(params *GetActionWorkflowConfigParams, 
 GetActionWorkflowConfigs gets action workflow for an app
 */
 func (a *Client) GetActionWorkflowConfigs(params *GetActionWorkflowConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionWorkflowConfigsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetActionWorkflowConfigsParams()
 	}
@@ -3703,17 +4188,22 @@ func (a *Client) GetActionWorkflowConfigs(params *GetActionWorkflowConfigsParams
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetActionWorkflowConfigsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetActionWorkflowConfigs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -3724,7 +4214,7 @@ GetActionWorkflowLatestConfig gets an app action workflow s latest config
 Return the latest config for an action workflow.
 */
 func (a *Client) GetActionWorkflowLatestConfig(params *GetActionWorkflowLatestConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionWorkflowLatestConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetActionWorkflowLatestConfigParams()
 	}
@@ -3744,17 +4234,22 @@ func (a *Client) GetActionWorkflowLatestConfig(params *GetActionWorkflowLatestCo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetActionWorkflowLatestConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetActionWorkflowLatestConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -3763,7 +4258,7 @@ func (a *Client) GetActionWorkflowLatestConfig(params *GetActionWorkflowLatestCo
 GetActionWorkflows gets action workflows for an app
 */
 func (a *Client) GetActionWorkflows(params *GetActionWorkflowsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetActionWorkflowsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetActionWorkflowsParams()
 	}
@@ -3783,17 +4278,22 @@ func (a *Client) GetActionWorkflows(params *GetActionWorkflowsParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetActionWorkflowsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetActionWorkflows: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -3804,7 +4304,7 @@ GetApp gets an app
 Return an app.
 */
 func (a *Client) GetApp(params *GetAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppParams()
 	}
@@ -3824,17 +4324,22 @@ func (a *Client) GetApp(params *GetAppParams, authInfo runtime.ClientAuthInfoWri
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetApp: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -3843,7 +4348,7 @@ func (a *Client) GetApp(params *GetAppParams, authInfo runtime.ClientAuthInfoWri
 GetAppAction gets an app action workflow by action workflow id
 */
 func (a *Client) GetAppAction(params *GetAppActionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppActionOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppActionParams()
 	}
@@ -3863,17 +4368,22 @@ func (a *Client) GetAppAction(params *GetAppActionParams, authInfo runtime.Clien
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppActionOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppAction: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -3882,7 +4392,7 @@ func (a *Client) GetAppAction(params *GetAppActionParams, authInfo runtime.Clien
 GetAppActionConfig gets an app action config
 */
 func (a *Client) GetAppActionConfig(params *GetAppActionConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppActionConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppActionConfigParams()
 	}
@@ -3902,17 +4412,22 @@ func (a *Client) GetAppActionConfig(params *GetAppActionConfigParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppActionConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppActionConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -3921,7 +4436,7 @@ func (a *Client) GetAppActionConfig(params *GetAppActionConfigParams, authInfo r
 GetAppActionConfigs gets action workflow for an app
 */
 func (a *Client) GetAppActionConfigs(params *GetAppActionConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppActionConfigsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppActionConfigsParams()
 	}
@@ -3941,17 +4456,22 @@ func (a *Client) GetAppActionConfigs(params *GetAppActionConfigsParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppActionConfigsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppActionConfigs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -3960,7 +4480,7 @@ func (a *Client) GetAppActionConfigs(params *GetAppActionConfigsParams, authInfo
 GetAppActionWorkflow gets an app action workflow
 */
 func (a *Client) GetAppActionWorkflow(params *GetAppActionWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppActionWorkflowOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppActionWorkflowParams()
 	}
@@ -3980,18 +4500,67 @@ func (a *Client) GetAppActionWorkflow(params *GetAppActionWorkflowParams, authIn
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppActionWorkflowOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppActionWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAppActions gets action workflows for an app
+*/
+func (a *Client) GetAppActions(params *GetAppActionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppActionsOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewGetAppActionsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetAppActions",
+		Method:             "GET",
+		PathPattern:        "/v1/apps/{app_id}/actions",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAppActionsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*GetAppActionsOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetAppActions: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -3999,7 +4568,7 @@ func (a *Client) GetAppActionWorkflow(params *GetAppActionWorkflowParams, authIn
 GetAppBranchAppConfigs gets app branch app configs
 */
 func (a *Client) GetAppBranchAppConfigs(params *GetAppBranchAppConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppBranchAppConfigsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppBranchAppConfigsParams()
 	}
@@ -4019,17 +4588,22 @@ func (a *Client) GetAppBranchAppConfigs(params *GetAppBranchAppConfigsParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppBranchAppConfigsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppBranchAppConfigs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4038,7 +4612,7 @@ func (a *Client) GetAppBranchAppConfigs(params *GetAppBranchAppConfigsParams, au
 GetAppBranches gets app branches
 */
 func (a *Client) GetAppBranches(params *GetAppBranchesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppBranchesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppBranchesParams()
 	}
@@ -4058,17 +4632,22 @@ func (a *Client) GetAppBranches(params *GetAppBranchesParams, authInfo runtime.C
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppBranchesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppBranches: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4079,7 +4658,7 @@ GetAppBreakGlassConfig gets app break glass config
 Return an app break glass config by id.
 */
 func (a *Client) GetAppBreakGlassConfig(params *GetAppBreakGlassConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppBreakGlassConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppBreakGlassConfigParams()
 	}
@@ -4099,17 +4678,22 @@ func (a *Client) GetAppBreakGlassConfig(params *GetAppBreakGlassConfigParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppBreakGlassConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppBreakGlassConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4120,7 +4704,7 @@ GetAppComponent gets a components for a specific app
 Return an app component by id or name.
 */
 func (a *Client) GetAppComponent(params *GetAppComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppComponentOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppComponentParams()
 	}
@@ -4140,17 +4724,22 @@ func (a *Client) GetAppComponent(params *GetAppComponentParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppComponentOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppComponent: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4161,7 +4750,7 @@ GetAppComponentBuild gets a build for a component
 Returns builds for one or all components in an app.
 */
 func (a *Client) GetAppComponentBuild(params *GetAppComponentBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppComponentBuildOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppComponentBuildParams()
 	}
@@ -4181,17 +4770,22 @@ func (a *Client) GetAppComponentBuild(params *GetAppComponentBuildParams, authIn
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppComponentBuildOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppComponentBuild: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4200,7 +4794,7 @@ func (a *Client) GetAppComponentBuild(params *GetAppComponentBuildParams, authIn
 GetAppComponentBuilds gets builds for components
 */
 func (a *Client) GetAppComponentBuilds(params *GetAppComponentBuildsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppComponentBuildsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppComponentBuildsParams()
 	}
@@ -4220,17 +4814,22 @@ func (a *Client) GetAppComponentBuilds(params *GetAppComponentBuildsParams, auth
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppComponentBuildsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppComponentBuilds: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4239,7 +4838,7 @@ func (a *Client) GetAppComponentBuilds(params *GetAppComponentBuildsParams, auth
 GetAppComponentConfig gets a config for a component
 */
 func (a *Client) GetAppComponentConfig(params *GetAppComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppComponentConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppComponentConfigParams()
 	}
@@ -4259,17 +4858,22 @@ func (a *Client) GetAppComponentConfig(params *GetAppComponentConfigParams, auth
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppComponentConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppComponentConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4278,7 +4882,7 @@ func (a *Client) GetAppComponentConfig(params *GetAppComponentConfigParams, auth
 GetAppComponentConfigs gets all configs for a component
 */
 func (a *Client) GetAppComponentConfigs(params *GetAppComponentConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppComponentConfigsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppComponentConfigsParams()
 	}
@@ -4298,17 +4902,22 @@ func (a *Client) GetAppComponentConfigs(params *GetAppComponentConfigsParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppComponentConfigsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppComponentConfigs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4317,7 +4926,7 @@ func (a *Client) GetAppComponentConfigs(params *GetAppComponentConfigsParams, au
 GetAppComponentDependencies gets a component s dependencies
 */
 func (a *Client) GetAppComponentDependencies(params *GetAppComponentDependenciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppComponentDependenciesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppComponentDependenciesParams()
 	}
@@ -4337,17 +4946,22 @@ func (a *Client) GetAppComponentDependencies(params *GetAppComponentDependencies
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppComponentDependenciesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppComponentDependencies: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4356,7 +4970,7 @@ func (a *Client) GetAppComponentDependencies(params *GetAppComponentDependencies
 GetAppComponentDependents gets a component s children
 */
 func (a *Client) GetAppComponentDependents(params *GetAppComponentDependentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppComponentDependentsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppComponentDependentsParams()
 	}
@@ -4376,17 +4990,22 @@ func (a *Client) GetAppComponentDependents(params *GetAppComponentDependentsPara
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppComponentDependentsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppComponentDependents: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4395,7 +5014,7 @@ func (a *Client) GetAppComponentDependents(params *GetAppComponentDependentsPara
 GetAppComponentLatestBuild gets latest build for a component
 */
 func (a *Client) GetAppComponentLatestBuild(params *GetAppComponentLatestBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppComponentLatestBuildOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppComponentLatestBuildParams()
 	}
@@ -4415,17 +5034,22 @@ func (a *Client) GetAppComponentLatestBuild(params *GetAppComponentLatestBuildPa
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppComponentLatestBuildOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppComponentLatestBuild: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4434,7 +5058,7 @@ func (a *Client) GetAppComponentLatestBuild(params *GetAppComponentLatestBuildPa
 GetAppComponentLatestConfig gets latest config for a component
 */
 func (a *Client) GetAppComponentLatestConfig(params *GetAppComponentLatestConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppComponentLatestConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppComponentLatestConfigParams()
 	}
@@ -4454,17 +5078,22 @@ func (a *Client) GetAppComponentLatestConfig(params *GetAppComponentLatestConfig
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppComponentLatestConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppComponentLatestConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4473,7 +5102,7 @@ func (a *Client) GetAppComponentLatestConfig(params *GetAppComponentLatestConfig
 GetAppComponents gets all components for an app
 */
 func (a *Client) GetAppComponents(params *GetAppComponentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppComponentsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppComponentsParams()
 	}
@@ -4493,17 +5122,22 @@ func (a *Client) GetAppComponents(params *GetAppComponentsParams, authInfo runti
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppComponentsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppComponents: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4514,7 +5148,7 @@ GetAppConfig gets an app config
 Fetch an app config by id.
 */
 func (a *Client) GetAppConfig(params *GetAppConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppConfigParams()
 	}
@@ -4534,17 +5168,22 @@ func (a *Client) GetAppConfig(params *GetAppConfigParams, authInfo runtime.Clien
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4558,7 +5197,7 @@ Note, for more complex viewing recommend to copy this output directly into [Grap
 viewer](https://dreampuf.github.io/GraphvizOnline).
 */
 func (a *Client) GetAppConfigGraph(params *GetAppConfigGraphParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppConfigGraphOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppConfigGraphParams()
 	}
@@ -4578,17 +5217,22 @@ func (a *Client) GetAppConfigGraph(params *GetAppConfigGraphParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppConfigGraphOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppConfigGraph: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4602,14 +5246,14 @@ Note, for more complex viewing recommend to copy this output directly into [Grap
 viewer](https://dreampuf.github.io/GraphvizOnline).
 */
 func (a *Client) GetAppConfigGraphV2(params *GetAppConfigGraphV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppConfigGraphV2OK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppConfigGraphV2Params()
 	}
 	op := &runtime.ClientOperation{
 		ID:                 "GetAppConfigGraphV2",
 		Method:             "GET",
-		PathPattern:        "/v1/apps/{app_id}/configs/{app_config_id}/graph",
+		PathPattern:        "/v1/apps/{app_id}/configs/{config_id}/graph",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -4622,17 +5266,22 @@ func (a *Client) GetAppConfigGraphV2(params *GetAppConfigGraphV2Params, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppConfigGraphV2OK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppConfigGraphV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4643,7 +5292,7 @@ GetAppConfigTemplate gets an app config template
 Create an application template which provides a fully rendered config that can be modified and used to kickstart any application.
 */
 func (a *Client) GetAppConfigTemplate(params *GetAppConfigTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppConfigTemplateCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppConfigTemplateParams()
 	}
@@ -4663,17 +5312,22 @@ func (a *Client) GetAppConfigTemplate(params *GetAppConfigTemplateParams, authIn
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppConfigTemplateCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppConfigTemplate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4684,7 +5338,7 @@ GetAppConfigs gets app configs
 Returns all configs for the app.
 */
 func (a *Client) GetAppConfigs(params *GetAppConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppConfigsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppConfigsParams()
 	}
@@ -4704,17 +5358,22 @@ func (a *Client) GetAppConfigs(params *GetAppConfigsParams, authInfo runtime.Cli
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppConfigsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppConfigs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4725,14 +5384,14 @@ GetAppConflgV2 gets an app config
 Fetch an app config by id.
 */
 func (a *Client) GetAppConflgV2(params *GetAppConflgV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppConflgV2OK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppConflgV2Params()
 	}
 	op := &runtime.ClientOperation{
 		ID:                 "GetAppConflgV2",
 		Method:             "GET",
-		PathPattern:        "/v1/apps/{app_id}/configs/{app_config_id}",
+		PathPattern:        "/v1/apps/{app_id}/configs/{config_id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -4745,17 +5404,22 @@ func (a *Client) GetAppConflgV2(params *GetAppConflgV2Params, authInfo runtime.C
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppConflgV2OK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppConflgV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4766,7 +5430,7 @@ GetAppInputConfig gets app input config
 Return an input config by id.
 */
 func (a *Client) GetAppInputConfig(params *GetAppInputConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppInputConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppInputConfigParams()
 	}
@@ -4786,17 +5450,22 @@ func (a *Client) GetAppInputConfig(params *GetAppInputConfigParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppInputConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppInputConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4805,7 +5474,7 @@ func (a *Client) GetAppInputConfig(params *GetAppInputConfigParams, authInfo run
 GetAppInputConfigs gets app input configs
 */
 func (a *Client) GetAppInputConfigs(params *GetAppInputConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppInputConfigsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppInputConfigsParams()
 	}
@@ -4825,17 +5494,22 @@ func (a *Client) GetAppInputConfigs(params *GetAppInputConfigsParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppInputConfigsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppInputConfigs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4844,7 +5518,7 @@ func (a *Client) GetAppInputConfigs(params *GetAppInputConfigsParams, authInfo r
 GetAppInputLatestConfig gets latest app input config
 */
 func (a *Client) GetAppInputLatestConfig(params *GetAppInputLatestConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppInputLatestConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppInputLatestConfigParams()
 	}
@@ -4864,17 +5538,22 @@ func (a *Client) GetAppInputLatestConfig(params *GetAppInputLatestConfigParams, 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppInputLatestConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppInputLatestConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4883,7 +5562,7 @@ func (a *Client) GetAppInputLatestConfig(params *GetAppInputLatestConfigParams, 
 GetAppInstalls gets all installs for an app
 */
 func (a *Client) GetAppInstalls(params *GetAppInstallsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppInstallsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppInstallsParams()
 	}
@@ -4903,17 +5582,22 @@ func (a *Client) GetAppInstalls(params *GetAppInstallsParams, authInfo runtime.C
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppInstallsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppInstalls: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4924,7 +5608,7 @@ GetAppLatestConfig gets latest app config
 Returns the most recent config for the provided app.
 */
 func (a *Client) GetAppLatestConfig(params *GetAppLatestConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppLatestConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppLatestConfigParams()
 	}
@@ -4944,17 +5628,22 @@ func (a *Client) GetAppLatestConfig(params *GetAppLatestConfigParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppLatestConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppLatestConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -4965,7 +5654,7 @@ GetAppPermissionsConfig gets app permissions config
 Return an app permissions config by id.
 */
 func (a *Client) GetAppPermissionsConfig(params *GetAppPermissionsConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppPermissionsConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppPermissionsConfigParams()
 	}
@@ -4985,17 +5674,22 @@ func (a *Client) GetAppPermissionsConfig(params *GetAppPermissionsConfigParams, 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppPermissionsConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppPermissionsConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5006,7 +5700,7 @@ GetAppPoliciesConfig gets app policies config
 Return an app policy config by id.
 */
 func (a *Client) GetAppPoliciesConfig(params *GetAppPoliciesConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppPoliciesConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppPoliciesConfigParams()
 	}
@@ -5026,17 +5720,22 @@ func (a *Client) GetAppPoliciesConfig(params *GetAppPoliciesConfigParams, authIn
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppPoliciesConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppPoliciesConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5045,7 +5744,7 @@ func (a *Client) GetAppPoliciesConfig(params *GetAppPoliciesConfigParams, authIn
 GetAppReleases gets all releases for an app
 */
 func (a *Client) GetAppReleases(params *GetAppReleasesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppReleasesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppReleasesParams()
 	}
@@ -5065,17 +5764,22 @@ func (a *Client) GetAppReleases(params *GetAppReleasesParams, authInfo runtime.C
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppReleasesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppReleases: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5084,7 +5788,7 @@ func (a *Client) GetAppReleases(params *GetAppReleasesParams, authInfo runtime.C
 GetAppRunnerConfigs gets app runner configs
 */
 func (a *Client) GetAppRunnerConfigs(params *GetAppRunnerConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppRunnerConfigsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppRunnerConfigsParams()
 	}
@@ -5104,17 +5808,22 @@ func (a *Client) GetAppRunnerConfigs(params *GetAppRunnerConfigsParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppRunnerConfigsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppRunnerConfigs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5123,7 +5832,7 @@ func (a *Client) GetAppRunnerConfigs(params *GetAppRunnerConfigsParams, authInfo
 GetAppRunnerLatestConfig gets latest app runner config
 */
 func (a *Client) GetAppRunnerLatestConfig(params *GetAppRunnerLatestConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppRunnerLatestConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppRunnerLatestConfigParams()
 	}
@@ -5143,17 +5852,22 @@ func (a *Client) GetAppRunnerLatestConfig(params *GetAppRunnerLatestConfigParams
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppRunnerLatestConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppRunnerLatestConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5162,7 +5876,7 @@ func (a *Client) GetAppRunnerLatestConfig(params *GetAppRunnerLatestConfigParams
 GetAppSandboxConfigs gets app sandbox configs
 */
 func (a *Client) GetAppSandboxConfigs(params *GetAppSandboxConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppSandboxConfigsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppSandboxConfigsParams()
 	}
@@ -5182,17 +5896,22 @@ func (a *Client) GetAppSandboxConfigs(params *GetAppSandboxConfigsParams, authIn
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppSandboxConfigsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppSandboxConfigs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5201,7 +5920,7 @@ func (a *Client) GetAppSandboxConfigs(params *GetAppSandboxConfigsParams, authIn
 GetAppSandboxLatestConfig gets latest app sandbox config
 */
 func (a *Client) GetAppSandboxLatestConfig(params *GetAppSandboxLatestConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppSandboxLatestConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppSandboxLatestConfigParams()
 	}
@@ -5221,17 +5940,22 @@ func (a *Client) GetAppSandboxLatestConfig(params *GetAppSandboxLatestConfigPara
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppSandboxLatestConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppSandboxLatestConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5244,7 +5968,7 @@ func (a *Client) GetAppSandboxLatestConfig(params *GetAppSandboxLatestConfigPara
 **NOTE** this does not return any sensitive values, as secrets are write only.
 */
 func (a *Client) GetAppSecrets(params *GetAppSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppSecretsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppSecretsParams()
 	}
@@ -5264,17 +5988,22 @@ func (a *Client) GetAppSecrets(params *GetAppSecretsParams, authInfo runtime.Cli
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppSecretsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppSecrets: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5285,7 +6014,7 @@ GetAppSecretsConfig gets app secrets config
 Return an app secrets config by id.
 */
 func (a *Client) GetAppSecretsConfig(params *GetAppSecretsConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppSecretsConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppSecretsConfigParams()
 	}
@@ -5305,17 +6034,22 @@ func (a *Client) GetAppSecretsConfig(params *GetAppSecretsConfigParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppSecretsConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppSecretsConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5326,7 +6060,7 @@ GetAppStackConfig gets app stack config
 Return a cloudformation stack config
 */
 func (a *Client) GetAppStackConfig(params *GetAppStackConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppStackConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppStackConfigParams()
 	}
@@ -5346,17 +6080,22 @@ func (a *Client) GetAppStackConfig(params *GetAppStackConfigParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppStackConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAppStackConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5365,7 +6104,7 @@ func (a *Client) GetAppStackConfig(params *GetAppStackConfigParams, authInfo run
 GetApps gets all apps for the current org
 */
 func (a *Client) GetApps(params *GetAppsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAppsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAppsParams()
 	}
@@ -5385,17 +6124,22 @@ func (a *Client) GetApps(params *GetAppsParams, authInfo runtime.ClientAuthInfoW
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAppsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetApps: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5406,7 +6150,7 @@ GetBuild gets a build
 Returns builds for one or all components in an app.
 */
 func (a *Client) GetBuild(params *GetBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBuildOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetBuildParams()
 	}
@@ -5426,17 +6170,22 @@ func (a *Client) GetBuild(params *GetBuildParams, authInfo runtime.ClientAuthInf
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetBuildOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetBuild: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5445,7 +6194,7 @@ func (a *Client) GetBuild(params *GetBuildParams, authInfo runtime.ClientAuthInf
 GetCLIConfig gets config for cli
 */
 func (a *Client) GetCLIConfig(params *GetCLIConfigParams, opts ...ClientOption) (*GetCLIConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetCLIConfigParams()
 	}
@@ -5464,17 +6213,22 @@ func (a *Client) GetCLIConfig(params *GetCLIConfigParams, opts ...ClientOption) 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetCLIConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetCLIConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5485,7 +6239,7 @@ GetCloudPlatformRegions gets regions for a cloud platform
 Return region metadata for the Nuon supported cloud platforms.
 */
 func (a *Client) GetCloudPlatformRegions(params *GetCloudPlatformRegionsParams, opts ...ClientOption) (*GetCloudPlatformRegionsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetCloudPlatformRegionsParams()
 	}
@@ -5504,17 +6258,22 @@ func (a *Client) GetCloudPlatformRegions(params *GetCloudPlatformRegionsParams, 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetCloudPlatformRegionsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetCloudPlatformRegions: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5523,7 +6282,7 @@ func (a *Client) GetCloudPlatformRegions(params *GetCloudPlatformRegionsParams, 
 GetComponent gets a component
 */
 func (a *Client) GetComponent(params *GetComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetComponentParams()
 	}
@@ -5543,17 +6302,22 @@ func (a *Client) GetComponent(params *GetComponentParams, authInfo runtime.Clien
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetComponentOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetComponent: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5564,7 +6328,7 @@ GetComponentBuild gets a build for a component
 Returns builds for one or all components in an app.
 */
 func (a *Client) GetComponentBuild(params *GetComponentBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentBuildOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetComponentBuildParams()
 	}
@@ -5584,17 +6348,22 @@ func (a *Client) GetComponentBuild(params *GetComponentBuildParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetComponentBuildOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetComponentBuild: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5603,7 +6372,7 @@ func (a *Client) GetComponentBuild(params *GetComponentBuildParams, authInfo run
 GetComponentBuilds gets builds for components
 */
 func (a *Client) GetComponentBuilds(params *GetComponentBuildsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentBuildsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetComponentBuildsParams()
 	}
@@ -5623,17 +6392,22 @@ func (a *Client) GetComponentBuilds(params *GetComponentBuildsParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetComponentBuildsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetComponentBuilds: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5642,7 +6416,7 @@ func (a *Client) GetComponentBuilds(params *GetComponentBuildsParams, authInfo r
 GetComponentConfig gets a config for a component
 */
 func (a *Client) GetComponentConfig(params *GetComponentConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetComponentConfigParams()
 	}
@@ -5662,17 +6436,22 @@ func (a *Client) GetComponentConfig(params *GetComponentConfigParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetComponentConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetComponentConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5681,7 +6460,7 @@ func (a *Client) GetComponentConfig(params *GetComponentConfigParams, authInfo r
 GetComponentConfigs gets all configs for a component
 */
 func (a *Client) GetComponentConfigs(params *GetComponentConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentConfigsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetComponentConfigsParams()
 	}
@@ -5701,17 +6480,22 @@ func (a *Client) GetComponentConfigs(params *GetComponentConfigsParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetComponentConfigsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetComponentConfigs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5720,7 +6504,7 @@ func (a *Client) GetComponentConfigs(params *GetComponentConfigsParams, authInfo
 GetComponentDependencies gets a component s dependencies
 */
 func (a *Client) GetComponentDependencies(params *GetComponentDependenciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentDependenciesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetComponentDependenciesParams()
 	}
@@ -5740,17 +6524,22 @@ func (a *Client) GetComponentDependencies(params *GetComponentDependenciesParams
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetComponentDependenciesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetComponentDependencies: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5759,7 +6548,7 @@ func (a *Client) GetComponentDependencies(params *GetComponentDependenciesParams
 GetComponentDependents gets a component s children
 */
 func (a *Client) GetComponentDependents(params *GetComponentDependentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentDependentsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetComponentDependentsParams()
 	}
@@ -5779,17 +6568,22 @@ func (a *Client) GetComponentDependents(params *GetComponentDependentsParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetComponentDependentsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetComponentDependents: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5798,7 +6592,7 @@ func (a *Client) GetComponentDependents(params *GetComponentDependentsParams, au
 GetComponentLatestBuild gets latest build for a component
 */
 func (a *Client) GetComponentLatestBuild(params *GetComponentLatestBuildParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentLatestBuildOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetComponentLatestBuildParams()
 	}
@@ -5818,17 +6612,22 @@ func (a *Client) GetComponentLatestBuild(params *GetComponentLatestBuildParams, 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetComponentLatestBuildOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetComponentLatestBuild: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5837,7 +6636,7 @@ func (a *Client) GetComponentLatestBuild(params *GetComponentLatestBuildParams, 
 GetComponentLatestConfig gets latest config for a component
 */
 func (a *Client) GetComponentLatestConfig(params *GetComponentLatestConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentLatestConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetComponentLatestConfigParams()
 	}
@@ -5857,17 +6656,22 @@ func (a *Client) GetComponentLatestConfig(params *GetComponentLatestConfigParams
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetComponentLatestConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetComponentLatestConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5876,7 +6680,7 @@ func (a *Client) GetComponentLatestConfig(params *GetComponentLatestConfigParams
 GetComponentReleases gets all releases for a component
 */
 func (a *Client) GetComponentReleases(params *GetComponentReleasesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentReleasesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetComponentReleasesParams()
 	}
@@ -5896,17 +6700,22 @@ func (a *Client) GetComponentReleases(params *GetComponentReleasesParams, authIn
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetComponentReleasesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetComponentReleases: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5938,7 +6747,7 @@ You can pass in a valid source argument to render within a specific config file:
 - job
 */
 func (a *Client) GetConfigSchema(params *GetConfigSchemaParams, opts ...ClientOption) (*GetConfigSchemaOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetConfigSchemaParams()
 	}
@@ -5957,17 +6766,22 @@ func (a *Client) GetConfigSchema(params *GetConfigSchemaParams, opts ...ClientOp
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetConfigSchemaOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetConfigSchema: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -5978,7 +6792,7 @@ GetCurrentAccount gets current account
 Get the current account with user journeys and other data
 */
 func (a *Client) GetCurrentAccount(params *GetCurrentAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCurrentAccountOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetCurrentAccountParams()
 	}
@@ -5998,17 +6812,22 @@ func (a *Client) GetCurrentAccount(params *GetCurrentAccountParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetCurrentAccountOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetCurrentAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6017,7 +6836,7 @@ func (a *Client) GetCurrentAccount(params *GetCurrentAccountParams, authInfo run
 GetCurrentInstallInputs gets an installs current inputs
 */
 func (a *Client) GetCurrentInstallInputs(params *GetCurrentInstallInputsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCurrentInstallInputsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetCurrentInstallInputsParams()
 	}
@@ -6037,17 +6856,22 @@ func (a *Client) GetCurrentInstallInputs(params *GetCurrentInstallInputsParams, 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetCurrentInstallInputsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetCurrentInstallInputs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6056,7 +6880,7 @@ func (a *Client) GetCurrentInstallInputs(params *GetCurrentInstallInputsParams, 
 GetCurrentUser gets current user
 */
 func (a *Client) GetCurrentUser(params *GetCurrentUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCurrentUserOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetCurrentUserParams()
 	}
@@ -6076,17 +6900,22 @@ func (a *Client) GetCurrentUser(params *GetCurrentUserParams, authInfo runtime.C
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetCurrentUserOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetCurrentUser: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6095,7 +6924,7 @@ func (a *Client) GetCurrentUser(params *GetCurrentUserParams, authInfo runtime.C
 GetDriftedObjects gets drifted objects for an install
 */
 func (a *Client) GetDriftedObjects(params *GetDriftedObjectsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDriftedObjectsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetDriftedObjectsParams()
 	}
@@ -6115,17 +6944,22 @@ func (a *Client) GetDriftedObjects(params *GetDriftedObjectsParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetDriftedObjectsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetDriftedObjects: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6138,7 +6972,7 @@ func (a *Client) GetDriftedObjects(params *GetDriftedObjectsParams, authInfo run
 This should only be used in cases where an install was broken in an unordinary way and needs to be manually deleted so the parent resources can be deleted.
 */
 func (a *Client) GetInstall(params *GetInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallParams()
 	}
@@ -6158,17 +6992,22 @@ func (a *Client) GetInstall(params *GetInstallParams, authInfo runtime.ClientAut
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstall: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6179,7 +7018,7 @@ GetInstallAction gets an install action
 Get an install action workflow.
 */
 func (a *Client) GetInstallAction(params *GetInstallActionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallActionParams()
 	}
@@ -6199,17 +7038,22 @@ func (a *Client) GetInstallAction(params *GetInstallActionParams, authInfo runti
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallActionOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallAction: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6218,7 +7062,7 @@ func (a *Client) GetInstallAction(params *GetInstallActionParams, authInfo runti
 GetInstallActionRecentRuns gets recent runs for an action workflow by install id
 */
 func (a *Client) GetInstallActionRecentRuns(params *GetInstallActionRecentRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionRecentRunsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallActionRecentRunsParams()
 	}
@@ -6238,17 +7082,22 @@ func (a *Client) GetInstallActionRecentRuns(params *GetInstallActionRecentRunsPa
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallActionRecentRunsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallActionRecentRuns: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6257,7 +7106,7 @@ func (a *Client) GetInstallActionRecentRuns(params *GetInstallActionRecentRunsPa
 GetInstallActionRun gets action workflow runs by install id and run id
 */
 func (a *Client) GetInstallActionRun(params *GetInstallActionRunParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionRunOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallActionRunParams()
 	}
@@ -6277,17 +7126,22 @@ func (a *Client) GetInstallActionRun(params *GetInstallActionRunParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallActionRunOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallActionRun: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6298,7 +7152,7 @@ GetInstallActionRunStep gets action workflow run step by install id and step id
 Get an install action workflow run step.
 */
 func (a *Client) GetInstallActionRunStep(params *GetInstallActionRunStepParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionRunStepOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallActionRunStepParams()
 	}
@@ -6318,17 +7172,22 @@ func (a *Client) GetInstallActionRunStep(params *GetInstallActionRunStepParams, 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallActionRunStepOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallActionRunStep: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6337,7 +7196,7 @@ func (a *Client) GetInstallActionRunStep(params *GetInstallActionRunStepParams, 
 GetInstallActionRuns gets action workflow runs by install id
 */
 func (a *Client) GetInstallActionRuns(params *GetInstallActionRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionRunsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallActionRunsParams()
 	}
@@ -6357,17 +7216,22 @@ func (a *Client) GetInstallActionRuns(params *GetInstallActionRunsParams, authIn
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallActionRunsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallActionRuns: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6378,7 +7242,7 @@ GetInstallActionWorkflow gets an install action workflow
 Get an install action workflow.
 */
 func (a *Client) GetInstallActionWorkflow(params *GetInstallActionWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallActionWorkflowParams()
 	}
@@ -6398,17 +7262,22 @@ func (a *Client) GetInstallActionWorkflow(params *GetInstallActionWorkflowParams
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallActionWorkflowOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallActionWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6417,7 +7286,7 @@ func (a *Client) GetInstallActionWorkflow(params *GetInstallActionWorkflowParams
 GetInstallActionWorkflowRecentRuns gets recent runs for an action workflow by install id
 */
 func (a *Client) GetInstallActionWorkflowRecentRuns(params *GetInstallActionWorkflowRecentRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowRecentRunsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallActionWorkflowRecentRunsParams()
 	}
@@ -6437,17 +7306,22 @@ func (a *Client) GetInstallActionWorkflowRecentRuns(params *GetInstallActionWork
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallActionWorkflowRecentRunsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallActionWorkflowRecentRuns: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6456,7 +7330,7 @@ func (a *Client) GetInstallActionWorkflowRecentRuns(params *GetInstallActionWork
 GetInstallActionWorkflowRun gets action workflow runs by install id and run id
 */
 func (a *Client) GetInstallActionWorkflowRun(params *GetInstallActionWorkflowRunParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowRunOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallActionWorkflowRunParams()
 	}
@@ -6476,17 +7350,22 @@ func (a *Client) GetInstallActionWorkflowRun(params *GetInstallActionWorkflowRun
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallActionWorkflowRunOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallActionWorkflowRun: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6497,7 +7376,7 @@ GetInstallActionWorkflowRunStep gets action workflow run step by install id and 
 Get an install action workflow run step.
 */
 func (a *Client) GetInstallActionWorkflowRunStep(params *GetInstallActionWorkflowRunStepParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowRunStepOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallActionWorkflowRunStepParams()
 	}
@@ -6517,17 +7396,22 @@ func (a *Client) GetInstallActionWorkflowRunStep(params *GetInstallActionWorkflo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallActionWorkflowRunStepOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallActionWorkflowRunStep: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6536,7 +7420,7 @@ func (a *Client) GetInstallActionWorkflowRunStep(params *GetInstallActionWorkflo
 GetInstallActionWorkflowRuns gets action workflow runs by install id
 */
 func (a *Client) GetInstallActionWorkflowRuns(params *GetInstallActionWorkflowRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowRunsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallActionWorkflowRunsParams()
 	}
@@ -6556,17 +7440,22 @@ func (a *Client) GetInstallActionWorkflowRuns(params *GetInstallActionWorkflowRu
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallActionWorkflowRunsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallActionWorkflowRuns: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6577,7 +7466,7 @@ GetInstallActionWorkflows gets an installs action workflows
 Get install action workflows.
 */
 func (a *Client) GetInstallActionWorkflows(params *GetInstallActionWorkflowsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallActionWorkflowsParams()
 	}
@@ -6597,17 +7486,22 @@ func (a *Client) GetInstallActionWorkflows(params *GetInstallActionWorkflowsPara
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallActionWorkflowsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallActionWorkflows: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6616,7 +7510,7 @@ func (a *Client) GetInstallActionWorkflows(params *GetInstallActionWorkflowsPara
 GetInstallActionWorkflowsLatestRuns gets latest runs for all action workflows by install id
 */
 func (a *Client) GetInstallActionWorkflowsLatestRuns(params *GetInstallActionWorkflowsLatestRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionWorkflowsLatestRunsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallActionWorkflowsLatestRunsParams()
 	}
@@ -6636,17 +7530,22 @@ func (a *Client) GetInstallActionWorkflowsLatestRuns(params *GetInstallActionWor
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallActionWorkflowsLatestRunsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallActionWorkflowsLatestRuns: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6657,7 +7556,7 @@ GetInstallActions gets an installs action workflows
 Get install action workflows.
 */
 func (a *Client) GetInstallActions(params *GetInstallActionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallActionsParams()
 	}
@@ -6677,17 +7576,22 @@ func (a *Client) GetInstallActions(params *GetInstallActionsParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallActionsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallActions: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6696,7 +7600,7 @@ func (a *Client) GetInstallActions(params *GetInstallActionsParams, authInfo run
 GetInstallActionsLatestRuns gets latest runs for all action workflows by install id
 */
 func (a *Client) GetInstallActionsLatestRuns(params *GetInstallActionsLatestRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallActionsLatestRunsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallActionsLatestRunsParams()
 	}
@@ -6716,17 +7620,22 @@ func (a *Client) GetInstallActionsLatestRuns(params *GetInstallActionsLatestRuns
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallActionsLatestRunsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallActionsLatestRuns: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6735,7 +7644,7 @@ func (a *Client) GetInstallActionsLatestRuns(params *GetInstallActionsLatestRuns
 GetInstallAuditLogs gets install audit logs
 */
 func (a *Client) GetInstallAuditLogs(params *GetInstallAuditLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallAuditLogsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallAuditLogsParams()
 	}
@@ -6755,17 +7664,22 @@ func (a *Client) GetInstallAuditLogs(params *GetInstallAuditLogsParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallAuditLogsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallAuditLogs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6774,7 +7688,7 @@ func (a *Client) GetInstallAuditLogs(params *GetInstallAuditLogsParams, authInfo
 GetInstallComponent gets an install component
 */
 func (a *Client) GetInstallComponent(params *GetInstallComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallComponentOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallComponentParams()
 	}
@@ -6794,17 +7708,22 @@ func (a *Client) GetInstallComponent(params *GetInstallComponentParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallComponentOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallComponent: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6813,7 +7732,7 @@ func (a *Client) GetInstallComponent(params *GetInstallComponentParams, authInfo
 GetInstallComponentDeploy gets an install deploy
 */
 func (a *Client) GetInstallComponentDeploy(params *GetInstallComponentDeployParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallComponentDeployOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallComponentDeployParams()
 	}
@@ -6833,17 +7752,22 @@ func (a *Client) GetInstallComponentDeploy(params *GetInstallComponentDeployPara
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallComponentDeployOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallComponentDeploy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6852,7 +7776,7 @@ func (a *Client) GetInstallComponentDeploy(params *GetInstallComponentDeployPara
 GetInstallComponentDeploys gets an install components deploys
 */
 func (a *Client) GetInstallComponentDeploys(params *GetInstallComponentDeploysParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallComponentDeploysOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallComponentDeploysParams()
 	}
@@ -6872,17 +7796,22 @@ func (a *Client) GetInstallComponentDeploys(params *GetInstallComponentDeploysPa
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallComponentDeploysOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallComponentDeploys: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6891,7 +7820,7 @@ func (a *Client) GetInstallComponentDeploys(params *GetInstallComponentDeploysPa
 GetInstallComponentLatestDeploy gets the latest deploy for an install component
 */
 func (a *Client) GetInstallComponentLatestDeploy(params *GetInstallComponentLatestDeployParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallComponentLatestDeployOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallComponentLatestDeployParams()
 	}
@@ -6911,17 +7840,22 @@ func (a *Client) GetInstallComponentLatestDeploy(params *GetInstallComponentLate
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallComponentLatestDeployOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallComponentLatestDeploy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6934,7 +7868,7 @@ func (a *Client) GetInstallComponentLatestDeploy(params *GetInstallComponentLate
 **NOTE** requires a valid install.
 */
 func (a *Client) GetInstallComponentOutputs(params *GetInstallComponentOutputsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallComponentOutputsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallComponentOutputsParams()
 	}
@@ -6954,17 +7888,22 @@ func (a *Client) GetInstallComponentOutputs(params *GetInstallComponentOutputsPa
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallComponentOutputsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallComponentOutputs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -6973,7 +7912,7 @@ func (a *Client) GetInstallComponentOutputs(params *GetInstallComponentOutputsPa
 GetInstallComponents gets an installs components
 */
 func (a *Client) GetInstallComponents(params *GetInstallComponentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallComponentsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallComponentsParams()
 	}
@@ -6993,17 +7932,22 @@ func (a *Client) GetInstallComponents(params *GetInstallComponentsParams, authIn
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallComponentsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallComponents: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -7012,7 +7956,7 @@ func (a *Client) GetInstallComponents(params *GetInstallComponentsParams, authIn
 GetInstallComponentsDeploys gets all deploys to an install
 */
 func (a *Client) GetInstallComponentsDeploys(params *GetInstallComponentsDeploysParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallComponentsDeploysOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallComponentsDeploysParams()
 	}
@@ -7032,57 +7976,23 @@ func (a *Client) GetInstallComponentsDeploys(params *GetInstallComponentsDeploys
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallComponentsDeploysOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallComponentsDeploys: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetInstallComponentsSummary gets an installs components summary
-*/
-func (a *Client) GetInstallComponentsSummary(params *GetInstallComponentsSummaryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallComponentsSummaryOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetInstallComponentsSummaryParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetInstallComponentsSummary",
-		Method:             "GET",
-		PathPattern:        "/v1/installs/{install_id}/components/summary",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetInstallComponentsSummaryReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetInstallComponentsSummaryOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetInstallComponentsSummary: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -7090,7 +8000,7 @@ func (a *Client) GetInstallComponentsSummary(params *GetInstallComponentsSummary
 GetInstallDeploy gets an install deploy
 */
 func (a *Client) GetInstallDeploy(params *GetInstallDeployParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallDeployOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallDeployParams()
 	}
@@ -7110,17 +8020,22 @@ func (a *Client) GetInstallDeploy(params *GetInstallDeployParams, authInfo runti
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallDeployOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallDeploy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -7129,7 +8044,7 @@ func (a *Client) GetInstallDeploy(params *GetInstallDeployParams, authInfo runti
 GetInstallDeploys gets all deploys to an install
 */
 func (a *Client) GetInstallDeploys(params *GetInstallDeploysParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallDeploysOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallDeploysParams()
 	}
@@ -7149,17 +8064,22 @@ func (a *Client) GetInstallDeploys(params *GetInstallDeploysParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallDeploysOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallDeploys: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -7170,7 +8090,7 @@ GetInstallEvent gets an install event
 Get a single install event.
 */
 func (a *Client) GetInstallEvent(params *GetInstallEventParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallEventOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallEventParams()
 	}
@@ -7190,17 +8110,22 @@ func (a *Client) GetInstallEvent(params *GetInstallEventParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallEventOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallEvent: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -7213,7 +8138,7 @@ func (a *Client) GetInstallEvent(params *GetInstallEventParams, authInfo runtime
 Return an event stream for an install.
 */
 func (a *Client) GetInstallEvents(params *GetInstallEventsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallEventsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallEventsParams()
 	}
@@ -7233,17 +8158,22 @@ func (a *Client) GetInstallEvents(params *GetInstallEventsParams, authInfo runti
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallEventsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallEvents: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -7252,7 +8182,7 @@ func (a *Client) GetInstallEvents(params *GetInstallEventsParams, authInfo runti
 GetInstallInputs gets an installs inputs
 */
 func (a *Client) GetInstallInputs(params *GetInstallInputsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallInputsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallInputsParams()
 	}
@@ -7272,17 +8202,22 @@ func (a *Client) GetInstallInputs(params *GetInstallInputsParams, authInfo runti
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallInputsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallInputs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -7291,7 +8226,7 @@ func (a *Client) GetInstallInputs(params *GetInstallInputsParams, authInfo runti
 GetInstallLatestDeploy gets an install s latest deploy
 */
 func (a *Client) GetInstallLatestDeploy(params *GetInstallLatestDeployParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallLatestDeployOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallLatestDeployParams()
 	}
@@ -7311,17 +8246,22 @@ func (a *Client) GetInstallLatestDeploy(params *GetInstallLatestDeployParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallLatestDeployOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallLatestDeploy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -7334,7 +8274,7 @@ func (a *Client) GetInstallLatestDeploy(params *GetInstallLatestDeployParams, au
 inputs and component outputs.
 */
 func (a *Client) GetInstallReadme(params *GetInstallReadmeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallReadmeOK, *GetInstallReadmePartialContent, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallReadmeParams()
 	}
@@ -7354,18 +8294,22 @@ func (a *Client) GetInstallReadme(params *GetInstallReadmeParams, authInfo runti
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, nil, err
 	}
+
+	// several success responses have to be checked
 	switch value := result.(type) {
 	case *GetInstallReadmeOK:
 		return value, nil, nil
 	case *GetInstallReadmePartialContent:
 		return nil, value, nil
 	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for operations: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -7376,7 +8320,7 @@ GetInstallRunnerGroup gets an install s runner group
 Return the runner group, including runners and settings for the provided install.
 */
 func (a *Client) GetInstallRunnerGroup(params *GetInstallRunnerGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallRunnerGroupOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallRunnerGroupParams()
 	}
@@ -7396,17 +8340,22 @@ func (a *Client) GetInstallRunnerGroup(params *GetInstallRunnerGroupParams, auth
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallRunnerGroupOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallRunnerGroup: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -7415,7 +8364,7 @@ func (a *Client) GetInstallRunnerGroup(params *GetInstallRunnerGroupParams, auth
 GetInstallSandboxRun gets an install sandbox run
 */
 func (a *Client) GetInstallSandboxRun(params *GetInstallSandboxRunParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallSandboxRunOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallSandboxRunParams()
 	}
@@ -7435,17 +8384,22 @@ func (a *Client) GetInstallSandboxRun(params *GetInstallSandboxRunParams, authIn
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallSandboxRunOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallSandboxRun: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -7454,7 +8408,7 @@ func (a *Client) GetInstallSandboxRun(params *GetInstallSandboxRunParams, authIn
 GetInstallSandboxRunV2 gets an install sandbox run
 */
 func (a *Client) GetInstallSandboxRunV2(params *GetInstallSandboxRunV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallSandboxRunV2OK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallSandboxRunV2Params()
 	}
@@ -7474,17 +8428,22 @@ func (a *Client) GetInstallSandboxRunV2(params *GetInstallSandboxRunV2Params, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallSandboxRunV2OK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallSandboxRunV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -7493,7 +8452,7 @@ func (a *Client) GetInstallSandboxRunV2(params *GetInstallSandboxRunV2Params, au
 GetInstallSandboxRuns gets an installs sandbox runs
 */
 func (a *Client) GetInstallSandboxRuns(params *GetInstallSandboxRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallSandboxRunsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallSandboxRunsParams()
 	}
@@ -7513,17 +8472,22 @@ func (a *Client) GetInstallSandboxRuns(params *GetInstallSandboxRunsParams, auth
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallSandboxRunsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallSandboxRuns: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -7532,7 +8496,7 @@ func (a *Client) GetInstallSandboxRuns(params *GetInstallSandboxRunsParams, auth
 GetInstallStack gets an install stack by stack ID
 */
 func (a *Client) GetInstallStack(params *GetInstallStackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallStackOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallStackParams()
 	}
@@ -7552,17 +8516,22 @@ func (a *Client) GetInstallStack(params *GetInstallStackParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallStackOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallStack: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -7571,7 +8540,7 @@ func (a *Client) GetInstallStack(params *GetInstallStackParams, authInfo runtime
 GetInstallStackByInstallID gets an install stack by install ID
 */
 func (a *Client) GetInstallStackByInstallID(params *GetInstallStackByInstallIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallStackByInstallIDOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallStackByInstallIDParams()
 	}
@@ -7591,17 +8560,22 @@ func (a *Client) GetInstallStackByInstallID(params *GetInstallStackByInstallIDPa
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallStackByInstallIDOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallStackByInstallID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -7612,7 +8586,7 @@ GetInstallStackRuns gets an install s stack runs
 get install stack runs
 */
 func (a *Client) GetInstallStackRuns(params *GetInstallStackRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallStackRunsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallStackRunsParams()
 	}
@@ -7632,17 +8606,22 @@ func (a *Client) GetInstallStackRuns(params *GetInstallStackRunsParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallStackRunsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallStackRuns: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -7651,7 +8630,7 @@ func (a *Client) GetInstallStackRuns(params *GetInstallStackRunsParams, authInfo
 GetInstallState gets the current state of an install
 */
 func (a *Client) GetInstallState(params *GetInstallStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallStateOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallStateParams()
 	}
@@ -7671,17 +8650,22 @@ func (a *Client) GetInstallState(params *GetInstallStateParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallStateOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallState: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -7690,7 +8674,7 @@ func (a *Client) GetInstallState(params *GetInstallStateParams, authInfo runtime
 GetInstallStateHistory gets install state history
 */
 func (a *Client) GetInstallStateHistory(params *GetInstallStateHistoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallStateHistoryOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallStateHistoryParams()
 	}
@@ -7710,17 +8694,22 @@ func (a *Client) GetInstallStateHistory(params *GetInstallStateHistoryParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallStateHistoryOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallStateHistory: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -7731,7 +8720,7 @@ GetInstallWorkflow gets an install workflow
 Return a workflow.
 */
 func (a *Client) GetInstallWorkflow(params *GetInstallWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallWorkflowOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallWorkflowParams()
 	}
@@ -7751,17 +8740,22 @@ func (a *Client) GetInstallWorkflow(params *GetInstallWorkflowParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallWorkflowOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -7772,7 +8766,7 @@ GetInstallWorkflowStep gets an install workflow step
 Return a single workflow step.
 */
 func (a *Client) GetInstallWorkflowStep(params *GetInstallWorkflowStepParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallWorkflowStepOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallWorkflowStepParams()
 	}
@@ -7792,17 +8786,22 @@ func (a *Client) GetInstallWorkflowStep(params *GetInstallWorkflowStepParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallWorkflowStepOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallWorkflowStep: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -7811,7 +8810,7 @@ func (a *Client) GetInstallWorkflowStep(params *GetInstallWorkflowStepParams, au
 GetInstallWorkflowStepApproval gets an install workflow step approval
 */
 func (a *Client) GetInstallWorkflowStepApproval(params *GetInstallWorkflowStepApprovalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallWorkflowStepApprovalOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallWorkflowStepApprovalParams()
 	}
@@ -7831,17 +8830,22 @@ func (a *Client) GetInstallWorkflowStepApproval(params *GetInstallWorkflowStepAp
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallWorkflowStepApprovalOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallWorkflowStepApproval: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -7852,7 +8856,7 @@ GetInstallWorkflowSteps gets all of the steps for a given install workflow
 Return all steps for a workflow.
 */
 func (a *Client) GetInstallWorkflowSteps(params *GetInstallWorkflowStepsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallWorkflowStepsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetInstallWorkflowStepsParams()
 	}
@@ -7872,98 +8876,23 @@ func (a *Client) GetInstallWorkflowSteps(params *GetInstallWorkflowStepsParams, 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetInstallWorkflowStepsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetInstallWorkflowSteps: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetInstaller gets an installer
-*/
-func (a *Client) GetInstaller(params *GetInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallerOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetInstallerParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetInstaller",
-		Method:             "GET",
-		PathPattern:        "/v1/installers/{installer_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetInstallerReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetInstallerOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetInstaller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetInstallers gets installers for current org
-
-Return all installers for the current org.
-*/
-func (a *Client) GetInstallers(params *GetInstallersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstallersOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetInstallersParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetInstallers",
-		Method:             "GET",
-		PathPattern:        "/v1/installers",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetInstallersReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetInstallersOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetInstallers: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -7973,7 +8902,7 @@ GetLatestAppBreakGlassConfig gets latest app break glass config
 Get the latest break glass config for an app.
 */
 func (a *Client) GetLatestAppBreakGlassConfig(params *GetLatestAppBreakGlassConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLatestAppBreakGlassConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetLatestAppBreakGlassConfigParams()
 	}
@@ -7993,17 +8922,22 @@ func (a *Client) GetLatestAppBreakGlassConfig(params *GetLatestAppBreakGlassConf
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetLatestAppBreakGlassConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetLatestAppBreakGlassConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -8014,7 +8948,7 @@ GetLatestAppPermissionsConfig gets latest app permissions config
 Get the latest app permissions config.
 */
 func (a *Client) GetLatestAppPermissionsConfig(params *GetLatestAppPermissionsConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLatestAppPermissionsConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetLatestAppPermissionsConfigParams()
 	}
@@ -8034,17 +8968,22 @@ func (a *Client) GetLatestAppPermissionsConfig(params *GetLatestAppPermissionsCo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetLatestAppPermissionsConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetLatestAppPermissionsConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -8055,7 +8994,7 @@ GetLatestAppPoliciesConfig gets latest app policies config
 Get latest app policies config.
 */
 func (a *Client) GetLatestAppPoliciesConfig(params *GetLatestAppPoliciesConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLatestAppPoliciesConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetLatestAppPoliciesConfigParams()
 	}
@@ -8075,17 +9014,22 @@ func (a *Client) GetLatestAppPoliciesConfig(params *GetLatestAppPoliciesConfigPa
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetLatestAppPoliciesConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetLatestAppPoliciesConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -8096,7 +9040,7 @@ GetLatestAppSecretsConfig gets latest app secrets config
 Get the latest app secrets config.
 */
 func (a *Client) GetLatestAppSecretsConfig(params *GetLatestAppSecretsConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLatestAppSecretsConfigOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetLatestAppSecretsConfigParams()
 	}
@@ -8116,17 +9060,22 @@ func (a *Client) GetLatestAppSecretsConfig(params *GetLatestAppSecretsConfigPara
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetLatestAppSecretsConfigOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetLatestAppSecretsConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -8135,7 +9084,7 @@ func (a *Client) GetLatestAppSecretsConfig(params *GetLatestAppSecretsConfigPara
 GetLatestRunnerHeartBeat gets a runner
 */
 func (a *Client) GetLatestRunnerHeartBeat(params *GetLatestRunnerHeartBeatParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLatestRunnerHeartBeatOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetLatestRunnerHeartBeatParams()
 	}
@@ -8155,17 +9104,22 @@ func (a *Client) GetLatestRunnerHeartBeat(params *GetLatestRunnerHeartBeatParams
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetLatestRunnerHeartBeatOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetLatestRunnerHeartBeat: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -8176,7 +9130,7 @@ GetLogStream gets a log stream
 Return a log stream.
 */
 func (a *Client) GetLogStream(params *GetLogStreamParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLogStreamOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetLogStreamParams()
 	}
@@ -8196,17 +9150,22 @@ func (a *Client) GetLogStream(params *GetLogStreamParams, authInfo runtime.Clien
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetLogStreamOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetLogStream: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -8215,7 +9174,7 @@ func (a *Client) GetLogStream(params *GetLogStreamParams, authInfo runtime.Clien
 GetOrg gets an org
 */
 func (a *Client) GetOrg(params *GetOrgParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrgOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetOrgParams()
 	}
@@ -8235,17 +9194,22 @@ func (a *Client) GetOrg(params *GetOrgParams, authInfo runtime.ClientAuthInfoWri
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetOrgOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetOrg: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -8254,7 +9218,7 @@ func (a *Client) GetOrg(params *GetOrgParams, authInfo runtime.ClientAuthInfoWri
 GetOrgAcounts gets user accounts for current org
 */
 func (a *Client) GetOrgAcounts(params *GetOrgAcountsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrgAcountsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetOrgAcountsParams()
 	}
@@ -8274,17 +9238,22 @@ func (a *Client) GetOrgAcounts(params *GetOrgAcountsParams, authInfo runtime.Cli
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetOrgAcountsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetOrgAcounts: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -8293,7 +9262,7 @@ func (a *Client) GetOrgAcounts(params *GetOrgAcountsParams, authInfo runtime.Cli
 GetOrgComponents gets all components for an org
 */
 func (a *Client) GetOrgComponents(params *GetOrgComponentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrgComponentsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetOrgComponentsParams()
 	}
@@ -8313,17 +9282,22 @@ func (a *Client) GetOrgComponents(params *GetOrgComponentsParams, authInfo runti
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetOrgComponentsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetOrgComponents: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -8332,7 +9306,7 @@ func (a *Client) GetOrgComponents(params *GetOrgComponentsParams, authInfo runti
 GetOrgInstalls gets all installs for an org
 */
 func (a *Client) GetOrgInstalls(params *GetOrgInstallsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrgInstallsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetOrgInstallsParams()
 	}
@@ -8352,17 +9326,22 @@ func (a *Client) GetOrgInstalls(params *GetOrgInstallsParams, authInfo runtime.C
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetOrgInstallsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetOrgInstalls: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -8373,7 +9352,7 @@ GetOrgInvites returns org invites
 Returns a list of all invites to the org.
 */
 func (a *Client) GetOrgInvites(params *GetOrgInvitesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrgInvitesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetOrgInvitesParams()
 	}
@@ -8393,17 +9372,22 @@ func (a *Client) GetOrgInvites(params *GetOrgInvitesParams, authInfo runtime.Cli
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetOrgInvitesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetOrgInvites: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -8414,7 +9398,7 @@ GetOrgRunnerGroup gets an org s runner group
 Get the current org's runner group, which includes the runners and their settings.
 */
 func (a *Client) GetOrgRunnerGroup(params *GetOrgRunnerGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrgRunnerGroupOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetOrgRunnerGroupParams()
 	}
@@ -8434,17 +9418,22 @@ func (a *Client) GetOrgRunnerGroup(params *GetOrgRunnerGroupParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetOrgRunnerGroupOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetOrgRunnerGroup: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -8453,7 +9442,7 @@ func (a *Client) GetOrgRunnerGroup(params *GetOrgRunnerGroupParams, authInfo run
 GetOrgVCSConnections gets vcs connection for an org
 */
 func (a *Client) GetOrgVCSConnections(params *GetOrgVCSConnectionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrgVCSConnectionsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetOrgVCSConnectionsParams()
 	}
@@ -8473,17 +9462,22 @@ func (a *Client) GetOrgVCSConnections(params *GetOrgVCSConnectionsParams, authIn
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetOrgVCSConnectionsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetOrgVCSConnections: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -8492,7 +9486,7 @@ func (a *Client) GetOrgVCSConnections(params *GetOrgVCSConnectionsParams, authIn
 GetOrgs returns current user s orgs
 */
 func (a *Client) GetOrgs(params *GetOrgsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrgsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetOrgsParams()
 	}
@@ -8512,17 +9506,22 @@ func (a *Client) GetOrgs(params *GetOrgsParams, authInfo runtime.ClientAuthInfoW
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetOrgsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetOrgs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -8531,7 +9530,7 @@ func (a *Client) GetOrgs(params *GetOrgsParams, authInfo runtime.ClientAuthInfoW
 GetRelease gets a release
 */
 func (a *Client) GetRelease(params *GetReleaseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetReleaseOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetReleaseParams()
 	}
@@ -8551,17 +9550,22 @@ func (a *Client) GetRelease(params *GetReleaseParams, authInfo runtime.ClientAut
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetReleaseOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetRelease: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -8570,7 +9574,7 @@ func (a *Client) GetRelease(params *GetReleaseParams, authInfo runtime.ClientAut
 GetReleaseSteps gets a release s steps
 */
 func (a *Client) GetReleaseSteps(params *GetReleaseStepsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetReleaseStepsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetReleaseStepsParams()
 	}
@@ -8590,40 +9594,43 @@ func (a *Client) GetReleaseSteps(params *GetReleaseStepsParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetReleaseStepsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetReleaseSteps: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetRunner gets a runner by id
-
-Return a runner.
+GetRunnerCardDetails gets runner card details
 */
-func (a *Client) GetRunner(params *GetRunnerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerOK, error) {
-	// TODO: Validate the params before sending
+func (a *Client) GetRunnerCardDetails(params *GetRunnerCardDetailsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerCardDetailsOK, error) {
+	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetRunnerParams()
+		params = NewGetRunnerCardDetailsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetRunner",
+		ID:                 "GetRunnerCardDetails",
 		Method:             "GET",
-		PathPattern:        "/v1/runners/{runner_id}",
+		PathPattern:        "/v1/runners/{runner_id}/card-details",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetRunnerReader{formats: a.formats},
+		Reader:             &GetRunnerCardDetailsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -8631,18 +9638,23 @@ func (a *Client) GetRunner(params *GetRunnerParams, authInfo runtime.ClientAuthI
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetRunnerOK)
+
+	// only one success response has to be checked
+	success, ok := result.(*GetRunnerCardDetailsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetRunner: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetRunnerCardDetails: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -8658,7 +9670,7 @@ if heart beat > 15 seconds ago — false, hb timestamp
 if the heart beat < 15 seconds ago — true
 */
 func (a *Client) GetRunnerConnectStatus(params *GetRunnerConnectStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerConnectStatusOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetRunnerConnectStatusParams()
 	}
@@ -8678,17 +9690,22 @@ func (a *Client) GetRunnerConnectStatus(params *GetRunnerConnectStatusParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetRunnerConnectStatusOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetRunnerConnectStatus: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -8699,7 +9716,7 @@ GetRunnerJob gets runner job
 Return a runner job.
 */
 func (a *Client) GetRunnerJob(params *GetRunnerJobParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetRunnerJobParams()
 	}
@@ -8719,17 +9736,22 @@ func (a *Client) GetRunnerJob(params *GetRunnerJobParams, authInfo runtime.Clien
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetRunnerJobOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetRunnerJob: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -8740,7 +9762,7 @@ GetRunnerJobCompositePlan gets runner job composite plan
 Return a plan for a runner job.
 */
 func (a *Client) GetRunnerJobCompositePlan(params *GetRunnerJobCompositePlanParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobCompositePlanOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetRunnerJobCompositePlanParams()
 	}
@@ -8760,17 +9782,22 @@ func (a *Client) GetRunnerJobCompositePlan(params *GetRunnerJobCompositePlanPara
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetRunnerJobCompositePlanOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetRunnerJobCompositePlan: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -8781,7 +9808,7 @@ GetRunnerJobExecutions gets runner job executions
 Return executions for a runner job.
 */
 func (a *Client) GetRunnerJobExecutions(params *GetRunnerJobExecutionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobExecutionsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetRunnerJobExecutionsParams()
 	}
@@ -8801,17 +9828,22 @@ func (a *Client) GetRunnerJobExecutions(params *GetRunnerJobExecutionsParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetRunnerJobExecutionsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetRunnerJobExecutions: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -8822,7 +9854,7 @@ GetRunnerJobPlan gets runner job plan
 Return a plan for a runner job.
 */
 func (a *Client) GetRunnerJobPlan(params *GetRunnerJobPlanParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobPlanOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetRunnerJobPlanParams()
 	}
@@ -8842,17 +9874,22 @@ func (a *Client) GetRunnerJobPlan(params *GetRunnerJobPlanParams, authInfo runti
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetRunnerJobPlanOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetRunnerJobPlan: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -8863,7 +9900,7 @@ GetRunnerJobPlanV2 gets runner job plan
 Return a plan for a runner job.
 */
 func (a *Client) GetRunnerJobPlanV2(params *GetRunnerJobPlanV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobPlanV2OK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetRunnerJobPlanV2Params()
 	}
@@ -8883,17 +9920,22 @@ func (a *Client) GetRunnerJobPlanV2(params *GetRunnerJobPlanV2Params, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetRunnerJobPlanV2OK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetRunnerJobPlanV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -8904,7 +9946,7 @@ GetRunnerJobV2 gets runner job
 Return a runner job.
 */
 func (a *Client) GetRunnerJobV2(params *GetRunnerJobV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobV2OK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetRunnerJobV2Params()
 	}
@@ -8924,17 +9966,22 @@ func (a *Client) GetRunnerJobV2(params *GetRunnerJobV2Params, authInfo runtime.C
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetRunnerJobV2OK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetRunnerJobV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -8945,7 +9992,7 @@ GetRunnerJobs gets runner jobs
 Return runner jobs.
 */
 func (a *Client) GetRunnerJobs(params *GetRunnerJobsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerJobsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetRunnerJobsParams()
 	}
@@ -8965,17 +10012,22 @@ func (a *Client) GetRunnerJobs(params *GetRunnerJobsParams, authInfo runtime.Cli
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetRunnerJobsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetRunnerJobs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -8984,7 +10036,7 @@ func (a *Client) GetRunnerJobs(params *GetRunnerJobsParams, authInfo runtime.Cli
 GetRunnerLatestHeartBeat gets the latest heartbeats for a runner
 */
 func (a *Client) GetRunnerLatestHeartBeat(params *GetRunnerLatestHeartBeatParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerLatestHeartBeatOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetRunnerLatestHeartBeatParams()
 	}
@@ -9004,17 +10056,22 @@ func (a *Client) GetRunnerLatestHeartBeat(params *GetRunnerLatestHeartBeatParams
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetRunnerLatestHeartBeatOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetRunnerLatestHeartBeat: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9023,7 +10080,7 @@ func (a *Client) GetRunnerLatestHeartBeat(params *GetRunnerLatestHeartBeatParams
 GetRunnerRecentHealthChecks gets recent health checks
 */
 func (a *Client) GetRunnerRecentHealthChecks(params *GetRunnerRecentHealthChecksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerRecentHealthChecksOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetRunnerRecentHealthChecksParams()
 	}
@@ -9043,17 +10100,22 @@ func (a *Client) GetRunnerRecentHealthChecks(params *GetRunnerRecentHealthChecks
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetRunnerRecentHealthChecksOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetRunnerRecentHealthChecks: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9064,7 +10126,7 @@ GetRunnerSettings gets runner settings
 Return runner settings for the provided runner.
 */
 func (a *Client) GetRunnerSettings(params *GetRunnerSettingsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRunnerSettingsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetRunnerSettingsParams()
 	}
@@ -9084,17 +10146,22 @@ func (a *Client) GetRunnerSettings(params *GetRunnerSettingsParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetRunnerSettingsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetRunnerSettings: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9103,7 +10170,7 @@ func (a *Client) GetRunnerSettings(params *GetRunnerSettingsParams, authInfo run
 GetTerraformCurrentStateData gets current terraform
 */
 func (a *Client) GetTerraformCurrentStateData(params *GetTerraformCurrentStateDataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformCurrentStateDataOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTerraformCurrentStateDataParams()
 	}
@@ -9123,17 +10190,22 @@ func (a *Client) GetTerraformCurrentStateData(params *GetTerraformCurrentStateDa
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTerraformCurrentStateDataOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetTerraformCurrentStateData: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9142,7 +10214,7 @@ func (a *Client) GetTerraformCurrentStateData(params *GetTerraformCurrentStateDa
 GetTerraformStates gets terraform states
 */
 func (a *Client) GetTerraformStates(params *GetTerraformStatesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformStatesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTerraformStatesParams()
 	}
@@ -9162,17 +10234,22 @@ func (a *Client) GetTerraformStates(params *GetTerraformStatesParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTerraformStatesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetTerraformStates: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9181,7 +10258,7 @@ func (a *Client) GetTerraformStates(params *GetTerraformStatesParams, authInfo r
 GetTerraformStatesV2 gets terraform states
 */
 func (a *Client) GetTerraformStatesV2(params *GetTerraformStatesV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformStatesV2OK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTerraformStatesV2Params()
 	}
@@ -9201,17 +10278,22 @@ func (a *Client) GetTerraformStatesV2(params *GetTerraformStatesV2Params, authIn
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTerraformStatesV2OK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetTerraformStatesV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9220,7 +10302,7 @@ func (a *Client) GetTerraformStatesV2(params *GetTerraformStatesV2Params, authIn
 GetTerraformWorkspace gets terraform workspace
 */
 func (a *Client) GetTerraformWorkspace(params *GetTerraformWorkspaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTerraformWorkspaceParams()
 	}
@@ -9240,17 +10322,22 @@ func (a *Client) GetTerraformWorkspace(params *GetTerraformWorkspaceParams, auth
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTerraformWorkspaceOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetTerraformWorkspace: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9259,7 +10346,7 @@ func (a *Client) GetTerraformWorkspace(params *GetTerraformWorkspaceParams, auth
 GetTerraformWorkspaceLock gets terraform workspace lock
 */
 func (a *Client) GetTerraformWorkspaceLock(params *GetTerraformWorkspaceLockParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceLockOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTerraformWorkspaceLockParams()
 	}
@@ -9279,17 +10366,22 @@ func (a *Client) GetTerraformWorkspaceLock(params *GetTerraformWorkspaceLockPara
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTerraformWorkspaceLockOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetTerraformWorkspaceLock: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9298,7 +10390,7 @@ func (a *Client) GetTerraformWorkspaceLock(params *GetTerraformWorkspaceLockPara
 GetTerraformWorkspaceStateByID gets terraform state by ID
 */
 func (a *Client) GetTerraformWorkspaceStateByID(params *GetTerraformWorkspaceStateByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceStateByIDOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTerraformWorkspaceStateByIDParams()
 	}
@@ -9318,17 +10410,22 @@ func (a *Client) GetTerraformWorkspaceStateByID(params *GetTerraformWorkspaceSta
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTerraformWorkspaceStateByIDOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetTerraformWorkspaceStateByID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9337,7 +10434,7 @@ func (a *Client) GetTerraformWorkspaceStateByID(params *GetTerraformWorkspaceSta
 GetTerraformWorkspaceStateByIDV2 gets terraform state by ID
 */
 func (a *Client) GetTerraformWorkspaceStateByIDV2(params *GetTerraformWorkspaceStateByIDV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceStateByIDV2OK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTerraformWorkspaceStateByIDV2Params()
 	}
@@ -9357,17 +10454,22 @@ func (a *Client) GetTerraformWorkspaceStateByIDV2(params *GetTerraformWorkspaceS
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTerraformWorkspaceStateByIDV2OK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetTerraformWorkspaceStateByIDV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9376,7 +10478,7 @@ func (a *Client) GetTerraformWorkspaceStateByIDV2(params *GetTerraformWorkspaceS
 GetTerraformWorkspaceStateJSONResources gets terraform state resources this output is similar to terraform state list
 */
 func (a *Client) GetTerraformWorkspaceStateJSONResources(params *GetTerraformWorkspaceStateJSONResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceStateJSONResourcesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTerraformWorkspaceStateJSONResourcesParams()
 	}
@@ -9396,17 +10498,22 @@ func (a *Client) GetTerraformWorkspaceStateJSONResources(params *GetTerraformWor
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTerraformWorkspaceStateJSONResourcesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetTerraformWorkspaceStateJSONResources: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9415,7 +10522,7 @@ func (a *Client) GetTerraformWorkspaceStateJSONResources(params *GetTerraformWor
 GetTerraformWorkspaceStateJSONResourcesV2 gets terraform state resources this output is similar to terraform state list
 */
 func (a *Client) GetTerraformWorkspaceStateJSONResourcesV2(params *GetTerraformWorkspaceStateJSONResourcesV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceStateJSONResourcesV2OK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTerraformWorkspaceStateJSONResourcesV2Params()
 	}
@@ -9435,17 +10542,22 @@ func (a *Client) GetTerraformWorkspaceStateJSONResourcesV2(params *GetTerraformW
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTerraformWorkspaceStateJSONResourcesV2OK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetTerraformWorkspaceStateJSONResourcesV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9454,7 +10566,7 @@ func (a *Client) GetTerraformWorkspaceStateJSONResourcesV2(params *GetTerraformW
 GetTerraformWorkspaceStateResources gets terraform state resources
 */
 func (a *Client) GetTerraformWorkspaceStateResources(params *GetTerraformWorkspaceStateResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceStateResourcesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTerraformWorkspaceStateResourcesParams()
 	}
@@ -9474,17 +10586,22 @@ func (a *Client) GetTerraformWorkspaceStateResources(params *GetTerraformWorkspa
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTerraformWorkspaceStateResourcesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetTerraformWorkspaceStateResources: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9493,7 +10610,7 @@ func (a *Client) GetTerraformWorkspaceStateResources(params *GetTerraformWorkspa
 GetTerraformWorkspaceStatesJSON gets terraform states json
 */
 func (a *Client) GetTerraformWorkspaceStatesJSON(params *GetTerraformWorkspaceStatesJSONParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceStatesJSONOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTerraformWorkspaceStatesJSONParams()
 	}
@@ -9513,17 +10630,22 @@ func (a *Client) GetTerraformWorkspaceStatesJSON(params *GetTerraformWorkspaceSt
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTerraformWorkspaceStatesJSONOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetTerraformWorkspaceStatesJSON: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9532,7 +10654,7 @@ func (a *Client) GetTerraformWorkspaceStatesJSON(params *GetTerraformWorkspaceSt
 GetTerraformWorkspaceStatesJSONByID gets terraform state json by id this output is same as terraform show json
 */
 func (a *Client) GetTerraformWorkspaceStatesJSONByID(params *GetTerraformWorkspaceStatesJSONByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceStatesJSONByIDOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTerraformWorkspaceStatesJSONByIDParams()
 	}
@@ -9552,17 +10674,22 @@ func (a *Client) GetTerraformWorkspaceStatesJSONByID(params *GetTerraformWorkspa
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTerraformWorkspaceStatesJSONByIDOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetTerraformWorkspaceStatesJSONByID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9571,7 +10698,7 @@ func (a *Client) GetTerraformWorkspaceStatesJSONByID(params *GetTerraformWorkspa
 GetTerraformWorkspaceStatesJSONByIDV2 gets terraform state json by id this output is same as terraform show json
 */
 func (a *Client) GetTerraformWorkspaceStatesJSONByIDV2(params *GetTerraformWorkspaceStatesJSONByIDV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceStatesJSONByIDV2OK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTerraformWorkspaceStatesJSONByIDV2Params()
 	}
@@ -9591,17 +10718,22 @@ func (a *Client) GetTerraformWorkspaceStatesJSONByIDV2(params *GetTerraformWorks
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTerraformWorkspaceStatesJSONByIDV2OK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetTerraformWorkspaceStatesJSONByIDV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9610,7 +10742,7 @@ func (a *Client) GetTerraformWorkspaceStatesJSONByIDV2(params *GetTerraformWorks
 GetTerraformWorkspaceStatesJSONV2 gets terraform states json
 */
 func (a *Client) GetTerraformWorkspaceStatesJSONV2(params *GetTerraformWorkspaceStatesJSONV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspaceStatesJSONV2OK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTerraformWorkspaceStatesJSONV2Params()
 	}
@@ -9630,17 +10762,22 @@ func (a *Client) GetTerraformWorkspaceStatesJSONV2(params *GetTerraformWorkspace
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTerraformWorkspaceStatesJSONV2OK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetTerraformWorkspaceStatesJSONV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9649,7 +10786,7 @@ func (a *Client) GetTerraformWorkspaceStatesJSONV2(params *GetTerraformWorkspace
 GetTerraformWorkspaces gets terraform workspaces
 */
 func (a *Client) GetTerraformWorkspaces(params *GetTerraformWorkspacesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTerraformWorkspacesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTerraformWorkspacesParams()
 	}
@@ -9669,17 +10806,22 @@ func (a *Client) GetTerraformWorkspaces(params *GetTerraformWorkspacesParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTerraformWorkspacesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetTerraformWorkspaces: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9690,7 +10832,7 @@ GetUserJourneys gets user journeys
 Get all user journeys for the current user account
 */
 func (a *Client) GetUserJourneys(params *GetUserJourneysParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserJourneysOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetUserJourneysParams()
 	}
@@ -9710,17 +10852,22 @@ func (a *Client) GetUserJourneys(params *GetUserJourneysParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetUserJourneysOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetUserJourneys: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9729,7 +10876,7 @@ func (a *Client) GetUserJourneys(params *GetUserJourneysParams, authInfo runtime
 GetVCSConnection returns a vcs connection for an org
 */
 func (a *Client) GetVCSConnection(params *GetVCSConnectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVCSConnectionOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetVCSConnectionParams()
 	}
@@ -9749,17 +10896,22 @@ func (a *Client) GetVCSConnection(params *GetVCSConnectionParams, authInfo runti
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetVCSConnectionOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetVCSConnection: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9770,7 +10922,7 @@ GetWorkflow gets a workflow
 Return a workflow.
 */
 func (a *Client) GetWorkflow(params *GetWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetWorkflowParams()
 	}
@@ -9790,17 +10942,22 @@ func (a *Client) GetWorkflow(params *GetWorkflowParams, authInfo runtime.ClientA
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetWorkflowOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9811,7 +10968,7 @@ GetWorkflowStep gets a workflow step
 Return a single workflow step.
 */
 func (a *Client) GetWorkflowStep(params *GetWorkflowStepParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowStepOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetWorkflowStepParams()
 	}
@@ -9831,17 +10988,22 @@ func (a *Client) GetWorkflowStep(params *GetWorkflowStepParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetWorkflowStepOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetWorkflowStep: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9850,7 +11012,7 @@ func (a *Client) GetWorkflowStep(params *GetWorkflowStepParams, authInfo runtime
 GetWorkflowStepApproval gets an workflow step approval
 */
 func (a *Client) GetWorkflowStepApproval(params *GetWorkflowStepApprovalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowStepApprovalOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetWorkflowStepApprovalParams()
 	}
@@ -9870,17 +11032,22 @@ func (a *Client) GetWorkflowStepApproval(params *GetWorkflowStepApprovalParams, 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetWorkflowStepApprovalOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetWorkflowStepApproval: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9891,7 +11058,7 @@ GetWorkflowStepApprovalContents gets a workflow step approval contents
 Return the contents of a json plan for an approval (compressed).
 */
 func (a *Client) GetWorkflowStepApprovalContents(params *GetWorkflowStepApprovalContentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowStepApprovalContentsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetWorkflowStepApprovalContentsParams()
 	}
@@ -9911,17 +11078,22 @@ func (a *Client) GetWorkflowStepApprovalContents(params *GetWorkflowStepApproval
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetWorkflowStepApprovalContentsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetWorkflowStepApprovalContents: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9932,7 +11104,7 @@ GetWorkflowSteps gets all of the steps for a given workflow
 Return all steps for a workflow.
 */
 func (a *Client) GetWorkflowSteps(params *GetWorkflowStepsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowStepsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetWorkflowStepsParams()
 	}
@@ -9952,17 +11124,22 @@ func (a *Client) GetWorkflowSteps(params *GetWorkflowStepsParams, authInfo runti
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetWorkflowStepsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetWorkflowSteps: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -9973,7 +11150,7 @@ GetWorkflows gets workflows
 Return workflows for an install.
 */
 func (a *Client) GetWorkflows(params *GetWorkflowsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetWorkflowsParams()
 	}
@@ -9993,17 +11170,22 @@ func (a *Client) GetWorkflows(params *GetWorkflowsParams, authInfo runtime.Clien
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetWorkflowsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetWorkflows: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -10016,7 +11198,7 @@ func (a *Client) GetWorkflows(params *GetWorkflowsParams, authInfo runtime.Clien
 _NOTE_ when a runner is unhealthy, the runner will not be able to pick up this job, so use force shut down instead.
 */
 func (a *Client) GracefulShutDownRunner(params *GracefulShutDownRunnerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GracefulShutDownRunnerCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGracefulShutDownRunnerParams()
 	}
@@ -10036,17 +11218,22 @@ func (a *Client) GracefulShutDownRunner(params *GracefulShutDownRunnerParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GracefulShutDownRunnerCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GracefulShutDownRunner: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -10055,7 +11242,7 @@ func (a *Client) GracefulShutDownRunner(params *GracefulShutDownRunnerParams, au
 LockTerraformWorkspace locks terraform state
 */
 func (a *Client) LockTerraformWorkspace(params *LockTerraformWorkspaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LockTerraformWorkspaceOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewLockTerraformWorkspaceParams()
 	}
@@ -10075,17 +11262,22 @@ func (a *Client) LockTerraformWorkspace(params *LockTerraformWorkspaceParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*LockTerraformWorkspaceOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for LockTerraformWorkspace: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -10096,7 +11288,7 @@ LogStreamReadLogs reads a log stream s logs
 Read OTEL formatted logs for a log stream.
 */
 func (a *Client) LogStreamReadLogs(params *LogStreamReadLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LogStreamReadLogsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewLogStreamReadLogsParams()
 	}
@@ -10116,17 +11308,22 @@ func (a *Client) LogStreamReadLogs(params *LogStreamReadLogsParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*LogStreamReadLogsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for LogStreamReadLogs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -10135,7 +11332,7 @@ func (a *Client) LogStreamReadLogs(params *LogStreamReadLogsParams, authInfo run
 MngVMShutDown shuts down an install runner VM
 */
 func (a *Client) MngVMShutDown(params *MngVMShutDownParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*MngVMShutDownCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewMngVMShutDownParams()
 	}
@@ -10155,17 +11352,22 @@ func (a *Client) MngVMShutDown(params *MngVMShutDownParams, authInfo runtime.Cli
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*MngVMShutDownCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for MngVMShutDown: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -10176,7 +11378,7 @@ PhoneHome phones home for an install
 A public endpoint for phoning home from a runner AWS cloudformation stack upon successfully processing it.
 */
 func (a *Client) PhoneHome(params *PhoneHomeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PhoneHomeCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewPhoneHomeParams()
 	}
@@ -10196,17 +11398,22 @@ func (a *Client) PhoneHome(params *PhoneHomeParams, authInfo runtime.ClientAuthI
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*PhoneHomeCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for PhoneHome: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -10217,7 +11424,7 @@ RemoveUser removes a user from the current org
 Remove a user from an org.
 */
 func (a *Client) RemoveUser(params *RemoveUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RemoveUserCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewRemoveUserParams()
 	}
@@ -10237,56 +11444,23 @@ func (a *Client) RemoveUser(params *RemoveUserParams, authInfo runtime.ClientAut
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*RemoveUserCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for RemoveUser: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-RenderInstaller renders an installer
-*/
-func (a *Client) RenderInstaller(params *RenderInstallerParams, opts ...ClientOption) (*RenderInstallerOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewRenderInstallerParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "RenderInstaller",
-		Method:             "GET",
-		PathPattern:        "/v1/installer/{installer_id}/render",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &RenderInstallerReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*RenderInstallerOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for RenderInstaller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -10296,7 +11470,7 @@ ReprovisionInstall reprovisions an install
 Reprovision an install sandbox.
 */
 func (a *Client) ReprovisionInstall(params *ReprovisionInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReprovisionInstallCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewReprovisionInstallParams()
 	}
@@ -10316,17 +11490,22 @@ func (a *Client) ReprovisionInstall(params *ReprovisionInstallParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ReprovisionInstallCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for ReprovisionInstall: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -10337,7 +11516,7 @@ ReprovisionInstallSandbox reprovisions an install sandbox
 Reprovision an install sandbox and redeploy all components on top.
 */
 func (a *Client) ReprovisionInstallSandbox(params *ReprovisionInstallSandboxParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReprovisionInstallSandboxCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewReprovisionInstallSandboxParams()
 	}
@@ -10357,17 +11536,22 @@ func (a *Client) ReprovisionInstallSandbox(params *ReprovisionInstallSandboxPara
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ReprovisionInstallSandboxCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for ReprovisionInstallSandbox: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -10378,7 +11562,7 @@ ResetUserJourney resets user journey steps
 Reset all steps in a specified user journey by setting their completion status to false
 */
 func (a *Client) ResetUserJourney(params *ResetUserJourneyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResetUserJourneyOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewResetUserJourneyParams()
 	}
@@ -10398,17 +11582,22 @@ func (a *Client) ResetUserJourney(params *ResetUserJourneyParams, authInfo runti
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ResetUserJourneyOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for ResetUserJourney: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -10417,7 +11606,7 @@ func (a *Client) ResetUserJourney(params *ResetUserJourneyParams, authInfo runti
 RetryOwnerWorkflowByID reruns the workflow steps starting from input step id can be used to retry a failed step
 */
 func (a *Client) RetryOwnerWorkflowByID(params *RetryOwnerWorkflowByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RetryOwnerWorkflowByIDCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewRetryOwnerWorkflowByIDParams()
 	}
@@ -10437,17 +11626,22 @@ func (a *Client) RetryOwnerWorkflowByID(params *RetryOwnerWorkflowByIDParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*RetryOwnerWorkflowByIDCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for RetryOwnerWorkflowByID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -10456,7 +11650,7 @@ func (a *Client) RetryOwnerWorkflowByID(params *RetryOwnerWorkflowByIDParams, au
 RetryWorkflow reruns the workflow steps starting from input step id can be used to retry a failed step
 */
 func (a *Client) RetryWorkflow(params *RetryWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RetryWorkflowCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewRetryWorkflowParams()
 	}
@@ -10476,17 +11670,22 @@ func (a *Client) RetryWorkflow(params *RetryWorkflowParams, authInfo runtime.Cli
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*RetryWorkflowCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for RetryWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -10495,7 +11694,7 @@ func (a *Client) RetryWorkflow(params *RetryWorkflowParams, authInfo runtime.Cli
 RetryWorkflowStep reruns the workflow steps starting from input step id can be used to retry a failed step
 */
 func (a *Client) RetryWorkflowStep(params *RetryWorkflowStepParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RetryWorkflowStepCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewRetryWorkflowStepParams()
 	}
@@ -10515,17 +11714,22 @@ func (a *Client) RetryWorkflowStep(params *RetryWorkflowStepParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*RetryWorkflowStepCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for RetryWorkflowStep: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -10534,7 +11738,7 @@ func (a *Client) RetryWorkflowStep(params *RetryWorkflowStepParams, authInfo run
 ShutDownRunnerMng shuts down an install runner management process
 */
 func (a *Client) ShutDownRunnerMng(params *ShutDownRunnerMngParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ShutDownRunnerMngCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewShutDownRunnerMngParams()
 	}
@@ -10554,17 +11758,22 @@ func (a *Client) ShutDownRunnerMng(params *ShutDownRunnerMngParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ShutDownRunnerMngCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for ShutDownRunnerMng: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -10575,7 +11784,7 @@ SyncSecrets syncs secrets install
 Execute the sync secrets workflow.
 */
 func (a *Client) SyncSecrets(params *SyncSecretsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncSecretsCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewSyncSecretsParams()
 	}
@@ -10595,17 +11804,22 @@ func (a *Client) SyncSecrets(params *SyncSecretsParams, authInfo runtime.ClientA
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*SyncSecretsCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for SyncSecrets: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -10614,7 +11828,7 @@ func (a *Client) SyncSecrets(params *SyncSecretsParams, authInfo runtime.ClientA
 TeardownInstallComponent teardowns an install component
 */
 func (a *Client) TeardownInstallComponent(params *TeardownInstallComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeardownInstallComponentCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewTeardownInstallComponentParams()
 	}
@@ -10634,17 +11848,22 @@ func (a *Client) TeardownInstallComponent(params *TeardownInstallComponentParams
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*TeardownInstallComponentCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for TeardownInstallComponent: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -10655,7 +11874,7 @@ TeardownInstallComponents teardowns an install s components
 Teardown all components on an install.
 */
 func (a *Client) TeardownInstallComponents(params *TeardownInstallComponentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeardownInstallComponentsCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewTeardownInstallComponentsParams()
 	}
@@ -10675,17 +11894,22 @@ func (a *Client) TeardownInstallComponents(params *TeardownInstallComponentsPara
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*TeardownInstallComponentsCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for TeardownInstallComponents: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -10694,7 +11918,7 @@ func (a *Client) TeardownInstallComponents(params *TeardownInstallComponentsPara
 UnlockTerraformWorkspace unlocks terraform workspace
 */
 func (a *Client) UnlockTerraformWorkspace(params *UnlockTerraformWorkspaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UnlockTerraformWorkspaceOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUnlockTerraformWorkspaceParams()
 	}
@@ -10714,17 +11938,22 @@ func (a *Client) UnlockTerraformWorkspace(params *UnlockTerraformWorkspaceParams
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UnlockTerraformWorkspaceOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UnlockTerraformWorkspace: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -10733,7 +11962,7 @@ func (a *Client) UnlockTerraformWorkspace(params *UnlockTerraformWorkspaceParams
 UpdateApp updates an app
 */
 func (a *Client) UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateAppParams()
 	}
@@ -10753,17 +11982,22 @@ func (a *Client) UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthI
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateAppOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateApp: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -10772,7 +12006,7 @@ func (a *Client) UpdateApp(params *UpdateAppParams, authInfo runtime.ClientAuthI
 UpdateAppAction patches an app action
 */
 func (a *Client) UpdateAppAction(params *UpdateAppActionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppActionCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateAppActionParams()
 	}
@@ -10792,17 +12026,22 @@ func (a *Client) UpdateAppAction(params *UpdateAppActionParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateAppActionCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateAppAction: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -10811,7 +12050,7 @@ func (a *Client) UpdateAppAction(params *UpdateAppActionParams, authInfo runtime
 UpdateAppActionWorkflow patches an app
 */
 func (a *Client) UpdateAppActionWorkflow(params *UpdateAppActionWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppActionWorkflowCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateAppActionWorkflowParams()
 	}
@@ -10831,17 +12070,22 @@ func (a *Client) UpdateAppActionWorkflow(params *UpdateAppActionWorkflowParams, 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateAppActionWorkflowCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateAppActionWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -10850,7 +12094,7 @@ func (a *Client) UpdateAppActionWorkflow(params *UpdateAppActionWorkflowParams, 
 UpdateAppComponent updates a component
 */
 func (a *Client) UpdateAppComponent(params *UpdateAppComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppComponentOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateAppComponentParams()
 	}
@@ -10870,17 +12114,22 @@ func (a *Client) UpdateAppComponent(params *UpdateAppComponentParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateAppComponentOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateAppComponent: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -10889,7 +12138,7 @@ func (a *Client) UpdateAppComponent(params *UpdateAppComponentParams, authInfo r
 UpdateAppConfig Update an app config, setting status and state.
 */
 func (a *Client) UpdateAppConfig(params *UpdateAppConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateAppConfigParams()
 	}
@@ -10909,17 +12158,22 @@ func (a *Client) UpdateAppConfig(params *UpdateAppConfigParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateAppConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateAppConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -10928,7 +12182,7 @@ func (a *Client) UpdateAppConfig(params *UpdateAppConfigParams, authInfo runtime
 UpdateAppConfigInstalls update app config installs API
 */
 func (a *Client) UpdateAppConfigInstalls(params *UpdateAppConfigInstallsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppConfigInstallsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateAppConfigInstallsParams()
 	}
@@ -10948,18 +12202,111 @@ func (a *Client) UpdateAppConfigInstalls(params *UpdateAppConfigInstallsParams, 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateAppConfigInstallsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateAppConfigInstalls: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateAppConfigInstallsV2 update app config installs v2 API
+*/
+func (a *Client) UpdateAppConfigInstallsV2(params *UpdateAppConfigInstallsV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppConfigInstallsV2OK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewUpdateAppConfigInstallsV2Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateAppConfigInstallsV2",
+		Method:             "POST",
+		PathPattern:        "/v1/apps/{app_id}/configs/{config_id}/update-installs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateAppConfigInstallsV2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*UpdateAppConfigInstallsV2OK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateAppConfigInstallsV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateAppConflgV2 Update an app config, setting status and state.
+*/
+func (a *Client) UpdateAppConflgV2(params *UpdateAppConflgV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAppConflgV2Created, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewUpdateAppConflgV2Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateAppConflgV2",
+		Method:             "PATCH",
+		PathPattern:        "/v1/apps/{app_id}/configs/{config_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateAppConflgV2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*UpdateAppConflgV2Created)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateAppConflgV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -10967,7 +12314,7 @@ func (a *Client) UpdateAppConfigInstalls(params *UpdateAppConfigInstallsParams, 
 UpdateComponent updates a component
 */
 func (a *Client) UpdateComponent(params *UpdateComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateComponentOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateComponentParams()
 	}
@@ -10987,17 +12334,22 @@ func (a *Client) UpdateComponent(params *UpdateComponentParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateComponentOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateComponent: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -11006,7 +12358,7 @@ func (a *Client) UpdateComponent(params *UpdateComponentParams, authInfo runtime
 UpdateInstall updates an install
 */
 func (a *Client) UpdateInstall(params *UpdateInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateInstallParams()
 	}
@@ -11026,17 +12378,22 @@ func (a *Client) UpdateInstall(params *UpdateInstallParams, authInfo runtime.Cli
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateInstallOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateInstall: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -11045,7 +12402,7 @@ func (a *Client) UpdateInstall(params *UpdateInstallParams, authInfo runtime.Cli
 UpdateInstallConfig updates an install config
 */
 func (a *Client) UpdateInstallConfig(params *UpdateInstallConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallConfigCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateInstallConfigParams()
 	}
@@ -11065,17 +12422,22 @@ func (a *Client) UpdateInstallConfig(params *UpdateInstallConfigParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateInstallConfigCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateInstallConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -11084,7 +12446,7 @@ func (a *Client) UpdateInstallConfig(params *UpdateInstallConfigParams, authInfo
 UpdateInstallInputs updates install input config for app
 */
 func (a *Client) UpdateInstallInputs(params *UpdateInstallInputsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallInputsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateInstallInputsParams()
 	}
@@ -11104,17 +12466,22 @@ func (a *Client) UpdateInstallInputs(params *UpdateInstallInputsParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateInstallInputsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateInstallInputs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -11123,7 +12490,7 @@ func (a *Client) UpdateInstallInputs(params *UpdateInstallInputsParams, authInfo
 UpdateInstallWorkflow updates an install workflow
 */
 func (a *Client) UpdateInstallWorkflow(params *UpdateInstallWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallWorkflowOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateInstallWorkflowParams()
 	}
@@ -11143,57 +12510,23 @@ func (a *Client) UpdateInstallWorkflow(params *UpdateInstallWorkflowParams, auth
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateInstallWorkflowOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateInstallWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-UpdateInstaller updates an installer
-*/
-func (a *Client) UpdateInstaller(params *UpdateInstallerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstallerCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewUpdateInstallerParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "UpdateInstaller",
-		Method:             "PATCH",
-		PathPattern:        "/v1/installers/{installer_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &UpdateInstallerReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*UpdateInstallerCreated)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for UpdateInstaller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -11201,7 +12534,7 @@ func (a *Client) UpdateInstaller(params *UpdateInstallerParams, authInfo runtime
 UpdateOrg updates current org
 */
 func (a *Client) UpdateOrg(params *UpdateOrgParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateOrgOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateOrgParams()
 	}
@@ -11221,17 +12554,22 @@ func (a *Client) UpdateOrg(params *UpdateOrgParams, authInfo runtime.ClientAuthI
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateOrgOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateOrg: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -11240,7 +12578,7 @@ func (a *Client) UpdateOrg(params *UpdateOrgParams, authInfo runtime.ClientAuthI
 UpdateRunnerMng updates an install runner via the mng process
 */
 func (a *Client) UpdateRunnerMng(params *UpdateRunnerMngParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateRunnerMngCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateRunnerMngParams()
 	}
@@ -11260,17 +12598,22 @@ func (a *Client) UpdateRunnerMng(params *UpdateRunnerMngParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateRunnerMngCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateRunnerMng: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -11279,7 +12622,7 @@ func (a *Client) UpdateRunnerMng(params *UpdateRunnerMngParams, authInfo runtime
 UpdateRunnerSettings updates a runner s settings via its runner settings group
 */
 func (a *Client) UpdateRunnerSettings(params *UpdateRunnerSettingsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateRunnerSettingsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateRunnerSettingsParams()
 	}
@@ -11299,17 +12642,22 @@ func (a *Client) UpdateRunnerSettings(params *UpdateRunnerSettingsParams, authIn
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateRunnerSettingsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateRunnerSettings: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -11318,7 +12666,7 @@ func (a *Client) UpdateRunnerSettings(params *UpdateRunnerSettingsParams, authIn
 UpdateTerraformState updates terraform state
 */
 func (a *Client) UpdateTerraformState(params *UpdateTerraformStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTerraformStateOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateTerraformStateParams()
 	}
@@ -11338,17 +12686,22 @@ func (a *Client) UpdateTerraformState(params *UpdateTerraformStateParams, authIn
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateTerraformStateOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateTerraformState: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -11359,7 +12712,7 @@ UpdateUserJourneyStep updates user journey step completion status
 Mark a user journey step as complete or incomplete
 */
 func (a *Client) UpdateUserJourneyStep(params *UpdateUserJourneyStepParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateUserJourneyStepOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateUserJourneyStepParams()
 	}
@@ -11379,17 +12732,22 @@ func (a *Client) UpdateUserJourneyStep(params *UpdateUserJourneyStepParams, auth
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateUserJourneyStepOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateUserJourneyStep: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -11398,7 +12756,7 @@ func (a *Client) UpdateUserJourneyStep(params *UpdateUserJourneyStepParams, auth
 UpdateWorkflow updates a workflow
 */
 func (a *Client) UpdateWorkflow(params *UpdateWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateWorkflowOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateWorkflowParams()
 	}
@@ -11418,17 +12776,22 @@ func (a *Client) UpdateWorkflow(params *UpdateWorkflowParams, authInfo runtime.C
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateWorkflowOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }

@@ -65,7 +65,7 @@ type LockTerraformWorkspaceParams struct {
 
 	   terraform workspace lock
 	*/
-	Body interface{}
+	Body any
 
 	/* JobID.
 
@@ -133,13 +133,13 @@ func (o *LockTerraformWorkspaceParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the lock terraform workspace params
-func (o *LockTerraformWorkspaceParams) WithBody(body interface{}) *LockTerraformWorkspaceParams {
+func (o *LockTerraformWorkspaceParams) WithBody(body any) *LockTerraformWorkspaceParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the lock terraform workspace params
-func (o *LockTerraformWorkspaceParams) SetBody(body interface{}) {
+func (o *LockTerraformWorkspaceParams) SetBody(body any) {
 	o.Body = body
 }
 

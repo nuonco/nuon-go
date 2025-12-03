@@ -35,7 +35,7 @@ const (
 )
 
 // for schema
-var appStackTypeEnum []interface{}
+var appStackTypeEnum []any
 
 func init() {
 	var res []AppStackType

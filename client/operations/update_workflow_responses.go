@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type UpdateWorkflowReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *UpdateWorkflowReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *UpdateWorkflowReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewUpdateWorkflowOK()
@@ -109,11 +111,13 @@ func (o *UpdateWorkflowOK) Code() int {
 }
 
 func (o *UpdateWorkflowOK) Error() string {
-	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowOK %s", 200, payload)
 }
 
 func (o *UpdateWorkflowOK) String() string {
-	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowOK %s", 200, payload)
 }
 
 func (o *UpdateWorkflowOK) GetPayload() *models.AppWorkflow {
@@ -125,7 +129,7 @@ func (o *UpdateWorkflowOK) readResponse(response runtime.ClientResponse, consume
 	o.Payload = new(models.AppWorkflow)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *UpdateWorkflowBadRequest) Code() int {
 }
 
 func (o *UpdateWorkflowBadRequest) Error() string {
-	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowBadRequest %s", 400, payload)
 }
 
 func (o *UpdateWorkflowBadRequest) String() string {
-	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowBadRequest %s", 400, payload)
 }
 
 func (o *UpdateWorkflowBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *UpdateWorkflowBadRequest) readResponse(response runtime.ClientResponse,
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *UpdateWorkflowUnauthorized) Code() int {
 }
 
 func (o *UpdateWorkflowUnauthorized) Error() string {
-	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowUnauthorized %s", 401, payload)
 }
 
 func (o *UpdateWorkflowUnauthorized) String() string {
-	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowUnauthorized %s", 401, payload)
 }
 
 func (o *UpdateWorkflowUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *UpdateWorkflowUnauthorized) readResponse(response runtime.ClientRespons
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *UpdateWorkflowForbidden) Code() int {
 }
 
 func (o *UpdateWorkflowForbidden) Error() string {
-	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowForbidden %s", 403, payload)
 }
 
 func (o *UpdateWorkflowForbidden) String() string {
-	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowForbidden %s", 403, payload)
 }
 
 func (o *UpdateWorkflowForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *UpdateWorkflowForbidden) readResponse(response runtime.ClientResponse, 
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *UpdateWorkflowNotFound) Code() int {
 }
 
 func (o *UpdateWorkflowNotFound) Error() string {
-	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowNotFound %s", 404, payload)
 }
 
 func (o *UpdateWorkflowNotFound) String() string {
-	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowNotFound %s", 404, payload)
 }
 
 func (o *UpdateWorkflowNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *UpdateWorkflowNotFound) readResponse(response runtime.ClientResponse, c
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *UpdateWorkflowInternalServerError) Code() int {
 }
 
 func (o *UpdateWorkflowInternalServerError) Error() string {
-	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateWorkflowInternalServerError) String() string {
-	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/workflows/{workflow_id}][%d] updateWorkflowInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateWorkflowInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *UpdateWorkflowInternalServerError) readResponse(response runtime.Client
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

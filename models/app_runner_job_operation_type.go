@@ -50,7 +50,7 @@ const (
 )
 
 // for schema
-var appRunnerJobOperationTypeEnum []interface{}
+var appRunnerJobOperationTypeEnum []any
 
 func init() {
 	var res []AppRunnerJobOperationType

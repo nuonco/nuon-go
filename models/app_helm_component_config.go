@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -90,11 +91,15 @@ func (m *AppHelmComponentConfig) validateConnectedGithubVcsConfig(formats strfmt
 
 	if m.ConnectedGithubVcsConfig != nil {
 		if err := m.ConnectedGithubVcsConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("connected_github_vcs_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("connected_github_vcs_config")
 			}
+
 			return err
 		}
 	}
@@ -109,11 +114,15 @@ func (m *AppHelmComponentConfig) validateHelmConfigJSON(formats strfmt.Registry)
 
 	if m.HelmConfigJSON != nil {
 		if err := m.HelmConfigJSON.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("helm_config_json")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("helm_config_json")
 			}
+
 			return err
 		}
 	}
@@ -128,11 +137,15 @@ func (m *AppHelmComponentConfig) validatePublicGitVcsConfig(formats strfmt.Regis
 
 	if m.PublicGitVcsConfig != nil {
 		if err := m.PublicGitVcsConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("public_git_vcs_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("public_git_vcs_config")
 			}
+
 			return err
 		}
 	}
@@ -171,11 +184,15 @@ func (m *AppHelmComponentConfig) contextValidateConnectedGithubVcsConfig(ctx con
 		}
 
 		if err := m.ConnectedGithubVcsConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("connected_github_vcs_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("connected_github_vcs_config")
 			}
+
 			return err
 		}
 	}
@@ -192,11 +209,15 @@ func (m *AppHelmComponentConfig) contextValidateHelmConfigJSON(ctx context.Conte
 		}
 
 		if err := m.HelmConfigJSON.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("helm_config_json")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("helm_config_json")
 			}
+
 			return err
 		}
 	}
@@ -213,11 +234,15 @@ func (m *AppHelmComponentConfig) contextValidatePublicGitVcsConfig(ctx context.C
 		}
 
 		if err := m.PublicGitVcsConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("public_git_vcs_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("public_git_vcs_config")
 			}
+
 			return err
 		}
 	}

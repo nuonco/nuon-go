@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetAppConfigGraphV2Reader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetAppConfigGraphV2Reader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetAppConfigGraphV2Reader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetAppConfigGraphV2OK()
@@ -60,7 +62,7 @@ func (o *GetAppConfigGraphV2Reader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /v1/apps/{app_id}/configs/{app_config_id}/graph] GetAppConfigGraphV2", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /v1/apps/{app_id}/configs/{config_id}/graph] GetAppConfigGraphV2", response, response.Code())
 	}
 }
 
@@ -109,11 +111,13 @@ func (o *GetAppConfigGraphV2OK) Code() int {
 }
 
 func (o *GetAppConfigGraphV2OK) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}/graph][%d] getAppConfigGraphV2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}/graph][%d] getAppConfigGraphV2OK %s", 200, payload)
 }
 
 func (o *GetAppConfigGraphV2OK) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}/graph][%d] getAppConfigGraphV2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}/graph][%d] getAppConfigGraphV2OK %s", 200, payload)
 }
 
 func (o *GetAppConfigGraphV2OK) GetPayload() string {
@@ -123,7 +127,7 @@ func (o *GetAppConfigGraphV2OK) GetPayload() string {
 func (o *GetAppConfigGraphV2OK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *GetAppConfigGraphV2BadRequest) Code() int {
 }
 
 func (o *GetAppConfigGraphV2BadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}/graph][%d] getAppConfigGraphV2BadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}/graph][%d] getAppConfigGraphV2BadRequest %s", 400, payload)
 }
 
 func (o *GetAppConfigGraphV2BadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}/graph][%d] getAppConfigGraphV2BadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}/graph][%d] getAppConfigGraphV2BadRequest %s", 400, payload)
 }
 
 func (o *GetAppConfigGraphV2BadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *GetAppConfigGraphV2BadRequest) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *GetAppConfigGraphV2Unauthorized) Code() int {
 }
 
 func (o *GetAppConfigGraphV2Unauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}/graph][%d] getAppConfigGraphV2Unauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}/graph][%d] getAppConfigGraphV2Unauthorized %s", 401, payload)
 }
 
 func (o *GetAppConfigGraphV2Unauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}/graph][%d] getAppConfigGraphV2Unauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}/graph][%d] getAppConfigGraphV2Unauthorized %s", 401, payload)
 }
 
 func (o *GetAppConfigGraphV2Unauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *GetAppConfigGraphV2Unauthorized) readResponse(response runtime.ClientRe
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *GetAppConfigGraphV2Forbidden) Code() int {
 }
 
 func (o *GetAppConfigGraphV2Forbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}/graph][%d] getAppConfigGraphV2Forbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}/graph][%d] getAppConfigGraphV2Forbidden %s", 403, payload)
 }
 
 func (o *GetAppConfigGraphV2Forbidden) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}/graph][%d] getAppConfigGraphV2Forbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}/graph][%d] getAppConfigGraphV2Forbidden %s", 403, payload)
 }
 
 func (o *GetAppConfigGraphV2Forbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *GetAppConfigGraphV2Forbidden) readResponse(response runtime.ClientRespo
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *GetAppConfigGraphV2NotFound) Code() int {
 }
 
 func (o *GetAppConfigGraphV2NotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}/graph][%d] getAppConfigGraphV2NotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}/graph][%d] getAppConfigGraphV2NotFound %s", 404, payload)
 }
 
 func (o *GetAppConfigGraphV2NotFound) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}/graph][%d] getAppConfigGraphV2NotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}/graph][%d] getAppConfigGraphV2NotFound %s", 404, payload)
 }
 
 func (o *GetAppConfigGraphV2NotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *GetAppConfigGraphV2NotFound) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *GetAppConfigGraphV2InternalServerError) Code() int {
 }
 
 func (o *GetAppConfigGraphV2InternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}/graph][%d] getAppConfigGraphV2InternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}/graph][%d] getAppConfigGraphV2InternalServerError %s", 500, payload)
 }
 
 func (o *GetAppConfigGraphV2InternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}/graph][%d] getAppConfigGraphV2InternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}/graph][%d] getAppConfigGraphV2InternalServerError %s", 500, payload)
 }
 
 func (o *GetAppConfigGraphV2InternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *GetAppConfigGraphV2InternalServerError) readResponse(response runtime.C
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

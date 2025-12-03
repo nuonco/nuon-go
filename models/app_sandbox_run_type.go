@@ -41,7 +41,7 @@ const (
 )
 
 // for schema
-var appSandboxRunTypeEnum []interface{}
+var appSandboxRunTypeEnum []any
 
 func init() {
 	var res []AppSandboxRunType

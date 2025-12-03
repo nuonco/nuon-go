@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetInstallRunnerGroupReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetInstallRunnerGroupReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetInstallRunnerGroupReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetInstallRunnerGroupOK()
@@ -109,11 +111,13 @@ func (o *GetInstallRunnerGroupOK) Code() int {
 }
 
 func (o *GetInstallRunnerGroupOK) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupOK %s", 200, payload)
 }
 
 func (o *GetInstallRunnerGroupOK) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupOK %s", 200, payload)
 }
 
 func (o *GetInstallRunnerGroupOK) GetPayload() *models.AppRunnerGroup {
@@ -125,7 +129,7 @@ func (o *GetInstallRunnerGroupOK) readResponse(response runtime.ClientResponse, 
 	o.Payload = new(models.AppRunnerGroup)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *GetInstallRunnerGroupBadRequest) Code() int {
 }
 
 func (o *GetInstallRunnerGroupBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupBadRequest %s", 400, payload)
 }
 
 func (o *GetInstallRunnerGroupBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupBadRequest %s", 400, payload)
 }
 
 func (o *GetInstallRunnerGroupBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *GetInstallRunnerGroupBadRequest) readResponse(response runtime.ClientRe
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *GetInstallRunnerGroupUnauthorized) Code() int {
 }
 
 func (o *GetInstallRunnerGroupUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupUnauthorized %s", 401, payload)
 }
 
 func (o *GetInstallRunnerGroupUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupUnauthorized %s", 401, payload)
 }
 
 func (o *GetInstallRunnerGroupUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *GetInstallRunnerGroupUnauthorized) readResponse(response runtime.Client
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *GetInstallRunnerGroupForbidden) Code() int {
 }
 
 func (o *GetInstallRunnerGroupForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupForbidden %s", 403, payload)
 }
 
 func (o *GetInstallRunnerGroupForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupForbidden %s", 403, payload)
 }
 
 func (o *GetInstallRunnerGroupForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *GetInstallRunnerGroupForbidden) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *GetInstallRunnerGroupNotFound) Code() int {
 }
 
 func (o *GetInstallRunnerGroupNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupNotFound %s", 404, payload)
 }
 
 func (o *GetInstallRunnerGroupNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupNotFound %s", 404, payload)
 }
 
 func (o *GetInstallRunnerGroupNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *GetInstallRunnerGroupNotFound) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *GetInstallRunnerGroupInternalServerError) Code() int {
 }
 
 func (o *GetInstallRunnerGroupInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupInternalServerError %s", 500, payload)
 }
 
 func (o *GetInstallRunnerGroupInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/runner-group][%d] getInstallRunnerGroupInternalServerError %s", 500, payload)
 }
 
 func (o *GetInstallRunnerGroupInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *GetInstallRunnerGroupInternalServerError) readResponse(response runtime
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

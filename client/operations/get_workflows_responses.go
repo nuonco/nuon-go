@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetWorkflowsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetWorkflowsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetWorkflowsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetWorkflowsOK()
@@ -109,11 +111,13 @@ func (o *GetWorkflowsOK) Code() int {
 }
 
 func (o *GetWorkflowsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsOK %s", 200, payload)
 }
 
 func (o *GetWorkflowsOK) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsOK %s", 200, payload)
 }
 
 func (o *GetWorkflowsOK) GetPayload() []*models.AppWorkflow {
@@ -123,7 +127,7 @@ func (o *GetWorkflowsOK) GetPayload() []*models.AppWorkflow {
 func (o *GetWorkflowsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *GetWorkflowsBadRequest) Code() int {
 }
 
 func (o *GetWorkflowsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsBadRequest %s", 400, payload)
 }
 
 func (o *GetWorkflowsBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsBadRequest %s", 400, payload)
 }
 
 func (o *GetWorkflowsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *GetWorkflowsBadRequest) readResponse(response runtime.ClientResponse, c
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *GetWorkflowsUnauthorized) Code() int {
 }
 
 func (o *GetWorkflowsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsUnauthorized %s", 401, payload)
 }
 
 func (o *GetWorkflowsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsUnauthorized %s", 401, payload)
 }
 
 func (o *GetWorkflowsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *GetWorkflowsUnauthorized) readResponse(response runtime.ClientResponse,
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *GetWorkflowsForbidden) Code() int {
 }
 
 func (o *GetWorkflowsForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsForbidden %s", 403, payload)
 }
 
 func (o *GetWorkflowsForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsForbidden %s", 403, payload)
 }
 
 func (o *GetWorkflowsForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *GetWorkflowsForbidden) readResponse(response runtime.ClientResponse, co
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *GetWorkflowsNotFound) Code() int {
 }
 
 func (o *GetWorkflowsNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsNotFound %s", 404, payload)
 }
 
 func (o *GetWorkflowsNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsNotFound %s", 404, payload)
 }
 
 func (o *GetWorkflowsNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *GetWorkflowsNotFound) readResponse(response runtime.ClientResponse, con
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *GetWorkflowsInternalServerError) Code() int {
 }
 
 func (o *GetWorkflowsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsInternalServerError %s", 500, payload)
 }
 
 func (o *GetWorkflowsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/workflows][%d] getWorkflowsInternalServerError %s", 500, payload)
 }
 
 func (o *GetWorkflowsInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *GetWorkflowsInternalServerError) readResponse(response runtime.ClientRe
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

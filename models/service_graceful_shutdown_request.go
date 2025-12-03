@@ -8,4 +8,4 @@ package models
 // ServiceGracefulShutdownRequest service graceful shutdown request
 //
 // swagger:model service.GracefulShutdownRequest
-type ServiceGracefulShutdownRequest interface{}
+type ServiceGracefulShutdownRequest any

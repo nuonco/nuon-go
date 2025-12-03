@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type SyncSecretsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *SyncSecretsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *SyncSecretsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewSyncSecretsCreated()
@@ -109,11 +111,13 @@ func (o *SyncSecretsCreated) Code() int {
 }
 
 func (o *SyncSecretsCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsCreated %s", 201, payload)
 }
 
 func (o *SyncSecretsCreated) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsCreated %s", 201, payload)
 }
 
 func (o *SyncSecretsCreated) GetPayload() string {
@@ -123,7 +127,7 @@ func (o *SyncSecretsCreated) GetPayload() string {
 func (o *SyncSecretsCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *SyncSecretsBadRequest) Code() int {
 }
 
 func (o *SyncSecretsBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsBadRequest %s", 400, payload)
 }
 
 func (o *SyncSecretsBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsBadRequest %s", 400, payload)
 }
 
 func (o *SyncSecretsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *SyncSecretsBadRequest) readResponse(response runtime.ClientResponse, co
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *SyncSecretsUnauthorized) Code() int {
 }
 
 func (o *SyncSecretsUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsUnauthorized %s", 401, payload)
 }
 
 func (o *SyncSecretsUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsUnauthorized %s", 401, payload)
 }
 
 func (o *SyncSecretsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *SyncSecretsUnauthorized) readResponse(response runtime.ClientResponse, 
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *SyncSecretsForbidden) Code() int {
 }
 
 func (o *SyncSecretsForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsForbidden %s", 403, payload)
 }
 
 func (o *SyncSecretsForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsForbidden %s", 403, payload)
 }
 
 func (o *SyncSecretsForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *SyncSecretsForbidden) readResponse(response runtime.ClientResponse, con
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *SyncSecretsNotFound) Code() int {
 }
 
 func (o *SyncSecretsNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsNotFound %s", 404, payload)
 }
 
 func (o *SyncSecretsNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsNotFound %s", 404, payload)
 }
 
 func (o *SyncSecretsNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *SyncSecretsNotFound) readResponse(response runtime.ClientResponse, cons
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *SyncSecretsInternalServerError) Code() int {
 }
 
 func (o *SyncSecretsInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsInternalServerError %s", 500, payload)
 }
 
 func (o *SyncSecretsInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/sync-secrets][%d] syncSecretsInternalServerError %s", 500, payload)
 }
 
 func (o *SyncSecretsInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *SyncSecretsInternalServerError) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

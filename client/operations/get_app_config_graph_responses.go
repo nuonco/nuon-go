@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetAppConfigGraphReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetAppConfigGraphReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetAppConfigGraphReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetAppConfigGraphOK()
@@ -109,11 +111,13 @@ func (o *GetAppConfigGraphOK) Code() int {
 }
 
 func (o *GetAppConfigGraphOK) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphOK %s", 200, payload)
 }
 
 func (o *GetAppConfigGraphOK) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphOK %s", 200, payload)
 }
 
 func (o *GetAppConfigGraphOK) GetPayload() string {
@@ -123,7 +127,7 @@ func (o *GetAppConfigGraphOK) GetPayload() string {
 func (o *GetAppConfigGraphOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *GetAppConfigGraphBadRequest) Code() int {
 }
 
 func (o *GetAppConfigGraphBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphBadRequest %s", 400, payload)
 }
 
 func (o *GetAppConfigGraphBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphBadRequest %s", 400, payload)
 }
 
 func (o *GetAppConfigGraphBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *GetAppConfigGraphBadRequest) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *GetAppConfigGraphUnauthorized) Code() int {
 }
 
 func (o *GetAppConfigGraphUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphUnauthorized %s", 401, payload)
 }
 
 func (o *GetAppConfigGraphUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphUnauthorized %s", 401, payload)
 }
 
 func (o *GetAppConfigGraphUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *GetAppConfigGraphUnauthorized) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *GetAppConfigGraphForbidden) Code() int {
 }
 
 func (o *GetAppConfigGraphForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphForbidden %s", 403, payload)
 }
 
 func (o *GetAppConfigGraphForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphForbidden %s", 403, payload)
 }
 
 func (o *GetAppConfigGraphForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *GetAppConfigGraphForbidden) readResponse(response runtime.ClientRespons
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *GetAppConfigGraphNotFound) Code() int {
 }
 
 func (o *GetAppConfigGraphNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphNotFound %s", 404, payload)
 }
 
 func (o *GetAppConfigGraphNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphNotFound %s", 404, payload)
 }
 
 func (o *GetAppConfigGraphNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *GetAppConfigGraphNotFound) readResponse(response runtime.ClientResponse
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *GetAppConfigGraphInternalServerError) Code() int {
 }
 
 func (o *GetAppConfigGraphInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphInternalServerError %s", 500, payload)
 }
 
 func (o *GetAppConfigGraphInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/config/{app_config_id}/graph][%d] getAppConfigGraphInternalServerError %s", 500, payload)
 }
 
 func (o *GetAppConfigGraphInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *GetAppConfigGraphInternalServerError) readResponse(response runtime.Cli
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
