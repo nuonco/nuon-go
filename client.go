@@ -92,14 +92,6 @@ type Client interface {
 	GetAppSecrets(ctx context.Context, appID string, query *models.GetPaginatedQuery) ([]*models.AppAppSecret, bool, error)
 	DeleteAppSecret(ctx context.Context, appID, secretID string) (bool, error)
 
-	// app installer methods
-	CreateInstaller(ctx context.Context, req *models.ServiceCreateInstallerRequest) (*models.AppInstaller, error)
-	UpdateInstaller(ctx context.Context, installerID string, req *models.ServiceUpdateInstallerRequest) (*models.AppInstaller, error)
-	DeleteInstaller(ctx context.Context, installerID string) (bool, error)
-	GetInstaller(ctx context.Context, installerID string) (*models.AppInstaller, error)
-	GetInstallers(ctx context.Context, query *models.GetPaginatedQuery) ([]*models.AppInstaller, bool, error)
-	RenderInstaller(ctx context.Context, installerID string) (*models.ServiceRenderedInstaller, error)
-
 	// general methods
 	GetCLIConfig(ctx context.Context) (*models.ServiceCLIConfig, error)
 	GetCurrentUser(ctx context.Context) (*models.AppAccount, error)

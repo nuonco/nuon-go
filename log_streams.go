@@ -21,7 +21,7 @@ func (c *client) GetLogStream(ctx context.Context, logStreamID string) (*models.
 
 func (c *client) LogStreamReadLogs(ctx context.Context, logStreamId string, offset string) ([]*models.AppOtelLogRecord, error) {
 	resp, err := c.genClient.Operations.LogStreamReadLogs(&operations.LogStreamReadLogsParams{
-		LogStreamID: logStreamId, XNuonAPIOffset: offset},
+		LogStreamID: logStreamId, XNuonAPIOffset: &offset},
 		c.getOrgIDAuthInfo(),
 	)
 	if err != nil {
