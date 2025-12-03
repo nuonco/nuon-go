@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type DeleteInstallReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DeleteInstallReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DeleteInstallReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDeleteInstallOK()
@@ -109,11 +111,13 @@ func (o *DeleteInstallOK) Code() int {
 }
 
 func (o *DeleteInstallOK) Error() string {
-	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallOK %s", 200, payload)
 }
 
 func (o *DeleteInstallOK) String() string {
-	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallOK %s", 200, payload)
 }
 
 func (o *DeleteInstallOK) GetPayload() bool {
@@ -123,7 +127,7 @@ func (o *DeleteInstallOK) GetPayload() bool {
 func (o *DeleteInstallOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *DeleteInstallBadRequest) Code() int {
 }
 
 func (o *DeleteInstallBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallBadRequest %s", 400, payload)
 }
 
 func (o *DeleteInstallBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallBadRequest %s", 400, payload)
 }
 
 func (o *DeleteInstallBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *DeleteInstallBadRequest) readResponse(response runtime.ClientResponse, 
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *DeleteInstallUnauthorized) Code() int {
 }
 
 func (o *DeleteInstallUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallUnauthorized %s", 401, payload)
 }
 
 func (o *DeleteInstallUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallUnauthorized %s", 401, payload)
 }
 
 func (o *DeleteInstallUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *DeleteInstallUnauthorized) readResponse(response runtime.ClientResponse
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *DeleteInstallForbidden) Code() int {
 }
 
 func (o *DeleteInstallForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallForbidden %s", 403, payload)
 }
 
 func (o *DeleteInstallForbidden) String() string {
-	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallForbidden %s", 403, payload)
 }
 
 func (o *DeleteInstallForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *DeleteInstallForbidden) readResponse(response runtime.ClientResponse, c
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *DeleteInstallNotFound) Code() int {
 }
 
 func (o *DeleteInstallNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallNotFound %s", 404, payload)
 }
 
 func (o *DeleteInstallNotFound) String() string {
-	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallNotFound %s", 404, payload)
 }
 
 func (o *DeleteInstallNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *DeleteInstallNotFound) readResponse(response runtime.ClientResponse, co
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *DeleteInstallInternalServerError) Code() int {
 }
 
 func (o *DeleteInstallInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteInstallInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/installs/{install_id}][%d] deleteInstallInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteInstallInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *DeleteInstallInternalServerError) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

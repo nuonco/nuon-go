@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetLatestAppPermissionsConfigReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetLatestAppPermissionsConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetLatestAppPermissionsConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetLatestAppPermissionsConfigOK()
@@ -109,11 +111,13 @@ func (o *GetLatestAppPermissionsConfigOK) Code() int {
 }
 
 func (o *GetLatestAppPermissionsConfigOK) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigOK %s", 200, payload)
 }
 
 func (o *GetLatestAppPermissionsConfigOK) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigOK %s", 200, payload)
 }
 
 func (o *GetLatestAppPermissionsConfigOK) GetPayload() *models.AppAppPermissionsConfig {
@@ -125,7 +129,7 @@ func (o *GetLatestAppPermissionsConfigOK) readResponse(response runtime.ClientRe
 	o.Payload = new(models.AppAppPermissionsConfig)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *GetLatestAppPermissionsConfigBadRequest) Code() int {
 }
 
 func (o *GetLatestAppPermissionsConfigBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigBadRequest %s", 400, payload)
 }
 
 func (o *GetLatestAppPermissionsConfigBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigBadRequest %s", 400, payload)
 }
 
 func (o *GetLatestAppPermissionsConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *GetLatestAppPermissionsConfigBadRequest) readResponse(response runtime.
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *GetLatestAppPermissionsConfigUnauthorized) Code() int {
 }
 
 func (o *GetLatestAppPermissionsConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigUnauthorized %s", 401, payload)
 }
 
 func (o *GetLatestAppPermissionsConfigUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigUnauthorized %s", 401, payload)
 }
 
 func (o *GetLatestAppPermissionsConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *GetLatestAppPermissionsConfigUnauthorized) readResponse(response runtim
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *GetLatestAppPermissionsConfigForbidden) Code() int {
 }
 
 func (o *GetLatestAppPermissionsConfigForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigForbidden %s", 403, payload)
 }
 
 func (o *GetLatestAppPermissionsConfigForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigForbidden %s", 403, payload)
 }
 
 func (o *GetLatestAppPermissionsConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *GetLatestAppPermissionsConfigForbidden) readResponse(response runtime.C
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *GetLatestAppPermissionsConfigNotFound) Code() int {
 }
 
 func (o *GetLatestAppPermissionsConfigNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigNotFound %s", 404, payload)
 }
 
 func (o *GetLatestAppPermissionsConfigNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigNotFound %s", 404, payload)
 }
 
 func (o *GetLatestAppPermissionsConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *GetLatestAppPermissionsConfigNotFound) readResponse(response runtime.Cl
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *GetLatestAppPermissionsConfigInternalServerError) Code() int {
 }
 
 func (o *GetLatestAppPermissionsConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigInternalServerError %s", 500, payload)
 }
 
 func (o *GetLatestAppPermissionsConfigInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-permissions-config][%d] getLatestAppPermissionsConfigInternalServerError %s", 500, payload)
 }
 
 func (o *GetLatestAppPermissionsConfigInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *GetLatestAppPermissionsConfigInternalServerError) readResponse(response
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

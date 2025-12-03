@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type CreateVCSConnectionReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateVCSConnectionReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateVCSConnectionReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateVCSConnectionCreated()
@@ -109,11 +111,13 @@ func (o *CreateVCSConnectionCreated) Code() int {
 }
 
 func (o *CreateVCSConnectionCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionCreated %s", 201, payload)
 }
 
 func (o *CreateVCSConnectionCreated) String() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionCreated %s", 201, payload)
 }
 
 func (o *CreateVCSConnectionCreated) GetPayload() *models.AppVCSConnection {
@@ -125,7 +129,7 @@ func (o *CreateVCSConnectionCreated) readResponse(response runtime.ClientRespons
 	o.Payload = new(models.AppVCSConnection)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *CreateVCSConnectionBadRequest) Code() int {
 }
 
 func (o *CreateVCSConnectionBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionBadRequest %s", 400, payload)
 }
 
 func (o *CreateVCSConnectionBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionBadRequest %s", 400, payload)
 }
 
 func (o *CreateVCSConnectionBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *CreateVCSConnectionBadRequest) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *CreateVCSConnectionUnauthorized) Code() int {
 }
 
 func (o *CreateVCSConnectionUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionUnauthorized %s", 401, payload)
 }
 
 func (o *CreateVCSConnectionUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionUnauthorized %s", 401, payload)
 }
 
 func (o *CreateVCSConnectionUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *CreateVCSConnectionUnauthorized) readResponse(response runtime.ClientRe
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *CreateVCSConnectionForbidden) Code() int {
 }
 
 func (o *CreateVCSConnectionForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionForbidden %s", 403, payload)
 }
 
 func (o *CreateVCSConnectionForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionForbidden %s", 403, payload)
 }
 
 func (o *CreateVCSConnectionForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *CreateVCSConnectionForbidden) readResponse(response runtime.ClientRespo
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *CreateVCSConnectionNotFound) Code() int {
 }
 
 func (o *CreateVCSConnectionNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionNotFound %s", 404, payload)
 }
 
 func (o *CreateVCSConnectionNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionNotFound %s", 404, payload)
 }
 
 func (o *CreateVCSConnectionNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *CreateVCSConnectionNotFound) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *CreateVCSConnectionInternalServerError) Code() int {
 }
 
 func (o *CreateVCSConnectionInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionInternalServerError %s", 500, payload)
 }
 
 func (o *CreateVCSConnectionInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/vcs/connections][%d] createVCSConnectionInternalServerError %s", 500, payload)
 }
 
 func (o *CreateVCSConnectionInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *CreateVCSConnectionInternalServerError) readResponse(response runtime.C
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

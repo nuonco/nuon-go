@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type CancelWorkflowReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CancelWorkflowReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CancelWorkflowReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 202:
 		result := NewCancelWorkflowAccepted()
@@ -109,11 +111,13 @@ func (o *CancelWorkflowAccepted) Code() int {
 }
 
 func (o *CancelWorkflowAccepted) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowAccepted  %+v", 202, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowAccepted %s", 202, payload)
 }
 
 func (o *CancelWorkflowAccepted) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowAccepted  %+v", 202, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowAccepted %s", 202, payload)
 }
 
 func (o *CancelWorkflowAccepted) GetPayload() bool {
@@ -123,7 +127,7 @@ func (o *CancelWorkflowAccepted) GetPayload() bool {
 func (o *CancelWorkflowAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *CancelWorkflowBadRequest) Code() int {
 }
 
 func (o *CancelWorkflowBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowBadRequest %s", 400, payload)
 }
 
 func (o *CancelWorkflowBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowBadRequest %s", 400, payload)
 }
 
 func (o *CancelWorkflowBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *CancelWorkflowBadRequest) readResponse(response runtime.ClientResponse,
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *CancelWorkflowUnauthorized) Code() int {
 }
 
 func (o *CancelWorkflowUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowUnauthorized %s", 401, payload)
 }
 
 func (o *CancelWorkflowUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowUnauthorized %s", 401, payload)
 }
 
 func (o *CancelWorkflowUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *CancelWorkflowUnauthorized) readResponse(response runtime.ClientRespons
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *CancelWorkflowForbidden) Code() int {
 }
 
 func (o *CancelWorkflowForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowForbidden %s", 403, payload)
 }
 
 func (o *CancelWorkflowForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowForbidden %s", 403, payload)
 }
 
 func (o *CancelWorkflowForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *CancelWorkflowForbidden) readResponse(response runtime.ClientResponse, 
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *CancelWorkflowNotFound) Code() int {
 }
 
 func (o *CancelWorkflowNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowNotFound %s", 404, payload)
 }
 
 func (o *CancelWorkflowNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowNotFound %s", 404, payload)
 }
 
 func (o *CancelWorkflowNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *CancelWorkflowNotFound) readResponse(response runtime.ClientResponse, c
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *CancelWorkflowInternalServerError) Code() int {
 }
 
 func (o *CancelWorkflowInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowInternalServerError %s", 500, payload)
 }
 
 func (o *CancelWorkflowInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/cancel][%d] cancelWorkflowInternalServerError %s", 500, payload)
 }
 
 func (o *CancelWorkflowInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *CancelWorkflowInternalServerError) readResponse(response runtime.Client
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

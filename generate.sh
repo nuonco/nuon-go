@@ -24,7 +24,7 @@ case $env in
 esac
 
 echo >&2 "generating with OAPI spec from $url"
-go run github.com/go-swagger/go-swagger/cmd/swagger@v0.30.5 \
+go run github.com/go-swagger/go-swagger/cmd/swagger@v0.33.0 \
   generate \
   client \
   --skip-tag-packages \

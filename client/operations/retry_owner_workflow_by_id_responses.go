@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type RetryOwnerWorkflowByIDReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *RetryOwnerWorkflowByIDReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *RetryOwnerWorkflowByIDReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewRetryOwnerWorkflowByIDCreated()
@@ -109,11 +111,13 @@ func (o *RetryOwnerWorkflowByIDCreated) Code() int {
 }
 
 func (o *RetryOwnerWorkflowByIDCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdCreated %s", 201, payload)
 }
 
 func (o *RetryOwnerWorkflowByIDCreated) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdCreated %s", 201, payload)
 }
 
 func (o *RetryOwnerWorkflowByIDCreated) GetPayload() *models.ServiceRetryWorkflowByIDResponse {
@@ -125,7 +129,7 @@ func (o *RetryOwnerWorkflowByIDCreated) readResponse(response runtime.ClientResp
 	o.Payload = new(models.ServiceRetryWorkflowByIDResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *RetryOwnerWorkflowByIDBadRequest) Code() int {
 }
 
 func (o *RetryOwnerWorkflowByIDBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdBadRequest %s", 400, payload)
 }
 
 func (o *RetryOwnerWorkflowByIDBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdBadRequest %s", 400, payload)
 }
 
 func (o *RetryOwnerWorkflowByIDBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *RetryOwnerWorkflowByIDBadRequest) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *RetryOwnerWorkflowByIDUnauthorized) Code() int {
 }
 
 func (o *RetryOwnerWorkflowByIDUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdUnauthorized %s", 401, payload)
 }
 
 func (o *RetryOwnerWorkflowByIDUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdUnauthorized %s", 401, payload)
 }
 
 func (o *RetryOwnerWorkflowByIDUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *RetryOwnerWorkflowByIDUnauthorized) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *RetryOwnerWorkflowByIDForbidden) Code() int {
 }
 
 func (o *RetryOwnerWorkflowByIDForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdForbidden %s", 403, payload)
 }
 
 func (o *RetryOwnerWorkflowByIDForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdForbidden %s", 403, payload)
 }
 
 func (o *RetryOwnerWorkflowByIDForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *RetryOwnerWorkflowByIDForbidden) readResponse(response runtime.ClientRe
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *RetryOwnerWorkflowByIDNotFound) Code() int {
 }
 
 func (o *RetryOwnerWorkflowByIDNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdNotFound %s", 404, payload)
 }
 
 func (o *RetryOwnerWorkflowByIDNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdNotFound %s", 404, payload)
 }
 
 func (o *RetryOwnerWorkflowByIDNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *RetryOwnerWorkflowByIDNotFound) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *RetryOwnerWorkflowByIDInternalServerError) Code() int {
 }
 
 func (o *RetryOwnerWorkflowByIDInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdInternalServerError %s", 500, payload)
 }
 
 func (o *RetryOwnerWorkflowByIDInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/retry][%d] retryOwnerWorkflowByIdInternalServerError %s", 500, payload)
 }
 
 func (o *RetryOwnerWorkflowByIDInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *RetryOwnerWorkflowByIDInternalServerError) readResponse(response runtim
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -105,11 +106,15 @@ func (m *PlantypesDeployPlan) validateHelm(formats strfmt.Registry) error {
 
 	if m.Helm != nil {
 		if err := m.Helm.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("helm")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("helm")
 			}
+
 			return err
 		}
 	}
@@ -124,11 +129,15 @@ func (m *PlantypesDeployPlan) validateKubernetesManifest(formats strfmt.Registry
 
 	if m.KubernetesManifest != nil {
 		if err := m.KubernetesManifest.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("kubernetes_manifest")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("kubernetes_manifest")
 			}
+
 			return err
 		}
 	}
@@ -143,11 +152,15 @@ func (m *PlantypesDeployPlan) validateSandboxMode(formats strfmt.Registry) error
 
 	if m.SandboxMode != nil {
 		if err := m.SandboxMode.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sandbox_mode")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sandbox_mode")
 			}
+
 			return err
 		}
 	}
@@ -163,11 +176,15 @@ func (m *PlantypesDeployPlan) validateSrcRegistry(formats strfmt.Registry) error
 
 	if m.SrcRegistry != nil {
 		if err := m.SrcRegistry.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("src_registry")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("src_registry")
 			}
+
 			return err
 		}
 	}
@@ -191,11 +208,15 @@ func (m *PlantypesDeployPlan) validateTerraform(formats strfmt.Registry) error {
 
 	if m.Terraform != nil {
 		if err := m.Terraform.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("terraform")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("terraform")
 			}
+
 			return err
 		}
 	}
@@ -242,11 +263,15 @@ func (m *PlantypesDeployPlan) contextValidateHelm(ctx context.Context, formats s
 		}
 
 		if err := m.Helm.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("helm")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("helm")
 			}
+
 			return err
 		}
 	}
@@ -263,11 +288,15 @@ func (m *PlantypesDeployPlan) contextValidateKubernetesManifest(ctx context.Cont
 		}
 
 		if err := m.KubernetesManifest.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("kubernetes_manifest")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("kubernetes_manifest")
 			}
+
 			return err
 		}
 	}
@@ -284,11 +313,15 @@ func (m *PlantypesDeployPlan) contextValidateSandboxMode(ctx context.Context, fo
 		}
 
 		if err := m.SandboxMode.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sandbox_mode")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sandbox_mode")
 			}
+
 			return err
 		}
 	}
@@ -301,11 +334,15 @@ func (m *PlantypesDeployPlan) contextValidateSrcRegistry(ctx context.Context, fo
 	if m.SrcRegistry != nil {
 
 		if err := m.SrcRegistry.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("src_registry")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("src_registry")
 			}
+
 			return err
 		}
 	}
@@ -322,11 +359,15 @@ func (m *PlantypesDeployPlan) contextValidateTerraform(ctx context.Context, form
 		}
 
 		if err := m.Terraform.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("terraform")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("terraform")
 			}
+
 			return err
 		}
 	}

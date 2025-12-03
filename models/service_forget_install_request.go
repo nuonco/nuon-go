@@ -8,4 +8,4 @@ package models
 // ServiceForgetInstallRequest service forget install request
 //
 // swagger:model service.ForgetInstallRequest
-type ServiceForgetInstallRequest interface{}
+type ServiceForgetInstallRequest any

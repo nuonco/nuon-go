@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetCurrentAccountReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetCurrentAccountReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetCurrentAccountReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetCurrentAccountOK()
@@ -97,11 +99,13 @@ func (o *GetCurrentAccountOK) Code() int {
 }
 
 func (o *GetCurrentAccountOK) Error() string {
-	return fmt.Sprintf("[GET /v1/account][%d] getCurrentAccountOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/account][%d] getCurrentAccountOK %s", 200, payload)
 }
 
 func (o *GetCurrentAccountOK) String() string {
-	return fmt.Sprintf("[GET /v1/account][%d] getCurrentAccountOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/account][%d] getCurrentAccountOK %s", 200, payload)
 }
 
 func (o *GetCurrentAccountOK) GetPayload() *models.AppAccount {
@@ -113,7 +117,7 @@ func (o *GetCurrentAccountOK) readResponse(response runtime.ClientResponse, cons
 	o.Payload = new(models.AppAccount)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -165,11 +169,13 @@ func (o *GetCurrentAccountUnauthorized) Code() int {
 }
 
 func (o *GetCurrentAccountUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/account][%d] getCurrentAccountUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/account][%d] getCurrentAccountUnauthorized %s", 401, payload)
 }
 
 func (o *GetCurrentAccountUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/account][%d] getCurrentAccountUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/account][%d] getCurrentAccountUnauthorized %s", 401, payload)
 }
 
 func (o *GetCurrentAccountUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -181,7 +187,7 @@ func (o *GetCurrentAccountUnauthorized) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -233,11 +239,13 @@ func (o *GetCurrentAccountNotFound) Code() int {
 }
 
 func (o *GetCurrentAccountNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/account][%d] getCurrentAccountNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/account][%d] getCurrentAccountNotFound %s", 404, payload)
 }
 
 func (o *GetCurrentAccountNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/account][%d] getCurrentAccountNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/account][%d] getCurrentAccountNotFound %s", 404, payload)
 }
 
 func (o *GetCurrentAccountNotFound) GetPayload() *models.StderrErrResponse {
@@ -249,7 +257,7 @@ func (o *GetCurrentAccountNotFound) readResponse(response runtime.ClientResponse
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -301,11 +309,13 @@ func (o *GetCurrentAccountInternalServerError) Code() int {
 }
 
 func (o *GetCurrentAccountInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/account][%d] getCurrentAccountInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/account][%d] getCurrentAccountInternalServerError %s", 500, payload)
 }
 
 func (o *GetCurrentAccountInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/account][%d] getCurrentAccountInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/account][%d] getCurrentAccountInternalServerError %s", 500, payload)
 }
 
 func (o *GetCurrentAccountInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -317,7 +327,7 @@ func (o *GetCurrentAccountInternalServerError) readResponse(response runtime.Cli
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

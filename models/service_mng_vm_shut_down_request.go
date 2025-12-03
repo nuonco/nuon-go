@@ -8,4 +8,4 @@ package models
 // ServiceMngVMShutDownRequest service mng VM shut down request
 //
 // swagger:model service.MngVMShutDownRequest
-type ServiceMngVMShutDownRequest interface{}
+type ServiceMngVMShutDownRequest any

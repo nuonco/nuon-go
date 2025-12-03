@@ -17,9 +17,6 @@ import (
 // swagger:model service.DeprovisionInstallSandboxRequest
 type ServiceDeprovisionInstallSandboxRequest struct {
 
-	// error behavior
-	ErrorBehavior string `json:"error_behavior,omitempty"`
-
 	// plan only
 	PlanOnly bool `json:"plan_only,omitempty"`
 }

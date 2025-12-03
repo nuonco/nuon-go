@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -91,11 +92,15 @@ func (m *ServiceCreateAppPermissionsConfigRequest) validateBreakGlassRoles(forma
 
 		if m.BreakGlassRoles[i] != nil {
 			if err := m.BreakGlassRoles[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("break_glass_roles" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("break_glass_roles" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -113,11 +118,15 @@ func (m *ServiceCreateAppPermissionsConfigRequest) validateDeprovisionRole(forma
 
 	if m.DeprovisionRole != nil {
 		if err := m.DeprovisionRole.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("deprovision_role")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("deprovision_role")
 			}
+
 			return err
 		}
 	}
@@ -133,11 +142,15 @@ func (m *ServiceCreateAppPermissionsConfigRequest) validateMaintenanceRole(forma
 
 	if m.MaintenanceRole != nil {
 		if err := m.MaintenanceRole.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("maintenance_role")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("maintenance_role")
 			}
+
 			return err
 		}
 	}
@@ -153,11 +166,15 @@ func (m *ServiceCreateAppPermissionsConfigRequest) validateProvisionRole(formats
 
 	if m.ProvisionRole != nil {
 		if err := m.ProvisionRole.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("provision_role")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("provision_role")
 			}
+
 			return err
 		}
 	}
@@ -202,11 +219,15 @@ func (m *ServiceCreateAppPermissionsConfigRequest) contextValidateBreakGlassRole
 			}
 
 			if err := m.BreakGlassRoles[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("break_glass_roles" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("break_glass_roles" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -221,11 +242,15 @@ func (m *ServiceCreateAppPermissionsConfigRequest) contextValidateDeprovisionRol
 	if m.DeprovisionRole != nil {
 
 		if err := m.DeprovisionRole.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("deprovision_role")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("deprovision_role")
 			}
+
 			return err
 		}
 	}
@@ -238,11 +263,15 @@ func (m *ServiceCreateAppPermissionsConfigRequest) contextValidateMaintenanceRol
 	if m.MaintenanceRole != nil {
 
 		if err := m.MaintenanceRole.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("maintenance_role")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("maintenance_role")
 			}
+
 			return err
 		}
 	}
@@ -255,11 +284,15 @@ func (m *ServiceCreateAppPermissionsConfigRequest) contextValidateProvisionRole(
 	if m.ProvisionRole != nil {
 
 		if err := m.ProvisionRole.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("provision_role")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("provision_role")
 			}
+
 			return err
 		}
 	}

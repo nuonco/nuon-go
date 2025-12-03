@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetLatestAppBreakGlassConfigReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetLatestAppBreakGlassConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetLatestAppBreakGlassConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetLatestAppBreakGlassConfigOK()
@@ -109,11 +111,13 @@ func (o *GetLatestAppBreakGlassConfigOK) Code() int {
 }
 
 func (o *GetLatestAppBreakGlassConfigOK) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigOK %s", 200, payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigOK) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigOK %s", 200, payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigOK) GetPayload() *models.AppAppBreakGlassConfig {
@@ -125,7 +129,7 @@ func (o *GetLatestAppBreakGlassConfigOK) readResponse(response runtime.ClientRes
 	o.Payload = new(models.AppAppBreakGlassConfig)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *GetLatestAppBreakGlassConfigBadRequest) Code() int {
 }
 
 func (o *GetLatestAppBreakGlassConfigBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigBadRequest %s", 400, payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigBadRequest %s", 400, payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *GetLatestAppBreakGlassConfigBadRequest) readResponse(response runtime.C
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *GetLatestAppBreakGlassConfigUnauthorized) Code() int {
 }
 
 func (o *GetLatestAppBreakGlassConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigUnauthorized %s", 401, payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigUnauthorized %s", 401, payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *GetLatestAppBreakGlassConfigUnauthorized) readResponse(response runtime
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *GetLatestAppBreakGlassConfigForbidden) Code() int {
 }
 
 func (o *GetLatestAppBreakGlassConfigForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigForbidden %s", 403, payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigForbidden %s", 403, payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *GetLatestAppBreakGlassConfigForbidden) readResponse(response runtime.Cl
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *GetLatestAppBreakGlassConfigNotFound) Code() int {
 }
 
 func (o *GetLatestAppBreakGlassConfigNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigNotFound %s", 404, payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigNotFound %s", 404, payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *GetLatestAppBreakGlassConfigNotFound) readResponse(response runtime.Cli
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *GetLatestAppBreakGlassConfigInternalServerError) Code() int {
 }
 
 func (o *GetLatestAppBreakGlassConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigInternalServerError %s", 500, payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/latest-app-break-glass-config][%d] getLatestAppBreakGlassConfigInternalServerError %s", 500, payload)
 }
 
 func (o *GetLatestAppBreakGlassConfigInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *GetLatestAppBreakGlassConfigInternalServerError) readResponse(response 
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

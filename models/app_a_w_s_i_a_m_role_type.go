@@ -47,7 +47,7 @@ const (
 )
 
 // for schema
-var appAWSIAMRoleTypeEnum []interface{}
+var appAWSIAMRoleTypeEnum []any
 
 func init() {
 	var res []AppAWSIAMRoleType

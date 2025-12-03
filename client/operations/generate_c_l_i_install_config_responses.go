@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -22,7 +24,7 @@ type GenerateCLIInstallConfigReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GenerateCLIInstallConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GenerateCLIInstallConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGenerateCLIInstallConfigOK(o.writer)
@@ -113,11 +115,11 @@ func (o *GenerateCLIInstallConfigOK) Code() int {
 }
 
 func (o *GenerateCLIInstallConfigOK) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigOK", 200)
 }
 
 func (o *GenerateCLIInstallConfigOK) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigOK", 200)
 }
 
 func (o *GenerateCLIInstallConfigOK) GetPayload() io.Writer {
@@ -127,7 +129,7 @@ func (o *GenerateCLIInstallConfigOK) GetPayload() io.Writer {
 func (o *GenerateCLIInstallConfigOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -179,11 +181,13 @@ func (o *GenerateCLIInstallConfigBadRequest) Code() int {
 }
 
 func (o *GenerateCLIInstallConfigBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigBadRequest %s", 400, payload)
 }
 
 func (o *GenerateCLIInstallConfigBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigBadRequest %s", 400, payload)
 }
 
 func (o *GenerateCLIInstallConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -195,7 +199,7 @@ func (o *GenerateCLIInstallConfigBadRequest) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -247,11 +251,13 @@ func (o *GenerateCLIInstallConfigUnauthorized) Code() int {
 }
 
 func (o *GenerateCLIInstallConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigUnauthorized %s", 401, payload)
 }
 
 func (o *GenerateCLIInstallConfigUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigUnauthorized %s", 401, payload)
 }
 
 func (o *GenerateCLIInstallConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -263,7 +269,7 @@ func (o *GenerateCLIInstallConfigUnauthorized) readResponse(response runtime.Cli
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -315,11 +321,13 @@ func (o *GenerateCLIInstallConfigForbidden) Code() int {
 }
 
 func (o *GenerateCLIInstallConfigForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigForbidden %s", 403, payload)
 }
 
 func (o *GenerateCLIInstallConfigForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigForbidden %s", 403, payload)
 }
 
 func (o *GenerateCLIInstallConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -331,7 +339,7 @@ func (o *GenerateCLIInstallConfigForbidden) readResponse(response runtime.Client
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -383,11 +391,13 @@ func (o *GenerateCLIInstallConfigNotFound) Code() int {
 }
 
 func (o *GenerateCLIInstallConfigNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigNotFound %s", 404, payload)
 }
 
 func (o *GenerateCLIInstallConfigNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigNotFound %s", 404, payload)
 }
 
 func (o *GenerateCLIInstallConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -399,7 +409,7 @@ func (o *GenerateCLIInstallConfigNotFound) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -451,11 +461,13 @@ func (o *GenerateCLIInstallConfigInternalServerError) Code() int {
 }
 
 func (o *GenerateCLIInstallConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigInternalServerError %s", 500, payload)
 }
 
 func (o *GenerateCLIInstallConfigInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/generate-cli-install-config][%d] generateCLIInstallConfigInternalServerError %s", 500, payload)
 }
 
 func (o *GenerateCLIInstallConfigInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -467,7 +479,7 @@ func (o *GenerateCLIInstallConfigInternalServerError) readResponse(response runt
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

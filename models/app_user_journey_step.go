@@ -30,7 +30,7 @@ type AppUserJourneyStep struct {
 	CompletionSource string `json:"completion_source,omitempty"`
 
 	// Flexible metadata for business data
-	Metadata interface{} `json:"metadata,omitempty"`
+	Metadata any `json:"metadata,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`

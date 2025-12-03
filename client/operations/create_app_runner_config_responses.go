@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type CreateAppRunnerConfigReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateAppRunnerConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateAppRunnerConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateAppRunnerConfigCreated()
@@ -109,11 +111,13 @@ func (o *CreateAppRunnerConfigCreated) Code() int {
 }
 
 func (o *CreateAppRunnerConfigCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigCreated %s", 201, payload)
 }
 
 func (o *CreateAppRunnerConfigCreated) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigCreated %s", 201, payload)
 }
 
 func (o *CreateAppRunnerConfigCreated) GetPayload() *models.AppAppRunnerConfig {
@@ -125,7 +129,7 @@ func (o *CreateAppRunnerConfigCreated) readResponse(response runtime.ClientRespo
 	o.Payload = new(models.AppAppRunnerConfig)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *CreateAppRunnerConfigBadRequest) Code() int {
 }
 
 func (o *CreateAppRunnerConfigBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppRunnerConfigBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppRunnerConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *CreateAppRunnerConfigBadRequest) readResponse(response runtime.ClientRe
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *CreateAppRunnerConfigUnauthorized) Code() int {
 }
 
 func (o *CreateAppRunnerConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppRunnerConfigUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppRunnerConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *CreateAppRunnerConfigUnauthorized) readResponse(response runtime.Client
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *CreateAppRunnerConfigForbidden) Code() int {
 }
 
 func (o *CreateAppRunnerConfigForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateAppRunnerConfigForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateAppRunnerConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *CreateAppRunnerConfigForbidden) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *CreateAppRunnerConfigNotFound) Code() int {
 }
 
 func (o *CreateAppRunnerConfigNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateAppRunnerConfigNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateAppRunnerConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *CreateAppRunnerConfigNotFound) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *CreateAppRunnerConfigInternalServerError) Code() int {
 }
 
 func (o *CreateAppRunnerConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppRunnerConfigInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/runner-configs][%d] createAppRunnerConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppRunnerConfigInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *CreateAppRunnerConfigInternalServerError) readResponse(response runtime
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

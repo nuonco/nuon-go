@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetAppConflgV2Reader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetAppConflgV2Reader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetAppConflgV2Reader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetAppConflgV2OK()
@@ -60,7 +62,7 @@ func (o *GetAppConflgV2Reader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /v1/apps/{app_id}/configs/{app_config_id}] GetAppConflgV2", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /v1/apps/{app_id}/configs/{config_id}] GetAppConflgV2", response, response.Code())
 	}
 }
 
@@ -109,11 +111,13 @@ func (o *GetAppConflgV2OK) Code() int {
 }
 
 func (o *GetAppConflgV2OK) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}][%d] getAppConflgV2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}][%d] getAppConflgV2OK %s", 200, payload)
 }
 
 func (o *GetAppConflgV2OK) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}][%d] getAppConflgV2OK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}][%d] getAppConflgV2OK %s", 200, payload)
 }
 
 func (o *GetAppConflgV2OK) GetPayload() *models.AppAppConfig {
@@ -125,7 +129,7 @@ func (o *GetAppConflgV2OK) readResponse(response runtime.ClientResponse, consume
 	o.Payload = new(models.AppAppConfig)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *GetAppConflgV2BadRequest) Code() int {
 }
 
 func (o *GetAppConflgV2BadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}][%d] getAppConflgV2BadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}][%d] getAppConflgV2BadRequest %s", 400, payload)
 }
 
 func (o *GetAppConflgV2BadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}][%d] getAppConflgV2BadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}][%d] getAppConflgV2BadRequest %s", 400, payload)
 }
 
 func (o *GetAppConflgV2BadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *GetAppConflgV2BadRequest) readResponse(response runtime.ClientResponse,
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *GetAppConflgV2Unauthorized) Code() int {
 }
 
 func (o *GetAppConflgV2Unauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}][%d] getAppConflgV2Unauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}][%d] getAppConflgV2Unauthorized %s", 401, payload)
 }
 
 func (o *GetAppConflgV2Unauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}][%d] getAppConflgV2Unauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}][%d] getAppConflgV2Unauthorized %s", 401, payload)
 }
 
 func (o *GetAppConflgV2Unauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *GetAppConflgV2Unauthorized) readResponse(response runtime.ClientRespons
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *GetAppConflgV2Forbidden) Code() int {
 }
 
 func (o *GetAppConflgV2Forbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}][%d] getAppConflgV2Forbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}][%d] getAppConflgV2Forbidden %s", 403, payload)
 }
 
 func (o *GetAppConflgV2Forbidden) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}][%d] getAppConflgV2Forbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}][%d] getAppConflgV2Forbidden %s", 403, payload)
 }
 
 func (o *GetAppConflgV2Forbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *GetAppConflgV2Forbidden) readResponse(response runtime.ClientResponse, 
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *GetAppConflgV2NotFound) Code() int {
 }
 
 func (o *GetAppConflgV2NotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}][%d] getAppConflgV2NotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}][%d] getAppConflgV2NotFound %s", 404, payload)
 }
 
 func (o *GetAppConflgV2NotFound) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}][%d] getAppConflgV2NotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}][%d] getAppConflgV2NotFound %s", 404, payload)
 }
 
 func (o *GetAppConflgV2NotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *GetAppConflgV2NotFound) readResponse(response runtime.ClientResponse, c
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *GetAppConflgV2InternalServerError) Code() int {
 }
 
 func (o *GetAppConflgV2InternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}][%d] getAppConflgV2InternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}][%d] getAppConflgV2InternalServerError %s", 500, payload)
 }
 
 func (o *GetAppConflgV2InternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{app_config_id}][%d] getAppConflgV2InternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/configs/{config_id}][%d] getAppConflgV2InternalServerError %s", 500, payload)
 }
 
 func (o *GetAppConflgV2InternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *GetAppConflgV2InternalServerError) readResponse(response runtime.Client
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

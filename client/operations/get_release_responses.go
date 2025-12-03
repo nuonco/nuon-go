@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetReleaseReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetReleaseReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetReleaseReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetReleaseOK()
@@ -109,11 +111,13 @@ func (o *GetReleaseOK) Code() int {
 }
 
 func (o *GetReleaseOK) Error() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseOK %s", 200, payload)
 }
 
 func (o *GetReleaseOK) String() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseOK %s", 200, payload)
 }
 
 func (o *GetReleaseOK) GetPayload() *models.AppComponentRelease {
@@ -125,7 +129,7 @@ func (o *GetReleaseOK) readResponse(response runtime.ClientResponse, consumer ru
 	o.Payload = new(models.AppComponentRelease)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *GetReleaseBadRequest) Code() int {
 }
 
 func (o *GetReleaseBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseBadRequest %s", 400, payload)
 }
 
 func (o *GetReleaseBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseBadRequest %s", 400, payload)
 }
 
 func (o *GetReleaseBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *GetReleaseBadRequest) readResponse(response runtime.ClientResponse, con
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *GetReleaseUnauthorized) Code() int {
 }
 
 func (o *GetReleaseUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseUnauthorized %s", 401, payload)
 }
 
 func (o *GetReleaseUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseUnauthorized %s", 401, payload)
 }
 
 func (o *GetReleaseUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *GetReleaseUnauthorized) readResponse(response runtime.ClientResponse, c
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *GetReleaseForbidden) Code() int {
 }
 
 func (o *GetReleaseForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseForbidden %s", 403, payload)
 }
 
 func (o *GetReleaseForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseForbidden %s", 403, payload)
 }
 
 func (o *GetReleaseForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *GetReleaseForbidden) readResponse(response runtime.ClientResponse, cons
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *GetReleaseNotFound) Code() int {
 }
 
 func (o *GetReleaseNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseNotFound %s", 404, payload)
 }
 
 func (o *GetReleaseNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseNotFound %s", 404, payload)
 }
 
 func (o *GetReleaseNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *GetReleaseNotFound) readResponse(response runtime.ClientResponse, consu
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *GetReleaseInternalServerError) Code() int {
 }
 
 func (o *GetReleaseInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseInternalServerError %s", 500, payload)
 }
 
 func (o *GetReleaseInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/releases/{release_id}][%d] getReleaseInternalServerError %s", 500, payload)
 }
 
 func (o *GetReleaseInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *GetReleaseInternalServerError) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

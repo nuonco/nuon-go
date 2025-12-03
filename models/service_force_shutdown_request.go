@@ -8,4 +8,4 @@ package models
 // ServiceForceShutdownRequest service force shutdown request
 //
 // swagger:model service.ForceShutdownRequest
-type ServiceForceShutdownRequest interface{}
+type ServiceForceShutdownRequest any

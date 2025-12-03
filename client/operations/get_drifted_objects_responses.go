@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetDriftedObjectsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetDriftedObjectsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetDriftedObjectsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetDriftedObjectsOK()
@@ -109,11 +111,13 @@ func (o *GetDriftedObjectsOK) Code() int {
 }
 
 func (o *GetDriftedObjectsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsOK %s", 200, payload)
 }
 
 func (o *GetDriftedObjectsOK) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsOK %s", 200, payload)
 }
 
 func (o *GetDriftedObjectsOK) GetPayload() []*models.AppDriftedObject {
@@ -123,7 +127,7 @@ func (o *GetDriftedObjectsOK) GetPayload() []*models.AppDriftedObject {
 func (o *GetDriftedObjectsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *GetDriftedObjectsBadRequest) Code() int {
 }
 
 func (o *GetDriftedObjectsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsBadRequest %s", 400, payload)
 }
 
 func (o *GetDriftedObjectsBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsBadRequest %s", 400, payload)
 }
 
 func (o *GetDriftedObjectsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *GetDriftedObjectsBadRequest) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *GetDriftedObjectsUnauthorized) Code() int {
 }
 
 func (o *GetDriftedObjectsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsUnauthorized %s", 401, payload)
 }
 
 func (o *GetDriftedObjectsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsUnauthorized %s", 401, payload)
 }
 
 func (o *GetDriftedObjectsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *GetDriftedObjectsUnauthorized) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *GetDriftedObjectsForbidden) Code() int {
 }
 
 func (o *GetDriftedObjectsForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsForbidden %s", 403, payload)
 }
 
 func (o *GetDriftedObjectsForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsForbidden %s", 403, payload)
 }
 
 func (o *GetDriftedObjectsForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *GetDriftedObjectsForbidden) readResponse(response runtime.ClientRespons
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *GetDriftedObjectsNotFound) Code() int {
 }
 
 func (o *GetDriftedObjectsNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsNotFound %s", 404, payload)
 }
 
 func (o *GetDriftedObjectsNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsNotFound %s", 404, payload)
 }
 
 func (o *GetDriftedObjectsNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *GetDriftedObjectsNotFound) readResponse(response runtime.ClientResponse
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *GetDriftedObjectsInternalServerError) Code() int {
 }
 
 func (o *GetDriftedObjectsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsInternalServerError %s", 500, payload)
 }
 
 func (o *GetDriftedObjectsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/drifted-objects][%d] getDriftedObjectsInternalServerError %s", 500, payload)
 }
 
 func (o *GetDriftedObjectsInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *GetDriftedObjectsInternalServerError) readResponse(response runtime.Cli
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -28,7 +29,7 @@ type GithubComPowertoolsdevMonoPkgTypesStateState struct {
 	CloudAccount *StateCloudAccount `json:"cloud_account,omitempty"`
 
 	// components
-	Components interface{} `json:"components,omitempty"`
+	Components map[string]any `json:"components,omitempty"`
 
 	// domain
 	Domain *StateDomainState `json:"domain,omitempty"`
@@ -127,11 +128,15 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) validateActions(formats s
 
 	if m.Actions != nil {
 		if err := m.Actions.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("actions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("actions")
 			}
+
 			return err
 		}
 	}
@@ -146,11 +151,15 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) validateApp(formats strfm
 
 	if m.App != nil {
 		if err := m.App.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("app")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("app")
 			}
+
 			return err
 		}
 	}
@@ -165,11 +174,15 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) validateCloudAccount(form
 
 	if m.CloudAccount != nil {
 		if err := m.CloudAccount.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cloud_account")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cloud_account")
 			}
+
 			return err
 		}
 	}
@@ -184,11 +197,15 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) validateDomain(formats st
 
 	if m.Domain != nil {
 		if err := m.Domain.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("domain")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("domain")
 			}
+
 			return err
 		}
 	}
@@ -203,11 +220,15 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) validateInputs(formats st
 
 	if m.Inputs != nil {
 		if err := m.Inputs.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("inputs")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("inputs")
 			}
+
 			return err
 		}
 	}
@@ -230,11 +251,15 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) validateInstallStack(form
 
 	if m.InstallStack != nil {
 		if err := m.InstallStack.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("install_stack")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("install_stack")
 			}
+
 			return err
 		}
 	}
@@ -249,11 +274,15 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) validateOrg(formats strfm
 
 	if m.Org != nil {
 		if err := m.Org.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("org")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("org")
 			}
+
 			return err
 		}
 	}
@@ -268,11 +297,15 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) validateRunner(formats st
 
 	if m.Runner != nil {
 		if err := m.Runner.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("runner")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("runner")
 			}
+
 			return err
 		}
 	}
@@ -287,11 +320,15 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) validateSandbox(formats s
 
 	if m.Sandbox != nil {
 		if err := m.Sandbox.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sandbox")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sandbox")
 			}
+
 			return err
 		}
 	}
@@ -306,11 +343,15 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) validateSecrets(formats s
 
 	if m.Secrets != nil {
 		if err := m.Secrets.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("secrets")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("secrets")
 			}
+
 			return err
 		}
 	}
@@ -381,11 +422,15 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) contextValidateActions(ct
 		}
 
 		if err := m.Actions.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("actions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("actions")
 			}
+
 			return err
 		}
 	}
@@ -402,11 +447,15 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) contextValidateApp(ctx co
 		}
 
 		if err := m.App.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("app")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("app")
 			}
+
 			return err
 		}
 	}
@@ -423,11 +472,15 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) contextValidateCloudAccou
 		}
 
 		if err := m.CloudAccount.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cloud_account")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cloud_account")
 			}
+
 			return err
 		}
 	}
@@ -444,11 +497,15 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) contextValidateDomain(ctx
 		}
 
 		if err := m.Domain.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("domain")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("domain")
 			}
+
 			return err
 		}
 	}
@@ -465,11 +522,15 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) contextValidateInputs(ctx
 		}
 
 		if err := m.Inputs.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("inputs")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("inputs")
 			}
+
 			return err
 		}
 	}
@@ -491,11 +552,15 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) contextValidateInstallSta
 		}
 
 		if err := m.InstallStack.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("install_stack")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("install_stack")
 			}
+
 			return err
 		}
 	}
@@ -512,11 +577,15 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) contextValidateOrg(ctx co
 		}
 
 		if err := m.Org.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("org")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("org")
 			}
+
 			return err
 		}
 	}
@@ -533,11 +602,15 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) contextValidateRunner(ctx
 		}
 
 		if err := m.Runner.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("runner")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("runner")
 			}
+
 			return err
 		}
 	}
@@ -554,11 +627,15 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) contextValidateSandbox(ct
 		}
 
 		if err := m.Sandbox.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sandbox")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sandbox")
 			}
+
 			return err
 		}
 	}
@@ -573,11 +650,15 @@ func (m *GithubComPowertoolsdevMonoPkgTypesStateState) contextValidateSecrets(ct
 	}
 
 	if err := m.Secrets.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("secrets")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("secrets")
 		}
+
 		return err
 	}
 

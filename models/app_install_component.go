@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -47,7 +48,7 @@ type AppInstallComponent struct {
 	InstallID string `json:"install_id,omitempty"`
 
 	// links
-	Links interface{} `json:"links,omitempty"`
+	Links map[string]any `json:"links,omitempty"`
 
 	// status
 	Status string `json:"status,omitempty"`
@@ -106,11 +107,15 @@ func (m *AppInstallComponent) validateComponent(formats strfmt.Registry) error {
 
 	if m.Component != nil {
 		if err := m.Component.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("component")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("component")
 			}
+
 			return err
 		}
 	}
@@ -125,11 +130,15 @@ func (m *AppInstallComponent) validateDriftedObject(formats strfmt.Registry) err
 
 	if m.DriftedObject != nil {
 		if err := m.DriftedObject.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("drifted_object")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("drifted_object")
 			}
+
 			return err
 		}
 	}
@@ -144,11 +153,15 @@ func (m *AppInstallComponent) validateHelmChart(formats strfmt.Registry) error {
 
 	if m.HelmChart != nil {
 		if err := m.HelmChart.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("helm_chart")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("helm_chart")
 			}
+
 			return err
 		}
 	}
@@ -168,11 +181,15 @@ func (m *AppInstallComponent) validateInstallDeploys(formats strfmt.Registry) er
 
 		if m.InstallDeploys[i] != nil {
 			if err := m.InstallDeploys[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("install_deploys" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("install_deploys" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -189,11 +206,15 @@ func (m *AppInstallComponent) validateStatusV2(formats strfmt.Registry) error {
 
 	if m.StatusV2 != nil {
 		if err := m.StatusV2.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("status_v2")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("status_v2")
 			}
+
 			return err
 		}
 	}
@@ -208,11 +229,15 @@ func (m *AppInstallComponent) validateTerraformWorkspace(formats strfmt.Registry
 
 	if m.TerraformWorkspace != nil {
 		if err := m.TerraformWorkspace.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("terraform_workspace")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("terraform_workspace")
 			}
+
 			return err
 		}
 	}
@@ -263,11 +288,15 @@ func (m *AppInstallComponent) contextValidateComponent(ctx context.Context, form
 		}
 
 		if err := m.Component.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("component")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("component")
 			}
+
 			return err
 		}
 	}
@@ -284,11 +313,15 @@ func (m *AppInstallComponent) contextValidateDriftedObject(ctx context.Context, 
 		}
 
 		if err := m.DriftedObject.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("drifted_object")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("drifted_object")
 			}
+
 			return err
 		}
 	}
@@ -305,11 +338,15 @@ func (m *AppInstallComponent) contextValidateHelmChart(ctx context.Context, form
 		}
 
 		if err := m.HelmChart.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("helm_chart")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("helm_chart")
 			}
+
 			return err
 		}
 	}
@@ -328,11 +365,15 @@ func (m *AppInstallComponent) contextValidateInstallDeploys(ctx context.Context,
 			}
 
 			if err := m.InstallDeploys[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("install_deploys" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("install_deploys" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -351,11 +392,15 @@ func (m *AppInstallComponent) contextValidateStatusV2(ctx context.Context, forma
 		}
 
 		if err := m.StatusV2.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("status_v2")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("status_v2")
 			}
+
 			return err
 		}
 	}
@@ -372,11 +417,15 @@ func (m *AppInstallComponent) contextValidateTerraformWorkspace(ctx context.Cont
 		}
 
 		if err := m.TerraformWorkspace.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("terraform_workspace")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("terraform_workspace")
 			}
+
 			return err
 		}
 	}

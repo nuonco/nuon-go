@@ -32,17 +32,14 @@ const (
 
 	// AppStepErrorBehaviorAbort captures enum value "abort"
 	AppStepErrorBehaviorAbort AppStepErrorBehavior = "abort"
-
-	// AppStepErrorBehaviorContinue captures enum value "continue"
-	AppStepErrorBehaviorContinue AppStepErrorBehavior = "continue"
 )
 
 // for schema
-var appStepErrorBehaviorEnum []interface{}
+var appStepErrorBehaviorEnum []any
 
 func init() {
 	var res []AppStepErrorBehavior
-	if err := json.Unmarshal([]byte(`["abort","continue"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["abort"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

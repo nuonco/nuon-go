@@ -86,7 +86,7 @@ const (
 )
 
 // for schema
-var serviceAppConfigTemplateTypeEnum []interface{}
+var serviceAppConfigTemplateTypeEnum []any
 
 func init() {
 	var res []ServiceAppConfigTemplateType

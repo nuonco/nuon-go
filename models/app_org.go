@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -32,7 +33,7 @@ type AppOrg struct {
 	ID string `json:"id,omitempty"`
 
 	// links
-	Links interface{} `json:"links,omitempty"`
+	Links map[string]any `json:"links,omitempty"`
 
 	// logo url
 	LogoURL string `json:"logo_url,omitempty"`
@@ -95,11 +96,15 @@ func (m *AppOrg) validateFeatures(formats strfmt.Registry) error {
 
 	if m.Features != nil {
 		if err := m.Features.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("features")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("features")
 			}
+
 			return err
 		}
 	}
@@ -114,11 +119,15 @@ func (m *AppOrg) validateNotificationsConfig(formats strfmt.Registry) error {
 
 	if m.NotificationsConfig != nil {
 		if err := m.NotificationsConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("notifications_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("notifications_config")
 			}
+
 			return err
 		}
 	}
@@ -133,11 +142,15 @@ func (m *AppOrg) validateRunnerGroup(formats strfmt.Registry) error {
 
 	if m.RunnerGroup != nil {
 		if err := m.RunnerGroup.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("runner_group")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("runner_group")
 			}
+
 			return err
 		}
 	}
@@ -157,11 +170,15 @@ func (m *AppOrg) validateVcsConnections(formats strfmt.Registry) error {
 
 		if m.VcsConnections[i] != nil {
 			if err := m.VcsConnections[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("vcs_connections" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("vcs_connections" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -204,11 +221,15 @@ func (m *AppOrg) contextValidateFeatures(ctx context.Context, formats strfmt.Reg
 	}
 
 	if err := m.Features.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("features")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("features")
 		}
+
 		return err
 	}
 
@@ -224,11 +245,15 @@ func (m *AppOrg) contextValidateNotificationsConfig(ctx context.Context, formats
 		}
 
 		if err := m.NotificationsConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("notifications_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("notifications_config")
 			}
+
 			return err
 		}
 	}
@@ -245,11 +270,15 @@ func (m *AppOrg) contextValidateRunnerGroup(ctx context.Context, formats strfmt.
 		}
 
 		if err := m.RunnerGroup.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("runner_group")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("runner_group")
 			}
+
 			return err
 		}
 	}
@@ -268,11 +297,15 @@ func (m *AppOrg) contextValidateVcsConnections(ctx context.Context, formats strf
 			}
 
 			if err := m.VcsConnections[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("vcs_connections" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("vcs_connections" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

@@ -56,7 +56,7 @@ const (
 )
 
 // for schema
-var appAppRunnerTypeEnum []interface{}
+var appAppRunnerTypeEnum []any
 
 func init() {
 	var res []AppAppRunnerType

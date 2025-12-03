@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -77,11 +78,15 @@ func (m *PlantypesSyncOCIPlan) validateDstRegistry(formats strfmt.Registry) erro
 
 	if m.DstRegistry != nil {
 		if err := m.DstRegistry.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("dst_registry")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("dst_registry")
 			}
+
 			return err
 		}
 	}
@@ -105,11 +110,15 @@ func (m *PlantypesSyncOCIPlan) validateSandboxMode(formats strfmt.Registry) erro
 
 	if m.SandboxMode != nil {
 		if err := m.SandboxMode.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sandbox_mode")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sandbox_mode")
 			}
+
 			return err
 		}
 	}
@@ -125,11 +134,15 @@ func (m *PlantypesSyncOCIPlan) validateSrcRegistry(formats strfmt.Registry) erro
 
 	if m.SrcRegistry != nil {
 		if err := m.SrcRegistry.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("src_registry")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("src_registry")
 			}
+
 			return err
 		}
 	}
@@ -173,11 +186,15 @@ func (m *PlantypesSyncOCIPlan) contextValidateDstRegistry(ctx context.Context, f
 	if m.DstRegistry != nil {
 
 		if err := m.DstRegistry.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("dst_registry")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("dst_registry")
 			}
+
 			return err
 		}
 	}
@@ -194,11 +211,15 @@ func (m *PlantypesSyncOCIPlan) contextValidateSandboxMode(ctx context.Context, f
 		}
 
 		if err := m.SandboxMode.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sandbox_mode")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sandbox_mode")
 			}
+
 			return err
 		}
 	}
@@ -211,11 +232,15 @@ func (m *PlantypesSyncOCIPlan) contextValidateSrcRegistry(ctx context.Context, f
 	if m.SrcRegistry != nil {
 
 		if err := m.SrcRegistry.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("src_registry")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("src_registry")
 			}
+
 			return err
 		}
 	}

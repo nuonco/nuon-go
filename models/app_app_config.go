@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -175,11 +176,15 @@ func (m *AppAppConfig) validateActionWorkflowConfigs(formats strfmt.Registry) er
 
 		if m.ActionWorkflowConfigs[i] != nil {
 			if err := m.ActionWorkflowConfigs[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("action_workflow_configs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("action_workflow_configs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -196,11 +201,15 @@ func (m *AppAppConfig) validateAppBranch(formats strfmt.Registry) error {
 
 	if m.AppBranch != nil {
 		if err := m.AppBranch.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("app_branch")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("app_branch")
 			}
+
 			return err
 		}
 	}
@@ -215,11 +224,15 @@ func (m *AppAppConfig) validateBreakGlass(formats strfmt.Registry) error {
 
 	if m.BreakGlass != nil {
 		if err := m.BreakGlass.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("break_glass")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("break_glass")
 			}
+
 			return err
 		}
 	}
@@ -239,11 +252,15 @@ func (m *AppAppConfig) validateComponentConfigConnections(formats strfmt.Registr
 
 		if m.ComponentConfigConnections[i] != nil {
 			if err := m.ComponentConfigConnections[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("component_config_connections" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("component_config_connections" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -260,11 +277,15 @@ func (m *AppAppConfig) validateInput(formats strfmt.Registry) error {
 
 	if m.Input != nil {
 		if err := m.Input.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("input")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("input")
 			}
+
 			return err
 		}
 	}
@@ -279,11 +300,15 @@ func (m *AppAppConfig) validatePermissions(formats strfmt.Registry) error {
 
 	if m.Permissions != nil {
 		if err := m.Permissions.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("permissions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("permissions")
 			}
+
 			return err
 		}
 	}
@@ -298,11 +323,15 @@ func (m *AppAppConfig) validatePolicies(formats strfmt.Registry) error {
 
 	if m.Policies != nil {
 		if err := m.Policies.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("policies")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("policies")
 			}
+
 			return err
 		}
 	}
@@ -317,11 +346,15 @@ func (m *AppAppConfig) validateRunner(formats strfmt.Registry) error {
 
 	if m.Runner != nil {
 		if err := m.Runner.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("runner")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("runner")
 			}
+
 			return err
 		}
 	}
@@ -336,11 +369,15 @@ func (m *AppAppConfig) validateSandbox(formats strfmt.Registry) error {
 
 	if m.Sandbox != nil {
 		if err := m.Sandbox.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sandbox")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sandbox")
 			}
+
 			return err
 		}
 	}
@@ -355,11 +392,15 @@ func (m *AppAppConfig) validateSecrets(formats strfmt.Registry) error {
 
 	if m.Secrets != nil {
 		if err := m.Secrets.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("secrets")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("secrets")
 			}
+
 			return err
 		}
 	}
@@ -374,11 +415,15 @@ func (m *AppAppConfig) validateStack(formats strfmt.Registry) error {
 
 	if m.Stack != nil {
 		if err := m.Stack.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("stack")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("stack")
 			}
+
 			return err
 		}
 	}
@@ -392,11 +437,15 @@ func (m *AppAppConfig) validateStatus(formats strfmt.Registry) error {
 	}
 
 	if err := m.Status.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("status")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("status")
 		}
+
 		return err
 	}
 
@@ -410,11 +459,15 @@ func (m *AppAppConfig) validateVcsConnectionCommit(formats strfmt.Registry) erro
 
 	if m.VcsConnectionCommit != nil {
 		if err := m.VcsConnectionCommit.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("vcs_connection_commit")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("vcs_connection_commit")
 			}
+
 			return err
 		}
 	}
@@ -495,11 +548,15 @@ func (m *AppAppConfig) contextValidateActionWorkflowConfigs(ctx context.Context,
 			}
 
 			if err := m.ActionWorkflowConfigs[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("action_workflow_configs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("action_workflow_configs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -518,11 +575,15 @@ func (m *AppAppConfig) contextValidateAppBranch(ctx context.Context, formats str
 		}
 
 		if err := m.AppBranch.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("app_branch")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("app_branch")
 			}
+
 			return err
 		}
 	}
@@ -539,11 +600,15 @@ func (m *AppAppConfig) contextValidateBreakGlass(ctx context.Context, formats st
 		}
 
 		if err := m.BreakGlass.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("break_glass")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("break_glass")
 			}
+
 			return err
 		}
 	}
@@ -562,11 +627,15 @@ func (m *AppAppConfig) contextValidateComponentConfigConnections(ctx context.Con
 			}
 
 			if err := m.ComponentConfigConnections[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("component_config_connections" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("component_config_connections" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -585,11 +654,15 @@ func (m *AppAppConfig) contextValidateInput(ctx context.Context, formats strfmt.
 		}
 
 		if err := m.Input.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("input")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("input")
 			}
+
 			return err
 		}
 	}
@@ -606,11 +679,15 @@ func (m *AppAppConfig) contextValidatePermissions(ctx context.Context, formats s
 		}
 
 		if err := m.Permissions.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("permissions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("permissions")
 			}
+
 			return err
 		}
 	}
@@ -627,11 +704,15 @@ func (m *AppAppConfig) contextValidatePolicies(ctx context.Context, formats strf
 		}
 
 		if err := m.Policies.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("policies")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("policies")
 			}
+
 			return err
 		}
 	}
@@ -648,11 +729,15 @@ func (m *AppAppConfig) contextValidateRunner(ctx context.Context, formats strfmt
 		}
 
 		if err := m.Runner.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("runner")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("runner")
 			}
+
 			return err
 		}
 	}
@@ -669,11 +754,15 @@ func (m *AppAppConfig) contextValidateSandbox(ctx context.Context, formats strfm
 		}
 
 		if err := m.Sandbox.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sandbox")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sandbox")
 			}
+
 			return err
 		}
 	}
@@ -690,11 +779,15 @@ func (m *AppAppConfig) contextValidateSecrets(ctx context.Context, formats strfm
 		}
 
 		if err := m.Secrets.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("secrets")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("secrets")
 			}
+
 			return err
 		}
 	}
@@ -711,11 +804,15 @@ func (m *AppAppConfig) contextValidateStack(ctx context.Context, formats strfmt.
 		}
 
 		if err := m.Stack.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("stack")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("stack")
 			}
+
 			return err
 		}
 	}
@@ -730,11 +827,15 @@ func (m *AppAppConfig) contextValidateStatus(ctx context.Context, formats strfmt
 	}
 
 	if err := m.Status.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("status")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("status")
 		}
+
 		return err
 	}
 
@@ -750,11 +851,15 @@ func (m *AppAppConfig) contextValidateVcsConnectionCommit(ctx context.Context, f
 		}
 
 		if err := m.VcsConnectionCommit.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("vcs_connection_commit")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("vcs_connection_commit")
 			}
+
 			return err
 		}
 	}

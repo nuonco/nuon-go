@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -26,6 +27,9 @@ type AppRunnerJobExecution struct {
 
 	// id
 	ID string `json:"id,omitempty"`
+
+	// Metadata is used to store additional information about the execution {e.g., client version.}
+	Metadata map[string]string `json:"metadata,omitempty"`
 
 	// org id
 	OrgID string `json:"org_id,omitempty"`
@@ -75,11 +79,15 @@ func (m *AppRunnerJobExecution) validateOutputs(formats strfmt.Registry) error {
 
 	if m.Outputs != nil {
 		if err := m.Outputs.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("outputs")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("outputs")
 			}
+
 			return err
 		}
 	}
@@ -94,11 +102,15 @@ func (m *AppRunnerJobExecution) validateResult(formats strfmt.Registry) error {
 
 	if m.Result != nil {
 		if err := m.Result.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("result")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("result")
 			}
+
 			return err
 		}
 	}
@@ -112,11 +124,15 @@ func (m *AppRunnerJobExecution) validateStatus(formats strfmt.Registry) error {
 	}
 
 	if err := m.Status.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("status")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("status")
 		}
+
 		return err
 	}
 
@@ -154,11 +170,15 @@ func (m *AppRunnerJobExecution) contextValidateOutputs(ctx context.Context, form
 		}
 
 		if err := m.Outputs.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("outputs")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("outputs")
 			}
+
 			return err
 		}
 	}
@@ -175,11 +195,15 @@ func (m *AppRunnerJobExecution) contextValidateResult(ctx context.Context, forma
 		}
 
 		if err := m.Result.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("result")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("result")
 			}
+
 			return err
 		}
 	}
@@ -194,11 +218,15 @@ func (m *AppRunnerJobExecution) contextValidateStatus(ctx context.Context, forma
 	}
 
 	if err := m.Status.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("status")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("status")
 		}
+
 		return err
 	}
 

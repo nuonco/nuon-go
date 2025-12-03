@@ -922,18 +922,18 @@ func (mr *MockClientMockRecorder) GetAppComponents(ctx, appID, query interface{}
 }
 
 // GetAppConfig mocks base method.
-func (m *MockClient) GetAppConfig(ctx context.Context, appID, appConfigID string) (*models.AppAppConfig, error) {
+func (m *MockClient) GetAppConfig(ctx context.Context, appID, appConfigID string, recurse *bool) (*models.AppAppConfig, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetAppConfig", ctx, appID, appConfigID)
+	ret := m.ctrl.Call(m, "GetAppConfig", ctx, appID, appConfigID, recurse)
 	ret0, _ := ret[0].(*models.AppAppConfig)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // GetAppConfig indicates an expected call of GetAppConfig.
-func (mr *MockClientMockRecorder) GetAppConfig(ctx, appID, appConfigID interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) GetAppConfig(ctx, appID, appConfigID, recurse interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppConfig", reflect.TypeOf((*MockClient)(nil).GetAppConfig), ctx, appID, appConfigID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppConfig", reflect.TypeOf((*MockClient)(nil).GetAppConfig), ctx, appID, appConfigID, recurse)
 }
 
 // GetAppConfigTemplate mocks base method.
@@ -965,6 +965,21 @@ func (m *MockClient) GetAppConfigs(ctx context.Context, appID string, query *mod
 func (mr *MockClientMockRecorder) GetAppConfigs(ctx, appID, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppConfigs", reflect.TypeOf((*MockClient)(nil).GetAppConfigs), ctx, appID, query)
+}
+
+// GetAppInputConfig mocks base method.
+func (m *MockClient) GetAppInputConfig(ctx context.Context, appID, appInputConfigID string) (*models.AppAppInputConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAppInputConfig", ctx, appID, appInputConfigID)
+	ret0, _ := ret[0].(*models.AppAppInputConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAppInputConfig indicates an expected call of GetAppInputConfig.
+func (mr *MockClientMockRecorder) GetAppInputConfig(ctx, appID, appInputConfigID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAppInputConfig", reflect.TypeOf((*MockClient)(nil).GetAppInputConfig), ctx, appID, appInputConfigID)
 }
 
 // GetAppInputConfigs mocks base method.

@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -46,11 +47,15 @@ func (m *PlantypesHelmBuildPlan) validateHelmRepoConfig(formats strfmt.Registry)
 
 	if m.HelmRepoConfig != nil {
 		if err := m.HelmRepoConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("helmRepoConfig")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("helmRepoConfig")
 			}
+
 			return err
 		}
 	}
@@ -81,11 +86,15 @@ func (m *PlantypesHelmBuildPlan) contextValidateHelmRepoConfig(ctx context.Conte
 		}
 
 		if err := m.HelmRepoConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("helmRepoConfig")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("helmRepoConfig")
 			}
+
 			return err
 		}
 	}
