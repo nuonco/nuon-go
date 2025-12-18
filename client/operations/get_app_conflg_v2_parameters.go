@@ -62,17 +62,17 @@ GetAppConflgV2Params contains all the parameters to send to the API endpoint
 */
 type GetAppConflgV2Params struct {
 
-	/* AppConfigID.
-
-	   app config ID
-	*/
-	AppConfigID string
-
 	/* AppID.
 
 	   app ID
 	*/
 	AppID string
+
+	/* ConfigID.
+
+	   app config ID
+	*/
+	ConfigID string
 
 	/* Recurse.
 
@@ -144,17 +144,6 @@ func (o *GetAppConflgV2Params) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithAppConfigID adds the appConfigID to the get app conflg v2 params
-func (o *GetAppConflgV2Params) WithAppConfigID(appConfigID string) *GetAppConflgV2Params {
-	o.SetAppConfigID(appConfigID)
-	return o
-}
-
-// SetAppConfigID adds the appConfigId to the get app conflg v2 params
-func (o *GetAppConflgV2Params) SetAppConfigID(appConfigID string) {
-	o.AppConfigID = appConfigID
-}
-
 // WithAppID adds the appID to the get app conflg v2 params
 func (o *GetAppConflgV2Params) WithAppID(appID string) *GetAppConflgV2Params {
 	o.SetAppID(appID)
@@ -164,6 +153,17 @@ func (o *GetAppConflgV2Params) WithAppID(appID string) *GetAppConflgV2Params {
 // SetAppID adds the appId to the get app conflg v2 params
 func (o *GetAppConflgV2Params) SetAppID(appID string) {
 	o.AppID = appID
+}
+
+// WithConfigID adds the configID to the get app conflg v2 params
+func (o *GetAppConflgV2Params) WithConfigID(configID string) *GetAppConflgV2Params {
+	o.SetConfigID(configID)
+	return o
+}
+
+// SetConfigID adds the configId to the get app conflg v2 params
+func (o *GetAppConflgV2Params) SetConfigID(configID string) {
+	o.ConfigID = configID
 }
 
 // WithRecurse adds the recurse to the get app conflg v2 params
@@ -185,13 +185,13 @@ func (o *GetAppConflgV2Params) WriteToRequest(r runtime.ClientRequest, reg strfm
 	}
 	var res []error
 
-	// path param app_config_id
-	if err := r.SetPathParam("app_config_id", o.AppConfigID); err != nil {
+	// path param app_id
+	if err := r.SetPathParam("app_id", o.AppID); err != nil {
 		return err
 	}
 
-	// path param app_id
-	if err := r.SetPathParam("app_id", o.AppID); err != nil {
+	// path param config_id
+	if err := r.SetPathParam("config_id", o.ConfigID); err != nil {
 		return err
 	}
 

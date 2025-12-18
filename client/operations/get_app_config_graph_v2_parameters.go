@@ -61,17 +61,17 @@ GetAppConfigGraphV2Params contains all the parameters to send to the API endpoin
 */
 type GetAppConfigGraphV2Params struct {
 
-	/* AppConfigID.
-
-	   app config ID
-	*/
-	AppConfigID string
-
 	/* AppID.
 
 	   app ID
 	*/
 	AppID string
+
+	/* ConfigID.
+
+	   app config ID
+	*/
+	ConfigID string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -126,17 +126,6 @@ func (o *GetAppConfigGraphV2Params) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithAppConfigID adds the appConfigID to the get app config graph v2 params
-func (o *GetAppConfigGraphV2Params) WithAppConfigID(appConfigID string) *GetAppConfigGraphV2Params {
-	o.SetAppConfigID(appConfigID)
-	return o
-}
-
-// SetAppConfigID adds the appConfigId to the get app config graph v2 params
-func (o *GetAppConfigGraphV2Params) SetAppConfigID(appConfigID string) {
-	o.AppConfigID = appConfigID
-}
-
 // WithAppID adds the appID to the get app config graph v2 params
 func (o *GetAppConfigGraphV2Params) WithAppID(appID string) *GetAppConfigGraphV2Params {
 	o.SetAppID(appID)
@@ -148,6 +137,17 @@ func (o *GetAppConfigGraphV2Params) SetAppID(appID string) {
 	o.AppID = appID
 }
 
+// WithConfigID adds the configID to the get app config graph v2 params
+func (o *GetAppConfigGraphV2Params) WithConfigID(configID string) *GetAppConfigGraphV2Params {
+	o.SetConfigID(configID)
+	return o
+}
+
+// SetConfigID adds the configId to the get app config graph v2 params
+func (o *GetAppConfigGraphV2Params) SetConfigID(configID string) {
+	o.ConfigID = configID
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *GetAppConfigGraphV2Params) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -156,13 +156,13 @@ func (o *GetAppConfigGraphV2Params) WriteToRequest(r runtime.ClientRequest, reg 
 	}
 	var res []error
 
-	// path param app_config_id
-	if err := r.SetPathParam("app_config_id", o.AppConfigID); err != nil {
+	// path param app_id
+	if err := r.SetPathParam("app_id", o.AppID); err != nil {
 		return err
 	}
 
-	// path param app_id
-	if err := r.SetPathParam("app_id", o.AppID); err != nil {
+	// path param config_id
+	if err := r.SetPathParam("config_id", o.ConfigID); err != nil {
 		return err
 	}
 

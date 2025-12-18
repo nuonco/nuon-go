@@ -41,7 +41,7 @@ const (
 )
 
 // for schema
-var appAppRunnerConfigHelmDriverTypeEnum []interface{}
+var appAppRunnerConfigHelmDriverTypeEnum []any
 
 func init() {
 	var res []AppAppRunnerConfigHelmDriverType

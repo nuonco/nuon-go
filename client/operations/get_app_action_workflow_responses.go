@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetAppActionWorkflowReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetAppActionWorkflowReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetAppActionWorkflowReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetAppActionWorkflowOK()
@@ -109,11 +111,13 @@ func (o *GetAppActionWorkflowOK) Code() int {
 }
 
 func (o *GetAppActionWorkflowOK) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowOK %s", 200, payload)
 }
 
 func (o *GetAppActionWorkflowOK) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowOK %s", 200, payload)
 }
 
 func (o *GetAppActionWorkflowOK) GetPayload() *models.AppActionWorkflow {
@@ -125,7 +129,7 @@ func (o *GetAppActionWorkflowOK) readResponse(response runtime.ClientResponse, c
 	o.Payload = new(models.AppActionWorkflow)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *GetAppActionWorkflowBadRequest) Code() int {
 }
 
 func (o *GetAppActionWorkflowBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowBadRequest %s", 400, payload)
 }
 
 func (o *GetAppActionWorkflowBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowBadRequest %s", 400, payload)
 }
 
 func (o *GetAppActionWorkflowBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *GetAppActionWorkflowBadRequest) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *GetAppActionWorkflowUnauthorized) Code() int {
 }
 
 func (o *GetAppActionWorkflowUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowUnauthorized %s", 401, payload)
 }
 
 func (o *GetAppActionWorkflowUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowUnauthorized %s", 401, payload)
 }
 
 func (o *GetAppActionWorkflowUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *GetAppActionWorkflowUnauthorized) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *GetAppActionWorkflowForbidden) Code() int {
 }
 
 func (o *GetAppActionWorkflowForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowForbidden %s", 403, payload)
 }
 
 func (o *GetAppActionWorkflowForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowForbidden %s", 403, payload)
 }
 
 func (o *GetAppActionWorkflowForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *GetAppActionWorkflowForbidden) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *GetAppActionWorkflowNotFound) Code() int {
 }
 
 func (o *GetAppActionWorkflowNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowNotFound %s", 404, payload)
 }
 
 func (o *GetAppActionWorkflowNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowNotFound %s", 404, payload)
 }
 
 func (o *GetAppActionWorkflowNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *GetAppActionWorkflowNotFound) readResponse(response runtime.ClientRespo
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *GetAppActionWorkflowInternalServerError) Code() int {
 }
 
 func (o *GetAppActionWorkflowInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowInternalServerError %s", 500, payload)
 }
 
 func (o *GetAppActionWorkflowInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/action-workflows/{action_workflow_id}][%d] getAppActionWorkflowInternalServerError %s", 500, payload)
 }
 
 func (o *GetAppActionWorkflowInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *GetAppActionWorkflowInternalServerError) readResponse(response runtime.
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

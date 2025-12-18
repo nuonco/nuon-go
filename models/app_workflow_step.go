@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -58,7 +59,7 @@ type AppWorkflowStep struct {
 	InstallWorkflowID string `json:"install_workflow_id,omitempty"`
 
 	// links
-	Links interface{} `json:"links,omitempty"`
+	Links map[string]any `json:"links,omitempty"`
 
 	// metadata
 	Metadata map[string]string `json:"metadata,omitempty"`
@@ -148,11 +149,15 @@ func (m *AppWorkflowStep) validateApproval(formats strfmt.Registry) error {
 
 	if m.Approval != nil {
 		if err := m.Approval.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("approval")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("approval")
 			}
+
 			return err
 		}
 	}
@@ -167,11 +172,15 @@ func (m *AppWorkflowStep) validateCreatedBy(formats strfmt.Registry) error {
 
 	if m.CreatedBy != nil {
 		if err := m.CreatedBy.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("created_by")
 			}
+
 			return err
 		}
 	}
@@ -185,11 +194,15 @@ func (m *AppWorkflowStep) validateExecutionType(formats strfmt.Registry) error {
 	}
 
 	if err := m.ExecutionType.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("execution_type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("execution_type")
 		}
+
 		return err
 	}
 
@@ -203,11 +216,15 @@ func (m *AppWorkflowStep) validatePolicyValidation(formats strfmt.Registry) erro
 
 	if m.PolicyValidation != nil {
 		if err := m.PolicyValidation.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("policy_validation")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("policy_validation")
 			}
+
 			return err
 		}
 	}
@@ -222,11 +239,15 @@ func (m *AppWorkflowStep) validateStatus(formats strfmt.Registry) error {
 
 	if m.Status != nil {
 		if err := m.Status.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("status")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("status")
 			}
+
 			return err
 		}
 	}
@@ -273,11 +294,15 @@ func (m *AppWorkflowStep) contextValidateApproval(ctx context.Context, formats s
 		}
 
 		if err := m.Approval.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("approval")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("approval")
 			}
+
 			return err
 		}
 	}
@@ -294,11 +319,15 @@ func (m *AppWorkflowStep) contextValidateCreatedBy(ctx context.Context, formats 
 		}
 
 		if err := m.CreatedBy.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("created_by")
 			}
+
 			return err
 		}
 	}
@@ -313,11 +342,15 @@ func (m *AppWorkflowStep) contextValidateExecutionType(ctx context.Context, form
 	}
 
 	if err := m.ExecutionType.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("execution_type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("execution_type")
 		}
+
 		return err
 	}
 
@@ -333,11 +366,15 @@ func (m *AppWorkflowStep) contextValidatePolicyValidation(ctx context.Context, f
 		}
 
 		if err := m.PolicyValidation.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("policy_validation")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("policy_validation")
 			}
+
 			return err
 		}
 	}
@@ -354,11 +391,15 @@ func (m *AppWorkflowStep) contextValidateStatus(ctx context.Context, formats str
 		}
 
 		if err := m.Status.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("status")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("status")
 			}
+
 			return err
 		}
 	}

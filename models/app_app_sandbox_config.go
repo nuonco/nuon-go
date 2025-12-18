@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -103,11 +104,15 @@ func (m *AppAppSandboxConfig) validateConnectedGithubVcsConfig(formats strfmt.Re
 
 	if m.ConnectedGithubVcsConfig != nil {
 		if err := m.ConnectedGithubVcsConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("connected_github_vcs_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("connected_github_vcs_config")
 			}
+
 			return err
 		}
 	}
@@ -122,11 +127,15 @@ func (m *AppAppSandboxConfig) validatePublicGitVcsConfig(formats strfmt.Registry
 
 	if m.PublicGitVcsConfig != nil {
 		if err := m.PublicGitVcsConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("public_git_vcs_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("public_git_vcs_config")
 			}
+
 			return err
 		}
 	}
@@ -146,11 +155,15 @@ func (m *AppAppSandboxConfig) validateRefs(formats strfmt.Registry) error {
 
 		if m.Refs[i] != nil {
 			if err := m.Refs[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("refs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("refs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -191,11 +204,15 @@ func (m *AppAppSandboxConfig) contextValidateConnectedGithubVcsConfig(ctx contex
 		}
 
 		if err := m.ConnectedGithubVcsConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("connected_github_vcs_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("connected_github_vcs_config")
 			}
+
 			return err
 		}
 	}
@@ -212,11 +229,15 @@ func (m *AppAppSandboxConfig) contextValidatePublicGitVcsConfig(ctx context.Cont
 		}
 
 		if err := m.PublicGitVcsConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("public_git_vcs_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("public_git_vcs_config")
 			}
+
 			return err
 		}
 	}
@@ -235,11 +256,15 @@ func (m *AppAppSandboxConfig) contextValidateRefs(ctx context.Context, formats s
 			}
 
 			if err := m.Refs[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("refs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("refs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

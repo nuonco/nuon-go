@@ -8,4 +8,4 @@ package models
 // ServiceCancelRunnerJobRequest service cancel runner job request
 //
 // swagger:model service.CancelRunnerJobRequest
-type ServiceCancelRunnerJobRequest interface{}
+type ServiceCancelRunnerJobRequest any

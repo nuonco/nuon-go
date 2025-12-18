@@ -47,7 +47,7 @@ const (
 )
 
 // for schema
-var appAppConfigStatusEnum []interface{}
+var appAppConfigStatusEnum []any
 
 func init() {
 	var res []AppAppConfigStatus

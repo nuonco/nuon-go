@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetRunnerJobExecutionsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetRunnerJobExecutionsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetRunnerJobExecutionsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetRunnerJobExecutionsOK()
@@ -109,11 +111,13 @@ func (o *GetRunnerJobExecutionsOK) Code() int {
 }
 
 func (o *GetRunnerJobExecutionsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsOK %s", 200, payload)
 }
 
 func (o *GetRunnerJobExecutionsOK) String() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsOK %s", 200, payload)
 }
 
 func (o *GetRunnerJobExecutionsOK) GetPayload() []*models.AppRunnerJobExecution {
@@ -123,7 +127,7 @@ func (o *GetRunnerJobExecutionsOK) GetPayload() []*models.AppRunnerJobExecution 
 func (o *GetRunnerJobExecutionsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *GetRunnerJobExecutionsBadRequest) Code() int {
 }
 
 func (o *GetRunnerJobExecutionsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsBadRequest %s", 400, payload)
 }
 
 func (o *GetRunnerJobExecutionsBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsBadRequest %s", 400, payload)
 }
 
 func (o *GetRunnerJobExecutionsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *GetRunnerJobExecutionsBadRequest) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *GetRunnerJobExecutionsUnauthorized) Code() int {
 }
 
 func (o *GetRunnerJobExecutionsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsUnauthorized %s", 401, payload)
 }
 
 func (o *GetRunnerJobExecutionsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsUnauthorized %s", 401, payload)
 }
 
 func (o *GetRunnerJobExecutionsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *GetRunnerJobExecutionsUnauthorized) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *GetRunnerJobExecutionsForbidden) Code() int {
 }
 
 func (o *GetRunnerJobExecutionsForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsForbidden %s", 403, payload)
 }
 
 func (o *GetRunnerJobExecutionsForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsForbidden %s", 403, payload)
 }
 
 func (o *GetRunnerJobExecutionsForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *GetRunnerJobExecutionsForbidden) readResponse(response runtime.ClientRe
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *GetRunnerJobExecutionsNotFound) Code() int {
 }
 
 func (o *GetRunnerJobExecutionsNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsNotFound %s", 404, payload)
 }
 
 func (o *GetRunnerJobExecutionsNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsNotFound %s", 404, payload)
 }
 
 func (o *GetRunnerJobExecutionsNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *GetRunnerJobExecutionsNotFound) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *GetRunnerJobExecutionsInternalServerError) Code() int {
 }
 
 func (o *GetRunnerJobExecutionsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsInternalServerError %s", 500, payload)
 }
 
 func (o *GetRunnerJobExecutionsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runner-jobs/{runner_job_id}/executions][%d] getRunnerJobExecutionsInternalServerError %s", 500, payload)
 }
 
 func (o *GetRunnerJobExecutionsInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *GetRunnerJobExecutionsInternalServerError) readResponse(response runtim
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

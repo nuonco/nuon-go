@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type CreateAppSandboxConfigReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateAppSandboxConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateAppSandboxConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateAppSandboxConfigCreated()
@@ -109,11 +111,13 @@ func (o *CreateAppSandboxConfigCreated) Code() int {
 }
 
 func (o *CreateAppSandboxConfigCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigCreated %s", 201, payload)
 }
 
 func (o *CreateAppSandboxConfigCreated) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigCreated %s", 201, payload)
 }
 
 func (o *CreateAppSandboxConfigCreated) GetPayload() *models.AppAppSandboxConfig {
@@ -125,7 +129,7 @@ func (o *CreateAppSandboxConfigCreated) readResponse(response runtime.ClientResp
 	o.Payload = new(models.AppAppSandboxConfig)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *CreateAppSandboxConfigBadRequest) Code() int {
 }
 
 func (o *CreateAppSandboxConfigBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppSandboxConfigBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppSandboxConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *CreateAppSandboxConfigBadRequest) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *CreateAppSandboxConfigUnauthorized) Code() int {
 }
 
 func (o *CreateAppSandboxConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppSandboxConfigUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppSandboxConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *CreateAppSandboxConfigUnauthorized) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *CreateAppSandboxConfigForbidden) Code() int {
 }
 
 func (o *CreateAppSandboxConfigForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateAppSandboxConfigForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateAppSandboxConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *CreateAppSandboxConfigForbidden) readResponse(response runtime.ClientRe
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *CreateAppSandboxConfigNotFound) Code() int {
 }
 
 func (o *CreateAppSandboxConfigNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateAppSandboxConfigNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateAppSandboxConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *CreateAppSandboxConfigNotFound) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *CreateAppSandboxConfigInternalServerError) Code() int {
 }
 
 func (o *CreateAppSandboxConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppSandboxConfigInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/sandbox-config][%d] createAppSandboxConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppSandboxConfigInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *CreateAppSandboxConfigInternalServerError) readResponse(response runtim
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

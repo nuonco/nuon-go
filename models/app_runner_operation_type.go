@@ -44,7 +44,7 @@ const (
 )
 
 // for schema
-var appRunnerOperationTypeEnum []interface{}
+var appRunnerOperationTypeEnum []any
 
 func init() {
 	var res []AppRunnerOperationType

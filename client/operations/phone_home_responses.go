@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type PhoneHomeReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *PhoneHomeReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *PhoneHomeReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewPhoneHomeCreated()
@@ -109,11 +111,13 @@ func (o *PhoneHomeCreated) Code() int {
 }
 
 func (o *PhoneHomeCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeCreated %s", 201, payload)
 }
 
 func (o *PhoneHomeCreated) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeCreated %s", 201, payload)
 }
 
 func (o *PhoneHomeCreated) GetPayload() string {
@@ -123,7 +127,7 @@ func (o *PhoneHomeCreated) GetPayload() string {
 func (o *PhoneHomeCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *PhoneHomeBadRequest) Code() int {
 }
 
 func (o *PhoneHomeBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeBadRequest %s", 400, payload)
 }
 
 func (o *PhoneHomeBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeBadRequest %s", 400, payload)
 }
 
 func (o *PhoneHomeBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *PhoneHomeBadRequest) readResponse(response runtime.ClientResponse, cons
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *PhoneHomeUnauthorized) Code() int {
 }
 
 func (o *PhoneHomeUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeUnauthorized %s", 401, payload)
 }
 
 func (o *PhoneHomeUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeUnauthorized %s", 401, payload)
 }
 
 func (o *PhoneHomeUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *PhoneHomeUnauthorized) readResponse(response runtime.ClientResponse, co
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *PhoneHomeForbidden) Code() int {
 }
 
 func (o *PhoneHomeForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeForbidden %s", 403, payload)
 }
 
 func (o *PhoneHomeForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeForbidden %s", 403, payload)
 }
 
 func (o *PhoneHomeForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *PhoneHomeForbidden) readResponse(response runtime.ClientResponse, consu
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *PhoneHomeNotFound) Code() int {
 }
 
 func (o *PhoneHomeNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeNotFound %s", 404, payload)
 }
 
 func (o *PhoneHomeNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeNotFound %s", 404, payload)
 }
 
 func (o *PhoneHomeNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *PhoneHomeNotFound) readResponse(response runtime.ClientResponse, consum
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *PhoneHomeInternalServerError) Code() int {
 }
 
 func (o *PhoneHomeInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeInternalServerError %s", 500, payload)
 }
 
 func (o *PhoneHomeInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/phone-home/{phone_home_id}][%d] phoneHomeInternalServerError %s", 500, payload)
 }
 
 func (o *PhoneHomeInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *PhoneHomeInternalServerError) readResponse(response runtime.ClientRespo
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

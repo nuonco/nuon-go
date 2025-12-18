@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -68,7 +69,7 @@ type AppInstallDeploy struct {
 	OciArtifact *AppOCIArtifact `json:"oci_artifact,omitempty"`
 
 	// outputs
-	Outputs interface{} `json:"outputs,omitempty"`
+	Outputs map[string]any `json:"outputs,omitempty"`
 
 	// plan only
 	PlanOnly bool `json:"plan_only,omitempty"`
@@ -156,11 +157,15 @@ func (m *AppInstallDeploy) validateActionWorkflowRuns(formats strfmt.Registry) e
 
 		if m.ActionWorkflowRuns[i] != nil {
 			if err := m.ActionWorkflowRuns[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("action_workflow_runs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("action_workflow_runs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -177,11 +182,15 @@ func (m *AppInstallDeploy) validateComponentBuild(formats strfmt.Registry) error
 
 	if m.ComponentBuild != nil {
 		if err := m.ComponentBuild.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("component_build")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("component_build")
 			}
+
 			return err
 		}
 	}
@@ -196,11 +205,15 @@ func (m *AppInstallDeploy) validateCreatedBy(formats strfmt.Registry) error {
 
 	if m.CreatedBy != nil {
 		if err := m.CreatedBy.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("created_by")
 			}
+
 			return err
 		}
 	}
@@ -214,11 +227,15 @@ func (m *AppInstallDeploy) validateInstallDeployType(formats strfmt.Registry) er
 	}
 
 	if err := m.InstallDeployType.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("install_deploy_type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("install_deploy_type")
 		}
+
 		return err
 	}
 
@@ -232,11 +249,15 @@ func (m *AppInstallDeploy) validateLogStream(formats strfmt.Registry) error {
 
 	if m.LogStream != nil {
 		if err := m.LogStream.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("log_stream")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("log_stream")
 			}
+
 			return err
 		}
 	}
@@ -251,11 +272,15 @@ func (m *AppInstallDeploy) validateOciArtifact(formats strfmt.Registry) error {
 
 	if m.OciArtifact != nil {
 		if err := m.OciArtifact.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("oci_artifact")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("oci_artifact")
 			}
+
 			return err
 		}
 	}
@@ -275,11 +300,15 @@ func (m *AppInstallDeploy) validateRunnerJobs(formats strfmt.Registry) error {
 
 		if m.RunnerJobs[i] != nil {
 			if err := m.RunnerJobs[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("runner_jobs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("runner_jobs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -296,11 +325,15 @@ func (m *AppInstallDeploy) validateStatusV2(formats strfmt.Registry) error {
 
 	if m.StatusV2 != nil {
 		if err := m.StatusV2.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("status_v2")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("status_v2")
 			}
+
 			return err
 		}
 	}
@@ -315,11 +348,15 @@ func (m *AppInstallDeploy) validateWorkflow(formats strfmt.Registry) error {
 
 	if m.Workflow != nil {
 		if err := m.Workflow.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("workflow")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("workflow")
 			}
+
 			return err
 		}
 	}
@@ -384,11 +421,15 @@ func (m *AppInstallDeploy) contextValidateActionWorkflowRuns(ctx context.Context
 			}
 
 			if err := m.ActionWorkflowRuns[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("action_workflow_runs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("action_workflow_runs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -407,11 +448,15 @@ func (m *AppInstallDeploy) contextValidateComponentBuild(ctx context.Context, fo
 		}
 
 		if err := m.ComponentBuild.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("component_build")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("component_build")
 			}
+
 			return err
 		}
 	}
@@ -428,11 +473,15 @@ func (m *AppInstallDeploy) contextValidateCreatedBy(ctx context.Context, formats
 		}
 
 		if err := m.CreatedBy.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("created_by")
 			}
+
 			return err
 		}
 	}
@@ -447,11 +496,15 @@ func (m *AppInstallDeploy) contextValidateInstallDeployType(ctx context.Context,
 	}
 
 	if err := m.InstallDeployType.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("install_deploy_type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("install_deploy_type")
 		}
+
 		return err
 	}
 
@@ -467,11 +520,15 @@ func (m *AppInstallDeploy) contextValidateLogStream(ctx context.Context, formats
 		}
 
 		if err := m.LogStream.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("log_stream")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("log_stream")
 			}
+
 			return err
 		}
 	}
@@ -488,11 +545,15 @@ func (m *AppInstallDeploy) contextValidateOciArtifact(ctx context.Context, forma
 		}
 
 		if err := m.OciArtifact.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("oci_artifact")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("oci_artifact")
 			}
+
 			return err
 		}
 	}
@@ -511,11 +572,15 @@ func (m *AppInstallDeploy) contextValidateRunnerJobs(ctx context.Context, format
 			}
 
 			if err := m.RunnerJobs[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("runner_jobs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("runner_jobs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -534,11 +599,15 @@ func (m *AppInstallDeploy) contextValidateStatusV2(ctx context.Context, formats 
 		}
 
 		if err := m.StatusV2.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("status_v2")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("status_v2")
 			}
+
 			return err
 		}
 	}
@@ -555,11 +624,15 @@ func (m *AppInstallDeploy) contextValidateWorkflow(ctx context.Context, formats 
 		}
 
 		if err := m.Workflow.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("workflow")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("workflow")
 			}
+
 			return err
 		}
 	}

@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetInstallSandboxRunsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetInstallSandboxRunsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetInstallSandboxRunsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetInstallSandboxRunsOK()
@@ -109,11 +111,13 @@ func (o *GetInstallSandboxRunsOK) Code() int {
 }
 
 func (o *GetInstallSandboxRunsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsOK %s", 200, payload)
 }
 
 func (o *GetInstallSandboxRunsOK) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsOK %s", 200, payload)
 }
 
 func (o *GetInstallSandboxRunsOK) GetPayload() []*models.AppInstallSandboxRun {
@@ -123,7 +127,7 @@ func (o *GetInstallSandboxRunsOK) GetPayload() []*models.AppInstallSandboxRun {
 func (o *GetInstallSandboxRunsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *GetInstallSandboxRunsBadRequest) Code() int {
 }
 
 func (o *GetInstallSandboxRunsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsBadRequest %s", 400, payload)
 }
 
 func (o *GetInstallSandboxRunsBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsBadRequest %s", 400, payload)
 }
 
 func (o *GetInstallSandboxRunsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *GetInstallSandboxRunsBadRequest) readResponse(response runtime.ClientRe
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *GetInstallSandboxRunsUnauthorized) Code() int {
 }
 
 func (o *GetInstallSandboxRunsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsUnauthorized %s", 401, payload)
 }
 
 func (o *GetInstallSandboxRunsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsUnauthorized %s", 401, payload)
 }
 
 func (o *GetInstallSandboxRunsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *GetInstallSandboxRunsUnauthorized) readResponse(response runtime.Client
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *GetInstallSandboxRunsForbidden) Code() int {
 }
 
 func (o *GetInstallSandboxRunsForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsForbidden %s", 403, payload)
 }
 
 func (o *GetInstallSandboxRunsForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsForbidden %s", 403, payload)
 }
 
 func (o *GetInstallSandboxRunsForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *GetInstallSandboxRunsForbidden) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *GetInstallSandboxRunsNotFound) Code() int {
 }
 
 func (o *GetInstallSandboxRunsNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsNotFound %s", 404, payload)
 }
 
 func (o *GetInstallSandboxRunsNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsNotFound %s", 404, payload)
 }
 
 func (o *GetInstallSandboxRunsNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *GetInstallSandboxRunsNotFound) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *GetInstallSandboxRunsInternalServerError) Code() int {
 }
 
 func (o *GetInstallSandboxRunsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsInternalServerError %s", 500, payload)
 }
 
 func (o *GetInstallSandboxRunsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/sandbox-runs][%d] getInstallSandboxRunsInternalServerError %s", 500, payload)
 }
 
 func (o *GetInstallSandboxRunsInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *GetInstallSandboxRunsInternalServerError) readResponse(response runtime
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

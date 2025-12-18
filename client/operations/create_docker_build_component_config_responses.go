@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type CreateDockerBuildComponentConfigReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateDockerBuildComponentConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateDockerBuildComponentConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateDockerBuildComponentConfigCreated()
@@ -109,11 +111,13 @@ func (o *CreateDockerBuildComponentConfigCreated) Code() int {
 }
 
 func (o *CreateDockerBuildComponentConfigCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigCreated %s", 201, payload)
 }
 
 func (o *CreateDockerBuildComponentConfigCreated) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigCreated %s", 201, payload)
 }
 
 func (o *CreateDockerBuildComponentConfigCreated) GetPayload() *models.AppDockerBuildComponentConfig {
@@ -125,7 +129,7 @@ func (o *CreateDockerBuildComponentConfigCreated) readResponse(response runtime.
 	o.Payload = new(models.AppDockerBuildComponentConfig)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *CreateDockerBuildComponentConfigBadRequest) Code() int {
 }
 
 func (o *CreateDockerBuildComponentConfigBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateDockerBuildComponentConfigBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateDockerBuildComponentConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *CreateDockerBuildComponentConfigBadRequest) readResponse(response runti
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *CreateDockerBuildComponentConfigUnauthorized) Code() int {
 }
 
 func (o *CreateDockerBuildComponentConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateDockerBuildComponentConfigUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateDockerBuildComponentConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *CreateDockerBuildComponentConfigUnauthorized) readResponse(response run
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *CreateDockerBuildComponentConfigForbidden) Code() int {
 }
 
 func (o *CreateDockerBuildComponentConfigForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateDockerBuildComponentConfigForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateDockerBuildComponentConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *CreateDockerBuildComponentConfigForbidden) readResponse(response runtim
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *CreateDockerBuildComponentConfigNotFound) Code() int {
 }
 
 func (o *CreateDockerBuildComponentConfigNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateDockerBuildComponentConfigNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateDockerBuildComponentConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *CreateDockerBuildComponentConfigNotFound) readResponse(response runtime
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *CreateDockerBuildComponentConfigInternalServerError) Code() int {
 }
 
 func (o *CreateDockerBuildComponentConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateDockerBuildComponentConfigInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/docker-build][%d] createDockerBuildComponentConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateDockerBuildComponentConfigInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *CreateDockerBuildComponentConfigInternalServerError) readResponse(respo
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

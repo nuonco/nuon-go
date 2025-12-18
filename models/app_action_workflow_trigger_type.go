@@ -104,7 +104,7 @@ const (
 )
 
 // for schema
-var appActionWorkflowTriggerTypeEnum []interface{}
+var appActionWorkflowTriggerTypeEnum []any
 
 func init() {
 	var res []AppActionWorkflowTriggerType

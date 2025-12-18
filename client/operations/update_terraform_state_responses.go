@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type UpdateTerraformStateReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *UpdateTerraformStateReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *UpdateTerraformStateReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewUpdateTerraformStateOK()
@@ -109,11 +111,13 @@ func (o *UpdateTerraformStateOK) Code() int {
 }
 
 func (o *UpdateTerraformStateOK) Error() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateOK %s", 200, payload)
 }
 
 func (o *UpdateTerraformStateOK) String() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateOK %s", 200, payload)
 }
 
 func (o *UpdateTerraformStateOK) GetPayload() *models.AppTerraformWorkspaceState {
@@ -125,7 +129,7 @@ func (o *UpdateTerraformStateOK) readResponse(response runtime.ClientResponse, c
 	o.Payload = new(models.AppTerraformWorkspaceState)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *UpdateTerraformStateBadRequest) Code() int {
 }
 
 func (o *UpdateTerraformStateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateBadRequest %s", 400, payload)
 }
 
 func (o *UpdateTerraformStateBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateBadRequest %s", 400, payload)
 }
 
 func (o *UpdateTerraformStateBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *UpdateTerraformStateBadRequest) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *UpdateTerraformStateUnauthorized) Code() int {
 }
 
 func (o *UpdateTerraformStateUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateUnauthorized %s", 401, payload)
 }
 
 func (o *UpdateTerraformStateUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateUnauthorized %s", 401, payload)
 }
 
 func (o *UpdateTerraformStateUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *UpdateTerraformStateUnauthorized) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *UpdateTerraformStateForbidden) Code() int {
 }
 
 func (o *UpdateTerraformStateForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateForbidden %s", 403, payload)
 }
 
 func (o *UpdateTerraformStateForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateForbidden %s", 403, payload)
 }
 
 func (o *UpdateTerraformStateForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *UpdateTerraformStateForbidden) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *UpdateTerraformStateNotFound) Code() int {
 }
 
 func (o *UpdateTerraformStateNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateNotFound %s", 404, payload)
 }
 
 func (o *UpdateTerraformStateNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateNotFound %s", 404, payload)
 }
 
 func (o *UpdateTerraformStateNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *UpdateTerraformStateNotFound) readResponse(response runtime.ClientRespo
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *UpdateTerraformStateInternalServerError) Code() int {
 }
 
 func (o *UpdateTerraformStateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateTerraformStateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-backend][%d] updateTerraformStateInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateTerraformStateInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *UpdateTerraformStateInternalServerError) readResponse(response runtime.
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

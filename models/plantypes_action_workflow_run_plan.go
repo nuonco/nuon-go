@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -82,11 +83,15 @@ func (m *PlantypesActionWorkflowRunPlan) validateAwsAuth(formats strfmt.Registry
 
 	if m.AwsAuth != nil {
 		if err := m.AwsAuth.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("aws_auth")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("aws_auth")
 			}
+
 			return err
 		}
 	}
@@ -109,11 +114,15 @@ func (m *PlantypesActionWorkflowRunPlan) validateSandboxMode(formats strfmt.Regi
 
 	if m.SandboxMode != nil {
 		if err := m.SandboxMode.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sandbox_mode")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sandbox_mode")
 			}
+
 			return err
 		}
 	}
@@ -133,11 +142,15 @@ func (m *PlantypesActionWorkflowRunPlan) validateSteps(formats strfmt.Registry) 
 
 		if m.Steps[i] != nil {
 			if err := m.Steps[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("steps" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("steps" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -182,11 +195,15 @@ func (m *PlantypesActionWorkflowRunPlan) contextValidateAwsAuth(ctx context.Cont
 		}
 
 		if err := m.AwsAuth.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("aws_auth")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("aws_auth")
 			}
+
 			return err
 		}
 	}
@@ -208,11 +225,15 @@ func (m *PlantypesActionWorkflowRunPlan) contextValidateSandboxMode(ctx context.
 		}
 
 		if err := m.SandboxMode.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sandbox_mode")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sandbox_mode")
 			}
+
 			return err
 		}
 	}
@@ -231,11 +252,15 @@ func (m *PlantypesActionWorkflowRunPlan) contextValidateSteps(ctx context.Contex
 			}
 
 			if err := m.Steps[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("steps" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("steps" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

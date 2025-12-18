@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -62,11 +63,15 @@ func (m *ServiceCreateAppInputConfigRequest) validateGroups(formats strfmt.Regis
 		}
 		if val, ok := m.Groups[k]; ok {
 			if err := val.Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("groups" + "." + k)
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("groups" + "." + k)
 				}
+
 				return err
 			}
 		}
@@ -89,11 +94,15 @@ func (m *ServiceCreateAppInputConfigRequest) validateInputs(formats strfmt.Regis
 		}
 		if val, ok := m.Inputs[k]; ok {
 			if err := val.Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("inputs" + "." + k)
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("inputs" + "." + k)
 				}
+
 				return err
 			}
 		}

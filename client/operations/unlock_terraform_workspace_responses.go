@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type UnlockTerraformWorkspaceReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *UnlockTerraformWorkspaceReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *UnlockTerraformWorkspaceReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewUnlockTerraformWorkspaceOK()
@@ -109,11 +111,13 @@ func (o *UnlockTerraformWorkspaceOK) Code() int {
 }
 
 func (o *UnlockTerraformWorkspaceOK) Error() string {
-	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceOK %s", 200, payload)
 }
 
 func (o *UnlockTerraformWorkspaceOK) String() string {
-	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceOK %s", 200, payload)
 }
 
 func (o *UnlockTerraformWorkspaceOK) GetPayload() *models.AppTerraformWorkspaceState {
@@ -125,7 +129,7 @@ func (o *UnlockTerraformWorkspaceOK) readResponse(response runtime.ClientRespons
 	o.Payload = new(models.AppTerraformWorkspaceState)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *UnlockTerraformWorkspaceBadRequest) Code() int {
 }
 
 func (o *UnlockTerraformWorkspaceBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceBadRequest %s", 400, payload)
 }
 
 func (o *UnlockTerraformWorkspaceBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceBadRequest %s", 400, payload)
 }
 
 func (o *UnlockTerraformWorkspaceBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *UnlockTerraformWorkspaceBadRequest) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *UnlockTerraformWorkspaceUnauthorized) Code() int {
 }
 
 func (o *UnlockTerraformWorkspaceUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceUnauthorized %s", 401, payload)
 }
 
 func (o *UnlockTerraformWorkspaceUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceUnauthorized %s", 401, payload)
 }
 
 func (o *UnlockTerraformWorkspaceUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *UnlockTerraformWorkspaceUnauthorized) readResponse(response runtime.Cli
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *UnlockTerraformWorkspaceForbidden) Code() int {
 }
 
 func (o *UnlockTerraformWorkspaceForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceForbidden %s", 403, payload)
 }
 
 func (o *UnlockTerraformWorkspaceForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceForbidden %s", 403, payload)
 }
 
 func (o *UnlockTerraformWorkspaceForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *UnlockTerraformWorkspaceForbidden) readResponse(response runtime.Client
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *UnlockTerraformWorkspaceNotFound) Code() int {
 }
 
 func (o *UnlockTerraformWorkspaceNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceNotFound %s", 404, payload)
 }
 
 func (o *UnlockTerraformWorkspaceNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceNotFound %s", 404, payload)
 }
 
 func (o *UnlockTerraformWorkspaceNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *UnlockTerraformWorkspaceNotFound) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *UnlockTerraformWorkspaceInternalServerError) Code() int {
 }
 
 func (o *UnlockTerraformWorkspaceInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceInternalServerError %s", 500, payload)
 }
 
 func (o *UnlockTerraformWorkspaceInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/terraform-workspaces/{workspace_id}/unlock][%d] unlockTerraformWorkspaceInternalServerError %s", 500, payload)
 }
 
 func (o *UnlockTerraformWorkspaceInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *UnlockTerraformWorkspaceInternalServerError) readResponse(response runt
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

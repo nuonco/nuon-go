@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type CreateAppSecretV2Reader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateAppSecretV2Reader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateAppSecretV2Reader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateAppSecretV2Created()
@@ -109,11 +111,13 @@ func (o *CreateAppSecretV2Created) Code() int {
 }
 
 func (o *CreateAppSecretV2Created) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2Created  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2Created %s", 201, payload)
 }
 
 func (o *CreateAppSecretV2Created) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2Created  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2Created %s", 201, payload)
 }
 
 func (o *CreateAppSecretV2Created) GetPayload() *models.AppAppSecret {
@@ -125,7 +129,7 @@ func (o *CreateAppSecretV2Created) readResponse(response runtime.ClientResponse,
 	o.Payload = new(models.AppAppSecret)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *CreateAppSecretV2BadRequest) Code() int {
 }
 
 func (o *CreateAppSecretV2BadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2BadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2BadRequest %s", 400, payload)
 }
 
 func (o *CreateAppSecretV2BadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2BadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2BadRequest %s", 400, payload)
 }
 
 func (o *CreateAppSecretV2BadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *CreateAppSecretV2BadRequest) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *CreateAppSecretV2Unauthorized) Code() int {
 }
 
 func (o *CreateAppSecretV2Unauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2Unauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2Unauthorized %s", 401, payload)
 }
 
 func (o *CreateAppSecretV2Unauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2Unauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2Unauthorized %s", 401, payload)
 }
 
 func (o *CreateAppSecretV2Unauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *CreateAppSecretV2Unauthorized) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *CreateAppSecretV2Forbidden) Code() int {
 }
 
 func (o *CreateAppSecretV2Forbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2Forbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2Forbidden %s", 403, payload)
 }
 
 func (o *CreateAppSecretV2Forbidden) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2Forbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2Forbidden %s", 403, payload)
 }
 
 func (o *CreateAppSecretV2Forbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *CreateAppSecretV2Forbidden) readResponse(response runtime.ClientRespons
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *CreateAppSecretV2NotFound) Code() int {
 }
 
 func (o *CreateAppSecretV2NotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2NotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2NotFound %s", 404, payload)
 }
 
 func (o *CreateAppSecretV2NotFound) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2NotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2NotFound %s", 404, payload)
 }
 
 func (o *CreateAppSecretV2NotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *CreateAppSecretV2NotFound) readResponse(response runtime.ClientResponse
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *CreateAppSecretV2InternalServerError) Code() int {
 }
 
 func (o *CreateAppSecretV2InternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2InternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2InternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppSecretV2InternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2InternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/secrets][%d] createAppSecretV2InternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppSecretV2InternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *CreateAppSecretV2InternalServerError) readResponse(response runtime.Cli
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

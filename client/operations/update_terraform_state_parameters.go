@@ -65,7 +65,7 @@ type UpdateTerraformStateParams struct {
 
 	   Terraform state data
 	*/
-	Body interface{}
+	Body any
 
 	timeout    time.Duration
 	Context    context.Context
@@ -121,13 +121,13 @@ func (o *UpdateTerraformStateParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the update terraform state params
-func (o *UpdateTerraformStateParams) WithBody(body interface{}) *UpdateTerraformStateParams {
+func (o *UpdateTerraformStateParams) WithBody(body any) *UpdateTerraformStateParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the update terraform state params
-func (o *UpdateTerraformStateParams) SetBody(body interface{}) {
+func (o *UpdateTerraformStateParams) SetBody(body any) {
 	o.Body = body
 }
 

@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -120,11 +121,15 @@ func (m *ServiceCreateHelmComponentConfigRequest) validateConnectedGithubVcsConf
 
 	if m.ConnectedGithubVcsConfig != nil {
 		if err := m.ConnectedGithubVcsConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("connected_github_vcs_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("connected_github_vcs_config")
 			}
+
 			return err
 		}
 	}
@@ -139,11 +144,15 @@ func (m *ServiceCreateHelmComponentConfigRequest) validateHelmRepoConfig(formats
 
 	if m.HelmRepoConfig != nil {
 		if err := m.HelmRepoConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("helm_repo_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("helm_repo_config")
 			}
+
 			return err
 		}
 	}
@@ -158,11 +167,15 @@ func (m *ServiceCreateHelmComponentConfigRequest) validatePublicGitVcsConfig(for
 
 	if m.PublicGitVcsConfig != nil {
 		if err := m.PublicGitVcsConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("public_git_vcs_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("public_git_vcs_config")
 			}
+
 			return err
 		}
 	}
@@ -210,11 +223,15 @@ func (m *ServiceCreateHelmComponentConfigRequest) contextValidateConnectedGithub
 		}
 
 		if err := m.ConnectedGithubVcsConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("connected_github_vcs_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("connected_github_vcs_config")
 			}
+
 			return err
 		}
 	}
@@ -231,11 +248,15 @@ func (m *ServiceCreateHelmComponentConfigRequest) contextValidateHelmRepoConfig(
 		}
 
 		if err := m.HelmRepoConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("helm_repo_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("helm_repo_config")
 			}
+
 			return err
 		}
 	}
@@ -252,11 +273,15 @@ func (m *ServiceCreateHelmComponentConfigRequest) contextValidatePublicGitVcsCon
 		}
 
 		if err := m.PublicGitVcsConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("public_git_vcs_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("public_git_vcs_config")
 			}
+
 			return err
 		}
 	}

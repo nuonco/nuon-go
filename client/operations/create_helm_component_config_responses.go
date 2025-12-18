@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type CreateHelmComponentConfigReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateHelmComponentConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateHelmComponentConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateHelmComponentConfigCreated()
@@ -109,11 +111,13 @@ func (o *CreateHelmComponentConfigCreated) Code() int {
 }
 
 func (o *CreateHelmComponentConfigCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigCreated %s", 201, payload)
 }
 
 func (o *CreateHelmComponentConfigCreated) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigCreated %s", 201, payload)
 }
 
 func (o *CreateHelmComponentConfigCreated) GetPayload() *models.AppHelmComponentConfig {
@@ -125,7 +129,7 @@ func (o *CreateHelmComponentConfigCreated) readResponse(response runtime.ClientR
 	o.Payload = new(models.AppHelmComponentConfig)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *CreateHelmComponentConfigBadRequest) Code() int {
 }
 
 func (o *CreateHelmComponentConfigBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateHelmComponentConfigBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateHelmComponentConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *CreateHelmComponentConfigBadRequest) readResponse(response runtime.Clie
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *CreateHelmComponentConfigUnauthorized) Code() int {
 }
 
 func (o *CreateHelmComponentConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateHelmComponentConfigUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateHelmComponentConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *CreateHelmComponentConfigUnauthorized) readResponse(response runtime.Cl
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *CreateHelmComponentConfigForbidden) Code() int {
 }
 
 func (o *CreateHelmComponentConfigForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateHelmComponentConfigForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateHelmComponentConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *CreateHelmComponentConfigForbidden) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *CreateHelmComponentConfigNotFound) Code() int {
 }
 
 func (o *CreateHelmComponentConfigNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateHelmComponentConfigNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateHelmComponentConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *CreateHelmComponentConfigNotFound) readResponse(response runtime.Client
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *CreateHelmComponentConfigInternalServerError) Code() int {
 }
 
 func (o *CreateHelmComponentConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateHelmComponentConfigInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/helm][%d] createHelmComponentConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateHelmComponentConfigInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *CreateHelmComponentConfigInternalServerError) readResponse(response run
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

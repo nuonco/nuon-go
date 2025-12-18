@@ -38,7 +38,7 @@ const (
 )
 
 // for schema
-var appAppInputSourceEnum []interface{}
+var appAppInputSourceEnum []any
 
 func init() {
 	var res []AppAppInputSource

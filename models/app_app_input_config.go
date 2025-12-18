@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -84,11 +85,15 @@ func (m *AppAppInputConfig) validateInputGroups(formats strfmt.Registry) error {
 
 		if m.InputGroups[i] != nil {
 			if err := m.InputGroups[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("input_groups" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("input_groups" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -110,11 +115,15 @@ func (m *AppAppInputConfig) validateInputs(formats strfmt.Registry) error {
 
 		if m.Inputs[i] != nil {
 			if err := m.Inputs[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("inputs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("inputs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -136,11 +145,15 @@ func (m *AppAppInputConfig) validateInstallInputs(formats strfmt.Registry) error
 
 		if m.InstallInputs[i] != nil {
 			if err := m.InstallInputs[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("install_inputs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("install_inputs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -183,11 +196,15 @@ func (m *AppAppInputConfig) contextValidateInputGroups(ctx context.Context, form
 			}
 
 			if err := m.InputGroups[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("input_groups" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("input_groups" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -208,11 +225,15 @@ func (m *AppAppInputConfig) contextValidateInputs(ctx context.Context, formats s
 			}
 
 			if err := m.Inputs[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("inputs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("inputs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -233,11 +254,15 @@ func (m *AppAppInputConfig) contextValidateInstallInputs(ctx context.Context, fo
 			}
 
 			if err := m.InstallInputs[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("install_inputs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("install_inputs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

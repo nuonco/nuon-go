@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -131,11 +132,15 @@ func (m *AppComponentBuild) validateComponentConfigConnection(formats strfmt.Reg
 
 	if m.ComponentConfigConnection != nil {
 		if err := m.ComponentConfigConnection.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("component_config_connection")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("component_config_connection")
 			}
+
 			return err
 		}
 	}
@@ -150,11 +155,15 @@ func (m *AppComponentBuild) validateCreatedBy(formats strfmt.Registry) error {
 
 	if m.CreatedBy != nil {
 		if err := m.CreatedBy.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("created_by")
 			}
+
 			return err
 		}
 	}
@@ -174,11 +183,15 @@ func (m *AppComponentBuild) validateInstallDeploys(formats strfmt.Registry) erro
 
 		if m.InstallDeploys[i] != nil {
 			if err := m.InstallDeploys[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("install_deploys" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("install_deploys" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -195,11 +208,15 @@ func (m *AppComponentBuild) validateLogStream(formats strfmt.Registry) error {
 
 	if m.LogStream != nil {
 		if err := m.LogStream.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("log_stream")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("log_stream")
 			}
+
 			return err
 		}
 	}
@@ -219,11 +236,15 @@ func (m *AppComponentBuild) validateReleases(formats strfmt.Registry) error {
 
 		if m.Releases[i] != nil {
 			if err := m.Releases[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("releases" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("releases" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -248,11 +269,15 @@ func (m *AppComponentBuild) validateStatusV2(formats strfmt.Registry) error {
 
 	if m.StatusV2 != nil {
 		if err := m.StatusV2.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("status_v2")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("status_v2")
 			}
+
 			return err
 		}
 	}
@@ -267,11 +292,15 @@ func (m *AppComponentBuild) validateVcsConnectionCommit(formats strfmt.Registry)
 
 	if m.VcsConnectionCommit != nil {
 		if err := m.VcsConnectionCommit.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("vcs_connection_commit")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("vcs_connection_commit")
 			}
+
 			return err
 		}
 	}
@@ -330,11 +359,15 @@ func (m *AppComponentBuild) contextValidateComponentConfigConnection(ctx context
 		}
 
 		if err := m.ComponentConfigConnection.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("component_config_connection")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("component_config_connection")
 			}
+
 			return err
 		}
 	}
@@ -351,11 +384,15 @@ func (m *AppComponentBuild) contextValidateCreatedBy(ctx context.Context, format
 		}
 
 		if err := m.CreatedBy.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("created_by")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("created_by")
 			}
+
 			return err
 		}
 	}
@@ -374,11 +411,15 @@ func (m *AppComponentBuild) contextValidateInstallDeploys(ctx context.Context, f
 			}
 
 			if err := m.InstallDeploys[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("install_deploys" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("install_deploys" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -397,11 +438,15 @@ func (m *AppComponentBuild) contextValidateLogStream(ctx context.Context, format
 		}
 
 		if err := m.LogStream.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("log_stream")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("log_stream")
 			}
+
 			return err
 		}
 	}
@@ -420,11 +465,15 @@ func (m *AppComponentBuild) contextValidateReleases(ctx context.Context, formats
 			}
 
 			if err := m.Releases[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("releases" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("releases" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -448,11 +497,15 @@ func (m *AppComponentBuild) contextValidateStatusV2(ctx context.Context, formats
 		}
 
 		if err := m.StatusV2.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("status_v2")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("status_v2")
 			}
+
 			return err
 		}
 	}
@@ -469,11 +522,15 @@ func (m *AppComponentBuild) contextValidateVcsConnectionCommit(ctx context.Conte
 		}
 
 		if err := m.VcsConnectionCommit.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("vcs_connection_commit")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("vcs_connection_commit")
 			}
+
 			return err
 		}
 	}

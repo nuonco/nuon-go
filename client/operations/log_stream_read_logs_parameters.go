@@ -65,13 +65,21 @@ type LogStreamReadLogsParams struct {
 
 	   log stream offset
 	*/
-	XNuonAPIOffset string
+	XNuonAPIOffset *string
 
 	/* LogStreamID.
 
 	   log stream ID
 	*/
 	LogStreamID string
+
+	/* Order.
+
+	   resource attribute filters
+
+	   Default: "asc"
+	*/
+	Order *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -90,7 +98,18 @@ func (o *LogStreamReadLogsParams) WithDefaults() *LogStreamReadLogsParams {
 //
 // All values with no default are reset to their zero value.
 func (o *LogStreamReadLogsParams) SetDefaults() {
-	// no default values defined for this parameter
+	var (
+		orderDefault = string("asc")
+	)
+
+	val := LogStreamReadLogsParams{
+		Order: &orderDefault,
+	}
+
+	val.timeout = o.timeout
+	val.Context = o.Context
+	val.HTTPClient = o.HTTPClient
+	*o = val
 }
 
 // WithTimeout adds the timeout to the log stream read logs params
@@ -127,13 +146,13 @@ func (o *LogStreamReadLogsParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithXNuonAPIOffset adds the xNuonAPIOffset to the log stream read logs params
-func (o *LogStreamReadLogsParams) WithXNuonAPIOffset(xNuonAPIOffset string) *LogStreamReadLogsParams {
+func (o *LogStreamReadLogsParams) WithXNuonAPIOffset(xNuonAPIOffset *string) *LogStreamReadLogsParams {
 	o.SetXNuonAPIOffset(xNuonAPIOffset)
 	return o
 }
 
 // SetXNuonAPIOffset adds the xNuonApiOffset to the log stream read logs params
-func (o *LogStreamReadLogsParams) SetXNuonAPIOffset(xNuonAPIOffset string) {
+func (o *LogStreamReadLogsParams) SetXNuonAPIOffset(xNuonAPIOffset *string) {
 	o.XNuonAPIOffset = xNuonAPIOffset
 }
 
@@ -148,6 +167,17 @@ func (o *LogStreamReadLogsParams) SetLogStreamID(logStreamID string) {
 	o.LogStreamID = logStreamID
 }
 
+// WithOrder adds the order to the log stream read logs params
+func (o *LogStreamReadLogsParams) WithOrder(order *string) *LogStreamReadLogsParams {
+	o.SetOrder(order)
+	return o
+}
+
+// SetOrder adds the order to the log stream read logs params
+func (o *LogStreamReadLogsParams) SetOrder(order *string) {
+	o.Order = order
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *LogStreamReadLogsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -156,14 +186,34 @@ func (o *LogStreamReadLogsParams) WriteToRequest(r runtime.ClientRequest, reg st
 	}
 	var res []error
 
-	// header param X-Nuon-API-Offset
-	if err := r.SetHeaderParam("X-Nuon-API-Offset", o.XNuonAPIOffset); err != nil {
-		return err
+	if o.XNuonAPIOffset != nil {
+
+		// header param X-Nuon-API-Offset
+		if err := r.SetHeaderParam("X-Nuon-API-Offset", *o.XNuonAPIOffset); err != nil {
+			return err
+		}
 	}
 
 	// path param log_stream_id
 	if err := r.SetPathParam("log_stream_id", o.LogStreamID); err != nil {
 		return err
+	}
+
+	if o.Order != nil {
+
+		// query param order
+		var qrOrder string
+
+		if o.Order != nil {
+			qrOrder = *o.Order
+		}
+		qOrder := qrOrder
+		if qOrder != "" {
+
+			if err := r.SetQueryParam("order", qOrder); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {

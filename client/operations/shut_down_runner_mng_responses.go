@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type ShutDownRunnerMngReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *ShutDownRunnerMngReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *ShutDownRunnerMngReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewShutDownRunnerMngCreated()
@@ -109,11 +111,13 @@ func (o *ShutDownRunnerMngCreated) Code() int {
 }
 
 func (o *ShutDownRunnerMngCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngCreated %s", 201, payload)
 }
 
 func (o *ShutDownRunnerMngCreated) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngCreated %s", 201, payload)
 }
 
 func (o *ShutDownRunnerMngCreated) GetPayload() bool {
@@ -123,7 +127,7 @@ func (o *ShutDownRunnerMngCreated) GetPayload() bool {
 func (o *ShutDownRunnerMngCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *ShutDownRunnerMngBadRequest) Code() int {
 }
 
 func (o *ShutDownRunnerMngBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngBadRequest %s", 400, payload)
 }
 
 func (o *ShutDownRunnerMngBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngBadRequest %s", 400, payload)
 }
 
 func (o *ShutDownRunnerMngBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *ShutDownRunnerMngBadRequest) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *ShutDownRunnerMngUnauthorized) Code() int {
 }
 
 func (o *ShutDownRunnerMngUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngUnauthorized %s", 401, payload)
 }
 
 func (o *ShutDownRunnerMngUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngUnauthorized %s", 401, payload)
 }
 
 func (o *ShutDownRunnerMngUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *ShutDownRunnerMngUnauthorized) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *ShutDownRunnerMngForbidden) Code() int {
 }
 
 func (o *ShutDownRunnerMngForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngForbidden %s", 403, payload)
 }
 
 func (o *ShutDownRunnerMngForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngForbidden %s", 403, payload)
 }
 
 func (o *ShutDownRunnerMngForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *ShutDownRunnerMngForbidden) readResponse(response runtime.ClientRespons
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *ShutDownRunnerMngNotFound) Code() int {
 }
 
 func (o *ShutDownRunnerMngNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngNotFound %s", 404, payload)
 }
 
 func (o *ShutDownRunnerMngNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngNotFound %s", 404, payload)
 }
 
 func (o *ShutDownRunnerMngNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *ShutDownRunnerMngNotFound) readResponse(response runtime.ClientResponse
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *ShutDownRunnerMngInternalServerError) Code() int {
 }
 
 func (o *ShutDownRunnerMngInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngInternalServerError %s", 500, payload)
 }
 
 func (o *ShutDownRunnerMngInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/shutdown][%d] shutDownRunnerMngInternalServerError %s", 500, payload)
 }
 
 func (o *ShutDownRunnerMngInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *ShutDownRunnerMngInternalServerError) readResponse(response runtime.Cli
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

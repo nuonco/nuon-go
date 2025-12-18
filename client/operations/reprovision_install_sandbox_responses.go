@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type ReprovisionInstallSandboxReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *ReprovisionInstallSandboxReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *ReprovisionInstallSandboxReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewReprovisionInstallSandboxCreated()
@@ -109,11 +111,13 @@ func (o *ReprovisionInstallSandboxCreated) Code() int {
 }
 
 func (o *ReprovisionInstallSandboxCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxCreated %s", 201, payload)
 }
 
 func (o *ReprovisionInstallSandboxCreated) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxCreated %s", 201, payload)
 }
 
 func (o *ReprovisionInstallSandboxCreated) GetPayload() string {
@@ -123,7 +127,7 @@ func (o *ReprovisionInstallSandboxCreated) GetPayload() string {
 func (o *ReprovisionInstallSandboxCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *ReprovisionInstallSandboxBadRequest) Code() int {
 }
 
 func (o *ReprovisionInstallSandboxBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxBadRequest %s", 400, payload)
 }
 
 func (o *ReprovisionInstallSandboxBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxBadRequest %s", 400, payload)
 }
 
 func (o *ReprovisionInstallSandboxBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *ReprovisionInstallSandboxBadRequest) readResponse(response runtime.Clie
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *ReprovisionInstallSandboxUnauthorized) Code() int {
 }
 
 func (o *ReprovisionInstallSandboxUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxUnauthorized %s", 401, payload)
 }
 
 func (o *ReprovisionInstallSandboxUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxUnauthorized %s", 401, payload)
 }
 
 func (o *ReprovisionInstallSandboxUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *ReprovisionInstallSandboxUnauthorized) readResponse(response runtime.Cl
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *ReprovisionInstallSandboxForbidden) Code() int {
 }
 
 func (o *ReprovisionInstallSandboxForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxForbidden %s", 403, payload)
 }
 
 func (o *ReprovisionInstallSandboxForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxForbidden %s", 403, payload)
 }
 
 func (o *ReprovisionInstallSandboxForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *ReprovisionInstallSandboxForbidden) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *ReprovisionInstallSandboxNotFound) Code() int {
 }
 
 func (o *ReprovisionInstallSandboxNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxNotFound %s", 404, payload)
 }
 
 func (o *ReprovisionInstallSandboxNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxNotFound %s", 404, payload)
 }
 
 func (o *ReprovisionInstallSandboxNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *ReprovisionInstallSandboxNotFound) readResponse(response runtime.Client
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *ReprovisionInstallSandboxInternalServerError) Code() int {
 }
 
 func (o *ReprovisionInstallSandboxInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxInternalServerError %s", 500, payload)
 }
 
 func (o *ReprovisionInstallSandboxInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/reprovision-sandbox][%d] reprovisionInstallSandboxInternalServerError %s", 500, payload)
 }
 
 func (o *ReprovisionInstallSandboxInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *ReprovisionInstallSandboxInternalServerError) readResponse(response run
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

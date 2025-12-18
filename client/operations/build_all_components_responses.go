@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type BuildAllComponentsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *BuildAllComponentsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *BuildAllComponentsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewBuildAllComponentsCreated()
@@ -109,11 +111,13 @@ func (o *BuildAllComponentsCreated) Code() int {
 }
 
 func (o *BuildAllComponentsCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsCreated %s", 201, payload)
 }
 
 func (o *BuildAllComponentsCreated) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsCreated %s", 201, payload)
 }
 
 func (o *BuildAllComponentsCreated) GetPayload() []*models.AppComponentBuild {
@@ -123,7 +127,7 @@ func (o *BuildAllComponentsCreated) GetPayload() []*models.AppComponentBuild {
 func (o *BuildAllComponentsCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *BuildAllComponentsBadRequest) Code() int {
 }
 
 func (o *BuildAllComponentsBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsBadRequest %s", 400, payload)
 }
 
 func (o *BuildAllComponentsBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsBadRequest %s", 400, payload)
 }
 
 func (o *BuildAllComponentsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *BuildAllComponentsBadRequest) readResponse(response runtime.ClientRespo
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *BuildAllComponentsUnauthorized) Code() int {
 }
 
 func (o *BuildAllComponentsUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsUnauthorized %s", 401, payload)
 }
 
 func (o *BuildAllComponentsUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsUnauthorized %s", 401, payload)
 }
 
 func (o *BuildAllComponentsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *BuildAllComponentsUnauthorized) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *BuildAllComponentsForbidden) Code() int {
 }
 
 func (o *BuildAllComponentsForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsForbidden %s", 403, payload)
 }
 
 func (o *BuildAllComponentsForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsForbidden %s", 403, payload)
 }
 
 func (o *BuildAllComponentsForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *BuildAllComponentsForbidden) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *BuildAllComponentsNotFound) Code() int {
 }
 
 func (o *BuildAllComponentsNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsNotFound %s", 404, payload)
 }
 
 func (o *BuildAllComponentsNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsNotFound %s", 404, payload)
 }
 
 func (o *BuildAllComponentsNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *BuildAllComponentsNotFound) readResponse(response runtime.ClientRespons
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *BuildAllComponentsInternalServerError) Code() int {
 }
 
 func (o *BuildAllComponentsInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsInternalServerError %s", 500, payload)
 }
 
 func (o *BuildAllComponentsInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/build-all][%d] buildAllComponentsInternalServerError %s", 500, payload)
 }
 
 func (o *BuildAllComponentsInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *BuildAllComponentsInternalServerError) readResponse(response runtime.Cl
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

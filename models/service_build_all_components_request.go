@@ -8,4 +8,4 @@ package models
 // ServiceBuildAllComponentsRequest service build all components request
 //
 // swagger:model service.BuildAllComponentsRequest
-type ServiceBuildAllComponentsRequest interface{}
+type ServiceBuildAllComponentsRequest any

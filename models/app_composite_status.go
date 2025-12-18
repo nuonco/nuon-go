@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -29,7 +30,7 @@ type AppCompositeStatus struct {
 	History []*AppCompositeStatus `json:"history"`
 
 	// metadata
-	Metadata interface{} `json:"metadata,omitempty"`
+	Metadata map[string]any `json:"metadata,omitempty"`
 
 	// status
 	Status AppStatus `json:"status,omitempty"`
@@ -68,11 +69,15 @@ func (m *AppCompositeStatus) validateHistory(formats strfmt.Registry) error {
 
 		if m.History[i] != nil {
 			if err := m.History[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("history" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("history" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -88,11 +93,15 @@ func (m *AppCompositeStatus) validateStatus(formats strfmt.Registry) error {
 	}
 
 	if err := m.Status.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("status")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("status")
 		}
+
 		return err
 	}
 
@@ -128,11 +137,15 @@ func (m *AppCompositeStatus) contextValidateHistory(ctx context.Context, formats
 			}
 
 			if err := m.History[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("history" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("history" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -149,11 +162,15 @@ func (m *AppCompositeStatus) contextValidateStatus(ctx context.Context, formats 
 	}
 
 	if err := m.Status.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("status")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("status")
 		}
+
 		return err
 	}
 

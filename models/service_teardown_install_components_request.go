@@ -17,9 +17,6 @@ import (
 // swagger:model service.TeardownInstallComponentsRequest
 type ServiceTeardownInstallComponentsRequest struct {
 
-	// error behavior
-	ErrorBehavior string `json:"error_behavior,omitempty"`
-
 	// plan only
 	PlanOnly bool `json:"plan_only,omitempty"`
 }

@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -64,7 +65,7 @@ type PlantypesSandboxRunPlan struct {
 	TerraformBackend *PlantypesTerraformBackend `json:"terraform_backend,omitempty"`
 
 	// vars
-	Vars interface{} `json:"vars,omitempty"`
+	Vars map[string]any `json:"vars,omitempty"`
 
 	// vars files
 	VarsFiles []string `json:"vars_files"`
@@ -119,11 +120,15 @@ func (m *PlantypesSandboxRunPlan) validateAwsAuth(formats strfmt.Registry) error
 
 	if m.AwsAuth != nil {
 		if err := m.AwsAuth.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("aws_auth")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("aws_auth")
 			}
+
 			return err
 		}
 	}
@@ -138,11 +143,15 @@ func (m *PlantypesSandboxRunPlan) validateAzureAuth(formats strfmt.Registry) err
 
 	if m.AzureAuth != nil {
 		if err := m.AzureAuth.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("azure_auth")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("azure_auth")
 			}
+
 			return err
 		}
 	}
@@ -157,11 +166,15 @@ func (m *PlantypesSandboxRunPlan) validateGitSource(formats strfmt.Registry) err
 
 	if m.GitSource != nil {
 		if err := m.GitSource.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("git_source")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("git_source")
 			}
+
 			return err
 		}
 	}
@@ -176,11 +189,15 @@ func (m *PlantypesSandboxRunPlan) validateHooks(formats strfmt.Registry) error {
 
 	if m.Hooks != nil {
 		if err := m.Hooks.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("hooks")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("hooks")
 			}
+
 			return err
 		}
 	}
@@ -195,11 +212,15 @@ func (m *PlantypesSandboxRunPlan) validateLocalArchive(formats strfmt.Registry) 
 
 	if m.LocalArchive != nil {
 		if err := m.LocalArchive.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("local_archive")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("local_archive")
 			}
+
 			return err
 		}
 	}
@@ -214,11 +235,15 @@ func (m *PlantypesSandboxRunPlan) validateSandboxMode(formats strfmt.Registry) e
 
 	if m.SandboxMode != nil {
 		if err := m.SandboxMode.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sandbox_mode")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sandbox_mode")
 			}
+
 			return err
 		}
 	}
@@ -233,11 +258,15 @@ func (m *PlantypesSandboxRunPlan) validateState(formats strfmt.Registry) error {
 
 	if m.State != nil {
 		if err := m.State.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("state")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("state")
 			}
+
 			return err
 		}
 	}
@@ -252,11 +281,15 @@ func (m *PlantypesSandboxRunPlan) validateTerraformBackend(formats strfmt.Regist
 
 	if m.TerraformBackend != nil {
 		if err := m.TerraformBackend.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("terraform_backend")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("terraform_backend")
 			}
+
 			return err
 		}
 	}
@@ -315,11 +348,15 @@ func (m *PlantypesSandboxRunPlan) contextValidateAwsAuth(ctx context.Context, fo
 		}
 
 		if err := m.AwsAuth.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("aws_auth")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("aws_auth")
 			}
+
 			return err
 		}
 	}
@@ -336,11 +373,15 @@ func (m *PlantypesSandboxRunPlan) contextValidateAzureAuth(ctx context.Context, 
 		}
 
 		if err := m.AzureAuth.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("azure_auth")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("azure_auth")
 			}
+
 			return err
 		}
 	}
@@ -357,11 +398,15 @@ func (m *PlantypesSandboxRunPlan) contextValidateGitSource(ctx context.Context, 
 		}
 
 		if err := m.GitSource.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("git_source")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("git_source")
 			}
+
 			return err
 		}
 	}
@@ -378,11 +423,15 @@ func (m *PlantypesSandboxRunPlan) contextValidateHooks(ctx context.Context, form
 		}
 
 		if err := m.Hooks.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("hooks")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("hooks")
 			}
+
 			return err
 		}
 	}
@@ -399,11 +448,15 @@ func (m *PlantypesSandboxRunPlan) contextValidateLocalArchive(ctx context.Contex
 		}
 
 		if err := m.LocalArchive.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("local_archive")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("local_archive")
 			}
+
 			return err
 		}
 	}
@@ -420,11 +473,15 @@ func (m *PlantypesSandboxRunPlan) contextValidateSandboxMode(ctx context.Context
 		}
 
 		if err := m.SandboxMode.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sandbox_mode")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sandbox_mode")
 			}
+
 			return err
 		}
 	}
@@ -441,11 +498,15 @@ func (m *PlantypesSandboxRunPlan) contextValidateState(ctx context.Context, form
 		}
 
 		if err := m.State.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("state")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("state")
 			}
+
 			return err
 		}
 	}
@@ -462,11 +523,15 @@ func (m *PlantypesSandboxRunPlan) contextValidateTerraformBackend(ctx context.Co
 		}
 
 		if err := m.TerraformBackend.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("terraform_backend")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("terraform_backend")
 			}
+
 			return err
 		}
 	}

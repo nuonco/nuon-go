@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type CreateWorkflowStepApprovalResponseReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateWorkflowStepApprovalResponseReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateWorkflowStepApprovalResponseReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateWorkflowStepApprovalResponseCreated()
@@ -109,11 +111,13 @@ func (o *CreateWorkflowStepApprovalResponseCreated) Code() int {
 }
 
 func (o *CreateWorkflowStepApprovalResponseCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseCreated %s", 201, payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseCreated) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseCreated %s", 201, payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseCreated) GetPayload() *models.ServiceCreateWorkflowStepApprovalResponseResponse {
@@ -125,7 +129,7 @@ func (o *CreateWorkflowStepApprovalResponseCreated) readResponse(response runtim
 	o.Payload = new(models.ServiceCreateWorkflowStepApprovalResponseResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *CreateWorkflowStepApprovalResponseBadRequest) Code() int {
 }
 
 func (o *CreateWorkflowStepApprovalResponseBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseBadRequest %s", 400, payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseBadRequest %s", 400, payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *CreateWorkflowStepApprovalResponseBadRequest) readResponse(response run
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *CreateWorkflowStepApprovalResponseUnauthorized) Code() int {
 }
 
 func (o *CreateWorkflowStepApprovalResponseUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseUnauthorized %s", 401, payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseUnauthorized %s", 401, payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *CreateWorkflowStepApprovalResponseUnauthorized) readResponse(response r
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *CreateWorkflowStepApprovalResponseForbidden) Code() int {
 }
 
 func (o *CreateWorkflowStepApprovalResponseForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseForbidden %s", 403, payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseForbidden %s", 403, payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *CreateWorkflowStepApprovalResponseForbidden) readResponse(response runt
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *CreateWorkflowStepApprovalResponseNotFound) Code() int {
 }
 
 func (o *CreateWorkflowStepApprovalResponseNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseNotFound %s", 404, payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseNotFound %s", 404, payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *CreateWorkflowStepApprovalResponseNotFound) readResponse(response runti
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *CreateWorkflowStepApprovalResponseInternalServerError) Code() int {
 }
 
 func (o *CreateWorkflowStepApprovalResponseInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseInternalServerError %s", 500, payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/steps/{step_id}/approvals/{approval_id}/response][%d] createWorkflowStepApprovalResponseInternalServerError %s", 500, payload)
 }
 
 func (o *CreateWorkflowStepApprovalResponseInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *CreateWorkflowStepApprovalResponseInternalServerError) readResponse(res
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -20,7 +21,7 @@ import (
 type StateSandboxState struct {
 
 	// outputs
-	Outputs interface{} `json:"outputs,omitempty"`
+	Outputs any `json:"outputs,omitempty"`
 
 	// populated
 	Populated bool `json:"populated,omitempty"`
@@ -64,11 +65,15 @@ func (m *StateSandboxState) validateRecentRuns(formats strfmt.Registry) error {
 
 		if m.RecentRuns[i] != nil {
 			if err := m.RecentRuns[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("recent_runs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("recent_runs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -103,11 +108,15 @@ func (m *StateSandboxState) contextValidateRecentRuns(ctx context.Context, forma
 			}
 
 			if err := m.RecentRuns[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("recent_runs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("recent_runs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

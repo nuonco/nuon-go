@@ -83,7 +83,7 @@ const (
 )
 
 // for schema
-var appWorkflowTypeEnum []interface{}
+var appWorkflowTypeEnum []any
 
 func init() {
 	var res []AppWorkflowType

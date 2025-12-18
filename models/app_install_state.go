@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -73,11 +74,15 @@ func (m *AppInstallState) validateStaleAt(formats strfmt.Registry) error {
 
 	if m.StaleAt != nil {
 		if err := m.StaleAt.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("stale_at")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("stale_at")
 			}
+
 			return err
 		}
 	}
@@ -108,11 +113,15 @@ func (m *AppInstallState) contextValidateStaleAt(ctx context.Context, formats st
 		}
 
 		if err := m.StaleAt.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("stale_at")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("stale_at")
 			}
+
 			return err
 		}
 	}

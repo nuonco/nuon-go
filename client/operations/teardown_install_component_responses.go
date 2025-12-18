@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type TeardownInstallComponentReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *TeardownInstallComponentReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *TeardownInstallComponentReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewTeardownInstallComponentCreated()
@@ -109,11 +111,13 @@ func (o *TeardownInstallComponentCreated) Code() int {
 }
 
 func (o *TeardownInstallComponentCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentCreated %s", 201, payload)
 }
 
 func (o *TeardownInstallComponentCreated) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentCreated %s", 201, payload)
 }
 
 func (o *TeardownInstallComponentCreated) GetPayload() string {
@@ -123,7 +127,7 @@ func (o *TeardownInstallComponentCreated) GetPayload() string {
 func (o *TeardownInstallComponentCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *TeardownInstallComponentBadRequest) Code() int {
 }
 
 func (o *TeardownInstallComponentBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentBadRequest %s", 400, payload)
 }
 
 func (o *TeardownInstallComponentBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentBadRequest %s", 400, payload)
 }
 
 func (o *TeardownInstallComponentBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *TeardownInstallComponentBadRequest) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *TeardownInstallComponentUnauthorized) Code() int {
 }
 
 func (o *TeardownInstallComponentUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentUnauthorized %s", 401, payload)
 }
 
 func (o *TeardownInstallComponentUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentUnauthorized %s", 401, payload)
 }
 
 func (o *TeardownInstallComponentUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *TeardownInstallComponentUnauthorized) readResponse(response runtime.Cli
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *TeardownInstallComponentForbidden) Code() int {
 }
 
 func (o *TeardownInstallComponentForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentForbidden %s", 403, payload)
 }
 
 func (o *TeardownInstallComponentForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentForbidden %s", 403, payload)
 }
 
 func (o *TeardownInstallComponentForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *TeardownInstallComponentForbidden) readResponse(response runtime.Client
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *TeardownInstallComponentNotFound) Code() int {
 }
 
 func (o *TeardownInstallComponentNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentNotFound %s", 404, payload)
 }
 
 func (o *TeardownInstallComponentNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentNotFound %s", 404, payload)
 }
 
 func (o *TeardownInstallComponentNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *TeardownInstallComponentNotFound) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *TeardownInstallComponentInternalServerError) Code() int {
 }
 
 func (o *TeardownInstallComponentInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentInternalServerError %s", 500, payload)
 }
 
 func (o *TeardownInstallComponentInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/teardown][%d] teardownInstallComponentInternalServerError %s", 500, payload)
 }
 
 func (o *TeardownInstallComponentInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *TeardownInstallComponentInternalServerError) readResponse(response runt
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

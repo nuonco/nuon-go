@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -49,11 +50,15 @@ func (m *PlantypesKubernetesManifestDeployPlan) validateClusterInfo(formats strf
 
 	if m.ClusterInfo != nil {
 		if err := m.ClusterInfo.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cluster_info")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cluster_info")
 			}
+
 			return err
 		}
 	}
@@ -84,11 +89,15 @@ func (m *PlantypesKubernetesManifestDeployPlan) contextValidateClusterInfo(ctx c
 		}
 
 		if err := m.ClusterInfo.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cluster_info")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cluster_info")
 			}
+
 			return err
 		}
 	}

@@ -50,7 +50,7 @@ const (
 )
 
 // for schema
-var permissionsPermissionEnum []interface{}
+var permissionsPermissionEnum []any
 
 func init() {
 	var res []PermissionsPermission

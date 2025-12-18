@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetRunnerConnectStatusReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetRunnerConnectStatusReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetRunnerConnectStatusReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetRunnerConnectStatusOK()
@@ -109,11 +111,13 @@ func (o *GetRunnerConnectStatusOK) Code() int {
 }
 
 func (o *GetRunnerConnectStatusOK) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusOK %s", 200, payload)
 }
 
 func (o *GetRunnerConnectStatusOK) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusOK %s", 200, payload)
 }
 
 func (o *GetRunnerConnectStatusOK) GetPayload() *models.ServiceRunnerConnectionStatus {
@@ -125,7 +129,7 @@ func (o *GetRunnerConnectStatusOK) readResponse(response runtime.ClientResponse,
 	o.Payload = new(models.ServiceRunnerConnectionStatus)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *GetRunnerConnectStatusBadRequest) Code() int {
 }
 
 func (o *GetRunnerConnectStatusBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusBadRequest %s", 400, payload)
 }
 
 func (o *GetRunnerConnectStatusBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusBadRequest %s", 400, payload)
 }
 
 func (o *GetRunnerConnectStatusBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *GetRunnerConnectStatusBadRequest) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *GetRunnerConnectStatusUnauthorized) Code() int {
 }
 
 func (o *GetRunnerConnectStatusUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusUnauthorized %s", 401, payload)
 }
 
 func (o *GetRunnerConnectStatusUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusUnauthorized %s", 401, payload)
 }
 
 func (o *GetRunnerConnectStatusUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *GetRunnerConnectStatusUnauthorized) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *GetRunnerConnectStatusForbidden) Code() int {
 }
 
 func (o *GetRunnerConnectStatusForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusForbidden %s", 403, payload)
 }
 
 func (o *GetRunnerConnectStatusForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusForbidden %s", 403, payload)
 }
 
 func (o *GetRunnerConnectStatusForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *GetRunnerConnectStatusForbidden) readResponse(response runtime.ClientRe
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *GetRunnerConnectStatusNotFound) Code() int {
 }
 
 func (o *GetRunnerConnectStatusNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusNotFound %s", 404, payload)
 }
 
 func (o *GetRunnerConnectStatusNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusNotFound %s", 404, payload)
 }
 
 func (o *GetRunnerConnectStatusNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *GetRunnerConnectStatusNotFound) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *GetRunnerConnectStatusInternalServerError) Code() int {
 }
 
 func (o *GetRunnerConnectStatusInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusInternalServerError %s", 500, payload)
 }
 
 func (o *GetRunnerConnectStatusInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/connected][%d] getRunnerConnectStatusInternalServerError %s", 500, payload)
 }
 
 func (o *GetRunnerConnectStatusInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *GetRunnerConnectStatusInternalServerError) readResponse(response runtim
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

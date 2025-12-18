@@ -33,7 +33,7 @@ type AppTerraformLock struct {
 	Path string `json:"path,omitempty"`
 
 	// version
-	Version interface{} `json:"version,omitempty"`
+	Version any `json:"version,omitempty"`
 
 	// who
 	Who string `json:"who,omitempty"`

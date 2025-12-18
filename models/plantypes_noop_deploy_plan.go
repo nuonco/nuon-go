@@ -8,4 +8,4 @@ package models
 // PlantypesNoopDeployPlan plantypes noop deploy plan
 //
 // swagger:model plantypes.NoopDeployPlan
-type PlantypesNoopDeployPlan interface{}
+type PlantypesNoopDeployPlan any

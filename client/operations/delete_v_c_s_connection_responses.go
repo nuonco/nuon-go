@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type DeleteVCSConnectionReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DeleteVCSConnectionReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DeleteVCSConnectionReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 204:
 		result := NewDeleteVCSConnectionNoContent()
@@ -108,11 +110,11 @@ func (o *DeleteVCSConnectionNoContent) Code() int {
 }
 
 func (o *DeleteVCSConnectionNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionNoContent ", 204)
+	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionNoContent", 204)
 }
 
 func (o *DeleteVCSConnectionNoContent) String() string {
-	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionNoContent ", 204)
+	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionNoContent", 204)
 }
 
 func (o *DeleteVCSConnectionNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -165,11 +167,13 @@ func (o *DeleteVCSConnectionBadRequest) Code() int {
 }
 
 func (o *DeleteVCSConnectionBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionBadRequest %s", 400, payload)
 }
 
 func (o *DeleteVCSConnectionBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionBadRequest %s", 400, payload)
 }
 
 func (o *DeleteVCSConnectionBadRequest) GetPayload() *models.StderrErrResponse {
@@ -181,7 +185,7 @@ func (o *DeleteVCSConnectionBadRequest) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -233,11 +237,13 @@ func (o *DeleteVCSConnectionUnauthorized) Code() int {
 }
 
 func (o *DeleteVCSConnectionUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionUnauthorized %s", 401, payload)
 }
 
 func (o *DeleteVCSConnectionUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionUnauthorized %s", 401, payload)
 }
 
 func (o *DeleteVCSConnectionUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -249,7 +255,7 @@ func (o *DeleteVCSConnectionUnauthorized) readResponse(response runtime.ClientRe
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -301,11 +307,13 @@ func (o *DeleteVCSConnectionForbidden) Code() int {
 }
 
 func (o *DeleteVCSConnectionForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionForbidden %s", 403, payload)
 }
 
 func (o *DeleteVCSConnectionForbidden) String() string {
-	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionForbidden %s", 403, payload)
 }
 
 func (o *DeleteVCSConnectionForbidden) GetPayload() *models.StderrErrResponse {
@@ -317,7 +325,7 @@ func (o *DeleteVCSConnectionForbidden) readResponse(response runtime.ClientRespo
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -369,11 +377,13 @@ func (o *DeleteVCSConnectionNotFound) Code() int {
 }
 
 func (o *DeleteVCSConnectionNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionNotFound %s", 404, payload)
 }
 
 func (o *DeleteVCSConnectionNotFound) String() string {
-	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionNotFound %s", 404, payload)
 }
 
 func (o *DeleteVCSConnectionNotFound) GetPayload() *models.StderrErrResponse {
@@ -385,7 +395,7 @@ func (o *DeleteVCSConnectionNotFound) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -437,11 +447,13 @@ func (o *DeleteVCSConnectionInternalServerError) Code() int {
 }
 
 func (o *DeleteVCSConnectionInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteVCSConnectionInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/vcs/connections/{connection_id}][%d] deleteVCSConnectionInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteVCSConnectionInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -453,7 +465,7 @@ func (o *DeleteVCSConnectionInternalServerError) readResponse(response runtime.C
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

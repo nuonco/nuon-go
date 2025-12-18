@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -29,6 +30,9 @@ type AppTerraformWorkspaceStateJSON struct {
 
 	// id
 	ID string `json:"id,omitempty"`
+
+	// org id
+	OrgID string `json:"org_id,omitempty"`
 
 	// runner job
 	RunnerJob *AppRunnerJob `json:"runner_job,omitempty"`
@@ -64,11 +68,15 @@ func (m *AppTerraformWorkspaceStateJSON) validateRunnerJob(formats strfmt.Regist
 
 	if m.RunnerJob != nil {
 		if err := m.RunnerJob.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("runner_job")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("runner_job")
 			}
+
 			return err
 		}
 	}
@@ -99,11 +107,15 @@ func (m *AppTerraformWorkspaceStateJSON) contextValidateRunnerJob(ctx context.Co
 		}
 
 		if err := m.RunnerJob.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("runner_job")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("runner_job")
 			}
+
 			return err
 		}
 	}

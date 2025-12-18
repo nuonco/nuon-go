@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type ResetUserJourneyReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *ResetUserJourneyReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *ResetUserJourneyReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewResetUserJourneyOK()
@@ -109,11 +111,13 @@ func (o *ResetUserJourneyOK) Code() int {
 }
 
 func (o *ResetUserJourneyOK) Error() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyOK %s", 200, payload)
 }
 
 func (o *ResetUserJourneyOK) String() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyOK %s", 200, payload)
 }
 
 func (o *ResetUserJourneyOK) GetPayload() *models.AppAccount {
@@ -125,7 +129,7 @@ func (o *ResetUserJourneyOK) readResponse(response runtime.ClientResponse, consu
 	o.Payload = new(models.AppAccount)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *ResetUserJourneyBadRequest) Code() int {
 }
 
 func (o *ResetUserJourneyBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyBadRequest %s", 400, payload)
 }
 
 func (o *ResetUserJourneyBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyBadRequest %s", 400, payload)
 }
 
 func (o *ResetUserJourneyBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *ResetUserJourneyBadRequest) readResponse(response runtime.ClientRespons
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *ResetUserJourneyUnauthorized) Code() int {
 }
 
 func (o *ResetUserJourneyUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyUnauthorized %s", 401, payload)
 }
 
 func (o *ResetUserJourneyUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyUnauthorized %s", 401, payload)
 }
 
 func (o *ResetUserJourneyUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *ResetUserJourneyUnauthorized) readResponse(response runtime.ClientRespo
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *ResetUserJourneyForbidden) Code() int {
 }
 
 func (o *ResetUserJourneyForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyForbidden %s", 403, payload)
 }
 
 func (o *ResetUserJourneyForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyForbidden %s", 403, payload)
 }
 
 func (o *ResetUserJourneyForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *ResetUserJourneyForbidden) readResponse(response runtime.ClientResponse
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *ResetUserJourneyNotFound) Code() int {
 }
 
 func (o *ResetUserJourneyNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyNotFound %s", 404, payload)
 }
 
 func (o *ResetUserJourneyNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyNotFound %s", 404, payload)
 }
 
 func (o *ResetUserJourneyNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *ResetUserJourneyNotFound) readResponse(response runtime.ClientResponse,
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *ResetUserJourneyInternalServerError) Code() int {
 }
 
 func (o *ResetUserJourneyInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyInternalServerError %s", 500, payload)
 }
 
 func (o *ResetUserJourneyInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys/{journey_name}/reset][%d] resetUserJourneyInternalServerError %s", 500, payload)
 }
 
 func (o *ResetUserJourneyInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *ResetUserJourneyInternalServerError) readResponse(response runtime.Clie
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

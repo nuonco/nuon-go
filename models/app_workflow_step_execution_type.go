@@ -47,7 +47,7 @@ const (
 )
 
 // for schema
-var appWorkflowStepExecutionTypeEnum []interface{}
+var appWorkflowStepExecutionTypeEnum []any
 
 func init() {
 	var res []AppWorkflowStepExecutionType

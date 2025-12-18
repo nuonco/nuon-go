@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type CreateUserJourneyReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateUserJourneyReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateUserJourneyReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateUserJourneyCreated()
@@ -109,11 +111,13 @@ func (o *CreateUserJourneyCreated) Code() int {
 }
 
 func (o *CreateUserJourneyCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyCreated %s", 201, payload)
 }
 
 func (o *CreateUserJourneyCreated) String() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyCreated %s", 201, payload)
 }
 
 func (o *CreateUserJourneyCreated) GetPayload() *models.AppAccount {
@@ -125,7 +129,7 @@ func (o *CreateUserJourneyCreated) readResponse(response runtime.ClientResponse,
 	o.Payload = new(models.AppAccount)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *CreateUserJourneyBadRequest) Code() int {
 }
 
 func (o *CreateUserJourneyBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyBadRequest %s", 400, payload)
 }
 
 func (o *CreateUserJourneyBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyBadRequest %s", 400, payload)
 }
 
 func (o *CreateUserJourneyBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *CreateUserJourneyBadRequest) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *CreateUserJourneyUnauthorized) Code() int {
 }
 
 func (o *CreateUserJourneyUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyUnauthorized %s", 401, payload)
 }
 
 func (o *CreateUserJourneyUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyUnauthorized %s", 401, payload)
 }
 
 func (o *CreateUserJourneyUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *CreateUserJourneyUnauthorized) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *CreateUserJourneyForbidden) Code() int {
 }
 
 func (o *CreateUserJourneyForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyForbidden %s", 403, payload)
 }
 
 func (o *CreateUserJourneyForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyForbidden %s", 403, payload)
 }
 
 func (o *CreateUserJourneyForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *CreateUserJourneyForbidden) readResponse(response runtime.ClientRespons
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *CreateUserJourneyNotFound) Code() int {
 }
 
 func (o *CreateUserJourneyNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyNotFound %s", 404, payload)
 }
 
 func (o *CreateUserJourneyNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyNotFound %s", 404, payload)
 }
 
 func (o *CreateUserJourneyNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *CreateUserJourneyNotFound) readResponse(response runtime.ClientResponse
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *CreateUserJourneyInternalServerError) Code() int {
 }
 
 func (o *CreateUserJourneyInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyInternalServerError %s", 500, payload)
 }
 
 func (o *CreateUserJourneyInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/account/user-journeys][%d] createUserJourneyInternalServerError %s", 500, payload)
 }
 
 func (o *CreateUserJourneyInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *CreateUserJourneyInternalServerError) readResponse(response runtime.Cli
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

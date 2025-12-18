@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type RemoveUserReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *RemoveUserReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *RemoveUserReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewRemoveUserCreated()
@@ -109,11 +111,13 @@ func (o *RemoveUserCreated) Code() int {
 }
 
 func (o *RemoveUserCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserCreated %s", 201, payload)
 }
 
 func (o *RemoveUserCreated) String() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserCreated %s", 201, payload)
 }
 
 func (o *RemoveUserCreated) GetPayload() *models.AppAccount {
@@ -125,7 +129,7 @@ func (o *RemoveUserCreated) readResponse(response runtime.ClientResponse, consum
 	o.Payload = new(models.AppAccount)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *RemoveUserBadRequest) Code() int {
 }
 
 func (o *RemoveUserBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserBadRequest %s", 400, payload)
 }
 
 func (o *RemoveUserBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserBadRequest %s", 400, payload)
 }
 
 func (o *RemoveUserBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *RemoveUserBadRequest) readResponse(response runtime.ClientResponse, con
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *RemoveUserUnauthorized) Code() int {
 }
 
 func (o *RemoveUserUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserUnauthorized %s", 401, payload)
 }
 
 func (o *RemoveUserUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserUnauthorized %s", 401, payload)
 }
 
 func (o *RemoveUserUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *RemoveUserUnauthorized) readResponse(response runtime.ClientResponse, c
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *RemoveUserForbidden) Code() int {
 }
 
 func (o *RemoveUserForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserForbidden %s", 403, payload)
 }
 
 func (o *RemoveUserForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserForbidden %s", 403, payload)
 }
 
 func (o *RemoveUserForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *RemoveUserForbidden) readResponse(response runtime.ClientResponse, cons
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *RemoveUserNotFound) Code() int {
 }
 
 func (o *RemoveUserNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserNotFound %s", 404, payload)
 }
 
 func (o *RemoveUserNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserNotFound %s", 404, payload)
 }
 
 func (o *RemoveUserNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *RemoveUserNotFound) readResponse(response runtime.ClientResponse, consu
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *RemoveUserInternalServerError) Code() int {
 }
 
 func (o *RemoveUserInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserInternalServerError %s", 500, payload)
 }
 
 func (o *RemoveUserInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/orgs/current/remove-user][%d] removeUserInternalServerError %s", 500, payload)
 }
 
 func (o *RemoveUserInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *RemoveUserInternalServerError) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

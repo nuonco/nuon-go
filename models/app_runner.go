@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -100,11 +101,15 @@ func (m *AppRunner) validateJobs(formats strfmt.Registry) error {
 
 		if m.Jobs[i] != nil {
 			if err := m.Jobs[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("jobs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("jobs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -126,11 +131,15 @@ func (m *AppRunner) validateOperations(formats strfmt.Registry) error {
 
 		if m.Operations[i] != nil {
 			if err := m.Operations[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("operations" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("operations" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -147,11 +156,15 @@ func (m *AppRunner) validateRunnerGroup(formats strfmt.Registry) error {
 
 	if m.RunnerGroup != nil {
 		if err := m.RunnerGroup.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("runner_group")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("runner_group")
 			}
+
 			return err
 		}
 	}
@@ -166,11 +179,15 @@ func (m *AppRunner) validateRunnerJob(formats strfmt.Registry) error {
 
 	if m.RunnerJob != nil {
 		if err := m.RunnerJob.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("runner_job")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("runner_job")
 			}
+
 			return err
 		}
 	}
@@ -215,11 +232,15 @@ func (m *AppRunner) contextValidateJobs(ctx context.Context, formats strfmt.Regi
 			}
 
 			if err := m.Jobs[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("jobs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("jobs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -240,11 +261,15 @@ func (m *AppRunner) contextValidateOperations(ctx context.Context, formats strfm
 			}
 
 			if err := m.Operations[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("operations" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("operations" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -263,11 +288,15 @@ func (m *AppRunner) contextValidateRunnerGroup(ctx context.Context, formats strf
 		}
 
 		if err := m.RunnerGroup.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("runner_group")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("runner_group")
 			}
+
 			return err
 		}
 	}
@@ -284,11 +313,15 @@ func (m *AppRunner) contextValidateRunnerJob(ctx context.Context, formats strfmt
 		}
 
 		if err := m.RunnerJob.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("runner_job")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("runner_job")
 			}
+
 			return err
 		}
 	}

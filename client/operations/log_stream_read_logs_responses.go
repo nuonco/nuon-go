@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type LogStreamReadLogsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *LogStreamReadLogsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *LogStreamReadLogsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewLogStreamReadLogsOK()
@@ -109,11 +111,13 @@ func (o *LogStreamReadLogsOK) Code() int {
 }
 
 func (o *LogStreamReadLogsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsOK %s", 200, payload)
 }
 
 func (o *LogStreamReadLogsOK) String() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsOK %s", 200, payload)
 }
 
 func (o *LogStreamReadLogsOK) GetPayload() []*models.AppOtelLogRecord {
@@ -123,7 +127,7 @@ func (o *LogStreamReadLogsOK) GetPayload() []*models.AppOtelLogRecord {
 func (o *LogStreamReadLogsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *LogStreamReadLogsBadRequest) Code() int {
 }
 
 func (o *LogStreamReadLogsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsBadRequest %s", 400, payload)
 }
 
 func (o *LogStreamReadLogsBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsBadRequest %s", 400, payload)
 }
 
 func (o *LogStreamReadLogsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *LogStreamReadLogsBadRequest) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *LogStreamReadLogsUnauthorized) Code() int {
 }
 
 func (o *LogStreamReadLogsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsUnauthorized %s", 401, payload)
 }
 
 func (o *LogStreamReadLogsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsUnauthorized %s", 401, payload)
 }
 
 func (o *LogStreamReadLogsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *LogStreamReadLogsUnauthorized) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *LogStreamReadLogsForbidden) Code() int {
 }
 
 func (o *LogStreamReadLogsForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsForbidden %s", 403, payload)
 }
 
 func (o *LogStreamReadLogsForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsForbidden %s", 403, payload)
 }
 
 func (o *LogStreamReadLogsForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *LogStreamReadLogsForbidden) readResponse(response runtime.ClientRespons
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *LogStreamReadLogsNotFound) Code() int {
 }
 
 func (o *LogStreamReadLogsNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsNotFound %s", 404, payload)
 }
 
 func (o *LogStreamReadLogsNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsNotFound %s", 404, payload)
 }
 
 func (o *LogStreamReadLogsNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *LogStreamReadLogsNotFound) readResponse(response runtime.ClientResponse
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *LogStreamReadLogsInternalServerError) Code() int {
 }
 
 func (o *LogStreamReadLogsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsInternalServerError %s", 500, payload)
 }
 
 func (o *LogStreamReadLogsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/log-streams/{log_stream_id}/logs][%d] logStreamReadLogsInternalServerError %s", 500, payload)
 }
 
 func (o *LogStreamReadLogsInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *LogStreamReadLogsInternalServerError) readResponse(response runtime.Cli
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

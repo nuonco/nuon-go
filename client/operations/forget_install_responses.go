@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type ForgetInstallReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *ForgetInstallReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *ForgetInstallReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewForgetInstallOK()
@@ -97,11 +99,13 @@ func (o *ForgetInstallOK) Code() int {
 }
 
 func (o *ForgetInstallOK) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallOK %s", 200, payload)
 }
 
 func (o *ForgetInstallOK) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallOK %s", 200, payload)
 }
 
 func (o *ForgetInstallOK) GetPayload() bool {
@@ -111,7 +115,7 @@ func (o *ForgetInstallOK) GetPayload() bool {
 func (o *ForgetInstallOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -163,11 +167,13 @@ func (o *ForgetInstallBadRequest) Code() int {
 }
 
 func (o *ForgetInstallBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallBadRequest %s", 400, payload)
 }
 
 func (o *ForgetInstallBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallBadRequest %s", 400, payload)
 }
 
 func (o *ForgetInstallBadRequest) GetPayload() *models.StderrErrResponse {
@@ -179,7 +185,7 @@ func (o *ForgetInstallBadRequest) readResponse(response runtime.ClientResponse, 
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -231,11 +237,13 @@ func (o *ForgetInstallNotFound) Code() int {
 }
 
 func (o *ForgetInstallNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallNotFound %s", 404, payload)
 }
 
 func (o *ForgetInstallNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallNotFound %s", 404, payload)
 }
 
 func (o *ForgetInstallNotFound) GetPayload() *models.StderrErrResponse {
@@ -247,7 +255,7 @@ func (o *ForgetInstallNotFound) readResponse(response runtime.ClientResponse, co
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -299,11 +307,13 @@ func (o *ForgetInstallInternalServerError) Code() int {
 }
 
 func (o *ForgetInstallInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallInternalServerError %s", 500, payload)
 }
 
 func (o *ForgetInstallInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/forget][%d] forgetInstallInternalServerError %s", 500, payload)
 }
 
 func (o *ForgetInstallInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -315,7 +325,7 @@ func (o *ForgetInstallInternalServerError) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type DeleteTerraformWorkspaceReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DeleteTerraformWorkspaceReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DeleteTerraformWorkspaceReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDeleteTerraformWorkspaceOK()
@@ -109,11 +111,13 @@ func (o *DeleteTerraformWorkspaceOK) Code() int {
 }
 
 func (o *DeleteTerraformWorkspaceOK) Error() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceOK %s", 200, payload)
 }
 
 func (o *DeleteTerraformWorkspaceOK) String() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceOK %s", 200, payload)
 }
 
 func (o *DeleteTerraformWorkspaceOK) GetPayload() []*models.AppTerraformWorkspace {
@@ -123,7 +127,7 @@ func (o *DeleteTerraformWorkspaceOK) GetPayload() []*models.AppTerraformWorkspac
 func (o *DeleteTerraformWorkspaceOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *DeleteTerraformWorkspaceBadRequest) Code() int {
 }
 
 func (o *DeleteTerraformWorkspaceBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceBadRequest %s", 400, payload)
 }
 
 func (o *DeleteTerraformWorkspaceBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceBadRequest %s", 400, payload)
 }
 
 func (o *DeleteTerraformWorkspaceBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *DeleteTerraformWorkspaceBadRequest) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *DeleteTerraformWorkspaceUnauthorized) Code() int {
 }
 
 func (o *DeleteTerraformWorkspaceUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceUnauthorized %s", 401, payload)
 }
 
 func (o *DeleteTerraformWorkspaceUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceUnauthorized %s", 401, payload)
 }
 
 func (o *DeleteTerraformWorkspaceUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *DeleteTerraformWorkspaceUnauthorized) readResponse(response runtime.Cli
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *DeleteTerraformWorkspaceForbidden) Code() int {
 }
 
 func (o *DeleteTerraformWorkspaceForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceForbidden %s", 403, payload)
 }
 
 func (o *DeleteTerraformWorkspaceForbidden) String() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceForbidden %s", 403, payload)
 }
 
 func (o *DeleteTerraformWorkspaceForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *DeleteTerraformWorkspaceForbidden) readResponse(response runtime.Client
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *DeleteTerraformWorkspaceNotFound) Code() int {
 }
 
 func (o *DeleteTerraformWorkspaceNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceNotFound %s", 404, payload)
 }
 
 func (o *DeleteTerraformWorkspaceNotFound) String() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceNotFound %s", 404, payload)
 }
 
 func (o *DeleteTerraformWorkspaceNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *DeleteTerraformWorkspaceNotFound) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *DeleteTerraformWorkspaceInternalServerError) Code() int {
 }
 
 func (o *DeleteTerraformWorkspaceInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteTerraformWorkspaceInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/terraform-workspaces/{workspace_id}][%d] deleteTerraformWorkspaceInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteTerraformWorkspaceInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *DeleteTerraformWorkspaceInternalServerError) readResponse(response runt
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

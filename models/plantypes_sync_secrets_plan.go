@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -72,11 +73,15 @@ func (m *PlantypesSyncSecretsPlan) validateAwsAuth(formats strfmt.Registry) erro
 
 	if m.AwsAuth != nil {
 		if err := m.AwsAuth.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("aws_auth")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("aws_auth")
 			}
+
 			return err
 		}
 	}
@@ -91,11 +96,15 @@ func (m *PlantypesSyncSecretsPlan) validateAzureAuth(formats strfmt.Registry) er
 
 	if m.AzureAuth != nil {
 		if err := m.AzureAuth.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("azure_auth")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("azure_auth")
 			}
+
 			return err
 		}
 	}
@@ -110,11 +119,15 @@ func (m *PlantypesSyncSecretsPlan) validateClusterInfo(formats strfmt.Registry) 
 
 	if m.ClusterInfo != nil {
 		if err := m.ClusterInfo.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cluster_info")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cluster_info")
 			}
+
 			return err
 		}
 	}
@@ -134,11 +147,15 @@ func (m *PlantypesSyncSecretsPlan) validateKubernetesSecrets(formats strfmt.Regi
 
 		if m.KubernetesSecrets[i] != nil {
 			if err := m.KubernetesSecrets[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("kubernetes_secrets" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("kubernetes_secrets" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -155,11 +172,15 @@ func (m *PlantypesSyncSecretsPlan) validateSandboxMode(formats strfmt.Registry) 
 
 	if m.SandboxMode != nil {
 		if err := m.SandboxMode.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sandbox_mode")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sandbox_mode")
 			}
+
 			return err
 		}
 	}
@@ -206,11 +227,15 @@ func (m *PlantypesSyncSecretsPlan) contextValidateAwsAuth(ctx context.Context, f
 		}
 
 		if err := m.AwsAuth.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("aws_auth")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("aws_auth")
 			}
+
 			return err
 		}
 	}
@@ -227,11 +252,15 @@ func (m *PlantypesSyncSecretsPlan) contextValidateAzureAuth(ctx context.Context,
 		}
 
 		if err := m.AzureAuth.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("azure_auth")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("azure_auth")
 			}
+
 			return err
 		}
 	}
@@ -248,11 +277,15 @@ func (m *PlantypesSyncSecretsPlan) contextValidateClusterInfo(ctx context.Contex
 		}
 
 		if err := m.ClusterInfo.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cluster_info")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cluster_info")
 			}
+
 			return err
 		}
 	}
@@ -271,11 +304,15 @@ func (m *PlantypesSyncSecretsPlan) contextValidateKubernetesSecrets(ctx context.
 			}
 
 			if err := m.KubernetesSecrets[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("kubernetes_secrets" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("kubernetes_secrets" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -294,11 +331,15 @@ func (m *PlantypesSyncSecretsPlan) contextValidateSandboxMode(ctx context.Contex
 		}
 
 		if err := m.SandboxMode.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sandbox_mode")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sandbox_mode")
 			}
+
 			return err
 		}
 	}

@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type RetryWorkflowStepReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *RetryWorkflowStepReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *RetryWorkflowStepReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewRetryWorkflowStepCreated()
@@ -109,11 +111,13 @@ func (o *RetryWorkflowStepCreated) Code() int {
 }
 
 func (o *RetryWorkflowStepCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepCreated %s", 201, payload)
 }
 
 func (o *RetryWorkflowStepCreated) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepCreated %s", 201, payload)
 }
 
 func (o *RetryWorkflowStepCreated) GetPayload() *models.ServiceRetryWorkflowByIDResponse {
@@ -125,7 +129,7 @@ func (o *RetryWorkflowStepCreated) readResponse(response runtime.ClientResponse,
 	o.Payload = new(models.ServiceRetryWorkflowByIDResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *RetryWorkflowStepBadRequest) Code() int {
 }
 
 func (o *RetryWorkflowStepBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepBadRequest %s", 400, payload)
 }
 
 func (o *RetryWorkflowStepBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepBadRequest %s", 400, payload)
 }
 
 func (o *RetryWorkflowStepBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *RetryWorkflowStepBadRequest) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *RetryWorkflowStepUnauthorized) Code() int {
 }
 
 func (o *RetryWorkflowStepUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepUnauthorized %s", 401, payload)
 }
 
 func (o *RetryWorkflowStepUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepUnauthorized %s", 401, payload)
 }
 
 func (o *RetryWorkflowStepUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *RetryWorkflowStepUnauthorized) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *RetryWorkflowStepForbidden) Code() int {
 }
 
 func (o *RetryWorkflowStepForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepForbidden %s", 403, payload)
 }
 
 func (o *RetryWorkflowStepForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepForbidden %s", 403, payload)
 }
 
 func (o *RetryWorkflowStepForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *RetryWorkflowStepForbidden) readResponse(response runtime.ClientRespons
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *RetryWorkflowStepNotFound) Code() int {
 }
 
 func (o *RetryWorkflowStepNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepNotFound %s", 404, payload)
 }
 
 func (o *RetryWorkflowStepNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepNotFound %s", 404, payload)
 }
 
 func (o *RetryWorkflowStepNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *RetryWorkflowStepNotFound) readResponse(response runtime.ClientResponse
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *RetryWorkflowStepInternalServerError) Code() int {
 }
 
 func (o *RetryWorkflowStepInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepInternalServerError %s", 500, payload)
 }
 
 func (o *RetryWorkflowStepInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/workflows/{workflow_id}/step/{step_id}/retry][%d] retryWorkflowStepInternalServerError %s", 500, payload)
 }
 
 func (o *RetryWorkflowStepInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *RetryWorkflowStepInternalServerError) readResponse(response runtime.Cli
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

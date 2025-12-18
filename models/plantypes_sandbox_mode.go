@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -28,7 +29,7 @@ type PlantypesSandboxMode struct {
 	KubernetesManifest *PlantypesKubernetesSandboxMode `json:"kubernetes_manifest,omitempty"`
 
 	// outputs
-	Outputs interface{} `json:"outputs,omitempty"`
+	Outputs map[string]any `json:"outputs,omitempty"`
 
 	// terraform
 	Terraform *PlantypesTerraformSandboxMode `json:"terraform,omitempty"`
@@ -63,11 +64,15 @@ func (m *PlantypesSandboxMode) validateHelm(formats strfmt.Registry) error {
 
 	if m.Helm != nil {
 		if err := m.Helm.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("helm")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("helm")
 			}
+
 			return err
 		}
 	}
@@ -82,11 +87,15 @@ func (m *PlantypesSandboxMode) validateKubernetesManifest(formats strfmt.Registr
 
 	if m.KubernetesManifest != nil {
 		if err := m.KubernetesManifest.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("kubernetes_manifest")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("kubernetes_manifest")
 			}
+
 			return err
 		}
 	}
@@ -101,11 +110,15 @@ func (m *PlantypesSandboxMode) validateTerraform(formats strfmt.Registry) error 
 
 	if m.Terraform != nil {
 		if err := m.Terraform.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("terraform")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("terraform")
 			}
+
 			return err
 		}
 	}
@@ -144,11 +157,15 @@ func (m *PlantypesSandboxMode) contextValidateHelm(ctx context.Context, formats 
 		}
 
 		if err := m.Helm.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("helm")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("helm")
 			}
+
 			return err
 		}
 	}
@@ -165,11 +182,15 @@ func (m *PlantypesSandboxMode) contextValidateKubernetesManifest(ctx context.Con
 		}
 
 		if err := m.KubernetesManifest.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("kubernetes_manifest")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("kubernetes_manifest")
 			}
+
 			return err
 		}
 	}
@@ -186,11 +207,15 @@ func (m *PlantypesSandboxMode) contextValidateTerraform(ctx context.Context, for
 		}
 
 		if err := m.Terraform.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("terraform")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("terraform")
 			}
+
 			return err
 		}
 	}

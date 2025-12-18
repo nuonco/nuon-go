@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type UpdateInstallWorkflowReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *UpdateInstallWorkflowReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *UpdateInstallWorkflowReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewUpdateInstallWorkflowOK()
@@ -109,11 +111,13 @@ func (o *UpdateInstallWorkflowOK) Code() int {
 }
 
 func (o *UpdateInstallWorkflowOK) Error() string {
-	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowOK %s", 200, payload)
 }
 
 func (o *UpdateInstallWorkflowOK) String() string {
-	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowOK %s", 200, payload)
 }
 
 func (o *UpdateInstallWorkflowOK) GetPayload() *models.AppWorkflow {
@@ -125,7 +129,7 @@ func (o *UpdateInstallWorkflowOK) readResponse(response runtime.ClientResponse, 
 	o.Payload = new(models.AppWorkflow)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *UpdateInstallWorkflowBadRequest) Code() int {
 }
 
 func (o *UpdateInstallWorkflowBadRequest) Error() string {
-	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowBadRequest %s", 400, payload)
 }
 
 func (o *UpdateInstallWorkflowBadRequest) String() string {
-	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowBadRequest %s", 400, payload)
 }
 
 func (o *UpdateInstallWorkflowBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *UpdateInstallWorkflowBadRequest) readResponse(response runtime.ClientRe
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *UpdateInstallWorkflowUnauthorized) Code() int {
 }
 
 func (o *UpdateInstallWorkflowUnauthorized) Error() string {
-	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowUnauthorized %s", 401, payload)
 }
 
 func (o *UpdateInstallWorkflowUnauthorized) String() string {
-	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowUnauthorized %s", 401, payload)
 }
 
 func (o *UpdateInstallWorkflowUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *UpdateInstallWorkflowUnauthorized) readResponse(response runtime.Client
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *UpdateInstallWorkflowForbidden) Code() int {
 }
 
 func (o *UpdateInstallWorkflowForbidden) Error() string {
-	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowForbidden %s", 403, payload)
 }
 
 func (o *UpdateInstallWorkflowForbidden) String() string {
-	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowForbidden %s", 403, payload)
 }
 
 func (o *UpdateInstallWorkflowForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *UpdateInstallWorkflowForbidden) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *UpdateInstallWorkflowNotFound) Code() int {
 }
 
 func (o *UpdateInstallWorkflowNotFound) Error() string {
-	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowNotFound %s", 404, payload)
 }
 
 func (o *UpdateInstallWorkflowNotFound) String() string {
-	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowNotFound %s", 404, payload)
 }
 
 func (o *UpdateInstallWorkflowNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *UpdateInstallWorkflowNotFound) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *UpdateInstallWorkflowInternalServerError) Code() int {
 }
 
 func (o *UpdateInstallWorkflowInternalServerError) Error() string {
-	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateInstallWorkflowInternalServerError) String() string {
-	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/install-workflows/{install_workflow_id}][%d] updateInstallWorkflowInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateInstallWorkflowInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *UpdateInstallWorkflowInternalServerError) readResponse(response runtime
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

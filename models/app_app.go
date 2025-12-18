@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -52,7 +53,7 @@ type AppApp struct {
 	} `json:"input_config,omitempty"`
 
 	// links
-	Links interface{} `json:"links,omitempty"`
+	Links map[string]any `json:"links,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
@@ -124,11 +125,15 @@ func (m *AppApp) validateAppConfigs(formats strfmt.Registry) error {
 
 		if m.AppConfigs[i] != nil {
 			if err := m.AppConfigs[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("app_configs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("app_configs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -153,11 +158,15 @@ func (m *AppApp) validateNotificationsConfig(formats strfmt.Registry) error {
 
 	if m.NotificationsConfig != nil {
 		if err := m.NotificationsConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("notifications_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("notifications_config")
 			}
+
 			return err
 		}
 	}
@@ -172,11 +181,15 @@ func (m *AppApp) validateRunnerConfig(formats strfmt.Registry) error {
 
 	if m.RunnerConfig != nil {
 		if err := m.RunnerConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("runner_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("runner_config")
 			}
+
 			return err
 		}
 	}
@@ -191,11 +204,15 @@ func (m *AppApp) validateSandboxConfig(formats strfmt.Registry) error {
 
 	if m.SandboxConfig != nil {
 		if err := m.SandboxConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sandbox_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sandbox_config")
 			}
+
 			return err
 		}
 	}
@@ -244,11 +261,15 @@ func (m *AppApp) contextValidateAppConfigs(ctx context.Context, formats strfmt.R
 			}
 
 			if err := m.AppConfigs[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("app_configs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("app_configs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -272,11 +293,15 @@ func (m *AppApp) contextValidateNotificationsConfig(ctx context.Context, formats
 		}
 
 		if err := m.NotificationsConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("notifications_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("notifications_config")
 			}
+
 			return err
 		}
 	}
@@ -293,11 +318,15 @@ func (m *AppApp) contextValidateRunnerConfig(ctx context.Context, formats strfmt
 		}
 
 		if err := m.RunnerConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("runner_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("runner_config")
 			}
+
 			return err
 		}
 	}
@@ -314,11 +343,15 @@ func (m *AppApp) contextValidateSandboxConfig(ctx context.Context, formats strfm
 		}
 
 		if err := m.SandboxConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sandbox_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sandbox_config")
 			}
+
 			return err
 		}
 	}

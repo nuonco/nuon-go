@@ -44,7 +44,7 @@ const (
 )
 
 // for schema
-var configsOCIRegistryTypeEnum []interface{}
+var configsOCIRegistryTypeEnum []any
 
 func init() {
 	var res []ConfigsOCIRegistryType

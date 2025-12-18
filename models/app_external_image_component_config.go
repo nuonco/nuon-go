@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -64,11 +65,15 @@ func (m *AppExternalImageComponentConfig) validateAwsEcrImageConfig(formats strf
 
 	if m.AwsEcrImageConfig != nil {
 		if err := m.AwsEcrImageConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("aws_ecr_image_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("aws_ecr_image_config")
 			}
+
 			return err
 		}
 	}
@@ -99,11 +104,15 @@ func (m *AppExternalImageComponentConfig) contextValidateAwsEcrImageConfig(ctx c
 		}
 
 		if err := m.AwsEcrImageConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("aws_ecr_image_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("aws_ecr_image_config")
 			}
+
 			return err
 		}
 	}

@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -79,11 +80,15 @@ func (m *AppConnectedGithubVCSConfig) validateVcsConnection(formats strfmt.Regis
 
 	if m.VcsConnection != nil {
 		if err := m.VcsConnection.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("vcs_connection")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("vcs_connection")
 			}
+
 			return err
 		}
 	}
@@ -114,11 +119,15 @@ func (m *AppConnectedGithubVCSConfig) contextValidateVcsConnection(ctx context.C
 		}
 
 		if err := m.VcsConnection.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("vcs_connection")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("vcs_connection")
 			}
+
 			return err
 		}
 	}

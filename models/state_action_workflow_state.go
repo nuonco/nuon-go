@@ -21,7 +21,7 @@ type StateActionWorkflowState struct {
 	ID string `json:"id,omitempty"`
 
 	// outputs
-	Outputs interface{} `json:"outputs,omitempty"`
+	Outputs map[string]any `json:"outputs,omitempty"`
 
 	// populated
 	Populated bool `json:"populated,omitempty"`

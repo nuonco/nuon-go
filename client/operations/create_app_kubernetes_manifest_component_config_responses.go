@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type CreateAppKubernetesManifestComponentConfigReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateAppKubernetesManifestComponentConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateAppKubernetesManifestComponentConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateAppKubernetesManifestComponentConfigCreated()
@@ -109,11 +111,13 @@ func (o *CreateAppKubernetesManifestComponentConfigCreated) Code() int {
 }
 
 func (o *CreateAppKubernetesManifestComponentConfigCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigCreated %s", 201, payload)
 }
 
 func (o *CreateAppKubernetesManifestComponentConfigCreated) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigCreated %s", 201, payload)
 }
 
 func (o *CreateAppKubernetesManifestComponentConfigCreated) GetPayload() *models.AppKubernetesManifestComponentConfig {
@@ -125,7 +129,7 @@ func (o *CreateAppKubernetesManifestComponentConfigCreated) readResponse(respons
 	o.Payload = new(models.AppKubernetesManifestComponentConfig)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *CreateAppKubernetesManifestComponentConfigBadRequest) Code() int {
 }
 
 func (o *CreateAppKubernetesManifestComponentConfigBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppKubernetesManifestComponentConfigBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppKubernetesManifestComponentConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *CreateAppKubernetesManifestComponentConfigBadRequest) readResponse(resp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *CreateAppKubernetesManifestComponentConfigUnauthorized) Code() int {
 }
 
 func (o *CreateAppKubernetesManifestComponentConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppKubernetesManifestComponentConfigUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppKubernetesManifestComponentConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *CreateAppKubernetesManifestComponentConfigUnauthorized) readResponse(re
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *CreateAppKubernetesManifestComponentConfigForbidden) Code() int {
 }
 
 func (o *CreateAppKubernetesManifestComponentConfigForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateAppKubernetesManifestComponentConfigForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateAppKubernetesManifestComponentConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *CreateAppKubernetesManifestComponentConfigForbidden) readResponse(respo
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *CreateAppKubernetesManifestComponentConfigNotFound) Code() int {
 }
 
 func (o *CreateAppKubernetesManifestComponentConfigNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateAppKubernetesManifestComponentConfigNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateAppKubernetesManifestComponentConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *CreateAppKubernetesManifestComponentConfigNotFound) readResponse(respon
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *CreateAppKubernetesManifestComponentConfigInternalServerError) Code() i
 }
 
 func (o *CreateAppKubernetesManifestComponentConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppKubernetesManifestComponentConfigInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/configs/kubernetes-manifest][%d] createAppKubernetesManifestComponentConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppKubernetesManifestComponentConfigInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *CreateAppKubernetesManifestComponentConfigInternalServerError) readResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

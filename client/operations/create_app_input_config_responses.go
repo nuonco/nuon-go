@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type CreateAppInputConfigReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateAppInputConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateAppInputConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateAppInputConfigCreated()
@@ -109,11 +111,13 @@ func (o *CreateAppInputConfigCreated) Code() int {
 }
 
 func (o *CreateAppInputConfigCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigCreated %s", 201, payload)
 }
 
 func (o *CreateAppInputConfigCreated) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigCreated %s", 201, payload)
 }
 
 func (o *CreateAppInputConfigCreated) GetPayload() *models.AppAppInputConfig {
@@ -125,7 +129,7 @@ func (o *CreateAppInputConfigCreated) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.AppAppInputConfig)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *CreateAppInputConfigBadRequest) Code() int {
 }
 
 func (o *CreateAppInputConfigBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppInputConfigBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppInputConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *CreateAppInputConfigBadRequest) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *CreateAppInputConfigUnauthorized) Code() int {
 }
 
 func (o *CreateAppInputConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppInputConfigUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppInputConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *CreateAppInputConfigUnauthorized) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *CreateAppInputConfigForbidden) Code() int {
 }
 
 func (o *CreateAppInputConfigForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateAppInputConfigForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateAppInputConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *CreateAppInputConfigForbidden) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *CreateAppInputConfigNotFound) Code() int {
 }
 
 func (o *CreateAppInputConfigNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateAppInputConfigNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateAppInputConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *CreateAppInputConfigNotFound) readResponse(response runtime.ClientRespo
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *CreateAppInputConfigInternalServerError) Code() int {
 }
 
 func (o *CreateAppInputConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppInputConfigInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/input-config][%d] createAppInputConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppInputConfigInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *CreateAppInputConfigInternalServerError) readResponse(response runtime.
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

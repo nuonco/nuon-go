@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -72,11 +73,15 @@ func (m *AppInstallActionWorkflow) validateActionWorkflow(formats strfmt.Registr
 
 	if m.ActionWorkflow != nil {
 		if err := m.ActionWorkflow.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("action_workflow")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("action_workflow")
 			}
+
 			return err
 		}
 	}
@@ -96,11 +101,15 @@ func (m *AppInstallActionWorkflow) validateRuns(formats strfmt.Registry) error {
 
 		if m.Runs[i] != nil {
 			if err := m.Runs[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("runs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("runs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -137,11 +146,15 @@ func (m *AppInstallActionWorkflow) contextValidateActionWorkflow(ctx context.Con
 		}
 
 		if err := m.ActionWorkflow.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("action_workflow")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("action_workflow")
 			}
+
 			return err
 		}
 	}
@@ -160,11 +173,15 @@ func (m *AppInstallActionWorkflow) contextValidateRuns(ctx context.Context, form
 			}
 
 			if err := m.Runs[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("runs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("runs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

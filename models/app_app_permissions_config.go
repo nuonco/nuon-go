@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -100,11 +101,15 @@ func (m *AppAppPermissionsConfig) validateAwsIamRoles(formats strfmt.Registry) e
 
 		if m.AwsIamRoles[i] != nil {
 			if err := m.AwsIamRoles[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("aws_iam_roles" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("aws_iam_roles" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -121,11 +126,15 @@ func (m *AppAppPermissionsConfig) validateBreakGlassAwsIamRole(formats strfmt.Re
 
 	if m.BreakGlassAwsIamRole != nil {
 		if err := m.BreakGlassAwsIamRole.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("break_glass_aws_iam_role")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("break_glass_aws_iam_role")
 			}
+
 			return err
 		}
 	}
@@ -140,11 +149,15 @@ func (m *AppAppPermissionsConfig) validateDeprovisionAwsIamRole(formats strfmt.R
 
 	if m.DeprovisionAwsIamRole != nil {
 		if err := m.DeprovisionAwsIamRole.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("deprovision_aws_iam_role")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("deprovision_aws_iam_role")
 			}
+
 			return err
 		}
 	}
@@ -159,11 +172,15 @@ func (m *AppAppPermissionsConfig) validateMaintenanceAwsIamRole(formats strfmt.R
 
 	if m.MaintenanceAwsIamRole != nil {
 		if err := m.MaintenanceAwsIamRole.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("maintenance_aws_iam_role")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("maintenance_aws_iam_role")
 			}
+
 			return err
 		}
 	}
@@ -220,11 +237,15 @@ func (m *AppAppPermissionsConfig) contextValidateAwsIamRoles(ctx context.Context
 			}
 
 			if err := m.AwsIamRoles[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("aws_iam_roles" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("aws_iam_roles" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -243,11 +264,15 @@ func (m *AppAppPermissionsConfig) contextValidateBreakGlassAwsIamRole(ctx contex
 		}
 
 		if err := m.BreakGlassAwsIamRole.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("break_glass_aws_iam_role")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("break_glass_aws_iam_role")
 			}
+
 			return err
 		}
 	}
@@ -264,11 +289,15 @@ func (m *AppAppPermissionsConfig) contextValidateDeprovisionAwsIamRole(ctx conte
 		}
 
 		if err := m.DeprovisionAwsIamRole.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("deprovision_aws_iam_role")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("deprovision_aws_iam_role")
 			}
+
 			return err
 		}
 	}
@@ -285,11 +314,15 @@ func (m *AppAppPermissionsConfig) contextValidateMaintenanceAwsIamRole(ctx conte
 		}
 
 		if err := m.MaintenanceAwsIamRole.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("maintenance_aws_iam_role")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("maintenance_aws_iam_role")
 			}
+
 			return err
 		}
 	}

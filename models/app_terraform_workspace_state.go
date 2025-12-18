@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -77,11 +78,15 @@ func (m *AppTerraformWorkspaceState) validateRunnerJob(formats strfmt.Registry) 
 
 	if m.RunnerJob != nil {
 		if err := m.RunnerJob.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("runner_job")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("runner_job")
 			}
+
 			return err
 		}
 	}
@@ -96,11 +101,15 @@ func (m *AppTerraformWorkspaceState) validateTerraformWorkspace(formats strfmt.R
 
 	if m.TerraformWorkspace != nil {
 		if err := m.TerraformWorkspace.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("terraform_workspace")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("terraform_workspace")
 			}
+
 			return err
 		}
 	}
@@ -135,11 +144,15 @@ func (m *AppTerraformWorkspaceState) contextValidateRunnerJob(ctx context.Contex
 		}
 
 		if err := m.RunnerJob.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("runner_job")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("runner_job")
 			}
+
 			return err
 		}
 	}
@@ -156,11 +169,15 @@ func (m *AppTerraformWorkspaceState) contextValidateTerraformWorkspace(ctx conte
 		}
 
 		if err := m.TerraformWorkspace.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("terraform_workspace")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("terraform_workspace")
 			}
+
 			return err
 		}
 	}

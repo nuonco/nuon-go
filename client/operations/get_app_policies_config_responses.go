@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetAppPoliciesConfigReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetAppPoliciesConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetAppPoliciesConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetAppPoliciesConfigOK()
@@ -109,11 +111,13 @@ func (o *GetAppPoliciesConfigOK) Code() int {
 }
 
 func (o *GetAppPoliciesConfigOK) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigOK %s", 200, payload)
 }
 
 func (o *GetAppPoliciesConfigOK) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigOK %s", 200, payload)
 }
 
 func (o *GetAppPoliciesConfigOK) GetPayload() *models.AppAppPoliciesConfig {
@@ -125,7 +129,7 @@ func (o *GetAppPoliciesConfigOK) readResponse(response runtime.ClientResponse, c
 	o.Payload = new(models.AppAppPoliciesConfig)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *GetAppPoliciesConfigBadRequest) Code() int {
 }
 
 func (o *GetAppPoliciesConfigBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigBadRequest %s", 400, payload)
 }
 
 func (o *GetAppPoliciesConfigBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigBadRequest %s", 400, payload)
 }
 
 func (o *GetAppPoliciesConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *GetAppPoliciesConfigBadRequest) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *GetAppPoliciesConfigUnauthorized) Code() int {
 }
 
 func (o *GetAppPoliciesConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigUnauthorized %s", 401, payload)
 }
 
 func (o *GetAppPoliciesConfigUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigUnauthorized %s", 401, payload)
 }
 
 func (o *GetAppPoliciesConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *GetAppPoliciesConfigUnauthorized) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *GetAppPoliciesConfigForbidden) Code() int {
 }
 
 func (o *GetAppPoliciesConfigForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigForbidden %s", 403, payload)
 }
 
 func (o *GetAppPoliciesConfigForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigForbidden %s", 403, payload)
 }
 
 func (o *GetAppPoliciesConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *GetAppPoliciesConfigForbidden) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *GetAppPoliciesConfigNotFound) Code() int {
 }
 
 func (o *GetAppPoliciesConfigNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigNotFound %s", 404, payload)
 }
 
 func (o *GetAppPoliciesConfigNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigNotFound %s", 404, payload)
 }
 
 func (o *GetAppPoliciesConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *GetAppPoliciesConfigNotFound) readResponse(response runtime.ClientRespo
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *GetAppPoliciesConfigInternalServerError) Code() int {
 }
 
 func (o *GetAppPoliciesConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigInternalServerError %s", 500, payload)
 }
 
 func (o *GetAppPoliciesConfigInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/policies-configs/{policies_config_id}][%d] getAppPoliciesConfigInternalServerError %s", 500, payload)
 }
 
 func (o *GetAppPoliciesConfigInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *GetAppPoliciesConfigInternalServerError) readResponse(response runtime.
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

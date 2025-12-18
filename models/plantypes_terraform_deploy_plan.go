@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -46,7 +47,7 @@ type PlantypesTerraformDeployPlan struct {
 	TerraformBackend *PlantypesTerraformBackend `json:"terraform_backend,omitempty"`
 
 	// vars
-	Vars interface{} `json:"vars,omitempty"`
+	Vars map[string]any `json:"vars,omitempty"`
 
 	// vars files
 	VarsFiles []string `json:"vars_files"`
@@ -93,11 +94,15 @@ func (m *PlantypesTerraformDeployPlan) validateAwsAuth(formats strfmt.Registry) 
 
 	if m.AwsAuth != nil {
 		if err := m.AwsAuth.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("aws_auth")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("aws_auth")
 			}
+
 			return err
 		}
 	}
@@ -112,11 +117,15 @@ func (m *PlantypesTerraformDeployPlan) validateAzureAuth(formats strfmt.Registry
 
 	if m.AzureAuth != nil {
 		if err := m.AzureAuth.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("azure_auth")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("azure_auth")
 			}
+
 			return err
 		}
 	}
@@ -131,11 +140,15 @@ func (m *PlantypesTerraformDeployPlan) validateClusterInfo(formats strfmt.Regist
 
 	if m.ClusterInfo != nil {
 		if err := m.ClusterInfo.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cluster_info")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cluster_info")
 			}
+
 			return err
 		}
 	}
@@ -150,11 +163,15 @@ func (m *PlantypesTerraformDeployPlan) validateHooks(formats strfmt.Registry) er
 
 	if m.Hooks != nil {
 		if err := m.Hooks.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("hooks")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("hooks")
 			}
+
 			return err
 		}
 	}
@@ -169,11 +186,15 @@ func (m *PlantypesTerraformDeployPlan) validateState(formats strfmt.Registry) er
 
 	if m.State != nil {
 		if err := m.State.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("state")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("state")
 			}
+
 			return err
 		}
 	}
@@ -188,11 +209,15 @@ func (m *PlantypesTerraformDeployPlan) validateTerraformBackend(formats strfmt.R
 
 	if m.TerraformBackend != nil {
 		if err := m.TerraformBackend.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("terraform_backend")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("terraform_backend")
 			}
+
 			return err
 		}
 	}
@@ -243,11 +268,15 @@ func (m *PlantypesTerraformDeployPlan) contextValidateAwsAuth(ctx context.Contex
 		}
 
 		if err := m.AwsAuth.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("aws_auth")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("aws_auth")
 			}
+
 			return err
 		}
 	}
@@ -264,11 +293,15 @@ func (m *PlantypesTerraformDeployPlan) contextValidateAzureAuth(ctx context.Cont
 		}
 
 		if err := m.AzureAuth.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("azure_auth")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("azure_auth")
 			}
+
 			return err
 		}
 	}
@@ -285,11 +318,15 @@ func (m *PlantypesTerraformDeployPlan) contextValidateClusterInfo(ctx context.Co
 		}
 
 		if err := m.ClusterInfo.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cluster_info")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cluster_info")
 			}
+
 			return err
 		}
 	}
@@ -306,11 +343,15 @@ func (m *PlantypesTerraformDeployPlan) contextValidateHooks(ctx context.Context,
 		}
 
 		if err := m.Hooks.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("hooks")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("hooks")
 			}
+
 			return err
 		}
 	}
@@ -327,11 +368,15 @@ func (m *PlantypesTerraformDeployPlan) contextValidateState(ctx context.Context,
 		}
 
 		if err := m.State.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("state")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("state")
 			}
+
 			return err
 		}
 	}
@@ -348,11 +393,15 @@ func (m *PlantypesTerraformDeployPlan) contextValidateTerraformBackend(ctx conte
 		}
 
 		if err := m.TerraformBackend.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("terraform_backend")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("terraform_backend")
 			}
+
 			return err
 		}
 	}

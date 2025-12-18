@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type UpdateRunnerMngReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *UpdateRunnerMngReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *UpdateRunnerMngReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewUpdateRunnerMngCreated()
@@ -109,11 +111,13 @@ func (o *UpdateRunnerMngCreated) Code() int {
 }
 
 func (o *UpdateRunnerMngCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngCreated %s", 201, payload)
 }
 
 func (o *UpdateRunnerMngCreated) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngCreated %s", 201, payload)
 }
 
 func (o *UpdateRunnerMngCreated) GetPayload() bool {
@@ -123,7 +127,7 @@ func (o *UpdateRunnerMngCreated) GetPayload() bool {
 func (o *UpdateRunnerMngCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *UpdateRunnerMngBadRequest) Code() int {
 }
 
 func (o *UpdateRunnerMngBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngBadRequest %s", 400, payload)
 }
 
 func (o *UpdateRunnerMngBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngBadRequest %s", 400, payload)
 }
 
 func (o *UpdateRunnerMngBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *UpdateRunnerMngBadRequest) readResponse(response runtime.ClientResponse
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *UpdateRunnerMngUnauthorized) Code() int {
 }
 
 func (o *UpdateRunnerMngUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngUnauthorized %s", 401, payload)
 }
 
 func (o *UpdateRunnerMngUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngUnauthorized %s", 401, payload)
 }
 
 func (o *UpdateRunnerMngUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *UpdateRunnerMngUnauthorized) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *UpdateRunnerMngForbidden) Code() int {
 }
 
 func (o *UpdateRunnerMngForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngForbidden %s", 403, payload)
 }
 
 func (o *UpdateRunnerMngForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngForbidden %s", 403, payload)
 }
 
 func (o *UpdateRunnerMngForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *UpdateRunnerMngForbidden) readResponse(response runtime.ClientResponse,
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *UpdateRunnerMngNotFound) Code() int {
 }
 
 func (o *UpdateRunnerMngNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngNotFound %s", 404, payload)
 }
 
 func (o *UpdateRunnerMngNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngNotFound %s", 404, payload)
 }
 
 func (o *UpdateRunnerMngNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *UpdateRunnerMngNotFound) readResponse(response runtime.ClientResponse, 
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *UpdateRunnerMngInternalServerError) Code() int {
 }
 
 func (o *UpdateRunnerMngInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateRunnerMngInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/runners/{runner_id}/mng/update][%d] updateRunnerMngInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateRunnerMngInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *UpdateRunnerMngInternalServerError) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type UpdateUserJourneyStepReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *UpdateUserJourneyStepReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *UpdateUserJourneyStepReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewUpdateUserJourneyStepOK()
@@ -109,11 +111,13 @@ func (o *UpdateUserJourneyStepOK) Code() int {
 }
 
 func (o *UpdateUserJourneyStepOK) Error() string {
-	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepOK %s", 200, payload)
 }
 
 func (o *UpdateUserJourneyStepOK) String() string {
-	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepOK %s", 200, payload)
 }
 
 func (o *UpdateUserJourneyStepOK) GetPayload() *models.AppAccount {
@@ -125,7 +129,7 @@ func (o *UpdateUserJourneyStepOK) readResponse(response runtime.ClientResponse, 
 	o.Payload = new(models.AppAccount)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *UpdateUserJourneyStepBadRequest) Code() int {
 }
 
 func (o *UpdateUserJourneyStepBadRequest) Error() string {
-	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepBadRequest %s", 400, payload)
 }
 
 func (o *UpdateUserJourneyStepBadRequest) String() string {
-	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepBadRequest %s", 400, payload)
 }
 
 func (o *UpdateUserJourneyStepBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *UpdateUserJourneyStepBadRequest) readResponse(response runtime.ClientRe
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *UpdateUserJourneyStepUnauthorized) Code() int {
 }
 
 func (o *UpdateUserJourneyStepUnauthorized) Error() string {
-	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepUnauthorized %s", 401, payload)
 }
 
 func (o *UpdateUserJourneyStepUnauthorized) String() string {
-	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepUnauthorized %s", 401, payload)
 }
 
 func (o *UpdateUserJourneyStepUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *UpdateUserJourneyStepUnauthorized) readResponse(response runtime.Client
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *UpdateUserJourneyStepForbidden) Code() int {
 }
 
 func (o *UpdateUserJourneyStepForbidden) Error() string {
-	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepForbidden %s", 403, payload)
 }
 
 func (o *UpdateUserJourneyStepForbidden) String() string {
-	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepForbidden %s", 403, payload)
 }
 
 func (o *UpdateUserJourneyStepForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *UpdateUserJourneyStepForbidden) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *UpdateUserJourneyStepNotFound) Code() int {
 }
 
 func (o *UpdateUserJourneyStepNotFound) Error() string {
-	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepNotFound %s", 404, payload)
 }
 
 func (o *UpdateUserJourneyStepNotFound) String() string {
-	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepNotFound %s", 404, payload)
 }
 
 func (o *UpdateUserJourneyStepNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *UpdateUserJourneyStepNotFound) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *UpdateUserJourneyStepInternalServerError) Code() int {
 }
 
 func (o *UpdateUserJourneyStepInternalServerError) Error() string {
-	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateUserJourneyStepInternalServerError) String() string {
-	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /v1/account/user-journeys/{journey_name}/steps/{step_name}][%d] updateUserJourneyStepInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateUserJourneyStepInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *UpdateUserJourneyStepInternalServerError) readResponse(response runtime
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

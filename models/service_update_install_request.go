@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -53,11 +54,15 @@ func (m *ServiceUpdateInstallRequest) validateInstallConfig(formats strfmt.Regis
 
 	if m.InstallConfig != nil {
 		if err := m.InstallConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("install_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("install_config")
 			}
+
 			return err
 		}
 	}
@@ -72,11 +77,15 @@ func (m *ServiceUpdateInstallRequest) validateMetadata(formats strfmt.Registry) 
 
 	if m.Metadata != nil {
 		if err := m.Metadata.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("metadata")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("metadata")
 			}
+
 			return err
 		}
 	}
@@ -111,11 +120,15 @@ func (m *ServiceUpdateInstallRequest) contextValidateInstallConfig(ctx context.C
 		}
 
 		if err := m.InstallConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("install_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("install_config")
 			}
+
 			return err
 		}
 	}
@@ -132,11 +145,15 @@ func (m *ServiceUpdateInstallRequest) contextValidateMetadata(ctx context.Contex
 		}
 
 		if err := m.Metadata.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("metadata")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("metadata")
 			}
+
 			return err
 		}
 	}

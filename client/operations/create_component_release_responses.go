@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type CreateComponentReleaseReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateComponentReleaseReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateComponentReleaseReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateComponentReleaseCreated()
@@ -109,11 +111,13 @@ func (o *CreateComponentReleaseCreated) Code() int {
 }
 
 func (o *CreateComponentReleaseCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseCreated %s", 201, payload)
 }
 
 func (o *CreateComponentReleaseCreated) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseCreated %s", 201, payload)
 }
 
 func (o *CreateComponentReleaseCreated) GetPayload() *models.AppComponentRelease {
@@ -125,7 +129,7 @@ func (o *CreateComponentReleaseCreated) readResponse(response runtime.ClientResp
 	o.Payload = new(models.AppComponentRelease)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *CreateComponentReleaseBadRequest) Code() int {
 }
 
 func (o *CreateComponentReleaseBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseBadRequest %s", 400, payload)
 }
 
 func (o *CreateComponentReleaseBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseBadRequest %s", 400, payload)
 }
 
 func (o *CreateComponentReleaseBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *CreateComponentReleaseBadRequest) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *CreateComponentReleaseUnauthorized) Code() int {
 }
 
 func (o *CreateComponentReleaseUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseUnauthorized %s", 401, payload)
 }
 
 func (o *CreateComponentReleaseUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseUnauthorized %s", 401, payload)
 }
 
 func (o *CreateComponentReleaseUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *CreateComponentReleaseUnauthorized) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *CreateComponentReleaseForbidden) Code() int {
 }
 
 func (o *CreateComponentReleaseForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseForbidden %s", 403, payload)
 }
 
 func (o *CreateComponentReleaseForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseForbidden %s", 403, payload)
 }
 
 func (o *CreateComponentReleaseForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *CreateComponentReleaseForbidden) readResponse(response runtime.ClientRe
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *CreateComponentReleaseNotFound) Code() int {
 }
 
 func (o *CreateComponentReleaseNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseNotFound %s", 404, payload)
 }
 
 func (o *CreateComponentReleaseNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseNotFound %s", 404, payload)
 }
 
 func (o *CreateComponentReleaseNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *CreateComponentReleaseNotFound) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *CreateComponentReleaseInternalServerError) Code() int {
 }
 
 func (o *CreateComponentReleaseInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseInternalServerError %s", 500, payload)
 }
 
 func (o *CreateComponentReleaseInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/releases][%d] createComponentReleaseInternalServerError %s", 500, payload)
 }
 
 func (o *CreateComponentReleaseInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *CreateComponentReleaseInternalServerError) readResponse(response runtim
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

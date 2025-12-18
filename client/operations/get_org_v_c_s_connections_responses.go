@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetOrgVCSConnectionsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetOrgVCSConnectionsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetOrgVCSConnectionsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetOrgVCSConnectionsOK()
@@ -109,11 +111,13 @@ func (o *GetOrgVCSConnectionsOK) Code() int {
 }
 
 func (o *GetOrgVCSConnectionsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsOK %s", 200, payload)
 }
 
 func (o *GetOrgVCSConnectionsOK) String() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsOK %s", 200, payload)
 }
 
 func (o *GetOrgVCSConnectionsOK) GetPayload() []*models.AppVCSConnection {
@@ -123,7 +127,7 @@ func (o *GetOrgVCSConnectionsOK) GetPayload() []*models.AppVCSConnection {
 func (o *GetOrgVCSConnectionsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *GetOrgVCSConnectionsBadRequest) Code() int {
 }
 
 func (o *GetOrgVCSConnectionsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsBadRequest %s", 400, payload)
 }
 
 func (o *GetOrgVCSConnectionsBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsBadRequest %s", 400, payload)
 }
 
 func (o *GetOrgVCSConnectionsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *GetOrgVCSConnectionsBadRequest) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *GetOrgVCSConnectionsUnauthorized) Code() int {
 }
 
 func (o *GetOrgVCSConnectionsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsUnauthorized %s", 401, payload)
 }
 
 func (o *GetOrgVCSConnectionsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsUnauthorized %s", 401, payload)
 }
 
 func (o *GetOrgVCSConnectionsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *GetOrgVCSConnectionsUnauthorized) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *GetOrgVCSConnectionsForbidden) Code() int {
 }
 
 func (o *GetOrgVCSConnectionsForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsForbidden %s", 403, payload)
 }
 
 func (o *GetOrgVCSConnectionsForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsForbidden %s", 403, payload)
 }
 
 func (o *GetOrgVCSConnectionsForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *GetOrgVCSConnectionsForbidden) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *GetOrgVCSConnectionsNotFound) Code() int {
 }
 
 func (o *GetOrgVCSConnectionsNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsNotFound %s", 404, payload)
 }
 
 func (o *GetOrgVCSConnectionsNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsNotFound %s", 404, payload)
 }
 
 func (o *GetOrgVCSConnectionsNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *GetOrgVCSConnectionsNotFound) readResponse(response runtime.ClientRespo
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *GetOrgVCSConnectionsInternalServerError) Code() int {
 }
 
 func (o *GetOrgVCSConnectionsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsInternalServerError %s", 500, payload)
 }
 
 func (o *GetOrgVCSConnectionsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/vcs/connections][%d] getOrgVCSConnectionsInternalServerError %s", 500, payload)
 }
 
 func (o *GetOrgVCSConnectionsInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *GetOrgVCSConnectionsInternalServerError) readResponse(response runtime.
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

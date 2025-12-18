@@ -122,7 +122,7 @@ const (
 )
 
 // for schema
-var appStatusEnum []interface{}
+var appStatusEnum []any
 
 func init() {
 	var res []AppStatus

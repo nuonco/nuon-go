@@ -53,7 +53,7 @@ const (
 )
 
 // for schema
-var refsRefTypeEnum []interface{}
+var refsRefTypeEnum []any
 
 func init() {
 	var res []RefsRefType

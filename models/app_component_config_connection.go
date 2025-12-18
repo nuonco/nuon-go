@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -132,11 +133,15 @@ func (m *AppComponentConfigConnection) validateDockerBuild(formats strfmt.Regist
 
 	if m.DockerBuild != nil {
 		if err := m.DockerBuild.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("docker_build")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("docker_build")
 			}
+
 			return err
 		}
 	}
@@ -151,11 +156,15 @@ func (m *AppComponentConfigConnection) validateExternalImage(formats strfmt.Regi
 
 	if m.ExternalImage != nil {
 		if err := m.ExternalImage.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("external_image")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("external_image")
 			}
+
 			return err
 		}
 	}
@@ -170,11 +179,15 @@ func (m *AppComponentConfigConnection) validateHelm(formats strfmt.Registry) err
 
 	if m.Helm != nil {
 		if err := m.Helm.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("helm")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("helm")
 			}
+
 			return err
 		}
 	}
@@ -189,11 +202,15 @@ func (m *AppComponentConfigConnection) validateJob(formats strfmt.Registry) erro
 
 	if m.Job != nil {
 		if err := m.Job.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("job")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("job")
 			}
+
 			return err
 		}
 	}
@@ -208,11 +225,15 @@ func (m *AppComponentConfigConnection) validateKubernetesManifest(formats strfmt
 
 	if m.KubernetesManifest != nil {
 		if err := m.KubernetesManifest.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("kubernetes_manifest")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("kubernetes_manifest")
 			}
+
 			return err
 		}
 	}
@@ -232,11 +253,15 @@ func (m *AppComponentConfigConnection) validateRefs(formats strfmt.Registry) err
 
 		if m.Refs[i] != nil {
 			if err := m.Refs[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("refs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("refs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -253,11 +278,15 @@ func (m *AppComponentConfigConnection) validateTerraformModule(formats strfmt.Re
 
 	if m.TerraformModule != nil {
 		if err := m.TerraformModule.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("terraform_module")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("terraform_module")
 			}
+
 			return err
 		}
 	}
@@ -271,11 +300,15 @@ func (m *AppComponentConfigConnection) validateType(formats strfmt.Registry) err
 	}
 
 	if err := m.Type.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("type")
 		}
+
 		return err
 	}
 
@@ -333,11 +366,15 @@ func (m *AppComponentConfigConnection) contextValidateDockerBuild(ctx context.Co
 		}
 
 		if err := m.DockerBuild.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("docker_build")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("docker_build")
 			}
+
 			return err
 		}
 	}
@@ -354,11 +391,15 @@ func (m *AppComponentConfigConnection) contextValidateExternalImage(ctx context.
 		}
 
 		if err := m.ExternalImage.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("external_image")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("external_image")
 			}
+
 			return err
 		}
 	}
@@ -375,11 +416,15 @@ func (m *AppComponentConfigConnection) contextValidateHelm(ctx context.Context, 
 		}
 
 		if err := m.Helm.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("helm")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("helm")
 			}
+
 			return err
 		}
 	}
@@ -396,11 +441,15 @@ func (m *AppComponentConfigConnection) contextValidateJob(ctx context.Context, f
 		}
 
 		if err := m.Job.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("job")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("job")
 			}
+
 			return err
 		}
 	}
@@ -417,11 +466,15 @@ func (m *AppComponentConfigConnection) contextValidateKubernetesManifest(ctx con
 		}
 
 		if err := m.KubernetesManifest.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("kubernetes_manifest")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("kubernetes_manifest")
 			}
+
 			return err
 		}
 	}
@@ -440,11 +493,15 @@ func (m *AppComponentConfigConnection) contextValidateRefs(ctx context.Context, 
 			}
 
 			if err := m.Refs[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("refs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("refs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -463,11 +520,15 @@ func (m *AppComponentConfigConnection) contextValidateTerraformModule(ctx contex
 		}
 
 		if err := m.TerraformModule.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("terraform_module")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("terraform_module")
 			}
+
 			return err
 		}
 	}
@@ -482,11 +543,15 @@ func (m *AppComponentConfigConnection) contextValidateType(ctx context.Context, 
 	}
 
 	if err := m.Type.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("type")
 		}
+
 		return err
 	}
 

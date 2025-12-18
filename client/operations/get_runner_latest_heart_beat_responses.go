@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetRunnerLatestHeartBeatReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetRunnerLatestHeartBeatReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetRunnerLatestHeartBeatReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetRunnerLatestHeartBeatOK()
@@ -109,11 +111,13 @@ func (o *GetRunnerLatestHeartBeatOK) Code() int {
 }
 
 func (o *GetRunnerLatestHeartBeatOK) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatOK %s", 200, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatOK) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatOK %s", 200, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatOK) GetPayload() *models.AppRunnerHeartBeat {
@@ -125,7 +129,7 @@ func (o *GetRunnerLatestHeartBeatOK) readResponse(response runtime.ClientRespons
 	o.Payload = new(models.AppRunnerHeartBeat)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *GetRunnerLatestHeartBeatBadRequest) Code() int {
 }
 
 func (o *GetRunnerLatestHeartBeatBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatBadRequest %s", 400, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatBadRequest %s", 400, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *GetRunnerLatestHeartBeatBadRequest) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *GetRunnerLatestHeartBeatUnauthorized) Code() int {
 }
 
 func (o *GetRunnerLatestHeartBeatUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatUnauthorized %s", 401, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatUnauthorized %s", 401, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *GetRunnerLatestHeartBeatUnauthorized) readResponse(response runtime.Cli
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *GetRunnerLatestHeartBeatForbidden) Code() int {
 }
 
 func (o *GetRunnerLatestHeartBeatForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatForbidden %s", 403, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatForbidden %s", 403, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *GetRunnerLatestHeartBeatForbidden) readResponse(response runtime.Client
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *GetRunnerLatestHeartBeatNotFound) Code() int {
 }
 
 func (o *GetRunnerLatestHeartBeatNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatNotFound %s", 404, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatNotFound %s", 404, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *GetRunnerLatestHeartBeatNotFound) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *GetRunnerLatestHeartBeatInternalServerError) Code() int {
 }
 
 func (o *GetRunnerLatestHeartBeatInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatInternalServerError %s", 500, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/runners/{runner_id}/latest-heart-beat][%d] getRunnerLatestHeartBeatInternalServerError %s", 500, payload)
 }
 
 func (o *GetRunnerLatestHeartBeatInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *GetRunnerLatestHeartBeatInternalServerError) readResponse(response runt
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

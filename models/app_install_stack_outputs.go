@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -34,7 +35,7 @@ type AppInstallStackOutputs struct {
 	Data map[string]string `json:"data,omitempty"`
 
 	// data contents
-	DataContents interface{} `json:"data_contents,omitempty"`
+	DataContents map[string]any `json:"data_contents,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`
@@ -77,11 +78,15 @@ func (m *AppInstallStackOutputs) validateAws(formats strfmt.Registry) error {
 
 	if m.Aws != nil {
 		if err := m.Aws.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("aws")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("aws")
 			}
+
 			return err
 		}
 	}
@@ -96,11 +101,15 @@ func (m *AppInstallStackOutputs) validateAzure(formats strfmt.Registry) error {
 
 	if m.Azure != nil {
 		if err := m.Azure.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("azure")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("azure")
 			}
+
 			return err
 		}
 	}
@@ -135,11 +144,15 @@ func (m *AppInstallStackOutputs) contextValidateAws(ctx context.Context, formats
 		}
 
 		if err := m.Aws.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("aws")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("aws")
 			}
+
 			return err
 		}
 	}
@@ -156,11 +169,15 @@ func (m *AppInstallStackOutputs) contextValidateAzure(ctx context.Context, forma
 		}
 
 		if err := m.Azure.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("azure")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("azure")
 			}
+
 			return err
 		}
 	}

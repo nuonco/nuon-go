@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type DeleteOrgReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DeleteOrgReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DeleteOrgReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDeleteOrgOK()
@@ -109,11 +111,13 @@ func (o *DeleteOrgOK) Code() int {
 }
 
 func (o *DeleteOrgOK) Error() string {
-	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgOK %s", 200, payload)
 }
 
 func (o *DeleteOrgOK) String() string {
-	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgOK %s", 200, payload)
 }
 
 func (o *DeleteOrgOK) GetPayload() bool {
@@ -123,7 +127,7 @@ func (o *DeleteOrgOK) GetPayload() bool {
 func (o *DeleteOrgOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *DeleteOrgBadRequest) Code() int {
 }
 
 func (o *DeleteOrgBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgBadRequest %s", 400, payload)
 }
 
 func (o *DeleteOrgBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgBadRequest %s", 400, payload)
 }
 
 func (o *DeleteOrgBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *DeleteOrgBadRequest) readResponse(response runtime.ClientResponse, cons
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *DeleteOrgUnauthorized) Code() int {
 }
 
 func (o *DeleteOrgUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgUnauthorized %s", 401, payload)
 }
 
 func (o *DeleteOrgUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgUnauthorized %s", 401, payload)
 }
 
 func (o *DeleteOrgUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *DeleteOrgUnauthorized) readResponse(response runtime.ClientResponse, co
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *DeleteOrgForbidden) Code() int {
 }
 
 func (o *DeleteOrgForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgForbidden %s", 403, payload)
 }
 
 func (o *DeleteOrgForbidden) String() string {
-	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgForbidden %s", 403, payload)
 }
 
 func (o *DeleteOrgForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *DeleteOrgForbidden) readResponse(response runtime.ClientResponse, consu
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *DeleteOrgNotFound) Code() int {
 }
 
 func (o *DeleteOrgNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgNotFound %s", 404, payload)
 }
 
 func (o *DeleteOrgNotFound) String() string {
-	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgNotFound %s", 404, payload)
 }
 
 func (o *DeleteOrgNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *DeleteOrgNotFound) readResponse(response runtime.ClientResponse, consum
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *DeleteOrgInternalServerError) Code() int {
 }
 
 func (o *DeleteOrgInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteOrgInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/orgs/current][%d] deleteOrgInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteOrgInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *DeleteOrgInternalServerError) readResponse(response runtime.ClientRespo
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -79,11 +80,15 @@ func (m *AppAppRunnerConfig) validateAppRunnerType(formats strfmt.Registry) erro
 	}
 
 	if err := m.AppRunnerType.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("app_runner_type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("app_runner_type")
 		}
+
 		return err
 	}
 
@@ -96,11 +101,15 @@ func (m *AppAppRunnerConfig) validateCloudPlatform(formats strfmt.Registry) erro
 	}
 
 	if err := m.CloudPlatform.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("cloud_platform")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("cloud_platform")
 		}
+
 		return err
 	}
 
@@ -132,11 +141,15 @@ func (m *AppAppRunnerConfig) contextValidateAppRunnerType(ctx context.Context, f
 	}
 
 	if err := m.AppRunnerType.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("app_runner_type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("app_runner_type")
 		}
+
 		return err
 	}
 
@@ -150,11 +163,15 @@ func (m *AppAppRunnerConfig) contextValidateCloudPlatform(ctx context.Context, f
 	}
 
 	if err := m.CloudPlatform.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("cloud_platform")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("cloud_platform")
 		}
+
 		return err
 	}
 

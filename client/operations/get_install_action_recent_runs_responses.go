@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetInstallActionRecentRunsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetInstallActionRecentRunsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetInstallActionRecentRunsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetInstallActionRecentRunsOK()
@@ -109,11 +111,13 @@ func (o *GetInstallActionRecentRunsOK) Code() int {
 }
 
 func (o *GetInstallActionRecentRunsOK) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsOK %s", 200, payload)
 }
 
 func (o *GetInstallActionRecentRunsOK) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsOK %s", 200, payload)
 }
 
 func (o *GetInstallActionRecentRunsOK) GetPayload() *models.AppInstallActionWorkflow {
@@ -125,7 +129,7 @@ func (o *GetInstallActionRecentRunsOK) readResponse(response runtime.ClientRespo
 	o.Payload = new(models.AppInstallActionWorkflow)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *GetInstallActionRecentRunsBadRequest) Code() int {
 }
 
 func (o *GetInstallActionRecentRunsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsBadRequest %s", 400, payload)
 }
 
 func (o *GetInstallActionRecentRunsBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsBadRequest %s", 400, payload)
 }
 
 func (o *GetInstallActionRecentRunsBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *GetInstallActionRecentRunsBadRequest) readResponse(response runtime.Cli
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *GetInstallActionRecentRunsUnauthorized) Code() int {
 }
 
 func (o *GetInstallActionRecentRunsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsUnauthorized %s", 401, payload)
 }
 
 func (o *GetInstallActionRecentRunsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsUnauthorized %s", 401, payload)
 }
 
 func (o *GetInstallActionRecentRunsUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *GetInstallActionRecentRunsUnauthorized) readResponse(response runtime.C
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *GetInstallActionRecentRunsForbidden) Code() int {
 }
 
 func (o *GetInstallActionRecentRunsForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsForbidden %s", 403, payload)
 }
 
 func (o *GetInstallActionRecentRunsForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsForbidden %s", 403, payload)
 }
 
 func (o *GetInstallActionRecentRunsForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *GetInstallActionRecentRunsForbidden) readResponse(response runtime.Clie
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *GetInstallActionRecentRunsNotFound) Code() int {
 }
 
 func (o *GetInstallActionRecentRunsNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsNotFound %s", 404, payload)
 }
 
 func (o *GetInstallActionRecentRunsNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsNotFound %s", 404, payload)
 }
 
 func (o *GetInstallActionRecentRunsNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *GetInstallActionRecentRunsNotFound) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *GetInstallActionRecentRunsInternalServerError) Code() int {
 }
 
 func (o *GetInstallActionRecentRunsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsInternalServerError %s", 500, payload)
 }
 
 func (o *GetInstallActionRecentRunsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/installs/{install_id}/actions/{action_id}/recent-runs][%d] getInstallActionRecentRunsInternalServerError %s", 500, payload)
 }
 
 func (o *GetInstallActionRecentRunsInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *GetInstallActionRecentRunsInternalServerError) readResponse(response ru
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

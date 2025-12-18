@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type CreateExternalImageComponentConfigReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateExternalImageComponentConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateExternalImageComponentConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateExternalImageComponentConfigCreated()
@@ -109,11 +111,13 @@ func (o *CreateExternalImageComponentConfigCreated) Code() int {
 }
 
 func (o *CreateExternalImageComponentConfigCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigCreated %s", 201, payload)
 }
 
 func (o *CreateExternalImageComponentConfigCreated) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigCreated %s", 201, payload)
 }
 
 func (o *CreateExternalImageComponentConfigCreated) GetPayload() *models.AppExternalImageComponentConfig {
@@ -125,7 +129,7 @@ func (o *CreateExternalImageComponentConfigCreated) readResponse(response runtim
 	o.Payload = new(models.AppExternalImageComponentConfig)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *CreateExternalImageComponentConfigBadRequest) Code() int {
 }
 
 func (o *CreateExternalImageComponentConfigBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateExternalImageComponentConfigBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateExternalImageComponentConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *CreateExternalImageComponentConfigBadRequest) readResponse(response run
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *CreateExternalImageComponentConfigUnauthorized) Code() int {
 }
 
 func (o *CreateExternalImageComponentConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateExternalImageComponentConfigUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateExternalImageComponentConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *CreateExternalImageComponentConfigUnauthorized) readResponse(response r
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *CreateExternalImageComponentConfigForbidden) Code() int {
 }
 
 func (o *CreateExternalImageComponentConfigForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateExternalImageComponentConfigForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateExternalImageComponentConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *CreateExternalImageComponentConfigForbidden) readResponse(response runt
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *CreateExternalImageComponentConfigNotFound) Code() int {
 }
 
 func (o *CreateExternalImageComponentConfigNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateExternalImageComponentConfigNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateExternalImageComponentConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *CreateExternalImageComponentConfigNotFound) readResponse(response runti
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *CreateExternalImageComponentConfigInternalServerError) Code() int {
 }
 
 func (o *CreateExternalImageComponentConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateExternalImageComponentConfigInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/components/{component_id}/configs/external-image][%d] createExternalImageComponentConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateExternalImageComponentConfigInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *CreateExternalImageComponentConfigInternalServerError) readResponse(res
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

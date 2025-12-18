@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type CreateAppPermissionsConfigReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateAppPermissionsConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateAppPermissionsConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateAppPermissionsConfigCreated()
@@ -109,11 +111,13 @@ func (o *CreateAppPermissionsConfigCreated) Code() int {
 }
 
 func (o *CreateAppPermissionsConfigCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigCreated %s", 201, payload)
 }
 
 func (o *CreateAppPermissionsConfigCreated) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigCreated %s", 201, payload)
 }
 
 func (o *CreateAppPermissionsConfigCreated) GetPayload() *models.AppAppPermissionsConfig {
@@ -125,7 +129,7 @@ func (o *CreateAppPermissionsConfigCreated) readResponse(response runtime.Client
 	o.Payload = new(models.AppAppPermissionsConfig)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *CreateAppPermissionsConfigBadRequest) Code() int {
 }
 
 func (o *CreateAppPermissionsConfigBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppPermissionsConfigBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppPermissionsConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *CreateAppPermissionsConfigBadRequest) readResponse(response runtime.Cli
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *CreateAppPermissionsConfigUnauthorized) Code() int {
 }
 
 func (o *CreateAppPermissionsConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppPermissionsConfigUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppPermissionsConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *CreateAppPermissionsConfigUnauthorized) readResponse(response runtime.C
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *CreateAppPermissionsConfigForbidden) Code() int {
 }
 
 func (o *CreateAppPermissionsConfigForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateAppPermissionsConfigForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigForbidden %s", 403, payload)
 }
 
 func (o *CreateAppPermissionsConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *CreateAppPermissionsConfigForbidden) readResponse(response runtime.Clie
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *CreateAppPermissionsConfigNotFound) Code() int {
 }
 
 func (o *CreateAppPermissionsConfigNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateAppPermissionsConfigNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigNotFound %s", 404, payload)
 }
 
 func (o *CreateAppPermissionsConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *CreateAppPermissionsConfigNotFound) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *CreateAppPermissionsConfigInternalServerError) Code() int {
 }
 
 func (o *CreateAppPermissionsConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppPermissionsConfigInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/permissions-configs][%d] createAppPermissionsConfigInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppPermissionsConfigInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *CreateAppPermissionsConfigInternalServerError) readResponse(response ru
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

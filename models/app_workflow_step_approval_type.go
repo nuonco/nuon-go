@@ -47,7 +47,7 @@ const (
 )
 
 // for schema
-var appWorkflowStepApprovalTypeEnum []interface{}
+var appWorkflowStepApprovalTypeEnum []any
 
 func init() {
 	var res []AppWorkflowStepApprovalType

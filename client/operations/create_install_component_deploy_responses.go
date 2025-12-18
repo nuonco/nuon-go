@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type CreateInstallComponentDeployReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateInstallComponentDeployReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateInstallComponentDeployReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateInstallComponentDeployCreated()
@@ -109,11 +111,13 @@ func (o *CreateInstallComponentDeployCreated) Code() int {
 }
 
 func (o *CreateInstallComponentDeployCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployCreated %s", 201, payload)
 }
 
 func (o *CreateInstallComponentDeployCreated) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployCreated %s", 201, payload)
 }
 
 func (o *CreateInstallComponentDeployCreated) GetPayload() *models.AppInstallDeploy {
@@ -125,7 +129,7 @@ func (o *CreateInstallComponentDeployCreated) readResponse(response runtime.Clie
 	o.Payload = new(models.AppInstallDeploy)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *CreateInstallComponentDeployBadRequest) Code() int {
 }
 
 func (o *CreateInstallComponentDeployBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployBadRequest %s", 400, payload)
 }
 
 func (o *CreateInstallComponentDeployBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployBadRequest %s", 400, payload)
 }
 
 func (o *CreateInstallComponentDeployBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *CreateInstallComponentDeployBadRequest) readResponse(response runtime.C
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *CreateInstallComponentDeployUnauthorized) Code() int {
 }
 
 func (o *CreateInstallComponentDeployUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployUnauthorized %s", 401, payload)
 }
 
 func (o *CreateInstallComponentDeployUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployUnauthorized %s", 401, payload)
 }
 
 func (o *CreateInstallComponentDeployUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *CreateInstallComponentDeployUnauthorized) readResponse(response runtime
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *CreateInstallComponentDeployForbidden) Code() int {
 }
 
 func (o *CreateInstallComponentDeployForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployForbidden %s", 403, payload)
 }
 
 func (o *CreateInstallComponentDeployForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployForbidden %s", 403, payload)
 }
 
 func (o *CreateInstallComponentDeployForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *CreateInstallComponentDeployForbidden) readResponse(response runtime.Cl
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *CreateInstallComponentDeployNotFound) Code() int {
 }
 
 func (o *CreateInstallComponentDeployNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployNotFound %s", 404, payload)
 }
 
 func (o *CreateInstallComponentDeployNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployNotFound %s", 404, payload)
 }
 
 func (o *CreateInstallComponentDeployNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *CreateInstallComponentDeployNotFound) readResponse(response runtime.Cli
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *CreateInstallComponentDeployInternalServerError) Code() int {
 }
 
 func (o *CreateInstallComponentDeployInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployInternalServerError %s", 500, payload)
 }
 
 func (o *CreateInstallComponentDeployInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/installs/{install_id}/components/{component_id}/deploys][%d] createInstallComponentDeployInternalServerError %s", 500, payload)
 }
 
 func (o *CreateInstallComponentDeployInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *CreateInstallComponentDeployInternalServerError) readResponse(response 
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

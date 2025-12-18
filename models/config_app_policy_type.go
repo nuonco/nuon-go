@@ -44,7 +44,7 @@ const (
 )
 
 // for schema
-var configAppPolicyTypeEnum []interface{}
+var configAppPolicyTypeEnum []any
 
 func init() {
 	var res []ConfigAppPolicyType

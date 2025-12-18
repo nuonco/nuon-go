@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -84,11 +85,15 @@ func (m *AppInstallSandbox) validateInstallSandboxRuns(formats strfmt.Registry) 
 
 		if m.InstallSandboxRuns[i] != nil {
 			if err := m.InstallSandboxRuns[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("install_sandbox_runs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("install_sandbox_runs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -105,11 +110,15 @@ func (m *AppInstallSandbox) validateStatusV2(formats strfmt.Registry) error {
 
 	if m.StatusV2 != nil {
 		if err := m.StatusV2.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("status_v2")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("status_v2")
 			}
+
 			return err
 		}
 	}
@@ -124,11 +133,15 @@ func (m *AppInstallSandbox) validateTerraformWorkspace(formats strfmt.Registry) 
 
 	if m.TerraformWorkspace != nil {
 		if err := m.TerraformWorkspace.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("terraform_workspace")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("terraform_workspace")
 			}
+
 			return err
 		}
 	}
@@ -169,11 +182,15 @@ func (m *AppInstallSandbox) contextValidateInstallSandboxRuns(ctx context.Contex
 			}
 
 			if err := m.InstallSandboxRuns[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("install_sandbox_runs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("install_sandbox_runs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -192,11 +209,15 @@ func (m *AppInstallSandbox) contextValidateStatusV2(ctx context.Context, formats
 		}
 
 		if err := m.StatusV2.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("status_v2")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("status_v2")
 			}
+
 			return err
 		}
 	}
@@ -213,11 +234,15 @@ func (m *AppInstallSandbox) contextValidateTerraformWorkspace(ctx context.Contex
 		}
 
 		if err := m.TerraformWorkspace.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("terraform_workspace")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("terraform_workspace")
 			}
+
 			return err
 		}
 	}

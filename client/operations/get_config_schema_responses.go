@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetConfigSchemaReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetConfigSchemaReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetConfigSchemaReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetConfigSchemaOK()
@@ -75,7 +77,7 @@ GetConfigSchemaOK describes a response with status code 200, with default header
 OK
 */
 type GetConfigSchemaOK struct {
-	Payload interface{}
+	Payload any
 }
 
 // IsSuccess returns true when this get config schema o k response has a 2xx status code
@@ -109,21 +111,23 @@ func (o *GetConfigSchemaOK) Code() int {
 }
 
 func (o *GetConfigSchemaOK) Error() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaOK %s", 200, payload)
 }
 
 func (o *GetConfigSchemaOK) String() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaOK %s", 200, payload)
 }
 
-func (o *GetConfigSchemaOK) GetPayload() interface{} {
+func (o *GetConfigSchemaOK) GetPayload() any {
 	return o.Payload
 }
 
 func (o *GetConfigSchemaOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *GetConfigSchemaBadRequest) Code() int {
 }
 
 func (o *GetConfigSchemaBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaBadRequest %s", 400, payload)
 }
 
 func (o *GetConfigSchemaBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaBadRequest %s", 400, payload)
 }
 
 func (o *GetConfigSchemaBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *GetConfigSchemaBadRequest) readResponse(response runtime.ClientResponse
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *GetConfigSchemaUnauthorized) Code() int {
 }
 
 func (o *GetConfigSchemaUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaUnauthorized %s", 401, payload)
 }
 
 func (o *GetConfigSchemaUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaUnauthorized %s", 401, payload)
 }
 
 func (o *GetConfigSchemaUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *GetConfigSchemaUnauthorized) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *GetConfigSchemaForbidden) Code() int {
 }
 
 func (o *GetConfigSchemaForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaForbidden %s", 403, payload)
 }
 
 func (o *GetConfigSchemaForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaForbidden %s", 403, payload)
 }
 
 func (o *GetConfigSchemaForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *GetConfigSchemaForbidden) readResponse(response runtime.ClientResponse,
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *GetConfigSchemaNotFound) Code() int {
 }
 
 func (o *GetConfigSchemaNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaNotFound %s", 404, payload)
 }
 
 func (o *GetConfigSchemaNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaNotFound %s", 404, payload)
 }
 
 func (o *GetConfigSchemaNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *GetConfigSchemaNotFound) readResponse(response runtime.ClientResponse, 
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *GetConfigSchemaInternalServerError) Code() int {
 }
 
 func (o *GetConfigSchemaInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaInternalServerError %s", 500, payload)
 }
 
 func (o *GetConfigSchemaInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/general/config-schema][%d] getConfigSchemaInternalServerError %s", 500, payload)
 }
 
 func (o *GetConfigSchemaInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *GetConfigSchemaInternalServerError) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

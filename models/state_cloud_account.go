@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -50,11 +51,15 @@ func (m *StateCloudAccount) validateAws(formats strfmt.Registry) error {
 
 	if m.Aws != nil {
 		if err := m.Aws.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("aws")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("aws")
 			}
+
 			return err
 		}
 	}
@@ -69,11 +74,15 @@ func (m *StateCloudAccount) validateAzure(formats strfmt.Registry) error {
 
 	if m.Azure != nil {
 		if err := m.Azure.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("azure")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("azure")
 			}
+
 			return err
 		}
 	}
@@ -108,11 +117,15 @@ func (m *StateCloudAccount) contextValidateAws(ctx context.Context, formats strf
 		}
 
 		if err := m.Aws.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("aws")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("aws")
 			}
+
 			return err
 		}
 	}
@@ -129,11 +142,15 @@ func (m *StateCloudAccount) contextValidateAzure(ctx context.Context, formats st
 		}
 
 		if err := m.Azure.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("azure")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("azure")
 			}
+
 			return err
 		}
 	}

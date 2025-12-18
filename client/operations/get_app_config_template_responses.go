@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetAppConfigTemplateReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetAppConfigTemplateReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetAppConfigTemplateReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewGetAppConfigTemplateCreated()
@@ -109,11 +111,13 @@ func (o *GetAppConfigTemplateCreated) Code() int {
 }
 
 func (o *GetAppConfigTemplateCreated) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateCreated %s", 201, payload)
 }
 
 func (o *GetAppConfigTemplateCreated) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateCreated %s", 201, payload)
 }
 
 func (o *GetAppConfigTemplateCreated) GetPayload() *models.ServiceAppConfigTemplate {
@@ -125,7 +129,7 @@ func (o *GetAppConfigTemplateCreated) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.ServiceAppConfigTemplate)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *GetAppConfigTemplateBadRequest) Code() int {
 }
 
 func (o *GetAppConfigTemplateBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateBadRequest %s", 400, payload)
 }
 
 func (o *GetAppConfigTemplateBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateBadRequest %s", 400, payload)
 }
 
 func (o *GetAppConfigTemplateBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *GetAppConfigTemplateBadRequest) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *GetAppConfigTemplateUnauthorized) Code() int {
 }
 
 func (o *GetAppConfigTemplateUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateUnauthorized %s", 401, payload)
 }
 
 func (o *GetAppConfigTemplateUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateUnauthorized %s", 401, payload)
 }
 
 func (o *GetAppConfigTemplateUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *GetAppConfigTemplateUnauthorized) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *GetAppConfigTemplateForbidden) Code() int {
 }
 
 func (o *GetAppConfigTemplateForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateForbidden %s", 403, payload)
 }
 
 func (o *GetAppConfigTemplateForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateForbidden %s", 403, payload)
 }
 
 func (o *GetAppConfigTemplateForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *GetAppConfigTemplateForbidden) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *GetAppConfigTemplateNotFound) Code() int {
 }
 
 func (o *GetAppConfigTemplateNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateNotFound %s", 404, payload)
 }
 
 func (o *GetAppConfigTemplateNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateNotFound %s", 404, payload)
 }
 
 func (o *GetAppConfigTemplateNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *GetAppConfigTemplateNotFound) readResponse(response runtime.ClientRespo
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *GetAppConfigTemplateInternalServerError) Code() int {
 }
 
 func (o *GetAppConfigTemplateInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateInternalServerError %s", 500, payload)
 }
 
 func (o *GetAppConfigTemplateInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/template-config][%d] getAppConfigTemplateInternalServerError %s", 500, payload)
 }
 
 func (o *GetAppConfigTemplateInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *GetAppConfigTemplateInternalServerError) readResponse(response runtime.
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

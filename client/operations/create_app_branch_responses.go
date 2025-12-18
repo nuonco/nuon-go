@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type CreateAppBranchReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateAppBranchReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateAppBranchReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateAppBranchCreated()
@@ -109,11 +111,13 @@ func (o *CreateAppBranchCreated) Code() int {
 }
 
 func (o *CreateAppBranchCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchCreated %s", 201, payload)
 }
 
 func (o *CreateAppBranchCreated) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchCreated %s", 201, payload)
 }
 
 func (o *CreateAppBranchCreated) GetPayload() *models.AppAppBranch {
@@ -125,7 +129,7 @@ func (o *CreateAppBranchCreated) readResponse(response runtime.ClientResponse, c
 	o.Payload = new(models.AppAppBranch)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *CreateAppBranchBadRequest) Code() int {
 }
 
 func (o *CreateAppBranchBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppBranchBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppBranchBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *CreateAppBranchBadRequest) readResponse(response runtime.ClientResponse
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *CreateAppBranchUnauthorized) Code() int {
 }
 
 func (o *CreateAppBranchUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppBranchUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppBranchUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *CreateAppBranchUnauthorized) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *CreateAppBranchForbidden) Code() int {
 }
 
 func (o *CreateAppBranchForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchForbidden %s", 403, payload)
 }
 
 func (o *CreateAppBranchForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchForbidden %s", 403, payload)
 }
 
 func (o *CreateAppBranchForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *CreateAppBranchForbidden) readResponse(response runtime.ClientResponse,
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *CreateAppBranchNotFound) Code() int {
 }
 
 func (o *CreateAppBranchNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchNotFound %s", 404, payload)
 }
 
 func (o *CreateAppBranchNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchNotFound %s", 404, payload)
 }
 
 func (o *CreateAppBranchNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *CreateAppBranchNotFound) readResponse(response runtime.ClientResponse, 
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *CreateAppBranchInternalServerError) Code() int {
 }
 
 func (o *CreateAppBranchInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppBranchInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/branches][%d] createAppBranchInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppBranchInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *CreateAppBranchInternalServerError) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

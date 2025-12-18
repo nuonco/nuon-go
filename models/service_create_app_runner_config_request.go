@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -60,11 +61,15 @@ func (m *ServiceCreateAppRunnerConfigRequest) validateHelmDriver(formats strfmt.
 	}
 
 	if err := m.HelmDriver.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("helm_driver")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("helm_driver")
 		}
+
 		return err
 	}
 
@@ -83,11 +88,15 @@ func (m *ServiceCreateAppRunnerConfigRequest) validateType(formats strfmt.Regist
 
 	if m.Type != nil {
 		if err := m.Type.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("type")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("type")
 			}
+
 			return err
 		}
 	}
@@ -120,11 +129,15 @@ func (m *ServiceCreateAppRunnerConfigRequest) contextValidateHelmDriver(ctx cont
 	}
 
 	if err := m.HelmDriver.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("helm_driver")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("helm_driver")
 		}
+
 		return err
 	}
 
@@ -136,11 +149,15 @@ func (m *ServiceCreateAppRunnerConfigRequest) contextValidateType(ctx context.Co
 	if m.Type != nil {
 
 		if err := m.Type.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("type")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("type")
 			}
+
 			return err
 		}
 	}

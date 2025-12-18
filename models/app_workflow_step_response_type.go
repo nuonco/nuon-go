@@ -50,7 +50,7 @@ const (
 )
 
 // for schema
-var appWorkflowStepResponseTypeEnum []interface{}
+var appWorkflowStepResponseTypeEnum []any
 
 func init() {
 	var res []AppWorkflowStepResponseType

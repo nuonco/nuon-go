@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -89,7 +90,7 @@ type AppInstall struct {
 	InstallStates []*AppInstallState `json:"install_states"`
 
 	// links
-	Links interface{} `json:"links,omitempty"`
+	Links map[string]any `json:"links,omitempty"`
 
 	// metadata
 	Metadata map[string]string `json:"metadata,omitempty"`
@@ -208,11 +209,15 @@ func (m *AppInstall) validateAppRunnerConfig(formats strfmt.Registry) error {
 
 	if m.AppRunnerConfig != nil {
 		if err := m.AppRunnerConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("app_runner_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("app_runner_config")
 			}
+
 			return err
 		}
 	}
@@ -227,11 +232,15 @@ func (m *AppInstall) validateAppSandboxConfig(formats strfmt.Registry) error {
 
 	if m.AppSandboxConfig != nil {
 		if err := m.AppSandboxConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("app_sandbox_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("app_sandbox_config")
 			}
+
 			return err
 		}
 	}
@@ -246,11 +255,15 @@ func (m *AppInstall) validateAwsAccount(formats strfmt.Registry) error {
 
 	if m.AwsAccount != nil {
 		if err := m.AwsAccount.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("aws_account")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("aws_account")
 			}
+
 			return err
 		}
 	}
@@ -265,11 +278,15 @@ func (m *AppInstall) validateAzureAccount(formats strfmt.Registry) error {
 
 	if m.AzureAccount != nil {
 		if err := m.AzureAccount.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("azure_account")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("azure_account")
 			}
+
 			return err
 		}
 	}
@@ -289,11 +306,15 @@ func (m *AppInstall) validateDriftedObjects(formats strfmt.Registry) error {
 
 		if m.DriftedObjects[i] != nil {
 			if err := m.DriftedObjects[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("drifted_objects" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("drifted_objects" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -315,11 +336,15 @@ func (m *AppInstall) validateInstallActionWorkflows(formats strfmt.Registry) err
 
 		if m.InstallActionWorkflows[i] != nil {
 			if err := m.InstallActionWorkflows[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("install_action_workflows" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("install_action_workflows" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -341,11 +366,15 @@ func (m *AppInstall) validateInstallComponents(formats strfmt.Registry) error {
 
 		if m.InstallComponents[i] != nil {
 			if err := m.InstallComponents[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("install_components" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("install_components" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -362,11 +391,15 @@ func (m *AppInstall) validateInstallConfig(formats strfmt.Registry) error {
 
 	if m.InstallConfig != nil {
 		if err := m.InstallConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("install_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("install_config")
 			}
+
 			return err
 		}
 	}
@@ -386,11 +419,15 @@ func (m *AppInstall) validateInstallEvents(formats strfmt.Registry) error {
 
 		if m.InstallEvents[i] != nil {
 			if err := m.InstallEvents[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("install_events" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("install_events" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -412,11 +449,15 @@ func (m *AppInstall) validateInstallInputs(formats strfmt.Registry) error {
 
 		if m.InstallInputs[i] != nil {
 			if err := m.InstallInputs[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("install_inputs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("install_inputs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -438,11 +479,15 @@ func (m *AppInstall) validateInstallSandboxRuns(formats strfmt.Registry) error {
 
 		if m.InstallSandboxRuns[i] != nil {
 			if err := m.InstallSandboxRuns[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("install_sandbox_runs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("install_sandbox_runs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -459,11 +504,15 @@ func (m *AppInstall) validateInstallStack(formats strfmt.Registry) error {
 
 	if m.InstallStack != nil {
 		if err := m.InstallStack.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("install_stack")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("install_stack")
 			}
+
 			return err
 		}
 	}
@@ -483,11 +532,15 @@ func (m *AppInstall) validateInstallStates(formats strfmt.Registry) error {
 
 		if m.InstallStates[i] != nil {
 			if err := m.InstallStates[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("install_states" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("install_states" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -504,11 +557,15 @@ func (m *AppInstall) validateSandbox(formats strfmt.Registry) error {
 
 	if m.Sandbox != nil {
 		if err := m.Sandbox.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sandbox")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sandbox")
 			}
+
 			return err
 		}
 	}
@@ -528,11 +585,15 @@ func (m *AppInstall) validateWorkflows(formats strfmt.Registry) error {
 
 		if m.Workflows[i] != nil {
 			if err := m.Workflows[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("workflows" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("workflows" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -621,11 +682,15 @@ func (m *AppInstall) contextValidateAppRunnerConfig(ctx context.Context, formats
 		}
 
 		if err := m.AppRunnerConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("app_runner_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("app_runner_config")
 			}
+
 			return err
 		}
 	}
@@ -642,11 +707,15 @@ func (m *AppInstall) contextValidateAppSandboxConfig(ctx context.Context, format
 		}
 
 		if err := m.AppSandboxConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("app_sandbox_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("app_sandbox_config")
 			}
+
 			return err
 		}
 	}
@@ -663,11 +732,15 @@ func (m *AppInstall) contextValidateAwsAccount(ctx context.Context, formats strf
 		}
 
 		if err := m.AwsAccount.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("aws_account")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("aws_account")
 			}
+
 			return err
 		}
 	}
@@ -684,11 +757,15 @@ func (m *AppInstall) contextValidateAzureAccount(ctx context.Context, formats st
 		}
 
 		if err := m.AzureAccount.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("azure_account")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("azure_account")
 			}
+
 			return err
 		}
 	}
@@ -707,11 +784,15 @@ func (m *AppInstall) contextValidateDriftedObjects(ctx context.Context, formats 
 			}
 
 			if err := m.DriftedObjects[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("drifted_objects" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("drifted_objects" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -732,11 +813,15 @@ func (m *AppInstall) contextValidateInstallActionWorkflows(ctx context.Context, 
 			}
 
 			if err := m.InstallActionWorkflows[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("install_action_workflows" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("install_action_workflows" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -757,11 +842,15 @@ func (m *AppInstall) contextValidateInstallComponents(ctx context.Context, forma
 			}
 
 			if err := m.InstallComponents[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("install_components" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("install_components" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -780,11 +869,15 @@ func (m *AppInstall) contextValidateInstallConfig(ctx context.Context, formats s
 		}
 
 		if err := m.InstallConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("install_config")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("install_config")
 			}
+
 			return err
 		}
 	}
@@ -803,11 +896,15 @@ func (m *AppInstall) contextValidateInstallEvents(ctx context.Context, formats s
 			}
 
 			if err := m.InstallEvents[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("install_events" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("install_events" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -828,11 +925,15 @@ func (m *AppInstall) contextValidateInstallInputs(ctx context.Context, formats s
 			}
 
 			if err := m.InstallInputs[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("install_inputs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("install_inputs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -853,11 +954,15 @@ func (m *AppInstall) contextValidateInstallSandboxRuns(ctx context.Context, form
 			}
 
 			if err := m.InstallSandboxRuns[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("install_sandbox_runs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("install_sandbox_runs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -876,11 +981,15 @@ func (m *AppInstall) contextValidateInstallStack(ctx context.Context, formats st
 		}
 
 		if err := m.InstallStack.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("install_stack")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("install_stack")
 			}
+
 			return err
 		}
 	}
@@ -899,11 +1008,15 @@ func (m *AppInstall) contextValidateInstallStates(ctx context.Context, formats s
 			}
 
 			if err := m.InstallStates[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("install_states" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("install_states" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -922,11 +1035,15 @@ func (m *AppInstall) contextValidateSandbox(ctx context.Context, formats strfmt.
 		}
 
 		if err := m.Sandbox.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sandbox")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sandbox")
 			}
+
 			return err
 		}
 	}
@@ -945,11 +1062,15 @@ func (m *AppInstall) contextValidateWorkflows(ctx context.Context, formats strfm
 			}
 
 			if err := m.Workflows[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("workflows" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("workflows" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

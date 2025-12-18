@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type GetActionLatestConfigReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetActionLatestConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetActionLatestConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetActionLatestConfigOK()
@@ -109,11 +111,13 @@ func (o *GetActionLatestConfigOK) Code() int {
 }
 
 func (o *GetActionLatestConfigOK) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigOK %s", 200, payload)
 }
 
 func (o *GetActionLatestConfigOK) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigOK %s", 200, payload)
 }
 
 func (o *GetActionLatestConfigOK) GetPayload() *models.AppActionWorkflowConfig {
@@ -125,7 +129,7 @@ func (o *GetActionLatestConfigOK) readResponse(response runtime.ClientResponse, 
 	o.Payload = new(models.AppActionWorkflowConfig)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *GetActionLatestConfigBadRequest) Code() int {
 }
 
 func (o *GetActionLatestConfigBadRequest) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigBadRequest %s", 400, payload)
 }
 
 func (o *GetActionLatestConfigBadRequest) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigBadRequest %s", 400, payload)
 }
 
 func (o *GetActionLatestConfigBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *GetActionLatestConfigBadRequest) readResponse(response runtime.ClientRe
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *GetActionLatestConfigUnauthorized) Code() int {
 }
 
 func (o *GetActionLatestConfigUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigUnauthorized %s", 401, payload)
 }
 
 func (o *GetActionLatestConfigUnauthorized) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigUnauthorized %s", 401, payload)
 }
 
 func (o *GetActionLatestConfigUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *GetActionLatestConfigUnauthorized) readResponse(response runtime.Client
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *GetActionLatestConfigForbidden) Code() int {
 }
 
 func (o *GetActionLatestConfigForbidden) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigForbidden %s", 403, payload)
 }
 
 func (o *GetActionLatestConfigForbidden) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigForbidden %s", 403, payload)
 }
 
 func (o *GetActionLatestConfigForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *GetActionLatestConfigForbidden) readResponse(response runtime.ClientRes
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *GetActionLatestConfigNotFound) Code() int {
 }
 
 func (o *GetActionLatestConfigNotFound) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigNotFound %s", 404, payload)
 }
 
 func (o *GetActionLatestConfigNotFound) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigNotFound %s", 404, payload)
 }
 
 func (o *GetActionLatestConfigNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *GetActionLatestConfigNotFound) readResponse(response runtime.ClientResp
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *GetActionLatestConfigInternalServerError) Code() int {
 }
 
 func (o *GetActionLatestConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigInternalServerError %s", 500, payload)
 }
 
 func (o *GetActionLatestConfigInternalServerError) String() string {
-	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /v1/apps/{app_id}/actions/{action_id}/latest-config][%d] getActionLatestConfigInternalServerError %s", 500, payload)
 }
 
 func (o *GetActionLatestConfigInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *GetActionLatestConfigInternalServerError) readResponse(response runtime
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

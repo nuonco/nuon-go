@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type DeleteAppSecretReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *DeleteAppSecretReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *DeleteAppSecretReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewDeleteAppSecretOK()
@@ -109,11 +111,13 @@ func (o *DeleteAppSecretOK) Code() int {
 }
 
 func (o *DeleteAppSecretOK) Error() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretOK %s", 200, payload)
 }
 
 func (o *DeleteAppSecretOK) String() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretOK %s", 200, payload)
 }
 
 func (o *DeleteAppSecretOK) GetPayload() bool {
@@ -123,7 +127,7 @@ func (o *DeleteAppSecretOK) GetPayload() bool {
 func (o *DeleteAppSecretOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -175,11 +179,13 @@ func (o *DeleteAppSecretBadRequest) Code() int {
 }
 
 func (o *DeleteAppSecretBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretBadRequest %s", 400, payload)
 }
 
 func (o *DeleteAppSecretBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretBadRequest %s", 400, payload)
 }
 
 func (o *DeleteAppSecretBadRequest) GetPayload() *models.StderrErrResponse {
@@ -191,7 +197,7 @@ func (o *DeleteAppSecretBadRequest) readResponse(response runtime.ClientResponse
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -243,11 +249,13 @@ func (o *DeleteAppSecretUnauthorized) Code() int {
 }
 
 func (o *DeleteAppSecretUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretUnauthorized %s", 401, payload)
 }
 
 func (o *DeleteAppSecretUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretUnauthorized %s", 401, payload)
 }
 
 func (o *DeleteAppSecretUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -259,7 +267,7 @@ func (o *DeleteAppSecretUnauthorized) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -311,11 +319,13 @@ func (o *DeleteAppSecretForbidden) Code() int {
 }
 
 func (o *DeleteAppSecretForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretForbidden %s", 403, payload)
 }
 
 func (o *DeleteAppSecretForbidden) String() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretForbidden %s", 403, payload)
 }
 
 func (o *DeleteAppSecretForbidden) GetPayload() *models.StderrErrResponse {
@@ -327,7 +337,7 @@ func (o *DeleteAppSecretForbidden) readResponse(response runtime.ClientResponse,
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -379,11 +389,13 @@ func (o *DeleteAppSecretNotFound) Code() int {
 }
 
 func (o *DeleteAppSecretNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretNotFound %s", 404, payload)
 }
 
 func (o *DeleteAppSecretNotFound) String() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretNotFound %s", 404, payload)
 }
 
 func (o *DeleteAppSecretNotFound) GetPayload() *models.StderrErrResponse {
@@ -395,7 +407,7 @@ func (o *DeleteAppSecretNotFound) readResponse(response runtime.ClientResponse, 
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -447,11 +459,13 @@ func (o *DeleteAppSecretInternalServerError) Code() int {
 }
 
 func (o *DeleteAppSecretInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteAppSecretInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /v1/apps/{app_id}/secret/{secret_id}][%d] deleteAppSecretInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteAppSecretInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -463,7 +477,7 @@ func (o *DeleteAppSecretInternalServerError) readResponse(response runtime.Clien
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

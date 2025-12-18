@@ -6,6 +6,8 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -21,7 +23,7 @@ type CreateAppComponentBuildReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateAppComponentBuildReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateAppComponentBuildReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateAppComponentBuildCreated()
@@ -109,11 +111,13 @@ func (o *CreateAppComponentBuildCreated) Code() int {
 }
 
 func (o *CreateAppComponentBuildCreated) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildCreated %s", 201, payload)
 }
 
 func (o *CreateAppComponentBuildCreated) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildCreated %s", 201, payload)
 }
 
 func (o *CreateAppComponentBuildCreated) GetPayload() *models.AppComponentBuild {
@@ -125,7 +129,7 @@ func (o *CreateAppComponentBuildCreated) readResponse(response runtime.ClientRes
 	o.Payload = new(models.AppComponentBuild)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -177,11 +181,13 @@ func (o *CreateAppComponentBuildBadRequest) Code() int {
 }
 
 func (o *CreateAppComponentBuildBadRequest) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppComponentBuildBadRequest) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildBadRequest %s", 400, payload)
 }
 
 func (o *CreateAppComponentBuildBadRequest) GetPayload() *models.StderrErrResponse {
@@ -193,7 +199,7 @@ func (o *CreateAppComponentBuildBadRequest) readResponse(response runtime.Client
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -245,11 +251,13 @@ func (o *CreateAppComponentBuildUnauthorized) Code() int {
 }
 
 func (o *CreateAppComponentBuildUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppComponentBuildUnauthorized) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildUnauthorized  %+v", 401, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildUnauthorized %s", 401, payload)
 }
 
 func (o *CreateAppComponentBuildUnauthorized) GetPayload() *models.StderrErrResponse {
@@ -261,7 +269,7 @@ func (o *CreateAppComponentBuildUnauthorized) readResponse(response runtime.Clie
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -313,11 +321,13 @@ func (o *CreateAppComponentBuildForbidden) Code() int {
 }
 
 func (o *CreateAppComponentBuildForbidden) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildForbidden %s", 403, payload)
 }
 
 func (o *CreateAppComponentBuildForbidden) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildForbidden %s", 403, payload)
 }
 
 func (o *CreateAppComponentBuildForbidden) GetPayload() *models.StderrErrResponse {
@@ -329,7 +339,7 @@ func (o *CreateAppComponentBuildForbidden) readResponse(response runtime.ClientR
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -381,11 +391,13 @@ func (o *CreateAppComponentBuildNotFound) Code() int {
 }
 
 func (o *CreateAppComponentBuildNotFound) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildNotFound %s", 404, payload)
 }
 
 func (o *CreateAppComponentBuildNotFound) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildNotFound %s", 404, payload)
 }
 
 func (o *CreateAppComponentBuildNotFound) GetPayload() *models.StderrErrResponse {
@@ -397,7 +409,7 @@ func (o *CreateAppComponentBuildNotFound) readResponse(response runtime.ClientRe
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -449,11 +461,13 @@ func (o *CreateAppComponentBuildInternalServerError) Code() int {
 }
 
 func (o *CreateAppComponentBuildInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppComponentBuildInternalServerError) String() string {
-	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /v1/apps/{app_id}/components/{component_id}/builds][%d] createAppComponentBuildInternalServerError %s", 500, payload)
 }
 
 func (o *CreateAppComponentBuildInternalServerError) GetPayload() *models.StderrErrResponse {
@@ -465,7 +479,7 @@ func (o *CreateAppComponentBuildInternalServerError) readResponse(response runti
 	o.Payload = new(models.StderrErrResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
