@@ -1,4 +1,9 @@
+# Deprecation ⚠️
+This repo is deprecated in favor of moving it [intree of Nuon repo](https://github.com/nuonco/nuon/tree/main/sdks/nuon-go). 
+You can import it in your go.mod with `go get github.com/nuonco/nuon/sdks/nuon-go`
+
 # nuon-go
+
 
 An interface for working with our API from go programs.
 
